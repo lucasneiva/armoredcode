@@ -1,4 +1,4 @@
-**# ArmoredCode: Secure Freelance Marketplace for Cybersecurity in Software Development**
+# **ArmoredCode: Secure Freelance Marketplace for Cybersecurity in Software Development**
 
 ## **Problem Statement**
 
@@ -8,7 +8,25 @@ Companies of all sizes face mounting cybersecurity threats, often stemming from 
 
 ArmoredCode bridges this gap with a platform tailored to the intersection of cybersecurity and software development. We offer:
 
-( MVP not defined yet )
+* **Project Postings:**
+    - Structured form ensuring clients provide the necessary security context.
+    - Fields for tech stack, vulnerability focus, compliance needs (if relevant), timeframe urgency, and budget range.
+* **Freelancer Profiles:**
+    - Security specialization emphasis (Pen-Test, Code Review, DevSecOps, etc.)
+    - Skills filtering/tagging
+    - Experience level (Even if basic: Junior, Mid, Senior)
+    - Option for a brief service offering blurb (seeds the later expansion)
+    - Verification (tiered if possible: basic ID check builds more trust than none)
+
+* **Search & Filtering:**
+    - Freelancers must find relevant projects easily. Skill/tech stack filters are vital.
+* **Secure Communication:**
+    - Project-specific messaging (encrypted).
+    File sharing with security focus (limit sizes, scanning if possible).
+
+* **Freelancer "Pitching":**
+    - Short proposals or a way to express interest directly to the client per project.
+
 
 ## **Target Users**
 
