@@ -1,4 +1,4 @@
-**# ArmoredCode: Secure Freelance Marketplace for Cybersecurity in Software Development**
+# **ArmoredCode: Secure Freelance Marketplace for Cybersecurity in Software Development**
 
 ## **Problem Statement**
 
