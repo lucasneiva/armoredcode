@@ -2,11 +2,11 @@
 
 **Company:** HealthSafe ([https://www.healthsafe.com])
 
-##**Project Overview:**
+## **Project Overview:**
 
 HealthSafe is in the final stages of a major upgrade to our patient portal software. Before launch, we require a targeted security audit and any necessary remediation to ensure compliance with HIPAA's evolving standards and mitigate potential vulnerabilities.
 
-##**Specific Needs**
+## **Specific Needs**
 
 * **Vulnerability Scanning & Remediation:**  Thorough penetration testing of the upgraded portal (Web application, APIs, database interactions) to identify exploitable weaknesses. Immediate patching of any high-risk or critical vulnerabilities before launch.
 * **Authentication & Authorization Review:**  In-depth assessment of access controls, authorization procedures, and session management to safeguard patient data. Recommendations for strengthening these mechanisms in line with HIPAA.
