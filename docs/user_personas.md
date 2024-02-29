@@ -52,7 +52,7 @@
 
 ## Client Personas
 
-**Persona 1:  AccelerateNow,  the Growth-Driven Startup**
+### AccelerateNow,  the Growth-Driven Startup
 
 * **Background:** A rapidly growing SaaS startup offering an innovative collaboration platform.  Focused on new features and user acquisition, but some recent embarrassing data leaks.
 * **Needs:**
@@ -62,9 +62,11 @@
 * **Pain Points:**
     * No in-house security team. Their core devs are too busy building new features.
     * Worried they're a bigger target for cyberattacks because of the recent publicity.
-    * Unsure how to budget for security or prioritize the scariest-sounding vulnerabilities.   
+    * Unsure how to budget for security or prioritize the scariest-sounding vulnerabilities.
 
-**Persona 2: MidSize Solutions, the Established Software Firm**
+* **Example Project:** [acceleratenow.md](project_examples/acceleratenow.md)
+
+### MidSize Solutions, the Established Software Firm
 
 * **Background:** Medium-sized company with legacy enterprise software (mostly Java-based).  Beginning a cloud migration and modernization push.
 * **Needs:**
@@ -76,7 +78,9 @@
     * Worried about compliance risks (PCI-DSS relevant) as they move into more sensitive client work.
     * Leadership wants to modernize but doesn't fully understand the security risks of the cloud.
 
-**Persona 3:  HealthSafe, the Healthcare Tech Provider**
+* **Example Project:** [midsizesolutions.md](project_examples/midsizesolutions.md)
+
+###  HealthSafe, the Healthcare Tech Provider
 
 * **Background:**  Software vendor creating patient data management systems for hospitals.  Highly regulated (HIPAA) with strict security obligations.
 * **Needs:**
@@ -87,3 +91,5 @@
     * Finding specialized devs with the right experience and willingness to work within regulations.
     * Smaller applicant pool for niche skills makes hiring slow and expensive.
     * Unsure if freelancers *truly* adhere to the same standards as full-time employees.
+
+* **Example Project:** [healthsafe.md](project_examples/healthsafe.md)
