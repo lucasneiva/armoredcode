@@ -49,6 +49,10 @@ ArmoredCode bridges this gap with a platform tailored to the intersection of cyb
 * Manufacturers using connected systems 
 * Research Institutions
 
+**Personas:**
+
+Detailed personas for client and freelancer available in [user_personas.md](https://github.com/lucasneiva/armoredcode/blob/main/docs/user_personas.md)
+
 ## **Technology Stack**
 
 * **Frontend:** React
