@@ -1,8 +1,37 @@
-# ArmoredCode User Personas
+# ArmoredCode Target Users
 
-## Freelancer Personas
+## Overview
 
-## Maya, the Secure Coding Champion
+ArmoredCode is a specialized platform where skilled cybersecurity professionals connect with companies seeking top-tier software security expertise. Below, you'll find a comprehensive breakdown of our target audience.
+
+## Professional Profiles
+
+* **Secure Coding Specialists:** Developers with expertise in preventing common vulnerabilities, secure coding practices across various languages, and secure software architecture.
+* **Security-Focused Code Reviewers:** Professionals specializing in identifying security flaws in existing code bases, providing remediation advice.
+* **Penetration Testers (Application-Specific):** Ethical hackers focused on vulnerability discovery in software applications (web, mobile, desktop).
+* **DevSecOps Consultants:** Experts in integrating security throughout the software development lifecycle (SDLC), automating testing, and advising on tools for secure development. 
+* **Cloud Application Security Specialists:**   Focused on securing applications built for cloud environments (AWS, Azure, GCP).
+* **Mobile App Security Experts:** Specialists addressing the unique security challenges for mobile applications (iOS, Android).
+* **Security Auditors (Software Frameworks):** Professionals with deep knowledge of popular frameworks (React, Angular, Django, etc.) for auditing purposes.
+* **API Security Specialists:** Focused on securing APIs, including proper authentication, authorization, input validation, and preventing common API attacks.
+* **IoT Application Security Specialists:** Experts in securing software for internet-connected devices, understanding device-specific vulnerabilities and protocols.
+
+## Client Profiles
+
+* **Software Development Companies:** Businesses building software products (web applications, SaaS platforms, mobile apps, etc.) that need security expertise.
+* **Technology Startups:** Often lack in-house security knowledge. They may seek experts for consultations or to outsource vulnerability testing before launch. 
+* **Internal Development Teams (within larger organizations):**  In-house development teams in sectors like finance or healthcare might require specialized security help that their existing IT staff doesn't possess.
+* **Businesses Undergoing Digital Transformation:** Companies modernizing legacy systems may need specialized help to securely integrate new software components. 
+* **Government Agencies and Contractors:** Those developing software solutions for government use often need to meet strict security and compliance standards.
+* **E-commerce Businesses:** Websites and platforms handling sensitive customer data require robust application security to prevent breaches and maintain consumer trust.
+* **Manufacturers with Connected Systems:**  Manufacturers utilizing software in industrial processes need specialists to safeguard these systems from disruption or sabotage. 
+* **Research Institutions:** Universities and labs conducting research with sensitive data or prototypes may engage security-focused developers.
+
+## Personas
+
+### Freelancer
+
+#### Maya, the Secure Coding Champion
 
 * **Background:** 8+ years experience as a software developer, the last 3 with a conscious shift towards secure coding practices. Frustrated by witnessing vulnerability-riddled projects in previous roles.
 * **Skills:**
@@ -19,7 +48,7 @@
     * Build a portfolio showcasing projects with strong security implementation. 
 * **Resume:** [maya.md](resume_examples/maya.md)
 
-### Alex, the AppSec Pen-Tester
+#### Alex, the AppSec Pen-Tester
 
 * **Background:** Ethical hacker turned software security specialist. Self-taught, with some industry certifications (e.g., OSCP, CEH).
 * **Skills:**
@@ -36,7 +65,7 @@
      * Gain more experience in specific verticals (healthcare, finance) for specialization.
 * **Resume:** [alex.md](resume_examples/alex.md)
 
-### Zara, the DevSecOps Consultant
+#### Zara, the DevSecOps Consultant
 
 * **Background:**  Seasoned DevOps engineer (10+ years), recently obtained DevSecOps certifications. Worked in fast-paced agile environments.
 * **Skills:**
@@ -53,9 +82,9 @@
      * Position herself as a strategic advisor, not just an implementer.
 * **Resume:** [zara.md](resume_examples/zara.md)
 
-## Client Personas
+### Client Personas
 
-### AccelerateNow,  the Growth-Driven Startup
+#### AccelerateNow,  the Growth-Driven Startup
 
 * **Background:** A rapidly growing SaaS startup offering an innovative collaboration platform.  Focused on new features and user acquisition, but some recent embarrassing data leaks.
 * **Needs:**
@@ -69,7 +98,7 @@
 
 * **Example Project:** [acceleratenow.md](project_examples/acceleratenow.md)
 
-### MidSize Solutions, the Established Software Firm
+#### MidSize Solutions, the Established Software Firm
 
 * **Background:** Medium-sized company with legacy enterprise software (mostly Java-based).  Beginning a cloud migration and modernization push.
 * **Needs:**
@@ -83,7 +112,7 @@
 
 * **Example Project:** [midsizesolutions.md](project_examples/midsizesolutions.md)
 
-###  HealthSafe, the Healthcare Tech Provider
+####  HealthSafe, the Healthcare Tech Provider
 
 * **Background:**  Software vendor creating patient data management systems for hospitals.  Highly regulated (HIPAA) with strict security obligations.
 * **Needs:**
