@@ -23,7 +23,7 @@ ArmoredCode bridges this gap with a platform tailored to the intersection of cyb
 * **Secure Communication:**
     - Project-specific messaging (encrypted).
     File sharing with security focus (limit sizes, scanning if possible).
-
+    - Core Chat Features: [chat.md](docs/chat.md)
 * **Freelancer "Pitching":**
     - Short proposals or a way to express interest directly to the client per project.
 
