@@ -2,7 +2,7 @@
 
 ## Freelancer Personas
 
-**Persona 1: Maya, the Secure Coding Champion**
+## Maya, the Secure Coding Champion
 
 * **Background:** 8+ years experience as a software developer, the last 3 with a conscious shift towards secure coding practices. Frustrated by witnessing vulnerability-riddled projects in previous roles.
 * **Skills:**
@@ -17,8 +17,9 @@
     * Work on projects valuing secure development,  allowing her to make a real impact.
     * Collaborate with like-minded security professionals.
     * Build a portfolio showcasing projects with strong security implementation. 
+* **Resume:** [maya.md](resume_examples/maya.md)
 
-**Persona 2: Alex, the AppSec Pen-Tester**
+### Alex, the AppSec Pen-Tester
 
 * **Background:** Ethical hacker turned software security specialist. Self-taught, with some industry certifications (e.g., OSCP, CEH).
 * **Skills:**
@@ -33,8 +34,9 @@
      * Consistent stream of well-scoped projects with security-aware clients.
      * Collaborate with developers directly to fix issues during development, not after. 
      * Gain more experience in specific verticals (healthcare, finance) for specialization.
+* **Resume:** [alex.md](resume_examples/alex.md)
 
-**Persona 3: Zara, the DevSecOps Consultant**
+### Zara, the DevSecOps Consultant
 
 * **Background:**  Seasoned DevOps engineer (10+ years), recently obtained DevSecOps certifications. Worked in fast-paced agile environments.
 * **Skills:**
@@ -49,6 +51,7 @@
      * Work on projects where security is 'baked-in'. 
      * Help teams achieve a truly collaborative DevSecOps culture.
      * Position herself as a strategic advisor, not just an implementer.
+* **Resume:** [zara.md](resume_examples/zara.md)
 
 ## Client Personas
 
