@@ -98,6 +98,9 @@ ArmoredCode is a specialized platform where skilled cybersecurity professionals 
 
 * **Example Project:** [acceleratenow.md](project_examples/acceleratenow.md)
 
+
+* **Example Proposal:** [maya_acceleratenow.md](proposals_examples/maya_acceleratenow.md)
+
 #### MidSize Solutions, the Established Software Firm
 
 * **Background:** Medium-sized company with legacy enterprise software (mostly Java-based).  Beginning a cloud migration and modernization push.
@@ -111,6 +114,7 @@ ArmoredCode is a specialized platform where skilled cybersecurity professionals 
     * Leadership wants to modernize but doesn't fully understand the security risks of the cloud.
 
 * **Example Project:** [midsizesolutions.md](project_examples/midsizesolutions.md)
+* **Example Proposal:** [alex_midsizesolutions.md](proposals_examples/alex_midsizesolutions.md)
 
 ####  HealthSafe, the Healthcare Tech Provider
 
@@ -125,3 +129,4 @@ ArmoredCode is a specialized platform where skilled cybersecurity professionals 
     * Unsure if freelancers *truly* adhere to the same standards as full-time employees.
 
 * **Example Project:** [healthsafe.md](project_examples/healthsafe.md)
+* **Example Proposal:** [zara_healthsafe.md](proposals_examples/zara_healthsafe.md)
