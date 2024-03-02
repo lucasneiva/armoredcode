@@ -53,10 +53,10 @@ A more extensive view of our target users is available in [target_users.md](http
 
 ## **Technology Stack**
 
-* **Frontend:** React
-* **Backend:** NodeJS
-* **Database:** MongoDB
-* **Hosting:** AWS
+* **MongoDB:** Scalable NoSQL database for data storage and persistence.
+* **Express.js:** Node.js web framework for building RESTful APIs and server-side logic.
+* **Angular:**: Frontend JavaScript framework for creating dynamic web UIs and single-page applications.
+* **Node.js:** JavaScript runtime for executing server-side code.
 
 ## **Monetization**
 
