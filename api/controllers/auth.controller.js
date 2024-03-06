@@ -23,6 +23,25 @@ export const register = async (req, res, next)=>{
     return next(CreateSuccess(200, "User Registered Sucessfulyy!"));
 }
 
+
+export const registerAdmin = async (req, res, next)=>{
+    const role = await Role.find({});
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(req.body.password, salt);
+    const newUser = new User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        username: req.body.username,
+        email: req.body.email,
+        password: hashPassword,
+        isAdmin: true,
+        roles: role
+    });
+
+    await newUser.save();
+    return next(CreateSuccess(200, "User Registered Sucessfulyy!"));
+}
+
 export const login = async (req, res, next)=>{
 
     try {
