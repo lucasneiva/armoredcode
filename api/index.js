@@ -4,11 +4,16 @@ import dotenv from "dotenv";
 import roleRoute from "./routes/role.js"
 import authRoute from "./routes/auth.js"
 import userRoute from "./routes/user.js"
+import cookieParser from "cookie-parser";
 
 const app = express();
 dotenv.config();
 
 app.use(express.json());
+app.use(cookieParser());
+app.use("/api/auth", authRoute);
+app.use("/api/role", roleRoute);
+app.use("/api/user", userRoute);
 
 //DB Connection
 const connectMongoDB = async () => {
@@ -20,10 +25,6 @@ const connectMongoDB = async () => {
         throw error;
     }
 }
-
-app.use("/api/auth", authRoute);
-app.use("/api/role", roleRoute);
-app.use("/api/user", userRoute);
 
 //Error Handler Middleware
 app.use((obj, req, res, next)=>{

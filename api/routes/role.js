@@ -5,7 +5,7 @@ import { createRole, updateRole, getAllRoles, deleteRole } from '../controllers/
 const router = express.Router();
 
 //Create a new role in DB
-router.post('/create', createRole);
+router.post('/create', createRole); // remember to protect all endpoints
 
 //Update role in DB
 router.put('/update/:id', updateRole);
