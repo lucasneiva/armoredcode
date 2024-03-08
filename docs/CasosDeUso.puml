@@ -1,0 +1,31 @@
+@startuml Casos de Uso
+skinparam stereotypefontsize 14
+!pragma size 1000 800
+
+actor Cliente
+actor Freelancer
+actor ArmoredCode
+
+usecase PublicarProjeto
+usecase BuscarFreelancer
+usecase ComunicarSeComFreelancer
+usecase SelecionarFreelancer
+usecase CriarPerfil
+usecase BuscarProjeto
+usecase EnviarProposta
+
+Cliente --> PublicarProjeto
+Cliente --> BuscarFreelancer
+Cliente --> SelecionarFreelancer
+
+Freelancer ---> CriarPerfil
+Freelancer ---> BuscarProjeto
+Freelancer ---> EnviarProposta
+
+ArmoredCode <---> PublicarProjeto
+ArmoredCode <---> BuscarFreelancer
+ArmoredCode <---> ComunicarSeComFreelancer
+ArmoredCode <---> CriarPerfil
+ArmoredCode <---> BuscarProjeto
+ArmoredCode <---> EnviarProposta
+@enduml

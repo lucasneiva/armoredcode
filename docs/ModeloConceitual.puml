@@ -1,0 +1,66 @@
+@startuml Modelo Conceitual
+class Cliente {
+    + nome: String
+    + email: String
+    + telefone: String
+    + necessidadesDeSeguranca: String
+    + prazo: String
+    + orcamento: String
+}
+
+class Freelancer {
+    + nome: String
+    + email: String
+    + telefone: String
+    + habilidades: List<Habilidade>
+    + especializacao: Especializacao
+    + experiencia: String
+    + nivelDeExperiencia: String
+    + descricaoDosServicos: String
+}
+
+class Projeto {
+    + titulo: String
+    + descricao: String
+    + pilhaTecnologica: List<PilhaTecnologica>
+    + focoDeVulnerabilidade: String
+    + necessidadesDeCompliance: String
+}
+
+class Habilidade {
+    + nome: String
+    + descricao: String
+}
+
+class Especializacao {
+    + nome: String
+    + descricao: String
+}
+
+class PilhaTecnologica {
+    + nome: String
+    + descricao: String
+}
+
+class Comunicacao {
+    + dataHora: String
+    + mensagem: String
+    + tipoDeArquivo: String
+    + tamanhoDoArquivo: String
+}
+
+Cliente --* Projeto
+Cliente --* Freelancer
+Freelancer --* Projeto
+
+Projeto --* Habilidade
+Projeto --* Especializacao
+Projeto --* PilhaTecnologica
+
+Habilidade --* Freelancer
+Especializacao --* Freelancer
+
+Comunicacao --* Cliente
+Comunicacao --* Freelancer
+Comunicacao --* Projeto
+@enduml
