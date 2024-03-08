@@ -13,14 +13,14 @@ export const register = async (req, res, next)=>{
     const newUser = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        username: req.body.username,
+        username: req.body.userName,
         email: req.body.email,
         password: hashPassword,
         roles: role
     });
 
     await newUser.save();
-    return next(CreateSuccess(200, "User Registered Sucessfulyy!"));
+    return res.status(200).json( "User Registered Sucessfulyy!"); //obs: json para mandar dados por beck + DB
 }
 
 
