@@ -19,13 +19,64 @@ class Freelancer {
     + descricaoDosServicos: String
 }
 
-class Projeto {
-    + titulo: String
-    + descricao: String
-    + pilhaTecnologica: List<PilhaTecnologica>
-    + focoDeVulnerabilidade: String
-    + necessidadesDeCompliance: String
+class Project {
+  +ProjectID : int <<PK>>
+  +ProjectTitle : String
+  +ProjectDescription : String
+  +ProjectBudget : double 
+  +StartDate : Date
+  +EndDate : Date 
+  +ClientID : int <<FK>> 
 }
+
+class ProjectStatus {
+  +StatusID : int <<PK>>
+  +StatusName : String
+  +StatusDescription : String
+}
+
+class Requirement {
+  +RequirementID : int <<PK>>
+  +RequirementTitle : String
+  +RequirementDescription : String
+  +Priority : int <<FK>> 
+  +ProjectID : int <<FK>>
+}
+
+class Deliverable {
+  +DeliverableID : int <<PK>>
+  +DeliverableTitle : String
+  +RequirementID : int <<FK>>
+  +DeliverableType : int <<FK>>
+  +DeliverableDescription : String
+  +ProjectID : int <<FK>>
+}
+
+class DeliverableType {
+  +DeliverableTypeID : int <<PK>>
+  +TypeName : String [e.g., "Documentation", "Code", "Prototype", "Report"]
+  +TypeDescription : String [Optional]
+}
+
+class TechnologyStack {
+  +StackID : int <<PK>>
+  +StackName : String
+  +StackDescription : String
+} 
+
+class Priority {
+  +PriorityID : int <<PK>>
+  +PriorityLevel : String [e.g., "High", "Medium", "Low"]
+  +PriorityDescription : String [Optional]
+}
+
+Deliverable "1" -- "1" DeliverableType : has
+Deliverable "*" -- "1" Requirement : has many
+Requirement "1" -- "1" Priority : has
+Project "1" -- "1" ProjectStatus : has
+Project "1" -- "*" Requirement : has many
+Project "*" -- "1" TechnologyStack : uses
+
 
 class Habilidade {
     + nome: String
@@ -49,18 +100,15 @@ class Comunicacao {
     + tamanhoDoArquivo: String
 }
 
-Cliente --* Projeto
+Cliente --* Project
 Cliente --* Freelancer
-Freelancer --* Projeto
+Freelancer --* Project
 
-Projeto --* Habilidade
-Projeto --* Especializacao
-Projeto --* PilhaTecnologica
 
 Habilidade --* Freelancer
 Especializacao --* Freelancer
 
 Comunicacao --* Cliente
 Comunicacao --* Freelancer
-Comunicacao --* Projeto
+Comunicacao --* Project
 @enduml
