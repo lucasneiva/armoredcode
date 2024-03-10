@@ -1,114 +1,205 @@
 @startuml Modelo Conceitual
-class Cliente {
-    + nome: String
-    + email: String
-    + telefone: String
-    + necessidadesDeSeguranca: String
-    + prazo: String
-    + orcamento: String
-}
-
-class Freelancer {
-    + nome: String
-    + email: String
-    + telefone: String
-    + habilidades: List<Habilidade>
-    + especializacao: Especializacao
-    + experiencia: String
-    + nivelDeExperiencia: String
-    + descricaoDosServicos: String
-}
 
 class Project {
-  +ProjectID : int <<PK>>
-  +ProjectTitle : String
-  +ProjectDescription : String
-  +ProjectBudget : double 
-  +StartDate : Date
-  +EndDate : Date 
-  +ClientID : int <<FK>> 
+   + ProjectID : int <<PK>>
+   + ProjectTitle : String
+   + ProjectDescription : String
+   + ProjectBudget : double 
+   + StartDate : Date
+   + EndDate : Date 
+   + ClientID : int <<FK>> 
 }
 
 class ProjectStatus {
-  +StatusID : int <<PK>>
-  +StatusName : String
-  +StatusDescription : String
+   + StatusID : int <<PK>>
+   + StatusName : String
+   + StatusDescription : String
 }
 
 class Requirement {
-  +RequirementID : int <<PK>>
-  +RequirementTitle : String
-  +RequirementDescription : String
-  +Priority : int <<FK>> 
-  +ProjectID : int <<FK>>
+   + RequirementID : int <<PK>>
+   + RequirementTitle : String
+   + RequirementDescription : String
+   + Priority : int <<FK>> 
+   + ProjectID : int <<FK>>
 }
 
 class Deliverable {
-  +DeliverableID : int <<PK>>
-  +DeliverableTitle : String
-  +RequirementID : int <<FK>>
-  +DeliverableType : int <<FK>>
-  +DeliverableDescription : String
-  +ProjectID : int <<FK>>
+   + DeliverableID : int <<PK>>
+   + DeliverableTitle : String
+   + RequirementID : int <<FK>>
+   + DeliverableType : int <<FK>>
+   + DeliverableDescription : String
+   + ProjectID : int <<FK>>
 }
 
 class DeliverableType {
-  +DeliverableTypeID : int <<PK>>
-  +TypeName : String [e.g., "Documentation", "Code", "Prototype", "Report"]
-  +TypeDescription : String [Optional]
+   + DeliverableTypeID : int <<PK>>
+   + TypeName : String [e.g., "Documentation", "Code", "Prototype", "Report"]
+   + TypeDescription : String [Optional]
 }
 
 class TechnologyStack {
-  +StackID : int <<PK>>
-  +StackName : String
-  +StackDescription : String
+   + StackID : int <<PK>>
+   + StackName : String
+   + StackDescription : String
 } 
 
 class Priority {
-  +PriorityID : int <<PK>>
-  +PriorityLevel : String [e.g., "High", "Medium", "Low"]
-  +PriorityDescription : String [Optional]
+   + PriorityID : int <<PK>>
+   + PriorityLevel : String [e.g., "High", "Medium", "Low"]
+   + PriorityDescription : String [Optional]
 }
 
-Deliverable "1" -- "1" DeliverableType : has
+class Freelancer {
+    + freelancer_id : int <<PK>>
+    + experience_level_id : int <<FK>>
+    + overall_rating : double
+    + is_premium : booleann
+    + first_name : String
+    + last_name : String
+    + email : String <<unique>>
+    + phone_number : String
+    + hourly_rate : double
+    + rate_currency : String
+    + profile_summary : String
+    + resume_document_url : String
+    + is_verified : boolean
+    + is_available : boolean
+    + availability_notes : String
+}
+
+class ExperienceLevel {
+    + experience_level_id : int <<PK>>
+    + experience_level_name : String
+}
+
+class SecuritySpecialization {
+    + specialization_id : int <<PK>> 
+    + specialization_name : String
+    + specialization_description : String
+    + related_skills : String
+}
+
+class Skill {
+    + skill_id : int <<PK>>
+    + skill_name : String
+    + skill_description : String
+}
+
+class Certification {
+    + certification_id : int <<PK>> 
+    + certification_name : String
+    + certification_provider : String
+    + certification_date : date
+}
+
+class WorkExperience {
+    + experience_id : int <<PK>>
+    + freelancer_id : int <<FK>>
+    + company_name : String
+    + job_title : String
+    + start_date : date
+    + end_date : date
+    + job_description : String
+}
+
+class Rating {
+    + rating_id : int <<PK>>
+    + freelancer_id : int <<FK>>
+    + client_id : int <<FK>>
+    + rating_score : int
+    + rating_comment : String
+    + rating_date : date
+}
+
+class Portfolio {
+    + portfolio_id : int <<PK>>
+    + freelancer_id : int <<FK>>
+    + service_offering_blurb : String
+    + portfolio_description : String
+    + portfolio_website : String
+    + portfolio_samples : List<String> // URLs or file paths to sample work
+}
+
+class Verification {
+    + verification_id : int <<PK>>
+    + freelancer_id : int <<FK>>
+    + verification_date : Date
+    + verification_status : String // e.g., "Verified" or "Not Verified"
+    + verification_notes : String // Optional notes or comments
+}
+
+class Client {
+    + clientID: int <<PK>>
+    + clientType: String [e.g., "Software Company", "Startup", "Healthcare Provider"]
+    + companyName: String
+    + industry: String
+    + companySize: String [e.g., "Small", "Medium", "Large"]
+    + contactName: String
+    + contactEmail: String
+    + contactPhone: String
+    + createdAt: Date
+    + updatedAt: Date
+}
+
+class Proposal {
+    + proposal_id: int <<PK>> 
+    + freelancer_id: int <<FK>>
+    + project_id: int <<FK>>
+    + proposed_deliverable_id: int <<PK>>
+    + proposedDeliverablesId: [int <<FK>>]
+    + proposal_status_id: int <<FK>>
+    + description: String
+    + createdAt: Date
+    + updatedAt: Date
+}
+
+class ProposedDeliverable {
+    + proposed_deliverable_id: int <<PK>>
+    + proposal_id: int <<FK>>
+    + DeliverableID : int <<FK>>
+    + proposedPrice: double
+    + proposedDeliveryTime: date
+    + notes: String
+}
+
+class ProposalStatus {
+    + proposal_status_id: int <<PK>>
+    + name: String
+    + description: String
+}
+
+
+Proposal "1" -- "1" Freelancer : by
+Proposal "1" -- "1" Project : for
+Proposal "1" -- "*" ProposedDeliverable : has many
+Proposal "1" -- "1" ProposalStatus : has
+
+ProposedDeliverable "1" -- "1" Deliverable : for
+
+Client "1" -- "*" Project : posts
+Client "1" -- "*" Rating : provides
+
+
+Freelancer "1" -- "*" Project : works on 
+Freelancer "1" -- "1" Verification : has one
+Freelancer "1" -- "1" Portfolio : has one
+Freelancer "1" -- "1" ExperienceLevel : has one
+Freelancer "1" -- "1" SecuritySpecialization : has one
+
+Freelancer "1" -- "*" Skill : has many
+Freelancer "1" -- "*" Certification : has many
+Freelancer "1" -- "*" WorkExperience : has many
+Freelancer "1" -- "*" Rating : has many
+
+
+Deliverable "1" -- "1" DeliverableType : has one
 Deliverable "*" -- "1" Requirement : has many
-Requirement "1" -- "1" Priority : has
-Project "1" -- "1" ProjectStatus : has
+Requirement "1" -- "1" Priority : has one
+Project "1" -- "1" ProjectStatus : has one
 Project "1" -- "*" Requirement : has many
-Project "*" -- "1" TechnologyStack : uses
+Project "*" -- "1" TechnologyStack : uses 
 
 
-class Habilidade {
-    + nome: String
-    + descricao: String
-}
-
-class Especializacao {
-    + nome: String
-    + descricao: String
-}
-
-class PilhaTecnologica {
-    + nome: String
-    + descricao: String
-}
-
-class Comunicacao {
-    + dataHora: String
-    + mensagem: String
-    + tipoDeArquivo: String
-    + tamanhoDoArquivo: String
-}
-
-Cliente --* Project
-Cliente --* Freelancer
-Freelancer --* Project
-
-
-Habilidade --* Freelancer
-Especializacao --* Freelancer
-
-Comunicacao --* Cliente
-Comunicacao --* Freelancer
-Comunicacao --* Project
 @enduml
