@@ -1,6 +1,6 @@
 @startuml Modelo Conceitual
 
-class Project {
+entity Project {
    + ProjectID : int <<PK>>
    + ProjectTitle : String
    + ProjectDescription : String
@@ -8,15 +8,18 @@ class Project {
    + StartDate : Date
    + EndDate : Date 
    + ClientID : int <<FK>> 
+   + StatusID : int <<FK>>
+   + freelancer_id : int <<FK>>
+
 }
 
-class ProjectStatus {
+entity ProjectStatus {
    + StatusID : int <<PK>>
    + StatusName : String
    + StatusDescription : String
 }
 
-class Requirement {
+entity Requirement {
    + RequirementID : int <<PK>>
    + RequirementTitle : String
    + RequirementDescription : String
@@ -24,7 +27,7 @@ class Requirement {
    + ProjectID : int <<FK>>
 }
 
-class Deliverable {
+entity Deliverable {
    + DeliverableID : int <<PK>>
    + DeliverableTitle : String
    + RequirementID : int <<FK>>
@@ -33,25 +36,25 @@ class Deliverable {
    + ProjectID : int <<FK>>
 }
 
-class DeliverableType {
+entity DeliverableType {
    + DeliverableTypeID : int <<PK>>
    + TypeName : String [e.g., "Documentation", "Code", "Prototype", "Report"]
    + TypeDescription : String [Optional]
 }
 
-class TechnologyStack {
-   + StackID : int <<PK>>
-   + StackName : String
-   + StackDescription : String
+entity Technology {
+   + TechnologyID : int <<PK>>
+   + TechnologyName : String
+   + TechnologyDescription : String
 } 
 
-class Priority {
+entity Priority {
    + PriorityID : int <<PK>>
    + PriorityLevel : String [e.g., "High", "Medium", "Low"]
    + PriorityDescription : String [Optional]
 }
 
-class Freelancer {
+entity Freelancer {
     + freelancer_id : int <<PK>>
     + experience_level_id : int <<FK>>
     + overall_rating : double
@@ -69,32 +72,32 @@ class Freelancer {
     + availability_notes : String
 }
 
-class ExperienceLevel {
+entity ExperienceLevel {
     + experience_level_id : int <<PK>>
     + experience_level_name : String
 }
 
-class SecuritySpecialization {
+entity SecuritySpecialization {
     + specialization_id : int <<PK>> 
     + specialization_name : String
     + specialization_description : String
     + related_skills : String
 }
 
-class Skill {
+entity Skill {
     + skill_id : int <<PK>>
     + skill_name : String
     + skill_description : String
 }
 
-class Certification {
+entity Certification {
     + certification_id : int <<PK>> 
     + certification_name : String
     + certification_provider : String
     + certification_date : date
 }
 
-class WorkExperience {
+entity WorkExperience {
     + experience_id : int <<PK>>
     + freelancer_id : int <<FK>>
     + company_name : String
@@ -104,7 +107,7 @@ class WorkExperience {
     + job_description : String
 }
 
-class Rating {
+entity Rating {
     + rating_id : int <<PK>>
     + freelancer_id : int <<FK>>
     + client_id : int <<FK>>
@@ -113,7 +116,7 @@ class Rating {
     + rating_date : date
 }
 
-class Portfolio {
+entity Portfolio {
     + portfolio_id : int <<PK>>
     + freelancer_id : int <<FK>>
     + service_offering_blurb : String
@@ -122,7 +125,7 @@ class Portfolio {
     + portfolio_samples : List<String> // URLs or file paths to sample work
 }
 
-class Verification {
+entity Verification {
     + verification_id : int <<PK>>
     + freelancer_id : int <<FK>>
     + verification_date : Date
@@ -130,7 +133,7 @@ class Verification {
     + verification_notes : String // Optional notes or comments
 }
 
-class Client {
+entity Client {
     + clientID: int <<PK>>
     + clientType: String [e.g., "Software Company", "Startup", "Healthcare Provider"]
     + companyName: String
@@ -143,7 +146,7 @@ class Client {
     + updatedAt: Date
 }
 
-class Proposal {
+entity Proposal {
     + proposal_id: int <<PK>> 
     + freelancer_id: int <<FK>>
     + project_id: int <<FK>>
@@ -155,7 +158,7 @@ class Proposal {
     + updatedAt: Date
 }
 
-class ProposedDeliverable {
+entity ProposedDeliverable {
     + proposed_deliverable_id: int <<PK>>
     + proposal_id: int <<FK>>
     + DeliverableID : int <<FK>>
@@ -164,12 +167,45 @@ class ProposedDeliverable {
     + notes: String
 }
 
-class ProposalStatus {
+entity ProposalStatus {
     + proposal_status_id: int <<PK>>
     + name: String
     + description: String
 }
 
+entity Chat {
+    + ChatID : int <<PK>>
+    + ChatTitle : String
+    + CreatedTimestamp : Date
+    + LastMessageTimestamp : Date
+    + ProjectID : int <<FK>>
+}
+
+entity ChatMessage {
+    + MessageID : int <<PK>>
+    + MessageText : String
+    + SentTimestamp : Date
+    + ChatID : int <<FK>>
+    + SenderID : int <<FK>>
+    + RecipientID : int <<FK>>
+}
+
+entity ChatFile {
+    + FileID : int <<PK>>
+    + FileName : String
+    + FileType : String
+    + FileContent : Binary
+    + UploadedTimestamp : Date
+    + MessageID : int <<FK>>
+}
+
+Project "1" -- "*" Chat : has
+Chat "1" -- "*" ChatMessage : has
+ChatMessage "1" -- "*" ChatFile : has
+ChatMessage "*" -- "1" Freelancer : sent by
+ChatMessage "*" -- "1" Client : sent by
+Freelancer "*" -- "*" Chat : participates in
+Client "*" -- "*" Chat : participates in
 
 Proposal "1" -- "1" Freelancer : by
 Proposal "1" -- "1" Project : for
@@ -199,7 +235,7 @@ Deliverable "*" -- "1" Requirement : has many
 Requirement "1" -- "1" Priority : has one
 Project "1" -- "1" ProjectStatus : has one
 Project "1" -- "*" Requirement : has many
-Project "*" -- "1" TechnologyStack : uses 
+Project "*" -- "*" Technology : uses 
 
 
 @enduml
