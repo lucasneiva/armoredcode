@@ -1,211 +1,238 @@
-@startuml Modelo Conceitual
+@startuml ModeloConceitual
 
 entity Project {
-   + ProjectID : int <<PK>>
+   + ProjectId : int <<PK>>
    + ProjectTitle : String
    + ProjectDescription : String
    + ProjectBudget : double 
    + StartDate : Date
    + EndDate : Date 
-   + ClientID : int <<FK>> 
-   + StatusID : int <<FK>>
-   + freelancer_id : int <<FK>>
+   + ClientId : int <<FK>> 
+   + StatusId : int <<FK>>
+   + FreelancerId : int <<FK>>
 
 }
 
+entity ProjectCategory {
+   + CategoryId : int <<PK>>
+   + CategoryName : String
+   + CategoryDescription : String [Optional]
+}
+
 entity ProjectStatus {
-   + StatusID : int <<PK>>
+   + StatusId : int <<PK>>
    + StatusName : String
    + StatusDescription : String
 }
 
 entity Requirement {
-   + RequirementID : int <<PK>>
+   + RequirementId : int <<PK>>
    + RequirementTitle : String
    + RequirementDescription : String
-   + Priority : int <<FK>> 
-   + ProjectID : int <<FK>>
+   + PriorityId : int <<FK>> 
+   + ProjectId : int <<FK>>
 }
 
 entity Deliverable {
-   + DeliverableID : int <<PK>>
+   + DeliverableId : int <<PK>>
    + DeliverableTitle : String
-   + RequirementID : int <<FK>>
-   + DeliverableType : int <<FK>>
+   + RequirementId : int <<FK>>
+   + DeliverableTypeId : int <<FK>>
    + DeliverableDescription : String
-   + ProjectID : int <<FK>>
+   + ProjectId : int <<FK>>
 }
 
 entity DeliverableType {
-   + DeliverableTypeID : int <<PK>>
+   + DeliverableTypeId : int <<PK>>
    + TypeName : String [e.g., "Documentation", "Code", "Prototype", "Report"]
    + TypeDescription : String [Optional]
 }
 
 entity Technology {
-   + TechnologyID : int <<PK>>
+   + TechnologyId : int <<PK>>
    + TechnologyName : String
    + TechnologyDescription : String
 } 
 
 entity Priority {
-   + PriorityID : int <<PK>>
+   + PriorityId : int <<PK>>
    + PriorityLevel : String [e.g., "High", "Medium", "Low"]
    + PriorityDescription : String [Optional]
 }
 
 entity Freelancer {
-    + freelancer_id : int <<PK>>
-    + experience_level_id : int <<FK>>
-    + overall_rating : double
-    + is_premium : booleann
-    + first_name : String
-    + last_name : String
-    + email : String <<unique>>
-    + phone_number : String
-    + hourly_rate : double
-    + rate_currency : String
-    + profile_summary : String
-    + resume_document_url : String
-    + is_verified : boolean
-    + is_available : boolean
-    + availability_notes : String
+    + FreelancerId : int <<PK>>
+    + ExperienceLevelId : int <<FK>>
+    + OverallRating : double
+    + IsPremium : boolean
+    + FirstName : String
+    + LastName : String
+    + Email : String <<unique>>
+    + PhoneNumber : String
+    + HourlyRate : double
+    + RateCurrency : String
+    + ProfileSummary : String
+    + ResumeDocumentUrl : String
+    + IsVerified : boolean
+    + IsAvailable : boolean
+    + AvailabilityNotes : String
 }
 
 entity ExperienceLevel {
-    + experience_level_id : int <<PK>>
-    + experience_level_name : String
+    + ExperienceLevelId : int <<PK>>
+    + ExperienceLevelName : String
 }
 
 entity SecuritySpecialization {
-    + specialization_id : int <<PK>> 
-    + specialization_name : String
-    + specialization_description : String
-    + related_skills : String
+    + SpecializationId : int <<PK>> 
+    + SpecializationName : String
+    + SpecializationDescription : String
+    + RelatedSkills : String
 }
 
 entity Skill {
-    + skill_id : int <<PK>>
-    + skill_name : String
-    + skill_description : String
+    + SkillId : int <<PK>>
+    + SkillName : String
+    + SkillDescription : String
 }
 
 entity Certification {
-    + certification_id : int <<PK>> 
-    + certification_name : String
-    + certification_provider : String
-    + certification_date : date
+    + CertificationId : int <<PK>> 
+    + CertificationName : String
+    + CertificationProvider : String
+    + CertificationDate : date
 }
 
 entity WorkExperience {
-    + experience_id : int <<PK>>
-    + freelancer_id : int <<FK>>
-    + company_name : String
-    + job_title : String
-    + start_date : date
-    + end_date : date
-    + job_description : String
+    + ExperienceId : int <<PK>>
+    + FreelancerId : int <<FK>>
+    + CompanyName : String
+    + JobTitle : String
+    + StartDate : date
+    + EndDate : date
+    + JobDescription : String
 }
 
 entity Rating {
-    + rating_id : int <<PK>>
-    + freelancer_id : int <<FK>>
-    + client_id : int <<FK>>
-    + rating_score : int
-    + rating_comment : String
-    + rating_date : date
+    + RatingId : int <<PK>>
+    + FreelancerId : int <<FK>>
+    + ClientId : int <<FK>>
+    + RatingScore : int
+    + RatingComment : String
+    + RatingDate : date
 }
 
 entity Portfolio {
-    + portfolio_id : int <<PK>>
-    + freelancer_id : int <<FK>>
-    + service_offering_blurb : String
-    + portfolio_description : String
-    + portfolio_website : String
-    + portfolio_samples : List<String> // URLs or file paths to sample work
+    + PortfolioId : int <<PK>>
+    + FreelancerId : int <<FK>>
+    + ServiceOfferingBlurb : String
+    + PortfolioDescription : String
+    + PortfolioWebsite : String
+    + PortfolioSamples : List<String> // URLs or file paths to sample work
 }
 
 entity Verification {
-    + verification_id : int <<PK>>
-    + freelancer_id : int <<FK>>
-    + verification_date : Date
-    + verification_status : String // e.g., "Verified" or "Not Verified"
-    + verification_notes : String // Optional notes or comments
+    + VerificationId : int <<PK>>
+    + FreelancerId : int <<FK>>
+    + VerificationDate : Date
+    + VerificationStatus : String // e.g., "Verified" or "Not Verified"
+    + VerificationNotes : String // Optional notes or comments
 }
 
 entity Client {
-    + clientID: int <<PK>>
-    + clientType: String [e.g., "Software Company", "Startup", "Healthcare Provider"]
-    + companyName: String
-    + industry: String
-    + companySize: String [e.g., "Small", "Medium", "Large"]
-    + contactName: String
-    + contactEmail: String
-    + contactPhone: String
-    + createdAt: Date
-    + updatedAt: Date
+    + ClientId: int <<PK>>
+    + ClientType: String [e.g., "Software Company", "Startup", "Healthcare Provider"]
+    + CompanyName: String
+    + Industry: String
+    + CompanySize: String [e.g., "Small", "Medium", "Large"]
+    + ContactName: String
+    + ContactEmail: String
+    + ContactPhone: String
+    + CreatedAt: Date
+    + UpdatedAt: Date
 }
 
 entity Proposal {
-    + proposal_id: int <<PK>> 
-    + freelancer_id: int <<FK>>
-    + project_id: int <<FK>>
-    + proposed_deliverable_id: int <<PK>>
-    + proposedDeliverablesId: [int <<FK>>]
-    + proposal_status_id: int <<FK>>
-    + description: String
-    + createdAt: Date
-    + updatedAt: Date
+    + ProposalId: int <<PK>> 
+    + FreelancerId: int <<FK>>
+    + ProjectId: int <<FK>>
+    + ProposedDeliverableId: int <<PK>>
+    + ProposedDeliverablesId: [int <<FK>>]
+    + ProposalStatusId: int <<FK>>
+    + Description: String
+    + CreatedAt: Date
+    + UpdatedAt: Date
 }
 
 entity ProposedDeliverable {
-    + proposed_deliverable_id: int <<PK>>
-    + proposal_id: int <<FK>>
-    + DeliverableID : int <<FK>>
-    + proposedPrice: double
-    + proposedDeliveryTime: date
-    + notes: String
+    + ProposedDeliverableId: int <<PK>>
+    + ProposalId: int <<FK>>
+    + DeliverableId : int <<FK>>
+    + ProposedPrice: double
+    + ProposedDeliveryTime: date
+    + Notes: String
 }
 
 entity ProposalStatus {
-    + proposal_status_id: int <<PK>>
-    + name: String
-    + description: String
+    + ProposalStatusId: int <<PK>>
+    + Name: String
+    + Description: String
 }
 
 entity Chat {
-    + ChatID : int <<PK>>
+    + ChatId : int <<PK>>
     + ChatTitle : String
     + CreatedTimestamp : Date
     + LastMessageTimestamp : Date
-    + ProjectID : int <<FK>>
+    + ProjectId : int <<FK>>
 }
 
 entity ChatMessage {
-    + MessageID : int <<PK>>
+    + MessageId : int <<PK>>
     + MessageText : String
     + SentTimestamp : Date
-    + ChatID : int <<FK>>
-    + SenderID : int <<FK>>
-    + RecipientID : int <<FK>>
+    + ChatId : int <<FK>>
+    + SenderId : int <<FK>>
+    + RecipientId : int <<FK>>
 }
 
 entity ChatFile {
-    + FileID : int <<PK>>
+    + FileId : int <<PK>>
     + FileName : String
     + FileType : String
     + FileContent : Binary
     + UploadedTimestamp : Date
-    + MessageID : int <<FK>>
+    + MessageId : int <<FK>>
 }
 
-Project "1" -- "*" Chat : has
+entity Notification {
+    + NotificationId : int <<PK>>
+    + NotificationTypeId : int <<FK>>
+    + NotificationMessage : String
+    + SenderId : int <<FK>>
+    + RecipientId : int <<FK>>
+    + SentTimestamp : Date
+    + ReadTimestamp : Date [Optional]
+}
+
+entity NotificationType {
+    + NotificationTypeId : int <<PK>>
+    + TypeName : String
+    + TypeDescription : String [Optional]
+}
+
+Notification "1" -- "*" NotificationType : has one
+Notification "*" -- "1" Freelancer : sent by
+Notification "*" -- "1" Client : sent to
+
+Project "*" -- "*" ProjectCategory : belongs to
+Project "*" -- "*" Chat : has many
 Chat "1" -- "*" ChatMessage : has
-ChatMessage "1" -- "*" ChatFile : has
+ChatMessage "1" -- "*" ChatFile : has many
 ChatMessage "*" -- "1" Freelancer : sent by
 ChatMessage "*" -- "1" Client : sent by
-Freelancer "*" -- "*" Chat : participates in
-Client "*" -- "*" Chat : participates in
+Freelancer "*" -- "*" Chat : participates in many
+Client "*" -- "*" Chat : participates in many
 
 Proposal "1" -- "1" Freelancer : by
 Proposal "1" -- "1" Project : for
