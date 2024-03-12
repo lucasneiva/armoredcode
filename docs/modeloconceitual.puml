@@ -7,7 +7,7 @@ entity Project {
    + ProjectBudget : double 
    + StartDate : Date
    + EndDate : Date 
-   + ClientId : int <<FK>> 
+   + ClientProfileId : int <<FK>> 
    + StatusId : int <<FK>>
    + FreelancerId : int <<FK>>
 
@@ -60,22 +60,16 @@ entity Priority {
    + PriorityDescription : String [Optional]
 }
 
-entity Freelancer {
+entity FreelancerProfile {
     + FreelancerId : int <<PK>>
+    + UserId : int <<FK>>
     + ExperienceLevelId : int <<FK>>
     + OverallRating : double
     + IsPremium : boolean
-    + FirstName : String
-    + LastName : String
-    + Email : String <<unique>>
-    + PhoneNumber : String
     + HourlyRate : double
     + RateCurrency : String
     + ProfileSummary : String
     + ResumeDocumentUrl : String
-    + IsVerified : boolean
-    + IsAvailable : boolean
-    + AvailabilityNotes : String
 }
 
 entity ExperienceLevel {
@@ -113,13 +107,13 @@ entity WorkExperience {
     + JobDescription : String
 }
 
-entity Rating {
-    + RatingId : int <<PK>>
+entity Review {
+    + ReviewId : int <<PK>>
     + FreelancerId : int <<FK>>
-    + ClientId : int <<FK>>
+    + ReviewType : String [e.g., "Freelancer-to-Client", "Client-to-Freelancer"]
     + RatingScore : int
-    + RatingComment : String
-    + RatingDate : date
+    + ReviewComment : String
+    + ReviewDate : date
 }
 
 entity Portfolio {
@@ -139,17 +133,14 @@ entity Verification {
     + VerificationNotes : String // Optional notes or comments
 }
 
-entity Client {
-    + ClientId: int <<PK>>
-    + ClientType: String [e.g., "Software Company", "Startup", "Healthcare Provider"]
-    + CompanyName: String
-    + Industry: String
-    + CompanySize: String [e.g., "Small", "Medium", "Large"]
-    + ContactName: String
-    + ContactEmail: String
-    + ContactPhone: String
-    + CreatedAt: Date
-    + UpdatedAt: Date
+entity ClientProfile {
+    + ClientId : int <<PK>>
+    + UserId : int <<FK>>
+    + ClientType : String [e.g., "Software Company", "Startup", "Healthcare Provider"]
+    + CompanyName : String
+    + Industry : String
+    + CompanySize : String [e.g., "Small", "Medium", "Large"]
+    + ContactPhone : String
 }
 
 entity Proposal {
@@ -221,41 +212,126 @@ entity NotificationType {
     + TypeDescription : String [Optional]
 }
 
+entity PaymentMethod {
+    + PaymentMethodId : int <<PK>>
+    + PaymentMethodType : String [e.g., "Credit Card", "PayPal", "Bank Transfer"]
+    + PaymentDetails : String [Optional placeholder for future expansion]
+}
+
+entity ProgressStatus {
+    + ProgressStatusId : int <<PK>>
+    + ProgressStatusName : String [e.g., "Not Started", "In Progress", "Completed"]
+    + ProgressStatusDescription : String [Optional]
+}
+
+' Constraint: Project progress status is derived from its requirements and deliverables
+' Constraint: Requirement progress status is derived from its associated deliverables
+
+entity AvailabilityStatus {
+    + AvailabilityStatusId : int <<PK>>
+    + AvailabilityStatusName : String [e.g., "Available", "Partially Available", "Not Available"]
+    + AvailabilityNotes : String [Optional]
+}
+
+
+' Constraint: FreelancerProfile availability status determines visibility in search results and recommendations
+' Workflow: Freelancers can update their availability status and notes as needed
+
+entity User {
+    + userId : int <<PK>>
+    + firstName : String
+    + lastName : String
+    + username : String
+    + email : String
+    + password : String
+    + profileImage : String
+    + isAdmin : boolean
+    + roles : [Schema.Types.ObjectId] <<FK>>
+    --
+    .. Timestamps ..
+    + createdAt : Date
+    + updatedAt : Date
+}
+
+entity Role {
+    + roleId : int <<PK>>
+    + roleName : String
+    + roleDescription : String
+}
+
+entity Education {
+   + EducationId : int <<PK>>
+   + FreelancerId : int <<FK>>
+   + DegreeName : String
+   + FieldOfStudy : String
+   + Institution : String
+   + GraduationYear : int
+}
+
+entity Language {
+   + LanguageId : int <<PK>>
+   + LanguageName : String
+   + ProficiencyLevel : String [e.g., "Beginner", "Intermediate", "Advanced", "Fluent"]
+   + IsNative : boolean
+}
+
+User "1" -- "*" Review : has many
+
+Review "*" -- "1" FreelancerProfile : given by/for
+Review "*" -- "1" ClientProfile : given by/for 
+
+' When ReviewType is "Freelancer-to-Client", the FreelancerId references the freelancer giving the review, and the review is associated with the client's profile.
+' Constraint: When ReviewType is "Client-to-Freelancer", the FreelancerId references the freelancer receiving the review, and the review is associated with the freelancer's profile.
+
+FreelancerProfile "1" -- "*" Language : knows
+
+User "1" -- "*" Role : has many
+User "1" -- "1" ClientProfile : has one
+User "1" -- "1" FreelancerProfile : has one
+
+Requirement "1" -- "1" ProgressStatus : has one
+Deliverable "1" -- "1" ProgressStatus : has one
+
+FreelancerProfile "1" -- "1" AvailabilityStatus : has one
+
+Requirement "*" -- "*" Deliverable : has many
+
+FreelancerProfile "1" -- "*" PaymentMethod : has many
+ClientProfile "1" -- "*" PaymentMethod : has many 
+
 Notification "1" -- "*" NotificationType : has one
-Notification "*" -- "1" Freelancer : sent by
-Notification "*" -- "1" Client : sent to
+Notification "*" -- "1" FreelancerProfile : sent by
+Notification "*" -- "1" ClientProfile : sent to
 
 Project "*" -- "*" ProjectCategory : belongs to
 Project "*" -- "*" Chat : has many
 Chat "1" -- "*" ChatMessage : has
 ChatMessage "1" -- "*" ChatFile : has many
-ChatMessage "*" -- "1" Freelancer : sent by
-ChatMessage "*" -- "1" Client : sent by
-Freelancer "*" -- "*" Chat : participates in many
-Client "*" -- "*" Chat : participates in many
+ChatMessage "*" -- "1" FreelancerProfile : sent by
+ChatMessage "*" -- "1" ClientProfile : sent by
+FreelancerProfile "*" -- "*" Chat : participates in many
+ClientProfile "*" -- "*" Chat : participates in many
 
-Proposal "1" -- "1" Freelancer : by
+Proposal "1" -- "1" FreelancerProfile : by
 Proposal "1" -- "1" Project : for
 Proposal "1" -- "*" ProposedDeliverable : has many
 Proposal "1" -- "1" ProposalStatus : has
 
 ProposedDeliverable "1" -- "1" Deliverable : for
 
-Client "1" -- "*" Project : posts
-Client "1" -- "*" Rating : provides
+ClientProfile "1" -- "*" Project : posts
 
 
-Freelancer "1" -- "*" Project : works on 
-Freelancer "1" -- "1" Verification : has one
-Freelancer "1" -- "1" Portfolio : has one
-Freelancer "1" -- "1" ExperienceLevel : has one
-Freelancer "1" -- "1" SecuritySpecialization : has one
+FreelancerProfile "1" -- "*" Project : works on 
+FreelancerProfile "1" -- "1" Verification : has one
+FreelancerProfile "1" -- "1" Education : has one
+FreelancerProfile "1" -- "1" Portfolio : has one
+FreelancerProfile "1" -- "1" ExperienceLevel : has one
+FreelancerProfile "1" -- "1" SecuritySpecialization : has one
 
-Freelancer "1" -- "*" Skill : has many
-Freelancer "1" -- "*" Certification : has many
-Freelancer "1" -- "*" WorkExperience : has many
-Freelancer "1" -- "*" Rating : has many
-
+FreelancerProfile "1" -- "*" Skill : has many
+FreelancerProfile "1" -- "*" Certification : has many
+FreelancerProfile "1" -- "*" WorkExperience : has many
 
 Deliverable "1" -- "1" DeliverableType : has one
 Deliverable "*" -- "1" Requirement : has many
@@ -263,6 +339,5 @@ Requirement "1" -- "1" Priority : has one
 Project "1" -- "1" ProjectStatus : has one
 Project "1" -- "*" Requirement : has many
 Project "*" -- "*" Technology : uses 
-
 
 @enduml
