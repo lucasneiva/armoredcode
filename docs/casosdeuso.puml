@@ -1,31 +1,104 @@
-@startuml Casos de Uso
-skinparam stereotypefontsize 14
-!pragma size 1000 800
+@startuml
+left to right direction
 
-actor Cliente
 actor Freelancer
-actor ArmoredCode
+actor Client
+actor Administrator
 
-usecase PublicarProjeto
-usecase BuscarFreelancer
-usecase ComunicarSeComFreelancer
-usecase SelecionarFreelancer
-usecase CriarPerfil
-usecase BuscarProjeto
-usecase EnviarProposta
+rectangle "Profile Management" {
+  usecase "Create/Update Profile" as UC1
+  usecase "Manage Portfolio" as UC2
+  usecase "Update Availability" as UC3
+  usecase "Manage Security Specializations" as UC4
+  usecase "Add/Update Education" as UC26
+  usecase "Add/Update Certification" as UC27
+  usecase "Add/Update Language" as UC28
+  usecase "Add/Update Work Experience" as UC29
+  usecase "Manage Skill" as UC30
+  usecase "Verify Profile" as UC31
+}
 
-Cliente --> PublicarProjeto
-Cliente --> BuscarFreelancer
-Cliente --> SelecionarFreelancer
+rectangle "Project Management" {
+  usecase "Search for Projects" as UC5
+  usecase "Submit Proposal" as UC6
+  usecase "Create/Manage Project" as UC7
+  usecase "Manage Requirements and Deliverables" as UC8
+  usecase "Review/Accept Proposals" as UC9
+}
 
-Freelancer ---> CriarPerfil
-Freelancer ---> BuscarProjeto
-Freelancer ---> EnviarProposta
+rectangle "Communication" {
+  usecase "Initiate Chat" as UC10
+  usecase "Send Message" as UC11
+  usecase "Share File" as UC12
+  usecase "View Chat History" as UC13
+}
 
-ArmoredCode <---> PublicarProjeto
-ArmoredCode <---> BuscarFreelancer
-ArmoredCode <---> ComunicarSeComFreelancer
-ArmoredCode <---> CriarPerfil
-ArmoredCode <---> BuscarProjeto
-ArmoredCode <---> EnviarProposta
+rectangle "Progress Tracking" {
+  usecase "Update Progress Status" as UC14
+}
+
+rectangle "Feedback and Payments" {
+  usecase "Provide Feedback/Reviews" as UC17
+  usecase "Manage Payment Methods" as UC20
+}
+
+rectangle "Administrative" {
+  usecase "Manage Deliverable Types" as UC32
+  usecase "Manage Priority Levels" as UC33
+  usecase "Manage User Accounts" as UC21
+  usecase "Manage Project Categories/Statuses" as UC22
+  usecase "Manage Notification Types" as UC23
+  usecase "Monitor Platform Activity" as UC24
+}
+
+rectangle "Search and Browse" {
+  usecase "Search for Projects" as UC5
+  usecase "Browse Freelancer Profiles" as UC25
+}
+
+Freelancer -- UC1
+Freelancer -- UC2
+Freelancer -- UC3
+Freelancer -- UC4
+Freelancer -- UC26
+Freelancer -- UC27
+Freelancer -- UC28
+Freelancer -- UC29
+Freelancer -- UC30
+Freelancer -- UC31
+Freelancer -- UC5
+Freelancer -- UC6
+Freelancer -- UC10
+Freelancer -- UC11
+Freelancer -- UC12
+Freelancer -- UC13
+Freelancer -- UC14
+Freelancer -- UC17
+Freelancer -- UC18
+
+Client -- UC7
+Client -- UC8
+Client -- UC9
+Client -- UC10
+Client -- UC11
+Client -- UC12
+Client -- UC13
+Client -- UC17
+Client -- UC20
+Client -- UC25
+
+Administrator -- UC21
+Administrator -- UC22
+Administrator -- UC23
+Administrator -- UC24
+Administrator -- UC33
+Administrator -- UC32
+
+UC1 ..> UC5 : <<includes>>
+UC1 ..> UC6 : <<includes>>
+UC7 ..> UC9 : <<includes>>
+UC10 ..> UC11 : <<extends>>
+UC10 ..> UC12 : <<extends>>
+UC10 ..> UC13 : <<extends>>
+
 @enduml
