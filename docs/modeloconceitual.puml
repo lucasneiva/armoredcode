@@ -4,13 +4,13 @@ entity Project {
    + ProjectId : int <<PK>>
    + ProjectTitle : String
    + ProjectDescription : String
-   + ProjectBudget : double 
+   + ProjectBudget : double
    + StartDate : Date
-   + EndDate : Date 
-   + ClientProfileId : int <<FK>> 
-   + StatusId : int <<FK>>
+   + EndDate : Date
+   + ClientProfileId : int <<FK>>
+   + Status : enum ProjectStatus {"PROPOSED", "PLANNING", "ACTIVE", "ON_HOLD", "REVIEW", "COMPLETED", "CANCELLED"}
    + FreelancerId : int <<FK>>
-
+   + IsFixedPrice: boolean
 }
 
 entity ProjectCategory {
@@ -19,17 +19,12 @@ entity ProjectCategory {
    + CategoryDescription : String [Optional]
 }
 
-entity ProjectStatus {
-   + StatusId : int <<PK>>
-   + StatusName : String
-   + StatusDescription : String
-}
 
 entity Requirement {
    + RequirementId : int <<PK>>
    + RequirementTitle : String
    + RequirementDescription : String
-   + PriorityId : int <<FK>> 
+   + Priority: enum {'Low', 'Medium', 'High'} 
    + ProjectId : int <<FK>>
 }
 
@@ -37,15 +32,9 @@ entity Deliverable {
    + DeliverableId : int <<PK>>
    + DeliverableTitle : String
    + RequirementId : int <<FK>>
-   + DeliverableTypeId : int <<FK>>
+   + DeliverableType : enum {"Documentation", "Code", "Prototype", "Report"}
    + DeliverableDescription : String
    + ProjectId : int <<FK>>
-}
-
-entity DeliverableType {
-   + DeliverableTypeId : int <<PK>>
-   + TypeName : String [e.g., "Documentation", "Code", "Prototype", "Report"]
-   + TypeDescription : String [Optional]
 }
 
 entity Technology {
@@ -54,27 +43,19 @@ entity Technology {
    + TechnologyDescription : String
 } 
 
-entity Priority {
-   + PriorityId : int <<PK>>
-   + PriorityLevel : String [e.g., "High", "Medium", "Low"]
-   + PriorityDescription : String [Optional]
-}
-
 entity FreelancerProfile {
     + FreelancerId : int <<PK>>
     + UserId : int <<FK>>
-    + ExperienceLevelId : int <<FK>>
+    + Bio : String
+    + ServiceOfferingBlurb : String
+    + AvailabilityStatus : enum {"Available", "Partially Available", "Not Available"}
+    + ExperienceLevel : enum {"Beginner", "Intermediate", "Expert"} 
     + OverallRating : double
     + IsPremium : boolean
     + HourlyRate : double
     + RateCurrency : String
     + ProfileSummary : String
     + ResumeDocumentUrl : String
-}
-
-entity ExperienceLevel {
-    + ExperienceLevelId : int <<PK>>
-    + ExperienceLevelName : String
 }
 
 entity SecuritySpecialization {
@@ -107,22 +88,12 @@ entity WorkExperience {
     + JobDescription : String
 }
 
-entity Review {
-    + ReviewId : int <<PK>>
+entity WorkSample {
+    + WorkSampleId : int <<PK>>
     + FreelancerId : int <<FK>>
-    + ReviewType : String [e.g., "Freelancer-to-Client", "Client-to-Freelancer"]
-    + RatingScore : int
-    + ReviewComment : String
-    + ReviewDate : date
-}
-
-entity Portfolio {
-    + PortfolioId : int <<PK>>
-    + FreelancerId : int <<FK>>
-    + ServiceOfferingBlurb : String
-    + PortfolioDescription : String
-    + PortfolioWebsite : String
-    + PortfolioSamples : List<String> // URLs or file paths to sample work
+    + SampleTitle : String
+    + SampleDescription : String
+    + SampleUrl : String [URL or file path to the sample work]
 }
 
 entity Verification {
@@ -136,38 +107,25 @@ entity Verification {
 entity ClientProfile {
     + ClientId : int <<PK>>
     + UserId : int <<FK>>
-    + ClientType : String [e.g., "Software Company", "Startup", "Healthcare Provider"]
     + CompanyName : String
     + Industry : String
-    + CompanySize : String [e.g., "Small", "Medium", "Large"]
+    + CompanySize : enum {"Small", "Medium", "Large"}
     + ContactPhone : String
 }
 
 entity Proposal {
-    + ProposalId: int <<PK>> 
+    + ProposalId: int <<PK>>
     + FreelancerId: int <<FK>>
     + ProjectId: int <<FK>>
-    + ProposedDeliverableId: int <<PK>>
-    + ProposedDeliverablesId: [int <<FK>>]
-    + ProposalStatusId: int <<FK>>
-    + Description: String
+    + ProposalType: enum {"FixedPrice", "Hourly"}
+    + FixedPrice: double [Optional]
+    + ProposedHourlyRate: double [Optional]
+    + EstimatedHours: int [Optional]
+    + EstimatedDuration: date
+    + ProposalStatus: enum {"Draft", "Submitted", "Pending", "UnderReview", "Accepted", "Declined", "Negotiation", "Withdrawn", "Expired", "RevisionRequested", "ContractPending"}
+    + CoverLetter: String
     + CreatedAt: Date
     + UpdatedAt: Date
-}
-
-entity ProposedDeliverable {
-    + ProposedDeliverableId: int <<PK>>
-    + ProposalId: int <<FK>>
-    + DeliverableId : int <<FK>>
-    + ProposedPrice: double
-    + ProposedDeliveryTime: date
-    + Notes: String
-}
-
-entity ProposalStatus {
-    + ProposalStatusId: int <<PK>>
-    + Name: String
-    + Description: String
 }
 
 entity Chat {
@@ -198,7 +156,7 @@ entity ChatFile {
 
 entity Notification {
     + NotificationId : int <<PK>>
-    + NotificationTypeId : int <<FK>>
+    + NotificationType : enum {"Project Accpeted, ..."}
     + NotificationMessage : String
     + SenderId : int <<FK>>
     + RecipientId : int <<FK>>
@@ -206,36 +164,12 @@ entity Notification {
     + ReadTimestamp : Date [Optional]
 }
 
-entity NotificationType {
-    + NotificationTypeId : int <<PK>>
-    + TypeName : String
-    + TypeDescription : String [Optional]
-}
 
 entity PaymentMethod {
     + PaymentMethodId : int <<PK>>
     + PaymentMethodType : String [e.g., "Credit Card", "PayPal", "Bank Transfer"]
     + PaymentDetails : String [Optional placeholder for future expansion]
 }
-
-entity ProgressStatus {
-    + ProgressStatusId : int <<PK>>
-    + ProgressStatusName : String [e.g., "Not Started", "In Progress", "Completed"]
-    + ProgressStatusDescription : String [Optional]
-}
-
-' Constraint: Project progress status is derived from its requirements and deliverables
-' Constraint: Requirement progress status is derived from its associated deliverables
-
-entity AvailabilityStatus {
-    + AvailabilityStatusId : int <<PK>>
-    + AvailabilityStatusName : String [e.g., "Available", "Partially Available", "Not Available"]
-    + AvailabilityNotes : String [Optional]
-}
-
-
-' Constraint: FreelancerProfile availability status determines visibility in search results and recommendations
-' Workflow: Freelancers can update their availability status and notes as needed
 
 entity User {
     + userId : int <<PK>>
@@ -271,14 +205,35 @@ entity Education {
 entity Language {
    + LanguageId : int <<PK>>
    + LanguageName : String
-   + ProficiencyLevel : String [e.g., "Beginner", "Intermediate", "Advanced", "Fluent"]
+   + ProficiencyLevel : enum {"Beginner", "Intermediate", "Advanced", "Fluent"}
    + IsNative : boolean
 }
 
-User "1" -- "*" Review : has many
+entity SuccessRate {
+    + SuccessRateId : int <<PK>>
+    + EntityType : enum {"Client", "Freelancer"}
+    + EntityId : int <<FK>> (reference ClientId or FreelancerId based on EntityType)
+    + SuccessfulProjects : int
+    + TotalProjects : int
+    + CalculatedRate : double (derived from SuccessfulProjects / TotalProjects)
+}
 
-Review "*" -- "1" FreelancerProfile : given by/for
-Review "*" -- "1" ClientProfile : given by/for 
+entity ProjectReview {
+    + ReviewId : int <<PK>>
+    + ProjectId : int <<FK>>
+    + ClientComment : String
+    + FreelancerComment : String
+    + ReviewDate : date
+}
+
+ProjectReview "1" -- "1" Project : review for
+
+' Constraint: A ProjectReview can only be created once per project, after the project is marked as "COMPLETED".
+' Constraint: Both ClientComment and FreelancerComment must be provided to create a ProjectReview.
+
+SuccessRate "*" -- "1" FreelancerProfile : success rate for
+SuccessRate "*" -- "1" ClientProfile : success rate for
+
 
 ' When ReviewType is "Freelancer-to-Client", the FreelancerId references the freelancer giving the review, and the review is associated with the client's profile.
 ' Constraint: When ReviewType is "Client-to-Freelancer", the FreelancerId references the freelancer receiving the review, and the review is associated with the freelancer's profile.
@@ -289,17 +244,11 @@ User "1" -- "*" Role : has many
 User "1" -- "1" ClientProfile : has one
 User "1" -- "1" FreelancerProfile : has one
 
-Requirement "1" -- "1" ProgressStatus : has one
-Deliverable "1" -- "1" ProgressStatus : has one
-
-FreelancerProfile "1" -- "1" AvailabilityStatus : has one
-
-Requirement "*" -- "*" Deliverable : has many
+Requirement "1" -- "*" Deliverable : has many
 
 FreelancerProfile "1" -- "*" PaymentMethod : has many
 ClientProfile "1" -- "*" PaymentMethod : has many 
 
-Notification "1" -- "*" NotificationType : has one
 Notification "*" -- "1" FreelancerProfile : sent by
 Notification "*" -- "1" ClientProfile : sent to
 
@@ -314,10 +263,6 @@ ClientProfile "*" -- "*" Chat : participates in many
 
 Proposal "1" -- "1" FreelancerProfile : by
 Proposal "1" -- "1" Project : for
-Proposal "1" -- "*" ProposedDeliverable : has many
-Proposal "1" -- "1" ProposalStatus : has
-
-ProposedDeliverable "1" -- "1" Deliverable : for
 
 ClientProfile "1" -- "*" Project : posts
 
@@ -325,19 +270,15 @@ ClientProfile "1" -- "*" Project : posts
 FreelancerProfile "1" -- "*" Project : works on 
 FreelancerProfile "1" -- "1" Verification : has one
 FreelancerProfile "1" -- "1" Education : has one
-FreelancerProfile "1" -- "1" Portfolio : has one
-FreelancerProfile "1" -- "1" ExperienceLevel : has one
 FreelancerProfile "1" -- "1" SecuritySpecialization : has one
 
 FreelancerProfile "1" -- "*" Skill : has many
 FreelancerProfile "1" -- "*" Certification : has many
 FreelancerProfile "1" -- "*" WorkExperience : has many
 
-Deliverable "1" -- "1" DeliverableType : has one
-Deliverable "*" -- "1" Requirement : has many
-Requirement "1" -- "1" Priority : has one
-Project "1" -- "1" ProjectStatus : has one
 Project "1" -- "*" Requirement : has many
 Project "*" -- "*" Technology : uses 
+
+FreelancerProfile "1" -- "*" WorkSample : has many
 
 @enduml
