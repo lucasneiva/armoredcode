@@ -46,6 +46,7 @@ rectangle "Feedback" {
 rectangle "Administrative" {
   usecase "Manage Project Categories" as UC22
   usecase "Manage Technologies" as UC33
+  usecase "Manage Skills" as UC37
   usecase "Verify Freelancer Profile" as UC34
   usecase "Approve Freelancer Profile" as UC35
 }
@@ -87,6 +88,7 @@ Administrator -- UC33
 Administrator -- UC22
 Administrator -- UC34
 Administrator -- UC35
+Administrator -- UC37
 
 UC1 ..> UC5 : <<includes>>
 UC1 ..> UC6 : <<includes>>
