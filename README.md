@@ -1,5 +1,5 @@
 # **ArmoredCode: Secure Freelance Marketplace for Cybersecurity in Software Development**
-
+![1711059552226](https://github.com/lucasneiva/armoredcode/assets/112989505/b31cf012-797c-4567-aca1-6ee47770988a)
 ## **Problem Statement**
 
 Companies of all sizes face mounting cybersecurity threats, often stemming from vulnerabilities introduced during software development. Finding qualified cybersecurity professionals with deep development knowledge remains a challenge, while many in-house teams lack this specialized expertise.
