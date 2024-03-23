@@ -324,7 +324,6 @@ Key Elements:
    - In-App Notification Center
 
 ## Payment and Billing:
-Absolutely! Let's break down the key screens for handling payments and subscriptions within your platform:
 
 ### Payment Method Management Screen
 
