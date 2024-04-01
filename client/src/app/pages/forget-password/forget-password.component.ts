@@ -1,12 +1,26 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-forget-password',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './forget-password.component.html',
   styleUrl: './forget-password.component.scss'
 })
 export default class ForgetPasswordComponent {
+  fb = inject(FormBuilder);
 
+  forgetForm !: FormGroup;
+
+  ngOnInit(): void {
+    this.forgetForm = this.fb.group({
+      email: ['',Validators.compose ([Validators.required, Validators.email])]
+    })
+  }
+
+  submit(){
+    console.log(this.forgetForm.value);
+  }
 }

@@ -15,7 +15,8 @@
         
         <button [disabled]="loginForm.invalid" [class.disabled]="loginForm.invalid" (click)="login()" class="bg-indigo-500 text-white p-2 rounded mt-3">Submit</button>
     </form>
-    <div class="flex justify-center mt-5">
-        <span>New to ArmoredCode?</span> <a routerLink="/register" class="text-indigo-600 ml-2 cursor-pointer">Register Here</a>
+    <div class="flex justify-between mt-5">
+        <a routerLink="/forget-password" class="text-indigo-600 ml-2 cursor-pointer">Forget Password?</a>
+        <a routerLink="/register" class="text-indigo-600 ml-2 cursor-pointer">Create Account</a>
     </div>
 </div>
