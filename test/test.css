@@ -12,7 +12,6 @@ nav{
     padding: 12px;
     
 }
-
 footer{
     display: flex; 
     justify-content: center; 
@@ -27,7 +26,6 @@ footer{
     position:fixed;
     bottom: 0;
 }
-
 .box{
     box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.201);
 
@@ -42,7 +40,6 @@ footer{
     align-items: center;
     overflow: auto;
 }
-
 .proj-box{
     display: block;
     background-color: #ffffff;
@@ -53,11 +50,23 @@ footer{
     max-width: 350px;
     min-width: 250px;
 }
+.proj-box button{
+    background-color: transparent;
+    border: double 2px #1f6695;
+    border-radius: 4px;
+
+    padding: 3px;
+    margin: 5px;
+    width: 50%;
+}
+.proj-box button:hover{
+    background-color: #126ac2;
+    color: white;
+}
 
 /*inputs*/
 .sub-input{
-    box-shadow: 7px 5px 13px 2px rgba(0, 0, 0, 0.201),
-     inset 0px 0px 12px 2px rgba(219, 219, 219, 0.781);
+    box-shadow: 7px 5px 13px 2px rgba(0, 0, 0, 0.201);
     background-color: #ffffff;
 
     border-style:hidden;
@@ -72,8 +81,7 @@ footer{
 
 /*buttons*/
 .sub-button{
-    box-shadow: 7px 5px 13px 2px rgba(0, 0, 0, 0.201),
-     inset 0px 0px 12px 3px rgba(6, 38, 141, 0.783);
+    box-shadow: 5px 3px 10px 1px rgba(0, 0, 0, 0.281);
     background-color: #126ac2;
 
     border-style:hidden;
@@ -87,8 +95,6 @@ footer{
 }
 .sub-button:hover{
     background-color: #1173d5;
-    box-shadow: 5px 3px 10px 1px rgba(0, 0, 0, 0.281),
-     inset 0px 0px 12px 3px rgba(6, 38, 141, 0.783);
 }
 
 /*texts*/
