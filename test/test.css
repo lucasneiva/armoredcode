@@ -1,4 +1,41 @@
+/*fonts*/
+
 /*components*/
+nav{
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+
+    background-color: #1f6695; 
+    color: white; 
+
+    padding: 12px;
+    
+}
+
+footer{
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+
+    background-color: #5E5E5E; 
+    color: white; 
+
+    padding: 12px;
+    width: 100%;
+
+    position:fixed;
+    bottom: 0;
+}
+
+.box{
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.201);
+
+    margin: 4% auto 30px auto;
+
+    max-width: 20%;
+    min-width: 300px;
+}
 .content-row{
     display: flex;
     justify-content: left;
@@ -52,4 +89,34 @@
     background-color: #1173d5;
     box-shadow: 5px 3px 10px 1px rgba(0, 0, 0, 0.281),
      inset 0px 0px 12px 3px rgba(6, 38, 141, 0.783);
+}
+
+/*texts*/
+h1{
+    margin-top: 20px;
+    padding: 20px;
+}
+
+/*link*/
+.sub-link{
+    color: grey;
+    font-size: 14px;
+
+    margin: 8px;
+}
+
+.sub-link:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.sub-nav-link{
+    font-size: 32px;
+
+    margin: 12px;
+}
+
+.sub-nav-link a:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }
