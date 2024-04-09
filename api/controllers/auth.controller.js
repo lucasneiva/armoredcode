@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { CreateError } from "../utils/error.js";
 import { CreateSuccess } from "../utils/success.js";
 import jwt from "jsonwebtoken";
+import UserToken from "../models/UserToken.js";
 
 export const register = async (req, res, next)=>{
     const role = await Role.find({role: 'user'});
@@ -79,4 +80,58 @@ export const login = async (req, res, next)=>{
         return next(CreateError(500, "deu ruim"));
     }
     
+}
+
+export const sendEmail = async (req, res, next)=>{
+     const email = req.body.email;
+     const user = await User.findOne({email: {$regex: '^'+email+'$', $options: 'i'}})
+
+     if(!user){
+        return next(CreateError(404, "User not found to rest the email!"))
+     }
+
+     const payload = {
+        email: user.email
+     }
+
+     const expiryTime = 300;
+     const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: expiryTime})
+
+     const newToken = new UserToken({
+        userId: user._id,
+        token: token
+     })
+
+     const mailTransporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user: "",
+            pass: ""
+        }
+     })
+
+     let mailDetails = {
+        from: "email@gmail.com",
+        to: email,
+        subject: "Reset Password",
+        html: `<html>
+    <head>
+    <title>Password Reset Request</title>
+    </head>
+    <body>
+    <h1>Password Reset Request</h1>
+    <p>Dear 5(user.username), </p>
+    <p>We have received a request to reset your password for your account with BookMYBook. To complete the password reset process, please click on the button below:</p> <a href=${process.env.LIVE_URL}/reset/${token}><button style="background-color: #4CAF50; color: white; padding: 14px 20px; border: none;
+    cursor: pointer; border-radius: 4px;">Reset Password</button></a>
+    < <p>Thank you,</p>
+    p>Please note that this link is only valid for a 5mins. If you did not request a password reset, please disregard this message.</p>
+    <p>Let's Program Team</p>
+    </body>
+</html>`,
+
+     };
+
+     mailTransporter.sendEmail()
+
+     
 }
