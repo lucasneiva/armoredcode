@@ -63,6 +63,40 @@ footer{
     background-color: #126ac2;
     color: white;
 }
+.freela-box{
+    display: block;
+    background-color: #ffffff;
+    box-shadow: 2px 3px 10px 2px rgba(0, 0, 0, 0.201);
+
+    margin: 25px;
+    padding: 10px;
+    max-width: 350px;
+    min-width: 250px;
+}
+.freela-box h2{
+    margin: auto;
+}
+.freela-box img{
+    background-color: grey;
+
+    margin: auto;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+}
+.freela-box button{
+    background-color: transparent;
+    border: double 2px #1f6695;
+    border-radius: 4px;
+
+    padding: 3px;
+    margin: 5px;
+    width: 50%;
+}
+.freela-box button:hover{
+    background-color: #126ac2;
+    color: white;
+}
 
 /*inputs*/
 .sub-input{
