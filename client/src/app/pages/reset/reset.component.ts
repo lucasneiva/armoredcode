@@ -13,7 +13,8 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './reset.component.html',
   styleUrl: './reset.component.scss'
 })
-export default class ResetComponent implements OnInit{
+
+export default class ResetComponent implements OnInit {
   fb = inject(FormBuilder);
   resetForm !: FormGroup;
   activatedRoute = inject(ActivatedRoute);
@@ -24,34 +25,34 @@ export default class ResetComponent implements OnInit{
 
   ngOnInit(): void {
     this.resetForm = this.fb.group({
-      password: ['',Validators.required],
+      password: ['', Validators.required],
       confirmpassword: ['', Validators.required]
     },
-    {
-      validator: confirmPasswordValidator('password', 'confirmPassword')
-    })
-    
-    this.activatedRoute.params.subscribe(val=>{
+      {
+        validator: confirmPasswordValidator('password', 'confirmPassword')
+      })
+
+    this.activatedRoute.params.subscribe(val => {
       this.token = val['token']; //mudar sempre q mudar no routes
       console.log(this.token);
     })
   }
 
-  reset(){
+  reset() {
     let resetObj = {
       token: this.token,
       password: this.resetForm.value.password
     }
     this.authService.resetPasswordService(resetObj)
-    .subscribe({
-      next: (res)=>{
-        alert(res.message);
-        this.resetForm.reset;
-        this.router.navigate(['login']);
-      },
-      error: (err)=>{
-        alert(err.error.message);
-      }
-    })
+      .subscribe({
+        next: (res) => {
+          alert(res.message);
+          this.resetForm.reset;
+          this.router.navigate(['login']);
+        },
+        error: (err) => {
+          alert(err.error.message);
+        }
+      })
   }
 }

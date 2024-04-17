@@ -6,15 +6,17 @@ import { CreateError } from "../utils/error.js";
 import { CreateSuccess } from "../utils/success.js";
 import jwt from "jsonwebtoken";
 import UserToken from "../models/UserToken.js";
+import nodemailer from "nodemailer";
 
 export const register = async (req, res, next)=>{
+    console.log(req.body.username);
     const role = await Role.find({role: 'user'});
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password, salt);
     const newUser = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        username: req.body.userName,
+        username: req.body.username,
         email: req.body.email,
         password: hashPassword,
         roles: role
@@ -26,9 +28,11 @@ export const register = async (req, res, next)=>{
 
 
 export const registerAdmin = async (req, res, next)=>{
+    
     const role = await Role.find({});
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password, salt);
+    
     const newUser = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -105,13 +109,13 @@ export const sendEmail = async (req, res, next)=>{
      const mailTransporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-            user: "",
-            pass: ""
+            user: "armoredcode2@gmail.com",
+            pass: "fxzzygovyurfdynn"
         }
      })
 
      let mailDetails = {
-        from: "letsprogram30@gmail.com",
+        from: "armoredcode2@gmail.com",
         to: email,
         subject: "Reset Password",
         html: `<html>
@@ -120,18 +124,18 @@ export const sendEmail = async (req, res, next)=>{
     </head>
     <body>
     <h1>Password Reset Request</h1>
-    <p>Dear 5(user.username), </p>
-    <p>We have received a request to reset your password for your account with BookMYBook. To complete the password reset process, please click on the button below:</p> <a href=${process.env.LIVE_URL}/reset/${token}><button style="background-color: #4CAF50; color: white; padding: 14px 20px; border: none;
+    <p>Dear ${user.username}, </p>
+    <p>We have received a request to reset your password for your account with ArmoredCode. To complete the password reset process, please click on the button below:</p> <a href=${process.env.LIVE_URL}/reset/${token}><button style="background-color: #4CAF50; color: white; padding: 14px 20px; border: none;
     cursor: pointer; border-radius: 4px;">Reset Password</button></a>
-    < <p>Thank you,</p>
-    p>Please note that this link is only valid for a 5mins. If you did not request a password reset, please disregard this message.</p>
-    <p>Let's Program Team</p>
+    <p>Thank you,</p>
+    <p>Please note that this link is only valid for a 5mins. If you did not request a password reset, please disregard this message.</p>
+    <p>ArmoredCode Team</p>
     </body>
 </html>`,
 
      };
 
-     mailTransporter.sendEmail(mailDetails, async(err, data)=>{
+     mailTransporter.sendMail(mailDetails, async(err, data)=>{
         if(err){
             console.log(err);
             return next(CreateError(500, "Something went wrong while sending the email"));
@@ -142,4 +146,8 @@ export const sendEmail = async (req, res, next)=>{
      })
 
      
+}
+
+export const resetPassword = async (req, res, next)=>{
+    
 }
