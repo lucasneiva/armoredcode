@@ -111,7 +111,7 @@ export const sendEmail = async (req, res, next)=>{
      })
 
      let mailDetails = {
-        from: "email@gmail.com",
+        from: "letsprogram30@gmail.com",
         to: email,
         subject: "Reset Password",
         html: `<html>
@@ -131,7 +131,15 @@ export const sendEmail = async (req, res, next)=>{
 
      };
 
-     mailTransporter.sendEmail()
+     mailTransporter.sendEmail(mailDetails, async(err, data)=>{
+        if(err){
+            console.log(err);
+            return next(CreateError(500, "Something went wrong while sending the email"));
+        }else{
+            await newToken.save();
+            return next(CreateSuccess(200, "Email Sent Successfully!"));
+        }
+     })
 
      
 }
