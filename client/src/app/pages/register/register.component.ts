@@ -12,6 +12,7 @@ import { Router, RouterModule } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
+
 export default class RegisterComponent implements OnInit{
   fb = inject(FormBuilder);
   authService = inject(AuthService);
@@ -23,7 +24,7 @@ export default class RegisterComponent implements OnInit{
       firstName: ['',Validators.required],
       lastName: ['',Validators.required],
       email: ['',Validators.compose ([Validators.required, Validators.email])],
-      userName: ['',Validators.required],
+      username: ['',Validators.required],
       password: ['',Validators.required],
       confirmPassword: ['',Validators.required]
     },
