@@ -1,3 +1,3 @@
 export const apiUrls = {
-    authServiceApi: 'http://locaslhost:8800/api/auth/'
+    authServiceApi: 'http://localhost:8800/api/auth/'
 }
