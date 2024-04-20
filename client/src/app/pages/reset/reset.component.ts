@@ -26,7 +26,7 @@ export default class ResetComponent implements OnInit {
   ngOnInit(): void {
     this.resetForm = this.fb.group({
       password: ['', Validators.required],
-      confirmpassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required]
     },
       {
         validator: confirmPasswordValidator('password', 'confirmPassword')

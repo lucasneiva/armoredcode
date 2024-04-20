@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResetComponent } from './reset.component';
+import ResetComponent from './reset.component';
 
 describe('ResetComponent', () => {
   let component: ResetComponent;

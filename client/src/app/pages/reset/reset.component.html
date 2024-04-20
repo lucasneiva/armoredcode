@@ -11,7 +11,7 @@
         </div>
 
         <div class="flex flex-col mt-4 mb-1">
-            <input formControlName="ConfirmPassword" class="p-2 border border-gray-300 rounded" type="password" placeholder="Confirm Password">
+            <input formControlName="confirmPassword" class="p-2 border border-gray-300 rounded" type="password" placeholder="Confirm Password">
             <span *ngIf="resetForm.hasError('required', 'password') && resetForm.controls['password'].dirty" class="text-red-500">*Confirm Password is required</span>
             <span *ngIf="resetForm.hasError('confirmPasswordValidator', 'confirmPassword')" class="text-red-500">*Password didnt matched!</span>
         </div>
