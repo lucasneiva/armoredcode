@@ -22,4 +22,4 @@ export default router;
 
 // Reset Password
 
-router.post("reset-password", resetPassword);
+router.post("/reset-password", resetPassword);

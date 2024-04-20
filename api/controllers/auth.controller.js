@@ -151,7 +151,7 @@ export const sendEmail = async (req, res, next)=>{
 export const resetPassword = async (req, res, next)=>{
     const token = req.body.token;
     const newPassword = req.body.password;
-
+    console.log("Entrou na func");
     jwt.verify(token, process.env.JWT_SECRET, async(err, data)=>{
         if(err) {
             return next(CreateError(500, "Reset Link is Expired!"))
