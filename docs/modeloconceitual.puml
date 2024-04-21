@@ -1,42 +1,58 @@
 @startuml ModeloConceitual
 
-entity Project {
-   + ProjectId : int <<PK>>
-   + ProjectTitle : String
-   + ProjectDescription : String
-   + ProjectBudget : double
-   + StartDate : Date
-   + EndDate : Date
-   + ClientProfileId : int <<FK>>
-   + Status : enum ProjectStatus {"PROPOSED", "PLANNING", "ACTIVE", "ON_HOLD", "REVIEW", "COMPLETED", "CANCELLED"}
-   + FreelancerId : int <<FK>>
-   + IsFixedPrice: boolean
+entity Job {
+    + JobId : ObjectId 
+    + ClientId : ObjectId 
+    + FreelancerId : ObjectId 
+    + JobCategoryId : ObjectId 
+    + RequirementIds : ObjectId[*] 
+    + Skills : ObjectId[*]
+    + JobTitle : String
+    + JobDescription : String
+    + HourlyRateLowerBound : double
+    + HourlyRateUpperBound : double
+    + IsFixedRate: boolean
+    + FixedBudget : double
+    + EstimatedDuration : int
+    + JobSize : String <"SMALL", "MEDIUM", "LARGE"> 
+    + Status : String <"DRAFT", "POSTED">
+    + ExperienceLevel : <"ENTRY-LEVEL", "MID-LEVEL", "SENIOR">
+    + StartDate : Date
+    + EndDate : Date
+    + IsRemote : boolean
+    + City : String <"SOROCABA", "VOTORANTIM", "ITU", "ARAÇOIABA DA SERRA", "PORTO FELIZ">
 }
 
-entity ProjectCategory {
-   + CategoryId : int <<PK>>
+entity JobCategory {
+   + CategoryId : ObjectId
    + CategoryName : String
-   + CategoryDescription : String [Optional]
+   + CategoryDescription : String
 }
 
-entity WorkItem {
-  + WorkItemId : int <<PK>>
-  + ProjectId : int <<FK>>
+entity Requirement {
+  + RequirementId : ObjectId
+  + JobId : ObjectId
   + Title : String
   + Description : String
-  + WorkItemType : enum {"Code", "Documentation", "Prototype", "Report", "Other"}
-  + Status: enum {"Proposed", "Completed"}
+  + RequirementType : String <"SOURCE_CODE", "DOCUMENTATION", "TEST_REPORT", >
 }
 
 entity Technology {
-   + TechnologyId : int <<PK>>
+   + TechnologyId : ObjectId
    + TechnologyName : String
    + TechnologyDescription : String
 } 
 
+entity Skill {
+    + SkillId : ObjectId
+    + SkillName : String
+    + SkillDescription : String
+}
+
+
 entity FreelancerProfile {
-    + FreelancerId : int <<PK>>
-    + UserId : int <<FK>>
+    + FreelancerId : ObjectId
+    + UserId : ObjectId
     + ProfileSummary : String
     + ServiceOfferingBlurb : String
     + AvailabilityStatus : enum {"Available", "Partially Available", "Not Available"}
@@ -48,27 +64,22 @@ entity FreelancerProfile {
 }
 
 entity SecuritySpecialization {
-    + SpecializationId : int <<PK>> 
+    + SpecializationId : ObjectId 
     + SpecializationName : String
     + SpecializationDescription : String
 }
 
-entity Skill {
-    + SkillId : int <<PK>>
-    + SkillName : String
-    + SkillDescription : String
-}
 
 entity Certification {
-    + CertificationId : int <<PK>> 
+    + CertificationId : ObjectId 
     + CertificationName : String
     + CertificationProvider : String
     + CertificationDate : date
 }
 
 entity WorkExperience {
-    + ExperienceId : int <<PK>>
-    + FreelancerId : int <<FK>>
+    + ExperienceId : ObjectId
+    + FreelancerId : ObjectId
     + CompanyName : String
     + JobTitle : String
     + StartDate : date
@@ -77,32 +88,32 @@ entity WorkExperience {
 }
 
 entity WorkSample {
-    + WorkSampleId : int <<PK>>
-    + FreelancerId : int <<FK>>
+    + WorkSampleId : ObjectId
+    + FreelancerId : ObjectId
     + SampleTitle : String
     + SampleDescription : String
     + SampleUrl : String [URL or file path to the sample work]
 }
 
 entity Verification {
-    + VerificationId : int <<PK>>
-    + FreelancerId : int <<FK>>
+    + VerificationId : ObjectId
+    + FreelancerId : ObjectId
     + VerificationType : enum { ID, ADDRESS, PHONE, PAYMENT}
     + VerificationDate : Date
     + VerificationNotes : String
 }
 
 entity ClientProfile {
-    + ClientId : int <<PK>>
-    + UserId : int <<FK>>
+    + ClientId : ObjectId
+    + UserId : ObjectId
     + CompanyName : String
     + CompanySize : enum {"Small", "Medium", "Large"}
 }
 
 entity Proposal {
-    + ProposalId: int <<PK>>
-    + FreelancerId: int <<FK>>
-    + ProjectId: int <<FK>>
+    + ProposalId: ObjectId
+    + FreelancerId: ObjectId
+    + JobId: ObjectId
     + ProposalType: enum {"FixedPrice", "Hourly"}
     + FixedPrice: double [Optional]
     + ProposedHourlyRate: double [Optional]
@@ -115,24 +126,24 @@ entity Proposal {
 }
 
 entity Chat {
-    + ChatId : int <<PK>>
-    + ProjectId : int <<FK>>
+    + ChatId : ObjectId
+    + JobId : ObjectId
     + ChatTitle : String
     + CreatedTimestamp : Date
 }
 
 entity ChatMessage {
-    + MessageId : int <<PK>>
-    + ChatId : int <<FK>>
-    + SenderId : int <<FK>>
-    + RecipientId : int <<FK>>
+    + MessageId : ObjectId
+    + ChatId : ObjectId
+    + SenderId : ObjectId
+    + RecipientId : ObjectId
     + MessageText : String
     + SentTimestamp : Date
 }
 
 entity ChatFile {
-    + FileId : int <<PK>>
-    + MessageId : int <<FK>>
+    + FileId : ObjectId
+    + MessageId : ObjectId
     + FileName : String
     + FileType : String
     + FileContent : Binary
@@ -140,22 +151,22 @@ entity ChatFile {
 }
 
 entity Notification {
-    + NotificationId : int <<PK>>
-    + RecipientId : int <<FK>>
-    + NotificationType : enum {PROJECT_ACCEPTED, PROPOSAL_RECEIVED, PROPOSAL_ACCEPTED, PROPOSAL_DECLINED, PROJECT_CANCELLED, NEW_CHAT_MESSAGE}
+    + NotificationId : ObjectId
+    + RecipientId : ObjectId
+    + NotificationType : enum {Job_ACCEPTED, PROPOSAL_RECEIVED, PROPOSAL_ACCEPTED, PROPOSAL_DECLINED, Job_CANCELLED, NEW_CHAT_MESSAGE}
     + NotificationMessage : String
     + SentTimestamp : Date
 }
 
 
 entity PaymentMethod {
-    + PaymentMethodId : int <<PK>>
+    + PaymentMethodId : ObjectId
     + PaymentMethodType : enum {e.g., "Credit Card", "PayPal", "Bank Transfer"}
     + PaymentDetails : String [Optional placeholder for future expansion]
 }
 
 entity User {
-    + userId : int <<PK>>
+    + userId : ObjectId
     + firstName : String
     + lastName : String
     + username : String
@@ -168,14 +179,14 @@ entity User {
 }
 
 entity Role {
-    + roleId : int <<PK>>
+    + roleId : ObjectId
     + roleName : String [e.g "Freelancer", "Client", "Admin"]
     + roleDescription : String
 }
 
 entity Education {
-   + EducationId : int <<PK>>
-   + FreelancerId : int <<FK>>
+   + EducationId : ObjectId
+   + FreelancerId : ObjectId
    + DegreeName : String
    + FieldOfStudy : String
    + Institution : String
@@ -183,40 +194,46 @@ entity Education {
 }
 
 entity Language {
-   + LanguageId : int <<PK>>
+   + LanguageId : ObjectId
    + LanguageName : String
    + ProficiencyLevel : enum {"Beginner", "Intermediate", "Advanced", "Fluent"}
    + IsNative : boolean
 }
 
 entity SuccessRate {
-    + SuccessRateId : int <<PK>>
-    + SuccessfulProjects : int
-    + TotalProjects : int
+    + SuccessRateId : ObjectId
+    + SuccessfulJobs : int
+    + TotalJobs : int
     + CalculatedRate : double
 }
 
-entity ProjectReview {
-    + ReviewId : int <<PK>>
-    + ProjectId : int <<FK>>
+entity JobReview {
+    + ReviewId : ObjectId
+    + JobId : ObjectId
     + ClientComment : String
     + FreelancerComment : String
 }
 
 entity Location {
-  + LocationId : int <<PK>>
+  + LocationId : ObjectId
   + City : String
   + State : String
   + Country : String 
 }
 
+Job "1" -- "*" Skill : requires many
+Job "1" -- "*" Requirement : has many
+Job "*" -- "*" Technology : uses many
+Job "*" -- "1" JobCategory : belongs to one
+Job "*" -- "*" Chat : has many
+
 ClientProfile "1" -- "1" Location : lives in
 FreelancerProfile "1" -- "1" Location : lives in 
 
-ProjectReview "1" -- "1" Project : review for
+JobReview "1" -- "1" Job : review for
 
-' Constraint: A ProjectReview can only be created once per project, after the project is marked as "COMPLETED".
-' Constraint: Both ClientComment and FreelancerComment must be provided to create a ProjectReview.
+' Constraint: A JobReview can only be created once per Job, after the Job is marked as "COMPLETED".
+' Constraint: Both ClientComment and FreelancerComment must be provided to create a JobReview.
 
 SuccessRate "*" -- "1" FreelancerProfile : success rate for
 SuccessRate "*" -- "1" ClientProfile : success rate for
@@ -233,8 +250,7 @@ ClientProfile "1" -- "*" PaymentMethod : has many
 Notification "*" -- "1" FreelancerProfile : sent by
 Notification "*" -- "1" ClientProfile : sent to
 
-Project "*" -- "*" ProjectCategory : belongs to
-Project "*" -- "*" Chat : has many
+
 Chat "1" -- "*" ChatMessage : has
 ChatMessage "1" -- "*" ChatFile : has many
 ChatMessage "*" -- "1" FreelancerProfile : sent by
@@ -243,22 +259,19 @@ FreelancerProfile "*" -- "*" Chat : participates in many
 ClientProfile "*" -- "*" Chat : participates in many
 
 Proposal "1" -- "1" FreelancerProfile : by
-Proposal "1" -- "1" Project : for
+Proposal "1" -- "1" Job : for
 
-ClientProfile "1" -- "*" Project : posts
+ClientProfile "1" -- "*" Job : posts
 
 
-FreelancerProfile "1" -- "*" Project : works on 
+FreelancerProfile "1" -- "*" Job : works on 
 FreelancerProfile "1" -- "*" Verification : has many
 FreelancerProfile "1" -- "1" Education : has one
 FreelancerProfile "1" -- "1" SecuritySpecialization : has one
-
 FreelancerProfile "1" -- "*" Skill : has many
 FreelancerProfile "1" -- "*" Certification : has many
 FreelancerProfile "1" -- "*" WorkExperience : has many
 
-Project "1" -- "*" WorkItem : has many
-Project "*" -- "*" Technology : uses 
 
 FreelancerProfile "1" -- "*" WorkSample : has many
 
