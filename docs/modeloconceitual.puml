@@ -4,9 +4,10 @@ entity Job {
     + JobId : ObjectId 
     + ClientId : ObjectId 
     + FreelancerId : ObjectId 
-    + JobCategoryId : ObjectId 
-    + RequirementIds : ObjectId[*] 
-    + Skills : ObjectId[*]
+    + JobCategory : JobCategory
+    + Skills : Skill[*] <<Emb>>
+    + Technologies : Technology[*] <<Emb>>
+    + Requirements : Requirement[*] <<Emb>>
     + JobTitle : String
     + JobDescription : String
     + HourlyRateLowerBound : double

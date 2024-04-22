@@ -1,0 +1,62 @@
+{
+    "JobId": "job_12345",
+    "ClientId": "client_abcde",
+    "FreelancerId": null,
+    "JobCategory": {
+      "CategoryId": "category_webdev",
+      "CategoryName": "Web Development",
+      "CategoryDescription": "Building and maintaining web applications"
+    },
+    "Skills": [
+      {
+        "SkillId": "skill_python",
+        "SkillName": "Python Programming",
+        "SkillDescription": "Experience with Python language and frameworks"
+      },
+      {
+        "SkillId": "skill_django",
+        "SkillName": "Django Framework",
+        "SkillDescription": "Experience with the Django web framework"
+      }
+    ],
+    "Technologies": [
+      {
+        "TechnologyId": "tech_python",
+        "TechnologyName": "Python",
+        "TechnologyDescription": "Python programming language"
+      },
+      {
+        "TechnologyId": "tech_django",
+        "TechnologyName": "Django",
+        "TechnologyDescription": "Django web framework"
+      }
+    ],
+    "Requirements": [
+      {
+        "RequirementId": "req_1",
+        "Title": "E-commerce Website Development",
+        "Description": "Build an e-commerce website with user registration, product catalog, and payment integration.",
+        "RequirementType": "SOURCE_CODE"
+      },
+      {
+        "RequirementId": "req_2",
+        "Title": "API Documentation",
+        "Description": "Provide comprehensive API documentation for the developed website.",
+        "RequirementType": "DOCUMENTATION"
+      }
+    ],
+    "JobTitle": "Full-Stack Python Developer for E-commerce Website",
+    "JobDescription": "We are looking for a skilled Python developer to build and maintain an e-commerce website using Django.",
+    "HourlyRateLowerBound": 30.00,
+    "HourlyRateUpperBound": 45.00,
+    "IsFixedRate": false,
+    "FixedBudget": null,
+    "EstimatedDuration": 2,
+    "JobSize": "MEDIUM",
+    "Status": "POSTED",
+    "ExperienceLevel": "MID-LEVEL",
+    "StartDate": "2024-01-15",
+    "EndDate": null,
+    "IsRemote": true,
+    "City": null 
+  }
