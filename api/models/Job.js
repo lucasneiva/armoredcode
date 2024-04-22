@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-const { default: Technology } = require('./Technology');
-const { default: JobCategory } = require('./JobCategory');
-const { default: Skill } = require('./Skill');
+import Technology from './Technology.js';
+import JobCategory from './JobCategory.js';
+import Skill from './Skill.js';
 
 
 const RequirementSchema = new Schema({
@@ -17,9 +17,9 @@ const JobSchema = new Schema({
     jobId: { type: Schema.Types.ObjectId, required: true },
     clientId: { type: Schema.Types.ObjectId, required: true },
     freelancerId: { type: Schema.Types.ObjectId },
-    jobCategory: { type: JobCategory, required: true }, 
-    skills: [Skill],
-    technologies: [Technology],
+    jobCategory: { type: JobCategory.schema, required: true }, 
+    skills: [Skill.schema],
+    technologies: [Technology.schema],
     requirements: [RequirementSchema],
     jobTitle: { type: String, required: true },
     jobDescription: { type: String, required: true },

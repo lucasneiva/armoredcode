@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const JobCategorySchema = new Schema({
@@ -7,4 +7,4 @@ const JobCategorySchema = new Schema({
     categoryDescription: { type: String }
 });
 
-export default mongoose.model("JobCategory", UserSchema);
+export default mongoose.model("JobCategory", JobCategorySchema);
