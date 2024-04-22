@@ -4,7 +4,7 @@ entity Job {
     + JobId : ObjectId 
     + ClientId : ObjectId 
     + FreelancerId : ObjectId 
-    + JobCategory : JobCategory
+    + JobCategory : JobCategory <<Emb>>
     + Skills : Skill[*] <<Emb>>
     + Technologies : Technology[*] <<Emb>>
     + Requirements : Requirement[*] <<Emb>>
