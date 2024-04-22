@@ -31,7 +31,6 @@ entity JobCategory {
 }
 
 entity Requirement {
-  + RequirementId : ObjectId
   + JobId : ObjectId
   + Title : String
   + Description : String
@@ -49,7 +48,6 @@ entity Skill {
     + SkillName : String
     + SkillDescription : String
 }
-
 
 entity FreelancerProfile {
     + FreelancerId : ObjectId
