@@ -1,52 +1,52 @@
 @startuml ModeloConceitual
 
 entity Job {
-    + JobId : ObjectId 
-    + ClientId : ObjectId 
-    + FreelancerId : ObjectId 
-    + JobCategory : JobCategory <<Emb>>
-    + Skills : Skill[*] <<Emb>>
-    + Technologies : Technology[*] <<Emb>>
-    + Requirements : Requirement[*] <<Emb>>
-    + JobTitle : String
-    + JobDescription : String
-    + HourlyRateLowerBound : double
-    + HourlyRateUpperBound : double
-    + IsFixedRate: boolean
-    + FixedBudget : double
-    + EstimatedDuration : int
-    + JobSize : String <"SMALL", "MEDIUM", "LARGE"> 
-    + Status : String <"DRAFT", "POSTED">
-    + ExperienceLevel : <"ENTRY-LEVEL", "MID-LEVEL", "SENIOR">
-    + StartDate : Date
-    + EndDate : Date
-    + IsRemote : boolean
-    + City : String <"SOROCABA", "VOTORANTIM", "ITU", "ARAÇOIABA DA SERRA", "PORTO FELIZ">
+    + jobId : ObjectId 
+    + clientId : ObjectId 
+    + freelancerId : ObjectId 
+    + jobCategory : JobCategory <<Emb>>
+    + skills : Skill[*] <<Emb>>
+    + technologies : Technology[*] <<Emb>>
+    + requirements : Requirement[*] <<Emb>>
+    + jobTitle : String
+    + jobDescription : String
+    + hourlyRateLowerBound : double
+    + hourlyRateUpperBound : double
+    + isFixedRate: boolean
+    + fixedBudget : double
+    + estimatedDuration : int
+    + jobSize : String <"SMALL", "MEDIUM", "LARGE"> 
+    + status : String <"DRAFT", "POSTED">
+    + experienceLevel : <"ENTRY-LEVEL", "MID-LEVEL", "SENIOR">
+    + startDate : Date
+    + endDate : Date
+    + isRemote : boolean
+    + city : String <"SOROCABA", "VOTORANTIM", "ITU", "ARAÇOIABA DA SERRA", "PORTO FELIZ">
 }
 
 entity JobCategory {
-   + CategoryId : ObjectId
-   + CategoryName : String
-   + CategoryDescription : String
+   + categoryId : ObjectId
+   + categoryName : String
+   + categoryDescription : String
 }
 
 entity Requirement {
-  + RequirementId : ObjectId
-  + Title : String
-  + Description : String
-  + RequirementType : String <"SOURCE_CODE", "DOCUMENTATION", "TEST_REPORT", >
+  + requirementId : ObjectId
+  + title : String
+  + description : String
+  + requirementType : String <"SOURCE_CODE", "DOCUMENTATION", "TEST_REPORT", >
 }
 
 entity Technology {
-   + TechnologyId : ObjectId
-   + TechnologyName : String
-   + TechnologyDescription : String
+   + technologyId : ObjectId
+   + technologyName : String
+   + technologyDescription : String
 } 
 
 entity Skill {
-    + SkillId : ObjectId
-    + SkillName : String
-    + SkillDescription : String
+    + skillId : ObjectId
+    + skillName : String
+    + skillDescription : String
 }
 
 entity FreelancerProfile {
