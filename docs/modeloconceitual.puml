@@ -31,7 +31,7 @@ entity JobCategory {
 }
 
 entity Requirement {
-  + JobId : ObjectId
+  + RequirementId : ObjectId
   + Title : String
   + Description : String
   + RequirementType : String <"SOURCE_CODE", "DOCUMENTATION", "TEST_REPORT", >
@@ -220,10 +220,10 @@ entity Location {
   + Country : String 
 }
 
-Job "1" -- "*" Skill : requires many
-Job "1" -- "*" Requirement : has many
-Job "*" -- "*" Technology : uses many
-Job "*" -- "1" JobCategory : belongs to one
+Job "1" o-- "*" Skill : requires many
+Job "1" *-- "*" Requirement : has many
+Job "*" o-- "*" Technology : uses many
+Job "*" o-- "1" JobCategory : belongs to one
 Job "*" -- "*" Chat : has many
 
 ClientProfile "1" -- "1" Location : lives in
