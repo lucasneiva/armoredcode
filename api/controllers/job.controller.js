@@ -23,7 +23,7 @@ export const postJob = async (req, res, next) => {
         if ( validationResult.error ) {
             return next(CreateError(400, "Bad Request!"));  
         }
-
+        
         const newJob = new Job(newJobData);
 
         await newJob.save();
