@@ -5,14 +5,12 @@ import skillJoiSchema from './skillValidator.js';
 import technologyJoiSchema from './technologyValidator.js';
 
 const requirementJoiSchema = Joi.object({
-    requirementId: Joi.string().required().custom(objectIdValidation, 'ObjectId Validation'),
     title: Joi.string().required(),
     description: Joi.string().required(),
     requirementType: Joi.string().valid('SOURCE_CODE', 'DOCUMENTATION', 'TEST_REPORT').required()
 });
 
 const jobJoiSchema = Joi.object({
-    jobId: Joi.string().required().custom(objectIdValidation, 'ObjectId Validation'),
     clientId: Joi.string().required().custom(objectIdValidation, 'ObjectId Validation'),
     freelancerId: Joi.string().optional().custom(objectIdValidation, 'ObjectId Validation'),
     jobCategory: jobCategoryJoiSchema.required(),

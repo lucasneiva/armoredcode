@@ -7,14 +7,12 @@ import Skill from './Skill.js';
 
 
 const RequirementSchema = new Schema({
-    requirementId: { type: Schema.Types.ObjectId, required: true },
     title: { type: String, required: true },
     description: { type: String, required: true },
     requirementType: { type: String, enum: ["SOURCE_CODE", "DOCUMENTATION", "TEST_REPORT"] }
 });
 
 const JobSchema = new Schema({
-    jobId: { type: Schema.Types.ObjectId, required: true },
     clientId: { type: Schema.Types.ObjectId, required: true },
     freelancerId: { type: Schema.Types.ObjectId },
     jobCategory: { type: JobCategory.schema, required: true }, 
