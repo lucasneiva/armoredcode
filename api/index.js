@@ -5,6 +5,7 @@ import cors from 'cors';
 import roleRoute from "./routes/role.js"
 import authRoute from "./routes/auth.js"
 import userRoute from "./routes/user.js"
+import jobRoute from "./routes/job.js"
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -21,6 +22,7 @@ app.use(cors({
 app.use("/api/auth", authRoute);
 app.use("/api/role", roleRoute);
 app.use("/api/user", userRoute);
+app.use("/api/job", jobRoute);
 
 //DB Connection
 const connectMongoDB = async () => {

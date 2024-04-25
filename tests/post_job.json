@@ -1,0 +1,34 @@
+{
+    "clientId": "63fa7d59888fcd1c3da34b2e",
+    "jobCategory": { 
+      "categoryName": "Software Development",
+      "categoryDescription": "Developing web-based applications"
+    },
+    "skills": [
+      { "skillName": "React.js" },
+      { "skillName": "Node.js" },
+      { "skillName": "MongoDB" }
+    ],
+    "technologies": [
+      { "technologyName": "JavaScript" },
+      { "technologyName": "TypeScript" }
+    ],
+    "requirements": [
+      { 
+        "title": "Source Code", 
+        "description": "Provide full source code for the project",
+        "requirementType": "SOURCE_CODE" 
+      }
+    ],
+    "jobTitle": "Build a Web Application with React and Node",
+    "jobDescription": "...",
+    "hourlyRateLowerBound": 35,
+    "hourlyRateUpperBound": 55,
+    "estimatedDuration": 40,
+    "jobSize": "MEDIUM",
+    "status": "DRAFT", 
+    "experienceLevel": "MID-LEVEL", 
+    "isRemote": true,
+    "city": "SOROCABA" 
+  }
+  
