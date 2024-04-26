@@ -1,67 +1,43 @@
-# **ArmoredCode: Secure Freelance Marketplace for Cybersecurity in Software Development**
-![1711059552226](https://github.com/lucasneiva/armoredcode/assets/112989505/b31cf012-797c-4567-aca1-6ee47770988a)
-## **Problem Statement**
+# ArmoredCode: O Mercado de Desenvolvimento de Software de Sorocaba
 
-Companies of all sizes face mounting cybersecurity threats, often stemming from vulnerabilities introduced during software development. Finding qualified cybersecurity professionals with deep development knowledge remains a challenge, while many in-house teams lack this specialized expertise.
+## O Problema
+Empresas de Sorocaba, especialmente as menores ou startups, muitas vezes têm dificuldade em encontrar desenvolvedores de software qualificados localmente. Ao mesmo tempo, estudantes e recém-formados que buscam entrar na indústria de tecnologia enfrentam desafios para ganhar experiência prática e se conectar com potenciais empregadores. 
 
-## **The ArmoredCode Solution**
+## A Solução
+O ArmoredCode resolve essa lacuna fornecendo uma plataforma feita sob medida para a região de Sorocaba. Nós conectamos empresas com talentos locais de desenvolvimento de software, com foco na criação de oportunidades para estudantes e recém-formados desenvolverem suas habilidades e portfólios.
 
-ArmoredCode bridges this gap with a platform tailored to the intersection of cybersecurity and software development. We offer:
-
-* **Project Postings:**
-    - Structured form ensuring clients provide the necessary security context.
-    - Fields for tech stack, vulnerability focus, compliance needs (if relevant), timeframe urgency, and budget range.
-* **Freelancer Profiles:**
-    - Security specialization emphasis (Pen-Test, Code Review, DevSecOps, etc.)
-    - Skills filtering/tagging
-    - Experience level (Even if basic: Junior, Mid, Senior)
-    - Option for a brief service offering blurb (seeds the later expansion)
-    - Verification (tiered if possible: basic ID check builds more trust than none)
-
-* **Search & Filtering:**
-    - Freelancers must find relevant projects easily. Skill/tech stack filters are vital.
-* **Secure Communication:**
-    - Project-specific messaging (encrypted).
-    File sharing with security focus (limit sizes, scanning if possible).
-    - Core Chat Features: [chat.md](docs/chat.md)
-* **Freelancer "Pitching":**
-    - Short proposals or a way to express interest directly to the client per project.
-
-
-## **Target Users**
+## Público-Alvo
 
 **Freelancers:**
+* Estudantes de Ciência da Computação, Engenharia de Software e áreas relacionadas.
+* Recém-formados em busca de vagas de nível inicial em desenvolvimento de software
+* Desenvolvedores autodidatas que buscam expandir sua rede profissional
+* Desenvolvedores experientes à procura de projetos freelance na região de Sorocaba
 
-* Secure coding specialists
-* Code reviewers (security focus)
-* Penetration testers (application-specific)
-* DevSecOps consultants
-* Specialists in cloud/mobile/IoT security
+**Clientes:**
+* Startups e pequenas empresas que precisam de expertise em desenvolvimento de software
+* Empresas estabelecidas buscando recursos adicionais de desenvolvimento
+* Organizações com projetos adequados para estudantes ou estagiários
+* Qualquer pessoa em Sorocaba com uma necessidade de desenvolvimento de software
 
-**Clients:**
+**Como Funciona o ArmoredCode**
 
-* Software development companies
-* Startups (especially those handling sensitive data)
-* Internal dev teams needing urgent security help
-* Businesses undergoing software modernization 
-* Government agencies & contractors
-* E-commerce sites
-* Manufacturers using connected systems 
-* Research Institutions
+* Clientes podem postar descrições detalhadas de projetos, destacando escopo, orçamento e habilidades necessárias.
+* Freelancers exibem suas habilidades, formação, experiência e portfólio de trabalhos. 
+* Ferramenta de busca poderosa permite que clientes encontrem freelancers adequados com base em critérios específicos. 
+* Sistema de mensagens e compartilhamento de arquivos para projetos garante colaboração segura e eficiente.
+* Freelancers podem enviar propostas para projetos, detalhando sua abordagem e valores.
+* Sistema de feedback para clientes e freelancers constrói confiança e transparência. 
 
-A more extensive view of our target users is available in [target_users.md](https://github.com/lucasneiva/armoredcode/blob/main/docs/target_users.md)
+**Modelo de Negócios**
+* O acesso básico à plataforma é gratuito para clientes e freelancers, com recursos premium opcionais para maior visibilidade e funcionalidade.
 
-## **Technology Stack**
+**A Missão do ArmoredCode**
+O ArmoredCode é mais do que apenas um mercado - é uma comunidade. Somos dedicados a promover o crescimento do ecossistema de tecnologia da rSorocaba:
 
-* **MongoDB:** Scalable NoSQL database for data storage and persistence.
-* **Express.js:** Node.js web framework for building RESTful APIs and server-side logic.
-* **Angular:**: Frontend JavaScript framework for creating dynamic web UIs and single-page applications.
-* **Node.js:** JavaScript runtime for executing server-side code.
-
-## **Monetization**
-
-* **Freemium Subscription Model:**  Tiered for freelancers and potentially clients.
-* **Commission on Projects:** A percentage per successful project.
+* Fornecendo uma plataforma para aspirantes a desenvolvedores ganharem experiência real e lançarem suas carreiras. 
+* Conectando empresas com o talento necessário para prosperar na era digital.
+* Criando uma rede de desenvolvedores e empreendedores para colaborarem e inovarem juntos. 
 
 **License**
 
