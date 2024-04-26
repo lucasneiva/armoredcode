@@ -1,42 +1,47 @@
-# ALEX CHANG
-**AppSec Penetration Tester | Security Consultant**
-[555-325-9088] | [alexchang@topmail.com] | [alexchang.tech] (Sample Portfolio Website)
+# Alex Souza
 
-## SUMMARY
+**Desenvolvedor Web e Designer** | [555-325-9088] | [alexsouza@email.com] | [alexsouza.dev]
 
-* Self-driven penetration tester with a strong background in ethical hacking, focused on the in-depth security analysis of web and mobile applications. 
-* Adept at identifying critical vulnerabilities, communicating complex technical concepts to developers, and collaborating to implement effective fixes.
-* Seeks to embed security throughout the development lifecycle and promote a proactive stance toward application security.
+# Resumo
 
-## TECHNICAL SKILLS
+Desenvolvedor web e designer experiente, apaixonado por criar websites amigáveis, visualmente atraentes e seguros para empresas e pessoas físicas em Sorocaba e regiões vizinhas. Habilidoso tanto em tecnologias front-end quanto back-end, me esforço para entregar soluções de alta qualidade que atendam às necessidades únicas de cada cliente.
 
-* **Penetration Testing:** Burp Suite Pro, OWASP ZAP, Metasploit Framework, Kali Linux, Wireshark, Nmap
-* **Web Technologies:**  OWASP Top 10, XSS, CSRF, SQL Injection, Broken Authentication, API security, SSRF
-* **Mobile App Security:** Reverse engineering (Frida, jadx), Android and iOS security models, OWASP Mobile Top 10, static/dynamic analysis
-* **Vulnerability Reporting:**  Clear technical write-ups, risk severity classification, prioritized remediation guidance. 
-* **Scripting:** Python, Bash for vulnerability automation and custom tooling
+# Habilidades
 
-## PROFESSIONAL Experience
+* **Front-End:** HTML, CSS, JavaScript, React, Bootstrap, Material UI, Design Responsivo
+* **Back-End:** Python (Django, Flask), Node.js (Express), PHP  
+* **Bancos de Dados:** MySQL, PostgreSQL
+* **CMS:** WordPress (desenvolvimento de temas personalizados)
+* **Ferramentas:** Git, GitHub, Visual Studio Code, Figma, Adobe Photoshop
 
-**Freelance AppSec Consultant |  2020 - Present** 
+# Experiência
 
-* Conducted comprehensive penetration tests (black-box, grey-box) for various web applications and mobile apps across diverse industries.
-* Collaborated directly with development teams to explain vulnerabilities, aid in reproducing exploits, and verify fixes.
-* Provided detailed reports outlining security weaknesses, their potential business impact, and actionable recommendations.
+**Desenvolvedor Web Freelance | 2020 - Presente**
 
-**Security Researcher | Independent | 2017 - 2020**
+* Projetei e desenvolvi websites para diversos clientes em Sorocaba, incluindo empresas locais, startups e profissionais autônomos.
+* Os projetos variam desde websites informativos simples até plataformas de e-commerce e aplicações web personalizadas.
+* Colaborei com os clientes para entender suas necessidades, objetivos e público-alvo a fim de oferecer soluções eficazes.
+* Implementei boas práticas de SEO para melhorar a visibilidade do website e os rankings nos mecanismos de busca.
+* **Destaques de Clientes:**
+    * **Doce Sabor Confeitaria:** Desenvolvi um website com recursos de pedidos online e serviços de buffet, resultando em um aumento de 20% nas vendas.
+    * **Espaço Yoga Sorocaba:** Criei um website moderno e acolhedor, exibindo a programação de aulas e perfis de instrutores, levando a um aumento de 15% nas inscrições em aulas.
+    * **Dra. Ana Paula Silva (Dentista):** Construí um website profissional destacando seus serviços e expertise, atraindo novos pacientes e estabelecendo sua presença online.
 
-* Actively participated in bug bounty programs, responsibly disclosing vulnerabilities to affected vendors. 
-* Built and maintained a home lab for continuous experimentation, testing new attack vectors and security tools.
+# Projetos
 
-## EDUCATION & CERTIFICATIONS
+* **Doce Sabor Confeitaria:** Desenvolvi um website moderno e responsivo para uma confeitaria local, exibindo seus produtos e permitindo pedidos online. (Link para website)
+* **Loja Chic Boutique:** Construí uma plataforma de e-commerce segura para uma boutique de roupas, integrando sistemas de processamento de pagamentos e gerenciamento de estoque.  
+* **Fotografia Renata Oliveira:** Criei um website portfólio pessoal para uma fotógrafa, exibindo seu trabalho e fornecendo informações de contato.
+* **Sorocaba Events App (Em Desenvolvimento):** Construindo um aplicativo móvel React Native para exibir eventos e atividades locais, fomentando o engajamento comunitário.
 
-* **Offensive Security Certified Professional (OSCP)**
-* **Certified Ethical Hacker (CEH)**
-* **Web Application Security Specialist (WASS - fictional, can substitute with a real course)** 
+# Formação Acadêmica
 
-## PROJECT HIGHLIGHTS
+* **Curso de Desenvolvimento Web Full Stack** | SENAC Sorocaba, Sorocaba, SP | 2019
 
-* **[Project 1:]** Discovered a chain of vulnerabilities in an e-commerce platform allowing attacker access to customer order data and payment information.
-* **[Project 2:]** Identified an authorization bypass in a fintech mobile app, potentially enabling fraudulent transactions. Worked with the development team to implement robust access controls.
-* **[Project 3:]**  Collaborated with a healthcare SaaS provider to develop a secure SDLC, incorporating early security testing and developer training. 
+# Envolvimento Comunitário  
+
+* **Membro ativo do Sorocaba Dev Meetup:** Participo regularmente de meetups e workshops para me manter atualizado sobre as últimas tendências em desenvolvimento web e interagir com outros profissionais.
+
+# Referências
+
+Disponíveis mediante solicitação.
