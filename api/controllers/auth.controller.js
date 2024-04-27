@@ -15,7 +15,7 @@ export const register = async ( req, res, next ) => {
     const newUserData = req.body;
 
     try {
-        await validateData( userJoiSchema, newUserData );
+        await validateData ( userJoiSchema, newUserData );
     } catch ( error ) {
         return next( CreateError( 400, error.message ) );
     }

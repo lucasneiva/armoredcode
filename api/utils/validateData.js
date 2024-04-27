@@ -1,5 +1,4 @@
 export const validateData = async (schema, data) => { 
-    console.log("Validation started"); 
     try {
       const validationResult = schema.validate(data, { abortEarly: false }); // Show all errors
       // console.log("Validation result:", validationResult);
