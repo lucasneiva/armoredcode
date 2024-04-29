@@ -1,4 +1,4 @@
-@startuml ModeloConceitual
+@startuml class diagram
 
 ' User
 
@@ -76,32 +76,32 @@ entity Location {
   + country : String <"Brazil">
 }
 
-' JOB
+' Project
 
-entity Job {
+entity Project {
     + clientId : ObjectId 
     + freelancerId : ObjectId 
-    + jobCategory : JobCategory <<Emb>>
+    + ProjectCategory : ProjectCategory <<Emb>>
     + skills : Skill[*] <<Emb>>
     + technologies : Technology[*] <<Emb>>
     + requirements : Requirement[*] <<Emb>>
-    + jobTitle : String
-    + jobDescription : String
+    + ProjectTitle : String
+    + ProjectDescription : String
     + hourlyRateLowerBound : double
     + hourlyRateUpperBound : double
     + isFixedRate: boolean
     + fixedBudget : double
     + estimatedDuration : int
-    + jobSize : String <"SMALL", "MEDIUM", "LARGE"> 
+    + ProjectSize : String <"SMALL", "MEDIUM", "LARGE"> 
     + status : String <"DRAFT", "POSTED">
     + experienceLevel : String <"ENTRY-LEVEL", "MID-LEVEL", "SENIOR">
     + startDate : Date
     + endDate : Date
     + isRemote : boolean
-    + city : String <"SOROCABA", "VOTORANTIM", "ITU", "ARAÇOIABA DA SERRA", "PORTO FELIZ">
+    + location : Location
 }
 
-entity JobCategory {
+entity ProjectCategory {
    + categoryName : String
    + categoryDescription : String
 }
@@ -124,7 +124,7 @@ entity Skill {
 
 entity Proposal {
     + freelancerId: ObjectId
-    + jobId: ObjectId
+    + ProjectId: ObjectId
     + isFixedRate: boolean
     + fixedPrice: double 
     + proposedHourlyRate: double 
@@ -132,12 +132,6 @@ entity Proposal {
     + estimatedDuration: date
     + proposalStatus: String <"PENDING", "ACCEPTED", "DECLINED">
     + coverLetter: String
-}
-
-entity JobReview {
-    + JobId : ObjectId
-    + ClientComment : String
-    + FreelancerComment : String
 }
 
 ' Relationships
@@ -148,21 +142,22 @@ User --o  "1" FreelancerProfile: has one
 ClientProfile --o "1" Location : located in
 FreelancerProfile --o "1" Location : located in
 
-Job "1" o-- "*" Skill : requires many
-Job "1" *-- "*" Requirement : has many
-Job "*" o-- "*" Technology : uses many
-Job "*" o-- "1" JobCategory : belongs to one
+Project "1" o-- "*" Skill : requires many
+Project "1" *-- "*" Requirement : has many
+Project "*" o-- "*" Technology : uses many
+Project "*" o-- "1" ProjectCategory : belongs to one
 
 Proposal "1" -- "1" FreelancerProfile : by
-Proposal "1" -- "1" Job : for
+Proposal "1" -- "1" Project : for
 
-ClientProfile "1" -- "*" Job : posts
+ClientProfile "1" -- "*" Project : posts
 
 FreelancerProfile "1" -- "*" Language : knows
-FreelancerProfile "1" -- "*" Job : works on 
+FreelancerProfile "1" -- "*" Project : works on 
 FreelancerProfile "1" -- "1" Education : has one
 FreelancerProfile "1" -- "*" Skill : has many
 FreelancerProfile "1" -- "*" Certification : has many
 FreelancerProfile "1" -- "*" WorkExperience : has many
+FreelancerProfile "1" -- "*" PortfolioItem : has many
 
 @enduml
