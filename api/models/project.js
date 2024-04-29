@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 import Technology from './Technology.js';
-import JobCategory from './JobCategory.js';
+import projectCategory from './projectCategory.js';
 import Skill from './Skill.js';
 
 
@@ -12,21 +12,21 @@ const RequirementSchema = new Schema({
     requirementType: { type: String, enum: ["SOURCE_CODE", "DOCUMENTATION", "TEST_REPORT"] }
 });
 
-const JobSchema = new Schema({
+const projectSchema = new Schema({
     clientId: { type: Schema.Types.ObjectId, required: true },
     freelancerId: { type: Schema.Types.ObjectId },
-    jobCategory: { type: JobCategory.schema, required: true }, 
+    projectCategory: { type: projectCategory.schema, required: true }, 
     skills: [Skill.schema],
     technologies: [Technology.schema],
     requirements: [RequirementSchema],
-    jobTitle: { type: String, required: true },
-    jobDescription: { type: String, required: true },
+    projectTitle: { type: String, required: true },
+    projectDescription: { type: String, required: true },
     hourlyRateLowerBound: { type: Number },
     hourlyRateUpperBound: { type: Number },
     isFixedRate: { type: Boolean },
     fixedBudget: { type: Number },
     estimatedDuration: { type: Number },
-    jobSize: { type: String, enum: ["SMALL", "MEDIUM", "LARGE"] },
+    projectSize: { type: String, enum: ["SMALL", "MEDIUM", "LARGE"] },
     status: { type: String, enum: ["DRAFT", "POSTED"] },
     experienceLevel: { type: String, enum: ["ENTRY-LEVEL", "MID-LEVEL", "SENIOR"] },
     startDate: { type: Date },
@@ -35,4 +35,4 @@ const JobSchema = new Schema({
     city: { type: String, enum: ["SOROCABA", "VOTORANTIM", "ITU", "ARAÇOIABA DA SERRA", "PORTO FELIZ"] }
 });
 
-export default mongoose.model("Job", JobSchema);
+export default mongoose.model("project", projectSchema);

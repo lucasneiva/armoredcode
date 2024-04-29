@@ -1,8 +1,8 @@
 import Joi from 'joi';
 
-const jobCategoryJoiSchema = Joi.object( {
+const projectCategoryJoiSchema = Joi.object( {
     categoryName: Joi.string().required(),
     categoryDescription: Joi.string().optional()
 } );
 
-export default jobCategoryJoiSchema;
+export default projectCategoryJoiSchema;
