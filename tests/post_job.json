@@ -1,6 +1,6 @@
 {
     "clientId": "63fa7d59888fcd1c3da34b2e",
-    "jobCategory": { 
+    "projectCategory": { 
       "categoryName": "Software Development",
       "categoryDescription": "Developing web-based applications"
     },
@@ -20,12 +20,12 @@
         "requirementType": "SOURCE_CODE" 
       }
     ],
-    "jobTitle": "Build a Web Application with React and Node",
-    "jobDescription": "...",
+    "projectTitle": "Build a Web Application with React and Node",
+    "projectDescription": "...",
     "hourlyRateLowerBound": 35,
     "hourlyRateUpperBound": 55,
     "estimatedDuration": 40,
-    "jobSize": "MEDIUM",
+    "projectSize": "MEDIUM",
     "status": "DRAFT", 
     "experienceLevel": "MID-LEVEL", 
     "isRemote": true,

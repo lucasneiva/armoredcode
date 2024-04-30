@@ -1,8 +1,8 @@
 {
-    "JobId": "job_12345",
+    "projectId": "project_12345",
     "ClientId": "client_abcde",
     "FreelancerId": null,
-    "JobCategory": {
+    "projectCategory": {
       "CategoryId": "category_webdev",
       "CategoryName": "Web Development",
       "CategoryDescription": "Building and maintaining web applications"
@@ -45,14 +45,14 @@
         "RequirementType": "DOCUMENTATION"
       }
     ],
-    "JobTitle": "Full-Stack Python Developer for E-commerce Website",
-    "JobDescription": "We are looking for a skilled Python developer to build and maintain an e-commerce website using Django.",
+    "projectTitle": "Full-Stack Python Developer for E-commerce Website",
+    "projectDescription": "We are looking for a skilled Python developer to build and maintain an e-commerce website using Django.",
     "HourlyRateLowerBound": 30.00,
     "HourlyRateUpperBound": 45.00,
     "IsFixedRate": false,
     "FixedBudget": null,
     "EstimatedDuration": 2,
-    "JobSize": "MEDIUM",
+    "projectSize": "MEDIUM",
     "Status": "POSTED",
     "ExperienceLevel": "MID-LEVEL",
     "StartDate": "2024-01-15",
