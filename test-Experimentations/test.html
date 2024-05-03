@@ -15,6 +15,109 @@
         </div>
     </nav>
     
+    <form class="content-row" style="justify-content: center; align-items: baseline;">
+        <!--Características chave do projeto-->
+        <div class="proj-imput-items">
+            <h2>Project Name:</h2>
+            <input class="proj-input" placeholder="Type Here the project name" style="text-align: center"></input>
+        
+            <h2>Project Category:</h2>
+            <label for="projCategory"></label>
+            <select name="Option" id="projCategory" class="proj-input" style="color: #A5B2B2">
+                <option value="Default" selected>Select project category here</option>
+                <option value="Op1">Option 1</option>
+                <option value="Op2">Option 2</option>
+                <option value="Op3">Option 3</option>
+                <!--<option value="Op4" disabled>Option 4</option>-->
+            </select>
+        </div>
+        
+        <!--Método de pagamento / orçamento-->
+        <div class="proj-imput-items">
+            <h2>Budget:</h2>
+            <div class="content-row">
+                <div style="margin: 10px;">
+                    <input type="radio" id="priceFix" name="price_type" value="fix" checked>
+                    <label for="priceFix">Fixed</label><br>
+                </div>
+                <div style="margin: 10px;">
+                    <input type="radio" id="priceHour" name="price_type" value="hour">
+                    <label for="priceHour">Per Hour</label><br>
+                </div>
+            </div>
+            <div class="content-row">
+                <div style="margin: 7px;">
+                    <h2 style="margin-right: 10px;">From:</h2>
+                    <input class="sub-input" placeholder="Min value"
+                     style="text-align: center; max-width: 80px; padding: 5px;"></input>
+                </div>
+                <div style="margin: 7px;">
+                    <h2 style="margin-left: 10px;">To:</h2>
+                    <input class="sub-input" placeholder="Max value" 
+                     style="text-align: center; max-width: 80px; padding: 5px;"></input>
+                </div>
+            </div>
+        </div>
+
+        <!--Duração-->
+        <div class="proj-imput-items">
+            <h2>Estimated duration:</h2>
+            <input class="proj-input" placeholder="Type the duration in hours" style="text-align: center"></input>
+        
+            <div style="margin: 10px; margin-top: 25px;">
+                <legend>The job is remote?</legend>
+              
+                <div>
+                  <input type="checkbox" id="isRemote" name="remote" />
+                  <label for="isRemote">Remote</label>
+                </div>
+              
+            </div>
+        </div>
+
+        <!--Escopo-->
+        <div class="proj-imput-items">
+            <div>
+                <h2>Scope:</h2>
+                <input type="radio" id="scopeS" name="scope" value="small" checked>
+                <label for="scopeS">Small</label>
+            </div>
+            <div>
+                <input type="radio" id="scopeM" name="scope" value="medium">
+                <label for="scopeM">Medium</label>
+            </div>
+            <div>
+                <input type="radio" id="scopeL" name="scope" value="large">
+                <label for="scopeL">Large</label>
+            </div>
+        </div>
+
+        <!--Nível de experiência-->
+        <div class="proj-imput-items">
+            <h2>Experience level:</h2>
+                <div>
+                    <input type="radio" id="entryLvl" name="exp_level" value="entry" checked />
+                    <label for="entryLvl">Entry level</label>
+                </div>
+                <div>
+                    <input type="radio" id="midLvl" name="exp_level" value="mid" />
+                    <label for="midLvl">Mid level</label>
+                </div>
+                <div>
+                    <input type="radio" id="seniorLvl" name="exp_level" value="senior" />
+                    <label for="seniorLvl">Senior level</label>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+    
+    
+    
+    
+    <!--
+
     <form class="box" style="display: grid; justify-content: center; align-items: center;">
         <h1 style="text-align: center;">Login</h1>
 
@@ -217,7 +320,8 @@
         </div>
     </div>
     
-    
+    -->    
+
     <footer style="margin: -10px;">
         <span>EDSON & EDSON &#64;2024</span>
     </footer>
