@@ -1,4 +1,4 @@
-# ConectaDev
+# ArmoredCode
 
 ## O Problema
 
@@ -6,7 +6,7 @@ Empresas de Sorocaba, especialmente as menores ou startups, muitas vezes têm di
 
 ## A Solução
 
-O ConectaDev resolve esse problema fornecendo uma plataforma feita sob medida para a região de Sorocaba. Nós conectamos empresas a talentos locais de desenvolvimento de software, com foco na criação de oportunidades para que estudantes e recém-formados desenvolvam suas habilidades e portfólios.
+O ArmoredCode resolve esse problema fornecendo uma plataforma feita sob medida para a região de Sorocaba. Nós conectamos empresas a talentos locais de desenvolvimento de software, com foco na criação de oportunidades para que estudantes e recém-formados desenvolvam suas habilidades e portfólios.
 
 ## Público-Alvo
 
@@ -24,7 +24,7 @@ O ConectaDev resolve esse problema fornecendo uma plataforma feita sob medida pa
 - Organizações com projetos adequados para estudantes ou estagiários.
 - Qualquer pessoa em Sorocaba com uma necessidade de desenvolvimento de software.
 
-## Como Funciona o ConectaDev
+## Como Funciona o ArmoredCode
 
 - Clientes podem postar descrições detalhadas de projetos, destacando escopo, orçamento e habilidades necessárias.
 - Freelancers exibem suas habilidades, formação, experiência e portfólio de trabalhos.
