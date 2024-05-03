@@ -9,7 +9,6 @@ entity User {
   + email : String
   + password : String 
   + profileImage : String
-  + isAdmin : boolean
   + role : String <"CLIENT", "FREELANCER">
   + profile : ObjectId
 }
