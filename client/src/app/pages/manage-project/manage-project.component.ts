@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './manage-project.component.html',
   styleUrl: './manage-project.component.scss'
 })
-export class ManageProjectComponent {
+export default class ManageProjectComponent {
 
 }
