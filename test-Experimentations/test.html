@@ -15,7 +15,8 @@
         </div>
     </nav>
     
-    <form class="content-row" style="justify-content: center; align-items: baseline;">
+    <!--menu de inputs-->
+    <form class="content-row" style="justify-content: center; align-items: baseline; background-color: blueviolet;">
         <!--Características chave do projeto-->
         <div class="proj-imput-items">
             <h2>Project Name:</h2>
@@ -38,11 +39,11 @@
             <div class="content-row">
                 <div style="margin: 10px;">
                     <input type="radio" id="priceFix" name="price_type" value="fix" checked>
-                    <label for="priceFix">Fixed</label><br>
+                    <label for="priceFix" class="lbl-proj">Fixed</label><br>
                 </div>
                 <div style="margin: 10px;">
                     <input type="radio" id="priceHour" name="price_type" value="hour">
-                    <label for="priceHour">Per Hour</label><br>
+                    <label for="priceHour" class="lbl-proj">Per Hour</label><br>
                 </div>
             </div>
             <div class="content-row">
@@ -65,11 +66,11 @@
             <input class="proj-input" placeholder="Type the duration in hours" style="text-align: center"></input>
         
             <div style="margin: 10px; margin-top: 25px;">
-                <legend>The job is remote?</legend>
+                <h2 style="font-size: 24px; margin-bottom: 15px;">The job is remote?</h2>
               
                 <div>
                   <input type="checkbox" id="isRemote" name="remote" />
-                  <label for="isRemote">Remote</label>
+                  <label for="isRemote" class="lbl-proj">Remote</label>
                 </div>
               
             </div>
@@ -80,15 +81,15 @@
             <div>
                 <h2>Scope:</h2>
                 <input type="radio" id="scopeS" name="scope" value="small" checked>
-                <label for="scopeS">Small</label>
+                <label for="scopeS" class="lbl-proj">Small</label>
             </div>
             <div>
                 <input type="radio" id="scopeM" name="scope" value="medium">
-                <label for="scopeM">Medium</label>
+                <label for="scopeM" class="lbl-proj">Medium</label>
             </div>
             <div>
                 <input type="radio" id="scopeL" name="scope" value="large">
-                <label for="scopeL">Large</label>
+                <label for="scopeL" class="lbl-proj">Large</label>
             </div>
         </div>
 
@@ -97,22 +98,97 @@
             <h2>Experience level:</h2>
                 <div>
                     <input type="radio" id="entryLvl" name="exp_level" value="entry" checked />
-                    <label for="entryLvl">Entry level</label>
+                    <label for="entryLvl" class="lbl-proj">Entry level</label>
                 </div>
                 <div>
                     <input type="radio" id="midLvl" name="exp_level" value="mid" />
-                    <label for="midLvl">Mid level</label>
+                    <label for="midLvl" class="lbl-proj">Mid level</label>
                 </div>
                 <div>
                     <input type="radio" id="seniorLvl" name="exp_level" value="senior" />
-                    <label for="seniorLvl">Senior level</label>
+                    <label for="seniorLvl" class="lbl-proj">Senior level</label>
                 </div>
             </div>
             
         </div>
 
-    </div>
+    </form>
     
+    <!--coluna de detalhamento-->
+    <div class="content-row">
+        <!--coluna 1-->
+        <div class="column">
+            <div>
+                <h2 style="font-size: 28px; text-indent: 35px;">Overview:</h2>
+                <p class="proj-text">
+                    This project aims to develop a [brief description of the project's goal].
+                    By achieving this, we hope to [explain the positive outcomes or impact of the project].
+                    The project will involve [mention a high-level overview of the methods or approaches used].
+                </p>
+                <p class="proj-text">
+                    This project is expected to be completed within [estimated timeframe, e.g., 6 months, 1 year].
+                </p>
+            </div>
+            <div>
+                <h2 style="font-size: 28px; text-indent: 35px;">Requirements:</h2>
+            </div>
+            <div class="req-box">
+                <div style="display: flex; align-items: center;">
+                    <h3 class="req-title" style="width: 100%; min-width: 50%;">Title</h3>
+
+                    <div style="display:flex; justify-content: end;">
+                        <select name="Option" id="projCategory" class="req-input" style="color: #A5B2B2;">
+                            <option value="Default" selected>Select request category here</option>
+                            <option value="Op1">Option 1</option>
+                            <option value="Op2">Option 2</option>
+                            <option value="Op3">Option 3</option>
+                        </select>
+    
+                        <button class="req-btn" style="margin: 5px;">X</button>
+                    </div>
+                </div>
+                
+                <p class="req-text">
+                    Lorem ipsum dolor sit amet. A quidem quod ut rerum esse qui galisum similique ad
+                    corporis possimus At fuga eligendi vel molestias voluptatem ex velit animi.
+                    Cum culpa facilis At nesciunt voluptatibus aut officia provident sed nisi numquam
+                    aut accusantium voluptas. 33 exercitationem excepturi et suscipit perspiciatis non
+                    itaque exercitationem?
+                </p>
+                
+            </div>
+
+            <div class="req-box">
+                <div style="display: flex; align-items: center;">
+                    <h3 class="req-title" style="width: 100%; min-width: 50%;">Title</h3>
+
+                    <div style="display:flex; justify-content: end;">
+                        <select name="Option" id="projCategory" class="req-input" style="color: #A5B2B2;">
+                            <option value="Default" selected>Select request category here</option>
+                            <option value="Op1">Option 1</option>
+                            <option value="Op2">Option 2</option>
+                            <option value="Op3">Option 3</option>
+                        </select>
+    
+                        <button class="req-btn" style="margin: 5px;">X</button>
+                    </div>
+                </div>
+                
+                <p class="req-text">
+                    Lorem ipsum dolor sit amet. A quidem quod ut rerum esse qui galisum similique ad
+                    corporis possimus At fuga eligendi vel molestias voluptatem ex velit animi.
+                    Cum culpa facilis At nesciunt voluptatibus aut officia provident sed nisi numquam
+                    aut accusantium voluptas. 33 exercitationem excepturi et suscipit perspiciatis non
+                    itaque exercitationem?
+                </p>
+                
+            </div>
+        </div>
+        <!--coluna 2-->
+        <div class="column">
+            
+        </div>
+    </div>
     
     
     
