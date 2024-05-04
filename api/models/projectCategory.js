@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const ProjectCategorySchema = new Schema({
+const ProjectCategorySchema = new Schema( {
     categoryName: {
         type: String,
         required: true
@@ -10,7 +10,7 @@ const ProjectCategorySchema = new Schema({
     categoryDescription: {
         type: String
     }
-    
-});
 
-export default mongoose.model("ProjectCategory", ProjectCategorySchema);
+} );
+
+export default mongoose.model( "ProjectCategory", ProjectCategorySchema );
