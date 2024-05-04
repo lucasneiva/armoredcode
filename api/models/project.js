@@ -2,20 +2,32 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 import Technology from './Technology.js';
-import projectCategory from './projectCategory.js';
+import ProjectCategory from './ProjectCategory.js';
 import Skill from './Skill.js';
 
 
-const RequirementSchema = new Schema({
-    title: { type: String, required: true },
-    description: { type: String, required: true },
-    requirementType: { type: String, enum: ["SOURCE_CODE", "DOCUMENTATION", "TEST_REPORT"] }
-});
+const RequirementSchema = new Schema( {
+    title: {
+        type: String,
+        required: true
+    },
 
-const projectSchema = new Schema({
-    clientId: { 
+    description: {
+        type: String,
+        required: true
+    },
+
+    requirementType: {
+        type: String,
+        enum: [ "SOURCE_CODE", "DOCUMENTATION", "TEST_REPORT" ]
+    }
+
+} );
+
+const ProjectSchema = new Schema( {
+    clientId: {
         type: Schema.Types.ObjectId,
-        required: true 
+        required: true
     },
 
     freelancerId: {
@@ -23,15 +35,15 @@ const projectSchema = new Schema({
     },
 
     projectCategory: {
-        type: projectCategory.schema,
-        required: true 
+        type: ProjectCategory.schema,
+        required: true
     },
 
-    skills: [Skill.schema],
+    skills: [ Skill.schema ],
 
-    technologies: [Technology.schema],
+    technologies: [ Technology.schema ],
 
-    requirements: [RequirementSchema],
+    requirements: [ RequirementSchema ],
 
     projectTitle: {
         type: String,
@@ -65,17 +77,17 @@ const projectSchema = new Schema({
 
     projectSize: {
         type: String,
-        enum: ["SMALL", "MEDIUM", "LARGE"] 
+        enum: [ "SMALL", "MEDIUM", "LARGE" ]
     },
 
     status: {
         type: String,
-        enum: ["DRAFT", "POSTED"]
+        enum: [ "DRAFT", "POSTED" ]
     },
 
     experienceLevel: {
         type: String,
-        enum: ["ENTRY-LEVEL", "MID-LEVEL", "SENIOR"]
+        enum: [ "ENTRY-LEVEL", "MID-LEVEL", "SENIOR" ]
     },
 
     startDate: {
@@ -92,8 +104,9 @@ const projectSchema = new Schema({
 
     city: {
         type: String,
-        enum: ["SOROCABA", "VOTORANTIM", "ITU", "ARAÇOIABA DA SERRA", "PORTO FELIZ"]
+        enum: [ "SOROCABA", "VOTORANTIM", "ITU", "ARAÇOIABA DA SERRA", "PORTO FELIZ" ]
     }
-});
 
-export default mongoose.model("Project", projectSchema);
+} );
+
+export default mongoose.model( "Project", ProjectSchema );

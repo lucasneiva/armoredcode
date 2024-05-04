@@ -1,9 +1,24 @@
 import mongoose from "mongoose";
 
+import mongoose from 'mongoose';
+
+const Schema = mongoose.Schema;
+
 const PortfolioItemSchema = new Schema( {
-    title: String,
-    description: String,
-    url: String,
+    title: {
+        type: String,
+        required: true,
+    },
+
+    description: {
+        type: String,
+    },
+
+    url: {
+        type: String,
+        required: true,
+    }
+
 } );
 
-export default mongoose.model("PortfolioItem", PortfolioItemSchema);
+export default mongoose.model( "PortfolioItem", PortfolioItemSchema );
