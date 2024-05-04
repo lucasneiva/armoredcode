@@ -10,6 +10,12 @@ const SkillSchema = new Schema( {
 
     skillDescription: {
         type: String
+    },
+
+    proficiencyLevel: {
+        type: String,
+        required: false,
+        enum: [ "BEGINNER", "INTERMEDIATE", "ADVANCED" ]
     }
 
 } );

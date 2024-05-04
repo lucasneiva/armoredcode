@@ -9,7 +9,8 @@ const LanguageSchema = new Schema( {
 
     proficiencyLevel: {
         type: String,
-        required: true
+        required: false,
+        enum: [ "BEGINNER", "INTERMEDIATE", "ADVANCED" ]
     }
 
 } );

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-const TechnologySchema = new Schema({
+const TechnologySchema = new Schema( {
     technologyName: {
         type: String,
         required: true
@@ -9,8 +9,14 @@ const TechnologySchema = new Schema({
 
     technologyDescription: {
         type: String
-    }
-    
-});
+    },
 
-export default mongoose.model("Technology", TechnologySchema);
+    proficiencyLevel: {
+        type: String,
+        required: false,
+        enum: [ "BEGINNER", "INTERMEDIATE", "ADVANCED" ]
+    }
+
+} );
+
+export default mongoose.model( "Technology", TechnologySchema );
