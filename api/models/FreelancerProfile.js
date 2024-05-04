@@ -26,7 +26,7 @@ const EducationSchema = new Schema( {
         type: Number,
         required: true
     }
-    
+
 } );
 
 const WorkExperienceSchema = new Schema( {
@@ -119,6 +119,11 @@ const FreelancerProfileSchema = new Schema( {
         type: Boolean,
         default: true
     },
+
+    specializations: [ {
+        type: Schema.Types.ObjectId,
+        ref: "Specialization"
+    } ],
 
     location: Location.schema,
 
