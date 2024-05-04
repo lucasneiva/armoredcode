@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 import Location from './Location';
 
-const ClientProfileSchema = new Schema({
+const ClientProfileSchema = new Schema( {
     companyName: {
         type: String,
         required: true
@@ -11,7 +11,7 @@ const ClientProfileSchema = new Schema({
 
     companySize: {
         type: String,
-        enum: ["SMALL", "MEDIUM", "LARGE"],
+        enum: [ "SMALL", "MEDIUM", "LARGE" ],
         required: true
     },
 
@@ -36,6 +36,6 @@ const ClientProfileSchema = new Schema({
         type: Location.schema,
     }
 
-});
+} );
 
-export default mongoose.model("ClientProfile", ClientProfileSchema); 
+export default mongoose.model( "ClientProfile", ClientProfileSchema ); 
