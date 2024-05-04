@@ -6,4 +6,5 @@ export const routes: Routes = [
     {path:'forget-password', loadComponent: ()=> import('./pages/forget-password/forget-password.component')},
     {path:'home', loadComponent: ()=> import('./pages/home/home.component')},
     {path:'reset/:token', loadComponent: ()=> import('./pages/reset/reset.component')},
+    {path:'manage-project', loadComponent: ()=> import('./pages/manage-project/manage-project.component')},
 ];

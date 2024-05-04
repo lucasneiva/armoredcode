@@ -63,6 +63,9 @@ footer{
     background-color: #126ac2;
     color: white;
 }
+.proj-imput-items{
+    padding: 30px;
+}
 .freela-box{
     display: block;
     background-color: #ffffff;
@@ -102,13 +105,31 @@ footer{
 .sub-input{
     box-shadow: 7px 5px 13px 2px rgba(0, 0, 0, 0.201);
     background-color: #ffffff;
-
+    color: #A5B2B2;
     border-style:hidden;
     border-radius: 8px; 
     border-color: rgba(174, 178, 179, 0.933);
     margin: 10px;
 }
 .sub-input:focus-within{
+    border: solid #9e9e9e 1px;
+    outline: 0;
+}
+.proj-input{
+    box-shadow: 7px 5px 13px 2px rgba(0, 0, 0, 0.201);
+    background-color: #ffffff;
+
+    border-style:hidden;
+    border-radius: 8px; 
+    border-color: rgba(174, 178, 179, 0.933);
+    margin: 10px;
+    padding: 7px; 
+    min-width: 200px;
+}
+.proj-input option{
+    color: #A5B2B2
+}
+.proj-input:focus-within{
     border: solid #9e9e9e 1px;
     outline: 0;
 }
