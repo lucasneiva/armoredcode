@@ -1,4 +1,3 @@
-import Role from "../models/Role.js";
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
