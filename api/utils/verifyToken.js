@@ -1,36 +1,36 @@
 import jwt from 'jsonwebtoken';
 import { CreateError } from './error.js';
 
-export const verifyToken = (req, res, next)=>{
+export const verifyToken = ( req, res, next ) => {
     const token = req.cookies.acess_token;
 
-    if(!token)
-        return next(CreateError(401, "You are not authenticated!"));
+    if ( !token )
+        return next( CreateError( 401, "You are not authenticated!" ) );
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, user)=>{
-        if(err)
-            return next(CreateError(403, "Token is no Valid"));
+    jwt.verify( token, process.env.JWT_SECRET, ( err, user ) => {
+        if ( err )
+            return next( CreateError( 403, "Token is no Valid" ) );
         req.user = user;
         next();
-    })
+    } )
 }
 
-export const verifyUser = (req, res, next)=>{
-    verifyToken(req, res, ()=>{
-        if(req.user.id === req.params.id || req.user.isAdmin){
+export const verifyUser = ( req, res, next ) => {
+    verifyToken( req, res, () => {
+        if ( req.user.id === req.params.id || req.user.isAdmin ) {
             next();
-        }else{
-            return next(CreateError(403, "You are not authorized!"))
+        } else {
+            return next( CreateError( 403, "You are not authorized!" ) )
         }
-    })
+    } )
 }
 
-export const verifyAdmin = (req, res, next)=>{
-    verifyToken(req, res, ()=>{
-        if(req.user.isAdmin){
+export const verifyAdmin = ( req, res, next ) => {
+    verifyToken( req, res, () => {
+        if ( req.user.isAdmin ) {
             next();
-        }else{
-            return next(CreateError(403, "You are not authorized!"));
+        } else {
+            return next( CreateError( 403, "You are not authorized!" ) );
         }
-    })
+    } )
 }

@@ -2,7 +2,6 @@ import express from "express";
 import mongoose, { connect } from "mongoose";
 import dotenv from "dotenv";
 import cors from 'cors';
-import roleRoute from "./routes/role.js"
 import authRoute from "./routes/auth.js"
 import userRoute from "./routes/user.js"
 import projectRoute from "./routes/project.js"
@@ -20,7 +19,6 @@ app.use(cors({
 }));
 
 app.use("/api/auth", authRoute);
-app.use("/api/role", roleRoute);
 app.use("/api/user", userRoute);
 app.use("/api/project", projectRoute);
 
