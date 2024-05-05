@@ -87,11 +87,30 @@ const PortfolioItemSchema = new Schema( {
         type: String,
         required: true,
     }
-
+    
 } );
 
 const FreelancerProfileSchema = new Schema( {
+    firstName: {
+        type: String,
+        required: true,
+    },
+    
+    lastName: {
+        type: String,
+        required: true,
+    },
+
+    specializations: [ {
+        type: Schema.Types.ObjectId,
+        ref: "Specialization"
+    } ],
+
     profileSummary: {
+        type: String
+    },
+
+    profileImage: {
         type: String
     },
 
@@ -119,11 +138,6 @@ const FreelancerProfileSchema = new Schema( {
         type: Boolean,
         default: true
     },
-
-    specializations: [ {
-        type: Schema.Types.ObjectId,
-        ref: "Specialization"
-    } ],
 
     location: Location.schema,
 
