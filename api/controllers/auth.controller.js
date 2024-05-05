@@ -34,7 +34,7 @@ export const register = async ( req, res, next ) => {
 
     await newUser.save();
 
-    return CreateSuccess( 200, "User Registered Successfully!" );
+    return next(CreateSuccess( 200, "User Registered Successfully!" ));
     // return res.status( 200 ).json( "User Registered Successfully!" );
 };
 
@@ -71,7 +71,7 @@ export const login = async ( req, res, next ) => {
 
     } catch ( error ) {
         return next( CreateError( 500, "Internal Server Error!" ) );
-        
+
     }
 
 }

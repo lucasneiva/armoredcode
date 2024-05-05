@@ -1,8 +1,8 @@
 export const CreateSuccess = (statusCode, message, data)=>{
-    const sucessObj = {
+    const successObj = {
         status: statusCode,
         message: message,
         data: data
     }
-    return sucessObj;
+    return successObj;
 }

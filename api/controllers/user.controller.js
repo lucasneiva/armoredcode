@@ -4,23 +4,28 @@ import { CreateSuccess } from "../utils/success.js";
 
 
 
-export const getAllUsers = async (req, res, next)=>{
+export const getAllUsers = async ( req, res, next ) => {
     try {
         const users = await User.find();
-        return next(CreateSuccess(200, "All users", users));
+        return next( CreateSuccess( 200, "All users", users ) );
 
-    } catch (error) {
-        return next(CreateError(500, "Internal Server Error!"));
+    } catch ( error ) {
+        return next( CreateError( 500, "Internal Server Error!" ) );
     }
 }
 
-export const getById = async (req, res, next)=>{
+export const getById = async ( req, res, next ) => {
     try {
-        const user = await User.findById(req.params.id);
-        if(!user)
-            return next(CreateError(404, "User not found!"));
-        return next(CreateSuccess(200, "Single user", user));
-    } catch (error) {
-        return next(CreateError(500, "Internal Server Error!"));
+        const user = await User.findById( req.params.id );
+
+        if ( !user )
+            return next( CreateError( 404, "User not found!" ) );
+
+        return next( CreateSuccess( 200, "User Data", user ) );
+
+    } catch ( error ) {
+        return next( CreateError( 500, "Internal Server Error!" ) );
+
     }
+    
 }
