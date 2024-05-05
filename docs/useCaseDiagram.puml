@@ -4,6 +4,8 @@ left to right direction
 actor Freelancer
 actor Client
 
+usecase "Create Account" as UC0
+
 package "User Profile Management" {
   usecase "Create Profile" as UC1
   usecase "Update Profile" as UC3 
@@ -29,9 +31,10 @@ package "Client Functionalities" {
   } 
 }
 
-Freelancer -- UC1
-Client -- UC1
+Freelancer --> UC0
+Client --> UC0
 
+UC0 --> UC1 : <<includes>>
 UC1 ..> UC3 : <<extends>>
 UC1 ..> UC5 : <<extends>>
 UC1 ..> UC6 : <<extends>> 
@@ -39,4 +42,5 @@ UC7 ..> UC8 : <<includes>>
 UC1 ..> UC25 : <<extends>> 
 UC1 ..> UC7 : <<extends>> 
 UC7 ..> UC9 : <<includes>>
+
 @enduml
