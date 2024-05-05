@@ -1,6 +1,5 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
-import dotenv from "dotenv";
 import { CreateError } from "../utils/error.js";
 import { CreateSuccess } from "../utils/success.js";
 import jwt from "jsonwebtoken";
@@ -8,54 +7,47 @@ import UserToken from "../models/UserToken.js";
 import nodemailer from "nodemailer";
 import userJoiSchema from "../validators/userValidator.js";
 import { validateData } from "../utils/validateData.js";
+import ClientProfile from "../models/ClientProfile.js";
+import FreelancerProfile from "../models/FreelancerProfile.js";
+import ROLES from "../utils/roles.js";
 
 export const register = async ( req, res, next ) => {
-
     const newUserData = req.body;
 
     try {
-        await validateData ( userJoiSchema, newUserData );
+        await validateData( userJoiSchema, newUserData );
     } catch ( error ) {
         return next( CreateError( 400, error.message ) );
     }
 
-    const role = await Role.find( { role: 'user' } );
     const salt = await bcrypt.genSalt( 10 );
     const hashPassword = await bcrypt.hash( newUserData.password, salt );
 
+    let profile;
+    
+    if ( newUserData.role === ROLES.CLIENT ) {
+        profile = new ClientProfile( {} );
+
+    } else if ( newUserData.role === ROLES.FREELANCER ) {
+        profile = new FreelancerProfile( {} );
+
+    } else {
+        return next( CreateError( 400, "Invalid role" ) );
+    }
+
+    await profile.save();
+
     const newUser = new User( {
-        firstName: newUserData.firstName,
-        lastName: newUserData.lastName,
         username: newUserData.username,
         email: newUserData.email,
         password: hashPassword,
-        roles: role
+        role: newUserData.role,
+        profile: profile._id,
     } );
 
     await newUser.save();
-    return res.status( 200 ).json( "User Registered Sucessfulyy!" );
-}
-
-
-export const registerAdmin = async ( req, res, next ) => {
-
-    const role = await Role.find( {} );
-    const salt = await bcrypt.genSalt( 10 );
-    const hashPassword = await bcrypt.hash( req.body.password, salt );
-
-    const newUser = new User( {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        username: req.body.username,
-        email: req.body.email,
-        password: hashPassword,
-        isAdmin: true,
-        roles: role
-    } );
-
-    await newUser.save();
-    return next( CreateSuccess( 200, "User Registered Sucessfulyy!" ) );
-}
+    return res.status( 200 ).json( "User Registered Successfully!" );
+};
 
 export const login = async ( req, res, next ) => {
 
