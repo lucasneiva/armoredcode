@@ -87,7 +87,7 @@ const PortfolioItemSchema = new Schema( {
         type: String,
         required: true,
     }
-    
+
 } );
 
 const FreelancerProfileSchema = new Schema( {
@@ -95,7 +95,7 @@ const FreelancerProfileSchema = new Schema( {
         type: String,
         required: true,
     },
-    
+
     lastName: {
         type: String,
         required: true,
@@ -141,11 +141,20 @@ const FreelancerProfileSchema = new Schema( {
 
     location: Location.schema,
 
-    skills: [ Skill.schema ],
+    skills: [ {
+        type: Schema.Types.ObjectId,
+        ref: "Skill"
+    } ],
 
-    technologies: [ Technology.schema ],
+    technologies: [ {
+        type: Schema.Types.ObjectId,
+        ref: "Technology"
+    } ],
 
-    languages: [ Language.schema ],
+    languages: [ {
+        type: Schema.Types.ObjectId,
+        ref: "Language"
+    } ],
 
     portfolio: [ PortfolioItemSchema ],
 

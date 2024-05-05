@@ -1,11 +1,6 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-import Technology from './Technology.js';
-import ProjectCategory from './ProjectCategory.js';
-import Skill from './Skill.js';
-
-
 const RequirementSchema = new Schema( {
     title: {
         type: String,
@@ -35,13 +30,20 @@ const ProjectSchema = new Schema( {
     },
 
     projectCategory: {
-        type: ProjectCategory.schema,
+        type: Schema.Types.ObjectId,
+        ref: "ProjectCategory",
         required: true
     },
 
-    skills: [ Skill.schema ],
+    skills: [{
+        type: Schema.Types.ObjectId,
+        ref: "Skill"
+    }],
 
-    technologies: [ Technology.schema ],
+    technologies: [{
+        type: Schema.Types.ObjectId,
+        ref: "Technology"
+    }],
 
     requirements: [ RequirementSchema ],
 
