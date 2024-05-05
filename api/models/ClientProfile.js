@@ -9,10 +9,18 @@ const ClientProfileSchema = new Schema( {
         required: true
     },
 
+    companyDescription: {
+        type: String
+    },
+
     companySize: {
         type: String,
         enum: [ "SMALL", "MEDIUM", "LARGE" ],
         required: true
+    },
+    
+    logo: {
+        type: String
     },
 
     industry: {
@@ -20,15 +28,7 @@ const ClientProfileSchema = new Schema( {
         required: true
     },
 
-    companyDescription: {
-        type: String
-    },
-
     website: {
-        type: String
-    },
-
-    logo: {
         type: String
     },
 
@@ -38,4 +38,4 @@ const ClientProfileSchema = new Schema( {
 
 } );
 
-export default mongoose.model( "ClientProfile", ClientProfileSchema ); 
+export default mongoose.model( "ClientProfile", ClientProfileSchema );
