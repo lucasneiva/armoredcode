@@ -23,54 +23,41 @@ export const register = async ( req, res, next ) => {
     const salt = await bcrypt.genSalt( 10 );
     const hashPassword = await bcrypt.hash( newUserData.password, salt );
 
-    let profile;
-    
-    if ( newUserData.role === ROLES.CLIENT ) {
-        profile = new ClientProfile( {} );
-
-    } else if ( newUserData.role === ROLES.FREELANCER ) {
-        profile = new FreelancerProfile( {} );
-
-    } else {
-        return next( CreateError( 400, "Invalid role" ) );
-    }
-
-    await profile.save();
 
     const newUser = new User( {
         username: newUserData.username,
         email: newUserData.email,
         password: hashPassword,
         role: newUserData.role,
-        profile: profile._id,
+        profile: null
     } );
 
     await newUser.save();
-    return res.status( 200 ).json( "User Registered Successfully!" );
+
+    return CreateSuccess( 200, "User Registered Successfully!" );
+    // return res.status( 200 ).json( "User Registered Successfully!" );
 };
 
 export const login = async ( req, res, next ) => {
-
     try {
-        const user = await User.findOne( { email: req.body.email } )
-            .populate( "roles", "role" );
+        const user = await User.findOne( { email: req.body.email } );
 
         if ( !user ) {
-            return res.status( 404 ).send( "User not found!" );
+            return CreateError( 404, "User Not Found!" );
+            // return res.status( 404 ).send( "User not found!" );
         }
 
         const isPasswordCorrect = await bcrypt.compare( req.body.password, user.password );
 
         if ( !isPasswordCorrect ) {
-            return res.status( 400 ).send( "Password is incorrect!" );
+            return CreateError( 400, "Password is incorrect!" );
+            // return res.status( 400 ).send( "Password is incorrect!" );
         }
 
-
         const token = jwt.sign(
-            { id: user._id, isAdmin: user.isAdmin, roles: user.roles },
+            { id: user._id, role: user.role },
             process.env.JWT_SECRET
         );
-
 
         res.cookie( "acess_token", token, { httpOnly: true } )
             .status( 200 )
@@ -80,10 +67,11 @@ export const login = async ( req, res, next ) => {
                 data: user
             } );
 
+        // return next(CreateSuccess(200, "Login Success!"));
 
-        //return next(CreateSuccess(200, "Login Success!"));
     } catch ( error ) {
-        return next( CreateError( 500, "deu ruim" ) );
+        return next( CreateError( 500, "Internal Server Error!" ) );
+        
     }
 
 }
