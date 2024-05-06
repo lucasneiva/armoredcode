@@ -1,4 +1,4 @@
-import { getById } from '../controllers/user.controller.js';
+import { getById } from '../controllers/userController.js';
 import express from 'express';
 import { verifyUser } from '../utils/authMiddleware.js';
 

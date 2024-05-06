@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllprojects, getprojectById, postproject } from '../controllers/project.controller.js';
+import { getAllprojects, getprojectById, postproject } from '../controllers/projectController.js';
 import { verifyClient } from '../utils/authMiddleware.js';
 
 const router = express.Router();
