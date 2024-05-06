@@ -24,7 +24,8 @@ const ClientProfileSchema = new Schema( {
     },
 
     industry: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "Industry",
         required: true
     },
 
