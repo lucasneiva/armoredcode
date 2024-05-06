@@ -1,14 +1,14 @@
-import User from "../models/User.js";
+import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import { CreateError } from "../utils/error.js";
 import { CreateSuccess } from "../utils/success.js";
 import jwt from "jsonwebtoken";
-import UserToken from "../models/UserToken.js";
+import UserToken from "../models/userTokenModel.js";
 import nodemailer from "nodemailer";
 import userJoiSchema from "../validators/userValidator.js";
 import { validateData } from "../utils/validateData.js";
-import ClientProfile from "../models/ClientProfile.js";
-import FreelancerProfile from "../models/FreelancerProfile.js";
+import ClientProfile from "../models/clientProfileModel.js";
+import FreelancerProfile from "../models/freelancerProfileModel.js";
 import ROLES from "../utils/roles.js";
 
 export const register = async ( req, res, next ) => {

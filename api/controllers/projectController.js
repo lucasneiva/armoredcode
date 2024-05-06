@@ -1,4 +1,4 @@
-import project from "../models/project.js"
+import project from "../models/projectModel.js"
 import { CreateError } from "../utils/error.js"
 import { CreateSuccess } from "../utils/success.js";
 import mongoose from "mongoose";

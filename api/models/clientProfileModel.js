@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-import Location from './Location.js';
+import Location from './locationModel.js';
 
 const ClientProfileSchema = new Schema( {
     companyName: {

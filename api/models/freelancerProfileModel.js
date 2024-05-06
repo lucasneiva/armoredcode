@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-import Skill from './Skill.js';
-import Technology from './Technology.js';
-import Language from './Language.js';
-import Location from './Location.js';
+import Skill from './skillModel.js';
+import Technology from './technologyModel.js';
+import Language from './languageModel.js';
+import Location from './locationModel.js';
 
 const EducationSchema = new Schema( {
     degreeName: {
