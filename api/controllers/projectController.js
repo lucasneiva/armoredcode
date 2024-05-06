@@ -9,7 +9,7 @@ export const getAllprojects = ( req, res, next ) => {
 
 };
 
-export const getprojectById = ( req, res, next ) => {
+export const getProjectById = ( req, res, next ) => {
 
 };
 
