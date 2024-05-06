@@ -2,10 +2,10 @@ import express from "express";
 import mongoose, { connect } from "mongoose";
 import dotenv from "dotenv";
 import cors from 'cors';
-import authRoute from "./routes/auth.js";
-import userRoute from "./routes/user.js";
-import projectRoute from "./routes/project.js";
-import profileRoute from "./routes/profile.js";
+import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import projectRoutes from "./routes/projectRoutes.js";
+import profileRoutes from "./routes/profileRoutes.js";
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -19,10 +19,10 @@ app.use(cors({
     credentials: true
 }));
 
-app.use("/api/auth", authRoute);
-app.use("/api/user", userRoute);
-app.use("/api/project", projectRoute);
-app.use("/api/profile", profileRoute);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/projects", projectRoutes);
+app.use("/api/profiles", profileRoutes);
 
 //DB Connection
 const connectMongoDB = async () => {
