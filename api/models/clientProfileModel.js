@@ -23,9 +23,15 @@ const ClientProfileSchema = new Schema( {
         type: String
     },
 
-    industry: {
+    industryId: {
         type: Schema.Types.ObjectId,
         ref: "Industry",
+        required: true
+    },
+
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
         required: true
     },
 
@@ -37,6 +43,6 @@ const ClientProfileSchema = new Schema( {
         type: Location.schema,
     }
 
-} );
+}, { timestamps: true } );
 
 export default mongoose.model( "ClientProfile", ClientProfileSchema );

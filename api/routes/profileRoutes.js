@@ -1,8 +1,9 @@
 import express from "express";
-import { postProfile } from "../controllers/profileController.js";
+import { createProfile } from "../controllers/profileController.js";
+import { verifyClient } from "../utils/authMiddleware.js";
 
 const router = express.Router();
 
-router.post( "/", postProfile );
+router.post( "/", verifyClient, createProfile );
 
 export default router;

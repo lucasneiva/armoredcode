@@ -164,6 +164,6 @@ const FreelancerProfileSchema = new Schema( {
 
     workExperience: [ WorkExperienceSchema ]
 
-} );
+}, { timestamps: true } );
 
 export default mongoose.model( "FreelancerProfile", FreelancerProfileSchema );

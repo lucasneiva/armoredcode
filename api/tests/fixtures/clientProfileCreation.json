@@ -1,0 +1,17 @@
+{
+    "companyName": "Acme Corporation",
+    "companyDescription": "Acme Corporation is a leading provider of widgets and gizmos.",
+    "companySize": "MEDIUM",
+    "logo": "https://acmecorp.com/logo.png",
+    "industryId": "64f2a7b1c5d4e2b88d2c4567",
+    "userId": "66394caec073041c87c0cf35",
+    "website": "https://acmecorp.com",
+    "location": {
+        "streetAddress": "123 Main Street",
+        "neighborhood": "Downtown",
+        "city": "New York",
+        "state": "NY",
+        "zipCode": "10001",
+        "country": "USA"
+    }
+}
