@@ -13,7 +13,7 @@ export const getprojectById = ( req, res, next ) => {
 
 };
 
-export const postproject = async ( req, res, next ) => {
+export const postProject = async ( req, res, next ) => {
     try {
         const newprojectData = req.body;
 
