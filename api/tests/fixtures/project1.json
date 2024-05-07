@@ -1,0 +1,40 @@
+{
+    "clientId": "NEEDS TO BE ID OF THE REQUESTER",
+    "projectCategoryId": "64f23b5c1c9d440000678901",
+    "skillIds": [
+        "64f23c6d1c9d440000abcdef",
+        "64f23d7e1c9d440000fedcba"
+    ],
+    "technologyIds": [
+        "64f23e8f1c9d440000112233"
+    ],
+    "requirements": [
+        {
+            "title": "Source Code",
+            "description": "Well-structured and commented source code for the application.",
+            "requirementType": "SOURCE_CODE"
+        },
+        {
+            "title": "User Manual",
+            "description": "Comprehensive user manual explaining the application's functionality.",
+            "requirementType": "DOCUMENTATION"
+        }
+    ],
+    "projectTitle": "E-commerce Website Development",
+    "projectDescription": "Seeking a skilled developer to build a modern and responsive e-commerce website with secure payment integration.",
+    "pricingType": "BUDGET",
+    "projectBudget": {
+        "min": 5000,
+        "max": 10000,
+        "currency": "R$"
+    },
+    "estimatedDuration": 8,
+    "projectSize": "MEDIUM",
+    "experienceLevel": "MID-LEVEL",
+    "workModel": "REMOTE",
+    "location": {
+        "city": "Sorocaba",
+        "state": "SP",
+        "country": "Brazil"
+    }
+}

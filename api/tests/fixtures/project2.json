@@ -1,0 +1,40 @@
+{
+    "clientId": "NEEDS TO BE ID OF THE REQUESTER",
+    "projectCategoryId": "64f23b5c1c9d440000678901",
+    "skillIds": [
+        "64f23c6d1c9d440000abcdef",
+        "64f23d7e1c9d440000fedcba"
+    ],
+    "technologyIds": [
+        "64f23e8f1c9d440000112233"
+    ],
+    "requirements": [
+        {
+            "title": "API Documentation",
+            "description": "Detailed API documentation for integration purposes.",
+            "requirementType": "DOCUMENTATION"
+        },
+        {
+            "title": "Unit Tests",
+            "description": "Comprehensive unit tests to ensure code quality.",
+            "requirementType": "TEST_REPORT"
+        }
+    ],
+    "projectTitle": "Mobile App Development (Android)",
+    "projectDescription": "Need an experienced Android developer to create a feature-rich mobile application with a focus on performance and user experience.",
+    "pricingType": "HOURLY_RATE",
+    "projectHourlyRate": {
+        "min": 80,
+        "max": 120,
+        "currency": "R$"
+    },
+    "estimatedDuration": 200,
+    "projectSize": "LARGE",
+    "experienceLevel": "SENIOR",
+    "workModel": "HYBRID",
+    "location": {
+        "city": "Votorantim",
+        "state": "SP",
+        "country": "Brazil"
+    }
+}
