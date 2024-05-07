@@ -22,14 +22,17 @@ const RequirementSchema = new Schema( {
 const ProjectSchema = new Schema( {
     clientId: {
         type: Schema.Types.ObjectId,
+        ref: "User",
         required: true
     },
 
     freelancerId: {
-        type: Schema.Types.ObjectId
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: false
     },
 
-    projectCategory: {
+    projectCategoryId: {
         type: Schema.Types.ObjectId,
         ref: "ProjectCategory",
         required: true

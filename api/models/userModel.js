@@ -23,7 +23,7 @@ const UserSchema = new Schema( {
       required: true,
     },
 
-    profile: {
+    profileId: {
       type: Schema.Types.ObjectId,
       refPath: "role",
       required: false,
