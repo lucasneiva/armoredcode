@@ -1,0 +1,90 @@
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "specializations": [
+        "64f6469a9e49eb9f18a509d3",
+        "64f646a09e49eb9f18a509d5"
+    ],
+    "profileSummary": "A highly skilled and experienced full-stack developer with a passion for creating innovative web applications.",
+    "profileImage": "https://example.com/john_doe_profile_pic.jpg",
+    "experienceLevel": "MID-LEVEL",
+    "hourlyRate": {
+        "min": 50,
+        "max": 100,
+        "currency": "R$"
+    },
+    "isAvailable": true,
+    "location": {
+        "streetAddress": "123 Main St",
+        "neighborhood": "Downtown",
+        "city": "Sorocaba",
+        "state": "SP",
+        "zipCode": "01001-000",
+        "country": "Brazil"
+    },
+    "skillIds": [
+        "64f646a69e49eb9f18a509d7",
+        "64f646ac9e49eb9f18a509d9"
+    ],
+    "technologyIds": [
+        "64f646b19e49eb9f18a509db",
+        "64f646b79e49eb9f18a509dd"
+    ],
+    "languageIds": [
+        "64f646be9e49eb9f18a509df"
+    ],
+    "portfolio": [
+        {
+            "title": "E-commerce Website",
+            "description": "Developed a full-fledged e-commerce platform using React and Node.js.",
+            "url": "https://example-ecommerce.com"
+        },
+        {
+            "title": "Mobile App for Productivity",
+            "description": "Created a cross-platform mobile application to help users manage their tasks and goals.",
+            "url": "https://play.google.com/store/apps/details?id=com.example.productivityapp"
+        }
+    ],
+    "education": [
+        {
+            "degreeName": "Bachelor of Science in Computer Science",
+            "fieldOfStudy": "Computer Science",
+            "institution": "University of São Paulo",
+            "graduationYear": 2020
+        },
+        {
+            "degreeName": "Master of Science in Software Engineering",
+            "fieldOfStudy": "Software Engineering",
+            "institution": "Stanford University",
+            "graduationYear": 2022
+        }
+    ],
+    "certifications": [
+        {
+            "name": "AWS Certified Solutions Architect - Associate",
+            "issuingOrganization": "Amazon Web Services (AWS)",
+            "issueDate": "2022-08-15"
+        },
+        {
+            "name": "Professional Scrum Master I (PSM I)",
+            "issuingOrganization": "Scrum.org",
+            "issueDate": "2023-03-10"
+        }
+    ],
+    "workExperience": [
+        {
+            "companyName": "Acme Corporation",
+            "jobTitle": "Software Engineer",
+            "startDate": "2020-09-01",
+            "endDate": "2023-11-01",
+            "jobDescription": "Designed and implemented various software solutions for the company's internal systems."
+        },
+        {
+            "companyName": "StartupX",
+            "jobTitle": "Lead Developer",
+            "startDate": "2018-02-15",
+            "endDate": "2020-08-31",
+            "jobDescription": "Led a team of developers in building a cutting-edge web application using Agile methodologies."
+        }
+    ]
+}

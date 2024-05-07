@@ -141,17 +141,17 @@ const FreelancerProfileSchema = new Schema( {
 
     location: Location.schema,
 
-    skills: [ {
+    skillIds: [ {
         type: Schema.Types.ObjectId,
         ref: "Skill"
     } ],
 
-    technologies: [ {
+    technologyIds: [ {
         type: Schema.Types.ObjectId,
         ref: "Technology"
     } ],
 
-    languages: [ {
+    languageIds: [ {
         type: Schema.Types.ObjectId,
         ref: "Language"
     } ],
