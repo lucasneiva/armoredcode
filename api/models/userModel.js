@@ -28,7 +28,7 @@ const UserSchema = new Schema( {
       refPath: "role",
       required: false,
     },
-
+    
   },
 
   { timestamps: true }

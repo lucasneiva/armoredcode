@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
+import locationModel from './locationModel.js';
+
 const RequirementSchema = new Schema( {
     title: {
         type: String,
@@ -38,12 +40,12 @@ const ProjectSchema = new Schema( {
         required: true
     },
 
-    skills: [{
+    skillIds: [{
         type: Schema.Types.ObjectId,
         ref: "Skill"
     }],
 
-    technologies: [{
+    technologyIds: [{
         type: Schema.Types.ObjectId,
         ref: "Technology"
     }],
@@ -60,20 +62,44 @@ const ProjectSchema = new Schema( {
         required: true
     },
 
-    hourlyRateLowerBound: {
-        type: Number
+    projectHourlyRate: {
+        type: Object,
+
+        min: {
+            type: Number
+        },
+
+        max: {
+            type: Number
+        },
+
+        currency: {
+            type: String,
+            default: "R$"
+        }
     },
 
-    hourlyRateUpperBound: {
-        type: Number
+    projectBudget: {
+        type: Object,
+
+        min: {
+            type: Number
+        },
+
+        max: {
+            type: Number
+        },
+
+        currency: {
+            type: String,
+            default: "R$"
+        }
     },
 
-    isFixedRate: {
-        type: Boolean
-    },
-
-    fixedBudget: {
-        type: Number
+    pricingType: {
+        type: String,
+        enum: ["BUDGET", "HOURLY_RATE"],
+        required: true,
     },
 
     estimatedDuration: {
@@ -85,7 +111,7 @@ const ProjectSchema = new Schema( {
         enum: [ "SMALL", "MEDIUM", "LARGE" ]
     },
 
-    status: {
+    projectStatus: {
         type: String,
         enum: [ "DRAFT", "POSTED" ]
     },
@@ -95,6 +121,17 @@ const ProjectSchema = new Schema( {
         enum: [ "ENTRY-LEVEL", "MID-LEVEL", "SENIOR" ]
     },
 
+    workModel: {
+        type: String,
+        enum: ["REMOTE", "HYBRID", "ON_SITE"],
+        required: true,
+    },
+
+    location: {
+        type: locationModel.schema,
+        required: false,
+    },
+
     startDate: {
         type: Date
     },
@@ -102,16 +139,7 @@ const ProjectSchema = new Schema( {
     endDate: {
         type: Date
     },
-
-    isRemote: {
-        type: Boolean
-    },
-
-    city: {
-        type: String,
-        enum: [ "SOROCABA", "VOTORANTIM", "ITU", "ARAÇOIABA DA SERRA", "PORTO FELIZ" ]
-    }
-
+    
 } );
 
 export default mongoose.model( "Project", ProjectSchema );
