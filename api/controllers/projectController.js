@@ -1,6 +1,7 @@
 import project from "../models/projectModel.js"
 import { CreateError } from "../utils/error.js"
 import { CreateSuccess } from "../utils/success.js";
+import jwt from 'jsonwebtoken';
 import mongoose from "mongoose";
 import projectJoiSchema from "../validators/projectValidator.js";
 import { validateData } from "../utils/validateData.js";
@@ -13,21 +14,30 @@ export const getProjectById = ( req, res, next ) => {
 
 };
 
-export const postProject = async ( req, res, next ) => {
+export const createProject = async ( req, res, next ) => {
     try {
-        const newprojectData = req.body;
+        const token = req.cookies.acess_token;
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
+        const newProjectData = req.body;
+        console.log(newProjectData.clientId);
+        console.log(decodedToken.id);
+        if ( decodedToken.id != newProjectData.clientId )
+            return next ( CreateError(400, "Not Authorizead!"));
+
+        /*
         try {
             await validateData( projectJoiSchema, newprojectData );
         } catch ( error ) {
             return next( CreateError( "400", error.message ));
         }
-
-        const newproject = new project( newprojectData );
+        */
+        
+        const newproject = new project( newProjectData );
 
         await newproject.save();
 
-        return next( CreateSuccess( 200, "project Posted!" ) );
+        return next( CreateSuccess( 200, "Project Created!" ) );
 
     } catch ( error ) {
         console.error( error );

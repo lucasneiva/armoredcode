@@ -34,7 +34,7 @@ export const register = async ( req, res, next ) => {
 
     await newUser.save();
 
-    return next(CreateSuccess( 200, "User Registered Successfully!" ));
+    return next( CreateSuccess( 200, "User Registered Successfully!" ) );
     // return res.status( 200 ).json( "User Registered Successfully!" );
 };
 
@@ -43,7 +43,7 @@ export const login = async ( req, res, next ) => {
         const user = await User.findOne( { email: req.body.email } );
 
         if ( !user ) {
-            return CreateError( 404, "User Not Found!" );
+            return next( CreateError( 404, "User Not Found!" ) );
             // return res.status( 404 ).send( "User not found!" );
         }
 
