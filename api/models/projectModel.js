@@ -45,11 +45,6 @@ const ProjectSchema = new Schema( {
         ref: "Skill"
     }],
 
-    technologyIds: [{
-        type: Schema.Types.ObjectId,
-        ref: "Technology"
-    }],
-
     requirements: [ RequirementSchema ],
 
     projectTitle: {

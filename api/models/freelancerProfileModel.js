@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 import Skill from './skillModel.js';
-import Technology from './technologyModel.js';
 import Language from './languageModel.js';
 import Location from './locationModel.js';
 
@@ -144,11 +143,6 @@ const FreelancerProfileSchema = new Schema( {
     skillIds: [ {
         type: Schema.Types.ObjectId,
         ref: "Skill"
-    } ],
-
-    technologyIds: [ {
-        type: Schema.Types.ObjectId,
-        ref: "Technology"
     } ],
 
     languageIds: [ {
