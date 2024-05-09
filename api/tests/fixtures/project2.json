@@ -5,18 +5,6 @@
         "64f23c6d1c9d440000abcdef",
         "64f23d7e1c9d440000fedcba"
     ],
-    "requirements": [
-        {
-            "title": "API Documentation",
-            "description": "Detailed API documentation for integration purposes.",
-            "requirementType": "DOCUMENTATION"
-        },
-        {
-            "title": "Unit Tests",
-            "description": "Comprehensive unit tests to ensure code quality.",
-            "requirementType": "TEST_REPORT"
-        }
-    ],
     "projectTitle": "Mobile App Development (Android)",
     "projectDescription": "Need an experienced Android developer to create a feature-rich mobile application with a focus on performance and user experience.",
     "pricingType": "HOURLY_RATE",

@@ -5,18 +5,6 @@
         "64f23c6d1c9d440000abcdef",
         "64f23d7e1c9d440000fedcba"
     ],
-    "requirements": [
-        {
-            "title": "Source Code",
-            "description": "Well-structured and commented source code for the application.",
-            "requirementType": "SOURCE_CODE"
-        },
-        {
-            "title": "User Manual",
-            "description": "Comprehensive user manual explaining the application's functionality.",
-            "requirementType": "DOCUMENTATION"
-        }
-    ],
     "projectTitle": "E-commerce Website Development",
     "projectDescription": "Seeking a skilled developer to build a modern and responsive e-commerce website with secure payment integration.",
     "pricingType": "BUDGET",

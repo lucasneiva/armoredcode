@@ -3,24 +3,6 @@ const Schema = mongoose.Schema;
 
 import locationModel from './locationModel.js';
 
-const RequirementSchema = new Schema( {
-    title: {
-        type: String,
-        required: true
-    },
-
-    description: {
-        type: String,
-        required: true
-    },
-
-    requirementType: {
-        type: String,
-        enum: [ "SOURCE_CODE", "DOCUMENTATION", "TEST_REPORT" ]
-    }
-
-} );
-
 const ProjectSchema = new Schema( {
     clientId: {
         type: Schema.Types.ObjectId,
@@ -44,8 +26,6 @@ const ProjectSchema = new Schema( {
         type: Schema.Types.ObjectId,
         ref: "Skill"
     }],
-
-    requirements: [ RequirementSchema ],
 
     projectTitle: {
         type: String,
