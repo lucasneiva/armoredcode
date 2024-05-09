@@ -7,4 +7,5 @@ export const routes: Routes = [
     {path:'home', loadComponent: ()=> import('./pages/home/home.component')},
     {path:'reset/:token', loadComponent: ()=> import('./pages/reset/reset.component')},
     {path:'manage-project', loadComponent: ()=> import('./pages/manage-project/manage-project.component')},
+    {path:'create-project', loadComponent: ()=> import('./pages/create-project/create-project.component')},
 ];
