@@ -6,6 +6,7 @@ import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import projectRoutes from "./routes/projectRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
+import skillRoutes from "./routes/skillRoutes.js"
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -23,8 +24,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/profiles", profileRoutes);
+app.use("/api/skills", skillRoutes);
 
-//DB Connection
 const connectMongoDB = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URL);
