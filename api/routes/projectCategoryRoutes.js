@@ -1,8 +1,12 @@
 import express from 'express';
-import { getAllprojects } from '../controllers/projectCategoryController.js';
+import { createProjectCategory, getProjectCategories, getProjectCategoryById } from '../controllers/projectCategoryController.js';
 
 const router = express.Router();
 
-router.get('/', getAllprojects);
+router.get('/', getProjectCategories);
 
-expor
+router.get('/:id', getProjectCategoryById);
+
+router.put('/', createProjectCategory);
+
+export default router;
