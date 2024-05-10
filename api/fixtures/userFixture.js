@@ -1,0 +1,41 @@
+import User from "../models/userModel.js";
+import bcrypt from "bcryptjs";
+
+const users = [
+    {
+        username: "client1",
+        email: "client1@example.com",
+        password: await bcrypt.hash( "password123", 10 ),
+        role: "CLIENT",
+    },
+    {
+        username: "freelancer1",
+        email: "freelancer1@example.com",
+        password: await bcrypt.hash( "password123", 10 ),
+        role: "FREELANCER",
+    },
+    {
+        username: "client2",
+        email: "client2@example.com",
+        password: await bcrypt.hash( "password123", 10 ),
+        role: "CLIENT",
+    },
+    {
+        username: "freelancer2",
+        email: "freelancer2@example.com",
+        password: await bcrypt.hash( "password123", 10 ),
+        role: "FREELANCER",
+    },
+];
+
+const seedUsers = async () => {
+    try {
+        await User.deleteMany( {} );
+        await User.insertMany( users );
+        console.log( "User data seeded successfully!" );
+    } catch ( error ) {
+        console.error( "Error seeding User data:", error );
+    }
+};
+
+export default seedUsers;

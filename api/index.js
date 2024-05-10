@@ -19,6 +19,7 @@ import seedProjectCategories from './fixtures/projectCategoryFixture.js';
 import seedIndustries from './fixtures/industryFixture.js';
 import seedSpecializations from './fixtures/specializationFixture.js';
 import seedSkills from './fixtures/skillsFixture.js';
+import seedUsers from "./fixtures/userFixture.js";
 
 const app = express();
 dotenv.config();
@@ -72,6 +73,7 @@ app.listen( 8800, () => {
         seedIndustries();
         seedSpecializations();
         seedSkills();
+        seedUsers();
     } ).catch( ( err ) => {
         console.error( `Error connecting to MongoDB: ${err}` );
     } );
