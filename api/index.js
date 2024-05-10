@@ -2,12 +2,18 @@ import express from "express";
 import mongoose, { connect } from "mongoose";
 import dotenv from "dotenv";
 import cors from 'cors';
+
+// Routes
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import projectRoutes from "./routes/projectRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
 import skillRoutes from "./routes/skillRoutes.js"
+import projectCategoryRoutes from "./routes/projectCategoryRoutes.js";
+import industryRoutes from "./routes/industryRoutes.js";
 import cookieParser from "cookie-parser";
+
+// Fixtures
 import seedProjectCategories from './fixtures/projectCategoryFixture.js';
 import seedIndustries from './fixtures/industryFixture.js';
 import seedSpecializations from './fixtures/specializationFixture.js';
@@ -28,6 +34,9 @@ app.use("/api/users", userRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/profiles", profileRoutes);
 app.use("/api/skills", skillRoutes);
+app.use("/api/project-categories", projectCategoryRoutes);
+app.use("/api/industries", industryRoutes);
+app.use("/api/specializations", specializationRoutes);
 
 const connectMongoDB = async () => {
     try {
