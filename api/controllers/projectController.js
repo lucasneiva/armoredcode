@@ -20,8 +20,9 @@ export const createProject = async ( req, res, next ) => {
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
         const newProjectData = req.body;
-        console.log(newProjectData.clientId);
-        console.log(decodedToken.id);
+        
+        newProjectData.clientId = decodedToken.id; 
+
         if ( decodedToken.id != newProjectData.clientId )
             return next ( CreateError(400, "Not Authorizead!"));
 
