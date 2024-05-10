@@ -20,6 +20,7 @@ import seedIndustries from './fixtures/industryFixture.js';
 import seedSpecializations from './fixtures/specializationFixture.js';
 import seedSkills from './fixtures/skillsFixture.js';
 import seedUsers from "./fixtures/userFixture.js";
+import seedFreelancerProfiles from "./fixtures/freelancerProfileFixture.js";
 
 const app = express();
 dotenv.config();
@@ -66,14 +67,17 @@ app.use( ( obj, req, res, next ) => {
 } );
 
 app.listen( 8800, () => {
-    connectMongoDB( () => {
+    connectMongoDB( async () => {
         console.log( `Server started on port 8800!` );
         console.log( `Connected to MongoDB database!` );
-        seedProjectCategories();
-        seedIndustries();
-        seedSpecializations();
-        seedSkills();
-        seedUsers();
+
+        await seedProjectCategories();
+        await seedIndustries();
+        await seedSpecializations();
+        await seedSkills();
+        await seedUsers();
+        await seedFreelancerProfiles();
+        
     } ).catch( ( err ) => {
         console.error( `Error connecting to MongoDB: ${err}` );
     } );
