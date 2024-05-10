@@ -6,7 +6,6 @@
         "64f646a09e49eb9f18a509d5"
     ],
     "profileSummary": "A highly skilled and experienced full-stack developer with a passion for creating innovative web applications.",
-    "profileImage": "https://example.com/john_doe_profile_pic.jpg",
     "experienceLevel": "MID-LEVEL",
     "hourlyRate": {
         "min": 50,
@@ -43,25 +42,29 @@
             "degreeName": "Bachelor of Science in Computer Science",
             "fieldOfStudy": "Computer Science",
             "institution": "University of São Paulo",
-            "graduationYear": 2020
+            "startDate": 2019,
+            "endDate": 2020
         },
         {
             "degreeName": "Master of Science in Software Engineering",
             "fieldOfStudy": "Software Engineering",
             "institution": "Stanford University",
-            "graduationYear": 2022
+            "startDate": 2019,
+            "endDate": 2020
         }
     ],
     "certifications": [
         {
             "name": "AWS Certified Solutions Architect - Associate",
             "issuingOrganization": "Amazon Web Services (AWS)",
-            "issueDate": "2022-08-15"
+            "issueDate": "2022-08-15",
+            "url": "https://example-ecommerce.com"
         },
         {
             "name": "Professional Scrum Master I (PSM I)",
             "issuingOrganization": "Scrum.org",
-            "issueDate": "2023-03-10"
+            "issueDate": "2023-03-10",
+            "url": "https://example-ecommerce.com"
         }
     ],
     "workExperience": [
