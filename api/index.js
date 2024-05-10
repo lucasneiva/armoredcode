@@ -8,6 +8,9 @@ import projectRoutes from "./routes/projectRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
 import skillRoutes from "./routes/skillRoutes.js"
 import cookieParser from "cookie-parser";
+import seedProjectCategories from './fixtures/projectCategoryFixture.js';
+import seedIndustries from './fixtures/industryFixture.js';
+import seedSpecializations from './fixtures/specializationFixture.js';
 
 const app = express();
 dotenv.config();
@@ -29,7 +32,11 @@ app.use("/api/skills", skillRoutes);
 const connectMongoDB = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URL);
-        console.log("Connected to Database!")
+        seedProjectCategories();
+        seedIndustries();
+        seedSpecializations();
+        console.log('Connected to MongoDB'); 
+
     }
     catch (error) {
         throw error;

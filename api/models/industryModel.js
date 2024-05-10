@@ -14,4 +14,4 @@ const IndustrySchema = new Schema( {
     
 } );
 
-export default Industry = mongoose.model( "Industry", IndustrySchema );
+export default mongoose.model( "Industry", IndustrySchema );
