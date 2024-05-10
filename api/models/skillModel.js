@@ -12,12 +12,6 @@ const SkillSchema = new Schema( {
         type: String
     },
 
-    proficiencyLevel: {
-        type: String,
-        required: false,
-        enum: [ "BEGINNER", "INTERMEDIATE", "ADVANCED" ]
-    }
-    
 } );
 
 export default mongoose.model( "Skill", SkillSchema );
