@@ -1,5 +1,4 @@
 {
-    "clientId": "NEEDS TO BE ID OF THE REQUESTER",
     "projectCategoryId": "64f23b5c1c9d440000678901",
     "skillIds": [
         "64f23c6d1c9d440000abcdef",
@@ -18,8 +17,7 @@
     "experienceLevel": "MID-LEVEL",
     "workModel": "REMOTE",
     "location": {
-        "city": "Sorocaba",
-        "state": "SP",
-        "country": "Brazil"
+        "city": "SOROCABA",
+        "zipCode": "19180000"
     }
 }

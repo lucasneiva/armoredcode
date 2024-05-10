@@ -51,7 +51,9 @@ const ProjectSchema = new Schema( {
         currency: {
             type: String,
             default: "R$"
-        }
+        },
+
+        required: false,
     },
 
     projectBudget: {
@@ -68,7 +70,9 @@ const ProjectSchema = new Schema( {
         currency: {
             type: String,
             default: "R$"
-        }
+        },
+
+        required: false,
     },
 
     pricingType: {
@@ -78,7 +82,8 @@ const ProjectSchema = new Schema( {
     },
 
     estimatedDuration: {
-        type: Number
+        type: Number,
+        required: true,
     },
 
     projectSize: {
@@ -108,11 +113,13 @@ const ProjectSchema = new Schema( {
     },
 
     startDate: {
-        type: Date
+        type: Date,
+        required: false,
     },
 
     endDate: {
-        type: Date
+        type: Date,
+        required: false,
     },
     
 } );

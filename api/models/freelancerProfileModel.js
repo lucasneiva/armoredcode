@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-import Skill from './skillModel.js';
-import Language from './languageModel.js';
 import Location from './locationModel.js';
 
 const EducationSchema = new Schema( {
@@ -21,9 +19,14 @@ const EducationSchema = new Schema( {
         required: true
     },
 
-    graduationYear: {
-        type: Number,
+    startDate: {
+        type: Date,
         required: true
+    },
+
+    endDate: {
+        type: Number,
+        required: false
     }
 
 } );
@@ -68,6 +71,11 @@ const CertificationSchema = new Schema( {
     issueDate: {
         type: Date,
         required: true
+    },
+
+    url: {
+        type: String,
+        required: false
     }
 
 } );
@@ -109,13 +117,9 @@ const FreelancerProfileSchema = new Schema( {
         type: String
     },
 
-    profileImage: {
-        type: String
-    },
-
     experienceLevel: {
         type: String,
-        enum: [ "ENTRY-LEVEL", "MID-LEVEL", "SENIOR" ]
+        enum: [ "JUNIOR", "MID-LEVEL", "SENIOR" ]
     },
 
     hourlyRate: {
@@ -143,11 +147,6 @@ const FreelancerProfileSchema = new Schema( {
     skillIds: [ {
         type: Schema.Types.ObjectId,
         ref: "Skill"
-    } ],
-
-    languageIds: [ {
-        type: Schema.Types.ObjectId,
-        ref: "Language"
     } ],
 
     portfolio: [ PortfolioItemSchema ],
