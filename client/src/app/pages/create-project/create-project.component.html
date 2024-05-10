@@ -1,1 +1,104 @@
-<p>create-project works!</p>
+<!--menu de inputs-->
+<form class="flex justify-around align-baseline bg-slate-100 border-b-4 border-b-slate-200">
+    <!--Características chave do projeto-->
+    <div class="p-1 ">
+        <h2 class="font-semibold mt-4">Project Name:</h2>
+        <input class="p-2 px-4 border border-gray-300 rounded" type="text"
+        placeholder="Type the project name">
+    
+        <h2 class="font-semibold mt-4">Project Category:</h2>
+        <label for="projCategory"></label>
+        <select name="Option" id="projCategory" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
+            <option value="Default" selected>Select the project category</option>
+            <option value="Op1">Option 1</option>
+            <option value="Op2">Option 2</option>
+            <option value="Op3">Option 3</option>
+        </select>
+    </div>
+    
+    <div class="p-1 ">
+        <h2 class="font-semibold mt-4">Budget:</h2>
+        <div class="flex justify-start align-middle overflow-auto">
+            <div class="m-3">
+                <input type="radio" id="priceFix" name="price_type" value="fix" checked>
+                <label for="priceFix" class="m-2 font-normal">Fixed</label><br>
+            </div>
+            <div class="m-3">
+                <input type="radio" id="priceHour" name="price_type" value="hour">
+                <label for="priceHour" class="m-2 font-normal">Per Hour</label><br>
+            </div>
+        </div>
+        <div class="flex justify-start align-middle overflow-auto">
+            <div class="m-3">
+                <h2 class="font-semibold mt-2">From:</h2>
+                <input placeholder="Min value" class="text-center max-w-20 p-1">
+            </div>
+            <div class="m-3">
+                <h2 class="font-semibold mt-2">To:</h2>
+                <input placeholder="Max value" class="text-center max-w-20 p-1">
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="p-1 ">
+        <h2 class="font-semibold mt-4">Estimated duration:</h2>
+        <input class="p-2 px-4 border border-gray-300 rounded" type="text"
+         placeholder="Type the duration (hours)">
+    
+        <div class="m-3 mt-6">
+            <h2 class="font-semibold mt-4">The job is remote?</h2>
+            <div class="mt-1">
+              <input type="checkbox" id="isRemote" name="remote" />
+              <label for="isRemote" class="m-2 font-normal">Remote</label>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="p-1 ">
+        <div class="m-0.5">
+            <h2 class="font-semibold mt-4">Scope:</h2>
+            <input type="radio" id="scopeS" name="scope" value="small" checked>
+            <label for="scopeS" class="m-2 font-normal">Small</label>
+        </div>
+        <div class="m-0.5">
+            <input type="radio" id="scopeM" name="scope" value="medium">
+            <label for="scopeM" class="m-2 font-normal">Medium</label>
+        </div>
+        <div class="m-0.5">
+            <input type="radio" id="scopeL" name="scope" value="large">
+            <label for="scopeL" class="m-2 font-normal">Large</label>
+        </div>
+    </div>
+
+    
+    <div class="p-1 ">
+        <h2 class="font-semibold mt-4">Experience level:</h2>
+            <div class="m-0.5">
+                <input type="radio" id="entryLvl" name="exp_level" value="entry" checked />
+                <label for="entryLvl"  class="m-2 font-normal">Entry level</label>
+            </div>
+            <div class="m-0.5">
+                <input type="radio" id="midLvl" name="exp_level" value="mid" />
+                <label for="midLvl"  class="m-2 font-normal">Mid level</label>
+            </div>
+            <div class="m-0.5">
+                <input type="radio" id="seniorLvl" name="exp_level" value="senior" />
+                <label for="seniorLvl"  class="m-2 font-normal">Senior level</label>
+            </div>
+        
+        
+    </div>
+</form>
+<!--botão push-->
+<div class="bg-transparent flex justify-center">
+    <button onclick="" class="bg-slate-200 rounded-b-lg w-40 text-slate-300"> - </button>
+</div>
+
+<!--view-->
+<form class="grid align-baseline bg-white m-4 lg:w-3/12 mt-5 p-10 shadow-lg">
+    <h2 class="font-semibold my-3 text-3xl">Overview:</h2>
+    <textarea id="companyDescription" name="companyDescription" rows="4" 
+    placeholder="Write the project description here" class="bg-gray-50 p-3 border-2"></textarea>
+</form>
