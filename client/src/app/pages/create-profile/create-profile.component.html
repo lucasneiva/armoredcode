@@ -1,0 +1,88 @@
+        <main>
+            <div id="containers">
+                <div class="container">
+                    <h2>Informações Pessoais</h2>
+                    <form>
+                        <div id="labels">
+                            <div style="display: grid;">
+                                <label class="font-semibold mt-4" for="nome">Nome</label>
+                                <input type="text" id="nome" name="nome" required>
+                            </div>
+                            
+                            <div style="display: grid;">
+                                <label class="font-semibold mt-4" for="sobrenome">Sobrenome</label>
+                                <input type="text" id="sobrenome" name="sobrenome" required>
+                            </div>
+                        </div>
+
+                        <div id="labels" style="display: grid;">
+                            <label class="font-semibold mt-4" for="user">Nome de usuário</label>
+                            <input type="text" id="user" name="user" required>
+                        </div>
+                        
+                        <div id="labels" style="display: grid;">
+                            <label class="font-semibold mt-4" for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div id="labels" style="display: grid;">
+                            <label class="font-semibold mt-4" for="email-repeat">Insira seu email novamente</label>
+                            <input type="email" id="email-repeat" name="email-repeat" required>
+                        </div>
+                        
+                        <div id="labels">
+                            <div style="display: grid;">
+                                <label class="font-semibold mt-4" for="senha">Senha</label>
+                                <input type="text" id="senha" name="senha" required>
+                            </div>
+                            
+                            <div style="display: grid;">
+                                <label class="font-semibold mt-4" for="senha-repeat">Insira sua senha novamente</label>
+                                <input type="text" id="senha-repeat" name="senha-repeat" required>
+                            </div> 
+                        </div>
+
+                        <div id="botoes-salvar-editar">
+                            <button id="salvar-pessoais">Salvar</button>
+                            <button id="editar-pessoais">Editar</button>
+                        </div>
+                    </form>
+                </div>
+                
+
+                <div class="container">
+                    <h2>Informações Sobre a Empresa</h2>
+                    <form>
+                        <label for="nome">Nome da empresa:</label>
+                        <input type="text" id="nome" name="nome" required>
+
+                        <label for="setor">Setor de atuação:</label>
+                        <select id="myList">
+                            <option value="optionStd">Selecione o setor</option>
+                            <option value="option2">Setor 1</option>
+                            <option value="option3">Setor 2</option>
+                            <option value="option4">Setor 3</option>
+                        </select>
+
+                        <label for="nome">Porte da empresa:</label>
+                        <select id="myList">
+                            <option value="optionStd">Selecione o porte</option>
+                            <option value="option2">Pequeno</option>
+                            <option value="option3">Médio</option>
+                            <option value="option4">Grande</option>
+                        </select>
+
+                        <label for="descricao">Descrição da Empresa</label>
+                        <input type="text" id="descricao" name="descricao" required>
+
+                        <label for="url">Site da empresa (opcional)</label>
+                        <input type="url" id="site" name="site" notrequired>
+
+                        <button id="salvar-empresa">Salvar</button>
+                        <button id="editar-empresa">Editar</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+

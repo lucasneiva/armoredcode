@@ -8,4 +8,5 @@ export const routes: Routes = [
     {path:'reset/:token', loadComponent: ()=> import('./pages/reset/reset.component')},
     {path:'manage-project', loadComponent: ()=> import('./pages/manage-project/manage-project.component')},
     {path:'create-project', loadComponent: ()=> import('./pages/create-project/create-project.component')},
+    {path:'create-profile', loadComponent: ()=> import('./pages/create-profile/create-profile.component')},
 ];
