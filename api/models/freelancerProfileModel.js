@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 import Skill from './skillModel.js';
-import Language from './languageModel.js';
 import Location from './locationModel.js';
 
 const EducationSchema = new Schema( {
