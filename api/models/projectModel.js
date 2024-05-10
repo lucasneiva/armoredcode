@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 import locationModel from './locationModel.js';
-import { required } from 'joi';
 
 const ProjectSchema = new Schema( {
     clientId: {
