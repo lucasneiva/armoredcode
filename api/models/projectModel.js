@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 import locationModel from './locationModel.js';
+import { required } from 'joi';
 
 const ProjectSchema = new Schema( {
     clientId: {
@@ -51,7 +52,9 @@ const ProjectSchema = new Schema( {
         currency: {
             type: String,
             default: "R$"
-        }
+        },
+
+        required: false,
     },
 
     projectBudget: {
@@ -68,7 +71,9 @@ const ProjectSchema = new Schema( {
         currency: {
             type: String,
             default: "R$"
-        }
+        },
+
+        required: false,
     },
 
     pricingType: {
@@ -78,7 +83,8 @@ const ProjectSchema = new Schema( {
     },
 
     estimatedDuration: {
-        type: Number
+        type: Number,
+        required: true,
     },
 
     projectSize: {
@@ -108,11 +114,13 @@ const ProjectSchema = new Schema( {
     },
 
     startDate: {
-        type: Date
+        type: Date,
+        required: false,
     },
 
     endDate: {
-        type: Date
+        type: Date,
+        required: false,
     },
     
 } );
