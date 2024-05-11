@@ -93,7 +93,7 @@ const PortfolioItemSchema = new Schema( {
 } );
 
 const FreelancerProfileSchema = new Schema( {
-    freelancerId: {
+    userId: {
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true,

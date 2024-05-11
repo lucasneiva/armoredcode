@@ -39,10 +39,10 @@ const seedClientProfiles = async () => {
         const clientDocs = await User.find( { role: "CLIENT" } ).lean();
 
         clientProfiles[ 0 ].industryId = industryDocs[ 0 ];
-        clientProfiles[ 0 ].clientId = clientDocs[ 0 ]._id;
+        clientProfiles[ 0 ].userId = clientDocs[ 0 ]._id;
 
         clientProfiles[ 1 ].industryId = industryDocs[ 1 ];
-        clientProfiles[ 1 ].clientId = clientDocs[ 1 ]._id;
+        clientProfiles[ 1 ].userId = clientDocs[ 1 ]._id;
 
         await clientProfile.deleteMany( {} );
 

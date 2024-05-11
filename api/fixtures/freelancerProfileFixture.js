@@ -128,11 +128,11 @@ const seedFreelancerProfiles = async () => {
         
         freelancerProfiles[ 0 ].specializations = [ specializationDocs[ 0 ]._id ];
         freelancerProfiles[ 0 ].skillIds = [ skillDocs[ 0 ]._id, skillDocs[ 1 ]._id ];
-        freelancerProfiles[ 0 ].freelancerId = freelancerDocs[ 0 ]._id;
+        freelancerProfiles[ 0 ].userId = freelancerDocs[ 0 ]._id;
         
         freelancerProfiles[ 1 ].specializations = [ specializationDocs[ 1 ]._id ];
         freelancerProfiles[ 1 ].skillIds = [ skillDocs[ 2 ]._id, skillDocs[ 3 ]._id ];
-        freelancerProfiles[ 1 ].freelancerId = freelancerDocs[ 1 ]._id;
+        freelancerProfiles[ 1 ].userId = freelancerDocs[ 1 ]._id;
 
         await FreelancerProfile.deleteMany( {} );
 

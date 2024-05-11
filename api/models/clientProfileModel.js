@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 import Location from './locationModel.js';
 
 const ClientProfileSchema = new Schema( {
-    clientId: {
+    userId: {
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true,
