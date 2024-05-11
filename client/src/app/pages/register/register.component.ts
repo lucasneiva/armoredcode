@@ -26,11 +26,6 @@ export default class RegisterComponent implements OnInit{
       password: ['',Validators.required],
       role: ['',Validators.required]
     },
-    /*
-    {
-      validator: confirmPasswordValidator('password', 'confirmPassword')
-    }
-    */
     );
   }
 
