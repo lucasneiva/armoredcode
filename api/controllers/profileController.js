@@ -12,7 +12,7 @@ export const createProfile = async ( req, res, next ) => {
     try {
         const existingProfile = await User.findById( userId, { profile: 1 } );
 
-        if ( existingProfile.profile ) {
+        if ( existingProfile.profileId ) {
             return next( CreateError( 400, "You already have a profile!" ) );
 
         }
@@ -41,3 +41,7 @@ export const createProfile = async ( req, res, next ) => {
 
     }
 };
+
+export const getProfileById = async ( req, res, next) => {
+    
+}

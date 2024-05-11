@@ -22,12 +22,6 @@ const UserSchema = new Schema( {
       enum: [ "CLIENT", "FREELANCER" ],
       required: true,
     },
-
-    profileId: {
-      type: Schema.Types.ObjectId,
-      refPath: "role",
-      required: false,
-    },
     
   },
 
