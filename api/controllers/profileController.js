@@ -10,11 +10,12 @@ export const createProfile = async ( req, res, next ) => {
     const profileData = req.body;
     
     profileData.userId = userId;
-    
+
     try {
         
         
         let profile;
+
         
         if ( role === "CLIENT" ) {
             const existingProfile = await ClientProfile.findOne( { userId: userId } );
@@ -27,7 +28,7 @@ export const createProfile = async ( req, res, next ) => {
 
         } else if ( role === "FREELANCER" ) {
             const existingProfile = await FreelancerProfile.findOne( { userId: userId } );
-
+            console.log(existingProfile);
             if ( existingProfile )
                 return next( CreateError( 400, "User has a profile already!" ) );
             
@@ -44,7 +45,7 @@ export const createProfile = async ( req, res, next ) => {
         return next( CreateSuccess( 200, "Profile created successfully!" ) );
 
     } catch ( error ) {
-        return next( CreateError( 500, "Error creating profile" ) );
+        return next( CreateError( 500, "Error creating profile", error ) );
 
     }
 };
