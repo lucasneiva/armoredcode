@@ -22,6 +22,7 @@ import seedSkills from './fixtures/skillsFixture.js';
 import seedUsers from "./fixtures/userFixture.js";
 import seedFreelancerProfiles from "./fixtures/freelancerProfileFixture.js";
 import seedClientProfiles from "./fixtures/clientProfileFixture.js";
+import seedProjects from "./fixtures/projectFixture.js";
 
 const app = express();
 dotenv.config();
@@ -84,6 +85,8 @@ app.listen( 8800, async () => {
          
         await seedFreelancerProfiles();
         await seedClientProfiles();
+
+        await seedProjects();
         
         
     } catch (error) {
