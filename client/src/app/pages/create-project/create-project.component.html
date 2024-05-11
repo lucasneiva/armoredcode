@@ -16,25 +16,40 @@
     </div>
 
     <div class="p-1 ">
-        <h2 class="font-semibold mt-4">Budget:</h2>
+        <h2 class="font-semibold mt-4">Pricing:</h2>
         <div class="flex justify-start align-middle overflow-auto">
+            <!--implementar-->
             <div class="m-3">
-                <input type="radio" id="priceFix" name="price_type" value="fix" checked>
-                <label for="priceFix" class="m-2 font-normal">Fixed</label><br>
+                <input onclick="document.getElementById('hourlyrate').style.display = 'none';
+                 document.getElementById('budget').style.display = 'flex';" 
+                 type="radio" id="priceFix" name="price_type" value="BUDGET" checked>
+                <label for="priceFix" class="m-2 font-normal">Budget</label><br>
             </div>
             <div class="m-3">
-                <input type="radio" id="priceHour" name="price_type" value="hour">
-                <label for="priceHour" class="m-2 font-normal">Per Hour</label><br>
+                <input onclick="document.getElementById('budget').style.display = 'none';
+                 document.getElementById('hourlyrate').style.display = 'flex';"  
+                 type="radio" id="priceHour" name="price_type" value="HOURLY_RATE">
+                <label for="priceHour" class="m-2 font-normal">Hourly Rate</label><br>
             </div>
         </div>
-        <div class="flex justify-start align-middle overflow-auto">
+        <div class="flex justify-start align-middle overflow-auto" id="budget">
             <div class="m-3">
                 <h2 class="font-semibold mt-2">From:</h2>
-                <input placeholder="Min value" class="text-center max-w-20 p-1">
+                <input placeholder="Min budget" class="text-center max-w-24 p-1">
             </div>
             <div class="m-3">
                 <h2 class="font-semibold mt-2">To:</h2>
-                <input placeholder="Max value" class="text-center max-w-20 p-1">
+                <input placeholder="Max budget" class="text-center max-w-24 p-1">
+            </div>
+        </div>
+        <div class="hidden justify-start align-middle overflow-auto" id="hourlyrate">
+            <div class="m-3">
+                <h2 class="font-semibold mt-2">From:</h2>
+                <input placeholder="Min value" class="text-center max-w-24 p-1">
+            </div>
+            <div class="m-3">
+                <h2 class="font-semibold mt-2">To:</h2>
+                <input placeholder="Max value" class="text-center max-w-24 p-1">
             </div>
         </div>
     </div>
@@ -43,14 +58,6 @@
     <div class="p-1 ">
         <h2 class="font-semibold mt-4">Estimated duration:</h2>
         <input class="p-2 px-4 border border-gray-300 rounded" type="text" placeholder="Type the duration (hours)">
-
-        <div class="m-3 mt-6">
-            <h2 class="font-semibold mt-4">The job is remote?</h2>
-            <div class="mt-1">
-                <input type="checkbox" id="isRemote" name="remote" />
-                <label for="isRemote" class="m-2 font-normal">Remote</label>
-            </div>
-        </div>
     </div>
 
 
@@ -74,19 +81,33 @@
     <div class="p-1 ">
         <h2 class="font-semibold mt-4">Experience level:</h2>
         <div class="m-0.5">
-            <input type="radio" id="entryLvl" name="exp_level" value="entry" checked />
+            <input type="radio" id="entryLvl" name="exp_level" value="ENTRY-LEVEL" checked />
             <label for="entryLvl" class="m-2 font-normal">Entry level</label>
         </div>
         <div class="m-0.5">
-            <input type="radio" id="midLvl" name="exp_level" value="mid" />
+            <input type="radio" id="midLvl" name="exp_level" value="MID-LEVEL" />
             <label for="midLvl" class="m-2 font-normal">Mid level</label>
         </div>
         <div class="m-0.5">
-            <input type="radio" id="seniorLvl" name="exp_level" value="senior" />
+            <input type="radio" id="seniorLvl" name="exp_level" value="SENIOR" />
             <label for="seniorLvl" class="m-2 font-normal">Senior level</label>
         </div>
+    </div>
 
-
+    <div class="p-1 ">
+        <div class="m-0.5">
+            <h2 class="font-semibold mt-4">Workspace:</h2>
+            <input type="radio" id="WR" name="workModel" value="REMOTE" checked>
+            <label for="WR" class="m-2 font-normal">Remote</label>
+        </div>
+        <div class="m-0.5">
+            <input type="radio" id="HW" name="workModel" value="HYBRID">
+            <label for="HW" class="m-2 font-normal">Hybrid</label>
+        </div>
+        <div class="m-0.5">
+            <input type="radio" id="OSW" name="workModel" value="ON_SITE">
+            <label for="OSW" class="m-2 font-normal">On Site</label>
+        </div>
     </div>
 </form>
 <!--botão push-->
