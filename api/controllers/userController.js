@@ -27,5 +27,29 @@ export const getById = async ( req, res, next ) => {
         return next( CreateError( 500, "Internal Server Error!" ) );
 
     }
-    
+
 }
+
+export const updateUser = async ( req, res, next ) => {
+    try {
+        const userId = req.params.id;
+        const updateData = req.body;
+
+        // Validate updateData using Joi
+
+        const user = await User.findById( userId );
+        if ( !user ) {
+            return next( CreateError( 404, "User not found!" ) );
+        }
+
+        user.username = updateData.username || user.username;
+        user.email = updateData.email || user.email;
+        
+        await user.save();
+
+        return next( CreateSuccess( 200, "User updated successfully!", user ) );
+
+    } catch ( error ) {
+        return next( CreateError( 500, "Internal Server Error!" ) );
+    }
+};
