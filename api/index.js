@@ -21,6 +21,7 @@ import seedSpecializations from './fixtures/specializationFixture.js';
 import seedSkills from './fixtures/skillsFixture.js';
 import seedUsers from "./fixtures/userFixture.js";
 import seedFreelancerProfiles from "./fixtures/freelancerProfileFixture.js";
+import seedClientProfiles from "./fixtures/clientProfileFixture.js";
 
 const app = express();
 dotenv.config();
@@ -42,11 +43,10 @@ app.use( "/api/project-categories", projectCategoryRoutes );
 app.use( "/api/industries", industryRoutes );
 app.use( "/api/specializations", specializationRoutes );
 
-const connectMongoDB = async ( next ) => {
+const connectMongoDB = async ( ) => {
     try {
         await mongoose.connect( process.env.MONGO_URL );
 
-        next();
     }
     catch ( error ) {
         throw error;
@@ -66,19 +66,28 @@ app.use( ( obj, req, res, next ) => {
     } );
 } );
 
-app.listen( 8800, () => {
-    connectMongoDB( async () => {
+app.listen( 8800, async () => {
+
+    try {
         console.log( `Server started on port 8800!` );
+
+        await connectMongoDB();
+
         console.log( `Connected to MongoDB database!` );
 
         await seedProjectCategories();
         await seedIndustries();
         await seedSpecializations();
         await seedSkills();
-        await seedUsers();
-        await seedFreelancerProfiles();
         
-    } ).catch( ( err ) => {
+        await seedUsers();
+         
+        await seedFreelancerProfiles();
+        await seedClientProfiles();
+        
+        
+    } catch (error) {
         console.error( `Error connecting to MongoDB: ${err}` );
-    } );
+    }
+
 } );

@@ -20,7 +20,7 @@ const LocationSchema = new Schema({
         default: "SP"
     },
 
-    zipCode: {  // CEP
+    CEP: {  // CEP
         type: String
     },
 

@@ -73,11 +73,6 @@ const CertificationSchema = new Schema( {
         required: true
     },
 
-    url: {
-        type: String,
-        required: false
-    }
-
 } );
 
 const PortfolioItemSchema = new Schema( {

@@ -1,4 +1,3 @@
-// freelancerProfileFixture.js
 import FreelancerProfile from "../models/freelancerProfileModel.js";
 import Specialization from "../models/specializationModel.js";
 import Skill from "../models/skillModel.js";
@@ -6,9 +5,9 @@ import User from "../models/userModel.js";
 
 const freelancerProfiles = [
     {
-        firstName: "John",
-        lastName: "Doe",
-        specializations: [], // Leave empty initially
+        firstName: "Miguel",
+        lastName: "Santos",
+        specializations: [],
         profileSummary: "Experienced full-stack developer with expertise in React and Node.js.",
         experienceLevel: "MID-LEVEL",
         hourlyRate: {
@@ -19,9 +18,9 @@ const freelancerProfiles = [
         isAvailable: true,
         location: {
             city: "SOROCABA",
-            zipCode: "12345678"
+            CEP: "12345678"
         },
-        skillIds: [], // Leave empty initially
+        skillIds: [],
         portfolio: [
             {
                 title: "E-commerce Website",
@@ -38,7 +37,13 @@ const freelancerProfiles = [
                 endDate: new Date( "2020-06-01" )
             }
         ],
-        certifications: [],
+        certifications: [
+            {
+                name: "Certified UX Designer",
+                issuingOrganization: "UX Design Institute",
+                issueDate: new Date( "2018-03-01" )
+            }
+        ],
         workExperience: [
             {
                 companyName: "Tech Solutions Inc.",
@@ -49,29 +54,91 @@ const freelancerProfiles = [
             }
         ]
     },
-    // ... Add more freelancer profiles with varied data 
+
+    {
+        firstName: "Joana",
+        lastName: "Silva",
+        specializations: [],
+        profileSummary: "Highly skilled front-end developer with expertise in creating responsive and user-friendly interfaces.",
+        experienceLevel: "SENIOR",
+        hourlyRate: {
+            min: 80,
+            max: 120,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            city: "SOROCABA",
+            CEP: "10021"
+        },
+        skillIds: [],
+        portfolio: [
+            {
+                title: "Responsive Website Redesign",
+                description: "Redesigned a website to be responsive and mobile-friendly using HTML, CSS, and JavaScript",
+                url: "https://example-redesign.com"
+            },
+            {
+                title: "E-learning Platform",
+                description: "Developed an e-learning platform using React, Redux, and Webpack",
+                url: "https://example-elearning.com"
+            }
+        ],
+        education: [
+            {
+                degreeName: "Master of Science in Human-Computer Interaction",
+                fieldOfStudy: "Human-Computer Interaction",
+                institution: "Carnegie Mellon University",
+                startDate: new Date( "2012-09-01" ),
+                endDate: new Date( "2014-06-01" )
+            }
+        ],
+        certifications: [
+            {
+                name: "Certified UX Designer",
+                issuingOrganization: "UX Design Institute",
+                issueDate: new Date( "2018-03-01" )
+            }
+        ],
+        workExperience: [
+            {
+                companyName: "DesignLab",
+                jobTitle: "Senior Front-end Developer",
+                startDate: new Date( "2018-01-01" ),
+                endDate: null,
+                jobDescription: "Led a team of front-end developers to create responsive and user-friendly interfaces for various clients."
+            },
+            {
+                companyName: "TechCorp",
+                jobTitle: "Front-end Developer",
+                startDate: new Date( "2015-06-01" ),
+                endDate: new Date( "2017-12-01" ),
+                jobDescription: "Developed and maintained multiple web applications using HTML, CSS, and JavaScript."
+            }
+        ]
+    }
 ];
 
 const seedFreelancerProfiles = async () => {
     try {
-        // Fetch required IDs
+
         const specializationDocs = await Specialization.find( {} ).lean();
         const skillDocs = await Skill.find( {} ).lean();
 
-        // Populate freelancerProfiles with IDs 
-        freelancerProfiles[ 0 ].specializations = [ specializationDocs[ 0 ]._id ]; // Assign the first specialization
-        freelancerProfiles[ 0 ].skillIds = [ skillDocs[ 0 ]._id, skillDocs[ 1 ]._id ]; // Assign the first two skills 
+        freelancerProfiles[ 0 ].specializations = [ specializationDocs[ 0 ]._id ];
+        freelancerProfiles[ 0 ].skillIds = [ skillDocs[ 0 ]._id, skillDocs[ 1 ]._id ];
 
-        // ... (Populate other freelancer profiles with IDs, ensuring variety)
+        freelancerProfiles[ 1 ].specializations = [ specializationDocs[ 1 ]._id ];
+        freelancerProfiles[ 1 ].skillIds = [ skillDocs[ 2 ]._id, skillDocs[ 3 ]._id ];
 
         await FreelancerProfile.deleteMany( {} );
+
         const createdProfiles = await FreelancerProfile.insertMany( freelancerProfiles );
 
-        // Update user fixtures with profile IDs
         for ( let i = 0; i < createdProfiles.length; i++ ) {
             await User.findOneAndUpdate(
                 { username: `freelancer${i + 1}` },
-                { profile: createdProfiles[ i ]._id }
+                { profileId: createdProfiles[ i ]._id }
             );
         }
 

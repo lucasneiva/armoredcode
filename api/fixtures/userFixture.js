@@ -7,24 +7,31 @@ const users = [
         email: "client1@example.com",
         password: await bcrypt.hash( "password123", 10 ),
         role: "CLIENT",
+        profileId: null,
     },
     {
         username: "freelancer1",
         email: "freelancer1@example.com",
         password: await bcrypt.hash( "password123", 10 ),
         role: "FREELANCER",
+        profileId: null,
+
     },
     {
         username: "client2",
         email: "client2@example.com",
         password: await bcrypt.hash( "password123", 10 ),
         role: "CLIENT",
+        profileId: null,
+
     },
     {
         username: "freelancer2",
         email: "freelancer2@example.com",
         password: await bcrypt.hash( "password123", 10 ),
         role: "FREELANCER",
+        profileId: null,
+
     },
 ];
 

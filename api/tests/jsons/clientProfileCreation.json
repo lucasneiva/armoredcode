@@ -11,7 +11,7 @@
         "neighborhood": "Downtown",
         "city": "New York",
         "state": "NY",
-        "zipCode": "10001",
+        "CEP": "10001",
         "country": "USA"
     }
 }

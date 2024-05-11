@@ -18,6 +18,6 @@
     "workModel": "REMOTE",
     "location": {
         "city": "SOROCABA",
-        "zipCode": "19180000"
+        "CEP": "19180000"
     }
 }
