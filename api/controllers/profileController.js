@@ -28,7 +28,7 @@ export const createProfile = async ( req, res, next ) => {
 
         } else if ( role === "FREELANCER" ) {
             const existingProfile = await FreelancerProfile.findOne( { userId: userId } );
-            console.log(existingProfile);
+
             if ( existingProfile )
                 return next( CreateError( 400, "User has a profile already!" ) );
             
