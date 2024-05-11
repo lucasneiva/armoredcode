@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
 import { ProjectService } from '../../services/project.service';
+import { Router, RouterModule } from '@angular/router';
+
 
 
 @Component({
@@ -18,7 +19,7 @@ export default class CreateProjectComponent implements OnInit{
   router = inject(Router);
   createProjectForm !: FormGroup;
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.createProjectForm = this.fb.group({
       clientId: ['',Validators.required],
       freelancerId: [''],
@@ -40,9 +41,9 @@ export default class CreateProjectComponent implements OnInit{
     },
     );
   }
-
+  
   CreateProject(){
-    this.projectService.createProjectForm(this.createProjectForm.value)
+    this.projectService.createProjectService(this.createProjectForm.value)
     .subscribe({
       next:(res)=>{
         alert("project Created!")
@@ -55,4 +56,26 @@ export default class CreateProjectComponent implements OnInit{
     })
 
   }
+
+  CancelProject(){
+    alert("project Canceled!")
+    this.createProjectForm.reset();
+    this.router.navigate(['manage-project'])
+  }
+
+  /*
+  PublishProject(){
+    this.projectService.createProjectForm(this.createProjectForm.value)
+    .subscribe({
+      next:(res)=>{
+        alert("project Created!")
+        this.createProjectForm.reset();
+        this.router.navigate(['manage-project'])
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
+  }
+  */
 }

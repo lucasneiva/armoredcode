@@ -158,7 +158,9 @@
 
 
 <div class="flex justify-center static mb-16">
-    <button [disabled]="createProjectForm.invalid" [class.disabled]="createProjectForm.invalid" (click)="CreateProject()"
+    <!--implementar no button:-->
+    <!--[disabled]="createProjectForm.invalid" [class.disabled]="createProjectForm.invalid"-->
+    <button (click)="CreateProject()"
         class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
         Save
     </button>
@@ -166,7 +168,7 @@
         class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
         Publish
     </button>
-    <button routerLink="/manage-project"
+    <button (click)="CancelProject()" routerLink="/manage-project"
         class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
         Cancel
     </button>

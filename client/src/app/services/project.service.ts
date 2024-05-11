@@ -11,7 +11,7 @@ export class ProjectService {
   isDraft$ = new BehaviorSubject<boolean>(false);
   isPosted$ = new BehaviorSubject<boolean>(false);
   
-  createProjectForm(projectObj: any){
+  createProjectService(projectObj: any){
     return this.http.post<any>(`${apiUrls.projectServiceApi}createProject`, projectObj);
   }
   
