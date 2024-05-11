@@ -124,23 +124,19 @@ const seedFreelancerProfiles = async () => {
 
         const specializationDocs = await Specialization.find( {} ).lean();
         const skillDocs = await Skill.find( {} ).lean();
-
+        const freelancerDocs = await User.find( { role: "FREELANCER" } ).lean();
+        
         freelancerProfiles[ 0 ].specializations = [ specializationDocs[ 0 ]._id ];
         freelancerProfiles[ 0 ].skillIds = [ skillDocs[ 0 ]._id, skillDocs[ 1 ]._id ];
-
+        freelancerProfiles[ 0 ].freelancerId = freelancerDocs[ 0 ]._id;
+        
         freelancerProfiles[ 1 ].specializations = [ specializationDocs[ 1 ]._id ];
         freelancerProfiles[ 1 ].skillIds = [ skillDocs[ 2 ]._id, skillDocs[ 3 ]._id ];
+        freelancerProfiles[ 1 ].freelancerId = freelancerDocs[ 1 ]._id;
 
         await FreelancerProfile.deleteMany( {} );
 
-        const createdProfiles = await FreelancerProfile.insertMany( freelancerProfiles );
-
-        for ( let i = 0; i < createdProfiles.length; i++ ) {
-            await User.findOneAndUpdate(
-                { username: `freelancer${i + 1}` },
-                { profileId: createdProfiles[ i ]._id }
-            );
-        }
+        await FreelancerProfile.insertMany( freelancerProfiles );
 
         console.log( "Freelancer profile data seeded successfully!" );
     } catch ( error ) {

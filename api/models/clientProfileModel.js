@@ -4,6 +4,12 @@ const Schema = mongoose.Schema;
 import Location from './locationModel.js';
 
 const ClientProfileSchema = new Schema( {
+    clientId: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
+
     companyName: {
         type: String,
         required: true

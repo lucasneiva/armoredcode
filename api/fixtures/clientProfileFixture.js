@@ -36,21 +36,17 @@ const clientProfiles = [
 const seedClientProfiles = async () => {
     try {
         const industryDocs = await Industry.find( {} ).lean();
+        const clientDocs = await User.find( { role: "CLIENT" } ).lean();
 
         clientProfiles[ 0 ].industryId = industryDocs[ 0 ];
+        clientProfiles[ 0 ].clientId = clientDocs[ 0 ]._id;
 
         clientProfiles[ 1 ].industryId = industryDocs[ 1 ];
+        clientProfiles[ 1 ].clientId = clientDocs[ 1 ]._id;
 
         await clientProfile.deleteMany( {} );
 
-        const createdProfiles = await clientProfile.insertMany( clientProfiles );
-
-        for ( let i = 0; i < createdProfiles.length; i++ ) {
-            await User.findOneAndUpdate(
-                { username: `client${i + 1}` },
-                { profileId: createdProfiles[ i ]._id }
-            );
-        }
+        await clientProfile.insertMany( clientProfiles );
 
         console.log( "Client profile data seeded successfully!" );
     } catch ( error ) {
