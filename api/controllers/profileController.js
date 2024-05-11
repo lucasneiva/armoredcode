@@ -8,36 +8,44 @@ export const createProfile = async ( req, res, next ) => {
     const userId = req.user.id;
     const role = req.user.role;
     const profileData = req.body;
+    
+    profileData.userId = userId;
 
     try {
-        const existingProfile = await User.findById( userId, { profile: 1 } );
-
-        if ( existingProfile.profileId ) {
-            return next( CreateError( 400, "You already have a profile!" ) );
-
-        }
-
+        
+        
         let profile;
 
+        
         if ( role === "CLIENT" ) {
+            const existingProfile = await ClientProfile.findOne( { userId: userId } );
+            
+            if ( existingProfile )
+                return next( CreateError( 400, "User has a profile already!" ) );
+
+
             profile = new ClientProfile( profileData );
 
         } else if ( role === "FREELANCER" ) {
+            const existingProfile = await FreelancerProfile.findOne( { userId: userId } );
+
+            if ( existingProfile )
+                return next( CreateError( 400, "User has a profile already!" ) );
+            
+            
             profile = new FreelancerProfile( profileData );
 
         } else {
-            return next( CreateError( 400, "Invalid role" ) );
+            return next( CreateError( 400, "Invalid role!" ) );
 
         }
 
         await profile.save();
 
-        await User.findByIdAndUpdate( userId, { profile: profile._id } );
-
         return next( CreateSuccess( 200, "Profile created successfully!" ) );
 
     } catch ( error ) {
-        return next( CreateError( 500, "Error creating profile" ) );
+        return next( CreateError( 500, "Error creating profile", error ) );
 
     }
 };
