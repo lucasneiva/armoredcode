@@ -1,13 +1,13 @@
 <!--menu de inputs-->
-<form id="top-form" class="flex justify-around align-baseline bg-slate-100 border-b-4 border-b-slate-200">
+<form [formGroup]="createProjectForm" id="top-form" class="flex justify-around align-baseline bg-slate-100 border-b-4 border-b-slate-200">
     <!--Características chave do projeto-->
     <div class="p-1 ">
         <h2 class="font-semibold mt-4">Project Name:</h2>
-        <input class="p-2 px-4 border border-gray-300 rounded" type="text" placeholder="Type the project name">
+        <input formControlName="projectTitle" class="p-2 px-4 border border-gray-300 rounded" type="text" placeholder="Type the project name">
 
         <h2 class="font-semibold mt-4">Project Category:</h2>
         <label for="projCategory"></label>
-        <select name="Option" id="projCategory" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
+        <select formControlName="projectCategoryId" name="Option" id="projCategory" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
             <option value="Default" selected>Select the project category</option>
             <option value="Op1">Option 1</option>
             <option value="Op2">Option 2</option>
@@ -15,40 +15,41 @@
         </select>
     </div>
 
+    <!--fix formName && name for radio buttons-->
     <div class="p-1 ">
         <h2 class="font-semibold mt-4">Pricing:</h2>
         <div class="flex justify-start align-middle overflow-auto">
             <div class="m-3">
-                <input onclick="document.getElementById('hourlyrate').style.display = 'none';
+                <input formControlName="pricingType" onclick="document.getElementById('hourlyrate').style.display = 'none';
                  document.getElementById('budget').style.display = 'flex';" 
-                 type="radio" id="priceFix" name="price_type" value="BUDGET" checked>
+                 type="radio" id="priceFix" name="pricingType" value="BUDGET" checked>
                 <label for="priceFix" class="m-2 font-normal">Budget</label><br>
             </div>
             <div class="m-3">
-                <input onclick="document.getElementById('budget').style.display = 'none';
+                <input formControlName="pricingType" onclick="document.getElementById('budget').style.display = 'none';
                  document.getElementById('hourlyrate').style.display = 'flex';"   
-                 type="radio" id="priceHour" name="price_type" value="HOURLY_RATE">
+                 type="radio" id="priceHour" name="pricingType" value="HOURLY_RATE">
                 <label for="priceHour" class="m-2 font-normal">Hourly Rate</label><br>
             </div>
         </div>
         <div class="flex justify-start align-middle overflow-auto" id="budget">
             <div class="m-3">
                 <h2 class="font-semibold mt-2">From:</h2>
-                <input type="text" placeholder="Min budget" id="minbudget" class="text-center max-w-24 p-1">
+                <input formControlName="projectBudget" type="text" placeholder="Min budget" id="minbudget" class="text-center max-w-24 p-1">
             </div>
             <div class="m-3">
                 <h2 class="font-semibold mt-2">To:</h2>
-                <input type="text" placeholder="Max budget" id="maxbudget" class="text-center max-w-24 p-1">
+                <input formControlName="projectBudget" type="text" placeholder="Max budget" id="maxbudget" class="text-center max-w-24 p-1">
             </div>
         </div>
         <div class="hidden justify-start align-middle overflow-auto" id="hourlyrate">
             <div class="m-3">
                 <h2 class="font-semibold mt-2">From:</h2>
-                <input type="text" placeholder="Min value" id="minhr" class="text-center max-w-24 p-1">
+                <input formControlName="projectHourlyRate" type="text" placeholder="Min value" id="minhr" class="text-center max-w-24 p-1">
             </div>
             <div class="m-3">
                 <h2 class="font-semibold mt-2">To:</h2>
-                <input type="text" placeholder="Max value" id="maxhr" class="text-center max-w-24 p-1">
+                <input formControlName="projectHourlyRate" type="text" placeholder="Max value" id="maxhr" class="text-center max-w-24 p-1">
             </div>
         </div>
     </div>
@@ -56,23 +57,23 @@
 
     <div class="p-1 ">
         <h2 class="font-semibold mt-4">Estimated duration:</h2>
-        <input class="p-2 px-4 border border-gray-300 rounded" type="text" placeholder="Type the duration (hours)">
+        <input formControlName="estimatedDuration" class="p-2 px-4 border border-gray-300 rounded" type="text" placeholder="Type the duration (hours)">
     </div>
 
 
     <div class="p-1 ">
         <div class="m-0.5">
             <h2 class="font-semibold mt-4">Scope:</h2>
-            <input type="radio" id="scopeS" name="scope" value="small" checked>
+            <input formControlName="projectSize" type="radio" id="scopeS" name="projectSize" value="small" checked>
             <label for="scopeS" class="m-2 font-normal">Small</label>
         </div>
         <div class="m-0.5">
-            <input type="radio" id="scopeM" name="scope" value="medium">
+            <input formControlName="projectSize" type="radio" id="scopeM" name="projectSize" value="medium">
             <label for="scopeM" class="m-2 font-normal">Medium</label>
         </div>
         <div class="m-0.5">
-            <input type="radio" id="scopeL" name="scope" value="large">
-            <label for="scopeL" class="m-2 font-normal">Large</label>
+            <input formControlName="projectSize" type="radio" id="scopeL" name="projectSize" value="large">
+            <label  for="scopeL" class="m-2 font-normal">Large</label>
         </div>
     </div>
 
@@ -80,15 +81,15 @@
     <div class="p-1 ">
         <h2 class="font-semibold mt-4">Experience level:</h2>
         <div class="m-0.5">
-            <input type="radio" id="entryLvl" name="exp_level" value="ENTRY-LEVEL" checked />
+            <input formControlName="experienceLevel" type="radio" id="entryLvl" name="experienceLevel" value="ENTRY-LEVEL" checked />
             <label for="entryLvl" class="m-2 font-normal">Entry level</label>
         </div>
         <div class="m-0.5">
-            <input type="radio" id="midLvl" name="exp_level" value="MID-LEVEL" />
+            <input formControlName="experienceLevel" type="radio" id="midLvl" name="experienceLevel" value="MID-LEVEL" />
             <label for="midLvl" class="m-2 font-normal">Mid level</label>
         </div>
         <div class="m-0.5">
-            <input type="radio" id="seniorLvl" name="exp_level" value="SENIOR" />
+            <input formControlName="experienceLevel" type="radio" id="seniorLvl" name="experienceLevel" value="SENIOR" />
             <label for="seniorLvl" class="m-2 font-normal">Senior level</label>
         </div>
     </div>
@@ -96,19 +97,20 @@
     <div class="p-1 ">
         <div class="m-0.5">
             <h2 class="font-semibold mt-4">Workspace:</h2>
-            <input type="radio" id="WR" name="workModel" value="REMOTE" checked>
+            <input formControlName="workModel" type="radio" id="WR" name="workModel" value="REMOTE" checked>
             <label for="WR" class="m-2 font-normal">Remote</label>
         </div>
         <div class="m-0.5">
-            <input type="radio" id="HW" name="workModel" value="HYBRID">
+            <input formControlName="workModel" type="radio" id="HW" name="workModel" value="HYBRID">
             <label for="HW" class="m-2 font-normal">Hybrid</label>
         </div>
         <div class="m-0.5">
-            <input type="radio" id="OSW" name="workModel" value="ON_SITE">
+            <input formControlName="workModel" type="radio" id="OSW" name="workModel" value="ON_SITE">
             <label for="OSW" class="m-2 font-normal">On Site</label>
         </div>
     </div>
 </form>
+
 <!--botão push-->
 <div class="bg-transparent flex justify-center">
     <button id="up-btn" onclick="document.getElementById('top-form').style.display = 'none';
