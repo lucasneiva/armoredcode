@@ -1,5 +1,5 @@
 <!--menu de inputs-->
-<form class="flex justify-around align-baseline bg-slate-100 border-b-4 border-b-slate-200">
+<form id="top-form" class="flex justify-around align-baseline bg-slate-100 border-b-4 border-b-slate-200">
     <!--Características chave do projeto-->
     <div class="p-1 ">
         <h2 class="font-semibold mt-4">Project Name:</h2>
@@ -90,9 +90,17 @@
     </div>
 </form>
 <!--botão push-->
-<script src="../../../assets/myassets.js"></script>
 <div class="bg-transparent flex justify-center">
-    <button class="bg-slate-200 rounded-b-lg w-40 text-slate-300"> - </button>
+    <button id="up-btn" onclick="document.getElementById('top-form').style.display = 'none';
+     document.getElementById('up-btn').style.display = 'none';
+     document.getElementById('down-btn').style.display = 'flex';" 
+     class="bg-slate-200 rounded-b-lg w-40 text-slate-400 justify-center"> close
+    </button>
+    <button id="down-btn" onclick="document.getElementById('top-form').style.display = 'flex';
+     document.getElementById('down-btn').style.display = 'none';
+     document.getElementById('up-btn').style.display = 'flex';"
+     class="bg-slate-200 rounded-b-lg w-40 text-slate-400 justify-center hidden"> open
+    </button>
 </div>
 
 <div class="flex">
