@@ -18,7 +18,6 @@
     <div class="p-1 ">
         <h2 class="font-semibold mt-4">Pricing:</h2>
         <div class="flex justify-start align-middle overflow-auto">
-            <!--implementar-->
             <div class="m-3">
                 <input onclick="document.getElementById('hourlyrate').style.display = 'none';
                  document.getElementById('budget').style.display = 'flex';" 
@@ -27,7 +26,7 @@
             </div>
             <div class="m-3">
                 <input onclick="document.getElementById('budget').style.display = 'none';
-                 document.getElementById('hourlyrate').style.display = 'flex';"  
+                 document.getElementById('hourlyrate').style.display = 'flex';"   
                  type="radio" id="priceHour" name="price_type" value="HOURLY_RATE">
                 <label for="priceHour" class="m-2 font-normal">Hourly Rate</label><br>
             </div>
@@ -35,21 +34,21 @@
         <div class="flex justify-start align-middle overflow-auto" id="budget">
             <div class="m-3">
                 <h2 class="font-semibold mt-2">From:</h2>
-                <input placeholder="Min budget" class="text-center max-w-24 p-1">
+                <input type="text" placeholder="Min budget" id="minbudget" class="text-center max-w-24 p-1">
             </div>
             <div class="m-3">
                 <h2 class="font-semibold mt-2">To:</h2>
-                <input placeholder="Max budget" class="text-center max-w-24 p-1">
+                <input type="text" placeholder="Max budget" id="maxbudget" class="text-center max-w-24 p-1">
             </div>
         </div>
         <div class="hidden justify-start align-middle overflow-auto" id="hourlyrate">
             <div class="m-3">
                 <h2 class="font-semibold mt-2">From:</h2>
-                <input placeholder="Min value" class="text-center max-w-24 p-1">
+                <input type="text" placeholder="Min value" id="minhr" class="text-center max-w-24 p-1">
             </div>
             <div class="m-3">
                 <h2 class="font-semibold mt-2">To:</h2>
-                <input placeholder="Max value" class="text-center max-w-24 p-1">
+                <input type="text" placeholder="Max value" id="maxhr" class="text-center max-w-24 p-1">
             </div>
         </div>
     </div>
@@ -157,7 +156,7 @@
 
 
 <div class="flex justify-center static mb-16">
-    <button routerLink="/manage-project"
+    <button [disabled]="createProjectForm.invalid" [class.disabled]="createProjectForm.invalid" (click)="CreateProject()"
         class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
         Save
     </button>

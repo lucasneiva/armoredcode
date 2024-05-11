@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { ProjectService } from '../../services/project.service';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export default class CreateProjectComponent implements OnInit{
   fb = inject(FormBuilder);
+  projectService = inject(ProjectService);
   router = inject(Router);
   createProjectForm !: FormGroup;
 
@@ -37,5 +39,20 @@ export default class CreateProjectComponent implements OnInit{
       endDate: [''],
     },
     );
+  }
+
+  CreateProject(){
+    this.projectService.createProjectForm(this.createProjectForm.value)
+    .subscribe({
+      next:(res)=>{
+        alert("project Created!")
+        this.createProjectForm.reset();
+        this.router.navigate(['manage-project'])
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
+
   }
 }
