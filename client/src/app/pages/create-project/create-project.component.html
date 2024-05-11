@@ -1,5 +1,5 @@
 <!--menu de inputs-->
-<form class="flex justify-around align-baseline bg-slate-100 border-b-4 border-b-slate-200">
+<form id="top-form" class="flex justify-around align-baseline bg-slate-100 border-b-4 border-b-slate-200">
     <!--Características chave do projeto-->
     <div class="p-1 ">
         <h2 class="font-semibold mt-4">Project Name:</h2>
@@ -90,9 +90,17 @@
     </div>
 </form>
 <!--botão push-->
-<script src="../../../assets/myassets.js"></script>
 <div class="bg-transparent flex justify-center">
-    <button class="bg-slate-200 rounded-b-lg w-40 text-slate-300"> - </button>
+    <button id="up-btn" onclick="document.getElementById('top-form').style.display = 'none';
+     document.getElementById('up-btn').style.display = 'none';
+     document.getElementById('down-btn').style.display = 'flex';"
+        class="bg-slate-200 rounded-b-lg w-40 text-slate-400 justify-center"> close
+    </button>
+    <button id="down-btn" onclick="document.getElementById('top-form').style.display = 'flex';
+     document.getElementById('down-btn').style.display = 'none';
+     document.getElementById('up-btn').style.display = 'flex';"
+        class="bg-slate-200 rounded-b-lg w-40 text-slate-400 justify-center hidden"> open
+    </button>
 </div>
 
 <div class="flex">
@@ -100,14 +108,15 @@
     <form class="grid align-baseline m-4 lg:w-1/2 mt-5 p-10 shadow-lg h-fit">
         <h2 class="font-semibold my-3 text-3xl">Overview:</h2>
         <textarea id="companyDescription" name="companyDescription" rows="4"
-            placeholder="Write the project description here" class="bg-gray-50 p-3 border-2 max-h-96"></textarea>
+            placeholder="Write the project description here" class="bg-gray-50 p-3 border-2"
+            style="max-height: 36rem;"></textarea>
     </form>
 
     <!--search e tags-->
     <div class="grid align-baseline bg-white m-4 lg:w-3/12 mt-5 p-10 mx-auto">
         <form class="">
             <h2 class="font-semibold my-3 text-3xl">Skills:</h2>
-            <div class="search relative shadow-lg flex">
+            <div class="search relative shadow-lg flex w-fit">
                 <span class="absolute mt-1.5 mx-3"><i class="fa fa-search font-light" aria-hidden="true"></i></span>
                 <input type="text" placeholder="Search skills"
                     class="w-96 p-2 pl-9 rounded rounded-r-none text-gray-600">
@@ -115,24 +124,28 @@
             </div>
             <!--tags-->
             <div class="align-baseline">
+                <!-- tag default
                 <span id="badge-default" class="inline-flex items-center px-4 py-1 me-2 mt-4 text-sm font-medium text-white bg-blue-400 rounded-3xl"> Default
                     <button type="button" class="inline-flex items-center p-1 px-2 ms-2 text-sm text-white bg-transparent rounded-full hover:bg-blue-300"> + </button>
                 </span>
+                -->
             </div>
         </form>
     </div>
 </div>
 
-<div class="flex justify-center">
-    <div class="absolute bottom-8">
-        <button routerLink="/manage-project" class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
-            Save
-        </button>
-        <button routerLink="/manage-project" class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
-            Publish
-        </button>
-        <button routerLink="/manage-project" class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
-            Cancel
-        </button>
-    </div>
+
+<div class="flex justify-center static mb-16">
+    <button routerLink="/manage-project"
+        class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
+        Save
+    </button>
+    <button routerLink="/manage-project"
+        class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
+        Publish
+    </button>
+    <button routerLink="/manage-project"
+        class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
+        Cancel
+    </button>
 </div>
