@@ -7,19 +7,32 @@ import projectJoiSchema from "../validators/projectValidator.js";
 import { validateData } from "../utils/validateData.js";
 import { connectToDatabase } from "../db.js";
 
-export const searchProjects = async ( req, res, next ) => {
-    console.log("teste");
-    try {
-        console.log("1");
-        const db = await connectToDatabase(); // Get the db instance
-        console.log("4"); 
-        res.status(200).json({ message: "Database connection successful!" });
-        return db; // Return the db instance
-    } catch (error) {
-        res.status(500).json({ error: "Database connection failed!" });
-    }
-    
+export const searchProjects = async (req, res, next) => {
+  try {
+    const db = await connectToDatabase();
+    const collection = db.collection('projects');
+
+    const searchTerm = req.query.q; // Get search term from query parameter
+
+    const results = await collection.aggregate([
+      { 
+        $search: {
+          index: 'projects', // Replace 'default' with your index name if needed
+          text: {
+            query: searchTerm,
+            path: ['projectTitle', 'projectDescription'] // Fields to search
+          }
+        }
+      }
+    ]).toArray();
+
+    return next(CreateSuccess(200, 'Search Results', results));
+
+  } catch (error) {
+    return next(CreateError(500, 'Internal Server Error'));
+  }
 };
+
 
 export const getProjectById = async ( req, res, next ) => {
     

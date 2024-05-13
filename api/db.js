@@ -1,14 +1,14 @@
 import { MongoClient } from 'mongodb';
+import dotenv from 'dotenv';
 
-const uri = "mongodb+srv://123:123@cluster0.cu1zpcf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+dotenv.config();
+
+const url = process.env.MONGO_URL;
 
 export const connectToDatabase = async () => {
     try {
-        console.log("2");
-        const client = new MongoClient( uri );
-        console.log("3");
+        const client = new MongoClient( url );
         await client.connect();
-        console.log( "Connected to MongoDB Atlas!" );
         return client.db( 'test' );
     } catch ( error ) {
         console.error( "Error connecting to database:", error );

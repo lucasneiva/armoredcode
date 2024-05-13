@@ -1,7 +1,6 @@
 import express from 'express';
 import { searchProjects, getProjectById, createProject } from '../controllers/projectController.js';
 import { verifyClient } from '../utils/authMiddleware.js';
-import { connectToDatabase } from '../db.js';
 
 const router = express.Router();
 
