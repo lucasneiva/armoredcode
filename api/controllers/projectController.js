@@ -5,13 +5,24 @@ import jwt from 'jsonwebtoken';
 import mongoose from "mongoose";
 import projectJoiSchema from "../validators/projectValidator.js";
 import { validateData } from "../utils/validateData.js";
+import { connectToDatabase } from "../db.js";
 
-export const getAllprojects = ( req, res, next ) => {
-
+export const searchProjects = async ( req, res, next ) => {
+    console.log("teste");
+    try {
+        console.log("1");
+        const db = await connectToDatabase(); // Get the db instance
+        console.log("4"); 
+        res.status(200).json({ message: "Database connection successful!" });
+        return db; // Return the db instance
+    } catch (error) {
+        res.status(500).json({ error: "Database connection failed!" });
+    }
+    
 };
 
-export const getProjectById = ( req, res, next ) => {
-
+export const getProjectById = async ( req, res, next ) => {
+    
 };
 
 export const createProject = async ( req, res, next ) => {
@@ -46,4 +57,3 @@ export const createProject = async ( req, res, next ) => {
     }
 
 };
-

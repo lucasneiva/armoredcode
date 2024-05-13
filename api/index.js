@@ -24,6 +24,8 @@ import seedFreelancerProfiles from "./fixtures/freelancerProfileFixture.js";
 import seedClientProfiles from "./fixtures/clientProfileFixture.js";
 import seedProjects from "./fixtures/projectFixture.js";
 
+import { searchProjects, getProjectById, createProject } from './controllers/projectController.js';
+
 const app = express();
 dotenv.config();
 
@@ -35,6 +37,7 @@ app.use( cors( {
     credentials: true
 } ) );
 
+// Routes
 app.use( "/api/auth", authRoutes );
 app.use( "/api/users", userRoutes );
 app.use( "/api/projects", projectRoutes );
@@ -47,7 +50,7 @@ app.use( "/api/specializations", specializationRoutes );
 const connectMongoDB = async ( ) => {
     try {
         await mongoose.connect( process.env.MONGO_URL );
-
+        
     }
     catch ( error ) {
         throw error;
@@ -58,7 +61,7 @@ const connectMongoDB = async ( ) => {
 app.use( ( obj, req, res, next ) => {
     const statusCode = obj.status || 500;
     const message = obj.message || "Something went wrong!";
-
+    
     return res.status( statusCode ).json( {
         success: [ 200, 201, 204 ].some( a => a === obj.status ) ? true : false,
         status: statusCode,
@@ -73,9 +76,9 @@ app.listen( 8800, async () => {
         console.log( `Server started on port 8800!` );
 
         await connectMongoDB();
-
+        
         console.log( `Connected to MongoDB database!` );
-
+        
         await seedProjectCategories();
         await seedIndustries();
         await seedSpecializations();
@@ -94,3 +97,4 @@ app.listen( 8800, async () => {
     }
 
 } );
+
