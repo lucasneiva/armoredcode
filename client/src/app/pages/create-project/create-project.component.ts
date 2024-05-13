@@ -43,6 +43,7 @@ export default class CreateProjectComponent implements OnInit{
   }
   
   CreateProject(){
+    //debug//console.log(this.createProjectForm.value);
     this.projectService.createProjectService(this.createProjectForm.value)
     .subscribe({
       next:(res)=>{
@@ -54,7 +55,6 @@ export default class CreateProjectComponent implements OnInit{
         console.log(err);
       }
     })
-
   }
 
   CancelProject(){
