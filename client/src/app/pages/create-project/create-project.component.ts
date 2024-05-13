@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProjectService } from '../../services/project.service';
 import { Router, RouterModule } from '@angular/router';
 
@@ -18,15 +18,21 @@ export default class CreateProjectComponent implements OnInit{
   projectService = inject(ProjectService);
   router = inject(Router);
   createProjectForm !: FormGroup;
+  descrypitionForm !: FormGroup;
 
   ngOnInit() {
+    this.descrypitionForm = new FormGroup({
+      desc: new FormControl(''),
+    });
+
     this.createProjectForm = this.fb.group({
+      
       clientId: ['',Validators.required],
       freelancerId: [''],
       projectCategoryId: ['',Validators.required],
       skillIds: [''],
       projectTitle: ['',Validators.required],
-      projectDescription: ['',Validators.required],
+      projectDescription: [this.descrypitionForm],
       projectHourlyRate: [''],
       projectBudget: [''],
       pricingType: ['',Validators.required],

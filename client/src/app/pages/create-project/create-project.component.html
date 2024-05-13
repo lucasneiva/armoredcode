@@ -1,137 +1,147 @@
-<!--menu de inputs-->
-<form [formGroup]="createProjectForm" id="top-form" class="flex justify-around align-baseline bg-slate-100 border-b-4 border-b-slate-200">
-    <!--Características chave do projeto-->
-    <div class="p-1 ">
-        <h2 class="font-semibold mt-4">Project Name:</h2>
-        <input formControlName="projectTitle" class="p-2 px-4 border border-gray-300 rounded" type="text" placeholder="Type the project name">
+<form [formGroup]="createProjectForm">
+    <!--menu de inputs-->
+    <div class="flex justify-around align-baseline bg-slate-100 border-b-4 border-b-slate-200" id="top-form">
+        <!--Características chave do projeto-->
+        <div class="p-1 ">
+            <h2 class="font-semibold mt-4">Project Name:</h2>
+            <input formControlName="projectTitle" class="p-2 px-4 border border-gray-300 rounded" type="text"
+                placeholder="Type the project name">
 
-        <h2 class="font-semibold mt-4">Project Category:</h2>
-        <label for="projCategory"></label>
-        <select formControlName="projectCategoryId" name="Option" id="projCategory" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
-            <option value="Default" selected>Select the project category</option>
-            <option value="Op1">Option 1</option>
-            <option value="Op2">Option 2</option>
-            <option value="Op3">Option 3</option>
-        </select>
-    </div>
+            <h2 class="font-semibold mt-4">Project Category:</h2>
+            <select formControlName="projectCategoryId" name="Option" id="projCategory" required
+                class="p-2 px-4 border border-gray-300 rounded text-gray-500">
+                <option value="" selected>Select the project category</option>
+                <option value="SOURCE_CODE">Source Code</option>
+                <option value="DOCUMENTATION">Documentation</option>
+                <option value="TEST_REPORT">Test Report</option>
+            </select>
+        </div>
 
-    <!--fix formName && name for radio buttons-->
-    <div class="p-1 ">
-        <h2 class="font-semibold mt-4">Pricing:</h2>
-        <div class="flex justify-start align-middle overflow-auto">
-            <div class="m-3">
-                <input formControlName="pricingType" onclick="document.getElementById('hourlyrate').style.display = 'none';
-                 document.getElementById('budget').style.display = 'flex';" 
-                 type="radio" id="priceFix" name="pricingType" value="BUDGET" checked>
-                <label for="priceFix" class="m-2 font-normal">Budget</label><br>
+        <!--fix formName && name for radio buttons-->
+        <div class="p-1 ">
+            <h2 class="font-semibold mt-4">Pricing:</h2>
+            <div class="flex justify-start align-middle overflow-auto">
+                <div class="m-3">
+                    <input formControlName="pricingType" onclick="document.getElementById('hourlyrate').style.display = 'none';
+                 document.getElementById('budget').style.display = 'flex';" type="radio" id="priceFix"
+                        name="pricingType" value="BUDGET" checked>
+                    <label for="priceFix" class="m-2 font-normal">Budget</label><br>
+                </div>
+                <div class="m-3">
+                    <input formControlName="pricingType" onclick="document.getElementById('budget').style.display = 'none';
+                 document.getElementById('hourlyrate').style.display = 'flex';" type="radio" id="priceHour"
+                        name="pricingType" value="HOURLY_RATE">
+                    <label for="priceHour" class="m-2 font-normal">Hourly Rate</label><br>
+                </div>
             </div>
-            <div class="m-3">
-                <input formControlName="pricingType" onclick="document.getElementById('budget').style.display = 'none';
-                 document.getElementById('hourlyrate').style.display = 'flex';"   
-                 type="radio" id="priceHour" name="pricingType" value="HOURLY_RATE">
-                <label for="priceHour" class="m-2 font-normal">Hourly Rate</label><br>
+            <div class="flex justify-start align-middle overflow-auto" id="budget">
+                <div class="m-3">
+                    <h2 class="font-semibold mt-2">From:</h2>
+                    <input formControlName="projectBudget" type="text" placeholder="Min budget" id="minbudget"
+                        class="text-center max-w-24 p-1">
+                </div>
+                <div class="m-3">
+                    <h2 class="font-semibold mt-2">To:</h2>
+                    <input formControlName="projectBudget" type="text" placeholder="Max budget" id="maxbudget"
+                        class="text-center max-w-24 p-1">
+                </div>
+            </div>
+            <div class="hidden justify-start align-middle overflow-auto" id="hourlyrate">
+                <div class="m-3">
+                    <h2 class="font-semibold mt-2">From:</h2>
+                    <input formControlName="projectHourlyRate" type="text" placeholder="Min value" id="minhr"
+                        class="text-center max-w-24 p-1">
+                </div>
+                <div class="m-3">
+                    <h2 class="font-semibold mt-2">To:</h2>
+                    <input formControlName="projectHourlyRate" type="text" placeholder="Max value" id="maxhr"
+                        class="text-center max-w-24 p-1">
+                </div>
             </div>
         </div>
-        <div class="flex justify-start align-middle overflow-auto" id="budget">
-            <div class="m-3">
-                <h2 class="font-semibold mt-2">From:</h2>
-                <input formControlName="projectBudget" type="text" placeholder="Min budget" id="minbudget" class="text-center max-w-24 p-1">
+
+
+        <div class="p-1 ">
+            <h2 class="font-semibold mt-4">Estimated duration:</h2>
+            <input formControlName="estimatedDuration" class="p-2 px-4 border border-gray-300 rounded" type="text"
+                placeholder="Type the duration (hours)">
+        </div>
+
+
+        <div class="p-1 ">
+            <div class="m-0.5">
+                <h2 class="font-semibold mt-4">Scope:</h2>
+                <input formControlName="projectSize" type="radio" id="scopeS" name="projectSize" value="small" checked>
+                <label for="scopeS" class="m-2 font-normal">Small</label>
             </div>
-            <div class="m-3">
-                <h2 class="font-semibold mt-2">To:</h2>
-                <input formControlName="projectBudget" type="text" placeholder="Max budget" id="maxbudget" class="text-center max-w-24 p-1">
+            <div class="m-0.5">
+                <input formControlName="projectSize" type="radio" id="scopeM" name="projectSize" value="medium">
+                <label for="scopeM" class="m-2 font-normal">Medium</label>
+            </div>
+            <div class="m-0.5">
+                <input formControlName="projectSize" type="radio" id="scopeL" name="projectSize" value="large">
+                <label for="scopeL" class="m-2 font-normal">Large</label>
             </div>
         </div>
-        <div class="hidden justify-start align-middle overflow-auto" id="hourlyrate">
-            <div class="m-3">
-                <h2 class="font-semibold mt-2">From:</h2>
-                <input formControlName="projectHourlyRate" type="text" placeholder="Min value" id="minhr" class="text-center max-w-24 p-1">
+
+
+        <div class="p-1 ">
+            <h2 class="font-semibold mt-4">Experience level:</h2>
+            <div class="m-0.5">
+                <input formControlName="experienceLevel" type="radio" id="entryLvl" name="experienceLevel"
+                    value="ENTRY-LEVEL" checked />
+                <label for="entryLvl" class="m-2 font-normal">Entry level</label>
             </div>
-            <div class="m-3">
-                <h2 class="font-semibold mt-2">To:</h2>
-                <input formControlName="projectHourlyRate" type="text" placeholder="Max value" id="maxhr" class="text-center max-w-24 p-1">
+            <div class="m-0.5">
+                <input formControlName="experienceLevel" type="radio" id="midLvl" name="experienceLevel"
+                    value="MID-LEVEL" />
+                <label for="midLvl" class="m-2 font-normal">Mid level</label>
+            </div>
+            <div class="m-0.5">
+                <input formControlName="experienceLevel" type="radio" id="seniorLvl" name="experienceLevel"
+                    value="SENIOR" />
+                <label for="seniorLvl" class="m-2 font-normal">Senior level</label>
+            </div>
+        </div>
+
+        <div class="p-1 ">
+            <div class="m-0.5">
+                <h2 class="font-semibold mt-4">Workspace:</h2>
+                <input formControlName="workModel" type="radio" id="WR" name="workModel" value="REMOTE" checked>
+                <label for="WR" class="m-2 font-normal">Remote</label>
+            </div>
+            <div class="m-0.5">
+                <input formControlName="workModel" type="radio" id="HW" name="workModel" value="HYBRID">
+                <label for="HW" class="m-2 font-normal">Hybrid</label>
+            </div>
+            <div class="m-0.5">
+                <input formControlName="workModel" type="radio" id="OSW" name="workModel" value="ON_SITE">
+                <label for="OSW" class="m-2 font-normal">On Site</label>
             </div>
         </div>
     </div>
-
-
-    <div class="p-1 ">
-        <h2 class="font-semibold mt-4">Estimated duration:</h2>
-        <input formControlName="estimatedDuration" class="p-2 px-4 border border-gray-300 rounded" type="text" placeholder="Type the duration (hours)">
-    </div>
-
-
-    <div class="p-1 ">
-        <div class="m-0.5">
-            <h2 class="font-semibold mt-4">Scope:</h2>
-            <input formControlName="projectSize" type="radio" id="scopeS" name="projectSize" value="small" checked>
-            <label for="scopeS" class="m-2 font-normal">Small</label>
-        </div>
-        <div class="m-0.5">
-            <input formControlName="projectSize" type="radio" id="scopeM" name="projectSize" value="medium">
-            <label for="scopeM" class="m-2 font-normal">Medium</label>
-        </div>
-        <div class="m-0.5">
-            <input formControlName="projectSize" type="radio" id="scopeL" name="projectSize" value="large">
-            <label  for="scopeL" class="m-2 font-normal">Large</label>
-        </div>
-    </div>
-
-
-    <div class="p-1 ">
-        <h2 class="font-semibold mt-4">Experience level:</h2>
-        <div class="m-0.5">
-            <input formControlName="experienceLevel" type="radio" id="entryLvl" name="experienceLevel" value="ENTRY-LEVEL" checked />
-            <label for="entryLvl" class="m-2 font-normal">Entry level</label>
-        </div>
-        <div class="m-0.5">
-            <input formControlName="experienceLevel" type="radio" id="midLvl" name="experienceLevel" value="MID-LEVEL" />
-            <label for="midLvl" class="m-2 font-normal">Mid level</label>
-        </div>
-        <div class="m-0.5">
-            <input formControlName="experienceLevel" type="radio" id="seniorLvl" name="experienceLevel" value="SENIOR" />
-            <label for="seniorLvl" class="m-2 font-normal">Senior level</label>
-        </div>
-    </div>
-
-    <div class="p-1 ">
-        <div class="m-0.5">
-            <h2 class="font-semibold mt-4">Workspace:</h2>
-            <input formControlName="workModel" type="radio" id="WR" name="workModel" value="REMOTE" checked>
-            <label for="WR" class="m-2 font-normal">Remote</label>
-        </div>
-        <div class="m-0.5">
-            <input formControlName="workModel" type="radio" id="HW" name="workModel" value="HYBRID">
-            <label for="HW" class="m-2 font-normal">Hybrid</label>
-        </div>
-        <div class="m-0.5">
-            <input formControlName="workModel" type="radio" id="OSW" name="workModel" value="ON_SITE">
-            <label for="OSW" class="m-2 font-normal">On Site</label>
-        </div>
-    </div>
-</form>
-
-<!--botão push-->
-<div class="bg-transparent flex justify-center">
-    <button id="up-btn" onclick="document.getElementById('top-form').style.display = 'none';
+    <!--botão push-->
+    <div class="bg-transparent flex justify-center">
+        <button id="up-btn" onclick="document.getElementById('top-form').style.display = 'none';
      document.getElementById('up-btn').style.display = 'none';
      document.getElementById('down-btn').style.display = 'flex';"
-        class="bg-slate-200 rounded-b-lg w-40 text-slate-400 justify-center"> close
-    </button>
-    <button id="down-btn" onclick="document.getElementById('top-form').style.display = 'flex';
+            class="bg-slate-200 rounded-b-lg w-40 text-slate-400 justify-center"> close
+        </button>
+        <button id="down-btn" onclick="document.getElementById('top-form').style.display = 'flex';
      document.getElementById('down-btn').style.display = 'none';
      document.getElementById('up-btn').style.display = 'flex';"
-        class="bg-slate-200 rounded-b-lg w-40 text-slate-400 justify-center hidden"> open
-    </button>
-</div>
+            class="bg-slate-200 rounded-b-lg w-40 text-slate-400 justify-center hidden"> open
+        </button>
+    </div>
+
+</form>
 
 <div class="flex">
     <!--view-->
-    <form class="grid align-baseline m-4 lg:w-1/2 mt-5 p-10 shadow-lg h-fit">
+    <form [formGroup]="descrypitionForm" class="grid align-baseline m-4 lg:w-1/2 mt-5 p-10 shadow-lg h-fit">
         <h2 class="font-semibold my-3 text-3xl">Overview:</h2>
-        <textarea id="companyDescription" name="companyDescription" rows="4"
-            placeholder="Write the project description here" class="bg-gray-50 p-3 border-2"
-            style="max-height: 36rem;"></textarea>
+        <textarea formControlName="desc" placeholder="Write the project description here" 
+         class="bg-gray-50 p-3 border-2" style="max-height: 36rem;"></textarea>
     </form>
 
     <!--search e tags-->
@@ -147,15 +157,14 @@
             <!--tags-->
             <div class="align-baseline">
                 <!-- tag default
-                <span id="badge-default" class="inline-flex items-center px-4 py-1 me-2 mt-4 text-sm font-medium text-white bg-blue-400 rounded-3xl"> Default
-                    <button type="button" class="inline-flex items-center p-1 px-2 ms-2 text-sm text-white bg-transparent rounded-full hover:bg-blue-300"> + </button>
-                </span>
-                -->
+            <span id="badge-default" class="inline-flex items-center px-4 py-1 me-2 mt-4 text-sm font-medium text-white bg-blue-400 rounded-3xl"> Default
+                <button type="button" class="inline-flex items-center p-1 px-2 ms-2 text-sm text-white bg-transparent rounded-full hover:bg-blue-300"> + </button>
+            </span>
+            -->
             </div>
         </form>
     </div>
 </div>
-
 
 <div class="flex justify-center static mb-16">
     <!--implementar no button:-->
