@@ -59,10 +59,13 @@ export const login = async ( req, res, next ) => {
             process.env.JWT_SECRET
         );
 
+        const origin = req.headers.origin;
+        const isAngularFrontend = origin === 'http://localhost:4200'; 
+        
         res.cookie( "acess_token", token, {
-            secure: true,
-            sameSite: 'None', // Allow in cross-site requests
-            httpOnly: false
+            /* secure: true,
+            sameSite: 'None', */ // Allow in cross-site requests
+            httpOnly: true
         } )
             .status( 200 )
             .json( {

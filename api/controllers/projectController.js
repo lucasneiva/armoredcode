@@ -66,13 +66,13 @@ export const createProject = async ( req, res, next ) => {
         const newProjectData = req.body;
         newProjectData.clientId = decodedToken.id;
 
-        /*
+        
         try {
             await validateData( projectJoiSchema, newprojectData );
         } catch ( error ) {
             return next( CreateError( "400", error.message ));
         }
-        */
+        
 
         const newproject = new project( newProjectData );
 
