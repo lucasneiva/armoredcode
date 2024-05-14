@@ -3,6 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProjectService } from '../../services/project.service';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 
 
@@ -15,40 +16,13 @@ import { Router, RouterModule } from '@angular/router';
 })
 export default class CreateProjectComponent implements OnInit{
   fb = inject(FormBuilder);
+  authService = inject(AuthService);
   projectService = inject(ProjectService);
   router = inject(Router);
   createProjectForm !: FormGroup;
-  descrypitionForm !: FormControl;
  
 
   ngOnInit() {
-    /*
-    this.descrypitionForm = new FormGroup({
-      desc: new FormControl(''),
-    });
-
-    this.createProjectForm = this.fb.group({
-      
-      clientId: ['',Validators.required],
-      freelancerId: [''],
-      projectCategoryId: ['',Validators.required],
-      skillIds: [''],
-      projectTitle: ['',Validators.required],
-      projectDescription: [this.descrypitionForm.get('desc')],
-      projectHourlyRate: [''],
-      projectBudget: [''],
-      pricingType: ['',Validators.required],
-      estimatedDuration: ['',Validators.required],
-      projectSize: [''],
-      projectStatus: [''],
-      experienceLevel: [''],
-      workModel: ['',Validators.required],
-      location: [''],
-      startDate: [''],
-      endDate: [''],
-    },
-    );
-    */
 
     this.createProjectForm = this.fb.group({
       clientId: ['',Validators.required],
@@ -58,9 +32,7 @@ export default class CreateProjectComponent implements OnInit{
       projectTitle: ['',Validators.required],
 
       //descrição do projeto do form separado
-      descrypitionForm:  this.fb.group({
-        projectDescription: ['',Validators.required],
-      }),
+      projectDescription:  ['',Validators.required],
 
       projectHourlyRate: [''],
       projectBudget: [''],
@@ -83,8 +55,10 @@ export default class CreateProjectComponent implements OnInit{
     .subscribe({
       next:(res)=>{
         alert("project Created!")
-        this.createProjectForm.reset();
+        localStorage.setItem("user_id", res.data._id);
+        this.projectService.isDraft$.next(true);
         this.router.navigate(['manage-project'])
+        this.createProjectForm.reset();
       },
       error:(err)=>{
         console.log(err);
@@ -94,8 +68,8 @@ export default class CreateProjectComponent implements OnInit{
 
   CancelProject(){
     alert("project Canceled!")
-    this.createProjectForm.reset();
     this.router.navigate(['manage-project'])
+    this.createProjectForm.reset();
   }
 
   /*
