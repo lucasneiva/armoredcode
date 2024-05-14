@@ -12,7 +12,7 @@ export class ProjectService {
   isPosted$ = new BehaviorSubject<boolean>(false);
   
   createProjectService(projectObj: any){
-    return this.http.post<any>(`${apiUrls.projectServiceApi}createProject`, projectObj);
+    return this.http.post<any>(`${apiUrls.projectServiceApi}`, projectObj);
   }
 
 /*

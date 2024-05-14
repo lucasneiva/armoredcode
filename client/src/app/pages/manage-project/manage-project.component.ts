@@ -11,7 +11,7 @@ import { Project, ProjectService } from '../../services/project.service';
   styleUrl: './manage-project.component.scss'
 })
 export default class ManageProjectComponent implements OnInit{
-  private projectService = inject(ProjectService);
+  //private projectService = inject(ProjectService);
   projects: Project[] = [];
 
   ngOnInit(): void {

@@ -78,7 +78,7 @@ export default class CreateProjectComponent implements OnInit{
   }
   
   CreateProject(){
-    //debug//console.log(this.createProjectForm.value);
+    /*debug*/ console.log(this.createProjectForm.value);
     this.projectService.createProjectService(this.createProjectForm.value)
     .subscribe({
       next:(res)=>{
