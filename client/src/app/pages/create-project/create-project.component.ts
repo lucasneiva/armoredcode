@@ -18,9 +18,10 @@ export default class CreateProjectComponent implements OnInit{
   projectService = inject(ProjectService);
   router = inject(Router);
   createProjectForm !: FormGroup;
-  descrypitionForm !: FormGroup;
+ 
 
   ngOnInit() {
+    /*
     this.descrypitionForm = new FormGroup({
       desc: new FormControl(''),
     });
@@ -32,7 +33,34 @@ export default class CreateProjectComponent implements OnInit{
       projectCategoryId: ['',Validators.required],
       skillIds: [''],
       projectTitle: ['',Validators.required],
-      projectDescription: [this.descrypitionForm],
+      projectDescription: [this.descrypitionForm.get('desc')],
+      projectHourlyRate: [''],
+      projectBudget: [''],
+      pricingType: ['',Validators.required],
+      estimatedDuration: ['',Validators.required],
+      projectSize: [''],
+      projectStatus: [''],
+      experienceLevel: [''],
+      workModel: ['',Validators.required],
+      location: [''],
+      startDate: [''],
+      endDate: [''],
+    },
+    );
+    */
+
+    this.createProjectForm = this.fb.group({
+      clientId: ['',Validators.required],
+      freelancerId: [''],
+      projectCategoryId: ['',Validators.required],
+      skillIds: [''],
+      projectTitle: ['',Validators.required],
+
+      //descrição do projeto do form separado
+      descrypitionForm:  this.fb.group({
+        projectDescription: ['',Validators.required],
+      }),
+
       projectHourlyRate: [''],
       projectBudget: [''],
       pricingType: ['',Validators.required],
