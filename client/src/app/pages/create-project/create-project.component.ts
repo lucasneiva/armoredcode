@@ -3,6 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProjectService } from '../../services/project.service';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 
 
@@ -15,6 +16,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export default class CreateProjectComponent implements OnInit{
   fb = inject(FormBuilder);
+  authService = inject(AuthService);
   projectService = inject(ProjectService);
   router = inject(Router);
   createProjectForm !: FormGroup;
@@ -83,8 +85,10 @@ export default class CreateProjectComponent implements OnInit{
     .subscribe({
       next:(res)=>{
         alert("project Created!")
-        this.createProjectForm.reset();
+        localStorage.setItem("user_id", res.data._id);
+        this.projectService.isDraft$.next(true);
         this.router.navigate(['manage-project'])
+        this.createProjectForm.reset();
       },
       error:(err)=>{
         console.log(err);
@@ -94,8 +98,8 @@ export default class CreateProjectComponent implements OnInit{
 
   CancelProject(){
     alert("project Canceled!")
-    this.createProjectForm.reset();
     this.router.navigate(['manage-project'])
+    this.createProjectForm.reset();
   }
 
   /*
