@@ -97,7 +97,7 @@ app.listen( 8800, async () => {
 
 
     } catch ( error ) {
-        console.error( `Error connecting to MongoDB: ${err}` );
+        console.error( `Error connecting to MongoDB: ${error}` );
     }
 
 } );
