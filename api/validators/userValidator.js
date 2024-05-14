@@ -1,11 +1,9 @@
-import Joi from 'joi';
 
-const userJoiSchema = Joi.object( {
-    username: Joi.string().alphanum().min( 3 ).max( 30 ).required(),
-    email: Joi.string().email().required(),
-    password: Joi.string().min( 6 ).required(),
-    role: Joi.string().valid( "CLIENT", "FREELANCER" ).required(), // Assuming enum roles
-} );
+// userValidator.js
+import { generateValidator } from './validatorGenerator.js';
+import User from '../models/userModel.js';
+
+const userJoiSchema = generateValidator( User.schema );
 
 export default userJoiSchema;
 

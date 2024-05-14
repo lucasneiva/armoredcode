@@ -36,9 +36,11 @@ app.use( cookieParser() );
 app.use( cors( {
     origin: 'http://localhost:4200', // Your frontend origin
     credentials: true,  // Allow cookies
+    /*
     allowedHeaders: [ 'Content-Type', 'Authorization' ],
     methods: [ 'GET', 'POST', 'PUT', 'DELETE' ],
     exposedHeaders: [ 'Set-Cookie' ] // Important for letting frontend access cookies
+    */
 } ) );
 
 // Routes
