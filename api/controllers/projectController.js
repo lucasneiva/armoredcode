@@ -2,8 +2,6 @@ import project from "../models/projectModel.js"
 import { CreateError } from "../utils/error.js"
 import { CreateSuccess } from "../utils/success.js";
 import jwt from 'jsonwebtoken';
-import mongoose from "mongoose";
-import projectJoiSchema from "../validators/projectValidator.js";
 import { validateData } from "../utils/validateData.js";
 import { connectToDatabase } from "../db.js";
 
