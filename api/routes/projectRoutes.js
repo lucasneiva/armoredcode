@@ -8,6 +8,6 @@ router.get( '/search', searchProjects );
 
 router.get( '/:id', getProjectById );
 
-router.post( '/createProject', verifyClient, createProject );
+router.post( '/create-project', verifyClient, createProject );
 
 export default router;
