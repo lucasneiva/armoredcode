@@ -59,7 +59,11 @@ export const login = async ( req, res, next ) => {
             process.env.JWT_SECRET
         );
 
-        res.cookie( "acess_token", token, { httpOnly: true } )
+        res.cookie("acess_token", token, {
+            secure: true,
+            sameSite:'strict',
+            httpOnly: false
+          })
             .status( 200 )
             .json( {
                 status: 200,
