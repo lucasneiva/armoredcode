@@ -20,7 +20,7 @@ export default class CreateProjectComponent implements OnInit{
   projectService = inject(ProjectService);
   router = inject(Router);
   createProjectForm !: FormGroup;
- 
+
 
   ngOnInit() {
 
@@ -32,23 +32,43 @@ export default class CreateProjectComponent implements OnInit{
       projectTitle: ['',Validators.required],
 
       //descrição do projeto do form separado
-      projectDescription:  ['',Validators.required],
-
+      //projectDescription:  ['Seeking a skilled developer to build a modern and responsive e-commerce website with secure payment integration.', Validators.required], 
+      projectDescription:  ['', Validators.required], 
+      
       projectHourlyRate: [''],
+      /* //error
+      projectHourlyRate: this.fb.group({ 
+        min: [], 
+        max: [], 
+      }),
+      */
       projectBudget: [''],
+      /* //error
+      projectBudget: this.fb.group({ 
+        min: [], 
+        max: [], 
+      }),
+      */
       pricingType: ['',Validators.required],
       estimatedDuration: ['',Validators.required],
       projectSize: [''],
       projectStatus: [''],
       experienceLevel: [''],
       workModel: ['',Validators.required],
-      location: [''],
+      //location: ['',Validators.required],
+      location: this.fb.group({ 
+        city: ['Sorocaba'], 
+        state: ['SP'], 
+        country: ['Brazil'] 
+      }),
       startDate: [''],
       endDate: [''],
+      
     },
     );
   }
-  
+
+
   CreateProject(){
     /*debug*/ console.log(this.createProjectForm.value);
     this.projectService.createProjectService(this.createProjectForm.value)
