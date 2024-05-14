@@ -1,4 +1,4 @@
-<div class="lg:w-3/12 mt-5 p-10 shadow-lg mx-auto bg-white" style="margin-top: 15%;">
+<ng-container class="lg:w-3/12 mt-5 p-10 shadow-lg mx-auto bg-white" style="margin-top: 15%;">
     <div class="block text-wrap max-w-lg mx-auto">
         <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
         <p class="text-left text-2xl text-gray-600 mt-4">
@@ -12,18 +12,12 @@
         </button>
     </div>
 
-</div>
+</ng-container>
 
-
-
-
-
-
-
-
-
-
-
+<!--app-project-card-->
+<ng-container *ngFor="let project of projects" >
+    <app-project-card [project]="project"></app-project-card>
+</ng-container>
 
 <!--card placeholder
 <div style="top: calc(1rem * 1);"

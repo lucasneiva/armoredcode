@@ -18,6 +18,7 @@ export default class CreateProjectComponent implements OnInit{
   projectService = inject(ProjectService);
   router = inject(Router);
   createProjectForm !: FormGroup;
+  descrypitionForm !: FormControl;
  
 
   ngOnInit() {
