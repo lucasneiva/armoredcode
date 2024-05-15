@@ -20,7 +20,7 @@ export default class CreateProjectComponent implements OnInit{
   projectService = inject(ProjectService);
   router = inject(Router);
   createProjectForm !: FormGroup;
-
+  datePipe: any;
 
   ngOnInit() {
 
@@ -57,17 +57,50 @@ export default class CreateProjectComponent implements OnInit{
       workModel: ['',Validators.required],
       //location: ['',Validators.required],
       location: this.fb.group({ 
-        city: ['Sorocaba'], 
+        city: ['SOROCABA'], 
         state: ['SP'], 
-        country: ['Brazil'] 
+        country: ['BRAZIL'] 
       }),
+      //CAMPOS CALCULADOS
       startDate: [''],
       endDate: [''],
       
     },
     );
   }
+  /*
+  set pricingType(value:String){
+    if(value="BUDGET"){
+      this.projectHourlyRate = null; 
+    }
+    else(){
+      this.projectBudget = null; 
+    }
+  }
+  */
+  set freelancerId(value:null){
+    this.freelancerId = value;
+  }
 
+  get clientId(){
+    //return this.authService.isLoggedIn();
+    return localStorage.getItem("user_id");
+  } 
+
+  get startDate(){
+    const currentDateAndTime = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
+    return  currentDateAndTime;
+  }
+
+  public get duration(){
+    return this.endDate;
+  }
+
+  get endDate(){
+    const currentDateAndTime = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
+    let duration = this.datePipe.transform(new Date(), 'HH');
+    return (currentDateAndTime + duration);
+  }
 
   CreateProject(){
     /*debug*/ console.log(this.createProjectForm.value);
