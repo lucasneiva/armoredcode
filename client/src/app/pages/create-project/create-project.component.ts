@@ -25,8 +25,8 @@ export default class CreateProjectComponent implements OnInit{
   ngOnInit() {
 
     this.createProjectForm = this.fb.group({
-      clientId: ['',Validators.required],
-      freelancerId: [''],
+      clientId: [this.clientId,Validators.required],
+      freelancerId: [this.freelancerId],
       projectCategoryId: ['',Validators.required],
       skillIds: [''],
       projectTitle: ['',Validators.required],
