@@ -36,16 +36,15 @@ export default class CreateProjectComponent implements OnInit{
       projectDescription:  ['', Validators.required], 
       
       //projectHourlyRate: [],
-      
       projectHourlyRate: this.fb.group({
-        min: [0, Validators.required],
-        max: [0, Validators.required],
+        min: [ , Validators.required],
+        max: [ , Validators.required],
       }),
 
       //projectBudget: [],
       projectBudget: this.fb.group({
-        min: [0, Validators.required],
-        max: [0, Validators.required],
+        min: [ , Validators.required],
+        max: [ , Validators.required],
       }),
       
       pricingType: ['',Validators.required],
@@ -68,27 +67,12 @@ export default class CreateProjectComponent implements OnInit{
     );
   }
 
-  
-  
-  set projectBudget(value:null){
+  set projectBudget(value:any){
     this.projectBudget = value;
   }
 
-  set projectHourlyRate(value:null){
+  set projectHourlyRate(value:any){
     this.projectHourlyRate = value;
-  }
-
-  set pricingType(value:any){
-    this.pricingType = value;
-    if(this.pricingType ="BUDGET"){
-      this.projectHourlyRate = null;
-    }
-    else if(this.pricingType ="HOURLY_RATE"){
-      this.projectBudget = null;
-    }
-    else{
-      console.log("value not permitted!")
-    }
   }
     
   set freelancerId(value:null){
@@ -118,6 +102,8 @@ export default class CreateProjectComponent implements OnInit{
     return (currentDateAndTime + duration);
   }
 
+  
+
   CreateProject(){
     /*debug*/ console.log(this.createProjectForm.value);
     this.projectService.createProjectService(this.createProjectForm.value)
@@ -141,6 +127,19 @@ export default class CreateProjectComponent implements OnInit{
     this.createProjectForm.reset();
   }
 
+  Test(selectedOption: string){
+    switch (selectedOption) {
+      case 'BUDGET':
+        
+        break;
+      case 'HOURLY_RATE':
+        
+        break;
+      default:
+        // Handle default values or reset to initial values
+        break;
+    }
+  }
   /*
   PublishProject(){
     this.projectService.createProjectForm(this.createProjectForm.value)
@@ -156,11 +155,5 @@ export default class CreateProjectComponent implements OnInit{
     })
   }
   */
- // Later in your code, to access the controls:
- /*
- projectHourlyRateMinControl = this.createProjectForm.get('projectHourlyRate').get('min');
- projectHourlyRateMaxControl = this.createProjectForm.get('projectHourlyRate').get('max');
- projectBudgetMinControl = this.createProjectForm.get('projectHourlyRate').get('min');
- projectBudgetMaxControl = this.createProjectForm.get('projectHourlyRate').get('max');
- */
+
 }
