@@ -1,8 +1,8 @@
 import ClientProfile from "../models/clientProfileModel.js";
 import FreelancerProfile from "../models/freelancerProfileModel.js";
 import User from "../models/userModel.js";
-import { CreateError } from "../utils/error.js";
-import { CreateSuccess } from "../utils/success.js";
+import { createError } from "../utils/error.js";
+import { createSuccess } from "../utils/success.js";
 
 export const createProfile = async ( req, res, next ) => {
     const userId = req.user.id;
@@ -21,7 +21,7 @@ export const createProfile = async ( req, res, next ) => {
             const existingProfile = await ClientProfile.findOne( { userId: userId } );
             
             if ( existingProfile )
-                return next( CreateError( 400, "User has a profile already!" ) );
+                return next( createError( 400, "User has a profile already!" ) );
 
 
             profile = new ClientProfile( profileData );
@@ -30,22 +30,22 @@ export const createProfile = async ( req, res, next ) => {
             const existingProfile = await FreelancerProfile.findOne( { userId: userId } );
 
             if ( existingProfile )
-                return next( CreateError( 400, "User has a profile already!" ) );
+                return next( createError( 400, "User has a profile already!" ) );
             
             
             profile = new FreelancerProfile( profileData );
 
         } else {
-            return next( CreateError( 400, "Invalid role!" ) );
+            return next( createError( 400, "Invalid role!" ) );
 
         }
 
         await profile.save();
 
-        return next( CreateSuccess( 200, "Profile created successfully!" ) );
+        return next( createSuccess( 200, "Profile created successfully!" ) );
 
     } catch ( error ) {
-        return next( CreateError( 500, "Error creating profile", error ) );
+        return next( createError( 500, "Error creating profile", error ) );
 
     }
 };

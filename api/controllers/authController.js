@@ -1,10 +1,11 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
-import { CreateError } from "../utils/error.js";
-import { CreateSuccess } from "../utils/success.js";
+import { createError } from "../utils/error.js";
+import { createSuccess } from "../utils/success.js";
 import jwt from "jsonwebtoken";
 import UserToken from "../models/userTokenModel.js";
 import nodemailer from "nodemailer";
+import { handleValidationError } from "../utils/handleValidationError.js";
 
 export const register = async ( req, res, next ) => {
     try {
@@ -24,18 +25,9 @@ export const register = async ( req, res, next ) => {
 
         await newUser.save();
 
-        return next( CreateSuccess( 200, "User Registered Successfully!" ) );
+        return next( createSuccess( 200, "User Registered Successfully!" ) );
     } catch ( error ) {
-        if ( error.name === 'ValidationError' ) {
-            const errors = {};
-            Object.keys( error.errors ).forEach( ( key ) => {
-                errors[ key ] = error.errors[ key ].message;
-            } );
-            return next( CreateError( 400, errors ) );
-        } else {
-            console.error( error );
-            return next( CreateError( 500, 'Internal Server Error' ) );
-        }
+        handleValidationError( error, next );
     }
 };
 
@@ -44,14 +36,14 @@ export const login = async ( req, res, next ) => {
         const user = await User.findOne( { email: req.body.email } );
 
         if ( !user ) {
-            return next( CreateError( 404, "User Not Found!" ) );
+            return next( createError( 404, "User Not Found!" ) );
             // return res.status( 404 ).send( "User not found!" );
         }
 
         const isPasswordCorrect = await bcrypt.compare( req.body.password, user.password );
 
         if ( !isPasswordCorrect ) {
-            return CreateError( 400, "Password is incorrect!" );
+            return createError( 400, "Password is incorrect!" );
             // return res.status( 400 ).send( "Password is incorrect!" );
         }
 
@@ -76,7 +68,7 @@ export const login = async ( req, res, next ) => {
             } );
 
     } catch ( error ) {
-        return next( CreateError( 500, "Internal Server Error!" ) );
+        return next( createError( 500, "Internal Server Error!" ) );
 
     }
 
@@ -87,7 +79,7 @@ export const sendEmail = async ( req, res, next ) => {
     const user = await User.findOne( { email: { $regex: '^' + email + '$', $options: 'i' } } )
 
     if ( !user ) {
-        return next( CreateError( 404, "User not found to rest the email!" ) )
+        return next( createError( 404, "User not found to rest the email!" ) )
     }
 
     const payload = {
@@ -134,10 +126,10 @@ export const sendEmail = async ( req, res, next ) => {
     mailTransporter.sendMail( mailDetails, async ( err, data ) => {
         if ( err ) {
             console.log( err );
-            return next( CreateError( 500, "Something went wrong while sending the email" ) );
+            return next( createError( 500, "Something went wrong while sending the email" ) );
         } else {
             await newToken.save();
-            return next( CreateSuccess( 200, "Email Sent Successfully!" ) );
+            return next( createSuccess( 200, "Email Sent Successfully!" ) );
         }
     } )
 
@@ -150,7 +142,7 @@ export const resetPassword = async ( req, res, next ) => {
     console.log( "Entrou na func" );
     jwt.verify( token, process.env.JWT_SECRET, async ( err, data ) => {
         if ( err ) {
-            return next( CreateError( 500, "Reset Link is Expired!" ) )
+            return next( createError( 500, "Reset Link is Expired!" ) )
         } else {
             const response = data;
             const user = await User.findOne( { email: { $regex: '^' + response.email + '$', $options: 'i' } } );
@@ -167,9 +159,9 @@ export const resetPassword = async ( req, res, next ) => {
                     { $set: user },
                     { new: true }
                 )
-                return next( CreateSuccess( 200, "Password Reset Success!" ) );
+                return next( createSuccess( 200, "Password Reset Success!" ) );
             } catch ( error ) {
-                return next( CreateError( 500, "Something went worng while resetting the password!" ) );
+                return next( createError( 500, "Something went worng while resetting the password!" ) );
             }
 
 

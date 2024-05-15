@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { CreateError } from './error.js';
+import { createError } from './error.js';
 
 export const verifyToken = ( req, res, next ) => {
 
@@ -7,7 +7,7 @@ export const verifyToken = ( req, res, next ) => {
     console.log(token);
     if ( !token ) {
         try {
-            return next( CreateError( 401, "Not Authenticated!" ) );
+            return next( createError( 401, "Not Authenticated!" ) );
         } catch ( err ) {
             console.error( err );
             res.status( 401 ).send( { message: "Not Authenticated!" } );
@@ -16,7 +16,7 @@ export const verifyToken = ( req, res, next ) => {
 
     jwt.verify( token, process.env.JWT_SECRET, ( err, user ) => {
         if ( err )
-            return next( CreateError( 403, "Invalid Token!" ) );
+            return next( createError( 403, "Invalid Token!" ) );
         
         console.log( "here" );
         req.user = user;
@@ -34,7 +34,7 @@ export const verifyUser = ( req, res, next ) => {
             next();
 
         } else {
-            return next( CreateError( 403, "Not Authorized!" ) );
+            return next( createError( 403, "Not Authorized!" ) );
 
         }
 
@@ -51,7 +51,7 @@ export const verifyClient = ( req, res, next ) => {
             next();
 
         } else {
-            return next( CreateError( 403, "Not Authorized As Client!" ) );
+            return next( createError( 403, "Not Authorized As Client!" ) );
 
         }
 
@@ -67,7 +67,7 @@ export const verifyFreelancer = ( req, res, next ) => {
             next();
 
         } else {
-            return next( CreateError( 403, "Not Authorized As Freelancer!" ) );
+            return next( createError( 403, "Not Authorized As Freelancer!" ) );
 
         }
 

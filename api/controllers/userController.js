@@ -1,16 +1,16 @@
-import { CreateError } from "../utils/error.js"
+import { createError } from "../utils/error.js"
 import User from "../models/userModel.js"
-import { CreateSuccess } from "../utils/success.js";
+import { createSuccess } from "../utils/success.js";
 
 
 
 export const getAllUsers = async ( req, res, next ) => {
     try {
         const users = await User.find();
-        return next( CreateSuccess( 200, "All users", users ) );
+        return next( createSuccess( 200, "All users", users ) );
 
     } catch ( error ) {
-        return next( CreateError( 500, "Internal Server Error!" ) );
+        return next( createError( 500, "Internal Server Error!" ) );
     }
 }
 
@@ -19,12 +19,12 @@ export const getById = async ( req, res, next ) => {
         const user = await User.findById( req.params.id );
 
         if ( !user )
-            return next( CreateError( 404, "User not found!" ) );
+            return next( createError( 404, "User not found!" ) );
 
-        return next( CreateSuccess( 200, "User Data", user ) );
+        return next( createSuccess( 200, "User Data", user ) );
 
     } catch ( error ) {
-        return next( CreateError( 500, "Internal Server Error!" ) );
+        return next( createError( 500, "Internal Server Error!" ) );
 
     }
 
@@ -39,7 +39,7 @@ export const updateUser = async ( req, res, next ) => {
 
         const user = await User.findById( userId );
         if ( !user ) {
-            return next( CreateError( 404, "User not found!" ) );
+            return next( createError( 404, "User not found!" ) );
         }
 
         user.username = updateData.username || user.username;
@@ -47,9 +47,9 @@ export const updateUser = async ( req, res, next ) => {
         
         await user.save();
 
-        return next( CreateSuccess( 200, "User updated successfully!", user ) );
+        return next( createSuccess( 200, "User updated successfully!", user ) );
 
     } catch ( error ) {
-        return next( CreateError( 500, "Internal Server Error!" ) );
+        return next( createError( 500, "Internal Server Error!" ) );
     }
 };
