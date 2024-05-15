@@ -75,8 +75,7 @@ export const createProject = async ( req, res, next ) => {
         return next( createSuccess( 200, "Project Created!" ) );
 
     } catch ( error ) {
-        console.error( error );
-        return next( createError( 500, "Internal Server Error!" ) );
+        handleValidationError( error, next );
     }
 
 };
