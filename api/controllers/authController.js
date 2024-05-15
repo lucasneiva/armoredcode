@@ -5,37 +5,38 @@ import { CreateSuccess } from "../utils/success.js";
 import jwt from "jsonwebtoken";
 import UserToken from "../models/userTokenModel.js";
 import nodemailer from "nodemailer";
-import userJoiSchema from "../validators/userValidator.js";
-import { validateData } from "../utils/validateData.js";
-import ClientProfile from "../models/clientProfileModel.js";
-import FreelancerProfile from "../models/freelancerProfileModel.js";
-import ROLES from "../utils/roles.js";
 
 export const register = async ( req, res, next ) => {
-    const newUserData = req.body;
-
     try {
-        await validateData( userJoiSchema, newUserData );
+        const newUserData = req.body;
+
+        const salt = await bcrypt.genSalt( 10 );
+        const hashPassword = await bcrypt.hash( newUserData.password, salt );
+
+
+        const newUser = new User( {
+            username: newUserData.username,
+            email: newUserData.email,
+            password: hashPassword,
+            role: newUserData.role,
+            profile: null
+        } );
+
+        await newUser.save();
+
+        return next( CreateSuccess( 200, "User Registered Successfully!" ) );
     } catch ( error ) {
-        return next( CreateError( 400, error.message ) );
+        if ( error.name === 'ValidationError' ) {
+            const errors = {};
+            Object.keys( error.errors ).forEach( ( key ) => {
+                errors[ key ] = error.errors[ key ].message;
+            } );
+            return next( CreateError( 400, errors ) );
+        } else {
+            console.error( error );
+            return next( CreateError( 500, 'Internal Server Error' ) );
+        }
     }
-
-    const salt = await bcrypt.genSalt( 10 );
-    const hashPassword = await bcrypt.hash( newUserData.password, salt );
-
-
-    const newUser = new User( {
-        username: newUserData.username,
-        email: newUserData.email,
-        password: hashPassword,
-        role: newUserData.role,
-        profile: null
-    } );
-
-    await newUser.save();
-
-    return next( CreateSuccess( 200, "User Registered Successfully!" ) );
-    // return res.status( 200 ).json( "User Registered Successfully!" );
 };
 
 export const login = async ( req, res, next ) => {
@@ -60,8 +61,8 @@ export const login = async ( req, res, next ) => {
         );
 
         const origin = req.headers.origin;
-        const isAngularFrontend = origin === 'http://localhost:4200'; 
-        
+        const isAngularFrontend = origin === 'http://localhost:4200';
+
         res.cookie( "acess_token", token, {
             /* secure: true,
             sameSite: 'None', */ // Allow in cross-site requests
@@ -73,8 +74,6 @@ export const login = async ( req, res, next ) => {
                 message: "Login Success",
                 data: user
             } );
-
-        // return next(CreateSuccess(200, "Login Success!"));
 
     } catch ( error ) {
         return next( CreateError( 500, "Internal Server Error!" ) );

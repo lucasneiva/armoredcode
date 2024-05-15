@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import { validateData } from "../utils/validateData.js";
 import { connectToDatabase } from "../db.js";
 import mongoose from "mongoose";
+// import projectJoiSchema from "../validators/projectValidator.js"
 
 export const searchProjects = async ( req, res, next ) => {
     try {
@@ -66,13 +67,13 @@ export const createProject = async ( req, res, next ) => {
         const newProjectData = req.body;
         newProjectData.clientId = decodedToken.id;
 
-        
+        /*        
         try {
-            await validateData( projectJoiSchema, newprojectData );
+            await validateData( projectJoiSchema, newProjectData );
         } catch ( error ) {
             return next( CreateError( "400", error.message ));
         }
-        
+        */
 
         const newproject = new project( newProjectData );
 
