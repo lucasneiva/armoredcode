@@ -34,32 +34,34 @@
                     <label for="priceHour" class="m-2 font-normal">Hourly Rate</label><br>
                 </div>
             </div>
-            <div class="flex justify-start align-middle overflow-auto" id="budget">
+            <div formGroupName="projectHourlyRate" class="hidden justify-start align-middle overflow-auto" id="hourlyrate">
                 <div class="m-3">
-                    <h2 class="font-semibold mt-2">From:</h2>
-                    <input formControlName="projectBudget" type="text" placeholder="Min budget" id="minbudget"
-                        class="text-center max-w-24 p-1">
+                    <h2 class="font-semibold mt-2">Min Rate:</h2>
+                    <input type="number" id="minHourlyRate" formControlName="min" required
+                     class="text-center max-w-24 p-1">
                 </div>
+                
                 <div class="m-3">
-                    <h2 class="font-semibold mt-2">To:</h2>
-                    <input formControlName="projectBudget" type="text" placeholder="Max budget" id="maxbudget"
-                        class="text-center max-w-24 p-1">
+                    <h2 class="font-semibold mt-2">Max Rate:</h2>
+                    <input type="number" id="maxHourlyRate" formControlName="max" required
+                     class="text-center max-w-24 p-1">
                 </div>
             </div>
-            <div class="hidden justify-start align-middle overflow-auto" id="hourlyrate">
+            
+            <div formGroupName="projectBudget" class="flex justify-start align-middle overflow-auto" id="budget">
                 <div class="m-3">
-                    <h2 class="font-semibold mt-2">From:</h2>
-                    <input formControlName="projectHourlyRate" type="text" placeholder="Min value" id="minhr"
-                        class="text-center max-w-24 p-1">
+                    <h2 class="font-semibold mt-2">Min Budget:</h2>
+                    <input formControlName="min" type="text" placeholder="Min budget" id="minbudget" required
+                    class="text-center max-w-24 p-1">
                 </div>
                 <div class="m-3">
-                    <h2 class="font-semibold mt-2">To:</h2>
-                    <input formControlName="projectHourlyRate" type="text" placeholder="Max value" id="maxhr"
-                        class="text-center max-w-24 p-1">
+                    <h2 class="font-semibold mt-2">Max Budget:</h2>
+                    <input formControlName="max" type="text" placeholder="Max budget" id="maxbudget" required 
+                    class="text-center max-w-24 p-1">
                 </div>
             </div>
         </div>
-
+        
 
         <div class="p-1 ">
             <h2 class="font-semibold mt-4">Estimated duration:</h2>

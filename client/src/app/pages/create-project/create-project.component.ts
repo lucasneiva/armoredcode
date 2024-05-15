@@ -28,27 +28,26 @@ export default class CreateProjectComponent implements OnInit{
       clientId: [this.clientId,Validators.required],
       freelancerId: [this.freelancerId],
       projectCategoryId: ['',Validators.required],
-      skillIds: [''],
+      skillIds: [],
       projectTitle: ['',Validators.required],
 
       //descrição do projeto do form separado
       //projectDescription:  ['Seeking a skilled developer to build a modern and responsive e-commerce website with secure payment integration.', Validators.required], 
       projectDescription:  ['', Validators.required], 
       
-      projectHourlyRate: [''],
-      /* //error
-      projectHourlyRate: this.fb.group({ 
-        min: [], 
-        max: [], 
+      //projectHourlyRate: [],
+      
+      projectHourlyRate: this.fb.group({
+        min: [0, Validators.required],
+        max: [0, Validators.required],
       }),
-      */
-      projectBudget: [''],
-      /* //error
-      projectBudget: this.fb.group({ 
-        min: [], 
-        max: [], 
+
+      //projectBudget: [],
+      projectBudget: this.fb.group({
+        min: [0, Validators.required],
+        max: [0, Validators.required],
       }),
-      */
+      
       pricingType: ['',Validators.required],
       estimatedDuration: ['',Validators.required],
       projectSize: [''],
@@ -68,16 +67,30 @@ export default class CreateProjectComponent implements OnInit{
     },
     );
   }
-  /*
-  set pricingType(value:String){
-    if(value="BUDGET"){
-      this.projectHourlyRate = null; 
+
+  
+  
+  set projectBudget(value:null){
+    this.projectBudget = value;
+  }
+
+  set projectHourlyRate(value:null){
+    this.projectHourlyRate = value;
+  }
+
+  set pricingType(value:any){
+    this.pricingType = value;
+    if(this.pricingType ="BUDGET"){
+      this.projectHourlyRate = null;
     }
-    else(){
-      this.projectBudget = null; 
+    else if(this.pricingType ="HOURLY_RATE"){
+      this.projectBudget = null;
+    }
+    else{
+      console.log("value not permitted!")
     }
   }
-  */
+    
   set freelancerId(value:null){
     this.freelancerId = value;
   }
@@ -87,15 +100,18 @@ export default class CreateProjectComponent implements OnInit{
     return localStorage.getItem("user_id");
   } 
 
+  //fix
   get startDate(){
     const currentDateAndTime = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
     return  currentDateAndTime;
   }
 
+  //fix
   public get duration(){
     return this.endDate;
   }
 
+  //fix
   get endDate(){
     const currentDateAndTime = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
     let duration = this.datePipe.transform(new Date(), 'HH');
@@ -140,4 +156,11 @@ export default class CreateProjectComponent implements OnInit{
     })
   }
   */
+ // Later in your code, to access the controls:
+ /*
+ projectHourlyRateMinControl = this.createProjectForm.get('projectHourlyRate').get('min');
+ projectHourlyRateMaxControl = this.createProjectForm.get('projectHourlyRate').get('max');
+ projectBudgetMinControl = this.createProjectForm.get('projectHourlyRate').get('min');
+ projectBudgetMaxControl = this.createProjectForm.get('projectHourlyRate').get('max');
+ */
 }
