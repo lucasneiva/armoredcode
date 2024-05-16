@@ -23,14 +23,14 @@
             <h2 class="font-semibold mt-4">Pricing:</h2>
             <div class="flex justify-start align-middle overflow-auto">
                 <div class="m-3">
-                    <input formControlName="pricingType" (change)="Test('BUDGET')"
+                    <input formControlName="pricingType" (change)="TestValue('BUDGET')"
                         onclick="document.getElementById('hourlyrate').style.display = 'none';
                         document.getElementById('budget').style.display = 'flex';"
                         type="radio" id="priceFix"name="pricingType" value="BUDGET" checked>
                     <label for="priceFix" class="m-2 font-normal">Budget</label><br>
                 </div>
                 <div class="m-3">
-                    <input formControlName="pricingType" (change)="Test('HOURLY_RATE')"
+                    <input formControlName="pricingType" (change)="TestValue('HOURLY_RATE')"
                         onclick="document.getElementById('budget').style.display = 'none';
                         document.getElementById('hourlyrate').style.display = 'flex';" 
                         type="radio" id="priceHour" name="pricingType" value="HOURLY_RATE">
@@ -40,13 +40,13 @@
             <div formGroupName="projectHourlyRate" class="hidden justify-start align-middle overflow-auto" id="hourlyrate">
                 <div class="m-3">
                     <h2 class="font-semibold mt-2">Min Rate:</h2>
-                    <input formControlName="min" type="number" id="minHourlyRate" required
+                    <input formControlName="min" type="number" placeholder="Min" id="minHourlyRate" required
                      class="text-center max-w-24 p-1">
                 </div>
                 
                 <div class="m-3">
                     <h2 class="font-semibold mt-2">Max Rate:</h2>
-                    <input formControlName="max" type="number" id="maxHourlyRate" required
+                    <input formControlName="max" type="number" placeholder="Max" id="maxHourlyRate" required
                      class="text-center max-w-24 p-1">
                 </div>
             </div>
@@ -54,12 +54,12 @@
             <div formGroupName="projectBudget" class="flex justify-start align-middle overflow-auto" id="budget">
                 <div class="m-3">
                     <h2 class="font-semibold mt-2">Min Budget:</h2>
-                    <input formControlName="min" type="text" placeholder="Min budget" id="minbudget" required
+                    <input formControlName="min" type="number" placeholder="Min" id="minbudget" required
                     class="text-center max-w-24 p-1">
                 </div>
                 <div class="m-3">
                     <h2 class="font-semibold mt-2">Max Budget:</h2>
-                    <input formControlName="max" type="text" placeholder="Max budget" id="maxbudget" required 
+                    <input formControlName="max" type="number" placeholder="Max" id="maxbudget" required 
                     class="text-center max-w-24 p-1">
                 </div>
             </div>

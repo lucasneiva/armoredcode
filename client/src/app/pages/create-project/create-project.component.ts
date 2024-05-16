@@ -138,13 +138,33 @@ export default class CreateProjectComponent implements OnInit{
     this.createProjectForm.reset();
   }
 
-  Test(selectedOption: string){
+  updateHourlyRate(newMin: number, newMax: number) {
+    this.createProjectForm.patchValue({
+      projectHourlyRate: {
+        min: newMin,
+        max: newMax
+      }
+    });
+  }
+
+  updateBudget(newMin: number, newMax: number) {
+    this.createProjectForm.patchValue({
+      projectBudget: {
+        min: newMin,
+        max: newMax
+      }
+    });
+  }
+
+  TestValue(selectedOption: string){
     switch (selectedOption) {
       case 'BUDGET':
-        
+        this.createProjectForm.patchValue({ projectHourlyRate: null });
+        this.updateHourlyRate(0, 0); 
         break;
       case 'HOURLY_RATE':
-        
+        this.createProjectForm.patchValue({ projectBudget: null });
+        this.updateBudget(0, 0); 
         break;
       default:
         // Handle default values or reset to initial values
