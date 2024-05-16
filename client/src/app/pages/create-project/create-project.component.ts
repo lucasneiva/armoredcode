@@ -27,7 +27,9 @@ export default class CreateProjectComponent implements OnInit{
     this.createProjectForm = this.fb.group({
       clientId: [this.clientId,Validators.required],
       freelancerId: [this.freelancerId],
-      projectCategoryId: ['',Validators.required],
+      //projectCategoryId: ['',Validators.required],
+      projectCategoryId: ['64f23b5c1c9d440000678901',],
+      
       skillIds: [],
       projectTitle: ['',Validators.required],
 
@@ -98,7 +100,7 @@ export default class CreateProjectComponent implements OnInit{
     .subscribe({
       next:(res)=>{
         alert("project Created!")
-        this.projectStatus = "DRAFT"
+        
         localStorage.setItem("user_id", res.data._id);
         this.projectService.isDraft$.next(true);
         this.router.navigate(['manage-project'])
@@ -116,7 +118,7 @@ export default class CreateProjectComponent implements OnInit{
     .subscribe({
       next:(res)=>{
         alert("project Created and Posted!")
-        this.projectStatus = "POSTED"
+        
         localStorage.setItem("user_id", res.data._id);
         this.projectService.isPosted$.next(true);
         this.router.navigate(['manage-project'])
