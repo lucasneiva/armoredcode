@@ -31,7 +31,6 @@ export default class CreateProjectComponent implements OnInit{
       skillIds: [],
       projectTitle: ['',Validators.required],
 
-      //descrição do projeto do form separado
       //projectDescription:  ['Seeking a skilled developer to build a modern and responsive e-commerce website with secure payment integration.', Validators.required], 
       projectDescription:  ['', Validators.required], 
       
@@ -50,21 +49,30 @@ export default class CreateProjectComponent implements OnInit{
       pricingType: ['',Validators.required],
       estimatedDuration: ['',Validators.required],
       projectSize: [''],
-      projectStatus: [''],
+      
+      // projectStatus: [''],
+      projectStatus: ['DRAFT'],
+      
       experienceLevel: [''],
       workModel: ['',Validators.required],
+
       //location: ['',Validators.required],
       location: this.fb.group({ 
         city: ['SOROCABA'], 
         state: ['SP'], 
         country: ['BRAZIL'] 
       }),
+
       //CAMPOS CALCULADOS
       startDate: [''],
       endDate: [''],
       
     },
     );
+  }
+
+  set projectStatus(value:String){
+    this.projectStatus = value;
   }
 
   set projectBudget(value:any){
@@ -84,32 +92,13 @@ export default class CreateProjectComponent implements OnInit{
     return localStorage.getItem("user_id");
   } 
 
-  //fix
-  get startDate(){
-    const currentDateAndTime = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
-    return  currentDateAndTime;
-  }
-
-  //fix
-  public get duration(){
-    return this.endDate;
-  }
-
-  //fix
-  get endDate(){
-    const currentDateAndTime = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
-    let duration = this.datePipe.transform(new Date(), 'HH');
-    return (currentDateAndTime + duration);
-  }
-
-  
-
   CreateProject(){
     /*debug*/ console.log(this.createProjectForm.value);
     this.projectService.createProjectService(this.createProjectForm.value)
     .subscribe({
       next:(res)=>{
         alert("project Created!")
+        this.projectStatus = "DRAFT"
         localStorage.setItem("user_id", res.data._id);
         this.projectService.isDraft$.next(true);
         this.router.navigate(['manage-project'])
@@ -121,8 +110,27 @@ export default class CreateProjectComponent implements OnInit{
     })
   }
 
+  PostProject(){
+    /*debug*/ console.log(this.createProjectForm.value);
+    this.projectService.createProjectService(this.createProjectForm.value)
+    .subscribe({
+      next:(res)=>{
+        alert("project Created and Posted!")
+        this.projectStatus = "POSTED"
+        localStorage.setItem("user_id", res.data._id);
+        this.projectService.isPosted$.next(true);
+        this.router.navigate(['manage-project'])
+        this.createProjectForm.reset();
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
+  }
+
   CancelProject(){
     alert("project Canceled!")
+    this.projectStatus = ""
     this.router.navigate(['manage-project'])
     this.createProjectForm.reset();
   }
@@ -140,20 +148,4 @@ export default class CreateProjectComponent implements OnInit{
         break;
     }
   }
-  /*
-  PublishProject(){
-    this.projectService.createProjectForm(this.createProjectForm.value)
-    .subscribe({
-      next:(res)=>{
-        alert("project Created!")
-        this.createProjectForm.reset();
-        this.router.navigate(['manage-project'])
-      },
-      error:(err)=>{
-        console.log(err);
-      }
-    })
-  }
-  */
-
 }

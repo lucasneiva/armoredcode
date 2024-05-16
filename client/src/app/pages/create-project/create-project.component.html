@@ -24,33 +24,15 @@
                 <div class="m-3">
                     <input formControlName="pricingType" (change)="Test('BUDGET')"
                         onclick="document.getElementById('hourlyrate').style.display = 'none';
-                        document.getElementById('budget').style.display = 'flex';
-                        radioButton = document.getElementById('priceFix'); // Replace with actual ID
-                        inputField1 = document.getElementById('minHourlyRate');
-                        inputField2 = document.getElementById('maxHourlyRate');
-                        radioButton.addEventListener('change', clearInputField);
-                        function clearInputField() {
-                            if (radioButton.checked) {
-                                inputField1.value = ''; // Clear the input field's value
-                                inputField2.value = ''; // Clear the input field's value
-                            }
-                        }" type="radio" id="priceFix"name="pricingType" value="BUDGET" checked>
+                        document.getElementById('budget').style.display = 'flex';"
+                        type="radio" id="priceFix"name="pricingType" value="BUDGET" checked>
                     <label for="priceFix" class="m-2 font-normal">Budget</label><br>
                 </div>
                 <div class="m-3">
                     <input formControlName="pricingType" (change)="Test('HOURLY_RATE')"
                         onclick="document.getElementById('budget').style.display = 'none';
-                        document.getElementById('hourlyrate').style.display = 'flex';
-                        radioButton = document.getElementById('priceHour'); // Replace with actual ID
-                        inputField1 = document.getElementById('minbudget');
-                        inputField2 = document.getElementById('maxbudget');
-                        radioButton.addEventListener('change', clearInputField);
-                        function clearInputField() {
-                            if (radioButton.checked) {
-                                inputField1.value = ''; // Clear the input field's value
-                                inputField2.value = ''; // Clear the input field's value
-                            }
-                        }" type="radio" id="priceHour" name="pricingType" value="HOURLY_RATE">
+                        document.getElementById('hourlyrate').style.display = 'flex';" 
+                        type="radio" id="priceHour" name="pricingType" value="HOURLY_RATE">
                     <label for="priceHour" class="m-2 font-normal">Hourly Rate</label><br>
                 </div>
             </div>
@@ -196,7 +178,7 @@
         class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
         Save
     </button>
-    <button 
+    <button (click)="PostProject()"
         class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
         Publish
     </button>
