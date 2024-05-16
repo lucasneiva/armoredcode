@@ -27,6 +27,8 @@ export const register = async ( req, res, next ) => {
 
         return next( createSuccess( 200, "User Registered Successfully!" ) );
     } catch ( error ) {
+        // console.log( error.name );
+        
         handleValidationError( error, next );
     }
 };
