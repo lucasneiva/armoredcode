@@ -53,7 +53,7 @@ export default class CreateProjectComponent implements OnInit{
       projectSize: [''],
       
       // projectStatus: [''],
-      projectStatus: ['DRAFT'],
+      projectStatus: [''],
       
       experienceLevel: [''],
       workModel: ['',Validators.required],
@@ -95,16 +95,17 @@ export default class CreateProjectComponent implements OnInit{
   } 
 
   CreateProject(){
+    this.createProjectForm.patchValue({ projectStatus: 'DRAFT' });
     /*debug*/ console.log(this.createProjectForm.value);
     this.projectService.createProjectService(this.createProjectForm.value)
     .subscribe({
       next:(res)=>{
         alert("project Created!")
         
-        localStorage.setItem("user_id", res.data._id);
+        //localStorage.setItem("project_id", res.data._id);
         this.projectService.isDraft$.next(true);
-        this.router.navigate(['manage-project'])
         this.createProjectForm.reset();
+        this.router.navigate(['manage-project'])
       },
       error:(err)=>{
         console.log(err);
@@ -113,13 +114,13 @@ export default class CreateProjectComponent implements OnInit{
   }
 
   PostProject(){
+    this.createProjectForm.patchValue({ projectStatus: 'POSTED' });
     /*debug*/ console.log(this.createProjectForm.value);
     this.projectService.createProjectService(this.createProjectForm.value)
     .subscribe({
       next:(res)=>{
         alert("project Created and Posted!")
         
-        localStorage.setItem("user_id", res.data._id);
         this.projectService.isPosted$.next(true);
         this.router.navigate(['manage-project'])
         this.createProjectForm.reset();
@@ -132,7 +133,7 @@ export default class CreateProjectComponent implements OnInit{
 
   CancelProject(){
     alert("project Canceled!")
-    this.projectStatus = ""
+    
     this.router.navigate(['manage-project'])
     this.createProjectForm.reset();
   }
