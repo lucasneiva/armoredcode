@@ -21,9 +21,9 @@ const generateLocationData = () => {
     ];
 
     return {
-        streetAddress: "Rua",
-        neighborhood: "Vila",
-        city: cities[ 0 ],
+        streetAddress: faker.location.streetAddress(),
+        neighborhood: faker.location.county(),
+        city: faker.helpers.arrayElement( cities ),
         state: "SP",
         cep: "99999-999",
         country: "BRAZIL"

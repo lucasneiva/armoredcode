@@ -1,29 +1,28 @@
 import Industry from "../models/industryModel.js";
+import { faker } from '@faker-js/faker';
 
-const industries = [
-    {
-        name: "Information Technology",
-        description: "Software, hardware, and technology services."
-    },
-    {
-        name: "Finance",
-        description: "Banking, investment, and financial services."
-    },
-    {
-        name: "Healthcare",
-        description: "Medical services, hospitals, and pharmaceuticals."
-    },
-    {
-        name: "Education",
-        description: "Schools, universities, and educational institutions."
-    }
-];
+const generateIndustryData = () => ( {
+    name: faker.lorem.word(),
+    description: faker.lorem.sentence()
+} );
 
-const seedIndustries = async () => {
+const seedIndustries = async ( count = 10 ) => {
     try {
+        const industries = [];
         await Industry.deleteMany( {} );
+
+        for ( let i = 0; i < count; i++ ) {
+            const newIndustry = generateIndustryData();
+            const existingIndustry = await Industry.findOne( { name: newIndustry.name } );
+            if ( !existingIndustry ) {
+                industries.push( newIndustry );
+            } else {
+                i--; // Retry if duplicate name found
+            }
+        }
+
         await Industry.insertMany( industries );
-        console.log( "Industry data seeded successfully!" );
+        console.log( `Seeded ${industries.length} industry documents successfully!` );
     } catch ( error ) {
         console.error( "Error seeding Industry data:", error );
     }

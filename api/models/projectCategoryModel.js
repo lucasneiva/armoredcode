@@ -6,6 +6,7 @@ const ProjectCategorySchema = new Schema( {
         type: String,
         required: true,
         maxLength: 50,
+        unique: true,
     },
 
     categoryDescription: {

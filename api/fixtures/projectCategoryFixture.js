@@ -1,31 +1,32 @@
 import ProjectCategory from "../models/projectCategoryModel.js";
+import { faker } from '@faker-js/faker';
 
-const projectCategories = [
-    {
-        categoryName: "Web Development",
-        categoryDescription: "Building and maintaining websites and web applications.",
-    },
-    {
-        categoryName: "Mobile App Development",
-        categoryDescription: "Creating applications for mobile devices.",
-    },
-    {
-        categoryName: "Data Science",
-        categoryDescription: "Analyzing and interpreting complex data.",
-    },
-    {
-        categoryName: "Design",
-        categoryDescription: "Creating visual concepts for products and brands.",
-    },
-];
+const generateProjectCategoryData = () => ( {
+    categoryName: faker.lorem.words( 3 ), // Use 3 words for category names
+    categoryDescription: faker.lorem.sentence()
+} );
 
-const seedProjectCategories = async () => {
+const seedProjectCategories = async ( count = 10 ) => {
     try {
+        const categories = [];
+        for ( let i = 0; i < count; i++ ) {
+            const newCategory = generateProjectCategoryData();
+            const existingCategory = await ProjectCategory.findOne( {
+                categoryName: newCategory.categoryName
+            } );
+
+            if ( !existingCategory ) {
+                categories.push( newCategory );
+            } else {
+                i--; // Retry if duplicate name found
+            }
+        }
+
         await ProjectCategory.deleteMany( {} );
-        await ProjectCategory.insertMany( projectCategories );
-        console.log( "Project Category data seeded successfully!" );
+        await ProjectCategory.insertMany( categories );
+        console.log( `Seeded ${categories.length} project category documents successfully!` );
     } catch ( error ) {
-        console.error( "Error seeding Project Category data:", error );
+        console.error( "Error seeding ProjectCategory data:", error );
     }
 };
 

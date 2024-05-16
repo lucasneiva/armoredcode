@@ -7,6 +7,7 @@ const SkillSchema = new Schema( {
         type: String,
         required: true,
         maxLentgh: 50,
+        unique: true,
     },
 
     skillDescription: {
