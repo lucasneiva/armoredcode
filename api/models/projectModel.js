@@ -22,19 +22,21 @@ const ProjectSchema = new Schema( {
         required: true
     },
 
-    skillIds: [{
+    skillIds: [ {
         type: Schema.Types.ObjectId,
         ref: "Skill"
-    }],
+    } ],
 
     projectTitle: {
         type: String,
-        required: true
+        required: true,
+        maxLentgh: 100,
     },
 
     projectDescription: {
         type: String,
-        required: true
+        required: true,
+        maxLentgh: 500,
     },
 
     projectHourlyRate: {
@@ -77,7 +79,7 @@ const ProjectSchema = new Schema( {
 
     pricingType: {
         type: String,
-        enum: ["BUDGET", "HOURLY_RATE"],
+        enum: [ "BUDGET", "HOURLY_RATE" ],
         required: true,
     },
 
@@ -89,7 +91,7 @@ const ProjectSchema = new Schema( {
     projectSize: {
         type: String,
         enum: [ "SMALL", "MEDIUM", "LARGE" ],
-        
+
     },
 
     projectStatus: {
@@ -104,7 +106,7 @@ const ProjectSchema = new Schema( {
 
     workModel: {
         type: String,
-        enum: ["REMOTE", "HYBRID", "ON_SITE"],
+        enum: [ "REMOTE", "HYBRID", "ON_SITE" ],
         required: true,
     },
 
@@ -122,7 +124,7 @@ const ProjectSchema = new Schema( {
         type: Date,
         required: false,
     },
-    
+
 } );
 
 export default mongoose.model( "Project", ProjectSchema );

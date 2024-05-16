@@ -4,11 +4,13 @@ const Schema = mongoose.Schema;
 const ProjectCategorySchema = new Schema( {
     categoryName: {
         type: String,
-        required: true
+        required: true,
+        maxLength: 50,
     },
 
     categoryDescription: {
-        type: String
+        type: String,
+        maxLength: 500,
     }
 
 } );

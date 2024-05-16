@@ -39,7 +39,8 @@ const WorkExperienceSchema = new Schema( {
 
     jobTitle: {
         type: String,
-        required: true
+        required: true,
+        maxLength: 100,
     },
 
     startDate: {
@@ -52,7 +53,8 @@ const WorkExperienceSchema = new Schema( {
     },
 
     jobDescription: {
-        type: String
+        type: String,
+        maxLength: 500,
     }
 
 } );
@@ -102,11 +104,13 @@ const FreelancerProfileSchema = new Schema( {
     firstName: {
         type: String,
         required: true,
+        maxLength: 50,
     },
 
     lastName: {
         type: String,
         required: true,
+        maxLength: 50,
     },
 
     specializations: [ {

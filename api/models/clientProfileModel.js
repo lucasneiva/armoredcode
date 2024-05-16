@@ -12,11 +12,15 @@ const ClientProfileSchema = new Schema( {
 
     companyName: {
         type: String,
+        maxLength: 100,
+        unique: true,
         required: true
     },
 
     companyDescription: {
-        type: String
+        type: String,
+        maxLength: 500,
+        required: true ,
     },
 
     companySize: {

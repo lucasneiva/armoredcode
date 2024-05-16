@@ -5,11 +5,13 @@ const Schema = mongoose.Schema;
 const SkillSchema = new Schema( {
     skillName: {
         type: String,
-        required: true
+        required: true,
+        maxLentgh: 50,
     },
 
     skillDescription: {
-        type: String
+        type: String,
+        maxlength: 150,
     },
 
 } );

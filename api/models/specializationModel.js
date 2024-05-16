@@ -2,14 +2,16 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const SpecializationSchema = new Schema( {
-    name: {
+    specializationName: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        maxLength: 50,
     },
 
-    description: {
-        type: String
+    specializationDescription: {
+        type: String,
+        maxLength: 500,
     },
     
 } );
