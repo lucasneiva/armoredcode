@@ -2,20 +2,20 @@ import Specialization from "../models/specializationModel.js";
 
 const specializations = [
     {
-        name: "Front-End Development",
-        description: "Building user interfaces with HTML, CSS, and JavaScript.",
+        specializationName: "Front-End Development",
+        specializationDescription: "Building user interfaces with HTML, CSS, and JavaScript.",
     },
     {
-        name: "Back-End Development",
-        description: "Server-side logic, databases, and API development.",
+        specializationName: "Back-End Development",
+        specializationDescription: "Server-side logic, databases, and API development.",
     },
     {
-        name: "Machine Learning",
-        description: "Developing algorithms for predictive modeling.",
+        specializationName: "Machine Learning",
+        specializationDescription: "Developing algorithms for predictive modeling.",
     },
     {
-        name: "UX/UI Design",
-        description: "Designing user-centered experiences.",
+        specializationName: "UX/UI Design",
+        specializationDescription: "Designing user-centered experiences.",
     },
 ];
 

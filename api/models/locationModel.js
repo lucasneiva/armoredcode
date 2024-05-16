@@ -37,7 +37,7 @@ const LocationSchema = new Schema( {
         default: "SP"
     },
 
-    CEP: {
+    cep: {
         type: String,
         required: true,
         minLength: 9,
