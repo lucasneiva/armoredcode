@@ -3,8 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProjectService } from '../../services/project.service';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-
+import { AuthService } from '../../services/auth.service'; 
 
 
 @Component({
@@ -17,48 +16,35 @@ import { AuthService } from '../../services/auth.service';
 export default class CreateProjectComponent implements OnInit{
   fb = inject(FormBuilder);
   authService = inject(AuthService);
-  projectService = inject(ProjectService);
+  projectService = inject(ProjectService); 
   router = inject(Router);
   createProjectForm !: FormGroup;
   datePipe: any;
+  projectCategories: any[] = []; // Array to store categories
 
   ngOnInit() {
 
     this.createProjectForm = this.fb.group({
       clientId: [this.clientId,Validators.required],
       freelancerId: [this.freelancerId],
-      //projectCategoryId: ['',Validators.required],
-      projectCategoryId: ['64f23b5c1c9d440000678901',],
-      
+      projectCategoryId: ['',Validators.required],
       skillIds: [],
       projectTitle: ['',Validators.required],
-
-      //projectDescription:  ['Seeking a skilled developer to build a modern and responsive e-commerce website with secure payment integration.', Validators.required], 
       projectDescription:  ['', Validators.required], 
-      
-      //projectHourlyRate: [],
       projectHourlyRate: this.fb.group({
         min: [ , Validators.required],
         max: [ , Validators.required],
       }),
-
-      //projectBudget: [],
       projectBudget: this.fb.group({
         min: [ , Validators.required],
         max: [ , Validators.required],
       }),
-      
       pricingType: ['',Validators.required],
       estimatedDuration: ['',Validators.required],
       projectSize: [''],
-      
-      // projectStatus: [''],
       projectStatus: [''],
-      
       experienceLevel: [''],
       workModel: ['',Validators.required],
-
-      //location: ['',Validators.required],
       location: this.fb.group({ 
         city: ['SOROCABA'], 
         state: ['SP'], 
@@ -71,6 +57,7 @@ export default class CreateProjectComponent implements OnInit{
       
     },
     );
+    this.getProjectCategories();
   }
 
   set projectStatus(value:String){
@@ -170,5 +157,16 @@ export default class CreateProjectComponent implements OnInit{
         // Handle default values or reset to initial values
         break;
     }
+  }
+
+  getProjectCategories() {
+    this.projectService.getProjectCategories().subscribe(
+      (response: any) => {
+        this.projectCategories = response.data;
+      },
+      (error) => {
+        console.error("Error fetching project categories:", error);
+      }
+    );
   }
 }

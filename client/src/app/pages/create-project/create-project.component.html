@@ -7,14 +7,14 @@
             <input formControlName="projectTitle" class="p-2 px-4 border border-gray-300 rounded" type="text"
                 placeholder="Type the project name">
 
-            <h2 class="font-semibold mt-4">Project Category:</h2>
             <!--formControlName="projectCategoryId"-->
-            <select  name="Option" id="projCategory" required
-                class="p-2 px-4 border border-gray-300 rounded text-gray-500">
+            <h2 class="font-semibold mt-4">Project Category:</h2>
+            <select formControlName="projectCategoryId" name="Option" id="projCategory" required
+             class="p-2 px-4 border border-gray-300 rounded text-gray-500">
                 <option value="" selected>Select the project category</option>
-                <option value="SOURCE_CODE">Source Code</option>
-                <option value="DOCUMENTATION">Documentation</option>
-                <option value="TEST_REPORT">Test Report</option>
+                <option *ngFor="let category of projectCategories" [value]="category._id">
+                {{ category.categoryName }} 
+                </option>
             </select>
         </div>
 
