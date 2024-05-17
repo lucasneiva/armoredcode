@@ -1,23 +1,23 @@
-<ng-container class="lg:w-3/12 mt-5 p-10 shadow-lg mx-auto bg-white" style="margin-top: 15%;">
-    <div class="block text-wrap max-w-lg mx-auto">
+<ng-container>
+    <div class="block text-wrap max-w-md shadow-lg mt-56 p-10 mx-auto bg-white">
         <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
         <p class="text-left text-2xl text-gray-600 mt-4">
             You dont have any projects in your workspace for now,
             but you can create one clicking in the "create project" button.
         </p>
     </div>
-    <div class="flex justify-center">
-        <button routerLink="/create-project" class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
-            Create project
-        </button>
-    </div>
-
 </ng-container>
 
 <!--app-project-card-->
 <ng-container > <!--*ngFor="let project of projects"-->
     <!--<app-project-card [project]="project"></app-project-card>-->
 </ng-container>
+
+<div class="flex justify-center">
+    <button routerLink="/create-project" class="bg-blue-500 hover:bg-blue-700 text-xl text-white font-bold mt-5 py-4 px-8 rounded cursor-pointer">
+        Create project
+    </button>
+</div>
 
 <!--card placeholder
 <div style="top: calc(1rem * 1);"
