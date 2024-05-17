@@ -20,7 +20,7 @@
             <div class="flex">
                 <span class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200">Chat</span>
                 <span routerLink="/manage-project" class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200">Projects</span>
-                <img [src]="profilePath" alt="Default Profile" outerLink="/login" (click)="logOut()" 
+                <img [src]="profilePath" alt="Default Profile" routerLink="/login" (click)="logOut()" 
                 class="h-12 w-12 mx-3 rounded-full border-white border-solid border-2">    
                 <!--<span routerLink="/login" (click)="logOut()" class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200">Logout</span>-->
             </div>
