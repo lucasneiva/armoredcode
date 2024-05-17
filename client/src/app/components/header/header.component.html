@@ -1,6 +1,7 @@
 <nav class="w-full flex justify-between items-center p-5 bg-sky-600 shadow-lg">
-    <div class="logo">
-        <span class="text-gray-200 text-4xl flex justify-start items-center"> ArmoredCode</span>
+    <div class="logo flex">
+        <img [src]="logoPath" alt="Company Logo" class="h-12 w-12 mx-3"> 
+        <span routerLink="/home" class="text-gray-200 text-4xl flex justify-start items-center"> ArmoredCode</span>
     </div>
     <div *ngIf="isLoggedIn" class="search relative">
         <span class="absolute mt-1.5 mx-3"><i class="fa fa-search font-light" aria-hidden="true"></i></span>
@@ -16,9 +17,14 @@
         </ng-container>
 
         <ng-container *ngIf="isLoggedIn">
-            <span class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200">Chat</span>
-            <span routerLink="/manage-project" class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200">Projects</span>
-            <span routerLink="/login" (click)="logOut()" class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200">Logout</span>
+            <div class="flex">
+                <span class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200">Chat</span>
+                <span routerLink="/manage-project" class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200">Projects</span>
+                <img [src]="profilePath" alt="Default Profile" outerLink="/login" (click)="logOut()" 
+                class="h-12 w-12 mx-3 rounded-full border-white border-solid border-2">    
+                <!--<span routerLink="/login" (click)="logOut()" class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200">Logout</span>-->
+            </div>
+            
         </ng-container>
     </div>
 </nav>

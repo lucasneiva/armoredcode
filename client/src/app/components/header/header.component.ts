@@ -13,6 +13,8 @@ import { AuthService } from '../../services/auth.service';
 export class HeaderComponent implements OnInit{
   authService = inject(AuthService);
   isLoggedIn: boolean = false;
+  profilePath = '../../assets/images/prf_icon.png';
+  logoPath = '../../assets/images/logo_branca_sfundo.png';
 
   ngOnInit(): void {
     this.authService.isLoggedIn$.subscribe(res=>{
