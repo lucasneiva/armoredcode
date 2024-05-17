@@ -46,9 +46,12 @@ export default class CreateProjectComponent implements OnInit{
       experienceLevel: [''],
       workModel: ['',Validators.required],
       location: this.fb.group({ 
+        streetAddress: ['Av. Eng. Carlos Reinaldo Mendes, 2015'],
+        neighborhood: ['EDEN'],
         city: ['SOROCABA'], 
         state: ['SP'], 
-        country: ['BRAZIL'] 
+        cep: ['19180-000'],
+        country: ['BRAZIL'] ,
       }),
 
       //CAMPOS CALCULADOS
