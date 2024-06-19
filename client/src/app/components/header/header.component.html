@@ -28,9 +28,8 @@
             <div class="flex justify-between align-middle">
                 <span class="text-2xl cursor-pointer text-gray-200 font-bold m-4 hover:underline hover:text-indigo-200">Chat</span>
                 <span routerLink="/manage-project" class="text-2xl cursor-pointer text-gray-200 font-bold m-4 hover:underline hover:text-indigo-200">Projects</span>
-                <img [src]="profilePath" alt="Default Profile" routerLink="/login" (click)="logOut()" 
+                <img [src]="profilePath" alt="Default Profile" routerLink="/profile" 
                 class="h-12 w-12 my-auto mx-4 rounded-full border-white border-solid border-2 cursor-pointer">    
-                <!--<span routerLink="/login" (click)="logOut()" class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200">Logout</span>-->
             </div>
             
         </ng-container>

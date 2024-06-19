@@ -10,10 +10,10 @@
             <h2 class="font-bold text-3xl">{{ userName }}</h2>
             <p class="font-semibold text-xl">{{ userId }}</p>
         </div>
-        <button class="flex items-center justify-center bg-transparent hover:bg-blue-500 
+        <button
+            class="flex items-center justify-center bg-transparent hover:bg-blue-500 
         text-gray-700 font-semibold hover:text-white py-1 px-8 mx-8 border border-gray-500 hover:border-transparent rounded">
-            <object class="w-3 h-3 mx-2 -mb-1"
-                data="../../../assets/images/pencil-edit-svgrepo-com.svg"></object>
+            <object class="w-3 h-3 mx-2 -mb-1" data="../../../assets/images/pencil-edit-svgrepo-com.svg"></object>
             Edit Profile
         </button>
     </div>
@@ -25,7 +25,7 @@
             <a class="active">About</a>
         </li>
         <li class="text-white mx-5 p-5 rounded-md hover:bg-sky-800 cursor-pointer">
-            <a>Projects</a>
+            <a routerLink="/manage-project">Projects</a>
         </li>
         <li class="text-white mx-5 p-5 rounded-md hover:bg-sky-800 cursor-pointer">
             <a>Notifications</a>
@@ -36,22 +36,51 @@
         <li class="text-white mx-5 p-5 rounded-md hover:bg-sky-800 cursor-pointer">
             <a>Settings</a>
         </li>
+        <li class="text-white mx-5 p-5 rounded-md hover:bg-sky-800 cursor-pointer">
+            <span routerLink="/login" (click)="logOut()">Logout</span>
+        </li>
     </ul>
 </div>
-
+<!--freelancer placeholder
 <div class="w-2/3 bg-slate-300 p-8">
     <h3 class="font-bold text-3xl py-3">About</h3>
     <p class="text-xl py-3">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-      Nulla facilisi. Donec lacinia, quam sed euismod tincidunt, 
-      nulla enim rhoncus dolor, ut tempus dolor risus vitae 
-      erat. Nulla facilisi. Donec lacinia, quam sed euismod 
-      tincidunt, nulla enim rhoncus dolor, ut tempus dolor 
-      risus vitae erat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Nulla facilisi. Donec lacinia, quam sed euismod tincidunt,
+        nulla enim rhoncus dolor, ut tempus dolor risus vitae
+        erat. Nulla facilisi. Donec lacinia, quam sed euismod
+        tincidunt, nulla enim rhoncus dolor, ut tempus dolor
+        risus vitae erat.
     </p>
     <ul class="text-xl py-3">
-      <li><strong>Skills:</strong> Web Development, UI/UX Design, Project Management</li>
-      <li><strong>Experience:</strong> 5+ years in the software industry</li>
-      <li><strong>Education:</strong> Bachelor's Degree in Computer Science</li>
+        <li><strong>Skills:</strong> Web Development, UI/UX Design, Project Management</li>
+        <li><strong>Experience:</strong> 5+ years in the software industry</li>
+        <li><strong>Education:</strong> Bachelor's Degree in Computer Science</li>
     </ul>
-  </div>
+</div>
+-->
+<!--client placeholder-->
+<div class="w-full p-8">
+    <div class="w-2/3 mx-auto">
+        <h3 class="font-bold text-3xl py-3">About</h3>
+        <p class="text-xl py-3">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Nulla facilisi. Donec lacinia, quam sed euismod tincidunt,
+            nulla enim rhoncus dolor, ut tempus dolor risus vitae
+            erat. Nulla facilisi. Donec lacinia, quam sed euismod
+            tincidunt, nulla enim rhoncus dolor, ut tempus dolor
+            risus vitae erat.
+        </p>
+        <ul class="text-xl py-3">
+            <li><strong>Industry:</strong> Technology</li>
+            <li><strong>Founded:</strong> 2015</li>
+            <li><strong>Location:</strong> San Francisco, CA</li>
+        </ul>
+
+        <ul class="text-xl py-3">
+            <li><span><strong>Website:</strong></span> <a> www.companywebsite.com</a></li>
+            <li><span><strong>Phone:</strong></span> +1 (555) 555-5555</li>
+            <li><span><strong>Email:</strong></span> info&#64;companyemail.com</li>
+        </ul>
+    </div>
+</div>

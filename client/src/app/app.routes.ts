@@ -9,4 +9,5 @@ export const routes: Routes = [
     {path:'manage-project', loadComponent: ()=> import('./pages/manage-project/manage-project.component')},
     {path:'create-project', loadComponent: ()=> import('./pages/create-project/create-project.component')},
     {path:'create-profile', loadComponent: ()=> import('./pages/create-profile/create-profile.component')},
+    {path:'profile', loadComponent: ()=> import('./pages/profile/profile.component')},
 ];
