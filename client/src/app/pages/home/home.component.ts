@@ -26,6 +26,8 @@ export default class HomeComponent {
     },
     );
   }
-    
-  
+
+  get clientId(){
+    return localStorage.getItem("user_id");
+  } 
 }

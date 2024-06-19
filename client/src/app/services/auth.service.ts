@@ -35,7 +35,4 @@ export class AuthService {
     return !!localStorage.getItem("user_id");
   }
 
-  getUserRole(){
-    return !!localStorage.getItem("user_role");
-  }
 }

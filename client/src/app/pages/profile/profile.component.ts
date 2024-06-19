@@ -12,6 +12,7 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './profile.component.scss'
 })
 export default class ProfileComponent {
+  fb = inject(FormBuilder);
 
   profileForm !: FormGroup;
 
@@ -19,17 +20,44 @@ export default class ProfileComponent {
 
   authService = inject(AuthService);
   isLoggedIn: boolean = false;
-  userName = 'User_name';
-  userId = 'User_ID';
+  userName = this.Name;
+  userId = this.Id;
+  userRole = this.Role;
 
   ngOnInit(): void {
-    this.authService.isLoggedIn$.subscribe(res=>{
-      this.isLoggedIn = this.authService.isLoggedIn();
-    });
+    this.profileForm = this.fb.group({
+      //profile edition
+    },
+    );
+    this.checkRole();
+  }
+
+  checkRole() {
+    try {
+      const role = this.userRole;
+      this.isClient = role === 'CLIENT';
+      this.isClient == true;
+    } catch (error) {
+      // Handle potential errors
+      console.error('Error fetching user role:', error);
+    }
   }
 
   logOut(){
     localStorage.removeItem("user_id");
     this.authService.isLoggedIn$.next(false);
   }
+
+  get Id(){
+    return localStorage.getItem("user_id");
+  } 
+
+  get Name(){
+    return localStorage.getItem("user_name");
+  } 
+
+  get Role(){
+    return localStorage.getItem("user_role");
+  } 
 }
+
