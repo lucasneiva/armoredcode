@@ -1,8 +1,17 @@
 <nav class="w-full flex justify-between items-center p-5 bg-sky-600 shadow-lg">
-    <div class="logo">
-        <span class="text-gray-200 text-4xl flex justify-start items-center"> ArmoredCode</span>
-    </div>
-    <div *ngIf="isLoggedIn" class="search relative">
+    <ng-container *ngIf="!isLoggedIn">
+        <div class="logo flex ">
+            <img [src]="logoPath" alt="Company Logo" class="h-12 w-12 mx-3"> 
+            <span class="text-gray-200 text-4xl flex justify-start items-center" style="font-family: Michroma;"> ArmoredCode</span>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="isLoggedIn">
+        <div routerLink="/home" class="logo flex max-w-72 cursor-pointer">
+            <img [src]="logoPath" alt="Company Logo" class="h-12 w-12 mx-3"> 
+            <span class="text-gray-200 text-4xl flex justify-start items-center" style="font-family: Michroma; font-size: 2rem;"> ArmoredCode</span>
+        </div>
+    </ng-container>
+    <div *ngIf="isLoggedIn" class="search relative ">
         <span class="absolute mt-1.5 mx-3"><i class="fa fa-search font-light" aria-hidden="true"></i></span>
         <input type="text" placeholder="Search"
         class="w-96 p-2 pl-9 rounded rounded-r-none text-gray-600">
@@ -16,9 +25,13 @@
         </ng-container>
 
         <ng-container *ngIf="isLoggedIn">
-            <span class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200">Chat</span>
-            <span routerLink="/manage-project" class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200">Projects</span>
-            <span routerLink="/login" (click)="logOut()" class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200">Logout</span>
+            <div class="flex justify-between align-middle">
+                <span class="text-2xl cursor-pointer text-gray-200 font-bold m-4 hover:underline hover:text-indigo-200">Chat</span>
+                <span routerLink="/manage-project" class="text-2xl cursor-pointer text-gray-200 font-bold m-4 hover:underline hover:text-indigo-200">Projects</span>
+                <img [src]="profilePath" alt="Default Profile" routerLink="/profile" 
+                class="h-12 w-12 my-auto mx-4 rounded-full border-white border-solid border-2 cursor-pointer">    
+            </div>
+            
         </ng-container>
     </div>
 </nav>

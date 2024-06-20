@@ -13,11 +13,7 @@ export class AuthService {
   registerService(registerObj: any){
     return this.http.post<any>(`${apiUrls.authServiceApi}register`, registerObj);
   }
-  /*
-  loginService(loginObj: any){
-    return this.http.post<any>(`${apiUrls.authServiceApi}login`, loginObj);
-  }
-  */
+
   loginService(loginObj: any){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -38,4 +34,5 @@ export class AuthService {
   isLoggedIn(){
     return !!localStorage.getItem("user_id");
   }
+
 }

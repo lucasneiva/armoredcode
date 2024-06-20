@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiUrls } from '../api.urls';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,6 @@ export class ProjectService {
   isDraft$ = new BehaviorSubject<boolean>(false);
   isPosted$ = new BehaviorSubject<boolean>(false);
   
-  /*
-  createProjectService(projectObj: any){
-    return this.http.post<any>(`${apiUrls.projectServiceApi}`, projectObj);
-  }
-  */
   createProjectService(projectObj: any){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -26,12 +21,16 @@ export class ProjectService {
     return this.http.post<any>(`${apiUrls.projectServiceApi}`, projectObj, httpOptions);
   }
   
-/*
-//isLoggedIn$ = new BehaviorSubject<boolean>(false);
-  isLoggedIn(){
-    return !!localStorage.getItem("user_id");
+  getProjectCategories(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true 
+    };
+    return this.http.get<any>(`${apiUrls.projectCategoryApi}`, httpOptions);
   }
-*/
+  
 }
 export type Project = {
   

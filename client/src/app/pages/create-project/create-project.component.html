@@ -1,190 +1,193 @@
-<form [formGroup]="createProjectForm">
-    <!--menu de inputs-->
-    <div class="flex justify-around align-baseline bg-slate-100 border-b-4 border-b-slate-200" id="top-form">
-        <!--Características chave do projeto-->
-        <div class="p-1 ">
-            <h2 class="font-semibold mt-4">Project Name:</h2>
-            <input formControlName="projectTitle" class="p-2 px-4 border border-gray-300 rounded" type="text"
-                placeholder="Type the project name">
-
-            <h2 class="font-semibold mt-4">Project Category:</h2>
-            <!--formControlName="projectCategoryId"-->
-            <select  name="Option" id="projCategory" required
-                class="p-2 px-4 border border-gray-300 rounded text-gray-500">
-                <option value="" selected>Select the project category</option>
-                <option value="SOURCE_CODE">Source Code</option>
-                <option value="DOCUMENTATION">Documentation</option>
-                <option value="TEST_REPORT">Test Report</option>
-            </select>
-        </div>
-
-        <!--fix formName && name for radio buttons-->
-        <div class="p-1 ">
-            <h2 class="font-semibold mt-4">Pricing:</h2>
-            <div class="flex justify-start align-middle overflow-auto">
-                <div class="m-3">
-                    <input formControlName="pricingType" (change)="TestValue('BUDGET')"
-                        onclick="document.getElementById('hourlyrate').style.display = 'none';
-                        document.getElementById('budget').style.display = 'flex';"
-                        type="radio" id="priceFix"name="pricingType" value="BUDGET" checked>
-                    <label for="priceFix" class="m-2 font-normal">Budget</label><br>
-                </div>
-                <div class="m-3">
-                    <input formControlName="pricingType" (change)="TestValue('HOURLY_RATE')"
-                        onclick="document.getElementById('budget').style.display = 'none';
-                        document.getElementById('hourlyrate').style.display = 'flex';" 
-                        type="radio" id="priceHour" name="pricingType" value="HOURLY_RATE">
-                    <label for="priceHour" class="m-2 font-normal">Hourly Rate</label><br>
-                </div>
+<div class="flex flex-col min-h-svh">
+    <form [formGroup]="createProjectForm">
+        <!--menu de inputs-->
+        <div class="flex justify-around align-baseline bg-slate-100 border-b-4 border-b-slate-200" id="top-form">
+            <!--Características chave do projeto-->
+            <div class="p-1 ">
+                <h2 class="font-semibold mt-4">Project Name:</h2>
+                <input formControlName="projectTitle" class="p-2 px-4 border border-gray-300 rounded" type="text"
+                    placeholder="Type the project name">
+    
+                <!--formControlName="projectCategoryId"-->
+                <h2 class="font-semibold mt-4">Project Category:</h2>
+                <select formControlName="projectCategoryId" name="Option" id="projCategory" required
+                 class="p-2 px-4 border border-gray-300 rounded text-gray-500">
+                    <option value="" selected>Select the project category</option>
+                    <option *ngFor="let category of projectCategories" [value]="category._id">
+                    {{ category.categoryName }} 
+                    </option>
+                </select>
             </div>
-            <div formGroupName="projectHourlyRate" class="hidden justify-start align-middle overflow-auto" id="hourlyrate">
-                <div class="m-3">
-                    <h2 class="font-semibold mt-2">Min Rate:</h2>
-                    <input formControlName="min" type="number" placeholder="Min" id="minHourlyRate" required
-                     class="text-center max-w-24 p-1">
+    
+            <!--fix formName && name for radio buttons-->
+            <div class="p-1 ">
+                <h2 class="font-semibold mt-4">Pricing:</h2>
+                <div class="flex justify-start align-middle overflow-auto">
+                    <div class="m-3">
+                        <input formControlName="pricingType" (change)="TestValue('BUDGET')"
+                            onclick="document.getElementById('hourlyrate').style.display = 'none';
+                            document.getElementById('budget').style.display = 'flex';"
+                            type="radio" id="priceFix"name="pricingType" value="BUDGET" checked>
+                        <label for="priceFix" class="m-2 font-normal">Budget</label><br>
+                    </div>
+                    <div class="m-3">
+                        <input formControlName="pricingType" (change)="TestValue('HOURLY_RATE')"
+                            onclick="document.getElementById('budget').style.display = 'none';
+                            document.getElementById('hourlyrate').style.display = 'flex';" 
+                            type="radio" id="priceHour" name="pricingType" value="HOURLY_RATE">
+                        <label for="priceHour" class="m-2 font-normal">Hourly Rate</label><br>
+                    </div>
+                </div>
+                <div formGroupName="projectHourlyRate" class="hidden justify-start align-middle overflow-auto" id="hourlyrate">
+                    <div class="m-3">
+                        <h2 class="font-semibold mt-2">Min Rate:</h2>
+                        <input formControlName="min" type="number" placeholder="Min" id="minHourlyRate" required
+                         class="text-center max-w-24 p-1">
+                    </div>
+                    
+                    <div class="m-3">
+                        <h2 class="font-semibold mt-2">Max Rate:</h2>
+                        <input formControlName="max" type="number" placeholder="Max" id="maxHourlyRate" required
+                         class="text-center max-w-24 p-1">
+                    </div>
                 </div>
                 
-                <div class="m-3">
-                    <h2 class="font-semibold mt-2">Max Rate:</h2>
-                    <input formControlName="max" type="number" placeholder="Max" id="maxHourlyRate" required
-                     class="text-center max-w-24 p-1">
+                <div formGroupName="projectBudget" class="flex justify-start align-middle overflow-auto" id="budget">
+                    <div class="m-3">
+                        <h2 class="font-semibold mt-2">Min Budget:</h2>
+                        <input formControlName="min" type="number" placeholder="Min" id="minbudget" required
+                        class="text-center max-w-24 p-1">
+                    </div>
+                    <div class="m-3">
+                        <h2 class="font-semibold mt-2">Max Budget:</h2>
+                        <input formControlName="max" type="number" placeholder="Max" id="maxbudget" required 
+                        class="text-center max-w-24 p-1">
+                    </div>
                 </div>
             </div>
             
-            <div formGroupName="projectBudget" class="flex justify-start align-middle overflow-auto" id="budget">
-                <div class="m-3">
-                    <h2 class="font-semibold mt-2">Min Budget:</h2>
-                    <input formControlName="min" type="number" placeholder="Min" id="minbudget" required
-                    class="text-center max-w-24 p-1">
+    
+            <div class="p-1 ">
+                <h2 class="font-semibold mt-4">Estimated duration:</h2>
+                <input formControlName="estimatedDuration" class="p-2 px-4 border border-gray-300 rounded" type="text"
+                    placeholder="Type the duration (hours)">
+            </div>
+    
+    
+            <div class="p-1 ">
+                <div class="m-0.5">
+                    <h2 class="font-semibold mt-4">Scope:</h2>
+                    <input formControlName="projectSize" type="radio" id="scopeS" name="projectSize" value="SMALL" checked>
+                    <label for="scopeS" class="m-2 font-normal">Small</label>
                 </div>
-                <div class="m-3">
-                    <h2 class="font-semibold mt-2">Max Budget:</h2>
-                    <input formControlName="max" type="number" placeholder="Max" id="maxbudget" required 
-                    class="text-center max-w-24 p-1">
+                <div class="m-0.5">
+                    <input formControlName="projectSize" type="radio" id="scopeM" name="projectSize" value="MEDIUM">
+                    <label for="scopeM" class="m-2 font-normal">Medium</label>
+                </div>
+                <div class="m-0.5">
+                    <input formControlName="projectSize" type="radio" id="scopeL" name="projectSize" value="LARGE">
+                    <label for="scopeL" class="m-2 font-normal">Large</label>
+                </div>
+            </div>
+    
+    
+            <div class="p-1 ">
+                <h2 class="font-semibold mt-4">Experience level:</h2>
+                <div class="m-0.5">
+                    <input formControlName="experienceLevel" type="radio" id="entryLvl" name="experienceLevel"
+                        value="ENTRY-LEVEL" checked />
+                    <label for="entryLvl" class="m-2 font-normal">Entry level</label>
+                </div>
+                <div class="m-0.5">
+                    <input formControlName="experienceLevel" type="radio" id="midLvl" name="experienceLevel"
+                        value="MID-LEVEL" />
+                    <label for="midLvl" class="m-2 font-normal">Mid level</label>
+                </div>
+                <div class="m-0.5">
+                    <input formControlName="experienceLevel" type="radio" id="seniorLvl" name="experienceLevel"
+                        value="SENIOR" />
+                    <label for="seniorLvl" class="m-2 font-normal">Senior level</label>
+                </div>
+            </div>
+    
+            <div class=" p-1">
+                <div class="m-0.5">
+                    <h2 class="font-semibold mt-4">Workspace:</h2>
+                    <input formControlName="workModel" type="radio" id="WR" name="workModel" value="REMOTE" checked>
+                    <label for="WR" class="m-2 font-normal">Remote</label>
+                </div>
+                <div class="m-0.5">
+                    <input formControlName="workModel" type="radio" id="HW" name="workModel" value="HYBRID">
+                    <label for="HW" class="m-2 font-normal">Hybrid</label>
+                </div>
+                <div class="m-0.5">
+                    <input formControlName="workModel" type="radio" id="OSW" name="workModel" value="ON_SITE">
+                    <label for="OSW" class="m-2 font-normal">On Site</label>
                 </div>
             </div>
         </div>
-        
-
-        <div class="p-1 ">
-            <h2 class="font-semibold mt-4">Estimated duration:</h2>
-            <input formControlName="estimatedDuration" class="p-2 px-4 border border-gray-300 rounded" type="text"
-                placeholder="Type the duration (hours)">
+        <!--botão push-->
+        <div class="bg-transparent flex justify-center">
+            <button id="up-btn" onclick="document.getElementById('top-form').style.display = 'none';
+         document.getElementById('up-btn').style.display = 'none';
+         document.getElementById('down-btn').style.display = 'flex';"
+                class="bg-slate-200 rounded-b-lg w-40 text-slate-400 justify-center"> close
+            </button>
+            <button id="down-btn" onclick="document.getElementById('top-form').style.display = 'flex';
+         document.getElementById('down-btn').style.display = 'none';
+         document.getElementById('up-btn').style.display = 'flex';"
+                class="bg-slate-200 rounded-b-lg w-40 text-slate-400 justify-center hidden"> open
+            </button>
         </div>
-
-
-        <div class="p-1 ">
-            <div class="m-0.5">
-                <h2 class="font-semibold mt-4">Scope:</h2>
-                <input formControlName="projectSize" type="radio" id="scopeS" name="projectSize" value="SMALL" checked>
-                <label for="scopeS" class="m-2 font-normal">Small</label>
+    
+        <div class="flex">
+            <!--view-->
+            <div class="grid align-baseline m-4 lg:w-1/2 mt-5 p-10 shadow-lg h-fit">
+                <h2 class="font-semibold my-3 text-3xl">Overview:</h2>
+                <textarea formControlName="projectDescription" placeholder="Write the project description here"
+                    class="bg-gray-50 p-3 border-2 min-h-14" style="max-height: 36rem;"></textarea>
             </div>
-            <div class="m-0.5">
-                <input formControlName="projectSize" type="radio" id="scopeM" name="projectSize" value="MEDIUM">
-                <label for="scopeM" class="m-2 font-normal">Medium</label>
-            </div>
-            <div class="m-0.5">
-                <input formControlName="projectSize" type="radio" id="scopeL" name="projectSize" value="LARGE">
-                <label for="scopeL" class="m-2 font-normal">Large</label>
-            </div>
-        </div>
-
-
-        <div class="p-1 ">
-            <h2 class="font-semibold mt-4">Experience level:</h2>
-            <div class="m-0.5">
-                <input formControlName="experienceLevel" type="radio" id="entryLvl" name="experienceLevel"
-                    value="ENTRY-LEVEL" checked />
-                <label for="entryLvl" class="m-2 font-normal">Entry level</label>
-            </div>
-            <div class="m-0.5">
-                <input formControlName="experienceLevel" type="radio" id="midLvl" name="experienceLevel"
-                    value="MID-LEVEL" />
-                <label for="midLvl" class="m-2 font-normal">Mid level</label>
-            </div>
-            <div class="m-0.5">
-                <input formControlName="experienceLevel" type="radio" id="seniorLvl" name="experienceLevel"
-                    value="SENIOR" />
-                <label for="seniorLvl" class="m-2 font-normal">Senior level</label>
-            </div>
-        </div>
-
-        <div class=" p-1">
-            <div class="m-0.5">
-                <h2 class="font-semibold mt-4">Workspace:</h2>
-                <input formControlName="workModel" type="radio" id="WR" name="workModel" value="REMOTE" checked>
-                <label for="WR" class="m-2 font-normal">Remote</label>
-            </div>
-            <div class="m-0.5">
-                <input formControlName="workModel" type="radio" id="HW" name="workModel" value="HYBRID">
-                <label for="HW" class="m-2 font-normal">Hybrid</label>
-            </div>
-            <div class="m-0.5">
-                <input formControlName="workModel" type="radio" id="OSW" name="workModel" value="ON_SITE">
-                <label for="OSW" class="m-2 font-normal">On Site</label>
+    
+            <!--search e tags-->
+            <div class="grid align-baseline bg-white m-4 lg:w-3/12 mt-5 p-10 mx-auto">
+                <div class="">
+                    <h2 class="font-semibold my-3 text-3xl">Skills:</h2>
+                    <div class="search relative shadow-lg flex w-fit">
+                        <span class="absolute mt-1.5 mx-3"><i class="fa fa-search font-light" aria-hidden="true"></i></span>
+                        <input type="text" placeholder="Search skills"
+                            class="w-96 p-2 pl-9 rounded rounded-r-none text-gray-600">
+                        <button class="bg-slate-600 p-2 rounded-r text-white outline-none outline-0">Search</button>
+                    </div>
+                    <!--tags-->
+                    <div class="align-baseline">
+                        <!-- tag default
+                <span id="badge-default" class="inline-flex items-center px-4 py-1 me-2 mt-4 text-sm font-medium text-white bg-blue-400 rounded-3xl"> Default
+                    <button type="button" class="inline-flex items-center p-1 px-2 ms-2 text-sm text-white bg-transparent rounded-full hover:bg-blue-300"> + </button>
+                </span>
+                -->
+                    </div>
+                </div>
             </div>
         </div>
+    </form>
+    
+    <div class="flex flex-grow justify-center static mb-4">
+        <!--flex-->
     </div>
-    <!--botão push-->
-    <div class="bg-transparent flex justify-center">
-        <button id="up-btn" onclick="document.getElementById('top-form').style.display = 'none';
-     document.getElementById('up-btn').style.display = 'none';
-     document.getElementById('down-btn').style.display = 'flex';"
-            class="bg-slate-200 rounded-b-lg w-40 text-slate-400 justify-center"> close
+    
+    <div class="flex justify-center static mb-28">
+        <!--implementar no button:-->
+        <button [disabled]="createProjectForm.invalid" [class.disabled]="createProjectForm.invalid" (click)="CreateProject()"
+            class=" bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
+            Save
         </button>
-        <button id="down-btn" onclick="document.getElementById('top-form').style.display = 'flex';
-     document.getElementById('down-btn').style.display = 'none';
-     document.getElementById('up-btn').style.display = 'flex';"
-            class="bg-slate-200 rounded-b-lg w-40 text-slate-400 justify-center hidden"> open
+        <button [disabled]="createProjectForm.invalid" [class.disabled]="createProjectForm.invalid" (click)="PostProject()"
+            class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
+            Publish
+        </button>
+        <button (click)="CancelProject()"
+            class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded ">
+            Cancel
         </button>
     </div>
-
-    <div class="flex">
-        <!--view-->
-        <div class="grid align-baseline m-4 lg:w-1/2 mt-5 p-10 shadow-lg h-fit">
-            <h2 class="font-semibold my-3 text-3xl">Overview:</h2>
-            <textarea formControlName="projectDescription" placeholder="Write the project description here"
-                class="bg-gray-50 p-3 border-2" style="max-height: 36rem;"></textarea>
-        </div>
-
-        <!--search e tags-->
-        <div class="grid align-baseline bg-white m-4 lg:w-3/12 mt-5 p-10 mx-auto">
-            <div class="">
-                <h2 class="font-semibold my-3 text-3xl">Skills:</h2>
-                <div class="search relative shadow-lg flex w-fit">
-                    <span class="absolute mt-1.5 mx-3"><i class="fa fa-search font-light" aria-hidden="true"></i></span>
-                    <input type="text" placeholder="Search skills"
-                        class="w-96 p-2 pl-9 rounded rounded-r-none text-gray-600">
-                    <button class="bg-slate-600 p-2 rounded-r text-white outline-none outline-0">Search</button>
-                </div>
-                <!--tags-->
-                <div class="align-baseline">
-                    <!-- tag default
-            <span id="badge-default" class="inline-flex items-center px-4 py-1 me-2 mt-4 text-sm font-medium text-white bg-blue-400 rounded-3xl"> Default
-                <button type="button" class="inline-flex items-center p-1 px-2 ms-2 text-sm text-white bg-transparent rounded-full hover:bg-blue-300"> + </button>
-            </span>
-            -->
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-
-
-
-<div class="flex justify-center static mb-16">
-    <!--implementar no button:-->
-    <!--[disabled]="createProjectForm.invalid" [class.disabled]="createProjectForm.invalid"-->
-    <button (click)="CreateProject()"
-        class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
-        Save
-    </button>
-    <button (click)="PostProject()"
-        class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
-        Publish
-    </button>
-    <button (click)="CancelProject()"
-        class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
-        Cancel
-    </button>
 </div>
