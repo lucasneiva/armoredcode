@@ -18,7 +18,7 @@ export default class HomeComponent {
 
   homeForm !: FormGroup;
 
-  isClient: boolean = false;
+  isClient: boolean = true; //false is default
 
   ngOnInit(): void {
     this.homeForm = this.fb.group({
