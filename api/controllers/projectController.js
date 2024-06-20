@@ -3,7 +3,7 @@ import { createError } from "../utils/error.js"
 import { createSuccess } from "../utils/success.js";
 import jwt from 'jsonwebtoken';
 import { connectToDatabase } from "../db.js";
-import mongoose from "mongoose";
+import mongoose, { Mongoose, Schema } from "mongoose";
 import { handleValidationError } from "../utils/handleValidationError.js";
 // import projectJoiSchema from "../validators/projectValidator.js"
 
@@ -15,7 +15,7 @@ export const searchProjects = async ( req, res, next ) => {
         const searchTerm = req.query.q; // Search term 
         const categoryId = req.query.category; // Category ID for filtering
 
-        console.log(categoryId);
+        console.log( categoryId );
 
         // 1. Build the Search Stage
         const searchStage = {
@@ -50,7 +50,7 @@ export const searchProjects = async ( req, res, next ) => {
         return next( createSuccess( 200, 'Search Results', results ) );
 
     } catch ( error ) {
-        console.log(error)
+        console.log( error )
         return next( createError( 500, 'Internal Server Error' ) );
     }
 };
@@ -78,4 +78,22 @@ export const createProject = async ( req, res, next ) => {
         handleValidationError( error, next );
     }
 
+};
+
+export const getUserProjects = async ( req, res, next ) => {
+    try {
+        const userId = req.user.id;
+        const userObjId = new mongoose.Types.ObjectId('6674774b0ffbef888d82cad1');
+
+        const projects = await project.find( { clientId:  userObjId });
+
+        return next( createSuccess( 200, 'User Projects', projects ) );
+
+    } catch ( error ) {
+        // Handle other potential errors 
+
+        console.log(error);
+        return next( createError( 500, 'Internal Server Error' ) );
+
+    }
 };
