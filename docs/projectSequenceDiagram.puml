@@ -1,0 +1,32 @@
+@startuml project sequence
+
+actor Cliente
+participant Sistema
+participant "Banco de Dados" as BD
+
+Cliente -> Sistema: Criar novo Projeto
+activate Cliente
+activate Sistema
+Sistema -> Cliente: Solicitar informações do Projeto\n (título, descrição, habilidades,\n tecnologias, orçamento, localização, etc.)
+deactivate Sistema
+Cliente -> Sistema: Inserir informações do Projeto
+activate Sistema
+Sistema -> BD: Verificar disponibilidade de\n habilidades e tecnologias
+activate BD
+BD --> Sistema: Retornar validação de \nhabilidades e tecnologias
+deactivate BD
+
+alt validação bem-sucedida
+  Sistema -> BD: Criar novo registro de Projeto\n com informações fornecidas
+  activate BD
+  BD --> Sistema: Retornar ID do novo Projeto
+  deactivate BD
+  Sistema -> Cliente: Projeto criado com sucesso\n (ID: [ID do Projeto])
+  deactivate Sistema
+else validação falhou
+  Sistema -> Cliente: Erro: Habilidades ou \ntecnologias inválidas.
+  deactivate Sistema
+end
+deactivate Cliente
+
+@enduml
