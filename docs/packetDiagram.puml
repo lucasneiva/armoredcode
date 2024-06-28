@@ -1,0 +1,35 @@
+@startuml packet diagram
+
+package "Gerenciamento de Projetos" {
+  [Project]
+  [Proposal]
+  [Requirement]
+  [ProjectCategory]
+}
+
+package "Usuários e Perfis" {
+  [User]
+  [ClientProfile]
+  [FreelancerProfile] 
+}
+
+package "Habilidades e Experiência" {
+  [Technology]
+  [Skill]
+  [Language]
+  [Education]
+  [Certification]
+  [WorkExperience]
+  [PortfolioItem]
+}
+
+package "Localização" {
+  [Location]
+}
+
+"Gerenciamento de Projetos" ..> "Habilidades e Experiência" : uses many
+"Gerenciamento de Projetos" --> "Localização" : uses many
+"Usuários e Perfis" --> "Habilidades e Experiência" : has many
+"Usuários e Perfis" --> "Localização" : has one
+
+@enduml
