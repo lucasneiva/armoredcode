@@ -8,6 +8,54 @@ Empresas de Sorocaba, especialmente as menores ou startups, muitas vezes têm di
 
 O ArmoredCode resolve esse problema fornecendo uma plataforma feita sob medida para a região de Sorocaba. Nós conectamos empresas a talentos locais de desenvolvimento de software, com foco na criação de oportunidades para que estudantes e recém-formados desenvolvam suas habilidades e portfólios.
 
+# ArmoredCode
+
+[... mantenha as seções anteriores ...]
+
+## Tecnologias Utilizadas
+
+- **Backend:**
+  - Node.js
+  - Express.js
+  - MongoDB
+  - Mongoose
+  - JSON Web Token (JWT) para autenticação
+
+- **Frontend:**
+    - Angular
+  
+- **Ferramentas de Desenvolvimento:**
+  - VSCode
+  - Thunder Client para testes de API
+  - MongoDB Atlas para busca indexada
+
+- **Linguagens:**
+  - JavaScript
+  - Typescript
+
+## Estado Atual do Projeto
+
+Até o momento, foram implementadas as seguintes funcionalidades:
+
+1. **Modelagem de Dados:**
+   - Criação de modelos para MongoDB usando Mongoose
+   - Modelos incluem: Projeto, Usuário, Cliente, Freelancer
+
+2. **API RESTful:**
+   - Implementação de rotas para Projetos, Usuários, Clientes e Freelancers
+   - Operações CRUD (Create, Read, Update, Delete) implementadas
+   - Foco atual em operações GET e POST
+
+3. **Autenticação:**
+   - Sistema de autenticação implementado usando JSON Web Tokens (JWT)
+
+4. **Busca Avançada:**
+   - Implementação de busca indexada utilizando MongoDB Atlas
+
+5. **Testes:**
+   - Utilização de Thunder Client para testes de API
+   - Criação e uso de fixtures para testes
+
 ## Público-Alvo
 
 **Freelancers:**
