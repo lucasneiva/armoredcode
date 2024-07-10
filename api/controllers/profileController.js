@@ -8,18 +8,18 @@ export const createProfile = async ( req, res, next ) => {
     const userId = req.user.id;
     const role = req.user.role;
     const profileData = req.body;
-    
+
     profileData.userId = userId;
 
     try {
-        
-        
+
+
         let profile;
 
-        
+
         if ( role === "CLIENT" ) {
             const existingProfile = await ClientProfile.findOne( { userId: userId } );
-            
+
             if ( existingProfile )
                 return next( createError( 400, "User has a profile already!" ) );
 
@@ -31,8 +31,8 @@ export const createProfile = async ( req, res, next ) => {
 
             if ( existingProfile )
                 return next( createError( 400, "User has a profile already!" ) );
-            
-            
+
+
             profile = new FreelancerProfile( profileData );
 
         } else {
@@ -50,6 +50,33 @@ export const createProfile = async ( req, res, next ) => {
     }
 };
 
-export const getProfileById = async ( req, res, next) => {
-    
-}
+export const getProfileById = async ( req, res, next ) => {
+    const { id } = req.params;
+
+    try {
+        // Find the user 
+        const user = await User.findById( id );
+        if ( !user ) {
+            return next( createError( 404, "User not found!" ) );
+        }
+
+        let profile;
+
+        if ( user.role === "CLIENT" ) {
+            profile = await ClientProfile.findOne( { userId: user._id } ).populate( "userId", "firstName lastName email" );
+        } else if ( user.role === "FREELANCER" ) {
+            profile = await FreelancerProfile.findOne( { userId: user._id } ).populate( "userId", "firstName lastName email" );
+        } else {
+            return next( createError( 400, "Invalid user role!" ) );
+        }
+
+        if ( !profile ) {
+            return next( createError( 404, "Profile not found!" ) );
+        }
+
+        return next( createSuccess( 200, "Profile fetched successfully!", profile ) );
+
+    } catch ( error ) {
+        return next( createError( 500, "Error fetching profile", error ) );
+    }
+};
