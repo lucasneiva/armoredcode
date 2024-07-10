@@ -1,0 +1,122 @@
+@startuml logic model
+
+entity Usuario {
+  * id
+  * login
+  * senha
+  * nome
+  * email
+  * imagemPerfil
+}
+
+entity PerfilFreelancer {
+  * id
+  * idUsuario
+  * resumoPerfil
+  * valorHora
+  * disponibilidade
+}
+
+entity Certificado {
+  * id
+  * idUsuario
+  * nome
+  * organizacaoEmissora
+  * dataEmissao
+}
+
+entity Formacao {
+  * id
+  * idUsuario
+  * nome
+  * instituicao
+  * anoConclusao
+}
+
+entity ExperienciaHabilidade {
+  * id
+  * idUsuario
+  * nomeExperiencia
+  * cargo
+  * dataInicio
+  * dataFim
+  * descricaoFuncao
+}
+
+entity BemPortfolio {
+  * id
+  * idUsuario
+  * nome
+  * descricao
+  * link
+}
+
+entity Localizacao {
+  * id
+  * cidade
+  * estado
+  * pais
+}
+
+entity Proposta {
+  * id
+  * idUsuario
+  * titulo
+  * descricao
+  * valorEstimado
+  * tempoEstimado
+  * status
+}
+
+entity Projeto {
+  * id
+  * idUsuario
+  * titulo
+  * descricao
+  * dataInicio
+  * dataFim
+  * valorTotal
+}
+
+entity Tecnologia {
+  * id
+  * nomeTecnologia
+  * descricaoTecnologia
+}
+
+entity CategoriaProjeto {
+  * id
+  * nomeCategoria
+  * descricaoCategoria
+}
+
+entity Habilidade {
+  * id
+  * nomeHabilidade
+  * descricaoHabilidade
+}
+
+entity Disponibilidade {
+  * id
+  * idPerfilFreelancer
+  * tipoDisponibilidade
+  * diasDisponiveis
+}
+
+Usuario "1" -- "1" PerfilFreelancer
+Usuario "1" -- "*" Certificado
+Usuario "1" -- "*" Formacao
+Usuario "1" -- "*" ExperienciaHabilidade
+Usuario "1" -- "*" BemPortfolio
+Usuario "1" -- "1" Localizacao
+Usuario "1" -- "*" Proposta
+Usuario "1" -- "*" Projeto
+PerfilFreelancer "1" -- "*" Habilidade
+PerfilFreelancer "1" -- "*" Disponibilidade
+Proposta "*" -- "*" Tecnologia : Requer
+Proposta "*" -- "*" Habilidade : Requer
+Proposta "*" -- "*" Proposta : Requer
+Projeto "*" -- "*" Tecnologia
+Projeto "*" -- "*" CategoriaProjeto
+
+@enduml

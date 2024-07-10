@@ -1,0 +1,22 @@
+@startuml project state
+state Criado 
+state EmAberto 
+state EmAvaliacao 
+state EmAndamento 
+state Concluido 
+state Cancelado
+
+[*] --> Criado
+Criado --> EmAberto : Publicar projeto
+EmAberto --> EmAvaliacao : Receber proposta
+EmAvaliacao --> EmAndamento : Aceitar proposta
+EmAvaliacao --> EmAberto : Rejeitar propostas
+EmAndamento --> Concluido : Finalizar projeto
+Criado --> Cancelado : Cancelar projeto
+EmAberto --> Cancelado : Cancelar projeto
+EmAndamento --> Cancelado : Cancelar projeto
+EmAvaliacao --> Cancelado : Rejeitar propostas
+Concluido --> [*]
+Cancelado --> [*]
+
+@enduml

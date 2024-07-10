@@ -1,0 +1,84 @@
+@startuml components diagram
+
+package Client {
+  package Components {
+    [Footer]
+    [Header]
+    [Project-Card] 
+  }
+  package Pages {
+    [Create-Profile]
+    [Create-Project]
+    [Forget-Password]
+    [Home]
+    [Login]
+    [Manage-Project]
+    [Profile]
+    [Register]
+    [Reset]
+  }
+  package Services {
+    [Auth Service]
+  }
+  package Validators {
+    [Confirms Password Validator]
+    [App Urls]
+  }
+}
+
+package Server {
+  package Controllers {
+    [Auth Controller]
+    [Industry Controller]
+    [Profile Controller]
+    [ProjectCategoryController]
+    [ProjectController]
+    [SkillController]
+    [SpecializationController]
+    [UserController]
+  }
+  package Fixtures {
+    [ClientProfile Fixture]
+    [FreelancerProfile Fixture]
+    [Industry Fixture]
+    [ProjectCategory Fixture]
+    [Project Fixture]
+    [Skill Fixture]
+    [Specialization Fixture]
+    [User Fixture]
+  }
+  package Models {
+    [ClientProfile Model]
+    [FreelancerProfile Model]
+    [Industry Model]
+    [Location Model]
+    [ProjectCategory Model]
+    [Project Model]
+    [Skill Model]
+    [Specialization Model]
+    [User Model]
+    [UserToken Model]
+  }
+  package Routes {
+    [Auth Routes]
+    [Industry Routes]
+    [Profile Routes]
+    [ProjectCategory Routes]
+    [Project Routes]
+    [Skill Routes]
+    [Specialization Routes]
+    [User Routes]
+  }
+}
+
+Client -[hidden]down-> Server
+
+Client ..> Server : HTTP requests
+
+Server ..> Client : HTTP responses
+
+database "Database" as db
+
+Server ..> db : CRUD operations
+
+@enduml
