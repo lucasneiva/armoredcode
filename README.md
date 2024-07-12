@@ -8,10 +8,6 @@ Empresas de Sorocaba, especialmente as menores ou startups, muitas vezes têm di
 
 O ArmoredCode resolve esse problema fornecendo uma plataforma feita sob medida para a região de Sorocaba. Nós conectamos empresas a talentos locais de desenvolvimento de software, com foco na criação de oportunidades para que estudantes e recém-formados desenvolvam suas habilidades e portfólios.
 
-# ArmoredCode
-
-[... mantenha as seções anteriores ...]
-
 ## Tecnologias Utilizadas
 
 - **Backend:**
