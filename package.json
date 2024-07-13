@@ -1,7 +1,15 @@
-{
-  "dependencies": {
-    "@faker-js/faker": "^8.4.1",
-    "mongodb": "^6.6.1",
-    "nodemailer": "^6.9.13"
+  {
+    "name": "armoredcode", 
+    "private": true,
+    "workspaces": [
+      "cliente",
+      "api"
+    ],
+
+    "dependencies": {
+      "@faker-js/faker": "^8.4.1",
+      "mongodb": "^6.6.1",
+      "nodemailer": "^6.9.13"
+    }
+
   }
-}
