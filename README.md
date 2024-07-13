@@ -123,15 +123,42 @@ O ArmoredCode resolve esse problema fornecendo uma plataforma feita sob medida p
 - API RESTful com operações CRUD básicas
 - Testes manuais utilizando Thunder Client para o backend
 
-## Configurações do Projeto
+##  Instruções para Rodar o Projeto
 
-Criar arquivo `.env` em `api/` com o seguinte conteúdo:
+### Pré-requisitos:
 
-```txt
-MONGO_URL=
+- **Node.js e npm:** Certifique-se de ter o Node.js e o npm instalados em sua máquina. Você pode baixá-los em [https://nodejs.org/](https://nodejs.org/).
+- **Yarn:** É recomendado usar o Yarn como gerenciador de pacotes para este projeto. Instale-o globalmente usando o comando `npm install -g yarn`.
+- **MongoDB:** Tenha o MongoDB instalado e em execução. Você pode baixá-lo em [https://www.mongodb.com/](https://www.mongodb.com/).
 
-JWT_SECRET=secretkey
+### Configuração do Projeto:
 
-LIVE_URL=http://localhost:4200
-```
+1. **Clonar o Repositório:**
+   ```bash
+   git clone https://github.com/lucas/armoredcode.git
+   ```
+2. **Instalar as Dependências:**
+   ```bash
+   yarn install
+   ```
+3. **Configurar Variáveis de Ambiente:**
+   - Criar um arquivo `.env` dentro da pasta `api` com o seguinte conteúdo, substituindo os valores entre `< >` pelas suas informações:
+   ```
+   MONGO_URL=<sua_string_de_conexao_do_mongodb> 
+   JWT_SECRET=<sua_chave_secreta_jwt> 
+   LIVE_URL=<url_do_seu_frontend> 
+   ```
+4. **Iniciar o Servidor:**
+   ```bash
+   yarn start 
+   ```
+   Isso iniciará o servidor backend.
+5. **Iniciar o Frontend (Angular):**
+   ```bash
+   cd cliente 
+   yarn start 
+   ```
+   Isso iniciará o servidor de desenvolvimento do Angular.
+
+   Agora você pode acessar o aplicativo em seu navegador, geralmente em `http://localhost:4200/`. 
 
