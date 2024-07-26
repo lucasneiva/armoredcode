@@ -12,6 +12,6 @@ router.get( '/:id', verifyClient, getProjectById );
 
 router.post( '/', verifyClient, createProject );
 
-router.patch('/', verifyClient, updateProject);
+router.patch('/:id', verifyClient, updateProject); 
 
 export default router;
