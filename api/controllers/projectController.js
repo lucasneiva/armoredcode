@@ -137,5 +137,51 @@ export const getUserProjects = async ( req, res, next ) => {
 };
 
 export const updateProject = async ( req, res, next ) => {
-
+    try {
+        const projectId = req.params.id;
+        const userId = req.user.id; // Assuming authentication middleware adds user to req
+        const updateData = req.body; // Data to update the project with
+    
+        // 1. Validation
+        //    - Validate projectId (ensure it's a valid ObjectId)
+        if (!mongoose.Types.ObjectId.isValid(projectId)) {
+          return next(createError(400, "Invalid project ID"));
+        }
+    
+        //    - Validate updateData (optional but recommended):
+        //      - Use a validation library like Joi to ensure data types and formats 
+        //        are correct and prevent unexpected data from being saved to your database.
+        //      - Example:
+        //        const { error } = projectJoiSchema.validate(updateData);
+        //        if (error) {
+        //          return next(createError(400, error.details[0].message)); 
+        //        } 
+    
+        // 2. Fetch the project
+        const existingProject = await project.findById(projectId);
+    
+        if (!existingProject) {
+          return next(createError(404, "Project not found"));
+        }
+    
+        // 5. Update the project 
+        //    - Option 1: Direct update (less verbose but less control):
+        //      Object.assign(existingProject, updateData);
+        //      await existingProject.save(); 
+    
+        //    - Option 2: Update specific fields (more control):
+        //      existingProject.projectTitle = updateData.projectTitle || existingProject.projectTitle;
+        //      existingProject.projectDescription = updateData.projectDescription || existingProject.projectDescription; 
+        //      // ... update other fields 
+        //      await existingProject.save();
+    
+        // Choose the update method that best suits your needs.
+    
+        // Return the updated project
+        return next(createSuccess(200, "Project updated successfully", existingProject));
+    
+      } catch (error) {
+        console.error("Error in updateProject:", error);
+        return next(createError(500, "Internal server error"));
+      }
 }
