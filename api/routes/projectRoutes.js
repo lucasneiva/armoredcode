@@ -6,10 +6,10 @@ const router = express.Router();
 
 router.get( '/search', searchProjects );
 
-router.get( '/:id', getProjectById );
+router.get('/user', verifyClient, getUserProjects);
+
+router.get( '/:id', verifyClient, getProjectById );
 
 router.post( '/', verifyClient, createProject );
-
-router.get('/user/:id', verifyClient, getUserProjects);
 
 export default router;

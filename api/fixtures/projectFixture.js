@@ -35,6 +35,7 @@ const generateProjectData = () => {
     const projectSizes = [ "SMALL", "MEDIUM", "LARGE" ];
     const experienceLevels = [ "ENTRY-LEVEL", "MID-LEVEL", "SENIOR" ];
     const workModels = [ "REMOTE", "HYBRID", "ON_SITE" ];
+    const statusTypes = [ "DRAFT", "POSTED" ];
 
     return {
         projectTitle: faker.lorem.words( 5 ),
@@ -55,6 +56,7 @@ const generateProjectData = () => {
         experienceLevel: faker.helpers.arrayElement( experienceLevels ),
         workModel: faker.helpers.arrayElement( workModels ),
         location: generateLocationData(),
+        projectStatus: faker.helpers.arrayElement( statusTypes )
     };
 };
 

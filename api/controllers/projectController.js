@@ -55,10 +55,48 @@ export const searchProjects = async ( req, res, next ) => {
     }
 };
 
-export const getProjectById = async ( req, res, next ) => {
 
+export const getProjectById = async (req, res, next) => {
+    try {
+        const projectId = req.params.id;
+        const userId = req.user.id; // Assumindo que o middleware de autenticação adiciona o user ao req
+
+        const projectObjectId = new mongoose.Types.ObjectId(projectId);
+
+        // Verificar se o projectId é um ObjectId válido
+        if (!mongoose.Types.ObjectId.isValid(projectId)) {
+            return next(createError(400, "Invalid project ID"));
+        }
+
+        // Buscar o projeto
+        const projectDetails = await project.findById(projectId)
+            .populate('clientId', 'username email') // Popula informações básicas do cliente
+            .populate('freelancerId', 'username email') // Popula informações básicas do freelancer, se atribuído
+            .populate('projectCategoryId', 'name') // Popula o nome da categoria do projeto
+            .populate('skillIds', 'name'); // Popula os nomes das habilidades requeridas
+
+        // Verificar se o projeto existe
+        if (!projectDetails) {
+            return next(createError(404, "Project not found"));
+        }
+
+        // Verificar permissões
+        // O usuário pode ver o projeto se for o cliente, o freelancer atribuído, ou se o status for "POSTED"
+        if (projectDetails.clientId._id.toString() !== userId && 
+            (projectDetails.freelancerId && projectDetails.freelancerId._id.toString() !== userId) && 
+            projectDetails.projectStatus !== "POSTED") {
+            return next(createError(403, "You don't have permission to view this project"));
+        }
+
+        // Se tudo estiver ok, retornar os detalhes do projeto
+        return next(createSuccess(200, "Project details retrieved successfully", projectDetails));
+
+} catch (error) {
+        console.error("Error in getProjectById:", error);
+        return next(createError(500, "Internal server error"));
+    }
 };
-
+  
 export const createProject = async ( req, res, next ) => {
     try {
         const token = req.cookies.acess_token;
