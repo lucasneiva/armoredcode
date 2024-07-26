@@ -135,3 +135,7 @@ export const getUserProjects = async ( req, res, next ) => {
 
     }
 };
+
+export const updateProject = async ( req, res, next ) => {
+
+}
