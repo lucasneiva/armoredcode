@@ -166,14 +166,8 @@ export const updateProject = async ( req, res, next ) => {
     
         // 5. Update the project
         //    - Option 1: Direct update (less verbose but less control):
-        //      Object.assign(existingProject, updateData);
-        //      await existingProject.save();
-    
-        //    - Option 2: Update specific fields (more control):
-        //      existingProject.projectTitle = updateData.projectTitle || existingProject.projectTitle;
-        //      existingProject.projectDescription = updateData.projectDescription || existingProject.projectDescription;
-        //      // ... update other fields
-        //      await existingProject.save();
+        Object.assign(existingProject, updateData);
+        await existingProject.save();
     
         // Return the updated project
         return next(createSuccess(200, "Project updated successfully", existingProject));
