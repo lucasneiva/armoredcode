@@ -1,77 +1,232 @@
-<div class="lg:w-2/6 mt-5 p-10 shadow-lg mx-auto mb-16">
-    <form>
-        <h2 class="font-semibold my-3 text-3xl">Informações Pessoais</h2>
-        <div class="flex justify-between">
-            <div>
-                <h2 class="font-semibold mt-4" for="nome">Nome da empresa</h2>
-                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="company name" id="companyname" name="companyname" required>
-            </div>
-            <div>
-                <h2 class="font-semibold mt-4" for="nome">Site da empresa</h2>
-                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="company site" id="companysite" name="companysite">
-            </div>
-        </div>
-
-        <div class="grid">
-            <h2 class="font-semibold mt-4" for="user">Descrição da empresa</h2>
-            <textarea id="companyDescription" name="companyDescription" rows="4"
-            placeholder="Write the company descripition here" class="bg-white p-3 border-2"></textarea>
-        
-            <h2 class="font-semibold mt-4">Tamanho da empresa</h2>
-            <select name="Option" id="" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
-                <option value="Default" selected>Select the company size</option>
-                <option value="small">Pequena</option>
-                <option value="medium">Média</option>
-                <option value="large">Grande</option>
-            </select>
-
-            <h2 class="font-semibold mt-4">Área de atuação</h2>
-            <select name="Option" id="" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
-                <option value="Default" selected>Select the company industry</option>
-                <option value="op1">Opção 1</option>
-                <option value="op2">Opção 2</option>
-                <option value="op3">Opção 3</option>
-            </select>
-        
-            <h2 class="font-bold mt-8 text-center">Localização</h2>
-
-            <h2 class="font-semibold mt-4">CEP</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name="" required>
-        
+<!--Client form-->
+<ng-container *ngIf="isClient">
+    <div class="lg:w-2/6 mt-5 p-10 shadow-lg mx-auto mb-16">
+        <form>
+            <h2 class="font-semibold my-3 text-3xl">Informações Pessoais</h2>
             <div class="flex justify-between">
                 <div>
-                    <h2 class="font-semibold mt-4" for="nome">Rua</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name="" required>
+                    <h2 class="font-semibold mt-4" for="nome">Nome da empresa</h2>
+                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="company name"
+                        id="companyname" name="companyname" required>
                 </div>
                 <div>
-                    <h2 class="font-semibold mt-4" for="nome">Número</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name="" required>
+                    <h2 class="font-semibold mt-4" for="nome">Site da empresa</h2>
+                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="company site"
+                        id="companysite" name="companysite">
                 </div>
             </div>
 
-            <h2 class="font-semibold mt-4">Bairro</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name="" required>
+            <div class="grid">
+                <h2 class="font-semibold mt-4" for="user">Descrição da empresa</h2>
+                <textarea id="companyDescription" name="companyDescription" rows="4"
+                    placeholder="Write the company descripition here" class="bg-white p-3 border-2"></textarea>
 
-            <h2 class="font-semibold mt-4">Cidade</h2>
-            <select name="Option" id="projCategory" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
-                <option value="Default" selected>Select a city</option>
-                <option value="aluminio">Aluminio</option>
-                <option value="itu">Itu</option>
-                <option value="salto">Salto</option>
-                <option value="sorocaba">Sorocaba</option>
-                <option value="votorantim">Votorantim</option>
-            </select>
+                <h2 class="font-semibold mt-4">Tamanho da empresa</h2>
+                <select name="Option" id="" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
+                    <option value="Default" selected>Select the company size</option>
+                    <option value="small">Pequena</option>
+                    <option value="medium">Média</option>
+                    <option value="large">Grande</option>
+                </select>
 
-            <h2 class="font-semibold mt-4">Estado</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="SP" id="" name="" disabled>
+                <h2 class="font-semibold mt-4">Área de atuação</h2>
+                <select name="Option" id="" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
+                    <option value="Default" selected>Select the company industry</option>
+                    <option value="op1">Opção 1</option>
+                    <option value="op2">Opção 2</option>
+                    <option value="op3">Opção 3</option>
+                </select>
 
-            <h2 class="font-semibold mt-4">País</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Brasil" id="" name="" disabled>
-        </div>
+                <h2 class="font-bold mt-8 text-center">Localização</h2>
 
-        <div class="flex justify-between mx-auto">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer w-5/12">Salvar</button>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer w-5/12">Cancelar</button>
-        </div>
-    </form>
-</div>
+                <h2 class="font-semibold mt-4">CEP</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name="" required>
+
+                <div class="flex justify-between">
+                    <div>
+                        <h2 class="font-semibold mt-4" for="nome">Rua</h2>
+                        <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name=""
+                            required>
+                    </div>
+                    <div>
+                        <h2 class="font-semibold mt-4" for="nome">Número</h2>
+                        <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name=""
+                            required>
+                    </div>
+                </div>
+
+                <h2 class="font-semibold mt-4">Bairro</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name="" required>
+
+                <h2 class="font-semibold mt-4">Cidade</h2>
+                <select name="Option" id="projCategory" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
+                    <option value="Default" selected>Select a city</option>
+                    <option value="aluminio">Aluminio</option>
+                    <option value="itu">Itu</option>
+                    <option value="salto">Salto</option>
+                    <option value="sorocaba">Sorocaba</option>
+                    <option value="votorantim">Votorantim</option>
+                </select>
+
+                <h2 class="font-semibold mt-4">Estado</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="SP" id="" name="" disabled>
+
+                <h2 class="font-semibold mt-4">País</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Brasil" id="" name=""
+                    disabled>
+            </div>
+
+            <div class="flex justify-between mx-auto">
+                <button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer w-5/12">Salvar</button>
+                <button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer w-5/12">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</ng-container>
+
+<!--Freelancer form-->
+<ng-container *ngIf="!isClient">
+    <div class="lg:w-2/6 mt-5 p-10 shadow-lg mx-auto mb-16">
+        <form>
+            <h2 class="font-semibold my-3 text-3xl">Informações Pessoais</h2>
+            <div class="flex justify-between">
+                <div>
+                    <h2 class="font-semibold mt-4" for="nome">Nome</h2>
+                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="first name"
+                        id="firstname" name="firstname" required>
+                </div>
+                <div>
+                    <h2 class="font-semibold mt-4" for="nome">Sobrenome</h2>
+                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="last name" id="lastname"
+                        name="lastname" required>
+                </div>
+            </div>
+
+            <div class="grid">
+                <h2 class="font-semibold mt-4" for="user">Sobre</h2>
+                <textarea id="profileSummary" name="profileSummary" rows="4"
+                    placeholder="Write the profile Summary here" class="bg-white p-3 border-2"></textarea>
+
+                <h2 class="font-bold mt-8 text-center">Educacional</h2>
+
+                <h2 class="font-semibold mt-4">Curso</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="degree Name" id="degreeName"
+                    name="degreeName">
+
+                <h2 class="font-semibold mt-4">Área de estudo</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="field of Study"
+                    id="fieldOfStudy" name="fieldOfStudy">
+
+                <h2 class="font-semibold mt-4">Instituição</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="institution" id="institution"
+                    name="institution">
+
+                <div class="flex justify-between">
+                    <div>
+                        <h2 class="font-semibold mt-4">Data de início</h2>
+                        <input class="p-2 border border-gray-300 rounded" type="text" placeholder="start Date"
+                            id="startDate" name="startDate">
+                    </div>
+
+                    <div>
+                        <h2 class="font-semibold mt-4">Data de Conclusão</h2>
+                        <input class="p-2 border border-gray-300 rounded" type="text" placeholder="end Date"
+                            id="endDate" name="endDate">
+                    </div>
+                </div>
+
+                <h2 class="font-bold mt-8 text-center">Certificações</h2>
+
+                <h2 class="font-semibold mt-4">Titúlo da certificação</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Certification title" id="name"
+                    name="name">
+
+                <h2 class="font-semibold mt-4">Organização Emissora</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="issuing Organization" id="issuingOrganization"
+                    name="issuingOrganization">
+
+                <h2 class="font-semibold mt-4">Data da certificação</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="issue Date" id="issueDate"
+                    name="issueDate">
+
+                <h2 class="font-bold mt-8 text-center">Profissional</h2>
+
+                <h2 class="font-semibold mt-4">Portfólio</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="portfolio" id="portfolio"
+                    name="portfolio">
+
+                <h2 class="font-semibold mt-4">Especializações</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="specializations"
+                    id="specializations" name="specializations">
+
+                <h2 class="font-semibold mt-4">Nível de Experiência</h2>
+                <select name="Option" id="experienceLevel"
+                    class="p-2 px-4 border border-gray-300 rounded text-gray-500">
+                    <option value="Default" selected>Select your experience here</option>
+                    <option value="JUNIOR">Junior</option>
+                    <option value="MID-LEVEL">Pleno</option>
+                    <option value="SENIOR">Senior</option>
+                </select>
+
+                <h2 class="font-semibold mt-4">Habilidades</h2>
+                <select name="skillIds" id="skillIds" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
+                    <option value="Default" selected>Select your Skills</option>
+                    <option value="L1">Java</option>
+                    <option value="L2">C++</option>
+                    <option value="L3">PhP</option>
+                </select>
+
+                <h2 class="font-semibold mt-4">Salário por Hora</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="hourly rate" id="hourlyRate"
+                    name="hourlyRate">
+
+                <h2 class="font-bold mt-8 text-center">Localização</h2>
+
+                <h2 class="font-semibold mt-4">CEP</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name="" required>
+
+                <div class="flex justify-between">
+                    <div>
+                        <h2 class="font-semibold mt-4" for="nome">Rua</h2>
+                        <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name=""
+                            required>
+                    </div>
+                    <div>
+                        <h2 class="font-semibold mt-4" for="nome">Número</h2>
+                        <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name=""
+                            required>
+                    </div>
+                </div>
+
+                <h2 class="font-semibold mt-4">Bairro</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name="" required>
+
+                <h2 class="font-semibold mt-4">Cidade</h2>
+                <select name="Option" id="projCategory" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
+                    <option value="Default" selected>Select a city</option>
+                    <option value="aluminio">Aluminio</option>
+                    <option value="itu">Itu</option>
+                    <option value="salto">Salto</option>
+                    <option value="sorocaba">Sorocaba</option>
+                    <option value="votorantim">Votorantim</option>
+                </select>
+
+                <h2 class="font-semibold mt-4">Estado</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="SP" id="" name="" disabled>
+
+                <h2 class="font-semibold mt-4">País</h2>
+                <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Brasil" id="" name=""
+                    disabled>
+            </div>
+
+            <div class="flex justify-between mx-auto">
+                <button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer w-5/12">Salvar</button>
+                <button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer w-5/12">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</ng-container>
