@@ -177,3 +177,29 @@ export const updateProject = async ( req, res, next ) => {
         return next(createError(500, "Internal server error"));
       }
 }
+
+export const deleteProject = async ( req, res, next ) => {
+    try {
+        const projectId = req.params.id;
+        const userId = req.user.id; // Assuming you have middleware to get the logged-in user
+        
+        // Check if the project ID is valid
+        if (!mongoose.Types.ObjectId.isValid(projectId)) {
+            return next(createError(400, "Invalid project ID"));
+        }
+
+        // Find the project and ensure the user is the owner (clientId)
+        const projectToDelete = await project.findOne({ _id: projectId, clientId: userId });
+
+        if (!projectToDelete) {
+          return next(createError(404, "Project not found or you don't have permission to delete it"));
+        }
+
+        // Delete the project
+        await projectToDelete.deleteOne(); 
+        return next(createSuccess(200, "Project deleted successfully"));
+        } catch (error) {
+            console.error("Error in deleteProject:", error);
+            return next(createError(500, "Internal server error"));
+        }
+}

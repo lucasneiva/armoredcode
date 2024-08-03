@@ -1,5 +1,5 @@
 import express from 'express';
-import { searchProjects, getProjectById, createProject, getUserProjects, updateProject } from '../controllers/projectController.js';
+import { searchProjects, getProjectById, createProject, getUserProjects, updateProject, deleteProject } from '../controllers/projectController.js';
 import { verifyClient } from '../utils/authMiddleware.js';
 
 const router = express.Router();
@@ -13,5 +13,7 @@ router.get( '/:id', verifyClient, getProjectById );
 router.post( '/', verifyClient, createProject );
 
 router.patch('/:id', verifyClient, updateProject);
+
+router.delete('/:id', verifyClient, deleteProject);
 
 export default router;
