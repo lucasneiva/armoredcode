@@ -23,6 +23,7 @@ export class AuthService {
     };
     return this.http.post<any>(`${apiUrls.authServiceApi}login`, loginObj, httpOptions);
   }
+  
   sendEmailService(email: string){
     return this.http.post<any>(`${apiUrls.authServiceApi}send-email`, {email: email });
   }
