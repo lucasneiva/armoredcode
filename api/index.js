@@ -85,9 +85,10 @@ app.listen( 8800, async () => {
 
         console.log( `Connected to MongoDB database!` );
 
+        //
         await seedProjectCategories();
         await seedIndustries();
-        await seedSpecializations();
+        seedSpecializations();
         await seedSkills();
 
         await seedUsers();
@@ -95,8 +96,8 @@ app.listen( 8800, async () => {
         // await seedFreelancerProfiles();
         // await seedClientProfiles();
 
-        await seedProjects();
-
+        await seedProjects(); 
+        //
 
     } catch ( error ) {
         console.error( `Error connecting to MongoDB: ${error}` );
