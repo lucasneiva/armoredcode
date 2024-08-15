@@ -26,9 +26,9 @@
             <h2 class="font-semibold mt-4">Tamanho da empresa</h2>
             <select name="Option" id="" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
                 <option value="Default" selected>Select the company size</option>
-                <option value="small">Pequena</option>
-                <option value="medium">Média</option>
-                <option value="large">Grande</option>
+                <option value="SMALL">Pequena</option>
+                <option value="MEDIUM">Média</option>
+                <option value="LARGE">Grande</option>
             </select>
 
             <h2 class="font-semibold mt-4">Área de atuação</h2>
@@ -43,21 +43,25 @@
             <h2 class="font-bold mt-8 text-center">Localização</h2>
 
             <h2 class="font-semibold mt-4">CEP</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name="" required>
+            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Example: 12345-678" id="" name=""
+                required>
 
             <div class="flex justify-between">
                 <div class="pr-2">
                     <h2 class="font-semibold mt-4" for="nome">Rua</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name="" required>
+                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Street Name" id=""
+                        name="" required>
                 </div>
                 <div class="pl-2">
                     <h2 class="font-semibold mt-4" for="nome">Número</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name="" required>
+                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Number" id="" name=""
+                        required>
                 </div>
             </div>
 
             <h2 class="font-semibold mt-4">Bairro</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name="" required>
+            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Neighborhood Name" id="" name=""
+                required>
 
             <h2 class="font-semibold mt-4">Cidade</h2>
             <select name="Option" id="projCategory" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
@@ -117,6 +121,48 @@
                 class="bg-white p-3 border-2 min-h-12 max-h-96"></textarea>
 
             <!--personal module end-->
+
+            <!--personal projects module start-->
+            <h2 class="font-semibold mt-4">Portfólio</h2>
+            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="portfolio" id="portfolio"
+                name="portfolio">
+            <!--personal projects module end-->
+
+            <!--experience module start-->
+            <h2 class="font-bold mt-8 text-center">Experiência</h2>
+
+            <div class="flex justify-between">
+                <div class="pr-2">
+                    <h2 class="font-semibold mt-4" for="companyName">Nome da Empresa</h2>
+                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="company Name"
+                        id="companyName" name="companyName" required>
+                </div>
+                <div class="pl-2">
+                    <h2 class="font-semibold mt-4" for="jobTitle">Título da vaga</h2>
+                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="job Title" id="jobTitle"
+                        name="jobTitle" required>
+                </div>
+            </div>
+
+            <div class="flex justify-between">
+                <div class="pr-2">
+                    <h2 class="font-semibold mt-4">Data de início</h2>
+                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="start Date"
+                        id="startDate" name="startDate">
+                </div>
+
+                <div class="pl-2">
+                    <h2 class="font-semibold mt-4">Data de Conclusão</h2>
+                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="end Date" id="endDate"
+                        name="endDate">
+                </div>
+            </div>
+
+            <h2 class="font-semibold mt-4" for="user">Descrição do trabalho</h2>
+            <textarea id="profileSummary" name="profileSummary" rows="4" placeholder="Write the profile Summary here"
+                class="bg-white p-3 border-2 min-h-12 max-h-96"></textarea>
+            <!--experience module end-->
+
             <!--educational module start-->
             <h2 class="font-bold mt-8 text-center">Educacional</h2>
 
@@ -166,10 +212,6 @@
             <!--professional module start-->
             <h2 class="font-bold mt-8 text-center">Profissional</h2>
 
-            <h2 class="font-semibold mt-4">Portfólio</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="portfolio" id="portfolio"
-                name="portfolio">
-
             <h2 class="font-semibold mt-4">Especializações</h2>
             <input class="p-2 border border-gray-300 rounded" type="text" placeholder="specializations"
                 id="specializations" name="specializations">
@@ -190,7 +232,7 @@
                 <option value="L3">PhP</option>
             </select>
 
-            <h2 class="font-semibold mt-4">Salário por Hora</h2>
+            <h2 class="font-semibold mt-4">Preço por Hora</h2>
             <input class="p-2 border border-gray-300 rounded" type="text" placeholder="hourly rate" id="hourlyRate"
                 name="hourlyRate">
 
@@ -199,21 +241,25 @@
             <h2 class="font-bold mt-8 text-center">Localização</h2>
 
             <h2 class="font-semibold mt-4">CEP</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name="" required>
+            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Example: 12345-678" id="" name=""
+                required>
 
             <div class="flex justify-between">
                 <div class="pr-2">
                     <h2 class="font-semibold mt-4" for="nome">Rua</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name="" required>
+                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Street Name" id=""
+                        name="" required>
                 </div>
                 <div class="pl-2">
                     <h2 class="font-semibold mt-4" for="nome">Número</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name="" required>
+                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Number" id="" name=""
+                        required>
                 </div>
             </div>
 
             <h2 class="font-semibold mt-4">Bairro</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="" id="" name="" required>
+            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Neighborhood Name" id="" name=""
+                required>
 
             <h2 class="font-semibold mt-4">Cidade</h2>
             <select name="Option" id="projCategory" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
