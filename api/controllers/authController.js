@@ -6,7 +6,8 @@ import jwt from "jsonwebtoken";
 import UserToken from "../models/userTokenModel.js";
 import nodemailer from "nodemailer";
 import { handleValidationError } from "../utils/handleValidationError.js";
-
+import ClientProfile from "../models/clientProfileModel.js"
+import FreelancerProfile from "../models/freelancerProfileModel.js"
 export const register = async ( req, res, next ) => {
     try {
         const newUserData = req.body;
