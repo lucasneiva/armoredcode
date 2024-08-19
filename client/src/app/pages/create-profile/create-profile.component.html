@@ -100,9 +100,9 @@
             <!--localization module end-->
             <div class="flex justify-between">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold
-                 mt-5 py-2 px-4 rounded cursor-pointer w-5/12">Salvar</button>
+                 mt-5 py-2 px-4 mr-2 rounded cursor-pointer w-full">Salvar</button>
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold
-                 mt-5 py-2 px-4 rounded cursor-pointer w-5/12">Cancelar</button>
+                 mt-5 py-2 px-4 ml-2 rounded cursor-pointer w-full">Cancelar</button>
             </div>
         </form>
     </div>
@@ -110,21 +110,21 @@
 
 <!--Freelancer form-->
 <ng-container *ngIf="!isClient">
-    <div class="container lg:w-3/6 mt-5 shadow-lg mx-auto mb-16">
+    <div class="w-fit lg:w-5/12 mt-5 shadow-lg mx-auto mb-16">
         <form class="grid p-10 overflow-hidden">
             <!--personal module start-->
             <h2 class="font-semibold my-3 text-3xl">Informações Pessoais</h2>
 
             <div class="flex justify-between">
-                <div class="pr-2">
+                <div class="pr-2 w-full">
                     <h2 class="font-semibold mt-4" for="nome">Nome</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="first name"
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="first name"
                         id="firstname" name="firstname" required>
                 </div>
-                <div class="pl-2">
+                <div class="pl-2 w-full">
                     <h2 class="font-semibold mt-4" for="nome">Sobrenome</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="last name" id="lastname"
-                        name="lastname" required>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="last name"
+                        id="lastname" name="lastname" required>
                 </div>
             </div>
 
@@ -136,7 +136,7 @@
 
             <!--personal projects module start-->
             <h2 class="font-semibold mt-4">Portfólio</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="portfolio" id="portfolio"
+            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="portfolio" id="portfolio"
                 name="portfolio">
             <!--personal projects module end-->
 
@@ -144,29 +144,28 @@
             <h2 class="font-bold mt-8 text-center">Experiência</h2>
 
             <div class="flex justify-between">
-                <div class="pr-2">
+                <div class="pr-2 w-full">
                     <h2 class="font-semibold mt-4" for="companyName">Nome da Empresa</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="company Name"
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="company Name"
                         id="companyName" name="companyName" required>
                 </div>
-                <div class="pl-2">
+                <div class="pl-2 w-full">
                     <h2 class="font-semibold mt-4" for="jobTitle">Título da vaga</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="job Title" id="jobTitle"
-                        name="jobTitle" required>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="job Title"
+                        id="jobTitle" name="jobTitle" required>
                 </div>
             </div>
 
             <div class="flex justify-between">
-                <div class="pr-2">
+                <div class="pr-2 w-full">
                     <h2 class="font-semibold mt-4">Data de início</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="start Date"
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="start Date"
                         id="startDate" name="startDate">
                 </div>
-
-                <div class="pl-2">
+                <div class="pl-2 w-full">
                     <h2 class="font-semibold mt-4">Data de Conclusão</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="end Date" id="endDate"
-                        name="endDate">
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="end Date"
+                        id="endDate" name="endDate">
                 </div>
             </div>
 
@@ -179,28 +178,28 @@
             <h2 class="font-bold mt-8 text-center">Educacional</h2>
 
             <h2 class="font-semibold mt-4">Curso</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="degree Name" id="degreeName"
-                name="degreeName">
+            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="degree Name"
+                id="degreeName" name="degreeName">
 
             <h2 class="font-semibold mt-4">Área de estudo</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="field of Study" id="fieldOfStudy"
-                name="fieldOfStudy">
+            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="field of Study"
+                id="fieldOfStudy" name="fieldOfStudy">
 
             <h2 class="font-semibold mt-4">Instituição</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="institution" id="institution"
-                name="institution">
+            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="institution"
+                id="institution" name="institution">
 
             <div class="flex justify-between">
-                <div class="pr-2">
+                <div class="pr-2 w-full">
                     <h2 class="font-semibold mt-4">Data de início</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="start Date"
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="start Date"
                         id="startDate" name="startDate">
                 </div>
 
-                <div class="pl-2">
+                <div class="pl-2 w-full">
                     <h2 class="font-semibold mt-4">Data de Conclusão</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="end Date" id="endDate"
-                        name="endDate">
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="end Date"
+                        id="endDate" name="endDate">
                 </div>
             </div>
 
@@ -209,15 +208,15 @@
             <h2 class="font-bold mt-8 text-center">Certificações</h2>
 
             <h2 class="font-semibold mt-4">Titúlo da certificação</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Certification title" id="name"
-                name="name">
+            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Certification title"
+                id="name" name="name">
 
             <h2 class="font-semibold mt-4">Organização Emissora</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="issuing Organization"
+            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="issuing Organization"
                 id="issuingOrganization" name="issuingOrganization">
 
             <h2 class="font-semibold mt-4">Data da certificação</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="issue Date" id="issueDate"
+            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="issue Date" id="issueDate"
                 name="issueDate">
 
             <!--certification module end-->
@@ -225,11 +224,12 @@
             <h2 class="font-bold mt-8 text-center">Profissional</h2>
 
             <h2 class="font-semibold mt-4">Especializações</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="specializations"
+            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="specializations"
                 id="specializations" name="specializations">
 
             <h2 class="font-semibold mt-4">Nível de Experiência</h2>
-            <select name="Option" id="experienceLevel" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
+            <select name="Option" id="experienceLevel"
+                class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                 <option value="Default" selected>Select your experience here</option>
                 <option value="JUNIOR">Junior</option>
                 <option value="MID-LEVEL">Pleno</option>
@@ -237,7 +237,7 @@
             </select>
 
             <h2 class="font-semibold mt-4">Habilidades</h2>
-            <select name="skillIds" id="skillIds" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
+            <select name="skillIds" id="skillIds" class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                 <option value="Default" selected>Select your Skills</option>
                 <option value="L1">Java</option>
                 <option value="L2">C++</option>
@@ -245,62 +245,69 @@
             </select>
 
             <h2 class="font-semibold mt-4">Preço por Hora</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="hourly rate" id="hourlyRate"
-                name="hourlyRate">
+            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="hourly rate"
+                id="hourlyRate" name="hourlyRate">
 
             <!--professional module end-->
             <!--localization module start-->
             <h2 class="font-bold mt-8 text-center">Localização</h2>
 
-            <h2 class="font-semibold mt-4">CEP</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Example: 12345-678" id="" name=""
-                required>
-
             <div class="flex justify-between">
-                <div class="pr-2">
+                <div class="pr-2 w-full">
+                    <h2 class="font-semibold mt-4">CEP</h2>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                        placeholder="Example: 12345-678" id="" name="" required>
+                </div>
+                <div class="px-2 w-full">
                     <h2 class="font-semibold mt-4" for="nome">Rua</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Street Name" id=""
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Street Name" id=""
                         name="" required>
                 </div>
-                <div class="pl-2">
+                <div class="pl-2 w-full">
                     <h2 class="font-semibold mt-4" for="nome">Número</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Number" id="" name=""
-                        required>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Number" id=""
+                        name="" required>
                 </div>
             </div>
 
-            <h2 class="font-semibold mt-4">Bairro</h2>
-            <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Neighborhood Name" id="" name=""
-                required>
-
-            <h2 class="font-semibold mt-4">Cidade</h2>
-            <select name="Option" id="projCategory" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
-                <option value="Default" selected>Select a city</option>
-                <option value="aluminio">Aluminio</option>
-                <option value="itu">Itu</option>
-                <option value="salto">Salto</option>
-                <option value="sorocaba">Sorocaba</option>
-                <option value="votorantim">Votorantim</option>
-            </select>
+            <div class="flex justify-between">
+                <div class="pr-2 w-full">
+                    <h2 class="font-semibold mt-4">Bairro</h2>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Neighborhood Name"
+                        id="" name="" required>
+                </div>
+                <div class="pl-2 w-full">
+                    <h2 class="font-semibold mt-4">Cidade</h2>
+                    <select name="Option" id="projCategory"
+                        class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
+                        <option value="Default" selected>Select a city</option>
+                        <option value="aluminio">Aluminio</option>
+                        <option value="itu">Itu</option>
+                        <option value="salto">Salto</option>
+                        <option value="sorocaba">Sorocaba</option>
+                        <option value="votorantim">Votorantim</option>
+                    </select>
+                </div>
+            </div>
 
             <div class="flex justify-between">
-                <div class="pr-2">
+                <div class="pr-2 w-full">
                     <h2 class="font-semibold mt-4">Estado</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="SP" id="" name=""
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="SP" id="" name=""
                         disabled>
                 </div>
-                <div class="pl-2">
+                <div class="pl-2 w-full">
                     <h2 class="font-semibold mt-4">País</h2>
-                    <input class="p-2 border border-gray-300 rounded" type="text" placeholder="Brasil" id="" name=""
-                        disabled>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Brasil" id=""
+                        name="" disabled>
                 </div>
             </div>
             <!--localization module end-->
             <div class="flex justify-between">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold
-                 mt-5 py-2 px-4 rounded cursor-pointer w-5/12">Salvar</button>
+                 mt-5 py-2 px-4 mr-2 rounded cursor-pointer w-full">Salvar</button>
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold
-                 mt-5 py-2 px-4 rounded cursor-pointer w-5/12">Cancelar</button>
+                 mt-5 py-2 px-4 ml-2 rounded cursor-pointer w-full">Cancelar</button>
             </div>
         </form>
     </div>
