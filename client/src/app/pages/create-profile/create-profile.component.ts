@@ -18,7 +18,7 @@ export default class CreateProfileComponent {
 
   profileForm !: FormGroup;
 
-  isClient: boolean = false; //false is default
+  isClient: boolean = true; //false is default
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
