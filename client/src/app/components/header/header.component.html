@@ -25,7 +25,7 @@
     </ng-container>
     <!--searchbar end-->
     <!--shortcuts start-->
-    <div class="nav-items"> <!--IMPLEMENTAR FETCH() PARA FETCH API-->
+    <div class="nav-items min-w-12 mx-4"> <!--IMPLEMENTAR FETCH() PARA FETCH API-->
         <ng-container *ngIf="!isLoggedIn">
             <span routerLink="/login" class="text-xl cursor-pointer text-gray-200 font-bold
              m-3 hover:underline hover:text-indigo-200">Login</span>
@@ -34,16 +34,22 @@
         </ng-container>
 
         <ng-container *ngIf="isLoggedIn">
-            <div *ngIf="isVisible || showMenu" class="flex justify-between align-middle">
+            <div *ngIf="isVisible" class="flex justify-between align-middle">
                 <span class="text-2xl cursor-pointer text-gray-200 font-bold
                  m-4 hover:underline hover:text-indigo-200">Chat</span>
                 <span routerLink="/manage-project" class="text-2xl cursor-pointer
                  text-gray-200 font-bold m-4 hover:underline hover:text-indigo-200">Projects</span>
                 <img [src]="profilePath" alt="Default Profile" routerLink="/profile" 
-                 class="h-12 w-12 my-auto mx-4 rounded-full border-white border-solid border-2 cursor-pointer">    
+                 class="h-12 w-12 my-auto mx-4 rounded-full border-white border-solid border-2 cursor-pointer">  
             </div>
-            <div *ngIf="!isVisible">
-                <img [src]="menuPath" alt="Menu Icon" class="h-12 w-12 mx-3" (click)="toggleMenu()"> 
+            <div *ngIf="!isVisible" class="flex w-full justify-around">
+                <span *ngIf="showMenu" class="text-2xl cursor-pointer text-gray-200 font-bold
+                 m-4 hover:underline hover:text-indigo-200">Chat</span>
+                <span routerLink="/manage-project" *ngIf="showMenu" class="text-2xl cursor-pointer
+                 text-gray-200 font-bold m-4 hover:underline hover:text-indigo-200">Projects</span>
+                <img [src]="profilePath" alt="Default Profile" routerLink="/profile" *ngIf="showMenu"
+                 class="h-12 w-12 my-auto mx-4 rounded-full border-white border-solid border-2 cursor-pointer">
+                <img [src]="menuPath" alt="Menu Icon" class="h-12 w-12 mx-3 my-auto" (click)="toggleMenu()"> 
             </div>
         </ng-container>
     </div>
