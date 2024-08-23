@@ -13,7 +13,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
   authService = inject(AuthService);
   isLoggedIn: boolean = false;
   profilePath = '../../assets/images/prf_icon.png';
@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit{
   menuPath = '../../assets/images/menu-svgrepo-com.svg';
 
   isVisible = true;
+  showMenu: boolean = false;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -28,21 +29,25 @@ export class HeaderComponent implements OnInit{
   }
 
   checkResolution(): boolean {
-    const targetWidth = 1200; 
-    // const targetHeight = 600; 
+    const targetWidth = 1100;
+    // const targetHeight = ???; 
 
-    return window.innerWidth > targetWidth; 
+    return window.innerWidth > targetWidth;
   }
 
   ngOnInit(): void {
-    this.isVisible = this.checkResolution(); 
-    this.authService.isLoggedIn$.subscribe(res=>{
+    this.isVisible = this.checkResolution();
+    this.authService.isLoggedIn$.subscribe(res => {
       this.isLoggedIn = this.authService.isLoggedIn();
     });
   }
 
-  logOut(){
+  logOut() {
     localStorage.removeItem("user_id");
     this.authService.isLoggedIn$.next(false);
+  }
+
+  toggleMenu() {
+    this.showMenu = !this.showMenu;
   }
 }
