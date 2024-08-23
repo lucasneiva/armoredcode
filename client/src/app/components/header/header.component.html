@@ -3,17 +3,17 @@
         <div class="logo flex max-w-96 overflow-hidden">
             <img [src]="logoPath" alt="Company Logo" class="h-12 w-12 mx-3"> 
             <span class="text-gray-200 text-4xl flex justify-start items-center" 
-             style="font-family: Michroma; font-size: 2rem;"> ArmoredCode </span>
+             style="font-family: Michroma; font-size: 2rem;" *ngIf="isVisible"> ArmoredCode </span>
         </div>
     </ng-container>
     <ng-container *ngIf="isLoggedIn">
-        <div routerLink="/home" class="logo flex max-w-96 cursor-pointer overflow-hidden">
+        <div routerLink="/home" class="logo flex max-w-96 min-w-16 cursor-pointer overflow-hidden">
             <img [src]="logoPath" alt="Company Logo" class="h-12 w-12 mx-3"> 
             <span class="text-gray-200 text-4xl flex justify-start items-center" 
-             style="font-family: Michroma; font-size: 2rem;"> ArmoredCode </span>
+             style="font-family: Michroma; font-size: 2rem;" *ngIf="isVisible"> ArmoredCode </span>
         </div>
     </ng-container>
-    <div *ngIf="isLoggedIn" class="search relative flex max-w-96 min-w-64 w-full px-5 border-red-500 border-2">
+    <div *ngIf="isLoggedIn" class="search relative flex max-w-96 min-w-64 w-full mx-2">
         <span class="absolute mt-1.5 mx-3"><i class="fa fa-search font-light" aria-hidden="true"></i></span>
         <input type="text" placeholder="Search" class="w-full p-2 pl-9 rounded rounded-r-none text-gray-600">
         <button class="bg-slate-600 p-2 rounded-r text-white outline-none outline-0">Search</button>
@@ -27,13 +27,16 @@
         </ng-container>
 
         <ng-container *ngIf="isLoggedIn">
-            <div class="flex justify-between align-middle">
+            <div *ngIf="isVisible" class="flex justify-between align-middle">
                 <span class="text-2xl cursor-pointer text-gray-200 font-bold
                  m-4 hover:underline hover:text-indigo-200">Chat</span>
                 <span routerLink="/manage-project" class="text-2xl cursor-pointer
                  text-gray-200 font-bold m-4 hover:underline hover:text-indigo-200">Projects</span>
                 <img [src]="profilePath" alt="Default Profile" routerLink="/profile" 
                  class="h-12 w-12 my-auto mx-4 rounded-full border-white border-solid border-2 cursor-pointer">    
+            </div>
+            <div *ngIf="!isVisible">
+                <img [src]="menuPath" alt="Menu Icon" class="h-12 w-12 mx-3"> 
             </div>
         </ng-container>
     </div>
