@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
@@ -16,116 +16,178 @@ export default class CreateProfileComponent {
   authService = inject(AuthService);
   router = inject(Router);
 
-  profileForm !: FormGroup;
-  clientProfileForm !: FormGroup;
-  freelancerProfileForm !: FormGroup;
+  clientProfileForm!: FormGroup;
+  freelancerProfileForm!: FormGroup;
 
   isClient: boolean = false; //false is default
 
   ngOnInit(): void {
-
-    this.profileForm = this.fb.group({
-
-      client: this.clientProfileForm = this.fb.group({
-        companyName: ['', Validators.required],
-        companySite: [''],
-        companyDescription: [''],
-        companySize: [''],
-        companyIndustry: [''],
-        location: this.fb.group({
-          zipCode: ['', Validators.required],
-          street: ['', Validators.required],
-          number: ['', Validators.required],
-          neighborhood: ['', Validators.required],
-          city: ['', Validators.required],
-          state: ['SP', Validators.required],
-          country: ['Brasil', Validators.required],
-        }),
+    this.clientProfileForm = this.fb.group({
+      companyName: ['', Validators.required],
+      companySite: [''],
+      companyDescription: [''],
+      companySize: ['', Validators.required],
+      companyIndustry: ['', Validators.required],
+      location: this.fb.group({
+        zipCode: ['', Validators.required],
+        street: ['', Validators.required],
+        number: ['', Validators.required],
+        neighborhood: ['', Validators.required],
+        city: ['', Validators.required],
+        state: ['SP'], 
+        country: ['Brasil'], 
       }),
+    });
 
-      freelancer: this.freelancerProfileForm = this.fb.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        profileSummary: [''],
-        portfolio: [''],
-        experiences: this.fb.array([]), // Use FormArray for multiple experiences
-        education: this.fb.array([]),    // Use FormArray for multiple education entries
-        certifications: this.fb.array([]), // Use FormArray for multiple certifications
-        specializations: [''],
-        experienceLevel: [''],
-        skillIds: [''],
-        hourlyRate: [''],
-        location: this.fb.group({
-          zipCode: ['', Validators.required],
-          street: ['', Validators.required],
-          number: ['', Validators.required],
-          neighborhood: ['', Validators.required],
-          city: ['', Validators.required],
-          state: ['SP', Validators.required],
-          country: ['Brasil', Validators.required],
-        }),
+    this.freelancerProfileForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      profileSummary: [''],
+      portfolio: this.fb.array([]),
+      experiences: this.fb.array([]), 
+      education: this.fb.array([]),
+      certifications: this.fb.array([]),
+      specializations: ['', Validators.required],
+      experienceLevel: ['', Validators.required],
+      skillIds: ['', Validators.required],
+      hourlyRate: this.fb.group({
+        min: [''],
+        max: [''],
+        currency: ['R$']
       }),
-    },
-    );
+      location: this.fb.group({
+        zipCode: ['', Validators.required],
+        street: ['', Validators.required],
+        number: ['', Validators.required],
+        neighborhood: ['', Validators.required],
+        city: ['', Validators.required],
+        state: ['SP'], 
+        country: ['Brasil'], 
+      }),
+    });
   }
 
   onSubmit() {
     if (this.isClient) {
-      // Submit client profile
       if (this.clientProfileForm.valid) {
-        console.log(this.clientProfileForm.value); // Replace with your backend logic
+        console.log(this.clientProfileForm.value); 
+        // Add your logic to send 'this.clientProfileForm.value' to the backend for client profile creation
         this.clientProfileForm.reset();
       } else {
-        // Handle form errors
+        // Handle form errors for client profile
+        this.displayFormErrors(this.clientProfileForm); 
       }
     } else {
-      // Submit freelancer profile
       if (this.freelancerProfileForm.valid) {
-        console.log(this.freelancerProfileForm.value); // Replace with your backend logic
-        this.freelancerProfileForm.reset();
+        console.log(this.freelancerProfileForm.value);
+        // Add your logic to send 'this.freelancerProfileForm.value' to the backend for freelancer profile creation
+        this.freelancerProfileForm.reset(); 
       } else {
-        // Handle form errors
+        // Handle form errors for freelancer profile
+        this.displayFormErrors(this.freelancerProfileForm); 
       }
     }
   }
 
   cancelSubmit(){
     alert("profile creation Canceled!")
-    
     this.router.navigate(['login'])
-    this.profileForm.reset();
+    if (this.isClient) {
+      this.clientProfileForm.reset();
+    }
+    else{
+      this.freelancerProfileForm.reset(); 
+    }
   }
 
-  // Helper functions to manage FormArrays (for experiences, education, certifications)
-  // ... (You can add these functions based on your requirements)
-  /*
+  // Helper functions to manage FormArrays 
+  
+  //Portfolio
+  get portfolioItems(): FormArray {
+    return this.freelancerProfileForm.get('portfolio') as FormArray;
+  }
+
+  addPortfolioItem() {
+    const portfolioItem = this.fb.group({
+      title: ['', Validators.required],
+      description: [''],
+      url: ['', Validators.required],
+    });
+    this.portfolioItems.push(portfolioItem);
+  }
+
+  removePortfolioItem(index: number) {
+    this.portfolioItems.removeAt(index);
+  }
+  
+  //Experiences
+  get experiences(): FormArray {
+    return this.freelancerProfileForm.get('experiences') as FormArray;
+  }
+
   addExperience() {
     const experienceForm = this.fb.group({
-    // Add fields for experience here
+      companyName: ['', Validators.required],
+      jobTitle: ['', Validators.required],
+      jobDescription: [''],
+      startDate: ['', Validators.required],
+      endDate: [''],
     });
-    this.freelancerProfileForm.get('experiences').push(experienceForm);
+    this.experiences.push(experienceForm);
   }
 
   removeExperience(index: number) {
-    this.freelancerProfileForm.get('experiences').removeAt(index);
+    this.experiences.removeAt(index);
+  }
+
+  //Education
+  get education(): FormArray {
+    return this.freelancerProfileForm.get('education') as FormArray;
   }
 
   addEducation() {
     const educationForm = this.fb.group({
-      // Add fields for education here
+      degreeName: ['', Validators.required],
+      fieldOfStudy: ['', Validators.required],
+      institution: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: [''],
     });
-    this.freelancerProfileForm.get('education').push(educationForm);
+    this.education.push(educationForm);
   }
 
   removeEducation(index: number) {
-    this.freelancerProfileForm.get('education').removeAt(index);
+    this.education.removeAt(index);
+  }
+
+  //Certifications
+  get certifications(): FormArray {
+    return this.freelancerProfileForm.get('certifications') as FormArray;
   }
 
   addCertification() {
     const certificationForm = this.fb.group({
-      // Add fields for certification here
-     },
-     );
-   }
-  */
+      name: ['', Validators.required],
+      issuingOrganization: ['', Validators.required],
+      issueDate: ['', Validators.required],
+    });
+    this.certifications.push(certificationForm);
+  }
+
+  removeCertification(index: number) {
+    this.certifications.removeAt(index);
+  }
+  
+  // Helper function to display form errors
+  private displayFormErrors(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl && control.invalid) {
+        console.log(`Field ${field} is invalid:`, control.errors);
+      } else if (control instanceof FormGroup && control.invalid) {
+        this.displayFormErrors(control); // Recursively check nested FormGroups
+      }
+    });
+  }
+
 }
