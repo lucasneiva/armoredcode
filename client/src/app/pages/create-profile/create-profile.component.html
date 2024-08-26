@@ -178,7 +178,7 @@
             <div formArrayName="education">
                 <h2 class="font-bold mt-8 text-center">Educacional</h2>
                 <div *ngFor="let educationForm of education.controls; let i = index">
-                    <div [formGroup]="educationForm" class="border p-4 rounded my-2"> <!--fix-->
+                    <div [formGroupName]="i" class="border p-4 rounded my-2">
                         <h3 class="font-semibold text-lg">Formação {{ i + 1 }}</h3>
 
                         <div class="flex justify-between">
