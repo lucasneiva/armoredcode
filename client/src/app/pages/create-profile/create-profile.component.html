@@ -111,7 +111,7 @@
 <!--Freelancer form-->
 <ng-container *ngIf="!isClient">
     <div class="w-fit lg:w-5/12 mt-5 shadow-lg mx-auto mb-16">
-        <form class="grid p-10 overflow-hidden">
+        <form class="grid p-10 overflow-hidden" [formGroup]="freelancerProfileForm">
             <!--personal module start-->
             <h2 class="font-semibold my-3 text-3xl">Informações Pessoais</h2>
 
@@ -175,34 +175,56 @@
             <!--experience module end-->
 
             <!--educational module start-->
-            <h2 class="font-bold mt-8 text-center">Educacional</h2>
+            <div formArrayName="education">
+                <h2 class="font-bold mt-8 text-center">Educacional</h2>
+                <div *ngFor="let educationForm of education.controls; let i = index">
+                    <div [formGroup]="educationForm" class="border p-4 rounded my-2"> <!--fix-->
+                        <h3 class="font-semibold text-lg">Formação {{ i + 1 }}</h3>
 
-            <h2 class="font-semibold mt-4">Curso</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="degree Name"
-                id="degreeName" name="degreeName">
+                        <div class="flex justify-between">
+                            <div class="pr-2 w-full">
+                                <h2 class="font-semibold mt-4">Curso</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="degree Name" formControlName="degreeName">
+                            </div>
+                            <div class="pl-2 w-full">
+                                <h2 class="font-semibold mt-4">Área de estudo</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="field of Study" formControlName="fieldOfStudy">
+                            </div>
+                        </div>
 
-            <h2 class="font-semibold mt-4">Área de estudo</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="field of Study"
-                id="fieldOfStudy" name="fieldOfStudy">
+                        <div class="flex justify-between">
+                            <div class="pr-2 w-full">
+                                <h2 class="font-semibold mt-4">Instituição</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="institution" formControlName="institution">
+                            </div>
+                        </div>
 
-            <h2 class="font-semibold mt-4">Instituição</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="institution"
-                id="institution" name="institution">
+                        <div class="flex justify-between">
+                            <div class="pr-2 w-full">
+                                <h2 class="font-semibold mt-4">Data de início</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="start Date" formControlName="startDate">
+                            </div>
+                            <div class="pl-2 w-full">
+                                <h2 class="font-semibold mt-4">Data de Conclusão</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="end Date" formControlName="endDate">
+                            </div>
+                        </div>
 
-            <div class="flex justify-between">
-                <div class="pr-2 w-full">
-                    <h2 class="font-semibold mt-4">Data de início</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="start Date"
-                        id="startDate" name="startDate">
+                        <button type="button" (click)="removeEducation(i)"
+                            class="bg-red-500 hover:bg-red-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">Remover</button>
+                    </div>
                 </div>
 
-                <div class="pl-2 w-full">
-                    <h2 class="font-semibold mt-4">Data de Conclusão</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="end Date"
-                        id="endDate" name="endDate">
-                </div>
+                <button type="button" (click)="addEducation()" *ngIf="education.length < 2"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
+                    Adicionar Formação
+                </button>
             </div>
-
             <!--educational module end-->
             <!--certification module start-->
             <h2 class="font-bold mt-8 text-center">Certificações</h2>

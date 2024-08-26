@@ -34,8 +34,8 @@ export default class CreateProfileComponent {
         number: ['', Validators.required],
         neighborhood: ['', Validators.required],
         city: ['', Validators.required],
-        state: ['SP'], 
-        country: ['Brasil'], 
+        state: ['SP'],
+        country: ['Brasil'],
       }),
     });
 
@@ -44,8 +44,8 @@ export default class CreateProfileComponent {
       lastName: ['', Validators.required],
       profileSummary: [''],
       portfolio: this.fb.array([]),
-      experiences: this.fb.array([]), 
-      education: this.fb.array([]),
+      experiences: this.fb.array([]),
+      education: this.fb.array([this.createEducationForm()]), // Initialize with one education form
       certifications: this.fb.array([]),
       specializations: ['', Validators.required],
       experienceLevel: ['', Validators.required],
@@ -61,8 +61,8 @@ export default class CreateProfileComponent {
         number: ['', Validators.required],
         neighborhood: ['', Validators.required],
         city: ['', Validators.required],
-        state: ['SP'], 
-        country: ['Brasil'], 
+        state: ['SP'],
+        country: ['Brasil'],
       }),
     });
   }
@@ -70,69 +70,67 @@ export default class CreateProfileComponent {
   onSubmit() {
     if (this.isClient) {
       if (this.clientProfileForm.valid) {
-        console.log(this.clientProfileForm.value); 
+        console.log(this.clientProfileForm.value);
         // Add your logic to send 'this.clientProfileForm.value' to the backend for client profile creation
         this.clientProfileForm.reset();
       } else {
         // Handle form errors for client profile
-        this.displayFormErrors(this.clientProfileForm); 
+        this.displayFormErrors(this.clientProfileForm);
       }
     } else {
       if (this.freelancerProfileForm.valid) {
         console.log(this.freelancerProfileForm.value);
         // Add your logic to send 'this.freelancerProfileForm.value' to the backend for freelancer profile creation
-        this.freelancerProfileForm.reset(); 
+        this.freelancerProfileForm.reset();
       } else {
         // Handle form errors for freelancer profile
-        this.displayFormErrors(this.freelancerProfileForm); 
+        this.displayFormErrors(this.freelancerProfileForm);
       }
     }
   }
 
-  cancelSubmit(){
+  cancelSubmit() {
     alert("profile creation Canceled!")
     this.router.navigate(['login'])
     if (this.isClient) {
       this.clientProfileForm.reset();
     }
-    else{
-      this.freelancerProfileForm.reset(); 
+    else {
+      this.freelancerProfileForm.reset();
     }
   }
 
   // Helper functions to manage FormArrays 
-  
+
   //Portfolio
   get portfolioItems(): FormArray {
     return this.freelancerProfileForm.get('portfolio') as FormArray;
   }
 
   addPortfolioItem() {
-    const portfolioItem = this.fb.group({
-      title: ['', Validators.required],
-      description: [''],
-      url: ['', Validators.required],
-    });
+    const portfolioItem = this.createPortfolioItem();
     this.portfolioItems.push(portfolioItem);
   }
 
   removePortfolioItem(index: number) {
     this.portfolioItems.removeAt(index);
   }
-  
+
+  createPortfolioItem(): FormGroup {
+    return this.fb.group({
+      title: ['', Validators.required],
+      description: [''],
+      url: ['', Validators.required],
+    });
+  }
+
   //Experiences
   get experiences(): FormArray {
     return this.freelancerProfileForm.get('experiences') as FormArray;
   }
 
   addExperience() {
-    const experienceForm = this.fb.group({
-      companyName: ['', Validators.required],
-      jobTitle: ['', Validators.required],
-      jobDescription: [''],
-      startDate: ['', Validators.required],
-      endDate: [''],
-    });
+    const experienceForm = this.createExperienceForm(); 
     this.experiences.push(experienceForm);
   }
 
@@ -140,20 +138,35 @@ export default class CreateProfileComponent {
     this.experiences.removeAt(index);
   }
 
-  //Education
+  createExperienceForm(): FormGroup {
+    return this.fb.group({
+      companyName: ['', Validators.required],
+      jobTitle: ['', Validators.required],
+      jobDescription: [''],
+      startDate: ['', Validators.required],
+      endDate: [''],
+    });
+  }
+
+  // Education (Modified)
   get education(): FormArray {
     return this.freelancerProfileForm.get('education') as FormArray;
   }
 
-  addEducation() {
-    const educationForm = this.fb.group({
+  createEducationForm(): FormGroup {
+    return this.fb.group({
       degreeName: ['', Validators.required],
       fieldOfStudy: ['', Validators.required],
       institution: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: [''],
     });
-    this.education.push(educationForm);
+  }
+
+  addEducation() {
+    if (this.education.length < 2) { // Limit to a maximum of 2 education forms
+      this.education.push(this.createEducationForm());
+    }
   }
 
   removeEducation(index: number) {
@@ -166,18 +179,22 @@ export default class CreateProfileComponent {
   }
 
   addCertification() {
-    const certificationForm = this.fb.group({
-      name: ['', Validators.required],
-      issuingOrganization: ['', Validators.required],
-      issueDate: ['', Validators.required],
-    });
+    const certificationForm = this.createCertificationForm(); 
     this.certifications.push(certificationForm);
   }
 
   removeCertification(index: number) {
     this.certifications.removeAt(index);
   }
-  
+
+  createCertificationForm(): FormGroup {
+    return this.fb.group({
+      name: ['', Validators.required],
+      issuingOrganization: ['', Validators.required],
+      issueDate: ['', Validators.required],
+    });
+  }
+
   // Helper function to display form errors
   private displayFormErrors(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
