@@ -140,39 +140,60 @@
                 name="portfolio">
             <!--personal projects module end-->
 
-            <!--experience module start-->
-            <h2 class="font-bold mt-8 text-center">Experiência</h2>
+            <!-- Experience Module Start -->
+            <div formArrayName="experiences">
+                <h2 class="font-bold mt-8 text-center">Experiência Profissional</h2>
+                <div *ngFor="let experienceForm of experiences.controls; let i = index" class="border p-4 rounded my-2">
+                    <div [formGroupName]="i">
+                        <h3 class="font-semibold text-lg">Experiência {{ i + 1 }}</h3>
 
-            <div class="flex justify-between">
-                <div class="pr-2 w-full">
-                    <h2 class="font-semibold mt-4" for="companyName">Nome da Empresa</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="company Name"
-                        id="companyName" name="companyName" required>
+                        <div class="flex justify-between">
+                            <div class="pr-2 w-full">
+                                <h2 class="font-semibold mt-4" for="companyName">Nome da Empresa</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="Nome da Empresa" formControlName="companyName">
+                            </div>
+                            <div class="pl-2 w-full">
+                                <h2 class="font-semibold mt-4" for="jobTitle">Cargo</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Cargo"
+                                    formControlName="jobTitle">
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <div class="pr-2 w-full">
+                                <h2 class="font-semibold mt-4">Data de Início</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="date"
+                                    placeholder="Data de Início" formControlName="startDate">
+                            </div>
+                            <div class="pl-2 w-full">
+                                <h2 class="font-semibold mt-4">Data de Término</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="date"
+                                    placeholder="Data de Término" formControlName="endDate">
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h2 class="font-semibold mt-4" for="jobDescription">Descrição das atividades</h2>
+                            <textarea class="bg-white p-3 border-2 min-h-12 max-h-96 w-full rounded" rows="4"
+                                formControlName="jobDescription" placeholder="Descreva suas atividades"></textarea>
+                        </div>
+
+                        <div class="flex justify-end align-middle">
+                            <button type="button" (click)="removeExperience(i)" class="bg-red-500 hover:bg-red-700
+                             text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">Remover
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="pl-2 w-full">
-                    <h2 class="font-semibold mt-4" for="jobTitle">Título da vaga</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="job Title"
-                        id="jobTitle" name="jobTitle" required>
+                <div class="flex justify-center align-middle">
+                    <button type="button" (click)="addExperience()" *ngIf="experiences.length < 2"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">Adicionar
+                        Experiência
+                    </button>
                 </div>
             </div>
-
-            <div class="flex justify-between">
-                <div class="pr-2 w-full">
-                    <h2 class="font-semibold mt-4">Data de início</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="start Date"
-                        id="startDate" name="startDate">
-                </div>
-                <div class="pl-2 w-full">
-                    <h2 class="font-semibold mt-4">Data de Conclusão</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="end Date"
-                        id="endDate" name="endDate">
-                </div>
-            </div>
-
-            <h2 class="font-semibold mt-4" for="user">Descrição do trabalho</h2>
-            <textarea id="profileSummary" name="profileSummary" rows="4" placeholder="Write the profile Summary here"
-                class="bg-white p-3 border-2 min-h-12 max-h-96"></textarea>
-            <!--experience module end-->
+            <!-- Experience Module End -->
             <!--professional module start-->
             <h2 class="font-bold mt-8 text-center">Profissional</h2>
 

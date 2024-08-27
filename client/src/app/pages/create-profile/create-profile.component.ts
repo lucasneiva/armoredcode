@@ -44,7 +44,7 @@ export default class CreateProfileComponent {
       lastName: ['', Validators.required],
       profileSummary: [''],
       portfolio: this.fb.array([]),
-      experiences: this.fb.array([]),
+      experiences: this.fb.array([this.createExperienceForm()]), // Initialize with one experience form
       education: this.fb.array([this.createEducationForm()]), // Initialize with one education form
       certifications: this.fb.array([]),
       specializations: ['', Validators.required],
@@ -124,14 +124,15 @@ export default class CreateProfileComponent {
     });
   }
 
-  //Experiences
+  // Experience methods
   get experiences(): FormArray {
     return this.freelancerProfileForm.get('experiences') as FormArray;
   }
 
   addExperience() {
-    const experienceForm = this.createExperienceForm(); 
-    this.experiences.push(experienceForm);
+    if (this.experiences.length < 2) { // Limit to a maximum of 2 education forms
+      this.experiences.push(this.createExperienceForm());
+    }
   }
 
   removeExperience(index: number) {
@@ -142,9 +143,9 @@ export default class CreateProfileComponent {
     return this.fb.group({
       companyName: ['', Validators.required],
       jobTitle: ['', Validators.required],
-      jobDescription: [''],
       startDate: ['', Validators.required],
       endDate: [''],
+      jobDescription: ['']
     });
   }
 
