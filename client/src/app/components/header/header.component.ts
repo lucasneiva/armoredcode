@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
   }
 
   checkResolution(): boolean {
-    const targetWidth = 1100;
+    const targetWidth = 1150;
     // const targetHeight = ???; 
 
     return window.innerWidth > targetWidth;

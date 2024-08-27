@@ -173,75 +173,6 @@
             <textarea id="profileSummary" name="profileSummary" rows="4" placeholder="Write the profile Summary here"
                 class="bg-white p-3 border-2 min-h-12 max-h-96"></textarea>
             <!--experience module end-->
-
-            <!--educational module start-->
-            <div formArrayName="education">
-                <h2 class="font-bold mt-8 text-center">Educacional</h2>
-                <div *ngFor="let educationForm of education.controls; let i = index">
-                    <div [formGroupName]="i" class="border p-4 rounded my-2">
-                        <h3 class="font-semibold text-lg">Formação {{ i + 1 }}</h3>
-
-                        <div class="flex justify-between">
-                            <div class="pr-2 w-full">
-                                <h2 class="font-semibold mt-4">Curso</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="degree Name" formControlName="degreeName">
-                            </div>
-                            <div class="pl-2 w-full">
-                                <h2 class="font-semibold mt-4">Área de estudo</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="field of Study" formControlName="fieldOfStudy">
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between">
-                            <div class="pr-2 w-full">
-                                <h2 class="font-semibold mt-4">Instituição</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="institution" formControlName="institution">
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between">
-                            <div class="pr-2 w-full">
-                                <h2 class="font-semibold mt-4">Data de início</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="start Date" formControlName="startDate">
-                            </div>
-                            <div class="pl-2 w-full">
-                                <h2 class="font-semibold mt-4">Data de Conclusão</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="end Date" formControlName="endDate">
-                            </div>
-                        </div>
-
-                        <button type="button" (click)="removeEducation(i)"
-                            class="bg-red-500 hover:bg-red-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">Remover</button>
-                    </div>
-                </div>
-
-                <button type="button" (click)="addEducation()" *ngIf="education.length < 2"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
-                    Adicionar Formação
-                </button>
-            </div>
-            <!--educational module end-->
-            <!--certification module start-->
-            <h2 class="font-bold mt-8 text-center">Certificações</h2>
-
-            <h2 class="font-semibold mt-4">Titúlo da certificação</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Certification title"
-                id="name" name="name">
-
-            <h2 class="font-semibold mt-4">Organização Emissora</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="issuing Organization"
-                id="issuingOrganization" name="issuingOrganization">
-
-            <h2 class="font-semibold mt-4">Data da certificação</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="issue Date" id="issueDate"
-                name="issueDate">
-
-            <!--certification module end-->
             <!--professional module start-->
             <h2 class="font-bold mt-8 text-center">Profissional</h2>
 
@@ -271,6 +202,74 @@
                 id="hourlyRate" name="hourlyRate">
 
             <!--professional module end-->
+            <!--educational module start-->
+            <div formArrayName="education">
+                <h2 class="font-bold mt-8 text-center">Educacional</h2>
+                <div *ngFor="let educationForm of education.controls; let i = index">
+                    <div [formGroupName]="i" class="border p-4 rounded my-2">
+                        <h3 class="font-semibold text-lg">Formação {{ i + 1 }}</h3>
+
+                        <div class="flex justify-between">
+                            <div class="pr-2 w-full">
+                                <h2 class="font-semibold mt-4">Curso</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="Degree name" formControlName="degreeName">
+                            </div>
+                            <div class="pl-2 w-full">
+                                <h2 class="font-semibold mt-4">Área de estudo</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="Field of study" formControlName="fieldOfStudy">
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <div class="pr-2 w-full">
+                                <h2 class="font-semibold mt-4">Instituição</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="Institution" formControlName="institution">
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <div class="pr-2 w-full">
+                                <h2 class="font-semibold mt-4">Data de início</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="Start date" formControlName="startDate">
+                            </div>
+                            <div class="pl-2 w-full">
+                                <h2 class="font-semibold mt-4">Data de Conclusão</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="End date" formControlName="endDate">
+                            </div>
+                        </div>
+                        <div class="flex justify-end align-middle">
+                            <button type="button" (click)="removeEducation(i)" class="bg-red-500 hover:bg-red-700
+                             text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">Remover</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center align-middle">
+                    <button type="button" (click)="addEducation()" *ngIf="education.length < 2" class="bg-blue-500 hover:bg-blue-700
+                     text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">Adicionar Formação</button>
+                </div>
+            </div>
+            <!--educational module end-->
+            <!--certification module start-->
+            <h2 class="font-bold mt-8 text-center">Certificações</h2>
+
+            <h2 class="font-semibold mt-4">Titúlo da certificação</h2>
+            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Certification title"
+                id="name" name="name">
+
+            <h2 class="font-semibold mt-4">Organização Emissora</h2>
+            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="issuing Organization"
+                id="issuingOrganization" name="issuingOrganization">
+
+            <h2 class="font-semibold mt-4">Data da certificação</h2>
+            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="issue Date" id="issueDate"
+                name="issueDate">
+
+            <!--certification module end-->
             <!--localization module start-->
             <h2 class="font-bold mt-8 text-center">Localização</h2>
 
