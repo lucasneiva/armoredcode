@@ -142,9 +142,15 @@
             <!--professional module start-->
             <h2 class="font-bold mt-8 text-center">Profissional</h2>
 
-            <h2 class="font-semibold mt-4">Especializações</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="specializations"
+            <h2 class="font-semibold mt-4">Especialização</h2>
+            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="specialization"
                 id="specializations" name="specializations">
+
+            <h2 class="font-semibold mt-4">Descrição da especialização</h2>
+            <textarea id="specializationsDescription" name="specializationsDescription" rows="4"
+                placeholder="Write the specialization description here"
+                class="bg-white p-3 border-2 min-h-12 max-h-96 w-full rounded" id="specializations"
+                name="specializations"></textarea>
 
             <h2 class="font-semibold mt-4">Nível de Experiência</h2>
             <select name="Option" id="experienceLevel"
@@ -168,7 +174,7 @@
                 id="hourlyRate" name="hourlyRate">
 
             <!--professional module end-->
-            <!-- Experience Module Start -->
+            <!--Experience Module Start -->
             <div formArrayName="experiences">
                 <h2 class="font-bold mt-8 text-center">Experiência Profissional</h2>
                 <div *ngFor="let experienceForm of experiences.controls; let i = index" class="border p-4 rounded my-2">
@@ -221,7 +227,7 @@
                     </button>
                 </div>
             </div>
-            <!-- Experience Module End -->
+            <!--Experience Module End -->
             <!--educational module start-->
             <div formArrayName="education">
                 <h2 class="font-bold mt-8 text-center">Educacional</h2>
@@ -375,9 +381,9 @@
             <!--localization module end-->
             <div class="flex justify-between">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold
-                 mt-5 py-2 px-4 mr-2 rounded cursor-pointer w-full">Salvar</button>
+                 mt-5 py-2 px-4 mr-2 rounded cursor-pointer w-full" (click)="onSubmit()">Salvar</button>
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold
-                 mt-5 py-2 px-4 ml-2 rounded cursor-pointer w-full">Cancelar</button>
+                 mt-5 py-2 px-4 ml-2 rounded cursor-pointer w-full" (click)="cancelSubmit()">Cancelar</button>
             </div>
         </form>
     </div>
