@@ -3,6 +3,12 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { SkillService } from '../../services/skill.service';
+
+interface Skill {
+  _id: string; // Assuming your Skill model has an _id field
+  skillName: string;
+}
 
 @Component({
   selector: 'app-create-profile',
@@ -15,11 +21,14 @@ export default class CreateProfileComponent {
   fb = inject(FormBuilder);
   authService = inject(AuthService);
   router = inject(Router);
+  skillService = inject(SkillService); // Inject the SkillService
 
   clientProfileForm!: FormGroup;
   freelancerProfileForm!: FormGroup;
 
   isClient: boolean = false; //false is default
+
+  skills: Skill[] = []; // Array to store fetched skills
 
   ngOnInit(): void {
     this.clientProfileForm = this.fb.group({
@@ -194,6 +203,19 @@ export default class CreateProfileComponent {
       name: ['', Validators.required],
       issuingOrganization: ['', Validators.required],
       issueDate: ['', Validators.required],
+    });
+  }
+
+  // Function to fetch skills from your backend using SkillService
+  fetchSkills() {
+    this.skillService.getSkills().subscribe({
+      next: (skills) => {
+        this.skills = skills;
+      },
+      error: (error) => {
+        console.error('Error fetching skills:', error);
+        // Handle the error appropriately, e.g., display an error message to the user
+      }
     });
   }
 
