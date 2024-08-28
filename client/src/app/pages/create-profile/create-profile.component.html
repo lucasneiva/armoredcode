@@ -139,7 +139,35 @@
             <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="portfolio" id="portfolio"
                 name="portfolio">
             <!--personal projects module end-->
+            <!--professional module start-->
+            <h2 class="font-bold mt-8 text-center">Profissional</h2>
 
+            <h2 class="font-semibold mt-4">Especializações</h2>
+            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="specializations"
+                id="specializations" name="specializations">
+
+            <h2 class="font-semibold mt-4">Nível de Experiência</h2>
+            <select name="Option" id="experienceLevel"
+                class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
+                <option value="Default" selected>Select your experience here</option>
+                <option value="JUNIOR">Junior</option>
+                <option value="MID-LEVEL">Pleno</option>
+                <option value="SENIOR">Senior</option>
+            </select>
+
+            <h2 class="font-semibold mt-4">Habilidades</h2>
+            <select name="skillIds" id="skillIds" class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
+                <option value="Default" selected>Select your Skills</option>
+                <option value="L1">Java</option>
+                <option value="L2">C++</option>
+                <option value="L3">PhP</option>
+            </select>
+
+            <h2 class="font-semibold mt-4">Preço por Hora</h2>
+            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="hourly rate"
+                id="hourlyRate" name="hourlyRate">
+
+            <!--professional module end-->
             <!-- Experience Module Start -->
             <div formArrayName="experiences">
                 <h2 class="font-bold mt-8 text-center">Experiência Profissional</h2>
@@ -194,35 +222,6 @@
                 </div>
             </div>
             <!-- Experience Module End -->
-            <!--professional module start-->
-            <h2 class="font-bold mt-8 text-center">Profissional</h2>
-
-            <h2 class="font-semibold mt-4">Especializações</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="specializations"
-                id="specializations" name="specializations">
-
-            <h2 class="font-semibold mt-4">Nível de Experiência</h2>
-            <select name="Option" id="experienceLevel"
-                class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
-                <option value="Default" selected>Select your experience here</option>
-                <option value="JUNIOR">Junior</option>
-                <option value="MID-LEVEL">Pleno</option>
-                <option value="SENIOR">Senior</option>
-            </select>
-
-            <h2 class="font-semibold mt-4">Habilidades</h2>
-            <select name="skillIds" id="skillIds" class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
-                <option value="Default" selected>Select your Skills</option>
-                <option value="L1">Java</option>
-                <option value="L2">C++</option>
-                <option value="L3">PhP</option>
-            </select>
-
-            <h2 class="font-semibold mt-4">Preço por Hora</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="hourly rate"
-                id="hourlyRate" name="hourlyRate">
-
-            <!--professional module end-->
             <!--educational module start-->
             <div formArrayName="education">
                 <h2 class="font-bold mt-8 text-center">Educacional</h2>
@@ -275,22 +274,51 @@
                 </div>
             </div>
             <!--educational module end-->
-            <!--certification module start-->
-            <h2 class="font-bold mt-8 text-center">Certificações</h2>
+            <!-- Certification Module Start -->
+            <div formArrayName="certifications">
+                <h2 class="font-bold mt-8 text-center">Certificações</h2>
+                <div *ngFor="let certificationForm of certifications.controls; let i = index"
+                    class="border p-4 rounded my-2">
+                    <div [formGroupName]="i">
+                        <h3 class="font-semibold text-lg">Certificação {{ i + 1 }}</h3>
 
-            <h2 class="font-semibold mt-4">Titúlo da certificação</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Certification title"
-                id="name" name="name">
+                        <div class="flex justify-between">
+                            <div class="pr-2 w-full">
+                                <h2 class="font-semibold mt-4">Título da Certificação</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="Título da Certificação" formControlName="name">
+                            </div>
+                            <div class="pl-2 w-full">
+                                <h2 class="font-semibold mt-4">Organização Emissora</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="Organização Emissora" formControlName="issuingOrganization">
+                            </div>
+                        </div>
 
-            <h2 class="font-semibold mt-4">Organização Emissora</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="issuing Organization"
-                id="issuingOrganization" name="issuingOrganization">
+                        <div class="flex justify-between">
+                            <div class="pr-2 w-full">
+                                <h2 class="font-semibold mt-4">Data da Certificação</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="date"
+                                    placeholder="Data da Certificação" formControlName="issueDate">
+                            </div>
+                        </div>
 
-            <h2 class="font-semibold mt-4">Data da certificação</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="issue Date" id="issueDate"
-                name="issueDate">
-
-            <!--certification module end-->
+                        <div class="flex justify-end align-middle">
+                            <button type="button" (click)="removeCertification(i)"
+                                class="bg-red-500 hover:bg-red-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
+                                Remover
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center align-middle">
+                    <button type="button" (click)="addCertification()" *ngIf="certifications.length < 5"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
+                        Adicionar Certificação
+                    </button>
+                </div>
+            </div>
+            <!-- Certification Module End -->
             <!--localization module start-->
             <h2 class="font-bold mt-8 text-center">Localização</h2>
 

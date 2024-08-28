@@ -46,7 +46,7 @@ export default class CreateProfileComponent {
       portfolio: this.fb.array([]),
       experiences: this.fb.array([this.createExperienceForm()]), // Initialize with one experience form
       education: this.fb.array([this.createEducationForm()]), // Initialize with one education form
-      certifications: this.fb.array([]),
+      certifications: this.fb.array([this.createCertificationForm()]), // Initialize with one certification form
       specializations: ['', Validators.required],
       experienceLevel: ['', Validators.required],
       skillIds: ['', Validators.required],
@@ -174,14 +174,15 @@ export default class CreateProfileComponent {
     this.education.removeAt(index);
   }
 
-  //Certifications
+  // Certifications
   get certifications(): FormArray {
     return this.freelancerProfileForm.get('certifications') as FormArray;
   }
 
   addCertification() {
-    const certificationForm = this.createCertificationForm(); 
-    this.certifications.push(certificationForm);
+    if (this.certifications.length < 5) {
+      this.certifications.push(this.createCertificationForm());
+    }
   }
 
   removeCertification(index: number) {
