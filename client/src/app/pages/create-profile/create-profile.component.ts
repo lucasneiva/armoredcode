@@ -33,7 +33,7 @@ export default class CreateProfileComponent {
 
   isClient: boolean = false; //false is default
 
-  skills: Skill[] = []; // Array to store fetched skills
+  skills: Skill[] = []; // Array to store fetched skills                                                  
   specializations: Specialization[] = []; // Array to store fetched skills
 
   ngOnInit(): void {
