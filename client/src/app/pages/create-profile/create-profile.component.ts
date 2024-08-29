@@ -35,6 +35,7 @@ export default class CreateProfileComponent {
 
   isClient: boolean = false; //false is default
 
+  // In your component's TypeScript file:
   skills: Skill[] = []; // Array to store fetched skills                                                  
   specializations: Specialization[] = []; // Array to store fetched skills
 
