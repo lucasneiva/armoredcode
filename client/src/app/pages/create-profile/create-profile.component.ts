@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { SkillService } from '../../services/skill.service';
+import { SpecializationService } from '../../services/specialization.service';
 
 interface Skill {
   _id: string; // Assuming your Skill model has an _id field
@@ -27,6 +28,7 @@ export default class CreateProfileComponent {
   authService = inject(AuthService);
   router = inject(Router);
   skillService = inject(SkillService); // Inject the SkillService
+  specializationService = inject(SpecializationService); // Inject the SpecializationService
 
   clientProfileForm!: FormGroup;
   freelancerProfileForm!: FormGroup;
@@ -38,6 +40,7 @@ export default class CreateProfileComponent {
 
   ngOnInit(): void {
     this.fetchSkills();
+    this.fetchSpecializations();
 
     this.clientProfileForm = this.fb.group({
       companyName: ['', Validators.required],
@@ -66,7 +69,7 @@ export default class CreateProfileComponent {
       certifications: this.fb.array([this.createCertificationForm()]), // Initialize with one certification form
       specializations: ['', Validators.required],
       experienceLevel: ['', Validators.required],
-      skillIds: ['', Validators.required],
+      skills: ['', Validators.required],
       hourlyRate: this.fb.group({
         min: [''],
         max: [''],
@@ -223,7 +226,7 @@ export default class CreateProfileComponent {
     });
   }
 
-  // Function to fetch skills from your backend using SkillService
+  // Function to fetch skills from your backend 
   fetchSkills() {
     this.skillService.getSkills().subscribe({
       next: (skills) => {
@@ -231,7 +234,18 @@ export default class CreateProfileComponent {
       },
       error: (error) => {
         console.error('Error fetching skills:', error);
-        // Handle the error appropriately, e.g., display an error message to the user
+      }
+    });
+  }
+
+  // Function to fetch specializations from your backend
+  fetchSpecializations() {
+    this.specializationService.getSpecializations().subscribe({
+      next: (specializations) => {
+        this.specializations = specializations;
+      },
+      error: (error) => {
+        console.error('Error fetching specializations:', error);
       }
     });
   }

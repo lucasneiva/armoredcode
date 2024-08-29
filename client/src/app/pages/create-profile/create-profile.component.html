@@ -144,8 +144,8 @@
 
             <h2 class="font-semibold mt-4">Especialização</h2>
 
-            <select name="specializationIds" id="specializationIds" class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
-                formControlName="specializationIds">
+            <select name="specializations" id="specializations" class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
+                formControlName="specializations">
                 <option value="Default" selected>Select your Specialization</option>
                 <option *ngFor="let specialization of specializations" [value]="specialization._id">
                     {{ specialization.specializationName }}
@@ -168,8 +168,8 @@
             </select>
 
             <h2 class="font-semibold mt-4">Habilidades</h2>
-            <select name="skillIds" id="skillIds" class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
-                formControlName="skillIds">
+            <select name="skills" id="skills" class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
+                formControlName="skills">
                 <option value="Default" selected>Select your Skills</option>
                 <option *ngFor="let skill of skills" [value]="skill._id">
                     {{ skill.skillName }}
