@@ -143,8 +143,14 @@
             <h2 class="font-bold mt-8 text-center">Profissional</h2>
 
             <h2 class="font-semibold mt-4">Especialização</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="specialization"
-                id="specializations" name="specializations">
+
+            <select name="specializationIds" id="specializationIds" class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
+                formControlName="specializationIds">
+                <option value="Default" selected>Select your Specialization</option>
+                <option *ngFor="let specialization of specializations" [value]="specialization._id">
+                    {{ specialization.specializationName }}
+                </option>
+            </select>
 
             <h2 class="font-semibold mt-4">Descrição da especialização</h2>
             <textarea id="specializationsDescription" name="specializationsDescription" rows="4"
@@ -259,14 +265,14 @@
 
                         <div class="flex justify-between">
                             <div class="pr-2 w-full">
-                                <h2 class="font-semibold mt-4">Data de início</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="Start date" formControlName="startDate">
+                                <h2 class="font-semibold mt-4">Data de Início</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="date"
+                                    placeholder="Data de Início" formControlName="startDate">
                             </div>
                             <div class="pl-2 w-full">
-                                <h2 class="font-semibold mt-4">Data de Conclusão</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="End date" formControlName="endDate">
+                                <h2 class="font-semibold mt-4">Data de Término</h2>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="date"
+                                    placeholder="Data de Término" formControlName="endDate">
                             </div>
                         </div>
                         <div class="flex justify-end align-middle">

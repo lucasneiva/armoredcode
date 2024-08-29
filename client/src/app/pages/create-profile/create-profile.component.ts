@@ -10,6 +10,11 @@ interface Skill {
   skillName: string;
 }
 
+interface Specialization {
+  _id: string; // Assuming your Skill model has an _id field
+  specializationName: string;
+}
+
 @Component({
   selector: 'app-create-profile',
   standalone: true,
@@ -29,8 +34,11 @@ export default class CreateProfileComponent {
   isClient: boolean = false; //false is default
 
   skills: Skill[] = []; // Array to store fetched skills
+  specializations: Specialization[] = []; // Array to store fetched skills
 
   ngOnInit(): void {
+    this.fetchSkills();
+
     this.clientProfileForm = this.fb.group({
       companyName: ['', Validators.required],
       companySite: [''],
@@ -74,8 +82,17 @@ export default class CreateProfileComponent {
         country: ['Brasil'],
       }),
     });
+    //this.determineUserType(); // Call the method to determine user type
   }
 
+  /* Method to determine user type
+  private determineUserType() {
+    
+    const userRole = this.authService.getUserRole(); 
+
+    this.isClient = userRole === 'CLIENT'; 
+  }
+  */
   onSubmit() {
     if (this.isClient) {
       if (this.clientProfileForm.valid) {

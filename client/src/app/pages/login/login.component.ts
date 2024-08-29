@@ -32,16 +32,16 @@ export default class LoginComponent {
       next:(res)=>{
         alert("Login is Success!");
         localStorage.setItem("user_id", res.data._id);
-        //localStorage.setItem("has_profile",res.data.has_profile); //arrumar
+        localStorage.setItem("has_profile",res.data.has_profile); //arrumar
         this.authService.isLoggedIn$.next(true);
-        /*
+        
         if(!!localStorage.getItem("has_profile")){
           this.router.navigate(['home']);
         }
         else{
           this.router.navigate(['create-profile']);
         }
-        */
+        
         this.router.navigate(['create-profile']);//arrumar
         this.loginForm.reset();
       },
