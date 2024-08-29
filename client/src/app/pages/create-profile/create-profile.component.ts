@@ -1,20 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { SkillService } from '../../services/skill.service';
 import { SpecializationService } from '../../services/specialization.service';
-
-interface Skill {
-  _id: string; // Assuming your Skill model has an _id field
-  skillName: string;
-}
-
-interface Specialization {
-  _id: string; // Assuming your Skill model has an _id field
-  specializationName: string;
-}
 
 @Component({
   selector: 'app-create-profile',
@@ -23,7 +13,7 @@ interface Specialization {
   templateUrl: './create-profile.component.html',
   styleUrl: './create-profile.component.scss'
 })
-export default class CreateProfileComponent {
+export default class CreateProfileComponent implements OnInit{
   fb = inject(FormBuilder);
   authService = inject(AuthService);
   router = inject(Router);
@@ -36,13 +26,11 @@ export default class CreateProfileComponent {
   isClient: boolean = false; //false is default
 
   // In your component's TypeScript file:
-  skills: Skill[] = []; // Array to store fetched skills                                                  
-  specializations: Specialization[] = []; // Array to store fetched skills
+  skills: any[] = []; // Array to store categories
+  specializations: any[] = []; // Array to store categories
 
-  ngOnInit(): void {
-    this.fetchSkills();
-    this.fetchSpecializations();
-
+  ngOnInit() {
+    
     this.clientProfileForm = this.fb.group({
       companyName: ['', Validators.required],
       companySite: [''],
@@ -68,9 +56,9 @@ export default class CreateProfileComponent {
       experiences: this.fb.array([this.createExperienceForm()]), // Initialize with one experience form
       education: this.fb.array([this.createEducationForm()]), // Initialize with one education form
       certifications: this.fb.array([this.createCertificationForm()]), // Initialize with one certification form
-      specializations: ['', Validators.required],
+      specializationsId: ['',Validators.required],
       experienceLevel: ['', Validators.required],
-      skills: ['', Validators.required],
+      skillsId: ['',Validators.required],
       hourlyRate: this.fb.group({
         min: [''],
         max: [''],
@@ -86,6 +74,8 @@ export default class CreateProfileComponent {
         country: ['Brasil'],
       }),
     });
+    this.fetchSkills();
+    this.fetchSpecializations();
     //this.determineUserType(); // Call the method to determine user type
   }
 
@@ -227,28 +217,28 @@ export default class CreateProfileComponent {
     });
   }
 
-  // Function to fetch skills from your backend 
+  // Function to fetch skills from your backend
   fetchSkills() {
-    this.skillService.getSkills().subscribe({
-      next: (skills) => {
-        this.skills = skills;
+    this.skillService.getSkills().subscribe(
+      (response: any) => {
+        this.skills = response.data;
       },
-      error: (error) => {
-        console.error('Error fetching skills:', error);
+      (error) => {
+        console.error("Error fetching skills:", error);
       }
-    });
+    );
   }
 
   // Function to fetch specializations from your backend
   fetchSpecializations() {
-    this.specializationService.getSpecializations().subscribe({
-      next: (specializations) => {
-        this.specializations = specializations;
+    this.specializationService.getSpecializations().subscribe(
+      (response: any) => {
+        this.specializations = response.data;
       },
-      error: (error) => {
-        console.error('Error fetching specializations:', error);
+      (error) => {
+        console.error("Error fetching specializations:", error);
       }
-    });
+    );
   }
 
   // Helper function to display form errors
