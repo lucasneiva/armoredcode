@@ -5,6 +5,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Va
 import { Router, RouterModule } from '@angular/router';
 import { SkillService } from '../../services/skill.service';
 import { SpecializationService } from '../../services/specialization.service';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'app-create-profile',
@@ -19,11 +20,12 @@ export default class CreateProfileComponent implements OnInit{
   router = inject(Router);
   skillService = inject(SkillService); // Inject the SkillService
   specializationService = inject(SpecializationService); // Inject the SpecializationService
+  profileService = inject(ProfileService); // Inject the ProfileService
 
   clientProfileForm!: FormGroup;
   freelancerProfileForm!: FormGroup;
 
-  isClient: boolean = false; //false is default
+  isClient: boolean = true; //false is default
 
   // In your component's TypeScript file:
   skills: any[] = []; // Array to store categories
@@ -91,8 +93,8 @@ export default class CreateProfileComponent implements OnInit{
     if (this.isClient) {
       if (this.clientProfileForm.valid) {
         console.log(this.clientProfileForm.value);
-        // Add your logic to send 'this.clientProfileForm.value' to the backend for client profile creation
-        this.clientProfileForm.reset();
+        this.CreateClientProfile();
+        //this.clientProfileForm.reset();
       } else {
         // Handle form errors for client profile
         this.displayFormErrors(this.clientProfileForm);
@@ -100,13 +102,51 @@ export default class CreateProfileComponent implements OnInit{
     } else {
       if (this.freelancerProfileForm.valid) {
         console.log(this.freelancerProfileForm.value);
-        // Add your logic to send 'this.freelancerProfileForm.value' to the backend for freelancer profile creation
-        this.freelancerProfileForm.reset();
+        this.CreateFreelancerProfile();
+        //this.freelancerProfileForm.reset();
       } else {
         // Handle form errors for freelancer profile
         this.displayFormErrors(this.freelancerProfileForm);
       }
     }
+  }
+
+  CreateClientProfile(){
+    //this.clientProfileForm.patchValue({});
+    /*debug*/ console.log(this.clientProfileForm.value);
+    this.profileService.CreateClientProfile(this.clientProfileForm.value)
+    .subscribe({
+      next:(res)=>{
+        alert("profile Created!")
+        
+        //localStorage.setItem("profile_id", res.data._id);
+        this.profileService.haveProfile$.next(true);
+        this.clientProfileForm.reset();
+        this.router.navigate(['home'])
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
+  }
+
+  CreateFreelancerProfile(){
+    //this.clientProfileForm.patchValue({});
+    /*debug*/ console.log(this.freelancerProfileForm.value);
+    this.profileService.CreateFreelancerProfile(this.freelancerProfileForm.value)
+    .subscribe({
+      next:(res)=>{
+        alert("profile Created!")
+        
+        //localStorage.setItem("profile_id", res.data._id);
+        this.profileService.haveProfile$.next(true);
+        this.freelancerProfileForm.reset();
+        this.router.navigate(['home'])
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
   }
 
   cancelSubmit() {
