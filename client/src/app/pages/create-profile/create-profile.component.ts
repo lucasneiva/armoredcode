@@ -27,7 +27,7 @@ export default class CreateProfileComponent implements OnInit{
   clientProfileForm!: FormGroup;
   freelancerProfileForm!: FormGroup;
 
-  isClient: boolean = true; //false is default
+  isClient: boolean = false; //false is default
 
   // In your component's TypeScript file:
   skills: any[] = []; // Array to store skills
@@ -62,6 +62,7 @@ export default class CreateProfileComponent implements OnInit{
       education: this.fb.array([this.createEducationForm()]), // Initialize with one education form
       certifications: this.fb.array([this.createCertificationForm()]), // Initialize with one certification form
       specializationsId: ['',Validators.required],
+      specializationDescripition: ['',Validators.required],
       experienceLevel: ['', Validators.required],
       skillsId: ['',Validators.required],
       hourlyRate: this.fb.group({
@@ -109,8 +110,8 @@ export default class CreateProfileComponent implements OnInit{
       }
         */
     } else {
-      console.log(this.clientProfileForm.value); //debug
-      alert(this.clientProfileForm.value); //debug
+      console.log(this.freelancerProfileForm.value); //debug
+      alert(this.freelancerProfileForm.value); //debug
       /*
       if (this.freelancerProfileForm.valid) {
         console.log(this.freelancerProfileForm.value);
