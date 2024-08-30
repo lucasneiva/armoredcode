@@ -24,7 +24,38 @@ const specializationData = [
 
 const seedSpecializations = async () => {
     await Specialization.deleteMany( {} );
+    
+    try {
+        const insertedSpecializations = []; // To store successfully inserted specializations
 
+        for (const data of specializationData) {
+            try {
+                // Attempt to create the specialization
+                const newSpecialization = await Specialization.create({
+                    specializationName: data.name,
+                    specializationDescription: data.description,
+                });
+
+                // If successful, add to the insertedSpecializations array
+                insertedSpecializations.push(newSpecialization);
+
+            } catch (error) {
+                // Handle potential duplicate key errors (assuming you have a unique index on specializationName)
+                if (error.code === 11000 && error.keyPattern && error.keyPattern.specializationName) {
+                    console.warn(`Specialization '${data.name}' already exists. Skipping.`);
+                } else {
+                    // Log other errors and rethrow if necessary
+                    console.error("Error creating specialization:", error);
+                    // throw error; // Consider rethrowing to stop the seeding process
+                }
+            }
+        }
+
+        console.log(`Seeded ${insertedSpecializations.length} specialization documents successfully!`);
+    } catch (error) {
+        console.error("Error seeding Specialization data:", error);
+    }
+/*
     try {
         const specializations = [];
         for ( const data of specializationData ) {
@@ -49,6 +80,7 @@ const seedSpecializations = async () => {
     } catch ( error ) {
         console.error( "Error seeding Specialization data:", error );
     }
+*/
 };
 
 export default seedSpecializations;
