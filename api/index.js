@@ -11,7 +11,7 @@ import profileRoutes from "./routes/profileRoutes.js";
 import skillRoutes from "./routes/skillRoutes.js"
 import projectCategoryRoutes from "./routes/projectCategoryRoutes.js";
 import industryRoutes from "./routes/industryRoutes.js";
-import specializationRoutes from "./routes/industryRoutes.js";
+import specializationRoutes from "./routes/specializationRoutes.js";
 import cookieParser from "cookie-parser";
 
 // Fixtures
@@ -50,8 +50,8 @@ app.use( "/api/projects", projectRoutes );
 app.use( "/api/profiles", profileRoutes );
 app.use( "/api/skills", skillRoutes );
 app.use( "/api/project-categories", projectCategoryRoutes );
-app.use( "/api/industries", industryRoutes );
 app.use( "/api/specializations", specializationRoutes );
+app.use( "/api/industries", industryRoutes );
 
 const connectMongoDB = async () => {
     try {
