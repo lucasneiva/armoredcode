@@ -33,7 +33,7 @@ export class IndustryService {
 export type Industry = {
   
     _id: string,
-    industryName: string,
+    name: string,
     description: string,
     
 }
