@@ -27,7 +27,7 @@ export default class CreateProfileComponent implements OnInit{
   clientProfileForm!: FormGroup;
   freelancerProfileForm!: FormGroup;
 
-  isClient: boolean = false; //false is default
+  isClient: boolean = true; //false is default
 
   // In your component's TypeScript file:
   skills: any[] = []; // Array to store skills

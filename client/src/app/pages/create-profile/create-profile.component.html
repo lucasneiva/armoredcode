@@ -36,13 +36,13 @@
                 </div>
                 <div class="pl-2 w-full">
                     <h2 class="font-semibold mt-4">Área de atuação</h2>
-                    <select name="companyIndustry" id="companyIndustry" formControlName="companyIndustry"
-                        class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
+                    <select name="companyIndustry" id="companyIndustry" formControlName="companyIndustry" 
+                     class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                         <option value="Default" selected>Select your industry</option>
                         <option *ngFor="let industry of industries" [value]="industry._id">
-                            {{ industry.skillName }}
+                          {{ industry.name }}
                         </option>
-                    </select>
+                      </select>
                 </div>
             </div>
             <!--personal module end-->
