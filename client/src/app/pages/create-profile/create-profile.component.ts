@@ -91,6 +91,10 @@ export default class CreateProfileComponent implements OnInit{
   */
   onSubmit() {
     if (this.isClient) {
+      console.log(this.clientProfileForm.value);
+      alert(this.clientProfileForm.value);
+      
+      /*
       if (this.clientProfileForm.valid) {
         console.log(this.clientProfileForm.value);
         this.CreateClientProfile();
@@ -99,6 +103,7 @@ export default class CreateProfileComponent implements OnInit{
         // Handle form errors for client profile
         this.displayFormErrors(this.clientProfileForm);
       }
+        */
     } else {
       if (this.freelancerProfileForm.valid) {
         console.log(this.freelancerProfileForm.value);
