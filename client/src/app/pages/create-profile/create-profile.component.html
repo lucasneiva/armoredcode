@@ -1,32 +1,33 @@
 <!--Client form-->
 <ng-container *ngIf="isClient">
     <div class="w-fit lg:w-5/12 mt-5 shadow-lg mx-auto mb-16">
-        <form class="grid p-10 overflow-hidden">
+        <form class="grid p-10 overflow-hidden" [formGroup]="clientProfileForm">
             <!--personal module start-->
             <h2 class="font-semibold my-3 text-3xl">Informações Pessoais</h2>
 
             <div class="flex justify-between">
                 <div class="pr-2 w-full">
-                    <h2 class="font-semibold mt-4" for="nome">Nome da empresa</h2>
+                    <h2 class="font-semibold mt-4" for="companyName">Nome da empresa</h2>
                     <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="company name"
-                        id="companyname" name="companyname" required>
+                        id="companyName" name="companyName" formControlName="companyName" required>
                 </div>
                 <div class="pl-2 w-full">
-                    <h2 class="font-semibold mt-4" for="nome">Site da empresa</h2>
+                    <h2 class="font-semibold mt-4" for="companySite">Site da empresa</h2>
                     <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="company site"
-                        id="companysite" name="companysite">
+                        id="companySite" name="companySite" formControlName="companySite">
                 </div>
             </div>
 
-            <h2 class="font-semibold mt-4" for="user">Descrição da empresa</h2>
+            <h2 class="font-semibold mt-4" for="companyDescription">Descrição da empresa</h2>
             <textarea id="companyDescription" name="companyDescription" rows="4"
-                placeholder="Write the company descripition here"
+                placeholder="Write the company descripition here" formControlName="companyDescription"
                 class="bg-white p-3 border-2 min-h-12 max-h-96"></textarea>
 
             <div class="flex justify-between">
                 <div class="pr-2 w-full">
                     <h2 class="font-semibold mt-4">Tamanho da empresa</h2>
-                    <select name="Option" id="" class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
+                    <select name="Option" id="companySize" formControlName="companySize" 
+                     class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                         <option value="Default" selected>Select the company size</option>
                         <option value="SMALL">Pequena</option>
                         <option value="MEDIUM">Média</option>
@@ -35,7 +36,8 @@
                 </div>
                 <div class="pl-2 w-full">
                     <h2 class="font-semibold mt-4">Área de atuação</h2>
-                    <select name="Option" id="" class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
+                    <select name="Option" id="companyIndustry" formControlName="companyIndustry" 
+                     class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                         <option value="Default" selected>Select the company industry</option>
                         <option value="op1">Opção 1</option>
                         <option value="op2">Opção 2</option>
@@ -47,33 +49,33 @@
             <!--localization module start-->
             <h2 class="font-bold mt-8 text-center">Localização</h2>
 
-            <div class="flex justify-between">
+            <div class="flex justify-between" formGroupName="location" id="location">
                 <div class="pr-2 w-full">
-                    <h2 class="font-semibold mt-4">CEP</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                        placeholder="Example: 12345-678" id="" name="" required>
+                    <h2 class="font-semibold mt-4" for="zipCode">CEP</h2>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Example: 12345-678"
+                     id="zipCode" name="zipCode" formControlName="zipCode" required>
                 </div>
                 <div class="px-2 w-full">
-                    <h2 class="font-semibold mt-4" for="nome">Rua</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Street Name" id=""
-                        name="" required>
+                    <h2 class="font-semibold mt-4" for="street">Rua</h2>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Street Name"
+                        id="street" name="street" formControlName="street" required>
                 </div>
                 <div class="pl-2 w-full">
-                    <h2 class="font-semibold mt-4" for="nome">Número</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Number" id=""
-                        name="" required>
+                    <h2 class="font-semibold mt-4" for="number">Número</h2>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Number"
+                        id="number" name="number" formControlName="number" required>
                 </div>
             </div>
 
-            <div class="flex justify-between">
+            <div class="flex justify-between" formGroupName="location" id="location">
                 <div class="pr-2 w-full">
                     <h2 class="font-semibold mt-4">Bairro</h2>
                     <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Neighborhood Name"
-                        id="" name="" required>
+                        id="neighborhood" name="neighborhood" formControlName="neighborhood" required>
                 </div>
                 <div class="pl-2 w-full">
                     <h2 class="font-semibold mt-4">Cidade</h2>
-                    <select name="Option" id="projCategory"
+                    <select name="Option" id="city" formControlName="city"
                         class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                         <option value="Default" selected>Select a city</option>
                         <option value="aluminio">Aluminio</option>
@@ -85,16 +87,16 @@
                 </div>
             </div>
 
-            <div class="flex justify-between">
+            <div class="flex justify-between" formGroupName="location" id="location">
                 <div class="pr-2 w-full">
                     <h2 class="font-semibold mt-4">Estado</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="SP" id="" name=""
-                        disabled>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="SP" id="state"
+                        name="state" disabled> <!--formControlName="state"-->
                 </div>
                 <div class="pl-2 w-full">
                     <h2 class="font-semibold mt-4">País</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Brasil" id=""
-                        name="" disabled>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Brasil"
+                        id="country" name="country" disabled> <!--formControlName="country"-->
                 </div>
             </div>
             <!--localization module end-->
@@ -131,7 +133,6 @@
             <h2 class="font-semibold mt-4" for="user">Sobre</h2>
             <textarea id="profileSummary" name="profileSummary" rows="4" placeholder="Write the profile Summary here"
                 class="bg-white p-3 border-2 min-h-12 max-h-96"></textarea>
-
             <!--personal module end-->
 
             <!--personal projects module start-->
@@ -139,12 +140,14 @@
             <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="portfolio" id="portfolio"
                 name="portfolio">
             <!--personal projects module end-->
+
             <!--professional module start-->
             <h2 class="font-bold mt-8 text-center">Profissional</h2>
 
             <h2 class="font-semibold mt-4">Especialização</h2>
 
-            <select name="specializationsId" id="specializationsId" class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
+            <select name="specializationsId" id="specializationsId"
+                class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
                 formControlName="specializationsId">
                 <option value="Default" selected>Select your Specialization</option>
                 <option *ngFor="let specialization of specializations" [value]="specialization._id">
@@ -337,19 +340,19 @@
 
             <div class="flex justify-between">
                 <div class="pr-2 w-full">
-                    <h2 class="font-semibold mt-4">CEP</h2>
+                    <h2 class="font-semibold mt-4" for="zipCode">CEP</h2>
                     <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                        placeholder="Example: 12345-678" id="" name="" required>
+                        placeholder="Example: 12345-678" id="zipCode" name="zipCode" required>
                 </div>
                 <div class="px-2 w-full">
-                    <h2 class="font-semibold mt-4" for="nome">Rua</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Street Name" id=""
-                        name="" required>
+                    <h2 class="font-semibold mt-4" for="street">Rua</h2>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Street Name"
+                        id="street" name="street" formControlName="street" required>
                 </div>
                 <div class="pl-2 w-full">
-                    <h2 class="font-semibold mt-4" for="nome">Número</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Number" id=""
-                        name="" required>
+                    <h2 class="font-semibold mt-4" for="number">Número</h2>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Number"
+                        id="number" name="number" formControlName="number" required>
                 </div>
             </div>
 
@@ -357,11 +360,11 @@
                 <div class="pr-2 w-full">
                     <h2 class="font-semibold mt-4">Bairro</h2>
                     <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Neighborhood Name"
-                        id="" name="" required>
+                        id="neighborhood" name="neighborhood" formControlName="neighborhood" required>
                 </div>
                 <div class="pl-2 w-full">
                     <h2 class="font-semibold mt-4">Cidade</h2>
-                    <select name="Option" id="projCategory"
+                    <select name="Option" id="city" formControlName="city"
                         class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                         <option value="Default" selected>Select a city</option>
                         <option value="aluminio">Aluminio</option>
@@ -376,13 +379,13 @@
             <div class="flex justify-between">
                 <div class="pr-2 w-full">
                     <h2 class="font-semibold mt-4">Estado</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="SP" id="" name=""
-                        disabled>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="SP" id="state"
+                        name="state" disabled> <!--formControlName="state"-->
                 </div>
                 <div class="pl-2 w-full">
                     <h2 class="font-semibold mt-4">País</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Brasil" id=""
-                        name="" disabled>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Brasil"
+                        id="country" name="country" disabled> <!--formControlName="country"-->
                 </div>
             </div>
             <!--localization module end-->
