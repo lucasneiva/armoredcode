@@ -23,24 +23,35 @@ const specializationData = [
 ];
 
 const seedSpecializations = async () => {
+    await Specialization.deleteMany( {} );
+
     try {
-      for (const data of specializationData) {
-        await Specialization.findOneAndUpdate(
-          { specializationName: data.name }, // Find by name
-          { 
-            specializationName: data.name, 
-            specializationDescription: data.description 
-          },
-          { upsert: true, new: true } // Create if not found, return new document
+        const specializations = [];
+        for ( const data of specializationData ) {
+            // Check for uniqueness to avoid duplicate names
+            const existingSpecialization = await Specialization.findOne( {
+                specializationName: data.name,
+            } );
+
+            if ( existingSpecialization ) {
+                console.warn( `Specialization '${data.name}' already exists. Skipping.` );
+            } 
+
+            specializations.push( { // Move this line outside the 'if' block
+                specializationName: data.name,
+                specializationDescription: data.description,
+            } );
+        }
+        await Specialization.insertMany( specializations );
+        console.log(
+            `Seeded ${specializations.length} specialization documents successfully!`
         );
-      }
-      console.log(
-        `Updated or inserted specializations successfully!`
-      );
-    } catch (error) {
-      console.error("Error seeding/updating Specialization data:", error);
+    } catch ( error ) {
+        console.error( "Error seeding Specialization data:", error );
     }
 /*
+    await Specialization.deleteMany( {} );
+
     try {
         const specializations = [];
         for ( const data of specializationData ) {
