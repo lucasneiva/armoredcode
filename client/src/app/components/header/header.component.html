@@ -1,37 +1,57 @@
-<nav class="w-full flex justify-between items-center p-5 bg-sky-600 shadow-lg">
+<nav class="w-full flex justify-between items-center overflow-hidden p-5 bg-sky-600 shadow-lg">
+    <!--logo start-->
     <ng-container *ngIf="!isLoggedIn">
-        <div class="logo flex ">
+        <div class="logo flex max-w-96 overflow-hidden">
             <img [src]="logoPath" alt="Company Logo" class="h-12 w-12 mx-3"> 
-            <span class="text-gray-200 text-4xl flex justify-start items-center" style="font-family: Michroma;"> ArmoredCode</span>
+            <span class="text-gray-200 text-4xl flex justify-start items-center" 
+             style="font-family: Michroma; font-size: 2rem;" *ngIf="isVisible"> ArmoredCode </span>
         </div>
     </ng-container>
     <ng-container *ngIf="isLoggedIn">
-        <div routerLink="/home" class="logo flex max-w-72 cursor-pointer">
-            <img [src]="logoPath" alt="Company Logo" class="h-12 w-12 mx-3"> 
-            <span class="text-gray-200 text-4xl flex justify-start items-center" style="font-family: Michroma; font-size: 2rem;"> ArmoredCode</span>
+        <div routerLink="/home" class="logo flex max-w-96 min-w-16 cursor-pointer overflow-hidden">
+            <img *ngIf="!showMenu" [src]="logoPath" alt="Company Logo" class="h-12 w-12 mx-3"> 
+            <span class="text-gray-200 text-4xl flex justify-start items-center" 
+             style="font-family: Michroma; font-size: 2rem;" *ngIf="isVisible"> ArmoredCode </span>
         </div>
     </ng-container>
-    <div *ngIf="isLoggedIn" class="search relative ">
-        <span class="absolute mt-1.5 mx-3"><i class="fa fa-search font-light" aria-hidden="true"></i></span>
-        <input type="text" placeholder="Search"
-        class="w-96 p-2 pl-9 rounded rounded-r-none text-gray-600">
-        <button class="bg-slate-600 p-2 rounded-r text-white outline-none outline-0">Search</button>
-    </div>
-    <div class="nav-items"> <!--IMPLEMENTAR FETCH() PARA FETCH API-->
+    <!--logo end-->
+    <!--searchbar start-->
+    <ng-container *ngIf="isLoggedIn">
+        <div *ngIf="!showMenu" class="search relative flex max-w-96 min-w-64 w-full mx-2">
+            <span class="absolute mt-1.5 mx-3"><i class="fa fa-search font-light" aria-hidden="true"></i></span>
+            <input type="text" placeholder="Search" class="w-full p-2 pl-9 rounded rounded-r-none text-gray-600">
+            <button class="bg-slate-600 p-2 rounded-r text-white outline-none outline-0">Search</button>
+        </div>
+    </ng-container>
+    <!--searchbar end-->
+    <!--shortcuts start-->
+    <div class="nav-items min-w-12 mx-4"> <!--IMPLEMENTAR FETCH() PARA FETCH API-->
         <ng-container *ngIf="!isLoggedIn">
-            <span routerLink="/login"
-             class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200">Login</span>
-            <span routerLink="/register" class="text-xl cursor-pointer text-gray-200 font-bold m-3 hover:underline hover:text-indigo-200">Register</span>
+            <span routerLink="/login" class="text-xl cursor-pointer text-gray-200 font-bold
+             m-3 hover:underline hover:text-indigo-200">Login</span>
+            <span routerLink="/register" class="text-xl cursor-pointer text-gray-200 font-bold
+             m-3 hover:underline hover:text-indigo-200">Register</span>
         </ng-container>
 
         <ng-container *ngIf="isLoggedIn">
-            <div class="flex justify-between align-middle">
-                <span class="text-2xl cursor-pointer text-gray-200 font-bold m-4 hover:underline hover:text-indigo-200">Chat</span>
-                <span routerLink="/manage-project" class="text-2xl cursor-pointer text-gray-200 font-bold m-4 hover:underline hover:text-indigo-200">Projects</span>
+            <div *ngIf="isVisible" class="flex justify-between align-middle">
+                <span class="text-2xl cursor-pointer text-gray-200 font-bold
+                 m-4 hover:underline hover:text-indigo-200">Chat</span>
+                <span routerLink="/manage-project" class="text-2xl cursor-pointer
+                 text-gray-200 font-bold m-4 hover:underline hover:text-indigo-200">Projects</span>
                 <img [src]="profilePath" alt="Default Profile" routerLink="/profile" 
-                class="h-12 w-12 my-auto mx-4 rounded-full border-white border-solid border-2 cursor-pointer">    
+                 class="h-12 w-12 my-auto mx-4 rounded-full border-white border-solid border-2 cursor-pointer">  
             </div>
-            
+            <div *ngIf="!isVisible" class="flex w-full justify-around">
+                <span *ngIf="showMenu" class="text-2xl cursor-pointer text-gray-200 font-bold
+                 m-4 hover:underline hover:text-indigo-200">Chat</span>
+                <span routerLink="/manage-project" *ngIf="showMenu" class="text-2xl cursor-pointer
+                 text-gray-200 font-bold m-4 hover:underline hover:text-indigo-200">Projects</span>
+                <img [src]="profilePath" alt="Default Profile" routerLink="/profile" *ngIf="showMenu"
+                 class="h-12 w-12 my-auto mx-4 rounded-full border-white border-solid border-2 cursor-pointer">
+                <img [src]="menuPath" alt="Menu Icon" class="h-12 w-12 mx-3 my-auto" (click)="toggleMenu()"> 
+            </div>
         </ng-container>
     </div>
+    <!--shortcuts end-->
 </nav>

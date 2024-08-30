@@ -6,7 +6,8 @@ import jwt from "jsonwebtoken";
 import UserToken from "../models/userTokenModel.js";
 import nodemailer from "nodemailer";
 import { handleValidationError } from "../utils/handleValidationError.js";
-
+import ClientProfile from "../models/clientProfileModel.js"
+import FreelancerProfile from "../models/freelancerProfileModel.js"
 export const register = async ( req, res, next ) => {
     try {
         const newUserData = req.body;
@@ -28,7 +29,7 @@ export const register = async ( req, res, next ) => {
         return next( createSuccess( 200, "User Registered Successfully!" ) );
     } catch ( error ) {
         // console.log( error.name );
-        
+
         handleValidationError( error, next );
     }
 };
@@ -39,14 +40,15 @@ export const login = async ( req, res, next ) => {
 
         if ( !user ) {
             return next( createError( 404, "User Not Found!" ) );
-            // return res.status( 404 ).send( "User not found!" );
         }
 
-        const isPasswordCorrect = await bcrypt.compare( req.body.password, user.password );
+        const isPasswordCorrect = await bcrypt.compare(
+            req.body.password,
+            user.password
+        );
 
         if ( !isPasswordCorrect ) {
             return createError( 400, "Password is incorrect!" );
-            // return res.status( 400 ).send( "Password is incorrect!" );
         }
 
         const token = jwt.sign(
@@ -54,27 +56,32 @@ export const login = async ( req, res, next ) => {
             process.env.JWT_SECRET
         );
 
-        const origin = req.headers.origin;
-        const isAngularFrontend = origin === 'http://localhost:4200';
+        // Verifica se o usuário possui um perfil
+        let hasProfile = false;
+        if ( user.role === "CLIENT" ) {
+            const clientProfile = await ClientProfile.findOne( { userId: user._id } );
+            hasProfile = !!clientProfile; // Converte para booleano
+        } else if ( user.role === "FREELANCER" ) {
+            const freelancerProfile = await FreelancerProfile.findOne( {
+                userId: user._id,
+            } );
+            hasProfile = !!freelancerProfile; // Converte para booleano
+        }
 
         res.cookie( "acess_token", token, {
-            /* secure: true,
-            sameSite: 'None', */ // Allow in cross-site requests
-            httpOnly: true
+            httpOnly: true,
         } )
             .status( 200 )
             .json( {
                 status: 200,
                 message: "Login Success",
-                data: user
+                data: user,
+                hasProfile: hasProfile, // Adiciona a informação sobre o perfil
             } );
-
     } catch ( error ) {
         return next( createError( 500, "Internal Server Error!" ) );
-
     }
-
-}
+};
 
 export const sendEmail = async ( req, res, next ) => {
     const email = req.body.email;
