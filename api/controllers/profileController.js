@@ -80,3 +80,43 @@ export const getProfileById = async ( req, res, next ) => {
         return next( createError( 500, "Error fetching profile", error ) );
     }
 };
+
+export const updateProfile = async ( req, res, next ) => {
+    const userId = req.user.id;
+    const role = req.user.role;
+    const profileData = req.body;
+
+    try {
+        let updatedProfile;
+
+        if ( role === "CLIENT" ) {
+            updatedProfile = await ClientProfile.findOneAndUpdate( { userId: userId }, profileData, {
+                new: true, // Return the updated document
+                runValidators: true, // Run validation rules on the update
+            } );
+        } else if ( role === "FREELANCER" ) {
+            updatedProfile = await FreelancerProfile.findOneAndUpdate( { userId: userId }, profileData, {
+                new: true,
+                runValidators: true,
+            } );
+        } else {
+            return next( createError( 400, "Invalid role!" ) );
+        }
+
+        if ( !updatedProfile ) {
+            return next( createError( 404, "Profile not found!" ) );
+        }
+
+        // You might want to update the user's basic info (e.g., firstName, lastName) as well if they are changed in the profile
+        if ( profileData.firstName || profileData.lastName ) {
+            await User.findByIdAndUpdate( userId, {
+                firstName: profileData.firstName,
+                lastName: profileData.lastName,
+            } );
+        }
+
+        return next( createSuccess( 200, "Profile updated successfully!", updatedProfile ) );
+    } catch ( error ) {
+        return next( createError( 500, "Error updating profile", error ) );
+    }
+};
