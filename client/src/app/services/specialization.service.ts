@@ -34,6 +34,6 @@ export type Specialization = {
   
     _id: string,
     specializationName: string,
-    description: string,
+    specializationDescription: string,
     
 }
