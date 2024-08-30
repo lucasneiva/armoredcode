@@ -6,6 +6,7 @@ import { Router, RouterModule } from '@angular/router';
 import { SkillService } from '../../services/skill.service';
 import { SpecializationService } from '../../services/specialization.service';
 import { ProfileService } from '../../services/profile.service';
+import { IndustryService } from '../../services/industry.service';
 
 @Component({
   selector: 'app-create-profile',
@@ -16,8 +17,9 @@ import { ProfileService } from '../../services/profile.service';
 })
 export default class CreateProfileComponent implements OnInit{
   fb = inject(FormBuilder);
-  authService = inject(AuthService);
   router = inject(Router);
+  authService = inject(AuthService);
+  industryService = inject(IndustryService); // Inject the IndustryService
   skillService = inject(SkillService); // Inject the SkillService
   specializationService = inject(SpecializationService); // Inject the SpecializationService
   profileService = inject(ProfileService); // Inject the ProfileService
@@ -28,8 +30,9 @@ export default class CreateProfileComponent implements OnInit{
   isClient: boolean = true; //false is default
 
   // In your component's TypeScript file:
-  skills: any[] = []; // Array to store categories
-  specializations: any[] = []; // Array to store categories
+  skills: any[] = []; // Array to store skills
+  specializations: any[] = []; // Array to store specializations
+  industries: any[] = []; // Array to store industries
 
   ngOnInit() {
     
@@ -76,9 +79,10 @@ export default class CreateProfileComponent implements OnInit{
         country: ['Brasil'],
       }),
     });
+    //this.determineUserType(); // Call the method to determine user type
+    this.fetchIndustries();
     this.fetchSkills();
     this.fetchSpecializations();
-    //this.determineUserType(); // Call the method to determine user type
   }
 
   /* Method to determine user type
@@ -91,8 +95,8 @@ export default class CreateProfileComponent implements OnInit{
   */
   onSubmit() {
     if (this.isClient) {
-      console.log(this.clientProfileForm.value);
-      alert(this.clientProfileForm.value);
+      console.log(this.clientProfileForm.value); //debug
+      alert(this.clientProfileForm.value); //debug
       
       /*
       if (this.clientProfileForm.valid) {
@@ -105,6 +109,9 @@ export default class CreateProfileComponent implements OnInit{
       }
         */
     } else {
+      console.log(this.clientProfileForm.value); //debug
+      alert(this.clientProfileForm.value); //debug
+      /*
       if (this.freelancerProfileForm.valid) {
         console.log(this.freelancerProfileForm.value);
         this.CreateFreelancerProfile();
@@ -113,6 +120,7 @@ export default class CreateProfileComponent implements OnInit{
         // Handle form errors for freelancer profile
         this.displayFormErrors(this.freelancerProfileForm);
       }
+        */
     }
   }
 
@@ -260,6 +268,18 @@ export default class CreateProfileComponent implements OnInit{
       issuingOrganization: ['', Validators.required],
       issueDate: ['', Validators.required],
     });
+  }
+
+  // Function to fetch skills from your backend
+  fetchIndustries() {
+    this.industryService.getIndustries().subscribe(
+      (response: any) => {
+        this.industries = response.data;
+      },
+      (error) => {
+        console.error("Error fetching industries:", error);
+      }
+    );
   }
 
   // Function to fetch skills from your backend
