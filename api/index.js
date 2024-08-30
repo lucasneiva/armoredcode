@@ -18,7 +18,7 @@ import cookieParser from "cookie-parser";
 import seedProjectCategories from './fixtures/projectCategoryFixture.js';
 import seedIndustries from './fixtures/industryFixture.js';
 import seedSpecializations from './fixtures/specializationFixture.js';
-import seedSkills from './fixtures/skillsFixture.js';
+import seedSkills from './fixtures/skillFixture.js';
 import seedUsers from "./fixtures/userFixture.js";
 import seedFreelancerProfiles from "./fixtures/freelancerProfileFixture.js";
 import seedClientProfiles from "./fixtures/clientProfileFixture.js";
