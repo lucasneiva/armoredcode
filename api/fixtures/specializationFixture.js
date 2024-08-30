@@ -23,38 +23,36 @@ const specializationData = [
 ];
 
 const seedSpecializations = async () => {
-    await Specialization.deleteMany( {} );
-    
-    try {
-        const insertedSpecializations = []; // To store successfully inserted specializations
+    await Specialization.deleteMany({}); // Clear existing data
 
-        for (const data of specializationData) {
-            try {
-                // Attempt to create the specialization
-                const newSpecialization = await Specialization.create({
-                    specializationName: data.name,
-                    specializationDescription: data.description,
-                });
+  try {
+    const insertedSpecializations = []; 
 
-                // If successful, add to the insertedSpecializations array
-                insertedSpecializations.push(newSpecialization);
+    for (const data of specializationData) {
+      try {
+        const newSpecialization = await Specialization.create({
+          specializationName: data.name,
+          specializationDescription: data.description,
+        });
 
-            } catch (error) {
-                // Handle potential duplicate key errors (assuming you have a unique index on specializationName)
-                if (error.code === 11000 && error.keyPattern && error.keyPattern.specializationName) {
-                    console.warn(`Specialization '${data.name}' already exists. Skipping.`);
-                } else {
-                    // Log other errors and rethrow if necessary
-                    console.error("Error creating specialization:", error);
-                    // throw error; // Consider rethrowing to stop the seeding process
-                }
-            }
+        insertedSpecializations.push(newSpecialization); 
+      } catch (error) {
+        // Assuming a unique index on 'specializationName', this catches duplicate key errors
+        if (error.code === 11000 && error.keyPattern && error.keyPattern.specializationName) {
+          console.warn(`Specialization '${data.name}' already exists. Skipping.`);
+        } else {
+          console.error("Error creating specialization:", error);
+          // throw error; // (Optional) Consider rethrowing to halt seeding if there are other errors
         }
-
-        console.log(`Seeded ${insertedSpecializations.length} specialization documents successfully!`);
-    } catch (error) {
-        console.error("Error seeding Specialization data:", error);
+      }
     }
+
+    console.log(
+      `Seeded ${insertedSpecializations.length} specialization documents successfully!`
+    );
+  } catch (error) {
+    console.error("Error seeding Specialization data:", error);
+  }
 /*
     try {
         const specializations = [];
