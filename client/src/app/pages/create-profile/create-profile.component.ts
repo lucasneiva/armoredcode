@@ -271,7 +271,7 @@ export default class CreateProfileComponent implements OnInit{
     });
   }
 
-  // Function to fetch skills from your backend
+  // Function to fetch industries from your backend
   fetchIndustries() {
     this.industryService.getIndustries().subscribe(
       (response: any) => {

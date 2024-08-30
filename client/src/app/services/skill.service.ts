@@ -34,5 +34,6 @@ export type Skill = {
   
     _id: string,
     skillName: string,
-
+    description: string,
+    
 }

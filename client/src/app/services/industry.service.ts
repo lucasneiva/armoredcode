@@ -34,5 +34,6 @@ export type Industry = {
   
     _id: string,
     industryName: string,
-
+    description: string,
+    
 }
