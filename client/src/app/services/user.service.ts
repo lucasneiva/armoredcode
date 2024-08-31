@@ -7,7 +7,7 @@ import { BehaviorSubject, catchError, map, of, throwError, Observable, tap } fro
   providedIn: 'root'
 })
 export class UserService {
-  http = inject(HttpClient); 
+  http = inject(HttpClient);
 
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
@@ -17,18 +17,19 @@ export class UserService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
-      withCredentials: true 
+      withCredentials: true
     };
-    return this.http.get<User | null>(`${apiUrls.userServiceApi}/`, httpOptions) 
+    return this.http.get<User | null>(`${apiUrls.userServiceApi}/`, httpOptions)
       .pipe(
         catchError(error => {
           console.error('Error fetching user data:', error);
-          return of(null); 
+          return of(null);
         }),
         tap(user => this.currentUserSubject.next(user)) // Update the subject
       );
   }
 }
+
 
 export type User = {
   _id: string,

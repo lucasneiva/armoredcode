@@ -1,4 +1,3 @@
-// create-profile.component.ts
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import {
@@ -12,7 +11,7 @@ import { IndustryService } from '../../services/industry.service';
 import { ProfileService } from '../../services/profile.service';
 import { UserService, User } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
-import { Subscription } from 'rxjs'; // Import Subscription
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-profile',
@@ -24,12 +23,13 @@ import { Subscription } from 'rxjs'; // Import Subscription
 export default class CreateProfileComponent implements OnInit, OnDestroy {
   fb = inject(FormBuilder);
   router = inject(Router);
+  //services
   authService = inject(AuthService);
   industryService = inject(IndustryService); // Inject the IndustryService
   skillService = inject(SkillService); // Inject the SkillService
   specializationService = inject(SpecializationService); // Inject the SpecializationService
   profileService = inject(ProfileService); // Inject the ProfileService
-  userService = inject(UserService); // Inject the ProfileService
+  userService = inject(UserService); // Inject the UserService
 
   //forms
   clientProfileForm!: FormGroup;
@@ -174,15 +174,6 @@ export default class CreateProfileComponent implements OnInit, OnDestroy {
     this.userSubscription.unsubscribe();
   }
 
-  private determineUserType() {
-
-  }
-
-  // Method to toggle isClient manually 
-  toggleUserType() {
-    this.isClient = !this.isClient;
-  }
-
   onSubmit() {
     if (this.isClient) {
       console.log(this.clientProfileForm.value); //debug
@@ -192,6 +183,7 @@ export default class CreateProfileComponent implements OnInit, OnDestroy {
       if (this.clientProfileForm.valid) {
         console.log(this.clientProfileForm.value);
         this.CreateClientProfile();
+        this.router.navigate(['home'])
         //this.clientProfileForm.reset();
       } else {
         // Handle form errors for client profile
@@ -205,12 +197,24 @@ export default class CreateProfileComponent implements OnInit, OnDestroy {
       if (this.freelancerProfileForm.valid) {
         console.log(this.freelancerProfileForm.value);
         this.CreateFreelancerProfile();
+        this.router.navigate(['home'])
         //this.freelancerProfileForm.reset();
       } else {
         // Handle form errors for freelancer profile
         this.displayFormErrors(this.freelancerProfileForm);
       }
         */
+    }
+  }
+
+  cancelSubmit() {
+    alert("profile creation Canceled!")
+    this.router.navigate(['login'])
+    if (this.isClient) {
+      this.clientProfileForm.reset();
+    }
+    else {
+      this.freelancerProfileForm.reset();
     }
   }
 
@@ -250,17 +254,6 @@ export default class CreateProfileComponent implements OnInit, OnDestroy {
           console.log(err);
         }
       })
-  }
-
-  cancelSubmit() {
-    alert("profile creation Canceled!")
-    this.router.navigate(['login'])
-    if (this.isClient) {
-      this.clientProfileForm.reset();
-    }
-    else {
-      this.freelancerProfileForm.reset();
-    }
   }
 
   // Helper functions to manage FormArrays 
@@ -372,6 +365,18 @@ export default class CreateProfileComponent implements OnInit, OnDestroy {
     );
   }
 
+  // Function to fetch specializations from your backend
+  fetchSpecializations() {
+    this.specializationService.getSpecializations().subscribe(
+      (response: any) => {
+        this.specializations = response.data;
+      },
+      (error) => {
+        console.error("Error fetching specializations:", error);
+      }
+    );
+  }
+
   // Function to fetch skills from your backend
   fetchSkills() {
     this.skillService.getSkills().subscribe(
@@ -411,18 +416,6 @@ export default class CreateProfileComponent implements OnInit, OnDestroy {
   // Get the selectedSkills FormArray
   get selectedSkills(): FormArray {
     return this.freelancerProfileForm.get('selectedSkills') as FormArray;
-  }
-
-  // Function to fetch specializations from your backend
-  fetchSpecializations() {
-    this.specializationService.getSpecializations().subscribe(
-      (response: any) => {
-        this.specializations = response.data;
-      },
-      (error) => {
-        console.error("Error fetching specializations:", error);
-      }
-    );
   }
 
   // Helper function to display form errors
