@@ -1,6 +1,6 @@
+// create-profile.component.ts
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import {
   FormArray, FormBuilder, FormControl, FormGroup,
   ReactiveFormsModule, Validators,
@@ -8,9 +8,10 @@ import {
 import { Router, RouterModule } from '@angular/router';
 import { SkillService } from '../../services/skill.service';
 import { SpecializationService } from '../../services/specialization.service';
-import { ProfileService } from '../../services/profile.service';
 import { IndustryService } from '../../services/industry.service';
+import { ProfileService } from '../../services/profile.service';
 import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-create-profile',
@@ -87,20 +88,21 @@ export default class CreateProfileComponent implements OnInit {
         country: ['Brasil'],
       }),
     });
-    //this.determineUserType(); // Call the method to determine user type
-    this.fetchIndustries();
-    this.fetchSkills();
-    this.fetchSpecializations();
+    // Determine user type and fetch data
+    this.determineUserType(); {
+      if (this.isClient) {
+        this.fetchIndustries();
+      } else {
+        this.fetchSkills();
+        this.fetchSpecializations();
+      }
+    };
   }
 
- /*
-  private determineUserType() {
+  private determineUserType(){
     
-    const userRole = this.userService.getUserRole(); 
-
-    this.isClient = userRole === 'CLIENT'; 
   }
-  */
+  
   onSubmit() {
     if (this.isClient) {
       console.log(this.clientProfileForm.value); //debug
