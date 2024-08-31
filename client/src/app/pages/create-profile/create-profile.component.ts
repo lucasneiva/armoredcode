@@ -10,6 +10,7 @@ import { SkillService } from '../../services/skill.service';
 import { SpecializationService } from '../../services/specialization.service';
 import { ProfileService } from '../../services/profile.service';
 import { IndustryService } from '../../services/industry.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-create-profile',
@@ -26,6 +27,7 @@ export default class CreateProfileComponent implements OnInit {
   skillService = inject(SkillService); // Inject the SkillService
   specializationService = inject(SpecializationService); // Inject the SpecializationService
   profileService = inject(ProfileService); // Inject the ProfileService
+  userService = inject(UserService); // Inject the ProfileService
 
   clientProfileForm!: FormGroup;
   freelancerProfileForm!: FormGroup;
@@ -91,10 +93,10 @@ export default class CreateProfileComponent implements OnInit {
     this.fetchSpecializations();
   }
 
-  /* Method to determine user type
+ /*
   private determineUserType() {
     
-    const userRole = this.authService.getUserRole(); 
+    const userRole = this.userService.getUserRole(); 
 
     this.isClient = userRole === 'CLIENT'; 
   }
@@ -139,7 +141,7 @@ export default class CreateProfileComponent implements OnInit {
           alert("profile Created!")
 
           //localStorage.setItem("profile_id", res.data._id);
-          this.profileService.haveProfile$.next(true);
+          this.profileService.hasProfile$.next(true);
           this.clientProfileForm.reset();
           this.router.navigate(['home'])
         },
@@ -158,7 +160,7 @@ export default class CreateProfileComponent implements OnInit {
           alert("profile Created!")
 
           //localStorage.setItem("profile_id", res.data._id);
-          this.profileService.haveProfile$.next(true);
+          this.profileService.hasProfile$.next(true);
           this.freelancerProfileForm.reset();
           this.router.navigate(['home'])
         },

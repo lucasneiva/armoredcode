@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class ProfileService {
   http = inject(HttpClient);
-  haveProfile$ = new BehaviorSubject<boolean>(false);
+  hasProfile$ = new BehaviorSubject<boolean>(false);
   
   CreateClientProfile(cli_profileObj: any){
     const httpOptions = {
@@ -43,6 +43,6 @@ export class ProfileService {
 }
 export type Profile = {
   
-
+  
 
 }

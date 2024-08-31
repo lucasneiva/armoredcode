@@ -6,4 +6,5 @@ export const apiUrls = {
     specializationServiceApi: 'http://localhost:8800/api/specializations',
     industryServiceApi: 'http://localhost:8800/api/industries',
     profileServiceApi: 'http://localhost:8800/api/profiles',
+    userServiceApi: 'http://localhost:8800/api/users',
 }
