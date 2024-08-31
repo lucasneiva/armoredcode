@@ -36,13 +36,13 @@
                 </div>
                 <div class="pl-2 w-full">
                     <h2 class="font-semibold mt-4">Área de atuação</h2>
-                    <select name="companyIndustry" id="companyIndustry" formControlName="companyIndustry" 
-                     class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
+                    <select name="companyIndustry" id="companyIndustry" formControlName="companyIndustry"
+                        class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                         <option value="Default" selected>Select your industry</option>
                         <option *ngFor="let industry of industries" [value]="industry._id">
-                          {{ industry.name }}
+                            {{ industry.name }}
                         </option>
-                      </select>
+                    </select>
                 </div>
             </div>
             <!--personal module end-->
@@ -137,13 +137,13 @@
 
             <h2 class="font-semibold mt-4" for="profileSummary">Sobre</h2>
             <textarea id="profileSummary" name="profileSummary" rows="4" placeholder="Write the profile Summary here"
-             formControlName="profileSummary" class="bg-white p-3 border-2 min-h-12 max-h-96"></textarea>
+                formControlName="profileSummary" class="bg-white p-3 border-2 min-h-12 max-h-96"></textarea>
             <!--personal module end-->
 
             <!--personal projects module start-->
             <h2 class="font-semibold mt-4">Portfólio</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="portfolio" 
-             id="portfolio" name="portfolio" formControlName="portfolio">
+            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="portfolio" id="portfolio"
+                name="portfolio" formControlName="portfolio">
             <!--personal projects module end-->
 
             <!--professional module start-->
@@ -173,6 +173,39 @@
                 <option value="SENIOR">Senior</option>
             </select>
 
+            <!-- Skills Section start -->
+            <div class="items-center mt-4">
+                <h2 class="font-semibold">Habilidades</h2>
+                <div class="flex w-full">
+                    <select class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
+                        (change)="onSkillSelected($event)">
+                        <option value="" disabled selected>Selecione sua habilidade</option>
+                        <option *ngFor="let skill of skills" [value]="skill._id">
+                            {{ skill.skillName }}
+                        </option>
+                    </select>
+                    <div class="pl-2">
+                        <button type="button" (click)="addSkill()"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold ml-2 py-2 px-4 rounded cursor-pointer">
+                            Adicionar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div formArrayName="selectedSkills" class="border-2 mt-4 p-2">
+                <div *ngFor="let skillControl of selectedSkills.controls; let i = index" 
+                 class="flex w-fit mb-2 rounded bg-blue-500">
+                    <div class="text-white py-1 px-4 flex w-fit pr-4">
+                        {{ getSkillName(skillControl.value)}}
+                    </div>
+                    <button type="button" (click)="removeSkill(i)" class="bg-red-500 hover:bg-red-700
+                        text-white font-bold py-1 px-2 rounded cursor-pointer"> X </button>
+                </div>
+            </div>
+
+            <!-- ... Skills Section end ... -->
+            <!----
             <h2 class="font-semibold mt-4">Habilidades</h2>
             <select name="skillsId" id="skillsId" formControlName="skillsId" 
              class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
@@ -181,19 +214,19 @@
                     {{ skill.skillName }}
                 </option>
             </select>
-
+            -->
             <h2 class="font-semibold mt-4">Preço por Hora</h2>
             <div formGroupName="hourlyRate" class="flex justify-between" id="hourlyRate">
                 <div class="pr-2 w-full">
                     <h2 class="font-semibold mt-2">Min Rate:</h2>
                     <input formControlName="min" type="number" placeholder="Min" id="minHourlyRate" required
-                     class="p-2 w-full border border-gray-300 rounded">
+                        class="p-2 w-full border border-gray-300 rounded">
                 </div>
-                
+
                 <div class="pl-2 w-full">
                     <h2 class="font-semibold mt-2">Max Rate:</h2>
                     <input formControlName="max" type="number" placeholder="Max" id="maxHourlyRate" required
-                     class="p-2 w-full border border-gray-300 rounded">
+                        class="p-2 w-full border border-gray-300 rounded">
                 </div>
             </div>
             <!--professional module end-->

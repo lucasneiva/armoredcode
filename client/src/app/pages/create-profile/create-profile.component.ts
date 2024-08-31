@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormArray, FormBuilder, FormControl, FormGroup,
+  ReactiveFormsModule, Validators,
+} from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { SkillService } from '../../services/skill.service';
 import { SpecializationService } from '../../services/specialization.service';
@@ -15,7 +18,7 @@ import { IndustryService } from '../../services/industry.service';
   templateUrl: './create-profile.component.html',
   styleUrl: './create-profile.component.scss'
 })
-export default class CreateProfileComponent implements OnInit{
+export default class CreateProfileComponent implements OnInit {
   fb = inject(FormBuilder);
   router = inject(Router);
   authService = inject(AuthService);
@@ -27,15 +30,16 @@ export default class CreateProfileComponent implements OnInit{
   clientProfileForm!: FormGroup;
   freelancerProfileForm!: FormGroup;
 
-  isClient: boolean = true; //false is default
+  isClient: boolean = false; //false is default
 
   // In your component's TypeScript file:
+  selectedSkillId: string = ''; // To store the selected skill ID
   skills: any[] = []; // Array to store skills
   specializations: any[] = []; // Array to store specializations
   industries: any[] = []; // Array to store industries
 
   ngOnInit() {
-    
+
     this.clientProfileForm = this.fb.group({
       companyName: ['', Validators.required],
       companySite: [''],
@@ -61,10 +65,11 @@ export default class CreateProfileComponent implements OnInit{
       experiences: this.fb.array([this.createExperienceForm()]), // Initialize with one experience form
       education: this.fb.array([this.createEducationForm()]), // Initialize with one education form
       certifications: this.fb.array([this.createCertificationForm()]), // Initialize with one certification form
-      specializationsId: ['',Validators.required],
-      specializationDescripition: ['',Validators.required],
+      specializationsId: ['', Validators.required],
+      specializationDescripition: ['', Validators.required],
       experienceLevel: ['', Validators.required],
-      skillsId: ['',Validators.required],
+      selectedSkills: this.fb.array([]), // FormArray to store selected skill IDs
+      skillsId: ['', Validators.required],
       hourlyRate: this.fb.group({
         min: [''],
         max: [''],
@@ -98,7 +103,7 @@ export default class CreateProfileComponent implements OnInit{
     if (this.isClient) {
       console.log(this.clientProfileForm.value); //debug
       alert(this.clientProfileForm.value); //debug
-      
+
       /*
       if (this.clientProfileForm.valid) {
         console.log(this.clientProfileForm.value);
@@ -125,42 +130,42 @@ export default class CreateProfileComponent implements OnInit{
     }
   }
 
-  CreateClientProfile(){
+  CreateClientProfile() {
     //this.clientProfileForm.patchValue({});
     /*debug*/ console.log(this.clientProfileForm.value);
     this.profileService.CreateClientProfile(this.clientProfileForm.value)
-    .subscribe({
-      next:(res)=>{
-        alert("profile Created!")
-        
-        //localStorage.setItem("profile_id", res.data._id);
-        this.profileService.haveProfile$.next(true);
-        this.clientProfileForm.reset();
-        this.router.navigate(['home'])
-      },
-      error:(err)=>{
-        console.log(err);
-      }
-    })
+      .subscribe({
+        next: (res) => {
+          alert("profile Created!")
+
+          //localStorage.setItem("profile_id", res.data._id);
+          this.profileService.haveProfile$.next(true);
+          this.clientProfileForm.reset();
+          this.router.navigate(['home'])
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      })
   }
 
-  CreateFreelancerProfile(){
+  CreateFreelancerProfile() {
     //this.clientProfileForm.patchValue({});
     /*debug*/ console.log(this.freelancerProfileForm.value);
     this.profileService.CreateFreelancerProfile(this.freelancerProfileForm.value)
-    .subscribe({
-      next:(res)=>{
-        alert("profile Created!")
-        
-        //localStorage.setItem("profile_id", res.data._id);
-        this.profileService.haveProfile$.next(true);
-        this.freelancerProfileForm.reset();
-        this.router.navigate(['home'])
-      },
-      error:(err)=>{
-        console.log(err);
-      }
-    })
+      .subscribe({
+        next: (res) => {
+          alert("profile Created!")
+
+          //localStorage.setItem("profile_id", res.data._id);
+          this.profileService.haveProfile$.next(true);
+          this.freelancerProfileForm.reset();
+          this.router.navigate(['home'])
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      })
   }
 
   cancelSubmit() {
@@ -293,6 +298,35 @@ export default class CreateProfileComponent implements OnInit{
         console.error("Error fetching skills:", error);
       }
     );
+  }
+
+  // Function to handle skill selection from dropdown
+  onSkillSelected(event: any) {
+    this.selectedSkillId = event.target.value;
+  }
+
+  // Function to add the selected skill to the form array
+  addSkill() {
+    if (this.selectedSkillId) {
+      this.selectedSkills.push(new FormControl(this.selectedSkillId));
+      this.selectedSkillId = ''; // Reset the selected skill
+    }
+  }
+
+  // Function to remove a skill from the form array
+  removeSkill(index: number) {
+    this.selectedSkills.removeAt(index);
+  }
+
+  // Get the skill name from the skill ID
+  getSkillName(skillId: string): string {
+    const skill = this.skills.find((s) => s._id === skillId);
+    return skill ? skill.skillName : '';
+  }
+
+  // Get the selectedSkills FormArray
+  get selectedSkills(): FormArray {
+    return this.freelancerProfileForm.get('selectedSkills') as FormArray;
   }
 
   // Function to fetch specializations from your backend
