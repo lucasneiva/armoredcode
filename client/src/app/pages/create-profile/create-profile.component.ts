@@ -1,26 +1,27 @@
 // create-profile.component.ts
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import {
   FormArray, FormBuilder, FormControl, FormGroup,
-  ReactiveFormsModule, Validators,
+  ReactiveFormsModule, FormsModule, Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { SkillService } from '../../services/skill.service';
 import { SpecializationService } from '../../services/specialization.service';
 import { IndustryService } from '../../services/industry.service';
 import { ProfileService } from '../../services/profile.service';
-import { UserService } from '../../services/user.service';
+import { UserService, User } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs'; // Import Subscription
 
 @Component({
   selector: 'app-create-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule,  FormsModule],
   templateUrl: './create-profile.component.html',
   styleUrl: './create-profile.component.scss'
 })
-export default class CreateProfileComponent implements OnInit {
+export default class CreateProfileComponent implements OnInit, OnDestroy {
   fb = inject(FormBuilder);
   router = inject(Router);
   authService = inject(AuthService);
@@ -30,19 +31,87 @@ export default class CreateProfileComponent implements OnInit {
   profileService = inject(ProfileService); // Inject the ProfileService
   userService = inject(UserService); // Inject the ProfileService
 
+  //forms
   clientProfileForm!: FormGroup;
   freelancerProfileForm!: FormGroup;
 
+  //constants
   isClient: boolean = false; //false is default
+  currentUser: User | null = null;
+  private userSubscription: Subscription = new Subscription();
 
-  // In your component's TypeScript file:
+  //arrays:
   selectedSkillId: string = ''; // To store the selected skill ID
   skills: any[] = []; // Array to store skills
   specializations: any[] = []; // Array to store specializations
   industries: any[] = []; // Array to store industries
 
-  ngOnInit() {
+  ngOnInit() { 
+    //client form constrols
+    this.clientProfileForm = this.fb.group({
+      companyName: ['', Validators.required],
+      companySite: [''],
+      companyDescription: [''],
+      companySize: ['', Validators.required],
+      companyIndustry: ['', Validators.required],
+      location: this.fb.group({
+        zipCode: ['', Validators.required],
+        street: ['', Validators.required],
+        number: ['', Validators.required],
+        neighborhood: ['', Validators.required],
+        city: ['', Validators.required],
+        state: ['SP'],
+        country: ['Brasil'],
+      }),
+    });
 
+    //freelancer form constrols
+    this.freelancerProfileForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      profileSummary: [''],
+      portfolio: this.fb.array([]),
+      experiences: this.fb.array([this.createExperienceForm()]), // Initialize with one experience form
+      education: this.fb.array([this.createEducationForm()]), // Initialize with one education form
+      certifications: this.fb.array([this.createCertificationForm()]), // Initialize with one certification form
+      specializationsId: ['', Validators.required],
+      specializationDescripition: ['', Validators.required],
+      experienceLevel: ['', Validators.required],
+      selectedSkills: this.fb.array([]), // FormArray to store selected skill IDs
+      skillsId: ['', Validators.required],
+      hourlyRate: this.fb.group({
+        min: [''],
+        max: [''],
+        currency: ['R$']
+      }),
+      location: this.fb.group({
+        zipCode: ['', Validators.required],
+        street: ['', Validators.required],
+        number: ['', Validators.required],
+        neighborhood: ['', Validators.required],
+        city: ['', Validators.required],
+        state: ['SP'],
+        country: ['Brasil'],
+      }),
+    });
+
+    //user testing
+    this.userSubscription = this.userService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+      if (this.currentUser) {
+        this.isClient = this.currentUser.role === 'CLIENT';
+        if (this.currentUser.role === 'CLIENT') {
+          this.fetchIndustries();
+        } else {
+          this.fetchSkills();
+          this.fetchSpecializations();
+        }
+      }
+    }); 
+  }
+
+  /*
+  ngOnInit() {
     this.clientProfileForm = this.fb.group({
       companyName: ['', Validators.required],
       companySite: [''],
@@ -88,6 +157,7 @@ export default class CreateProfileComponent implements OnInit {
         country: ['Brasil'],
       }),
     });
+
     // Determine user type and fetch data
     this.determineUserType(); {
       if (this.isClient) {
@@ -98,11 +168,21 @@ export default class CreateProfileComponent implements OnInit {
       }
     };
   }
-
-  private determineUserType(){
-    
+    */
+  // Important: Unsubscribe to avoid memory leaks
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
   }
-  
+
+  private determineUserType() {
+
+  }
+
+  // Method to toggle isClient manually 
+  toggleUserType() {
+    this.isClient = !this.isClient;
+  }
+
   onSubmit() {
     if (this.isClient) {
       console.log(this.clientProfileForm.value); //debug
