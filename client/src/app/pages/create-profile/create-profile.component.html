@@ -142,9 +142,35 @@
 
             <!--personal projects module start-->
             <h2 class="font-semibold mt-4">Portfólio</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="portfolio" id="portfolio"
-                name="portfolio" formControlName="portfolio">
-            <!--personal projects module end-->
+            <div formArrayName="portfolioItems">
+                <div>
+                    <div *ngFor="let portfolioItem of portfolioItems.controls; let i = index" [formGroupName]="i"
+                        class="border p-4 rounded my-2">
+                        <div class="flex justify-between">
+                            <h3 class="font-semibold text-lg">Portfolio {{ i + 1 }}</h3>
+                            <button type="button" (click)="removePortfolioItem(i)" class="bg-red-500 hover:bg-red-700 text-white 
+                                font-bold py-1 px-2 rounded cursor-pointer"> X </button>
+                        </div>
+                        <div class="flex mt-4">
+                            <div class="pr-2 w-full">
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="Project Title" formControlName="title" required>
+                            </div>
+                            <div class="pl-2 w-full">
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="Project URL" formControlName="url" required>
+                            </div>
+                        </div>
+                        <textarea class="bg-white mt-4 p-3 border-2 min-h-12 max-h-96 w-full rounded" rows="4"
+                                formControlName="description" placeholder="Project descripition"></textarea>
+                    </div>
+                </div>
+                <button type="button" (click)="addPortfolioItem()" class="bg-blue-500 hover:bg-blue-700 text-white 
+               font-bold mt-2 py-2 px-4 rounded cursor-pointer">
+                    Adicionar Item ao Portfólio
+                </button>
+                <!--personal projects module end-->
+            </div>
 
             <!--professional module start-->
             <h2 class="font-bold mt-8 text-center">Profissional</h2>

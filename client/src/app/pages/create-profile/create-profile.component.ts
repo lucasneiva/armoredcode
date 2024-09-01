@@ -78,7 +78,7 @@ export default class CreateProfileComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       profileSummary: [''],
-      portfolio: this.fb.array([]),
+      portfolioItems: this.fb.array([this.createPortfolioItem()]), // Initialize with one portfolio item
       experiences: this.fb.array([this.createExperienceForm()]), // Initialize with one experience form
       education: this.fb.array([this.createEducationForm()]), // Initialize with one education form
       certifications: this.fb.array([this.createCertificationForm()]), // Initialize with one certification form
@@ -208,7 +208,7 @@ export default class CreateProfileComponent implements OnInit {
 
   //Portfolio
   get portfolioItems(): FormArray {
-    return this.freelancerProfileForm.get('portfolio') as FormArray;
+    return this.freelancerProfileForm.get('portfolioItems') as FormArray; // Correct reference
   }
 
   addPortfolioItem() {
@@ -235,7 +235,8 @@ export default class CreateProfileComponent implements OnInit {
 
   addExperience() {
     if (this.experiences.length < 2) { // Limit to a maximum of 2 education forms
-      this.experiences.push(this.createExperienceForm());
+      const newExperienceForm = this.createExperienceForm(); // Create FormGroup
+      this.experiences.push(newExperienceForm); 
     }
   }
 
@@ -270,7 +271,8 @@ export default class CreateProfileComponent implements OnInit {
 
   addEducation() {
     if (this.education.length < 2) { // Limit to a maximum of 2 education forms
-      this.education.push(this.createEducationForm());
+      const newEducationForm = this.createEducationForm(); // Create FormGroup
+      this.education.push(newEducationForm); 
     }
   }
 
@@ -285,7 +287,8 @@ export default class CreateProfileComponent implements OnInit {
 
   addCertification() {
     if (this.certifications.length < 5) {
-      this.certifications.push(this.createCertificationForm());
+      const newCertificationForm = this.createCertificationForm(); // Create FormGroup
+      this.certifications.push(newCertificationForm); 
     }
   }
 
