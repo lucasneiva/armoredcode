@@ -42,8 +42,9 @@ export default class CreateProfileComponent implements OnInit {
   skills: any[] = []; // Array to store skills
   specializations: any[] = []; // Array to store specializations
   industries: any[] = []; // Array to store industries
-
+  
   ngOnInit() { 
+
     //client form constrols
     this.clientProfileForm = this.fb.group({
       companyName: ['', Validators.required],
