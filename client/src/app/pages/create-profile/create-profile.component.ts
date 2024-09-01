@@ -44,6 +44,16 @@ export default class CreateProfileComponent implements OnInit {
   industries: any[] = []; // Array to store industries
   
   ngOnInit() { 
+    //initialization of the user
+    //this.getUser();
+    //this.getUserRole();
+    
+    if(this.isClient == true){
+      this.fetchIndustries();
+    }else{
+      this.fetchSkills();
+      this.fetchSpecializations();
+    }
 
     //client form constrols
     this.clientProfileForm = this.fb.group({
@@ -95,6 +105,23 @@ export default class CreateProfileComponent implements OnInit {
 
   }
 
+  /*
+  getUser(){
+    this.userService.getUser().subscribe({
+      next: (res) =>{
+        alert(res);
+      }
+    });
+  }
+
+  getUserRole(){
+    this.userService.getUserRole().subscribe({
+      next: (res) =>{
+        alert(res);
+      }
+    });
+  }
+  */
   onSubmit() {
     if (this.isClient) {
       console.log(this.clientProfileForm.value); //debug

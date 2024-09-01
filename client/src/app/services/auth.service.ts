@@ -2,14 +2,12 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiUrls } from '../api.urls';
 import { BehaviorSubject, catchError, map, of, tap, throwError } from 'rxjs';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   http = inject(HttpClient);
-  userService = inject(UserService);
   isLoggedIn$ = new BehaviorSubject<boolean>(false);
 
   registerService(registerObj: any) {
