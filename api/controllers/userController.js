@@ -30,6 +30,24 @@ export const getById = async ( req, res, next ) => {
 
 }
 
+//fetching user role
+export const getUserRole = async (req, res, next) => {
+    try {
+      const userId = req.params.id;
+  
+      const user = await User.findById(userId, 'role'); // Only fetch the 'role' field
+  
+      if (!user) {
+        return next(createError(404, "User not found!"));
+      }
+  
+      return next(createSuccess(200, "User Role", { role: user.role }));
+  
+    } catch (error) {
+      return next(createError(500, "Internal Server Error!"));
+    }
+  };
+
 export const updateUser = async ( req, res, next ) => {
     try {
         const userId = req.params.id;

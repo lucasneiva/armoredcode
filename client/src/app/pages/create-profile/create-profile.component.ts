@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormArray, FormBuilder, FormControl, FormGroup,
-  ReactiveFormsModule, FormsModule, Validators,
+  ReactiveFormsModule, Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { SkillService } from '../../services/skill.service';
@@ -11,16 +11,15 @@ import { IndustryService } from '../../services/industry.service';
 import { ProfileService } from '../../services/profile.service';
 import { UserService, User } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule,  FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './create-profile.component.html',
   styleUrl: './create-profile.component.scss'
 })
-export default class CreateProfileComponent implements OnInit, OnDestroy {
+export default class CreateProfileComponent implements OnInit {
   fb = inject(FormBuilder);
   router = inject(Router);
   //services
@@ -37,8 +36,6 @@ export default class CreateProfileComponent implements OnInit, OnDestroy {
 
   //constants
   isClient: boolean = false; //false is default
-  currentUser: User | null = null;
-  private userSubscription: Subscription = new Subscription();
 
   //arrays:
   selectedSkillId: string = ''; // To store the selected skill ID
@@ -95,83 +92,6 @@ export default class CreateProfileComponent implements OnInit, OnDestroy {
       }),
     });
 
-    //user testing
-    this.userSubscription = this.userService.currentUser$.subscribe(user => {
-      this.currentUser = user;
-      if (this.currentUser) {
-        this.isClient = this.currentUser.role === 'CLIENT';
-        if (this.currentUser.role === 'CLIENT') {
-          this.fetchIndustries();
-        } else {
-          this.fetchSkills();
-          this.fetchSpecializations();
-        }
-      }
-    }); 
-  }
-
-  /*
-  ngOnInit() {
-    this.clientProfileForm = this.fb.group({
-      companyName: ['', Validators.required],
-      companySite: [''],
-      companyDescription: [''],
-      companySize: ['', Validators.required],
-      companyIndustry: ['', Validators.required],
-      location: this.fb.group({
-        zipCode: ['', Validators.required],
-        street: ['', Validators.required],
-        number: ['', Validators.required],
-        neighborhood: ['', Validators.required],
-        city: ['', Validators.required],
-        state: ['SP'],
-        country: ['Brasil'],
-      }),
-    });
-
-    this.freelancerProfileForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      profileSummary: [''],
-      portfolio: this.fb.array([]),
-      experiences: this.fb.array([this.createExperienceForm()]), // Initialize with one experience form
-      education: this.fb.array([this.createEducationForm()]), // Initialize with one education form
-      certifications: this.fb.array([this.createCertificationForm()]), // Initialize with one certification form
-      specializationsId: ['', Validators.required],
-      specializationDescripition: ['', Validators.required],
-      experienceLevel: ['', Validators.required],
-      selectedSkills: this.fb.array([]), // FormArray to store selected skill IDs
-      skillsId: ['', Validators.required],
-      hourlyRate: this.fb.group({
-        min: [''],
-        max: [''],
-        currency: ['R$']
-      }),
-      location: this.fb.group({
-        zipCode: ['', Validators.required],
-        street: ['', Validators.required],
-        number: ['', Validators.required],
-        neighborhood: ['', Validators.required],
-        city: ['', Validators.required],
-        state: ['SP'],
-        country: ['Brasil'],
-      }),
-    });
-
-    // Determine user type and fetch data
-    this.determineUserType(); {
-      if (this.isClient) {
-        this.fetchIndustries();
-      } else {
-        this.fetchSkills();
-        this.fetchSpecializations();
-      }
-    };
-  }
-    */
-  // Important: Unsubscribe to avoid memory leaks
-  ngOnDestroy() {
-    this.userSubscription.unsubscribe();
   }
 
   onSubmit() {
