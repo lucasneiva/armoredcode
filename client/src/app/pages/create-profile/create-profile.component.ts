@@ -212,8 +212,10 @@ export default class CreateProfileComponent implements OnInit {
   }
 
   addPortfolioItem() {
-    const portfolioItem = this.createPortfolioItem();
-    this.portfolioItems.push(portfolioItem);
+    if (this.portfolioItems.length < 3) { // Limit to a maximum of 3 portfolios forms
+      const portfolioItem = this.createPortfolioItem();
+      this.portfolioItems.push(portfolioItem);
+    }
   }
 
   removePortfolioItem(index: number) {
