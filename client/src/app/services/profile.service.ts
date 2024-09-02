@@ -1,68 +1,76 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiUrls } from '../api.urls';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+import { AuthService } from './auth.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
   http = inject(HttpClient);
+  authService = inject(AuthService);  // Inject it
   hasProfile$ = new BehaviorSubject<boolean>(false);
-  
-  CreateClientProfile(cli_profileObj: any){
+  /*
+  createProfile(profileObj: any, userId: string): Observable<any> { // Pass userId explicitly
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
-      withCredentials: true  // VERY IMPORTANT: Include cookies in requests
+      withCredentials: true  
     };
-    return this.http.post<any>(`${apiUrls.profileServiceApi}`, cli_profileObj, httpOptions);
+
+    // Include userId in the request body
+    return this.http.post<any>(`${apiUrls.profileServiceApi}`, 
+      { ...profileObj, userId },  
+      httpOptions
+    );
+  }
+  */
+  createProfile(profileData: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true
+    };
+
+    const userRole = this.authService.getUserRole();
+    if (!userRole) {
+      // Handle the case where the user role is not found (maybe redirect to login)
+      console.error("User role not found!");
+      return throwError(() => new Error("User role not found!"));
+    }
+
+    // Include the role in the profileData
+    const dataToSend = { ...profileData, role: userRole };
+
+    return this.http.post<any>(`${apiUrls.profileServiceApi}`, dataToSend, httpOptions)
+      .pipe(
+        tap((res) => {
+          console.log('Profile created:', res);
+          this.hasProfile$.next(true);
+        }),
+        catchError((error) => {
+          console.error('Error creating profile:', error);
+          throw error;
+        })
+      );
   }
 
-  CreateFreelancerProfile(fre_profileObj: any){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-      withCredentials: true  // VERY IMPORTANT: Include cookies in requests
-    };
-    return this.http.post<any>(`${apiUrls.profileServiceApi}`, fre_profileObj, httpOptions);
-  }
-  
   getProfile(): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
-      withCredentials: true 
+      withCredentials: true
     };
     return this.http.get<any>(`${apiUrls.profileServiceApi}`, httpOptions);
   }
-  /*
-  // Function to check for profile (we'll implement this shortly)
-  hasProfile(): Observable<boolean> { 
-    const userId = localStorage.getItem('user_id');
-    if (!userId) {
-      return of(false); // User is not logged in
-    }
-    
-    return this.http.get<any>(`${apiUrls.profileServiceApi}/${userId}`)
-      .pipe(
-        map(response => {
-          // Assuming your backend sends 'hasProfile' flag as explained before
-          return response.hasProfile; 
-        }),
-        catchError(error => {
-          console.error('Error checking profile:', error);
-          return of(false); // Assume no profile in case of error
-        })
-      );
-  }
-  */
 }
 export type Profile = {
-  
-  
+
+
 
 }

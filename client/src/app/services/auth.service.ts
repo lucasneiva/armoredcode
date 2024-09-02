@@ -49,4 +49,10 @@ export class AuthService {
     /*console.log("User Role from localStorage:", role); //debug */
     return role;
   }
+
+  getUserId(): string | null {
+    const user_id = localStorage.getItem('user_id');
+    /*console.log("User Role from localStorage:", role); //debug */
+    return user_id;
+  }
 }

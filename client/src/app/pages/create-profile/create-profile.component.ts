@@ -110,35 +110,41 @@ export default class CreateProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.isClient) {
-      console.log(this.clientProfileForm.value); //debug
-      alert(this.clientProfileForm.value); //debug
+    /*debug*/ console.log(this.clientProfileForm.value);
+    if (this.isClient && this.clientProfileForm.valid) {
+      this.profileService.createProfile(this.clientProfileForm.value)
+        .subscribe({
+          next: (res) => {
+            // Success!
+            alert("Client Profile Created!");
+            this.profileService.hasProfile$.next(true);
+            this.clientProfileForm.reset();
+            this.router.navigate(['home']); // Redirect after successful creation
+          },
+          error: (err) => {
+            console.error('Error creating client profile:', err);
+            // Handle errors appropriately (e.g., display an error message)
+          }
+        });
+    /*debug*/ //console.log(this.freelancerProfileForm.value);
+    } else if (!this.isClient && this.freelancerProfileForm.valid) {
+      this.profileService.createProfile(this.freelancerProfileForm.value)
+        .subscribe({
+          next: (res) => {
+            // Success!
+            alert("Freelancer Profile Created!");
+            this.profileService.hasProfile$.next(true);
+            this.freelancerProfileForm.reset();
+            this.router.navigate(['home']); 
+          },
+          error: (err) => {
+            console.error('Error creating freelancer profile:', err);
+          }
+        });
 
-      /*
-      if (this.clientProfileForm.valid) {
-        console.log(this.clientProfileForm.value);
-        this.CreateClientProfile();
-        this.router.navigate(['home'])
-        //this.clientProfileForm.reset();
-      } else {
-        // Handle form errors for client profile
-        this.displayFormErrors(this.clientProfileForm);
-      }
-        */
     } else {
-      console.log(this.freelancerProfileForm.value); //debug
-      alert(this.freelancerProfileForm.value); //debug
-      /*
-      if (this.freelancerProfileForm.valid) {
-        console.log(this.freelancerProfileForm.value);
-        this.CreateFreelancerProfile();
-        this.router.navigate(['home'])
-        //this.freelancerProfileForm.reset();
-      } else {
-        // Handle form errors for freelancer profile
-        this.displayFormErrors(this.freelancerProfileForm);
-      }
-        */
+      // Handle form errors 
+      this.displayFormErrors(this.isClient ? this.clientProfileForm : this.freelancerProfileForm);
     }
   }
 
@@ -153,46 +159,7 @@ export default class CreateProfileComponent implements OnInit {
     }
   }
 
-  CreateClientProfile() {
-    //this.clientProfileForm.patchValue({});
-    /*debug*/ console.log(this.clientProfileForm.value);
-    this.profileService.CreateClientProfile(this.clientProfileForm.value)
-      .subscribe({
-        next: (res) => {
-          alert("profile Created!")
-
-          //localStorage.setItem("profile_id", res.data._id);
-          this.profileService.hasProfile$.next(true);
-          this.clientProfileForm.reset();
-          this.router.navigate(['home'])
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      })
-  }
-
-  CreateFreelancerProfile() {
-    //this.clientProfileForm.patchValue({});
-    /*debug*/ console.log(this.freelancerProfileForm.value);
-    this.profileService.CreateFreelancerProfile(this.freelancerProfileForm.value)
-      .subscribe({
-        next: (res) => {
-          alert("profile Created!")
-
-          //localStorage.setItem("profile_id", res.data._id);
-          this.profileService.hasProfile$.next(true);
-          this.freelancerProfileForm.reset();
-          this.router.navigate(['home'])
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      })
-  }
-
   // Helper functions to manage FormArrays 
-
   //Portfolio
   get portfolioItems(): FormArray {
     return this.freelancerProfileForm.get('portfolioItems') as FormArray; // Correct reference
