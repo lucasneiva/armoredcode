@@ -86,11 +86,11 @@ export default class CreateProfileComponent implements OnInit {
       experiences: this.fb.array([this.createExperienceForm()]), // Initialize with one experience form
       education: this.fb.array([this.createEducationForm()]), // Initialize with one education form
       certifications: this.fb.array([this.createCertificationForm()]), // Initialize with one certification form
-      specializationsId: ['', Validators.required],
-      specializationDescripition: ['', Validators.required],
+      specializationsId: [''],
+      specializationDescripition: [''],
       experienceLevel: ['', Validators.required],
       selectedSkills: this.fb.array([]), // FormArray to store selected skill IDs
-      skillsId: ['', Validators.required],
+      skillsId: [''],
       hourlyRate: this.fb.group({
         min: [''],
         max: [''],
@@ -110,7 +110,8 @@ export default class CreateProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    /*debug*/ console.log(this.clientProfileForm.value);
+    /*debug*/ //console.log(this.clientProfileForm.value);
+    /*debug*/ //console.log(this.freelancerProfileForm.value);
     if (this.isClient && this.clientProfileForm.valid) {
       this.profileService.createProfile(this.clientProfileForm.value)
         .subscribe({
@@ -126,7 +127,6 @@ export default class CreateProfileComponent implements OnInit {
             // Handle errors appropriately (e.g., display an error message)
           }
         });
-    /*debug*/ //console.log(this.freelancerProfileForm.value);
     } else if (!this.isClient && this.freelancerProfileForm.valid) {
       this.profileService.createProfile(this.freelancerProfileForm.value)
         .subscribe({
@@ -178,9 +178,9 @@ export default class CreateProfileComponent implements OnInit {
 
   createPortfolioItem(): FormGroup {
     return this.fb.group({
-      title: ['', Validators.required],
+      title: [''],
       description: [''],
-      url: ['', Validators.required],
+      url: [''],
     });
   }
 
@@ -202,9 +202,9 @@ export default class CreateProfileComponent implements OnInit {
 
   createExperienceForm(): FormGroup {
     return this.fb.group({
-      companyName: ['', Validators.required],
-      jobTitle: ['', Validators.required],
-      startDate: ['', Validators.required],
+      companyName: [''],
+      jobTitle: [''],
+      startDate: [''],
       endDate: [''],
       jobDescription: ['']
     });
@@ -217,10 +217,10 @@ export default class CreateProfileComponent implements OnInit {
 
   createEducationForm(): FormGroup {
     return this.fb.group({
-      degreeName: ['', Validators.required],
-      fieldOfStudy: ['', Validators.required],
-      institution: ['', Validators.required],
-      startDate: ['', Validators.required],
+      degreeName: [''],
+      fieldOfStudy: [''],
+      institution: [''],
+      startDate: [''],
       endDate: [''],
     });
   }
@@ -254,9 +254,9 @@ export default class CreateProfileComponent implements OnInit {
 
   createCertificationForm(): FormGroup {
     return this.fb.group({
-      name: ['', Validators.required],
-      issuingOrganization: ['', Validators.required],
-      issueDate: ['', Validators.required],
+      name: [''],
+      issuingOrganization: [''],
+      issueDate: [''],
     });
   }
 

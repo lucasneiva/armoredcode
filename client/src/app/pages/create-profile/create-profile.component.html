@@ -106,8 +106,9 @@
             </div>
             <!--localization module end-->
             <div class="flex justify-between">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold
-                 mt-5 py-2 px-4 mr-2 rounded cursor-pointer w-full" (click)="onSubmit()">Salvar</button>
+                <button [disabled]="clientProfileForm.invalid" [class.disabled]="clientProfileForm.invalid" 
+                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 mr-2 rounded cursor-pointer w-full" 
+                 (click)="onSubmit()">Salvar</button>
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold
                  mt-5 py-2 px-4 ml-2 rounded cursor-pointer w-full" (click)="cancelSubmit()">Cancelar</button>
             </div>
@@ -460,8 +461,9 @@
             </div>
             <!--localization module end-->
             <div class="flex justify-between">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold
-                 mt-5 py-2 px-4 mr-2 rounded cursor-pointer w-full" (click)="onSubmit()">Salvar</button>
+                <button [disabled]="freelancerProfileForm.invalid" [class.disabled]="freelancerProfileForm.invalid" 
+                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 mr-2 rounded cursor-pointer w-full" 
+                 (click)="onSubmit()">Salvar</button>
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold
                  mt-5 py-2 px-4 ml-2 rounded cursor-pointer w-full" (click)="cancelSubmit()">Cancelar</button>
             </div>
