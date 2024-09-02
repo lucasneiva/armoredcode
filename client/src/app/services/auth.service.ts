@@ -13,8 +13,8 @@ export class AuthService {
   registerService(registerObj: any) {
     return this.http.post<any>(`${apiUrls.authServiceApi}register`, registerObj);
   }
- 
-  loginService(loginObj: any){
+
+  loginService(loginObj: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -43,4 +43,10 @@ export class AuthService {
     // Potentially redirect to login or perform other logout actions
   }
   */
+  
+  getUserRole(): string | null {
+    const role = localStorage.getItem('user_role');
+    /*console.log("User Role from localStorage:", role); //debug */
+    return role;
+  }
 }

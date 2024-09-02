@@ -33,6 +33,8 @@ export default class LoginComponent {
         next: (res) => {
           alert("Login is Success!");
           localStorage.setItem("user_id", res.data._id);
+          // Store user role in localStorage 
+          localStorage.setItem('user_role', res.userRole);
           localStorage.setItem('token', res.token);
           this.authService.isLoggedIn$.next(true);
 

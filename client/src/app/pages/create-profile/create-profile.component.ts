@@ -35,6 +35,7 @@ export default class CreateProfileComponent implements OnInit {
   freelancerProfileForm!: FormGroup;
 
   //constants
+  userRole: string | null = null; 
   isClient: boolean = false; //false is default
 
   //arrays:
@@ -45,16 +46,19 @@ export default class CreateProfileComponent implements OnInit {
   
   ngOnInit() { 
     //initialization of the user
-    //this.getUser();
-    //this.getUserRole();
-    
-    if(this.isClient == true){
+    this.userRole = this.authService.getUserRole();
+
+    if (this.userRole === 'CLIENT') {
+      this.isClient = true;
       this.fetchIndustries();
-    }else{
+    } else if (this.userRole === 'FREELANCER') {
+      this.isClient = false;
       this.fetchSkills();
       this.fetchSpecializations();
+    } else {
+      console.log("invalid role");
     }
-
+    
     //client form constrols
     this.clientProfileForm = this.fb.group({
       companyName: ['', Validators.required],
@@ -105,23 +109,6 @@ export default class CreateProfileComponent implements OnInit {
 
   }
 
-  /*
-  getUser(){
-    this.userService.getUser().subscribe({
-      next: (res) =>{
-        alert(res);
-      }
-    });
-  }
-
-  getUserRole(){
-    this.userService.getUserRole().subscribe({
-      next: (res) =>{
-        alert(res);
-      }
-    });
-  }
-  */
   onSubmit() {
     if (this.isClient) {
       console.log(this.clientProfileForm.value); //debug

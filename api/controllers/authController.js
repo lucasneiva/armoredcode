@@ -68,6 +68,7 @@ export const login = async (req, res, next) => {
             hasProfile = !!freelancerProfile; // Converte para booleano
         }
 
+        //modified
         res.cookie("acess_token", token, {
             httpOnly: true,
         })
@@ -76,7 +77,8 @@ export const login = async (req, res, next) => {
                 status: 200,
                 message: "Login Success",
                 data: user,
-                hasProfile: hasProfile, // Sending hasProfile in the response
+                token: token, 
+                userRole: user.role // Add userRole to the response 
             });
     } catch (error) {
         return next(createError(500, "Internal Server Error!"));
