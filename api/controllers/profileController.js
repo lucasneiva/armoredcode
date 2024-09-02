@@ -50,6 +50,40 @@ export const createProfile = async ( req, res, next ) => {
     }
 };
 
+//modified
+export const getProfileById = async (req, res, next) => {
+    const { id } = req.params;
+
+    try {
+        // Find the user 
+        const user = await User.findById(id);
+        if (!user) {
+            return next(createError(404, "User not found!"));
+        }
+
+        let profile;
+        let hasProfile = false; // Flag to indicate if profile exists
+
+        if (user.role === "CLIENT") {
+            profile = await ClientProfile.findOne({ userId: user._id }).populate("userId", "firstName lastName email");
+        } else if (user.role === "FREELANCER") {
+            profile = await FreelancerProfile.findOne({ userId: user._id }).populate("userId", "firstName lastName email");
+        } else {
+            return next(createError(400, "Invalid user role!"));
+        }
+
+        // Check if a profile was found
+        if (profile) {
+            hasProfile = true; 
+        }
+
+        return next(createSuccess(200, "Profile fetch status:", { hasProfile, profile } ));
+
+    } catch (error) {
+        return next(createError(500, "Error fetching profile", error));
+    }
+};
+/*
 export const getProfileById = async ( req, res, next ) => {
     const { id } = req.params;
 
@@ -80,6 +114,7 @@ export const getProfileById = async ( req, res, next ) => {
         return next( createError( 500, "Error fetching profile", error ) );
     }
 };
+*/
 
 export const updateProfile = async ( req, res, next ) => {
     const userId = req.user.id;
