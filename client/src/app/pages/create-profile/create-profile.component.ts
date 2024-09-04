@@ -1,11 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormArray, FormBuilder, FormControl, FormGroup,
+  ReactiveFormsModule, Validators,
+} from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { SkillService } from '../../services/skill.service';
 import { SpecializationService } from '../../services/specialization.service';
+import { IndustryService } from '../../services/industry.service';
 import { ProfileService } from '../../services/profile.service';
+import { UserService, User } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-create-profile',
@@ -14,25 +19,47 @@ import { ProfileService } from '../../services/profile.service';
   templateUrl: './create-profile.component.html',
   styleUrl: './create-profile.component.scss'
 })
-export default class CreateProfileComponent implements OnInit{
+export default class CreateProfileComponent implements OnInit {
   fb = inject(FormBuilder);
-  authService = inject(AuthService);
   router = inject(Router);
+  //services
+  authService = inject(AuthService);
+  industryService = inject(IndustryService); // Inject the IndustryService
   skillService = inject(SkillService); // Inject the SkillService
   specializationService = inject(SpecializationService); // Inject the SpecializationService
   profileService = inject(ProfileService); // Inject the ProfileService
+  userService = inject(UserService); // Inject the UserService
 
+  //forms
   clientProfileForm!: FormGroup;
   freelancerProfileForm!: FormGroup;
 
-  isClient: boolean = true; //false is default
+  //constants
+  userRole: string | null = null; 
+  isClient: boolean = false; //false is default
 
-  // In your component's TypeScript file:
-  skills: any[] = []; // Array to store categories
-  specializations: any[] = []; // Array to store categories
+  //arrays:
+  selectedSkillId: string = ''; // To store the selected skill ID
+  skills: any[] = []; // Array to store skills
+  specializations: any[] = []; // Array to store specializations
+  industries: any[] = []; // Array to store industries
+  
+  ngOnInit() { 
+    //initialization of the user
+    this.userRole = this.authService.getUserRole();
 
-  ngOnInit() {
+    if (this.userRole === 'CLIENT') {
+      this.isClient = true;
+      this.fetchIndustries();
+    } else if (this.userRole === 'FREELANCER') {
+      this.isClient = false;
+      this.fetchSkills();
+      this.fetchSpecializations();
+    } else {
+      console.log("invalid role");
+    }
     
+    //client form constrols
     this.clientProfileForm = this.fb.group({
       companyName: ['', Validators.required],
       companySite: [''],
@@ -50,17 +77,20 @@ export default class CreateProfileComponent implements OnInit{
       }),
     });
 
+    //freelancer form constrols
     this.freelancerProfileForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       profileSummary: [''],
-      portfolio: this.fb.array([]),
+      portfolioItems: this.fb.array([this.createPortfolioItem()]), // Initialize with one portfolio item
       experiences: this.fb.array([this.createExperienceForm()]), // Initialize with one experience form
       education: this.fb.array([this.createEducationForm()]), // Initialize with one education form
       certifications: this.fb.array([this.createCertificationForm()]), // Initialize with one certification form
-      specializationsId: ['',Validators.required],
+      specializationsId: [''],
+      specializationDescripition: [''],
       experienceLevel: ['', Validators.required],
-      skillsId: ['',Validators.required],
+      selectedSkills: this.fb.array([]), // FormArray to store selected skill IDs
+      skillsId: [''],
       hourlyRate: this.fb.group({
         min: [''],
         max: [''],
@@ -76,82 +106,46 @@ export default class CreateProfileComponent implements OnInit{
         country: ['Brasil'],
       }),
     });
-    this.fetchSkills();
-    this.fetchSpecializations();
-    //this.determineUserType(); // Call the method to determine user type
+
   }
 
-  /* Method to determine user type
-  private determineUserType() {
-    
-    const userRole = this.authService.getUserRole(); 
-
-    this.isClient = userRole === 'CLIENT'; 
-  }
-  */
   onSubmit() {
-    if (this.isClient) {
-      console.log(this.clientProfileForm.value);
-      alert(this.clientProfileForm.value);
-      
-      /*
-      if (this.clientProfileForm.valid) {
-        console.log(this.clientProfileForm.value);
-        this.CreateClientProfile();
-        //this.clientProfileForm.reset();
-      } else {
-        // Handle form errors for client profile
-        this.displayFormErrors(this.clientProfileForm);
-      }
-        */
+    /*debug*/ //console.log(this.clientProfileForm.value);
+    /*debug*/ //console.log(this.freelancerProfileForm.value);
+    if (this.isClient && this.clientProfileForm.valid) {
+      this.profileService.createProfile(this.clientProfileForm.value)
+        .subscribe({
+          next: (res) => {
+            // Success!
+            alert("Client Profile Created!");
+            this.profileService.hasProfile$.next(true);
+            this.clientProfileForm.reset();
+            this.router.navigate(['home']); // Redirect after successful creation
+          },
+          error: (err) => {
+            console.error('Error creating client profile:', err);
+            // Handle errors appropriately (e.g., display an error message)
+          }
+        });
+    } else if (!this.isClient && this.freelancerProfileForm.valid) {
+      this.profileService.createProfile(this.freelancerProfileForm.value)
+        .subscribe({
+          next: (res) => {
+            // Success!
+            alert("Freelancer Profile Created!");
+            this.profileService.hasProfile$.next(true);
+            this.freelancerProfileForm.reset();
+            this.router.navigate(['home']); 
+          },
+          error: (err) => {
+            console.error('Error creating freelancer profile:', err);
+          }
+        });
+
     } else {
-      if (this.freelancerProfileForm.valid) {
-        console.log(this.freelancerProfileForm.value);
-        this.CreateFreelancerProfile();
-        //this.freelancerProfileForm.reset();
-      } else {
-        // Handle form errors for freelancer profile
-        this.displayFormErrors(this.freelancerProfileForm);
-      }
+      // Handle form errors 
+      this.displayFormErrors(this.isClient ? this.clientProfileForm : this.freelancerProfileForm);
     }
-  }
-
-  CreateClientProfile(){
-    //this.clientProfileForm.patchValue({});
-    /*debug*/ console.log(this.clientProfileForm.value);
-    this.profileService.CreateClientProfile(this.clientProfileForm.value)
-    .subscribe({
-      next:(res)=>{
-        alert("profile Created!")
-        
-        //localStorage.setItem("profile_id", res.data._id);
-        this.profileService.haveProfile$.next(true);
-        this.clientProfileForm.reset();
-        this.router.navigate(['home'])
-      },
-      error:(err)=>{
-        console.log(err);
-      }
-    })
-  }
-
-  CreateFreelancerProfile(){
-    //this.clientProfileForm.patchValue({});
-    /*debug*/ console.log(this.freelancerProfileForm.value);
-    this.profileService.CreateFreelancerProfile(this.freelancerProfileForm.value)
-    .subscribe({
-      next:(res)=>{
-        alert("profile Created!")
-        
-        //localStorage.setItem("profile_id", res.data._id);
-        this.profileService.haveProfile$.next(true);
-        this.freelancerProfileForm.reset();
-        this.router.navigate(['home'])
-      },
-      error:(err)=>{
-        console.log(err);
-      }
-    })
   }
 
   cancelSubmit() {
@@ -166,15 +160,16 @@ export default class CreateProfileComponent implements OnInit{
   }
 
   // Helper functions to manage FormArrays 
-
   //Portfolio
   get portfolioItems(): FormArray {
-    return this.freelancerProfileForm.get('portfolio') as FormArray;
+    return this.freelancerProfileForm.get('portfolioItems') as FormArray; // Correct reference
   }
 
   addPortfolioItem() {
-    const portfolioItem = this.createPortfolioItem();
-    this.portfolioItems.push(portfolioItem);
+    if (this.portfolioItems.length < 3) { // Limit to a maximum of 3 portfolios forms
+      const portfolioItem = this.createPortfolioItem();
+      this.portfolioItems.push(portfolioItem);
+    }
   }
 
   removePortfolioItem(index: number) {
@@ -183,9 +178,9 @@ export default class CreateProfileComponent implements OnInit{
 
   createPortfolioItem(): FormGroup {
     return this.fb.group({
-      title: ['', Validators.required],
+      title: [''],
       description: [''],
-      url: ['', Validators.required],
+      url: [''],
     });
   }
 
@@ -196,7 +191,8 @@ export default class CreateProfileComponent implements OnInit{
 
   addExperience() {
     if (this.experiences.length < 2) { // Limit to a maximum of 2 education forms
-      this.experiences.push(this.createExperienceForm());
+      const newExperienceForm = this.createExperienceForm(); // Create FormGroup
+      this.experiences.push(newExperienceForm); 
     }
   }
 
@@ -206,9 +202,9 @@ export default class CreateProfileComponent implements OnInit{
 
   createExperienceForm(): FormGroup {
     return this.fb.group({
-      companyName: ['', Validators.required],
-      jobTitle: ['', Validators.required],
-      startDate: ['', Validators.required],
+      companyName: [''],
+      jobTitle: [''],
+      startDate: [''],
       endDate: [''],
       jobDescription: ['']
     });
@@ -221,17 +217,18 @@ export default class CreateProfileComponent implements OnInit{
 
   createEducationForm(): FormGroup {
     return this.fb.group({
-      degreeName: ['', Validators.required],
-      fieldOfStudy: ['', Validators.required],
-      institution: ['', Validators.required],
-      startDate: ['', Validators.required],
+      degreeName: [''],
+      fieldOfStudy: [''],
+      institution: [''],
+      startDate: [''],
       endDate: [''],
     });
   }
 
   addEducation() {
     if (this.education.length < 2) { // Limit to a maximum of 2 education forms
-      this.education.push(this.createEducationForm());
+      const newEducationForm = this.createEducationForm(); // Create FormGroup
+      this.education.push(newEducationForm); 
     }
   }
 
@@ -246,7 +243,8 @@ export default class CreateProfileComponent implements OnInit{
 
   addCertification() {
     if (this.certifications.length < 5) {
-      this.certifications.push(this.createCertificationForm());
+      const newCertificationForm = this.createCertificationForm(); // Create FormGroup
+      this.certifications.push(newCertificationForm); 
     }
   }
 
@@ -256,20 +254,20 @@ export default class CreateProfileComponent implements OnInit{
 
   createCertificationForm(): FormGroup {
     return this.fb.group({
-      name: ['', Validators.required],
-      issuingOrganization: ['', Validators.required],
-      issueDate: ['', Validators.required],
+      name: [''],
+      issuingOrganization: [''],
+      issueDate: [''],
     });
   }
 
-  // Function to fetch skills from your backend
-  fetchSkills() {
-    this.skillService.getSkills().subscribe(
+  // Function to fetch industries from your backend
+  fetchIndustries() {
+    this.industryService.getIndustries().subscribe(
       (response: any) => {
-        this.skills = response.data;
+        this.industries = response.data;
       },
       (error) => {
-        console.error("Error fetching skills:", error);
+        console.error("Error fetching industries:", error);
       }
     );
   }
@@ -284,6 +282,47 @@ export default class CreateProfileComponent implements OnInit{
         console.error("Error fetching specializations:", error);
       }
     );
+  }
+
+  // Function to fetch skills from your backend
+  fetchSkills() {
+    this.skillService.getSkills().subscribe(
+      (response: any) => {
+        this.skills = response.data;
+      },
+      (error) => {
+        console.error("Error fetching skills:", error);
+      }
+    );
+  }
+
+  // Function to handle skill selection from dropdown
+  onSkillSelected(event: any) {
+    this.selectedSkillId = event.target.value;
+  }
+
+  // Function to add the selected skill to the form array
+  addSkill() {
+    if (this.selectedSkillId) {
+      this.selectedSkills.push(new FormControl(this.selectedSkillId));
+      this.selectedSkillId = ''; // Reset the selected skill
+    }
+  }
+
+  // Function to remove a skill from the form array
+  removeSkill(index: number) {
+    this.selectedSkills.removeAt(index);
+  }
+
+  // Get the skill name from the skill ID
+  getSkillName(skillId: string): string {
+    const skill = this.skills.find((s) => s._id === skillId);
+    return skill ? skill.skillName : '';
+  }
+
+  // Get the selectedSkills FormArray
+  get selectedSkills(): FormArray {
+    return this.freelancerProfileForm.get('selectedSkills') as FormArray;
   }
 
   // Helper function to display form errors

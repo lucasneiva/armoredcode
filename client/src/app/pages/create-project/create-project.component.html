@@ -1,17 +1,17 @@
 <div class="flex flex-col min-h-svh">
     <form [formGroup]="createProjectForm">
         <!--menu de inputs-->
-        <div class="flex justify-around align-baseline bg-slate-100 border-b-4 border-b-slate-200" id="top-form">
+        <div class="flex flex-col lg:flex-flex-row justify-around align-baseline
+         bg-slate-100 border-b-4 border-b-slate-200 overflow-auto" id="top-form">
             <!--Características chave do projeto-->
-            <div class="p-1 ">
+            <div class="p-1 mx-2">
                 <h2 class="font-semibold mt-4">Project Name:</h2>
-                <input formControlName="projectTitle" class="p-2 px-4 border border-gray-300 rounded" type="text"
-                    placeholder="Type the project name">
+                <input formControlName="projectTitle" class="p-2 px-4 border border-gray-300 rounded w-full" 
+                 type="text" placeholder="Type the project name">
     
-                <!--formControlName="projectCategoryId"-->
                 <h2 class="font-semibold mt-4">Project Category:</h2>
                 <select formControlName="projectCategoryId" name="Option" id="projCategory" required
-                 class="p-2 px-4 border border-gray-300 rounded text-gray-500">
+                 class="p-2 px-4 border border-gray-300 rounded text-gray-500 w-full">
                     <option value="" selected>Select the project category</option>
                     <option *ngFor="let category of projectCategories" [value]="category._id">
                     {{ category.categoryName }} 
@@ -20,9 +20,9 @@
             </div>
     
             <!--fix formName && name for radio buttons-->
-            <div class="p-1 ">
+            <div class="p-1 mx-2 flex-row justify-center">
                 <h2 class="font-semibold mt-4">Pricing:</h2>
-                <div class="flex justify-start align-middle overflow-auto">
+                <div class="flex justify-center align-middle">
                     <div class="m-3">
                         <input formControlName="pricingType" (change)="TestValue('BUDGET')"
                             onclick="document.getElementById('hourlyrate').style.display = 'none';
@@ -38,7 +38,7 @@
                         <label for="priceHour" class="m-2 font-normal">Hourly Rate</label><br>
                     </div>
                 </div>
-                <div formGroupName="projectHourlyRate" class="hidden justify-start align-middle overflow-auto" id="hourlyrate">
+                <div formGroupName="projectHourlyRate" class="hidden justify-center align-middle" id="hourlyrate">
                     <div class="m-3">
                         <h2 class="font-semibold mt-2">Min Rate:</h2>
                         <input formControlName="min" type="number" placeholder="Min" id="minHourlyRate" required
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 
-                <div formGroupName="projectBudget" class="flex justify-start align-middle overflow-auto" id="budget">
+                <div formGroupName="projectBudget" class="flex justify-center align-middle" id="budget">
                     <div class="m-3">
                         <h2 class="font-semibold mt-2">Min Budget:</h2>
                         <input formControlName="min" type="number" placeholder="Min" id="minbudget" required
@@ -67,16 +67,16 @@
             </div>
             
     
-            <div class="p-1 ">
+            <div class="p-1 mx-2">
                 <h2 class="font-semibold mt-4">Estimated duration:</h2>
-                <input formControlName="estimatedDuration" class="p-2 px-4 border border-gray-300 rounded" type="text"
-                    placeholder="Type the duration (hours)">
+                <input formControlName="estimatedDuration" placeholder="Type the duration (hours)"
+                 type="text" class="p-2 px-4 border border-gray-300 rounded w-full">
             </div>
     
     
-            <div class="p-1 ">
+            <div class="p-1 mx-2 flex-row">
+                <h2 class="font-semibold mt-4">Scope:</h2>
                 <div class="m-0.5">
-                    <h2 class="font-semibold mt-4">Scope:</h2>
                     <input formControlName="projectSize" type="radio" id="scopeS" name="projectSize" value="SMALL" checked>
                     <label for="scopeS" class="m-2 font-normal">Small</label>
                 </div>
@@ -91,7 +91,7 @@
             </div>
     
     
-            <div class="p-1 ">
+            <div class="p-1 mx-2 flex-row">
                 <h2 class="font-semibold mt-4">Experience level:</h2>
                 <div class="m-0.5">
                     <input formControlName="experienceLevel" type="radio" id="entryLvl" name="experienceLevel"
@@ -110,9 +110,9 @@
                 </div>
             </div>
     
-            <div class=" p-1">
+            <div class="p-1 mx-2 flex-row">
+                <h2 class="font-semibold mt-4">Workspace:</h2>
                 <div class="m-0.5">
-                    <h2 class="font-semibold mt-4">Workspace:</h2>
                     <input formControlName="workModel" type="radio" id="WR" name="workModel" value="REMOTE" checked>
                     <label for="WR" class="m-2 font-normal">Remote</label>
                 </div>
@@ -140,9 +140,9 @@
             </button>
         </div>
     
-        <div class="flex">
+        <div class="flex flex-col lg:flex-flex-row">
             <!--view-->
-            <div class="grid align-baseline m-4 lg:w-1/2 mt-5 p-10 shadow-lg h-fit">
+            <div class="grid align-baseline m-4 lg:w-1/2 mt-5 p-10 shadow-lg h-fit w-full">
                 <h2 class="font-semibold my-3 text-3xl">Overview:</h2>
                 <textarea formControlName="projectDescription" placeholder="Write the project description here"
                     class="bg-gray-50 p-3 border-2 min-h-14" style="max-height: 36rem;"></textarea>
@@ -171,7 +171,7 @@
         </div>
     </form>
     
-    <div class="flex flex-grow justify-center static mb-4">
+    <div class="flex flex-gflex-row justify-center static mb-4">
         <!--flex-->
     </div>
     

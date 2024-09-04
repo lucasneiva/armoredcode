@@ -77,6 +77,7 @@ const CertificationSchema = new Schema( {
 
 } );
 
+//arrumar de acordo com novos reqisitos
 const PortfolioItemSchema = new Schema( {
     title: {
         type: String,
@@ -93,6 +94,7 @@ const PortfolioItemSchema = new Schema( {
     }
 
 } );
+//
 
 const FreelancerProfileSchema = new Schema( {
     userId: {

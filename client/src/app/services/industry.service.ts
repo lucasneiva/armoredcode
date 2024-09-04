@@ -6,34 +6,34 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SkillService {
+export class IndustryService {
   http = inject(HttpClient);
   
-  createSkillService(skillObj: any){
+  createSkillService(IndustryObj: any){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
       withCredentials: true  // VERY IMPORTANT: Include cookies in requests
     };
-    return this.http.post<any>(`${apiUrls.skillServiceApi}`, skillObj, httpOptions);
+    return this.http.post<any>(`${apiUrls.industryServiceApi}`, IndustryObj, httpOptions);
   }
   
-  getSkills(): Observable<any> {
+  getIndustries(): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
       withCredentials: true 
     };
-    return this.http.get<any>(`${apiUrls.skillServiceApi}`, httpOptions);
+    return this.http.get<any>(`${apiUrls.industryServiceApi}`, httpOptions);
   }
   
 }
-export type Skill = {
+export type Industry = {
   
     _id: string,
-    skillName: string,
-    skillDescription: string,
+    name: string,
+    description: string,
     
 }

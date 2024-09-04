@@ -2,31 +2,26 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ProjectCardComponent } from '../../components/project-card/project-card.component';
 import { Project, ProjectService } from '../../services/project.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-manage-project',
   standalone: true,
-  imports: [RouterModule,ProjectCardComponent],
+  imports: [CommonModule, RouterModule, ProjectCardComponent],
   templateUrl: './manage-project.component.html',
   styleUrl: './manage-project.component.scss'
 })
 export default class ManageProjectComponent implements OnInit{
-  //private projectService = inject(ProjectService);
-  projects: Project[] = [];
+  router = inject(Router);
+  projectService = inject(ProjectService);
+  projects: Project[] = [];// Array to store projects
 
   ngOnInit(): void {
-    //this.searchProjects();
-    //this.getProjectById();
-    //this.getProjects();
-  }
-
-  /*
-  getProjects(){
     this.projectService.getProjects().subscribe({
-      next: (res)=> {
+      next: (res) => {
         this.projects = res.data;
-      }
+      },
     });
   }
-  */
+
 }

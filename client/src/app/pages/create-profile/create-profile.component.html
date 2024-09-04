@@ -26,8 +26,8 @@
             <div class="flex justify-between">
                 <div class="pr-2 w-full">
                     <h2 class="font-semibold mt-4">Tamanho da empresa</h2>
-                    <select name="Option" id="companySize" formControlName="companySize" 
-                     class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
+                    <select name="Option" id="companySize" formControlName="companySize"
+                        class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                         <option value="Default" selected>Select the company size</option>
                         <option value="SMALL">Pequena</option>
                         <option value="MEDIUM">Média</option>
@@ -36,12 +36,12 @@
                 </div>
                 <div class="pl-2 w-full">
                     <h2 class="font-semibold mt-4">Área de atuação</h2>
-                    <select name="Option" id="companyIndustry" formControlName="companyIndustry" 
-                     class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
-                        <option value="Default" selected>Select the company industry</option>
-                        <option value="op1">Opção 1</option>
-                        <option value="op2">Opção 2</option>
-                        <option value="op3">Opção 3</option>
+                    <select name="companyIndustry" id="companyIndustry" formControlName="companyIndustry"
+                        class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
+                        <option value="Default" selected>Select your industry</option>
+                        <option *ngFor="let industry of industries" [value]="industry._id">
+                            {{ industry.name }}
+                        </option>
                     </select>
                 </div>
             </div>
@@ -49,31 +49,36 @@
             <!--localization module start-->
             <h2 class="font-bold mt-8 text-center">Localização</h2>
 
-            <div class="flex justify-between" formGroupName="location" id="location">
-                <div class="pr-2 w-full">
-                    <h2 class="font-semibold mt-4" for="zipCode">CEP</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Example: 12345-678"
-                     id="zipCode" name="zipCode" formControlName="zipCode" required>
+            <div class="row justify-between" formGroupName="location" id="location">
+                <div class="flex">
+                    <div class="w-full pr-2">
+                        <h2 class="font-semibold mt-4" for="zipCode">CEP</h2>
+                        <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                            placeholder="Example: 12345-678" id="zipCode" name="zipCode" formControlName="zipCode"
+                            required>
+                    </div>
+                    <div class="w-full pl-2">
+                        <h2 class="font-semibold mt-4" for="street">Rua</h2>
+                        <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Street Name"
+                            id="street" name="street" formControlName="street" required>
+                    </div>
                 </div>
-                <div class="px-2 w-full">
-                    <h2 class="font-semibold mt-4" for="street">Rua</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Street Name"
-                        id="street" name="street" formControlName="street" required>
-                </div>
-                <div class="pl-2 w-full">
-                    <h2 class="font-semibold mt-4" for="number">Número</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Number"
-                        id="number" name="number" formControlName="number" required>
-                </div>
-            </div>
 
-            <div class="flex justify-between" formGroupName="location" id="location">
-                <div class="pr-2 w-full">
-                    <h2 class="font-semibold mt-4">Bairro</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Neighborhood Name"
-                        id="neighborhood" name="neighborhood" formControlName="neighborhood" required>
+                <div class="flex">
+                    <div class="w-full pr-2">
+                        <h2 class="font-semibold mt-4" for="number">Número</h2>
+                        <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Number"
+                            id="number" name="number" formControlName="number" required>
+                    </div>
+                    <div class="w-full pl-2">
+                        <h2 class="font-semibold mt-4">Bairro</h2>
+                        <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                            placeholder="Neighborhood Name" id="neighborhood" name="neighborhood"
+                            formControlName="neighborhood" required>
+                    </div>
                 </div>
-                <div class="pl-2 w-full">
+
+                <div class="w-full">
                     <h2 class="font-semibold mt-4">Cidade</h2>
                     <select name="Option" id="city" formControlName="city"
                         class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
@@ -85,24 +90,25 @@
                         <option value="votorantim">Votorantim</option>
                     </select>
                 </div>
-            </div>
 
-            <div class="flex justify-between" formGroupName="location" id="location">
-                <div class="pr-2 w-full">
-                    <h2 class="font-semibold mt-4">Estado</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="SP" id="state"
-                        name="state" disabled> <!--formControlName="state"-->
-                </div>
-                <div class="pl-2 w-full">
-                    <h2 class="font-semibold mt-4">País</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Brasil"
-                        id="country" name="country" disabled> <!--formControlName="country"-->
+                <div class="flex">
+                    <div class="pr-2 w-full">
+                        <h2 class="font-semibold mt-4">Estado</h2>
+                        <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="SP" id="state"
+                            name="state" disabled> <!--formControlName="state"-->
+                    </div>
+                    <div class="pl-2 w-full">
+                        <h2 class="font-semibold mt-4">País</h2>
+                        <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Brasil"
+                            id="country" name="country" disabled> <!--formControlName="country"-->
+                    </div>
                 </div>
             </div>
             <!--localization module end-->
             <div class="flex justify-between">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold
-                 mt-5 py-2 px-4 mr-2 rounded cursor-pointer w-full" (click)="onSubmit()">Salvar</button>
+                <button [disabled]="clientProfileForm.invalid" [class.disabled]="clientProfileForm.invalid" 
+                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 mr-2 rounded cursor-pointer w-full" 
+                 (click)="onSubmit()">Salvar</button>
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold
                  mt-5 py-2 px-4 ml-2 rounded cursor-pointer w-full" (click)="cancelSubmit()">Cancelar</button>
             </div>
@@ -119,33 +125,26 @@
 
             <div class="flex justify-between">
                 <div class="pr-2 w-full">
-                    <h2 class="font-semibold mt-4" for="nome">Nome</h2>
+                    <h2 class="font-semibold mt-4" for="firstName">Nome</h2>
                     <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="first name"
-                        id="firstname" name="firstname" required>
+                        id="firstName" name="firstName" formControlName="firstName" required>
                 </div>
                 <div class="pl-2 w-full">
-                    <h2 class="font-semibold mt-4" for="nome">Sobrenome</h2>
+                    <h2 class="font-semibold mt-4" for="lastName">Sobrenome</h2>
                     <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="last name"
-                        id="lastname" name="lastname" required>
+                        id="lastName" name="lastName" formControlName="lastName" required>
                 </div>
             </div>
 
-            <h2 class="font-semibold mt-4" for="user">Sobre</h2>
+            <h2 class="font-semibold mt-4" for="profileSummary">Sobre</h2>
             <textarea id="profileSummary" name="profileSummary" rows="4" placeholder="Write the profile Summary here"
-                class="bg-white p-3 border-2 min-h-12 max-h-96"></textarea>
+                formControlName="profileSummary" class="bg-white p-3 border-2 min-h-12 max-h-96"></textarea>
             <!--personal module end-->
-
-            <!--personal projects module start-->
-            <h2 class="font-semibold mt-4">Portfólio</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="portfolio" id="portfolio"
-                name="portfolio">
-            <!--personal projects module end-->
 
             <!--professional module start-->
             <h2 class="font-bold mt-8 text-center">Profissional</h2>
 
             <h2 class="font-semibold mt-4">Especialização</h2>
-
             <select name="specializationsId" id="specializationsId"
                 class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
                 formControlName="specializationsId">
@@ -156,13 +155,12 @@
             </select>
 
             <h2 class="font-semibold mt-4">Descrição da especialização</h2>
-            <textarea id="specializationsDescription" name="specializationsDescription" rows="4"
-                placeholder="Write the specialization description here"
-                class="bg-white p-3 border-2 min-h-12 max-h-96 w-full rounded" id="specializations"
-                name="specializations"></textarea>
+            <textarea id="specializationDescripition" name="specializationDescripition" rows="4"
+                placeholder="Write the specialization description here" formControlName="specializationDescripition"
+                class="bg-white p-3 border-2 min-h-12 max-h-96 w-full rounded"></textarea>
 
             <h2 class="font-semibold mt-4">Nível de Experiência</h2>
-            <select name="Option" id="experienceLevel"
+            <select name="experienceLevel" id="experienceLevel" formControlName="experienceLevel"
                 class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                 <option value="Default" selected>Select your experience here</option>
                 <option value="JUNIOR">Junior</option>
@@ -170,20 +168,88 @@
                 <option value="SENIOR">Senior</option>
             </select>
 
-            <h2 class="font-semibold mt-4">Habilidades</h2>
-            <select name="skillsId" id="skillsId" class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
-                formControlName="skillsId">
-                <option value="Default" selected>Select your Skills</option>
-                <option *ngFor="let skill of skills" [value]="skill._id">
-                    {{ skill.skillName }}
-                </option>
-            </select>
+            <!-- Skills Section start -->
+            <div class="items-center mt-4">
+                <h2 class="font-semibold">Habilidades</h2>
+                <div class="flex w-full">
+                    <select class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
+                        (change)="onSkillSelected($event)">
+                        <option value="" disabled selected>Selecione sua habilidade</option>
+                        <option *ngFor="let skill of skills" [value]="skill._id">
+                            {{ skill.skillName }}
+                        </option>
+                    </select>
+                    <div class="pl-2">
+                        <button type="button" (click)="addSkill()"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold ml-2 py-2 px-4 rounded cursor-pointer">
+                            Adicionar
+                        </button>
+                    </div>
+                </div>
+            </div>
 
+            <div *ngIf="selectedSkills.length > 0" formArrayName="selectedSkills" class="border-2 mt-4 p-2">
+                <div *ngFor="let skillControl of selectedSkills.controls; let i = index"
+                    class="flex w-fit mb-2 rounded bg-blue-500">
+                    <div class="text-white py-1 px-4 flex w-fit pr-4">
+                        {{ getSkillName(skillControl.value)}}
+                    </div>
+                    <button type="button" (click)="removeSkill(i)" class="bg-red-500 hover:bg-red-700
+                        text-white font-bold py-1 px-2 rounded cursor-pointer"> X </button>
+                </div>
+            </div>
             <h2 class="font-semibold mt-4">Preço por Hora</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="hourly rate"
-                id="hourlyRate" name="hourlyRate">
+            <div formGroupName="hourlyRate" class="flex justify-between" id="hourlyRate">
+                <div class="pr-2 w-full">
+                    <h2 class="font-semibold mt-2">Min Rate:</h2>
+                    <input formControlName="min" type="number" placeholder="Min" id="minHourlyRate" required
+                        class="p-2 w-full border border-gray-300 rounded">
+                </div>
 
+                <div class="pl-2 w-full">
+                    <h2 class="font-semibold mt-2">Max Rate:</h2>
+                    <input formControlName="max" type="number" placeholder="Max" id="maxHourlyRate" required
+                        class="p-2 w-full border border-gray-300 rounded">
+                </div>
+            </div>
             <!--professional module end-->
+
+            <!--personal projects module start-->
+            <h2 class="font-semibold mt-4">Portfólio</h2>
+            <div formArrayName="portfolioItems">
+                <div>
+                    <div *ngFor="let portfolioItem of portfolioItems.controls; let i = index" [formGroupName]="i"
+                        class="border p-4 rounded my-2">
+                        <div class="flex justify-start">
+                            <h3 class="font-semibold text-lg">Portfolio {{ i + 1 }}</h3>
+                        </div>
+                        <div class="flex mt-4">
+                            <div class="pr-2 w-full">
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="Project Title" formControlName="title" required>
+                            </div>
+                            <div class="pl-2 w-full">
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="Project URL" formControlName="url" required>
+                            </div>
+                        </div>
+                        <textarea class="bg-white mt-4 p-3 border-2 min-h-12 max-h-96 w-full rounded" rows="4"
+                            formControlName="description" placeholder="Project descripition"></textarea>
+                        <div class="flex justify-end">
+                            <button type="button" (click)="removePortfolioItem(i)" class="bg-red-500 hover:bg-red-700
+                            text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer"> Remover </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center align-middle">
+                    <button type="button" (click)="addPortfolioItem()" *ngIf="portfolioItems.length < 3"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-2 py-2 px-4 rounded cursor-pointer">
+                        Adicionar Item ao Portfólio
+                    </button>
+                </div>
+            </div>
+            <!--personal projects module end-->
+
             <!--Experience Module Start -->
             <div formArrayName="experiences">
                 <h2 class="font-bold mt-8 text-center">Experiência Profissional</h2>
@@ -338,31 +404,36 @@
             <!--localization module start-->
             <h2 class="font-bold mt-8 text-center">Localização</h2>
 
-            <div class="flex justify-between">
-                <div class="pr-2 w-full">
-                    <h2 class="font-semibold mt-4" for="zipCode">CEP</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                        placeholder="Example: 12345-678" id="zipCode" name="zipCode" required>
+            <div class="row justify-between" formGroupName="location" id="location">
+                <div class="flex">
+                    <div class="w-full pr-2">
+                        <h2 class="font-semibold mt-4" for="zipCode">CEP</h2>
+                        <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                            placeholder="Example: 12345-678" id="zipCode" name="zipCode" formControlName="zipCode"
+                            required>
+                    </div>
+                    <div class="w-full pl-2">
+                        <h2 class="font-semibold mt-4" for="street">Rua</h2>
+                        <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Street Name"
+                            id="street" name="street" formControlName="street" required>
+                    </div>
                 </div>
-                <div class="px-2 w-full">
-                    <h2 class="font-semibold mt-4" for="street">Rua</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Street Name"
-                        id="street" name="street" formControlName="street" required>
-                </div>
-                <div class="pl-2 w-full">
-                    <h2 class="font-semibold mt-4" for="number">Número</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Number"
-                        id="number" name="number" formControlName="number" required>
-                </div>
-            </div>
 
-            <div class="flex justify-between">
-                <div class="pr-2 w-full">
-                    <h2 class="font-semibold mt-4">Bairro</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Neighborhood Name"
-                        id="neighborhood" name="neighborhood" formControlName="neighborhood" required>
+                <div class="flex">
+                    <div class="w-full pr-2">
+                        <h2 class="font-semibold mt-4" for="number">Número</h2>
+                        <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Number"
+                            id="number" name="number" formControlName="number" required>
+                    </div>
+                    <div class="w-full pl-2">
+                        <h2 class="font-semibold mt-4">Bairro</h2>
+                        <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                            placeholder="Neighborhood Name" id="neighborhood" name="neighborhood"
+                            formControlName="neighborhood" required>
+                    </div>
                 </div>
-                <div class="pl-2 w-full">
+
+                <div class="w-full">
                     <h2 class="font-semibold mt-4">Cidade</h2>
                     <select name="Option" id="city" formControlName="city"
                         class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
@@ -374,24 +445,25 @@
                         <option value="votorantim">Votorantim</option>
                     </select>
                 </div>
-            </div>
 
-            <div class="flex justify-between">
-                <div class="pr-2 w-full">
-                    <h2 class="font-semibold mt-4">Estado</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="SP" id="state"
-                        name="state" disabled> <!--formControlName="state"-->
-                </div>
-                <div class="pl-2 w-full">
-                    <h2 class="font-semibold mt-4">País</h2>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Brasil"
-                        id="country" name="country" disabled> <!--formControlName="country"-->
+                <div class="flex">
+                    <div class="pr-2 w-full">
+                        <h2 class="font-semibold mt-4">Estado</h2>
+                        <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="SP" id="state"
+                            name="state" disabled> <!--formControlName="state"-->
+                    </div>
+                    <div class="pl-2 w-full">
+                        <h2 class="font-semibold mt-4">País</h2>
+                        <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Brasil"
+                            id="country" name="country" disabled> <!--formControlName="country"-->
+                    </div>
                 </div>
             </div>
             <!--localization module end-->
             <div class="flex justify-between">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold
-                 mt-5 py-2 px-4 mr-2 rounded cursor-pointer w-full" (click)="onSubmit()">Salvar</button>
+                <button [disabled]="freelancerProfileForm.invalid" [class.disabled]="freelancerProfileForm.invalid" 
+                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 mr-2 rounded cursor-pointer w-full" 
+                 (click)="onSubmit()">Salvar</button>
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold
                  mt-5 py-2 px-4 ml-2 rounded cursor-pointer w-full" (click)="cancelSubmit()">Cancelar</button>
             </div>

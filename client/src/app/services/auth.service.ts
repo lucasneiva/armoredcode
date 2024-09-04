@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiUrls } from '../api.urls';
-import { BehaviorSubject, catchError, map, of, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +10,11 @@ export class AuthService {
   http = inject(HttpClient);
   isLoggedIn$ = new BehaviorSubject<boolean>(false);
 
-  registerService(registerObj: any){
+  registerService(registerObj: any) {
     return this.http.post<any>(`${apiUrls.authServiceApi}register`, registerObj);
   }
 
-  loginService(loginObj: any){
+  loginService(loginObj: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -23,16 +23,16 @@ export class AuthService {
     };
     return this.http.post<any>(`${apiUrls.authServiceApi}login`, loginObj, httpOptions);
   }
-  
-  sendEmailService(email: string){
-    return this.http.post<any>(`${apiUrls.authServiceApi}send-email`, {email: email });
+
+  sendEmailService(email: string) {
+    return this.http.post<any>(`${apiUrls.authServiceApi}send-email`, { email: email });
   }
 
-  resetPasswordService(resetObj: any){
+  resetPasswordService(resetObj: any) {
     return this.http.post<any>(`${apiUrls.authServiceApi}reset-password`, resetObj);
   }
 
-  isLoggedIn(){
+  isLoggedIn() {
     return !!localStorage.getItem("user_id");
   }
 
@@ -43,37 +43,16 @@ export class AuthService {
     // Potentially redirect to login or perform other logout actions
   }
   */
- 
-  /*
-  getCurrentUser() {
-    const userId = localStorage.getItem('user_id');
-    if (userId) {
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-      });
-      return this.http.get<any>(`${apiUrls.authServiceApi}user/${userId}`, { headers, withCredentials: true }).pipe(
-        catchError(error => {
-          console.error('Error fetching user data:', error);
-          // ... (Your error handling logic here)
-          return of(null); 
-        })
-      );
-    } else {
-      return of(null); 
-    }
+  
+  getUserRole(): string | null {
+    const role = localStorage.getItem('user_role');
+    /*console.log("User Role from localStorage:", role); //debug */
+    return role;
   }
 
-  // Modify getUserRole to handle the Observable
-  getUserRole(): string | null {
-    const userObservable = this.getCurrentUser();
-    let userRole: string | null = null; // Store the role
-
-    // Subscribe to the Observable to get the user object
-    userObservable.subscribe((user: { role: string | null; }) => {
-      userRole = user ? user.role : null;
-    });
-  
-    return userRole; 
-  }  
-  */
+  getUserId(): string | null {
+    const user_id = localStorage.getItem('user_id');
+    /*console.log("User Role from localStorage:", role); //debug */
+    return user_id;
+  }
 }

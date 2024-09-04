@@ -1,5 +1,5 @@
-<!--
-<ng-container>
+<!--if no projects-->
+<ng-container *ngIf="projects.length <= 0">
     <div class="block text-wrap max-w-md shadow-lg mt-56 p-10 mx-auto bg-white">
         <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
         <p class="text-left text-2xl text-gray-600 mt-4">
@@ -8,99 +8,101 @@
         </p>
     </div>
 </ng-container>
--->
-<!--app-project-card-->
-<ng-container> <!--*ngFor="let project of projects"-->
-    <!--<app-project-card [project]="project"></app-project-card>-->
-</ng-container>
 
 <!--grid-->
-<div class="grid justify-center gap-4 my-16" >
-    <!--card placeholder--
-    <div style="top: calc(1rem * 1);"
-        class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
-        <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-            <span class="block pb-2">Title of the Project</span>
-            <span class="block text-sm text-gray-700">Name of the User </span>
-        </h2>
-        <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum,
-            perspiciatis blanditiis accusamus commodi consectetur id tempora rem
-            iure eligendi quos eos et autem ratione exercitationem earum laborum ad
-            a sequi!
-        </p>
+<ng-container *ngIf="projects.length > 0">
+    <div class="grid justify-center gap-4 my-16">
+        <!--app-project-card-->
+        <ng-container *ngFor="let project of projects">
+            <app-project-card [project]="project"></app-project-card>
+        </ng-container>
+
+        <!--card placeholder--
+        <div style="top: calc(1rem * 1);"
+            class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
+            <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
+                <span class="block pb-2">Title of the Project</span>
+                <span class="block text-sm text-gray-700">Name of the User </span>
+            </h2>
+            <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum,
+                perspiciatis blanditiis accusamus commodi consectetur id tempora rem
+                iure eligendi quos eos et autem ratione exercitationem earum laborum ad
+                a sequi!
+            </p>
+        </div>
+        --
+        <div style="top: calc(1rem * 1);"
+            class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
+            <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
+                <span class="block pb-2">Project Phoenix: Legacy System Modernization</span>
+                <span class="block text-sm text-gray-700">Client One </span>
+            </h2>
+            <p>
+                This project aims to replace or update an outdated legacy system with modern technology.
+                This will improve efficiency, security, and user experience, while also reducing maintenance costs.
+            </p>
+        </div>
+        <div style="top: calc(1rem * 1);"
+            class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
+            <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
+                <span class="block pb-2">Operation Streamline: Workflow Automation & Optimization</span>
+                <span class="block text-sm text-gray-700">Client One </span>
+            </h2>
+            <p>
+                This project focuses on identifying and automating manual, repetitive tasks within the organization.
+                The goal is to improve productivity, reduce errors, and free up employees for more strategic work.
+            </p>
+        </div>
+        <div style="top: calc(1rem * 1);"
+            class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
+            <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
+                <span class="block pb-2"> Project Insight: Business Intelligence Dashboard Implementation</span>
+                <span class="block text-sm text-gray-700">Client One </span>
+            </h2>
+            <p>
+                This project will implement a centralized business intelligence dashboard,
+                providing real-time data visualization and analysis capabilities.
+                 This will enable data-driven decision-making across departments.
+            </p>
+        </div>
+        <div style="top: calc(1rem * 1);"
+            class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
+            <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
+                <span class="block pb-2">SecureGate: Cybersecurity Infrastructure Overhaul</span>
+                <span class="block text-sm text-gray-700">Client One </span>
+            </h2>
+            <p>
+                This project focuses on enhancing the organization's cybersecurity posture by upgrading existing security
+                 infrastructure, implementing new security protocols, and conducting comprehensive security audits.
+            </p>
+        </div>
+        <div style="top: calc(1rem * 1);"
+            class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
+            <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
+                <span class="block pb-2">Project Bridge: Cross-Platform Application Integration</span>
+                <span class="block text-sm text-gray-700">Client One </span>
+            </h2>
+            <p>
+                This project aims to seamlessly integrate various software applications used across
+                 different departments, improving data flow and collaboration between teams.
+            </p>
+        </div>
+        <div style="top: calc(1rem * 1);"
+            class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
+            <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
+                <span class="block pb-2">Empower: Digital Adoption & Training Program</span>
+                <span class="block text-sm text-gray-700">Client One </span>
+            </h2>
+            <p>
+                This project focuses on creating and delivering comprehensive training programs to
+                 increase employee adoption and proficiency in using new and existing IT systems and software.
+                 This will empower employees and maximize the return on technology investments.
+            </p>
+        </div>
+        -->
     </div>
-    -->
-    <div style="top: calc(1rem * 1);"
-        class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
-        <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-            <span class="block pb-2">Project Phoenix: Legacy System Modernization</span>
-            <span class="block text-sm text-gray-700">Client One </span>
-        </h2>
-        <p>
-            This project aims to replace or update an outdated legacy system with modern technology.
-            This will improve efficiency, security, and user experience, while also reducing maintenance costs.
-        </p>
-    </div>
-    <div style="top: calc(1rem * 1);"
-        class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
-        <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-            <span class="block pb-2">Operation Streamline: Workflow Automation & Optimization</span>
-            <span class="block text-sm text-gray-700">Client One </span>
-        </h2>
-        <p>
-            This project focuses on identifying and automating manual, repetitive tasks within the organization.
-            The goal is to improve productivity, reduce errors, and free up employees for more strategic work.
-        </p>
-    </div>
-    <div style="top: calc(1rem * 1);"
-        class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
-        <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-            <span class="block pb-2"> Project Insight: Business Intelligence Dashboard Implementation</span>
-            <span class="block text-sm text-gray-700">Client One </span>
-        </h2>
-        <p>
-            This project will implement a centralized business intelligence dashboard,
-            providing real-time data visualization and analysis capabilities.
-             This will enable data-driven decision-making across departments.
-        </p>
-    </div>
-    <div style="top: calc(1rem * 1);"
-        class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
-        <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-            <span class="block pb-2">SecureGate: Cybersecurity Infrastructure Overhaul</span>
-            <span class="block text-sm text-gray-700">Client One </span>
-        </h2>
-        <p>
-            This project focuses on enhancing the organization's cybersecurity posture by upgrading existing security
-             infrastructure, implementing new security protocols, and conducting comprehensive security audits.
-        </p>
-    </div>
-    <div style="top: calc(1rem * 1);"
-        class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
-        <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-            <span class="block pb-2">Project Bridge: Cross-Platform Application Integration</span>
-            <span class="block text-sm text-gray-700">Client One </span>
-        </h2>
-        <p>
-            This project aims to seamlessly integrate various software applications used across
-             different departments, improving data flow and collaboration between teams.
-        </p>
-    </div>
-    <div style="top: calc(1rem * 1);"
-        class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
-        <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-            <span class="block pb-2">Empower: Digital Adoption & Training Program</span>
-            <span class="block text-sm text-gray-700">Client One </span>
-        </h2>
-        <p>
-            This project focuses on creating and delivering comprehensive training programs to
-             increase employee adoption and proficiency in using new and existing IT systems and software.
-             This will empower employees and maximize the return on technology investments.
-        </p>
-    </div>
-</div>
-<!---->
+</ng-container>
 
 <div class="fixed bottom-12 left-1/2 transform -translate-x-1/2">
     <button routerLink="/create-project"
