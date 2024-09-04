@@ -41,6 +41,7 @@ export const createProfile = async (req, res, next) => {
         return next(createSuccess(200, "Profile created successfully!", profile));
 
     } catch (error) {
+        console.log();
         handleValidationError( error, next );
 
     }

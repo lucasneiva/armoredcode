@@ -12,9 +12,9 @@
                         id="companyName" name="companyName" formControlName="companyName" required>
                 </div>
                 <div class="pl-2 w-full">
-                    <h2 class="font-semibold mt-4" for="companySite">Site da empresa</h2>
+                    <h2 class="font-semibold mt-4" for="website">Site da empresa</h2>
                     <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="company site"
-                        id="companySite" name="companySite" formControlName="companySite">
+                        id="website" name="website" formControlName="website">
                 </div>
             </div>
 
@@ -36,7 +36,7 @@
                 </div>
                 <div class="pl-2 w-full">
                     <h2 class="font-semibold mt-4">Área de atuação</h2>
-                    <select name="companyIndustry" id="companyIndustry" formControlName="companyIndustry"
+                    <select name="industryId" id="industryId" formControlName="industryId"
                         class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                         <option value="Default" selected>Select your industry</option>
                         <option *ngFor="let industry of industries" [value]="industry._id">
@@ -52,15 +52,14 @@
             <div class="row justify-between" formGroupName="location" id="location">
                 <div class="flex">
                     <div class="w-full pr-2">
-                        <h2 class="font-semibold mt-4" for="zipCode">CEP</h2>
+                        <h2 class="font-semibold mt-4" for="cep">CEP</h2>
                         <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                            placeholder="Example: 12345-678" id="zipCode" name="zipCode" formControlName="zipCode"
-                            required>
+                            placeholder="Example: 12345-678" id="cep" name="cep" formControlName="cep" required>
                     </div>
                     <div class="w-full pl-2">
-                        <h2 class="font-semibold mt-4" for="street">Rua</h2>
+                        <h2 class="font-semibold mt-4" for="streetAddress">Rua</h2>
                         <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Street Name"
-                            id="street" name="street" formControlName="street" required>
+                            id="streetAddress" name="streetAddress" formControlName="streetAddress" required>
                     </div>
                 </div>
 
@@ -83,11 +82,17 @@
                     <select name="Option" id="city" formControlName="city"
                         class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                         <option value="Default" selected>Select a city</option>
-                        <option value="aluminio">Aluminio</option>
-                        <option value="itu">Itu</option>
-                        <option value="salto">Salto</option>
-                        <option value="sorocaba">Sorocaba</option>
-                        <option value="votorantim">Votorantim</option>
+                        <option value="ARAÇOIABA DA SERRA">Araçoiaba da serra</option>
+                        <option value="BOITUVA">Boituva</option>
+                        <option value="CAPELA DO ALTO">Capela do alto</option>
+                        <option value="CERQUILHO">Cerquilho</option>
+                        <option value="IPERÓ">Iperó</option>
+                        <option value="ITU">Itu</option>
+                        <option value="SALTO DE PIRAPORA">Salto</option>
+                        <option value="SÃO ROQUE">São Roque</option>
+                        <option value="SOROCABA">Sorocaba</option>
+                        <option value="TATUÍ">Tatuí</option>
+                        <option value="VOTORANTIM">Votorantim</option>
                     </select>
                 </div>
 
@@ -106,9 +111,9 @@
             </div>
             <!--localization module end-->
             <div class="flex justify-between">
-                <button [disabled]="clientProfileForm.invalid" [class.disabled]="clientProfileForm.invalid" 
-                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 mr-2 rounded cursor-pointer w-full" 
-                 (click)="onSubmit()">Salvar</button>
+                <button [disabled]="clientProfileForm.invalid" [class.disabled]="clientProfileForm.invalid"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 mr-2 rounded cursor-pointer w-full"
+                    (click)="onSubmit()">Salvar</button>
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold
                  mt-5 py-2 px-4 ml-2 rounded cursor-pointer w-full" (click)="cancelSubmit()">Cancelar</button>
             </div>
@@ -407,15 +412,14 @@
             <div class="row justify-between" formGroupName="location" id="location">
                 <div class="flex">
                     <div class="w-full pr-2">
-                        <h2 class="font-semibold mt-4" for="zipCode">CEP</h2>
+                        <h2 class="font-semibold mt-4" for="cep">CEP</h2>
                         <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                            placeholder="Example: 12345-678" id="zipCode" name="zipCode" formControlName="zipCode"
-                            required>
+                            placeholder="Example: 12345-678" id="cep" name="cep" formControlName="cep" required>
                     </div>
                     <div class="w-full pl-2">
-                        <h2 class="font-semibold mt-4" for="street">Rua</h2>
+                        <h2 class="font-semibold mt-4" for="streetAddress">Rua</h2>
                         <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Street Name"
-                            id="street" name="street" formControlName="street" required>
+                            id="streetAddress" name="streetAddress" formControlName="streetAddress" required>
                     </div>
                 </div>
 
@@ -438,11 +442,17 @@
                     <select name="Option" id="city" formControlName="city"
                         class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                         <option value="Default" selected>Select a city</option>
-                        <option value="aluminio">Aluminio</option>
-                        <option value="itu">Itu</option>
-                        <option value="salto">Salto</option>
-                        <option value="sorocaba">Sorocaba</option>
-                        <option value="votorantim">Votorantim</option>
+                        <option value="ARAÇOIABA DA SERRA">Araçoiaba da serra</option>
+                        <option value="BOITUVA">Boituva</option>
+                        <option value="CAPELA DO ALTO">Capela do alto</option>
+                        <option value="CERQUILHO">Cerquilho</option>
+                        <option value="IPERÓ">Iperó</option>
+                        <option value="ITU">Itu</option>
+                        <option value="SALTO DE PIRAPORA">Salto</option>
+                        <option value="SÃO ROQUE">São Roque</option>
+                        <option value="SOROCABA">Sorocaba</option>
+                        <option value="TATUÍ">Tatuí</option>
+                        <option value="VOTORANTIM">Votorantim</option>
                     </select>
                 </div>
 
@@ -461,9 +471,9 @@
             </div>
             <!--localization module end-->
             <div class="flex justify-between">
-                <button [disabled]="freelancerProfileForm.invalid" [class.disabled]="freelancerProfileForm.invalid" 
-                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 mr-2 rounded cursor-pointer w-full" 
-                 (click)="onSubmit()">Salvar</button>
+                <button [disabled]="freelancerProfileForm.invalid" [class.disabled]="freelancerProfileForm.invalid"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 mr-2 rounded cursor-pointer w-full"
+                    (click)="onSubmit()">Salvar</button>
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold
                  mt-5 py-2 px-4 ml-2 rounded cursor-pointer w-full" (click)="cancelSubmit()">Cancelar</button>
             </div>
