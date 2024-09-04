@@ -3,6 +3,7 @@ import FreelancerProfile from "../models/freelancerProfileModel.js";
 import User from "../models/userModel.js";
 import { createError } from "../utils/error.js";
 import { createSuccess } from "../utils/success.js";
+import { handleValidationError } from "../utils/handleValidationError.js";
 
 
 // In profileController.js
