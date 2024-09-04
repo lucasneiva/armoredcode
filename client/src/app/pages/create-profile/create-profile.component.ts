@@ -82,18 +82,12 @@ export default class CreateProfileComponent implements OnInit {
 
     //freelancer form constrols
     this.freelancerProfileForm = this.fb.group({
+      userId: [this.authService.getUserId(), Validators.required], 
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      specializationId: [''],
       profileSummary: [''],
-      portfolioItems: this.fb.array([this.createPortfolioItem()]), // Initialize with one portfolio item
-      experiences: this.fb.array([this.createExperienceForm()]), // Initialize with one experience form
-      education: this.fb.array([this.createEducationForm()]), // Initialize with one education form
-      certifications: this.fb.array([this.createCertificationForm()]), // Initialize with one certification form
-      specializationsId: [''],
-      specializationDescripition: [''],
       experienceLevel: ['', Validators.required],
-      selectedSkills: this.fb.array([]), // FormArray to store selected skill IDs
-      skillsId: [''],
       hourlyRate: this.fb.group({
         min: [''],
         max: [''],
@@ -108,8 +102,12 @@ export default class CreateProfileComponent implements OnInit {
         state: ['SP'],
         country: ['Brasil'],
       }),
+      skillIds: [''],
+      portfolioItems: this.fb.array([this.createPortfolioItem()]), // Initialize with one portfolio item
+      educations: this.fb.array([this.createEducationForm()]), // Initialize with one education form
+      certifications: this.fb.array([this.createCertificationForm()]), // Initialize with one certification form
+      workExperiences: this.fb.array([this.createExperienceForm()]), // Initialize with one experience form
     });
-
   }
 
   onSubmit() {
@@ -215,7 +213,7 @@ export default class CreateProfileComponent implements OnInit {
 
   // Education (Modified)
   get education(): FormArray {
-    return this.freelancerProfileForm.get('education') as FormArray;
+    return this.freelancerProfileForm.get('educations') as FormArray;
   }
 
   createEducationForm(): FormGroup {

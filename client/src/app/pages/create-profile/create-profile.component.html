@@ -150,19 +150,14 @@
             <h2 class="font-bold mt-8 text-center">Profissional</h2>
 
             <h2 class="font-semibold mt-4">Especialização</h2>
-            <select name="specializationsId" id="specializationsId"
+            <select name="specializationId" id="specializationId"
                 class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
-                formControlName="specializationsId">
+                formControlName="specializationId">
                 <option value="Default" selected>Select your Specialization</option>
                 <option *ngFor="let specialization of specializations" [value]="specialization._id">
                     {{ specialization.specializationName }}
                 </option>
             </select>
-
-            <h2 class="font-semibold mt-4">Descrição da especialização</h2>
-            <textarea id="specializationDescripition" name="specializationDescripition" rows="4"
-                placeholder="Write the specialization description here" formControlName="specializationDescripition"
-                class="bg-white p-3 border-2 min-h-12 max-h-96 w-full rounded"></textarea>
 
             <h2 class="font-semibold mt-4">Nível de Experiência</h2>
             <select name="experienceLevel" id="experienceLevel" formControlName="experienceLevel"
@@ -256,7 +251,7 @@
             <!--personal projects module end-->
 
             <!--Experience Module Start -->
-            <div formArrayName="experiences">
+            <div formArrayName="workExperiences">
                 <h2 class="font-bold mt-8 text-center">Experiência Profissional</h2>
                 <div *ngFor="let experienceForm of experiences.controls; let i = index" class="border p-4 rounded my-2">
                     <div [formGroupName]="i">
