@@ -46,6 +46,7 @@ export default class CreateProfileComponent implements OnInit {
   
   ngOnInit() { 
     //initialization of the user
+    this.authService.getUserId();
     this.userRole = this.authService.getUserRole();
 
     if (this.userRole === 'CLIENT') {
@@ -61,11 +62,13 @@ export default class CreateProfileComponent implements OnInit {
     
     //client form constrols
     this.clientProfileForm = this.fb.group({
+      userId: [this.authService.getUserId(), Validators.required], 
       companyName: ['', Validators.required],
-      companySite: [''],
       companyDescription: [''],
       companySize: ['', Validators.required],
-      companyIndustry: ['', Validators.required],
+      logo: [''],
+      industryId: ['', Validators.required],
+      website: [''],
       location: this.fb.group({
         zipCode: ['', Validators.required],
         street: ['', Validators.required],
@@ -110,7 +113,7 @@ export default class CreateProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    /*debug*/ //console.log(this.clientProfileForm.value);
+    /*debug*/ console.log(this.clientProfileForm.value);
     /*debug*/ //console.log(this.freelancerProfileForm.value);
     if (this.isClient && this.clientProfileForm.valid) {
       this.profileService.createProfile(this.clientProfileForm.value)
