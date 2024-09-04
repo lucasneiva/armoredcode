@@ -70,8 +70,8 @@ export default class CreateProfileComponent implements OnInit {
       industryId: ['', Validators.required],
       website: [''],
       location: this.fb.group({
-        zipCode: ['', Validators.required],
-        street: ['', Validators.required],
+        cep: ['', Validators.required],
+        streetAddress: ['', Validators.required],
         number: ['', Validators.required],
         neighborhood: ['', Validators.required],
         city: ['', Validators.required],
@@ -100,8 +100,8 @@ export default class CreateProfileComponent implements OnInit {
         currency: ['R$']
       }),
       location: this.fb.group({
-        zipCode: ['', Validators.required],
-        street: ['', Validators.required],
+        cep: ['', Validators.required],
+        streetAddress: ['', Validators.required],
         number: ['', Validators.required],
         neighborhood: ['', Validators.required],
         city: ['', Validators.required],
