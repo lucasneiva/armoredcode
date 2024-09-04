@@ -40,7 +40,7 @@ export const createProfile = async (req, res, next) => {
         return next(createSuccess(200, "Profile created successfully!", profile));
 
     } catch (error) {
-        return next(createError(500, "Error creating profile", error));
+        handleValidationError( error, next );
 
     }
 };
