@@ -156,13 +156,13 @@ const FreelancerProfileSchema = new Schema( {
         ref: "Skill"
     } ],
 
-    portfolio: [ PortfolioItemSchema ],
+    portfolioItems: [ PortfolioItemSchema ],
 
-    education: [ EducationSchema ],
+    educations: [ EducationSchema ],
 
     certifications: [ CertificationSchema ],
 
-    workExperience: [ WorkExperienceSchema ]
+    workExperiences: [ WorkExperienceSchema ]
 
 }, { timestamps: true } );
 
