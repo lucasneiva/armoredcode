@@ -24,11 +24,11 @@ export default class CreateProfileComponent implements OnInit {
   router = inject(Router);
   //services
   authService = inject(AuthService);
-  industryService = inject(IndustryService); // Inject the IndustryService
-  skillService = inject(SkillService); // Inject the SkillService
-  specializationService = inject(SpecializationService); // Inject the SpecializationService
-  profileService = inject(ProfileService); // Inject the ProfileService
-  userService = inject(UserService); // Inject the UserService
+  industryService = inject(IndustryService); 
+  skillService = inject(SkillService); 
+  specializationService = inject(SpecializationService); 
+  profileService = inject(ProfileService); 
+  userService = inject(UserService);
 
   //forms
   clientProfileForm!: FormGroup;
@@ -36,16 +36,15 @@ export default class CreateProfileComponent implements OnInit {
 
   //constants
   userRole: string | null = null; 
-  isClient: boolean = false; //false is default
+  isClient: boolean = false; 
 
   //arrays:
-  selectedSkillId: string = ''; // To store the selected skill ID
-  skills: any[] = []; // Array to store skills
-  specializations: any[] = []; // Array to store specializations
-  industries: any[] = []; // Array to store industries
+  selectedSkillId: string = ''; 
+  skills: any[] = []; 
+  specializations: any[] = []; 
+  industries: any[] = []; 
   
   ngOnInit() { 
-    //initialization of the user
     this.authService.getUserId();
     this.userRole = this.authService.getUserRole();
 
@@ -60,7 +59,6 @@ export default class CreateProfileComponent implements OnInit {
       console.log("invalid role");
     }
     
-    //client form constrols
     this.clientProfileForm = this.fb.group({
       userId: [this.authService.getUserId(), Validators.required], 
       companyName: ['', Validators.required],
@@ -80,7 +78,6 @@ export default class CreateProfileComponent implements OnInit {
       }),
     });
 
-    //freelancer form constrols
     this.freelancerProfileForm = this.fb.group({
       userId: [this.authService.getUserId(), Validators.required], 
       firstName: ['', Validators.required],
@@ -102,37 +99,40 @@ export default class CreateProfileComponent implements OnInit {
         state: ['SP'],
         country: ['Brasil'],
       }),
-      skillIds: [''],
-      portfolioItems: this.fb.array([this.createPortfolioItem()]), // Initialize with one portfolio item
-      educations: this.fb.array([this.createEducationForm()]), // Initialize with one education form
-      certifications: this.fb.array([this.createCertificationForm()]), // Initialize with one certification form
-      workExperiences: this.fb.array([this.createExperienceForm()]), // Initialize with one experience form
+      selectedSkills: this.fb.array([]), // Initialize as an empty array
+      portfolioItems: this.fb.array([this.createPortfolioItem()]),
+      education: this.fb.array([this.createEducationForm()]), 
+      certifications: this.fb.array([this.createCertificationForm()]), 
+      workExperiences: this.fb.array([this.createExperienceForm()]), 
     });
   }
 
   onSubmit() {
-    /*debug*/ console.log(this.clientProfileForm.value);
-    /*debug*/ //console.log(this.freelancerProfileForm.value);
+    console.log(this.freelancerProfileForm.value);
     if (this.isClient && this.clientProfileForm.valid) {
       this.profileService.createProfile(this.clientProfileForm.value)
         .subscribe({
           next: (res) => {
-            // Success!
             alert("Client Profile Created!");
             this.profileService.hasProfile$.next(true);
             this.clientProfileForm.reset();
-            this.router.navigate(['home']); // Redirect after successful creation
+            this.router.navigate(['home']);
           },
           error: (err) => {
             console.error('Error creating client profile:', err);
-            // Handle errors appropriately (e.g., display an error message)
           }
         });
     } else if (!this.isClient && this.freelancerProfileForm.valid) {
-      this.profileService.createProfile(this.freelancerProfileForm.value)
+
+      // Prepare the data for the freelancer profile
+      const formData = this.freelancerProfileForm.value;
+
+      // Convert selectedSkills array to a simple array of skill IDs
+      formData.skillIds = formData.selectedSkills;
+
+      this.profileService.createProfile(formData)
         .subscribe({
           next: (res) => {
-            // Success!
             alert("Freelancer Profile Created!");
             this.profileService.hasProfile$.next(true);
             this.freelancerProfileForm.reset();
@@ -144,7 +144,6 @@ export default class CreateProfileComponent implements OnInit {
         });
 
     } else {
-      // Handle form errors 
       this.displayFormErrors(this.isClient ? this.clientProfileForm : this.freelancerProfileForm);
     }
   }
@@ -163,11 +162,11 @@ export default class CreateProfileComponent implements OnInit {
   // Helper functions to manage FormArrays 
   //Portfolio
   get portfolioItems(): FormArray {
-    return this.freelancerProfileForm.get('portfolioItems') as FormArray; // Correct reference
+    return this.freelancerProfileForm.get('portfolioItems') as FormArray; 
   }
 
   addPortfolioItem() {
-    if (this.portfolioItems.length < 3) { // Limit to a maximum of 3 portfolios forms
+    if (this.portfolioItems.length < 3) { 
       const portfolioItem = this.createPortfolioItem();
       this.portfolioItems.push(portfolioItem);
     }
@@ -186,19 +185,19 @@ export default class CreateProfileComponent implements OnInit {
   }
 
   // Experience methods
-  get experiences(): FormArray {
-    return this.freelancerProfileForm.get('experiences') as FormArray;
+  get workExperiences(): FormArray {
+    return this.freelancerProfileForm.get('workExperiences') as FormArray;
   }
 
   addExperience() {
-    if (this.experiences.length < 2) { // Limit to a maximum of 2 education forms
-      const newExperienceForm = this.createExperienceForm(); // Create FormGroup
-      this.experiences.push(newExperienceForm); 
+    if (this.workExperiences.length < 2) { 
+      const newExperienceForm = this.createExperienceForm(); 
+      this.workExperiences.push(newExperienceForm); 
     }
   }
 
   removeExperience(index: number) {
-    this.experiences.removeAt(index);
+    this.workExperiences.removeAt(index);
   }
 
   createExperienceForm(): FormGroup {
@@ -211,9 +210,9 @@ export default class CreateProfileComponent implements OnInit {
     });
   }
 
-  // Education (Modified)
+  // Education 
   get education(): FormArray {
-    return this.freelancerProfileForm.get('educations') as FormArray;
+    return this.freelancerProfileForm.get('education') as FormArray;
   }
 
   createEducationForm(): FormGroup {
@@ -227,8 +226,8 @@ export default class CreateProfileComponent implements OnInit {
   }
 
   addEducation() {
-    if (this.education.length < 2) { // Limit to a maximum of 2 education forms
-      const newEducationForm = this.createEducationForm(); // Create FormGroup
+    if (this.education.length < 2) { 
+      const newEducationForm = this.createEducationForm(); 
       this.education.push(newEducationForm); 
     }
   }
@@ -244,7 +243,7 @@ export default class CreateProfileComponent implements OnInit {
 
   addCertification() {
     if (this.certifications.length < 5) {
-      const newCertificationForm = this.createCertificationForm(); // Create FormGroup
+      const newCertificationForm = this.createCertificationForm(); 
       this.certifications.push(newCertificationForm); 
     }
   }
@@ -261,7 +260,7 @@ export default class CreateProfileComponent implements OnInit {
     });
   }
 
-  // Function to fetch industries from your backend
+  
   fetchIndustries() {
     this.industryService.getIndustries().subscribe(
       (response: any) => {
@@ -273,7 +272,7 @@ export default class CreateProfileComponent implements OnInit {
     );
   }
 
-  // Function to fetch specializations from your backend
+  
   fetchSpecializations() {
     this.specializationService.getSpecializations().subscribe(
       (response: any) => {
@@ -285,7 +284,7 @@ export default class CreateProfileComponent implements OnInit {
     );
   }
 
-  // Function to fetch skills from your backend
+  
   fetchSkills() {
     this.skillService.getSkills().subscribe(
       (response: any) => {
@@ -297,43 +296,38 @@ export default class CreateProfileComponent implements OnInit {
     );
   }
 
-  // Function to handle skill selection from dropdown
   onSkillSelected(event: any) {
     this.selectedSkillId = event.target.value;
   }
 
-  // Function to add the selected skill to the form array
   addSkill() {
     if (this.selectedSkillId) {
       this.selectedSkills.push(new FormControl(this.selectedSkillId));
-      this.selectedSkillId = ''; // Reset the selected skill
+      this.selectedSkillId = ''; 
     }
   }
 
-  // Function to remove a skill from the form array
+  
   removeSkill(index: number) {
     this.selectedSkills.removeAt(index);
   }
 
-  // Get the skill name from the skill ID
   getSkillName(skillId: string): string {
     const skill = this.skills.find((s) => s._id === skillId);
     return skill ? skill.skillName : '';
   }
 
-  // Get the selectedSkills FormArray
   get selectedSkills(): FormArray {
     return this.freelancerProfileForm.get('selectedSkills') as FormArray;
   }
 
-  // Helper function to display form errors
   private displayFormErrors(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
       if (control instanceof FormControl && control.invalid) {
         console.log(`Field ${field} is invalid:`, control.errors);
       } else if (control instanceof FormGroup && control.invalid) {
-        this.displayFormErrors(control); // Recursively check nested FormGroups
+        this.displayFormErrors(control); 
       }
     });
   }
