@@ -30,6 +30,10 @@ export class ProjectService {
     };
     return this.http.get<any>(`${apiUrls.projectCategoryApi}`, httpOptions);
   }
+
+  getProjects(){
+    return this.http.get<any>(`${apiUrls.projectServiceApi}user`);
+  }
   
 }
 export type Project = {

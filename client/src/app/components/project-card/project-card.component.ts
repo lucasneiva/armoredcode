@@ -1,12 +1,15 @@
-import { Component, Input, input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { Project } from '../../services/project.service';
+
 
 @Component({
   selector: 'app-project-card',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './project-card.component.html',
   styleUrl: './project-card.component.scss'
 })
 export class ProjectCardComponent {
-  //@Input(required: true) project!: Project;
+  @Input({required: true}) project!: Project;
 }
