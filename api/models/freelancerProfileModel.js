@@ -115,10 +115,10 @@ const FreelancerProfileSchema = new Schema( {
         maxLength: 50,
     },
 
-    specializations: [ {
+    specializationId: {
         type: Schema.Types.ObjectId,
         ref: "Specialization"
-    } ],
+    },
 
     profileSummary: {
         type: String
