@@ -32,7 +32,13 @@ export class ProjectService {
   }
 
   getProjects(){
-    return this.http.get<any>(`${apiUrls.projectServiceApi}user`);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true 
+    };
+    return this.http.get<any>(`${apiUrls.projectServiceApi}user`, httpOptions);
   }
   
 }
