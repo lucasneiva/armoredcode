@@ -131,7 +131,7 @@
             </button>
         </div>
 
-        <div class="flex max-lg:grid overflow-hidden">
+        <div class="flex max-lg:grid h-fit">
             <!--Project Descrypition Module Start-->
             <div class="grid align-baseline mt-5 p-10 shadow-lg h-fit w-full">
                 <h2 class="font-semibold my-3 text-3xl">Overview:</h2>
@@ -141,7 +141,7 @@
             <!--Project Descrypition Module End-->
 
             <!--Search Skills Module Start-->
-            <div class="grid align-baseline bg-white m-4 mt-5 p-10 mx-auto w-fit">
+            <div class="block bg-white mx-4 mt-5 px-10 w-fit h-fit">
 
                 <h2 class="font-semibold my-3 text-3xl">Skills:</h2>
                 <div class="search relative shadow-lg flex w-fit h-10">
@@ -164,7 +164,6 @@
 
                 <div *ngIf="hasSelectedSkills()" class="row rounded-lg mt-4 bg-slate-50 p-4
                  border-2 border-slate-200 overflow-hidden">
-                    <h3 class="my-2">Selected Skills:</h3>
                     <ul>
                         <li *ngFor="let skillId of createProjectForm.get('skillIds')?.value"
                         class="flex w-fit mb-2 rounded bg-blue-500">
