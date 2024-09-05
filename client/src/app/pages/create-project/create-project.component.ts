@@ -235,6 +235,12 @@ export default class CreateProjectComponent implements OnInit {
     return skillIdsControl.value.includes(skillId);
   }
 
+  // Helper method to check if any skills are selected
+  hasSelectedSkills(): boolean {
+    const skillIdsControl = this.createProjectForm.get('skillIds') as FormControl;
+    return skillIdsControl.value.length > 0; 
+  }
+
   toggleTopForm() {
     this.isTopFormHidden = !this.isTopFormHidden;
   }

@@ -132,46 +132,52 @@
         </div>
 
         <div class="flex max-lg:grid overflow-hidden">
+            <!--Project Descrypition Module Start-->
             <div class="grid align-baseline mt-5 p-10 shadow-lg h-fit w-full">
                 <h2 class="font-semibold my-3 text-3xl">Overview:</h2>
                 <textarea formControlName="projectDescription" placeholder="Write the project description here"
                     class="bg-gray-50 p-3 border-2 min-h-14 max-h-96"></textarea>
             </div>
+            <!--Project Descrypition Module End-->
 
+            <!--Search Skills Module Start-->
+            <div class="grid align-baseline bg-white m-4 mt-5 p-10 mx-auto w-fit">
 
-            <div class="grid align-baseline bg-white m-4 mt-5 p-10 mx-auto w-full">
-                <div class="">
-                    <h2 class="font-semibold my-3 text-3xl">Skills:</h2>
-                    <div class="search relative shadow-lg flex w-fit">
-                        <span class="absolute mt-1.5 mx-3">
-                            <i class="fa fa-search font-light" aria-hidden="true"></i>
-                        </span>
-                        <input type="text" placeholder="Search skills"
-                            class="w-96 p-2 pl-9 rounded rounded-r-none text-gray-600" (input)="searchSkills($event)" />
-                    </div>
+                <h2 class="font-semibold my-3 text-3xl">Skills:</h2>
+                <div class="search relative shadow-lg flex w-fit h-10">
+                    <span class="absolute mt-1.5 mx-3">
+                        <i class="fa fa-search font-light" aria-hidden="true"></i>
+                    </span>
+                    <input type="text" placeholder="Search skills"
+                        class="w-96 p-2 pl-9 rounded rounded-r-none text-gray-600" (input)="searchSkills($event)" />
+                </div>
 
-                    <div *ngIf="showSkillsList">
-                        <ul>
-                            <li *ngFor="let skill of filteredSkills">
-                                <button (click)="addSkill(skill._id)">
-                                    Add {{ skill.skillName }}
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
+                <div *ngIf="showSkillsList" class="row rounded-b-lg bg-slate-50 border-slate-100 overflow-hidden">
+                    <ul>
+                        <li *ngFor="let skill of filteredSkills">
+                            <button class="w-full border-2 border-slate-100 hover:bg-slate-200" (click)="addSkill(skill._id)">
+                                Add {{ skill.skillName }}
+                            </button>
+                        </li>
+                    </ul>
+                </div>
 
-                    <div>
-                        <h3>Selected Skills:</h3>
-                        <ul>
-                            <li *ngFor="let skillId of createProjectForm.get('skillIds')?.value">
-                                {{ getSkillNameById(skillId) }}
-                                <button (click)="removeSkill(skillId)">Remove</button>
-                            </li>
-                        </ul>
-                    </div>
+                <div *ngIf="hasSelectedSkills()" class="row rounded-lg mt-4 bg-slate-50 p-4
+                 border-2 border-slate-200 overflow-hidden">
+                    <h3 class="my-2">Selected Skills:</h3>
+                    <ul>
+                        <li *ngFor="let skillId of createProjectForm.get('skillIds')?.value"
+                        class="flex w-fit mb-2 rounded bg-blue-500">
+                        <div class="text-white py-1 px-4 flex w-fit pr-4"> 
+                            {{ getSkillNameById(skillId) }}
+                        </div>
+                        <button type="button" (click)="removeSkill(skillId)" class="bg-red-500 hover:bg-red-700
+                        text-white font-bold py-1 px-2 rounded cursor-pointer"> X </button>
+                        </li>
+                    </ul>
                 </div>
             </div>
-
+            <!--Search Skills Module End-->
         </div>
     </form>
 
