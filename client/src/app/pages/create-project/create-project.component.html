@@ -133,14 +133,15 @@
             </button>
         </div>
 
-        <div class="flex flex-col max-lg:grid">
-            <div class="grid align-baseline m-4 lg:w-1/2 mt-5 p-10 shadow-lg h-fit w-full">
+        <div class="flex max-lg:grid">
+            <div class="grid align-baseline mt-5 p-10 shadow-lg h-fit w-full border-red-500 border-2">
                 <h2 class="font-semibold my-3 text-3xl">Overview:</h2>
                 <textarea formControlName="projectDescription" placeholder="Write the project description here"
-                    class="bg-gray-50 p-3 border-2 min-h-14" style="max-height: 36rem"></textarea>
+                    class="bg-gray-50 p-3 border-2 min-h-14 max-h-96"></textarea>
             </div>
 
-            <div class="grid align-baseline bg-white m-4 lg:w-3/12 mt-5 p-10 mx-auto">
+            <!--
+            <div class="grid align-baseline bg-white m-4 mt-5 p-10 mx-auto w-full border-red-500 border-2">
                 <div class="">
                     <h2 class="font-semibold my-3 text-3xl">Skills:</h2>
                     <div class="search relative shadow-lg flex w-fit">
@@ -154,26 +155,23 @@
                     </div>
                 </div>
             </div>
+        -->
         </div>
     </form>
 
-    <div class="flex flex-gflex-row justify-center static mb-4">
-
-    </div>
-
-    <div class="flex justify-center static mb-28">
+    <div class="flex justify-center align-middle my-11 w-full">
         <button [disabled]="createProjectForm.invalid" [class.disabled]="createProjectForm.invalid"
             (click)="CreateProject()"
-            class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
+            class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold w-full py-3 ml-4 rounded">
             Save
         </button>
         <button [disabled]="createProjectForm.invalid" [class.disabled]="createProjectForm.invalid"
             (click)="PostProject()"
-            class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
+            class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold w-full py-3 mx-4 rounded">
             Publish
         </button>
         <button (click)="CancelProject()"
-            class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold py-3 px-8 m-6 rounded">
+            class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold w-full py-3 mr-4 rounded">
             Cancel
         </button>
     </div>
