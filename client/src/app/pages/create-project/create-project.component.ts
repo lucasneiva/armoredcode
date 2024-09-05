@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup,
 import { ProjectService } from '../../services/project.service';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { SkillService } from '../../services/skill.service';
 
 @Component({
   selector: 'app-create-project',
@@ -15,23 +16,29 @@ import { AuthService } from '../../services/auth.service';
 })
 export default class CreateProjectComponent implements OnInit {
   fb = inject(FormBuilder);
+  router = inject(Router);
   authService = inject(AuthService);
   projectService = inject(ProjectService);
-  router = inject(Router);
+  skillService = inject(SkillService); 
 
   createProjectForm!: FormGroup;
 
   datePipe: any;
   projectCategories: any[] = []; // Array to store categories
+  skills: any[] = []; //array to store skills
+  filteredSkills: any[] = []; // Array to store filtered skills
+  // ... your other properties
+  showSkillsList: boolean = false; 
   isTopFormHidden = false; 
 
   ngOnInit() {
+    this.fetchSkills();
     this.getProjectCategories();
     this.createProjectForm = this.fb.group({
       clientId: [this.clientId, Validators.required],
       freelancerId: [this.freelancerId],
       projectCategoryId: ['', Validators.required],
-      skillIds: [],
+      skillIds: [[]], // Initialize as an empty array
       projectTitle: ['', Validators.required],
       projectDescription: ['', Validators.required],
       projectHourlyRate: this.fb.group({
@@ -42,7 +49,7 @@ export default class CreateProjectComponent implements OnInit {
         min: [, Validators.required],
         max: [, Validators.required],
       }),
-      pricingType: ['BUDGET', Validators.required], 
+      pricingType: ['BUDGET', Validators.required],
       estimatedDuration: ['', Validators.required],
       projectSize: [''],
       projectStatus: [''],
@@ -57,7 +64,7 @@ export default class CreateProjectComponent implements OnInit {
         country: ['BRAZIL'],
       }),
 
-      //CAMPOS CALCULADOS
+      // CAMPOS CALCULADOS
       startDate: [''],
       endDate: [''],
     });
@@ -173,6 +180,59 @@ export default class CreateProjectComponent implements OnInit {
         console.error('Error fetching project categories:', error);
       }
     );
+  }
+
+  fetchSkills() {
+    this.skillService.getSkills().subscribe(
+      (response: any) => {
+        this.skills = response.data;
+        this.filteredSkills = this.skills; // Initialize filteredSkills
+      },
+      (error) => {
+        console.error('Error fetching skills:', error);
+      }
+    );
+  }
+
+  // Method to filter skills based on search input
+  searchSkills(event: any) {
+    const searchTerm = event.target.value.toLowerCase();
+    this.showSkillsList = searchTerm.length > 0; // Show if search term is not empty
+
+    if (this.showSkillsList) { 
+      this.filteredSkills = this.skills.filter((skill) =>
+        skill.skillName.toLowerCase().includes(searchTerm)
+      );
+    }
+  }
+
+  // Method to get skill name by ID
+  getSkillNameById(skillId: string): string {
+    const skill = this.skills.find((s) => s._id === skillId);
+    return skill ? skill.skillName : ''; // Return skill name or empty string if not found
+  }
+
+  // Method to add a skill to the project
+  addSkill(skillId: string) {
+    const skillIdsControl = this.createProjectForm.get('skillIds') as FormControl;
+    const skillIds = skillIdsControl.value;
+
+    if (!skillIds.includes(skillId)) {
+      skillIdsControl.setValue([...skillIds, skillId]);
+    }
+  }
+
+  // Method to remove a skill from the project
+  removeSkill(skillId: string) {
+    const skillIdsControl = this.createProjectForm.get('skillIds') as FormControl;
+    const skillIds = skillIdsControl.value;
+    skillIdsControl.setValue(skillIds.filter((id: string) => id !== skillId));
+  }
+
+  // Method to determine if a skill should be visible
+  isSkillVisible(skillId: string): boolean {
+    const skillIdsControl = this.createProjectForm.get('skillIds') as FormControl;
+    return skillIdsControl.value.includes(skillId);
   }
 
   toggleTopForm() {
