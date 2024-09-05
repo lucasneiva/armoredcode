@@ -36,13 +36,13 @@ export class AuthService {
     return !!localStorage.getItem("user_id");
   }
 
-  /*
   logout() {
     localStorage.removeItem('user_id');
+    localStorage.removeItem('user_role');
+    localStorage.removeItem('token');
     this.isLoggedIn$.next(false);
     // Potentially redirect to login or perform other logout actions
   }
-  */
   
   getUserRole(): string | null {
     const role = localStorage.getItem('user_role');
