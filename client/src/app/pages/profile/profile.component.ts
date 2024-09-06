@@ -43,9 +43,8 @@ export default class ProfileComponent {
     }
   }
 
-  logOut(){
-    localStorage.removeItem("user_id");
-    this.authService.isLoggedIn$.next(false);
+  logOut() {
+    this.authService.logout();
   }
 
   get Id(){

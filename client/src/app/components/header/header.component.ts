@@ -43,8 +43,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
-    localStorage.removeItem("user_id");
-    this.authService.isLoggedIn$.next(false);
+    this.authService.logout();
   }
 
   toggleMenu() {

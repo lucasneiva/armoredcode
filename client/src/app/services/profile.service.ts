@@ -12,22 +12,7 @@ export class ProfileService {
   http = inject(HttpClient);
   authService = inject(AuthService);  // Inject it
   hasProfile$ = new BehaviorSubject<boolean>(false);
-  /*
-  createProfile(profileObj: any, userId: string): Observable<any> { // Pass userId explicitly
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-      withCredentials: true  
-    };
-
-    // Include userId in the request body
-    return this.http.post<any>(`${apiUrls.profileServiceApi}`, 
-      { ...profileObj, userId },  
-      httpOptions
-    );
-  }
-  */
+  
   createProfile(profileData: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
