@@ -20,28 +20,6 @@
         </div>
     </div>
 
-    <div class="w-full flex justify-start content-center bg-sky-700">
-        <ul class="flex justify-center p-1 text-xl">
-            <li class="text-white mx-5 p-5 bg-sky-800 rounded-md hover:bg-sky-800 cursor-pointer">
-                <a class="active">About</a>
-            </li>
-            <li class="text-white mx-5 p-5 rounded-md hover:bg-sky-800 cursor-pointer">
-                <a routerLink="/manage-project">Projects</a>
-            </li>
-            <li class="text-white mx-5 p-5 rounded-md hover:bg-sky-800 cursor-pointer">
-                <a>Notifications</a>
-            </li>
-            <li class="text-white mx-5 p-5 rounded-md hover:bg-sky-800 cursor-pointer">
-                <a>Messages</a>
-            </li>
-            <li class="text-white mx-5 p-5 rounded-md hover:bg-sky-800 cursor-pointer">
-                <a>Settings</a>
-            </li>
-            <li class="text-white mx-5 p-5 rounded-md hover:bg-sky-800 cursor-pointer">
-                <span routerLink="/login" (click)="logOut()">Logout</span>
-            </li>
-        </ul>
-    </div>
     <!--client placeholder-->
     <div class="w-full p-8">
         <div class="w-2/3 mx-auto">
@@ -67,6 +45,11 @@
             </ul>
         </div>
     </div>
+    <button
+        class="flex items-center justify-center bg-transparent hover:bg-blue-500 
+            text-gray-700 font-semibold hover:text-white py-1 px-8 mx-8 border border-gray-500 hover:border-transparent rounded">
+        Delete Account
+    </button>
 </ng-container>
 
 <ng-container *ngIf="!isClient">
@@ -79,7 +62,7 @@
         <div class="w-10/12 flex justify-between content-center">
             <div class="">
                 <!--<h2 class="font-bold text-3xl">{{ userName }}</h2>-->
-                <h2 class="font-bold text-3xl">Freealncer One</h2>
+                <h2 class="font-bold text-3xl">Freelancer One</h2>
                 <p class="font-semibold text-xl">{{ userId }}</p>
             </div>
             <button
@@ -91,41 +74,20 @@
         </div>
     </div>
 
-    <div class="w-full flex justify-start content-center bg-sky-700">
-        <ul class="flex justify-center p-1 text-xl">
-            <li class="text-white mx-5 p-5 bg-sky-800 rounded-md hover:bg-sky-800 cursor-pointer">
-                <a class="active">About</a>
-            </li>
-            <li class="text-white mx-5 p-5 rounded-md hover:bg-sky-800 cursor-pointer">
-                <a routerLink="/manage-project">Projects</a>
-            </li>
-            <li class="text-white mx-5 p-5 rounded-md hover:bg-sky-800 cursor-pointer">
-                <a>Notifications</a>
-            </li>
-            <li class="text-white mx-5 p-5 rounded-md hover:bg-sky-800 cursor-pointer">
-                <a>Messages</a>
-            </li>
-            <li class="text-white mx-5 p-5 rounded-md hover:bg-sky-800 cursor-pointer">
-                <a>Settings</a>
-            </li>
-            <li class="text-white mx-5 p-5 rounded-md hover:bg-sky-800 cursor-pointer">
-                <span routerLink="/login" (click)="logOut()">Logout</span>
-            </li>
-        </ul>
-    </div>
     <!--freelancer placeholder-->
     <div class="w-full p-8">
         <div class="w-2/3 mx-auto">
-            <h3 class="font-bold text-3xl py-3" style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 class="font-bold text-3xl py-3"
+                style="display: flex; justify-content: space-between; align-items: center;">
                 <!--About {first_name} {last_name}-->
-                About Fred Carvalho 
+                About Fred Carvalho
                 <!--<span class="bg-green-300 border-2 border-green-500 text-white p-2 rounded-md">{is_online}</span>-->
                 <span class="bg-green-300 border-2 border-green-500 text-white p-2 rounded-md">Online</span>
             </h3>
             <p class="text-xl py-3">
                 Creative and collaborative Software Engineer with a passion for building elegant and user-friendly
-                 software. Driven to learn and grow within a team environment, seeking opportunities to contribute
-                 to challenging and impactful projects.
+                software. Driven to learn and grow within a team environment, seeking opportunities to contribute
+                to challenging and impactful projects.
             </p>
             <ul class="text-xl py-3">
                 <li><strong>Location:</strong> São Paulo, SP (Brazil)</li>
@@ -136,7 +98,8 @@
                 <li><strong>Work Experience:</strong> In Tech Solutions Inc. as an Software Engineer (23/11/2022)</li>
                 <br>
                 <li><strong>Education:</strong> <br>
-                    <p class="ml-4">Bachelor's Degree in Computer Science, University C.P.S. Fatec Sorocaba. (01/02/2020 - 01/02/2023)</p>
+                    <p class="ml-4">Bachelor's Degree in Computer Science, University C.P.S. Fatec Sorocaba. (01/02/2020
+                        - 01/02/2023)</p>
                     <p class="ml-4">Complete College, IFSP campus São Paulo. (01/08/2017 - 01/08/2020)</p>
                 </li>
                 <li><strong>Certifications:</strong> Certified UX Designer, UX Design Institute (20/03/2021)</li>
@@ -144,5 +107,11 @@
                 <li><strong>Payment:</strong> R$100,00 to R$799,00</li>
             </ul>
         </div>
+
+        <button
+            class="flex items-center justify-center bg-transparent hover:bg-blue-500 
+            text-gray-700 font-semibold hover:text-white py-1 px-8 mx-8 border border-gray-500 hover:border-transparent rounded">
+            Delete Account
+        </button>
     </div>
 </ng-container>
