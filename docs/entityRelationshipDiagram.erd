@@ -1,0 +1,2132 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dineug/erd-editor/main/json-schema/schema.json",
+  "version": "3.0.0",
+  "settings": {
+    "width": 2000,
+    "height": 2000,
+    "scrollTop": -652.7015,
+    "scrollLeft": -539.7064,
+    "zoomLevel": 0.8,
+    "show": 2047,
+    "database": 4,
+    "databaseName": "SeuNomeDoBancoDeDados",
+    "canvasType": "ERD",
+    "language": 4,
+    "tableNameCase": 1,
+    "columnNameCase": 1,
+    "bracketType": 1,
+    "relationshipDataTypeSync": true,
+    "relationshipOptimization": true,
+    "columnOrder": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "maxWidthComment": 200,
+    "ignoreSaveSettings": 0
+  },
+  "doc": {
+    "tableIds": [
+      "User",
+      "ClientProfile",
+      "FreelancerProfile",
+      "Project",
+      "Skill",
+      "Specialization",
+      "Industry",
+      "Location",
+      "ProjectCategory",
+      "Proposal",
+      "CommunicationChannel",
+      "Notification"
+    ],
+    "relationshipIds": [
+      "User_ClientProfile",
+      "User_FreelancerProfile",
+      "Project_Client",
+      "Project_Freelancer",
+      "Project_ProjectCategory",
+      "Project_Skill",
+      "FreelancerProfile_Specialization",
+      "FreelancerProfile_Skill",
+      "ClientProfile_Industry",
+      "ClientProfile_Location",
+      "FreelancerProfile_Location",
+      "Project_Location",
+      "Proposal_Project",
+      "Proposal_Freelancer",
+      "Proposal_Client",
+      "Proposal_CommunicationChannel",
+      "CommunicationChannel_Project",
+      "CommunicationChannel_Freelancer",
+      "CommunicationChannel_Client",
+      "Notification_Freelancer",
+      "Notification_Client",
+      "Notification_Project"
+    ],
+    "indexIds": [],
+    "memoIds": []
+  },
+  "collections": {
+    "tableEntities": {
+      "User": {
+        "id": "User",
+        "name": "User",
+        "comment": "",
+        "columnIds": [
+          "User_id",
+          "User_username",
+          "User_email",
+          "User_password",
+          "User_role"
+        ],
+        "seqColumnIds": [
+          "User_id",
+          "User_username",
+          "User_email",
+          "User_password",
+          "User_role"
+        ],
+        "ui": {
+          "x": 90,
+          "y": 264,
+          "zIndex": 1,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": "#1e88e5"
+        },
+        "meta": {
+          "updateAt": 1725638300501,
+          "createAt": 1698669790952
+        }
+      },
+      "ClientProfile": {
+        "id": "ClientProfile",
+        "name": "ClientProfile",
+        "comment": "",
+        "columnIds": [
+          "ClientProfile_userId",
+          "ClientProfile_companyName",
+          "ClientProfile_companyDescription",
+          "ClientProfile_companySize",
+          "ClientProfile_logo",
+          "ClientProfile_industryId",
+          "ClientProfile_website",
+          "ClientProfile_location"
+        ],
+        "seqColumnIds": [
+          "ClientProfile_userId",
+          "ClientProfile_companyName",
+          "ClientProfile_companyDescription",
+          "ClientProfile_companySize",
+          "ClientProfile_logo",
+          "ClientProfile_industryId",
+          "ClientProfile_website",
+          "ClientProfile_location"
+        ],
+        "ui": {
+          "x": 461,
+          "y": 455,
+          "zIndex": 2,
+          "widthName": 66,
+          "widthComment": 60,
+          "color": "#00bcd4"
+        },
+        "meta": {
+          "updateAt": 1698744352782,
+          "createAt": 1698659448553
+        }
+      },
+      "FreelancerProfile": {
+        "id": "FreelancerProfile",
+        "name": "FreelancerProfile",
+        "comment": "",
+        "columnIds": [
+          "FreelancerProfile_userId",
+          "FreelancerProfile_firstName",
+          "FreelancerProfile_lastName",
+          "FreelancerProfile_specializations",
+          "FreelancerProfile_profileSummary",
+          "FreelancerProfile_experienceLevel",
+          "FreelancerProfile_hourlyRate",
+          "FreelancerProfile_isAvailable",
+          "FreelancerProfile_location",
+          "FreelancerProfile_skillIds",
+          "FreelancerProfile_portfolio",
+          "FreelancerProfile_education",
+          "FreelancerProfile_certifications",
+          "FreelancerProfile_workExperience"
+        ],
+        "seqColumnIds": [
+          "FreelancerProfile_userId",
+          "FreelancerProfile_firstName",
+          "FreelancerProfile_lastName",
+          "FreelancerProfile_specializations",
+          "FreelancerProfile_profileSummary",
+          "FreelancerProfile_experienceLevel",
+          "FreelancerProfile_hourlyRate",
+          "FreelancerProfile_isAvailable",
+          "FreelancerProfile_location",
+          "FreelancerProfile_skillIds",
+          "FreelancerProfile_portfolio",
+          "FreelancerProfile_education",
+          "FreelancerProfile_certifications",
+          "FreelancerProfile_workExperience"
+        ],
+        "ui": {
+          "x": 158,
+          "y": 1303,
+          "zIndex": 3,
+          "widthName": 90,
+          "widthComment": 60,
+          "color": "#4caf50"
+        },
+        "meta": {
+          "updateAt": 1725638276101,
+          "createAt": 1698669593313
+        }
+      },
+      "Project": {
+        "id": "Project",
+        "name": "Project",
+        "comment": "",
+        "columnIds": [
+          "Project_clientId",
+          "Project_freelancerId",
+          "Project_projectCategoryId",
+          "Project_skillIds",
+          "Project_projectTitle",
+          "Project_projectDescription",
+          "Project_projectHourlyRate",
+          "Project_projectBudget",
+          "Project_pricingType",
+          "Project_estimatedDuration",
+          "Project_projectSize",
+          "Project_projectStatus",
+          "Project_experienceLevel",
+          "Project_workModel",
+          "Project_location",
+          "Project_startDate",
+          "Project_endDate"
+        ],
+        "seqColumnIds": [
+          "Project_clientId",
+          "Project_freelancerId",
+          "Project_projectCategoryId",
+          "Project_skillIds",
+          "Project_projectTitle",
+          "Project_projectDescription",
+          "Project_projectHourlyRate",
+          "Project_projectBudget",
+          "Project_pricingType",
+          "Project_estimatedDuration",
+          "Project_projectSize",
+          "Project_projectStatus",
+          "Project_experienceLevel",
+          "Project_workModel",
+          "Project_location",
+          "Project_startDate",
+          "Project_endDate"
+        ],
+        "ui": {
+          "x": 1041,
+          "y": 956,
+          "zIndex": 4,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": "#f44336"
+        },
+        "meta": {
+          "updateAt": 1725638283704,
+          "createAt": 1698669361511
+        }
+      },
+      "Skill": {
+        "id": "Skill",
+        "name": "Skill",
+        "comment": "",
+        "columnIds": [
+          "Skill_skillName",
+          "Skill_skillDescription"
+        ],
+        "seqColumnIds": [
+          "Skill_skillName",
+          "Skill_skillDescription"
+        ],
+        "ui": {
+          "x": 641,
+          "y": 18,
+          "zIndex": 5,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": "#9c27b0"
+        },
+        "meta": {
+          "updateAt": 1725638297219,
+          "createAt": 1698659402428
+        }
+      },
+      "Specialization": {
+        "id": "Specialization",
+        "name": "Specialization",
+        "comment": "",
+        "columnIds": [
+          "Specialization_specializationName",
+          "Specialization_specializationDescription"
+        ],
+        "seqColumnIds": [
+          "Specialization_specializationName",
+          "Specialization_specializationDescription"
+        ],
+        "ui": {
+          "x": 136,
+          "y": 100,
+          "zIndex": 6,
+          "widthName": 74,
+          "widthComment": 60,
+          "color": "#673ab7"
+        },
+        "meta": {
+          "updateAt": 1698743804395,
+          "createAt": 1698658917482
+        }
+      },
+      "Industry": {
+        "id": "Industry",
+        "name": "Industry",
+        "comment": "",
+        "columnIds": [
+          "Industry_name",
+          "Industry_description"
+        ],
+        "seqColumnIds": [
+          "Industry_name",
+          "Industry_description"
+        ],
+        "ui": {
+          "x": 809,
+          "y": 311,
+          "zIndex": 7,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": "#3f51b5"
+        },
+        "meta": {
+          "updateAt": 1725638285526,
+          "createAt": 1698669315689
+        }
+      },
+      "Location": {
+        "id": "Location",
+        "name": "Location",
+        "comment": "",
+        "columnIds": [
+          "Location_streetAddress",
+          "Location_neighborhood",
+          "Location_city",
+          "Location_state",
+          "Location_cep",
+          "Location_country"
+        ],
+        "seqColumnIds": [
+          "Location_streetAddress",
+          "Location_neighborhood",
+          "Location_city",
+          "Location_state",
+          "Location_cep",
+          "Location_country"
+        ],
+        "ui": {
+          "x": 1258,
+          "y": 399,
+          "zIndex": 8,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": "#009688"
+        },
+        "meta": {
+          "updateAt": 1725638283704,
+          "createAt": 1698669264759
+        }
+      },
+      "ProjectCategory": {
+        "id": "ProjectCategory",
+        "name": "ProjectCategory",
+        "comment": "",
+        "columnIds": [
+          "ProjectCategory_categoryName",
+          "ProjectCategory_categoryDescription"
+        ],
+        "seqColumnIds": [
+          "ProjectCategory_categoryName",
+          "ProjectCategory_categoryDescription"
+        ],
+        "ui": {
+          "x": 1006,
+          "y": 100,
+          "zIndex": 9,
+          "widthName": 87,
+          "widthComment": 60,
+          "color": "#795548"
+        },
+        "meta": {
+          "updateAt": 1698754967081,
+          "createAt": 1698669220248
+        }
+      },
+      "Proposal": {
+        "id": "Proposal",
+        "name": "Proposal",
+        "comment": "",
+        "columnIds": [
+          "Proposal_projectId",
+          "Proposal_freelancerId",
+          "Proposal_clientId",
+          "Proposal_coverLetter",
+          "Proposal_pricingType",
+          "Proposal_proposedBudget",
+          "Proposal_proposedHourlyRate",
+          "Proposal_estimatedDuration",
+          "Proposal_status",
+          "Proposal_communicationChannelId"
+        ],
+        "seqColumnIds": [
+          "Proposal_projectId",
+          "Proposal_freelancerId",
+          "Proposal_clientId",
+          "Proposal_coverLetter",
+          "Proposal_pricingType",
+          "Proposal_proposedBudget",
+          "Proposal_proposedHourlyRate",
+          "Proposal_estimatedDuration",
+          "Proposal_status",
+          "Proposal_communicationChannelId"
+        ],
+        "ui": {
+          "x": 383,
+          "y": 969,
+          "zIndex": 10,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": "#ff9800"
+        },
+        "meta": {
+          "updateAt": 1725638277421,
+          "createAt": 1698669179056
+        }
+      },
+      "CommunicationChannel": {
+        "id": "CommunicationChannel",
+        "name": "CommunicationChannel",
+        "comment": "",
+        "columnIds": [
+          "CommunicationChannel_projectId",
+          "CommunicationChannel_freelancerId",
+          "CommunicationChannel_clientId",
+          "CommunicationChannel_messages",
+          "CommunicationChannel_isActive"
+        ],
+        "seqColumnIds": [
+          "CommunicationChannel_projectId",
+          "CommunicationChannel_freelancerId",
+          "CommunicationChannel_clientId",
+          "CommunicationChannel_messages",
+          "CommunicationChannel_isActive"
+        ],
+        "ui": {
+          "x": 1053,
+          "y": 1459,
+          "zIndex": 11,
+          "widthName": 129,
+          "widthComment": 60,
+          "color": "#607d8b"
+        },
+        "meta": {
+          "updateAt": 1725638279043,
+          "createAt": 1698669131432
+        }
+      },
+      "Notification": {
+        "id": "Notification",
+        "name": "Notification",
+        "comment": "",
+        "columnIds": [
+          "Notification_freelancerId",
+          "Notification_clientId",
+          "Notification_projectId",
+          "Notification_message",
+          "Notification_timestamp",
+          "Notification_isRead"
+        ],
+        "seqColumnIds": [
+          "Notification_freelancerId",
+          "Notification_clientId",
+          "Notification_projectId",
+          "Notification_message",
+          "Notification_timestamp",
+          "Notification_isRead"
+        ],
+        "ui": {
+          "x": 1084,
+          "y": 725,
+          "zIndex": 12,
+          "widthName": 64,
+          "widthComment": 60,
+          "color": "#9e9e9e"
+        },
+        "meta": {
+          "updateAt": 1725638280011,
+          "createAt": 1698669079623
+        }
+      }
+    },
+    "tableColumnEntities": {
+      "User_id": {
+        "id": "User_id",
+        "tableId": "User",
+        "name": "id",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 2,
+        "ui": {
+          "keys": 1,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755366516,
+          "createAt": 1698669790952
+        }
+      },
+      "User_username": {
+        "id": "User_username",
+        "tableId": "User",
+        "name": "username",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755366516,
+          "createAt": 1698669790952
+        }
+      },
+      "User_email": {
+        "id": "User_email",
+        "tableId": "User",
+        "name": "email",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755366516,
+          "createAt": 1698669790952
+        }
+      },
+      "User_password": {
+        "id": "User_password",
+        "tableId": "User",
+        "name": "password",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755366516,
+          "createAt": 1698669790952
+        }
+      },
+      "User_role": {
+        "id": "User_role",
+        "tableId": "User",
+        "name": "role",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755366516,
+          "createAt": 1698669790952
+        }
+      },
+      "ClientProfile_userId": {
+        "id": "ClientProfile_userId",
+        "tableId": "ClientProfile",
+        "name": "userId",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698744352782,
+          "createAt": 1698659448553
+        }
+      },
+      "ClientProfile_companyName": {
+        "id": "ClientProfile_companyName",
+        "tableId": "ClientProfile",
+        "name": "companyName",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 82,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698744352782,
+          "createAt": 1698659448553
+        }
+      },
+      "ClientProfile_companyDescription": {
+        "id": "ClientProfile_companyDescription",
+        "tableId": "ClientProfile",
+        "name": "companyDescription",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 111,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698744352782,
+          "createAt": 1698659448553
+        }
+      },
+      "ClientProfile_companySize": {
+        "id": "ClientProfile_companySize",
+        "tableId": "ClientProfile",
+        "name": "companySize",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 72,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698744352782,
+          "createAt": 1698659448553
+        }
+      },
+      "ClientProfile_logo": {
+        "id": "ClientProfile_logo",
+        "tableId": "ClientProfile",
+        "name": "logo",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698744352782,
+          "createAt": 1698659448553
+        }
+      },
+      "ClientProfile_industryId": {
+        "id": "ClientProfile_industryId",
+        "tableId": "ClientProfile",
+        "name": "industryId",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698744352782,
+          "createAt": 1698659448553
+        }
+      },
+      "ClientProfile_website": {
+        "id": "ClientProfile_website",
+        "tableId": "ClientProfile",
+        "name": "website",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698744352782,
+          "createAt": 1698659448553
+        }
+      },
+      "ClientProfile_location": {
+        "id": "ClientProfile_location",
+        "tableId": "ClientProfile",
+        "name": "location",
+        "comment": "",
+        "dataType": "embedded",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754630017,
+          "createAt": 1698754630017
+        }
+      },
+      "FreelancerProfile_userId": {
+        "id": "FreelancerProfile_userId",
+        "tableId": "FreelancerProfile",
+        "name": "userId",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755241055,
+          "createAt": 1698669593313
+        }
+      },
+      "FreelancerProfile_firstName": {
+        "id": "FreelancerProfile_firstName",
+        "tableId": "FreelancerProfile",
+        "name": "firstName",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755241055,
+          "createAt": 1698669593313
+        }
+      },
+      "FreelancerProfile_lastName": {
+        "id": "FreelancerProfile_lastName",
+        "tableId": "FreelancerProfile",
+        "name": "lastName",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755241055,
+          "createAt": 1698669593313
+        }
+      },
+      "FreelancerProfile_specializations": {
+        "id": "FreelancerProfile_specializations",
+        "tableId": "FreelancerProfile",
+        "name": "specializations",
+        "comment": "",
+        "dataType": "Array",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 78,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755241055,
+          "createAt": 1698669593313
+        }
+      },
+      "FreelancerProfile_profileSummary": {
+        "id": "FreelancerProfile_profileSummary",
+        "tableId": "FreelancerProfile",
+        "name": "profileSummary",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 86,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755241055,
+          "createAt": 1698669593313
+        }
+      },
+      "FreelancerProfile_experienceLevel": {
+        "id": "FreelancerProfile_experienceLevel",
+        "tableId": "FreelancerProfile",
+        "name": "experienceLevel",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 86,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755241055,
+          "createAt": 1698669593313
+        }
+      },
+      "FreelancerProfile_hourlyRate": {
+        "id": "FreelancerProfile_hourlyRate",
+        "tableId": "FreelancerProfile",
+        "name": "hourlyRate",
+        "comment": "",
+        "dataType": "embedded",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755241055,
+          "createAt": 1698669593313
+        }
+      },
+      "FreelancerProfile_isAvailable": {
+        "id": "FreelancerProfile_isAvailable",
+        "tableId": "FreelancerProfile",
+        "name": "isAvailable",
+        "comment": "",
+        "dataType": "Boolean",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755241055,
+          "createAt": 1698669593313
+        }
+      },
+      "FreelancerProfile_location": {
+        "id": "FreelancerProfile_location",
+        "tableId": "FreelancerProfile",
+        "name": "location",
+        "comment": "",
+        "dataType": "embedded",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754717627,
+          "createAt": 1698754717627
+        }
+      },
+      "FreelancerProfile_skillIds": {
+        "id": "FreelancerProfile_skillIds",
+        "tableId": "FreelancerProfile",
+        "name": "skillIds",
+        "comment": "",
+        "dataType": "Array",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755241055,
+          "createAt": 1698669593313
+        }
+      },
+      "FreelancerProfile_portfolio": {
+        "id": "FreelancerProfile_portfolio",
+        "tableId": "FreelancerProfile",
+        "name": "portfolio",
+        "comment": "",
+        "dataType": "Array",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755241055,
+          "createAt": 1698669593313
+        }
+      },
+      "FreelancerProfile_education": {
+        "id": "FreelancerProfile_education",
+        "tableId": "FreelancerProfile",
+        "name": "education",
+        "comment": "",
+        "dataType": "Array",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755241055,
+          "createAt": 1698669593313
+        }
+      },
+      "FreelancerProfile_certifications": {
+        "id": "FreelancerProfile_certifications",
+        "tableId": "FreelancerProfile",
+        "name": "certifications",
+        "comment": "",
+        "dataType": "Array",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 69,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755241055,
+          "createAt": 1698669593313
+        }
+      },
+      "FreelancerProfile_workExperience": {
+        "id": "FreelancerProfile_workExperience",
+        "tableId": "FreelancerProfile",
+        "name": "workExperience",
+        "comment": "",
+        "dataType": "Array",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755241055,
+          "createAt": 1698669593313
+        }
+      },
+      "Project_clientId": {
+        "id": "Project_clientId",
+        "tableId": "Project",
+        "name": "clientId",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755102485,
+          "createAt": 1698669361511
+        }
+      },
+      "Project_freelancerId": {
+        "id": "Project_freelancerId",
+        "tableId": "Project",
+        "name": "freelancerId",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 65,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755102485,
+          "createAt": 1698669361511
+        }
+      },
+      "Project_projectCategoryId": {
+        "id": "Project_projectCategoryId",
+        "tableId": "Project",
+        "name": "projectCategoryId",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 97,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755102485,
+          "createAt": 1698669361511
+        }
+      },
+      "Project_skillIds": {
+        "id": "Project_skillIds",
+        "tableId": "Project",
+        "name": "skillIds",
+        "comment": "",
+        "dataType": "Array",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755102485,
+          "createAt": 1698669361511
+        }
+      },
+      "Project_projectTitle": {
+        "id": "Project_projectTitle",
+        "tableId": "Project",
+        "name": "projectTitle",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 61,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755102485,
+          "createAt": 1698669361511
+        }
+      },
+      "Project_projectDescription": {
+        "id": "Project_projectDescription",
+        "tableId": "Project",
+        "name": "projectDescription",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 99,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755102485,
+          "createAt": 1698669361511
+        }
+      },
+      "Project_projectHourlyRate": {
+        "id": "Project_projectHourlyRate",
+        "tableId": "Project",
+        "name": "projectHourlyRate",
+        "comment": "",
+        "dataType": "embedded",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 98,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755102485,
+          "createAt": 1698669361511
+        }
+      },
+      "Project_projectBudget": {
+        "id": "Project_projectBudget",
+        "tableId": "Project",
+        "name": "projectBudget",
+        "comment": "",
+        "dataType": "embedded",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 77,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755102485,
+          "createAt": 1698669361511
+        }
+      },
+      "Project_pricingType": {
+        "id": "Project_pricingType",
+        "tableId": "Project",
+        "name": "pricingType",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 63,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755102485,
+          "createAt": 1698669361511
+        }
+      },
+      "Project_estimatedDuration": {
+        "id": "Project_estimatedDuration",
+        "tableId": "Project",
+        "name": "estimatedDuration",
+        "comment": "",
+        "dataType": "Number",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 100,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755102485,
+          "createAt": 1698669361511
+        }
+      },
+      "Project_projectSize": {
+        "id": "Project_projectSize",
+        "tableId": "Project",
+        "name": "projectSize",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755102485,
+          "createAt": 1698669361511
+        }
+      },
+      "Project_projectStatus": {
+        "id": "Project_projectStatus",
+        "tableId": "Project",
+        "name": "projectStatus",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 71,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755102485,
+          "createAt": 1698669361511
+        }
+      },
+      "Project_experienceLevel": {
+        "id": "Project_experienceLevel",
+        "tableId": "Project",
+        "name": "experienceLevel",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 86,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755102485,
+          "createAt": 1698669361511
+        }
+      },
+      "Project_workModel": {
+        "id": "Project_workModel",
+        "tableId": "Project",
+        "name": "workModel",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 62,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755102485,
+          "createAt": 1698669361511
+        }
+      },
+      "Project_location": {
+        "id": "Project_location",
+        "tableId": "Project",
+        "name": "location",
+        "comment": "",
+        "dataType": "embedded",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754754569,
+          "createAt": 1698754754569
+        }
+      },
+      "Project_startDate": {
+        "id": "Project_startDate",
+        "tableId": "Project",
+        "name": "startDate",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755102485,
+          "createAt": 1698669361511
+        }
+      },
+      "Project_endDate": {
+        "id": "Project_endDate",
+        "tableId": "Project",
+        "name": "endDate",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755102485,
+          "createAt": 1698669361511
+        }
+      },
+      "Skill_skillName": {
+        "id": "Skill_skillName",
+        "tableId": "Skill",
+        "name": "skillName",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698744307576,
+          "createAt": 1698659402428
+        }
+      },
+      "Skill_skillDescription": {
+        "id": "Skill_skillDescription",
+        "tableId": "Skill",
+        "name": "skillDescription",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 82,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698744307576,
+          "createAt": 1698659402428
+        }
+      },
+      "Specialization_specializationName": {
+        "id": "Specialization_specializationName",
+        "tableId": "Specialization",
+        "name": "specializationName",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 105,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698743804395,
+          "createAt": 1698658917482
+        }
+      },
+      "Specialization_specializationDescription": {
+        "id": "Specialization_specializationDescription",
+        "tableId": "Specialization",
+        "name": "specializationDescription",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 133,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698743804395,
+          "createAt": 1698658917482
+        }
+      },
+      "Industry_name": {
+        "id": "Industry_name",
+        "tableId": "Industry",
+        "name": "name",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755063025,
+          "createAt": 1698669315689
+        }
+      },
+      "Industry_description": {
+        "id": "Industry_description",
+        "tableId": "Industry",
+        "name": "description",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 61,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755063025,
+          "createAt": 1698669315689
+        }
+      },
+      "Location_streetAddress": {
+        "id": "Location_streetAddress",
+        "tableId": "Location",
+        "name": "streetAddress",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 74,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755012429,
+          "createAt": 1698669264759
+        }
+      },
+      "Location_neighborhood": {
+        "id": "Location_neighborhood",
+        "tableId": "Location",
+        "name": "neighborhood",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 78,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755012429,
+          "createAt": 1698669264759
+        }
+      },
+      "Location_city": {
+        "id": "Location_city",
+        "tableId": "Location",
+        "name": "city",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755012429,
+          "createAt": 1698669264759
+        }
+      },
+      "Location_state": {
+        "id": "Location_state",
+        "tableId": "Location",
+        "name": "state",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755012429,
+          "createAt": 1698669264759
+        }
+      },
+      "Location_cep": {
+        "id": "Location_cep",
+        "tableId": "Location",
+        "name": "cep",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755012429,
+          "createAt": 1698669264759
+        }
+      },
+      "Location_country": {
+        "id": "Location_country",
+        "tableId": "Location",
+        "name": "country",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698755012429,
+          "createAt": 1698669264759
+        }
+      },
+      "ProjectCategory_categoryName": {
+        "id": "ProjectCategory_categoryName",
+        "tableId": "ProjectCategory",
+        "name": "categoryName",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 80,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754967081,
+          "createAt": 1698669220248
+        }
+      },
+      "ProjectCategory_categoryDescription": {
+        "id": "ProjectCategory_categoryDescription",
+        "tableId": "ProjectCategory",
+        "name": "categoryDescription",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 108,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754967081,
+          "createAt": 1698669220248
+        }
+      },
+      "Proposal_projectId": {
+        "id": "Proposal_projectId",
+        "tableId": "Proposal",
+        "name": "projectId",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754925849,
+          "createAt": 1698669179056
+        }
+      },
+      "Proposal_freelancerId": {
+        "id": "Proposal_freelancerId",
+        "tableId": "Proposal",
+        "name": "freelancerId",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 65,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754925849,
+          "createAt": 1698669179056
+        }
+      },
+      "Proposal_clientId": {
+        "id": "Proposal_clientId",
+        "tableId": "Proposal",
+        "name": "clientId",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754925849,
+          "createAt": 1698669179056
+        }
+      },
+      "Proposal_coverLetter": {
+        "id": "Proposal_coverLetter",
+        "tableId": "Proposal",
+        "name": "coverLetter",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 61,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754925849,
+          "createAt": 1698669179056
+        }
+      },
+      "Proposal_pricingType": {
+        "id": "Proposal_pricingType",
+        "tableId": "Proposal",
+        "name": "pricingType",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 63,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754925849,
+          "createAt": 1698669179056
+        }
+      },
+      "Proposal_proposedBudget": {
+        "id": "Proposal_proposedBudget",
+        "tableId": "Proposal",
+        "name": "proposedBudget",
+        "comment": "",
+        "dataType": "Number",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 91,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754925849,
+          "createAt": 1698669179056
+        }
+      },
+      "Proposal_proposedHourlyRate": {
+        "id": "Proposal_proposedHourlyRate",
+        "tableId": "Proposal",
+        "name": "proposedHourlyRate",
+        "comment": "",
+        "dataType": "Number",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 112,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754925849,
+          "createAt": 1698669179056
+        }
+      },
+      "Proposal_estimatedDuration": {
+        "id": "Proposal_estimatedDuration",
+        "tableId": "Proposal",
+        "name": "estimatedDuration",
+        "comment": "",
+        "dataType": "Number",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 100,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754925849,
+          "createAt": 1698669179056
+        }
+      },
+      "Proposal_status": {
+        "id": "Proposal_status",
+        "tableId": "Proposal",
+        "name": "status",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754925849,
+          "createAt": 1698669179056
+        }
+      },
+      "Proposal_communicationChannelId": {
+        "id": "Proposal_communicationChannelId",
+        "tableId": "Proposal",
+        "name": "communicationChannelId",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 138,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754925849,
+          "createAt": 1698669179056
+        }
+      },
+      "CommunicationChannel_projectId": {
+        "id": "CommunicationChannel_projectId",
+        "tableId": "CommunicationChannel",
+        "name": "projectId",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754878452,
+          "createAt": 1698669131432
+        }
+      },
+      "CommunicationChannel_freelancerId": {
+        "id": "CommunicationChannel_freelancerId",
+        "tableId": "CommunicationChannel",
+        "name": "freelancerId",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 65,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754878452,
+          "createAt": 1698669131432
+        }
+      },
+      "CommunicationChannel_clientId": {
+        "id": "CommunicationChannel_clientId",
+        "tableId": "CommunicationChannel",
+        "name": "clientId",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754878452,
+          "createAt": 1698669131432
+        }
+      },
+      "CommunicationChannel_messages": {
+        "id": "CommunicationChannel_messages",
+        "tableId": "CommunicationChannel",
+        "name": "messages",
+        "comment": "",
+        "dataType": "Array",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754878452,
+          "createAt": 1698669131432
+        }
+      },
+      "CommunicationChannel_isActive": {
+        "id": "CommunicationChannel_isActive",
+        "tableId": "CommunicationChannel",
+        "name": "isActive",
+        "comment": "",
+        "dataType": "Boolean",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754878452,
+          "createAt": 1698669131432
+        }
+      },
+      "Notification_freelancerId": {
+        "id": "Notification_freelancerId",
+        "tableId": "Notification",
+        "name": "freelancerId",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 65,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754826546,
+          "createAt": 1698669079623
+        }
+      },
+      "Notification_clientId": {
+        "id": "Notification_clientId",
+        "tableId": "Notification",
+        "name": "clientId",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754826546,
+          "createAt": 1698669079623
+        }
+      },
+      "Notification_projectId": {
+        "id": "Notification_projectId",
+        "tableId": "Notification",
+        "name": "projectId",
+        "comment": "",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754826546,
+          "createAt": 1698669079623
+        }
+      },
+      "Notification_message": {
+        "id": "Notification_message",
+        "tableId": "Notification",
+        "name": "message",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754826546,
+          "createAt": 1698669079623
+        }
+      },
+      "Notification_timestamp": {
+        "id": "Notification_timestamp",
+        "tableId": "Notification",
+        "name": "timestamp",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754826546,
+          "createAt": 1698669079623
+        }
+      },
+      "Notification_isRead": {
+        "id": "Notification_isRead",
+        "tableId": "Notification",
+        "name": "isRead",
+        "comment": "",
+        "dataType": "Boolean",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1698754826546,
+          "createAt": 1698669079623
+        }
+      }
+    },
+    "relationshipEntities": {
+      "User_ClientProfile": {
+        "id": "User_ClientProfile",
+        "identification": false,
+        "relationshipType": 16,
+        "startRelationshipType": 2,
+        "start": {
+          "tableId": "User",
+          "columnIds": [
+            "User_id"
+          ],
+          "x": 403.5,
+          "y": 440,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "ClientProfile",
+          "columnIds": [
+            "ClientProfile_userId"
+          ],
+          "x": 461,
+          "y": 579,
+          "direction": 1
+        },
+        "meta": {
+          "updateAt": 1698744367839,
+          "createAt": 1698672359283
+        }
+      },
+      "User_FreelancerProfile": {
+        "id": "User_FreelancerProfile",
+        "identification": false,
+        "relationshipType": 16,
+        "startRelationshipType": 2,
+        "start": {
+          "tableId": "User",
+          "columnIds": [
+            "User_id"
+          ],
+          "x": 194.5,
+          "y": 440,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "FreelancerProfile",
+          "columnIds": [
+            "FreelancerProfile_userId"
+          ],
+          "x": 380,
+          "y": 1303,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 1698743822887,
+          "createAt": 1698672404870
+        }
+      }
+    },
+    "indexEntities": {},
+    "indexColumnEntities": {},
+    "memoEntities": {}
+  },
+  "lww": {}
+}
