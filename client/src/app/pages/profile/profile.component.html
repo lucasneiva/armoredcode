@@ -4,7 +4,7 @@
 </div>
 
 <ng-container *ngIf="!isLoading && profile">
-    <div class="w-full flex justify-between items-center p-5 bg-slate-300 shadow-lg">
+    <div class="w-full flex justify-between items-center p-5 bg-slate-300 shadow-lg border-2 border-red-500">
         <object
             class="rounded-full bg-black w-32 h-32 -mb-16 flex justify-center items-center"
             *ngIf="profile.logo; else defaultImage"
