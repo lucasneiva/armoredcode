@@ -93,8 +93,8 @@ app.listen( 8800, async () => {
 
         await seedUsers();
 
-        // await seedFreelancerProfiles();
-        // await seedClientProfiles();
+        await seedFreelancerProfiles();
+        await seedClientProfiles();
 
         await seedProjects(); 
         //

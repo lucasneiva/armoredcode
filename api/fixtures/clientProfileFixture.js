@@ -12,8 +12,9 @@ const clientProfiles = [
         website: "https://www.techsol.com.br",
         location: {
             streetAddress: "Rua XV de Novembro, 123",
-            city: "Sorocaba",
-            CEP: "18035-000",
+            city: "SOROCABA",
+            cep: "18035-000",
+            neighborhood: "Centro",
         }
     },
 
@@ -26,8 +27,9 @@ const clientProfiles = [
         website: "https://www.metalsocabana.com.br",
         location: {
             streetAddress: "Avenida Independência, 456",
-            city: "Sorocaba",
-            CEP: "18087-123",
+            city: "SOROCABA",
+            cep: "18087-123",
+            neighborhood: "Centro",
         }
     }
 

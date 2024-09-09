@@ -6,7 +6,6 @@ import { createSuccess } from "../utils/success.js";
 import { handleValidationError } from "../utils/handleValidationError.js";
 
 
-// In profileController.js
 export const createProfile = async (req, res, next) => {
     const userId = req.user.id;
     const role = req.user.role;
@@ -47,54 +46,8 @@ export const createProfile = async (req, res, next) => {
 
     }
 };
-/*
-export const createProfile = async ( req, res, next ) => {
-    const userId = req.user.id;
-    const role = req.user.role;
-    const profileData = req.body;
 
-    profileData.userId = userId;
-
-    try {
-
-
-        let profile;
-
-
-        if ( role === "CLIENT" ) {
-            const existingProfile = await ClientProfile.findOne( { userId: userId } );
-
-            if ( existingProfile )
-                return next( createError( 400, "User has a profile already!" ) );
-
-
-            profile = new ClientProfile( profileData );
-
-        } else if ( role === "FREELANCER" ) {
-            const existingProfile = await FreelancerProfile.findOne( { userId: userId } );
-
-            if ( existingProfile )
-                return next( createError( 400, "User has a profile already!" ) );
-
-
-            profile = new FreelancerProfile( profileData );
-
-        } else {
-            return next( createError( 400, "Invalid role!" ) );
-
-        }
-
-        await profile.save();
-
-        return next( createSuccess( 200, "Profile created successfully!" ) );
-
-    } catch ( error ) {
-        handleValidationError( error, next );
-    }
-};
-*/
-//modified
-export const getProfileById = async (req, res, next) => {
+export const getProfileByUserId = async (req, res, next) => {
     const { id } = req.params;
 
     try {
@@ -114,7 +67,7 @@ export const getProfileById = async (req, res, next) => {
         } else {
             return next(createError(400, "Invalid user role!"));
         }
-
+        
         // Check if a profile was found
         if (profile) {
             hasProfile = true; 
@@ -127,38 +80,6 @@ export const getProfileById = async (req, res, next) => {
         return next(createError(500, "Error fetching profile", error));
     }
 };
-/*
-export const getProfileById = async ( req, res, next ) => {
-    const { id } = req.params;
-
-    try {
-        // Find the user 
-        const user = await User.findById( id );
-        if ( !user ) {
-            return next( createError( 404, "User not found!" ) );
-        }
-
-        let profile;
-
-        if ( user.role === "CLIENT" ) {
-            profile = await ClientProfile.findOne( { userId: user._id } ).populate( "userId", "firstName lastName email" );
-        } else if ( user.role === "FREELANCER" ) {
-            profile = await FreelancerProfile.findOne( { userId: user._id } ).populate( "userId", "firstName lastName email" );
-        } else {
-            return next( createError( 400, "Invalid user role!" ) );
-        }
-
-        if ( !profile ) {
-            return next( createError( 404, "Profile not found!" ) );
-        }
-
-        return next( createSuccess( 200, "Profile fetched successfully!", profile ) );
-
-    } catch ( error ) {
-        return next( createError( 500, "Error fetching profile", error ) );
-    }
-};
-*/
 
 export const updateProfile = async ( req, res, next ) => {
     const userId = req.user.id;
@@ -186,7 +107,6 @@ export const updateProfile = async ( req, res, next ) => {
             return next( createError( 404, "Profile not found!" ) );
         }
 
-        // You might want to update the user's basic info (e.g., firstName, lastName) as well if they are changed in the profile
         if ( profileData.firstName || profileData.lastName ) {
             await User.findByIdAndUpdate( userId, {
                 firstName: profileData.firstName,
