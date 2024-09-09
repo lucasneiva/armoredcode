@@ -17,8 +17,10 @@ const freelancerProfiles = [
         },
         isAvailable: true,
         location: {
+            streetAddress: "Rua XV de Novembro, 123",
             city: "SOROCABA",
-            CEP: "12345678"
+            cep: "18035-000",
+            neighborhood: "Centro",
         },
         skillIds: [],
         portfolio: [
@@ -68,8 +70,10 @@ const freelancerProfiles = [
         },
         isAvailable: true,
         location: {
+            streetAddress: "Rua XV de Novembro, 123",
             city: "SOROCABA",
-            CEP: "10021"
+            cep: "18035-000",
+            neighborhood: "Centro",
         },
         skillIds: [],
         portfolio: [
