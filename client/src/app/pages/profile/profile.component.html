@@ -5,11 +5,8 @@
 
 <ng-container *ngIf="!isLoading && profile">
     <div class="w-full flex justify-between items-center p-5 bg-slate-300 shadow-lg">
-        <object
-            class="rounded-full bg-black w-32 h-32 -mb-16 flex justify-center items-center"
-            *ngIf="profile.logo; else defaultImage"
-            [data]="profile.logo"
-            type="image/png">
+        <object class="rounded-full bg-black w-32 h-32 -mb-16 flex justify-center items-center"
+            *ngIf="profile.logo; else defaultImage" [data]="profile.logo" type="image/png">
         </object>
         <ng-template #defaultImage>
             <img src="../../../assets/images/prf_icon.png" class="w-28 h-28 overflow-hidden">
@@ -21,7 +18,8 @@
             <div>
                 <!-- Display companyName if it exists, otherwise display firstName and lastName -->
                 <h2 class="font-bold text-3xl">
-                    {{ profile.companyName ? profile.companyName : (profile.firstName ? profile.firstName + ' ' + profile.lastName : 'User Profile') }}
+                    {{ profile.companyName ? profile.companyName : (profile.firstName ? profile.firstName + ' ' +
+                    profile.lastName : 'User Profile') }}
                 </h2>
                 <h2>
                     {{authService.getUserId()}}
@@ -138,5 +136,19 @@
 </ng-container>
 
 <ng-container *ngIf="!profile">
-    <p>You don't have a profile yet. <a routerLink="/create-profile">Create one now</a></p>
+    <div class="block text-wrap max-w-md shadow-lg mt-56 p-10 mx-auto bg-white">
+        <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
+        <p class="text-left text-2xl text-gray-600 mt-4">
+            You don't have a profile yet.
+            but you can create one clicking in the "create Profile" button.
+        </p>
+    </div>
+
+    <div class="fixed bottom-12 left-1/2 transform -translate-x-1/2">
+        <button routerLink="/create-profile"
+            class="bg-blue-500 hover:bg-blue-700 text-xl text-white font-bold py-4 px-8 rounded cursor-pointer">
+            Create profile
+        </button>
+    </div>
+
 </ng-container>

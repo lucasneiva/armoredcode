@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, OnInit, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { Router, RouterModule, NavigationEnd } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -11,17 +11,26 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
+  router = inject(Router);
   authService = inject(AuthService);
-  isLoggedIn: boolean = false;
+  
   profilePath = '../../assets/images/prf_icon.png';
   logoPath = '../../assets/images/logo_branca_sfundo.png';
   menuPath = '../../assets/images/menu-svgrepo-com.svg';
 
+  isLoggedIn: boolean = false;
   showMenu: boolean = false;
 
   ngOnInit(): void {
     this.authService.isLoggedIn$.subscribe(res => {
       this.isLoggedIn = this.authService.isLoggedIn();
+    });
+
+    // Subscribe to Router events
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.closeMenu(); 
+      }
     });
   }
 
@@ -31,5 +40,10 @@ export class HeaderComponent implements OnInit {
 
   toggleMenu() {
     this.showMenu = !this.showMenu;
+  }
+
+   // Helper function to close the menu
+   private closeMenu() {
+    this.showMenu = false; 
   }
 }
