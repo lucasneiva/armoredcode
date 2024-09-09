@@ -43,7 +43,7 @@
                 <!-- Client Profile Content -->
                 <p class="text-xl py-3">{{ profile.companyDescription }}</p>
                 <ul class="text-xl py-3">
-                    <li><strong>Industry:</strong> {{ profile.industryId?.name }}</li>
+                    <li><strong>Industry:</strong> {{ profile.industryId }}</li>
                     <li><strong>Company Size:</strong> {{ profile.companySize }}</li>
                     <li *ngIf="profile.location">
                         <strong>Location:</strong> {{ profile.location.city }}, {{ profile.location.country }}

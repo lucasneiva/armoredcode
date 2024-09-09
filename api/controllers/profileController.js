@@ -76,6 +76,7 @@ export const getProfileByUserId = async (req, res, next) => {
         return next(createSuccess(200, "Profile fetch status:", { hasProfile, profile } ));
 
     } catch (error) {
+        console.error("Error fetching profile:", error);
         return next(createError(500, "Error fetching profile", error));
     }
 };

@@ -43,19 +43,40 @@ export class ProfileService {
       );
   }
   
-  getProfile(userId: string): Observable<any> {
+  getProfile(userId: string | null): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
       withCredentials: true
     };
-    return this.http.get<ProfileData>(`${apiUrls.profileServiceApi}/:id${userId}`, httpOptions)
+    return this.http.get<ProfileResponse>(`${apiUrls.profileServiceApi}/${userId}`, httpOptions)
+    /*
+    .pipe(
+      tap((res) => {
+        console.log('Profile fetched:', res);
+      }),
+      catchError((error) => {
+        console.error('Error fetching profile:', error);
+        throw error;
+      })
+    );
+    */
   }
 
-  private profileSubject = new BehaviorSubject<ProfileData | null>(null);
-  profileData$ = this.profileSubject.asObservable();  // Use a more descriptive name
 }
+
+// Define a clear interface for your API response (ProfileResponse)
+export type ProfileResponse = {
+  success: boolean;
+  status: number;
+  message: string; 
+  data: {
+    hasProfile: boolean;
+    profile: Profile | null; 
+  };
+}
+
 export type ProfileData = { // Use an interface for type safety
   hasProfile: boolean;
   profile: Profile | null;
@@ -78,10 +99,7 @@ export type Profile = {
   companyDescription?: string;
   companySize?: 'SMALL' | 'MEDIUM' | 'LARGE';
   logo?: string;
-  industryId?: {
-    _id: string,
-    name: string
-  };
+  industryId?: string;
   website?: string;
 
   // Freelancer-specific fields
