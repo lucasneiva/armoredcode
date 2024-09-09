@@ -3,7 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { ProfileService, Profile } from '../../services/profile.service';
+import { ProfileService, Profile, ProfileResponse } from '../../services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -28,26 +28,25 @@ export default class ProfileComponent implements OnInit {
   }
 
   loadProfile() {
-    const userId = this.authService.getUserId(); // Assuming you have a method to get the logged-in user ID
-    if (!userId) {
-      // Handle cases where the user ID is not available
-      console.error("User ID not found!");
-      this.isLoading = false;
-      return;
-    }
-
-    this.profileService.getProfile(userId).subscribe({
-      next: (response) => { 
-        console.log("Full API response:", response); 
-        this.profile = response.data;   // Update the component's profile property
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Error loading profile:', error);
-        this.isLoading = false;
-        // Handle errors, e.g., redirect to login if unauthorized
-      }
-    });
+    this.isLoading = true;
+    const userId = this.authService.getUserId();
+    this.profileService.getProfile(userId) // Replace with how you get the user ID
+      .subscribe({
+        next: (response: ProfileResponse) => {
+          console.log("Full API response:", response);
+          if (response.data && response.data.hasProfile) {
+            this.profile = response.data.profile;
+          } else {
+            // Handle the case where there is no profile, maybe set a flag
+            console.log('No profile found for this user.');
+          }
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error("Error loading profile:", error);
+          this.isLoading = false;
+        }
+      });
   }
 
   logOut() {
