@@ -1,4 +1,7 @@
-<nav class="w-full flex justify-between items-center overflow-hidden p-5 bg-sky-600 shadow-lg">
+<div class="w-full flex h-20 py-11">
+
+</div>
+<nav class="w-full flex justify-between items-center overflow-hidden p-5 bg-sky-600 shadow-lg fixed z-20 top-0">
     <!--logo start-->
     <ng-container *ngIf="!isLoggedIn">
         <div class="flex lg:min-w-96">
@@ -57,13 +60,15 @@
 <ng-container *ngIf="isLoggedIn">
     <div *ngIf="showMenu" class="flex w-full justify-end">
         <div class="bg-sky-700 text-gray-200 text-2xl font-bold flex justify-between w-full p-5
-            max-lg:text-center max-lg:justify-center max-lg:grid">
+            max-lg:text-center max-lg:justify-center max-lg:grid fixed z-10 top-20">
             <div routerLink="/profile" 
                 class=" cursor-pointer m-4 hover:underline hover:text-indigo-200">Perfil</div>
             <div routerLink="/manage-project" 
                 class=" cursor-pointer m-4 hover:underline hover:text-indigo-200">Projetos</div>
             <div 
                 class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Propostas</div>
+            <div 
+                class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Busca</div>
             <div 
                 class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Mensagens</div>
             <div 

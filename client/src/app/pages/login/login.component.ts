@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterModule } from '@angular/router';
+import { Profile, ProfileResponse, ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'app-login',
@@ -14,9 +15,12 @@ import { Router, RouterModule } from '@angular/router';
 export default class LoginComponent {
   fb = inject(FormBuilder);
   authService = inject(AuthService);
+  profileService = inject(ProfileService);
   router = inject(Router);
 
   loginForm !: FormGroup;
+
+  profile: Profile | null = null;
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -33,19 +37,27 @@ export default class LoginComponent {
         next: (res) => {
           alert("Login is Success!");
           localStorage.setItem("user_id", res.data._id);
-          // Store user role in localStorage 
           localStorage.setItem('user_role', res.userRole);
           localStorage.setItem('token', res.token);
           this.authService.isLoggedIn$.next(true);
 
-          // Use the hasProfile flag directly from the response:
-          if (res.hasProfile) {
-            this.router.navigate(['home']);
-          } else {
-            this.router.navigate(['create-profile']);
-          }
-
-          this.loginForm.reset();
+          const userId = this.authService.getUserId();
+          this.profileService.getProfile(userId)
+            .subscribe({
+              next: (response: ProfileResponse) => {
+                /*debug*/ //console.log("Full API response:", response);
+                if (response.data && response.data.hasProfile) {
+                  this.router.navigate(['home']);
+                } else {
+                  // if no profile
+                  console.log('No profile found for this user.');
+                  this.router.navigate(['create-profile']);
+                }
+              },
+              error: (error) => {
+                console.error("Error loading profile:", error);
+              }
+            });
         },
         error: (err) => {
           console.log(err);
@@ -53,33 +65,5 @@ export default class LoginComponent {
         }
       });
   }
-
-  /*
-  login(){
-    this.authService.loginService(this.loginForm.value)
-    .subscribe({
-      next:(res)=>{
-        alert("Login is Success!");
-        localStorage.setItem("user_id", res.data._id);
-        localStorage.getItem("has_profile"); //arrumar
-        this.authService.isLoggedIn$.next(true);
-        
-        if(!!localStorage.getItem("has_profile") == true){
-          this.router.navigate(['home']);
-        }
-        else{
-          this.router.navigate(['create-profile']);
-        }
-        
-        this.router.navigate(['create-profile']);//arrumar
-        this.loginForm.reset();
-      },
-      error:(err)=>{
-        console.log(err);
-        alert(err.error);
-      }
-    })
-  }
-    */
 }
 
