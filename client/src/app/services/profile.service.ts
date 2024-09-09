@@ -4,7 +4,6 @@ import { apiUrls } from '../api.urls';
 import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +11,7 @@ export class ProfileService {
   http = inject(HttpClient);
   authService = inject(AuthService);  // Inject it
   hasProfile$ = new BehaviorSubject<boolean>(false);
-  
+
   createProfile(profileData: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -43,19 +42,89 @@ export class ProfileService {
         })
       );
   }
-
-  getProfile(): Observable<any> {
+  
+  getProfile(userId: string): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
       withCredentials: true
     };
-    return this.http.get<any>(`${apiUrls.profileServiceApi}`, httpOptions);
+    return this.http.get<ProfileData>(`${apiUrls.profileServiceApi}/:id${userId}`, httpOptions)
   }
+
+  private profileSubject = new BehaviorSubject<ProfileData | null>(null);
+  profileData$ = this.profileSubject.asObservable();  // Use a more descriptive name
 }
+export type ProfileData = { // Use an interface for type safety
+  hasProfile: boolean;
+  profile: Profile | null;
+}
+
 export type Profile = {
+  _id?: string;
+  userId: string;
+  createdAt?: string;
+  updatedAt?: string;
 
+  // Common fields (present in both profiles)
+  location?: {
+    city: string,
+    country: string
+  };
 
+  // Client-specific fields
+  companyName?: string;
+  companyDescription?: string;
+  companySize?: 'SMALL' | 'MEDIUM' | 'LARGE';
+  logo?: string;
+  industryId?: {
+    _id: string,
+    name: string
+  };
+  website?: string;
 
+  // Freelancer-specific fields
+  firstName?: string;
+  lastName?: string;
+  specializationId?: {
+    _id: string;
+    name: string; // Assuming you also fetch specialization name
+  };
+  profileSummary?: string;
+  experienceLevel?: 'JUNIOR' | 'MID-LEVEL' | 'SENIOR';
+  hourlyRate?: {
+    min: number;
+    max: number;
+    currency: string;
+  };
+  isAvailable?: boolean;
+  skillIds?: Array<{
+    _id: string;
+    name: string; // Assuming you also fetch skill names
+  }>;
+  portfolioItems?: Array<{
+    title: string;
+    description?: string;
+    url: string;
+  }>;
+  educations?: Array<{
+    degreeName: string;
+    fieldOfStudy: string;
+    institution: string;
+    startDate: Date;
+    endDate?: Date;
+  }>;
+  certifications?: Array<{
+    name: string;
+    issuingOrganization: string;
+    issueDate: Date;
+  }>;
+  workExperiences?: Array<{
+    companyName: string;
+    jobTitle: string;
+    startDate: Date;
+    endDate?: Date;
+    jobDescription?: string;
+  }>;
 }
