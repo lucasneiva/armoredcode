@@ -14,18 +14,17 @@
         </div>
     </ng-container>
     <ng-container *ngIf="isLoggedIn">
-        <div class="flex lg:min-w-96">
+        <div class="flex">
             <div routerLink="/home" class="logo flex justify-center align-middle w-full max-w-12 cursor-pointer">
                 <img [src]="logoPath" alt="Company Logo" class="min-h-12 min-w-12">
             </div>
             <div *ngIf="!showMenu" routerLink="/home" class="mx-2 max-xl:hidden cursor-pointer">
-                <span class="text-gray-200 text-4xl" style="font-family: Michroma;"> ArmoredCode </span>
+                <span class="text-gray-200 text-4xl max-xl:hidden" style="font-family: Michroma;"> ArmoredCode </span>
             </div>
         </div>
-
     </ng-container>
     <!--logo end-->
-    <!--searchbar start-->
+    <!--searchbar start--
     <ng-container *ngIf="isLoggedIn">
         <div *ngIf="!showMenu" class="flex justify-center mx-2">
             <div class="search relative flex">
@@ -35,20 +34,33 @@
             </div>
         </div>
     </ng-container>
-    <!--searchbar end-->
+    !--searchbar end-->
     <!--shortcuts start-->
     <div class="nav-items"> <!--IMPLEMENTAR FETCH() PARA FETCH API-->
         <ng-container *ngIf="!isLoggedIn">
             <div class="text-gray-200 text-2xl font-bold flex">
-                <span routerLink="/login" 
-                    class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Login</span>
+                <span routerLink="/login" class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Login</span>
                 <span routerLink="/register"
                     class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Register</span>
             </div>
         </ng-container>
 
         <ng-container *ngIf="isLoggedIn">
-            <div class="flex justify-center align-middle w-fit lg:min-w-96 lg:justify-end">
+            <div class="flex w-full text-gray-200 text-2xl font-bold max-lg:hidden">
+                <span routerLink="/manage-project"
+                    class=" cursor-pointer m-4 hover:underline hover:text-indigo-200">Projetos
+                </span>
+                <span class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Propostas</span>
+                <span class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Busca</span>
+                <span class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Mensagens</span>
+                <span class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Convites</span>
+                <span routerLink="/login" (click)="logOut()"
+                    class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Logout</span>
+                <img [src]="profilePath" alt="Default Profile" routerLink="/profile"
+                    class="h-12 w-12 my-auto mx-4 rounded-full border-white border-solid border-2 cursor-pointer">
+                <!--<div routerLink="/profile" class=" cursor-pointer m-4 hover:underline hover:text-indigo-200">Perfil</div>-->
+            </div>
+            <div class="flex justify-center align-middle w-fit lg:min-w-96 lg:justify-end lg:hidden">
                 <img [src]="menuPath" alt="Menu Icon" (click)="toggleMenu()" class="h-12 w-12 my-auto cursor-pointer">
             </div>
         </ng-container>
@@ -58,23 +70,23 @@
 
 <!--shortcuts menu start-->
 <ng-container *ngIf="isLoggedIn">
-    <div *ngIf="showMenu" class="flex w-full justify-end">
-        <div class="bg-sky-700 text-gray-200 text-2xl font-bold flex justify-between w-full p-5
-            max-lg:text-center max-lg:justify-center max-lg:grid fixed z-10 top-20">
-            <div routerLink="/profile" 
-                class=" cursor-pointer m-4 hover:underline hover:text-indigo-200">Perfil</div>
-            <div routerLink="/manage-project" 
-                class=" cursor-pointer m-4 hover:underline hover:text-indigo-200">Projetos</div>
-            <div 
-                class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Propostas</div>
-            <div 
-                class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Busca</div>
-            <div 
-                class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Mensagens</div>
-            <div 
-                class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Convites</div>
-            <div routerLink="/login" (click)="logOut()"
-                class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Logout</div>
+    <div *ngIf="showMenu" class="flex w-full h-fit justify-end lg:hidden">
+        <div class="bg-sky-700 text-gray-200 text-2xl font-bold px-16 fixed z-10 top-20 h-full w-full
+            max-lg:text-center max-lg:justify-center max-lg:grid max-lg:align-middle">
+            <div class="grid h-full mt-10">
+                <div routerLink="/profile" 
+                    class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Perfil</div>
+                <div routerLink="/manage-project" 
+                    class="cursor-pointer hover:underline hover:text-indigo-200">Projetos</div>
+                <div class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Propostas</div>
+                <div class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Busca</div>
+                <div class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Mensagens</div>
+                <div class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Convites</div>
+            </div>
+            <div class="grid h-fit mt-32">
+                <div routerLink="/login" (click)="logOut()"
+                class="cursor-pointer m-8 hover:underline hover:text-indigo-200">Logout</div>
+            </div>
         </div>
     </div>
 </ng-container>
