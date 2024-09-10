@@ -1,10 +1,17 @@
 <!--if no projects-->
 <ng-container *ngIf="projects.length <= 0">
-    <div class="block text-wrap max-w-md shadow-lg mt-56 p-10 mx-auto bg-white">
+    <div *ngIf="isClient" class="block text-wrap max-w-md shadow-lg mt-56 p-10 mx-auto bg-white">
         <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
         <p class="text-left text-2xl text-gray-600 mt-4">
             You dont have any projects in your workspace for now,
             but you can create one clicking in the "create project" button.
+        </p>
+    </div>
+
+    <div *ngIf="!isClient" class="block text-wrap max-w-md shadow-lg mt-56 p-10 mx-auto bg-white">
+        <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
+        <p class="text-left text-2xl text-gray-600 mt-4">
+            You dont have any projects in your workspace for now
         </p>
     </div>
 </ng-container>

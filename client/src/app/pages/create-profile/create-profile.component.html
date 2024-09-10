@@ -1,6 +1,6 @@
 <!--Client form-->
 <ng-container *ngIf="isClient">
-    <div class="w-fit lg:w-5/12 mt-5 shadow-lg mx-auto mb-16">
+    <div class="w-fit lg:w-5/12 lg:mt-5 max-lg:pb-10 shadow-lg mx-auto lg:mb-16 bg-white">
         <form class="grid p-10 overflow-hidden" [formGroup]="clientProfileForm">
             <!--personal module start-->
             <h2 class="font-semibold my-3 text-3xl">Informações Pessoais</h2>
@@ -123,7 +123,7 @@
 
 <!--Freelancer form-->
 <ng-container *ngIf="!isClient">
-    <div class="w-fit lg:w-5/12 mt-5 shadow-lg mx-auto mb-16">
+    <div class="w-fit lg:w-5/12 lg:mt-5 max-lg:pb-10 shadow-lg mx-auto lg:mb-16 bg-white">
         <form class="grid p-10 overflow-hidden" [formGroup]="freelancerProfileForm">
             <!--personal module start-->
             <h2 class="font-semibold my-3 text-3xl">Informações Pessoais</h2>

@@ -1,7 +1,7 @@
-<div class="flex flex-col min-h-svh">
+<div class="flex flex-col h-screen -mt-24">
     <form [formGroup]="createProjectForm">
         <div *ngIf="!isTopFormHidden"
-            class="flex max-lg:grid justify-around align-baseline bg-slate-100 border-b-4 border-b-slate-200 overflow-auto">
+            class="flex max-lg:grid justify-around align-baseline bg-slate-100 border-b-4 border-b-slate-300 overflow-auto mt-24">
             <div class="p-1 mx-2">
                 <h2 class="font-semibold mt-4">Project Name:</h2>
                 <input formControlName="projectTitle" class="p-2 px-4 border border-gray-300 rounded w-full" type="text"
@@ -121,19 +121,19 @@
         </div>
 
         <div class="bg-transparent flex justify-center">
-            <button class="bg-slate-200 rounded-b-lg w-40 text-slate-400 justify-center" (click)="toggleTopForm()"
+            <button class="bg-slate-300 rounded-b-lg w-40 text-slate-400 justify-center" (click)="toggleTopForm()"
                 [ngClass]="{ hidden: isTopFormHidden }">
                 close
             </button>
-            <button class="bg-slate-200 rounded-b-lg w-40 text-slate-400 justify-center" (click)="toggleTopForm()"
+            <button class="bg-slate-300 rounded-b-lg w-40 text-slate-400 justify-center mt-24" (click)="toggleTopForm()"
                 [ngClass]="{ hidden: !isTopFormHidden }">
                 open
             </button>
         </div>
 
-        <div class="flex max-lg:grid h-fit">
+        <div class="flex max-lg:grid h-fit overflow-hidden">
             <!--Project Descrypition Module Start-->
-            <div class="grid align-baseline mt-5 p-10 shadow-lg h-fit w-full">
+            <div class="grid align-baseline mt-5 p-10 shadow-lg h-fit w-full bg-white lg:mx-6">
                 <h2 class="font-semibold my-3 text-3xl">Overview:</h2>
                 <textarea formControlName="projectDescription" placeholder="Write the project description here"
                     class="bg-gray-50 p-3 border-2 min-h-14 max-h-96"></textarea>
@@ -141,8 +141,7 @@
             <!--Project Descrypition Module End-->
 
             <!--Search Skills Module Start-->
-            <div class="block justify-center bg-white mx-4 mt-5 px-10 w-fit h-fit">
-
+            <div class="block justify-center mx-4 mt-5 px-10 w-fit h-fit max-lg:mb-5">
                 <h2 class="font-semibold my-3 text-3xl">Skills:</h2>
                 <div class="search relative shadow-lg flex w-fit h-10">
                     <span class="absolute mt-1.5 mx-3">
@@ -182,24 +181,23 @@
             <!--Search Skills Module End-->
         </div>
     </form>
-    <!--border-slate-100 border-t-2-->
-    <div class="sticky bottom-0 left-0 right-0 bg-white border-slate-100 border-t-2 z-10">
-        <div class="flex justify-center align-middle my-4 w-full">
-            <button [disabled]="createProjectForm.invalid" [class.disabled]="createProjectForm.invalid"
-                (click)="CreateProject()"
-                class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold max-w-64 w-full py-3 ml-4 rounded">
-                Save
-            </button>
-            <button [disabled]="createProjectForm.invalid" [class.disabled]="createProjectForm.invalid"
-                (click)="PostProject()"
-                class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold max-w-64 w-full py-3 mx-4 rounded">
-                Publish
-            </button>
-            <button (click)="CancelProject()"
-                class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold max-w-64 w-full py-3 mr-4 rounded">
-                Cancel
-            </button>
-        </div>
+
+    <!--buttons-->
+    <div class="flex justify-center place-items-end border-t-2 h-screen bg-slate-200 border-slate-300 py-4 z-10">
+        <button [disabled]="createProjectForm.invalid" [class.disabled]="createProjectForm.invalid"
+            (click)="CreateProject()"
+            class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold max-w-64 w-full py-3 ml-4 h-20 rounded">
+            Save
+        </button>
+        <button [disabled]="createProjectForm.invalid" [class.disabled]="createProjectForm.invalid"
+            (click)="PostProject()"
+            class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold max-w-64 w-full py-3 mx-4 h-20 rounded">
+            Publish
+        </button>
+        <button (click)="CancelProject()"
+            class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-semibold max-w-64 w-full py-3 mr-4 h-20 rounded">
+            Cancel
+        </button>
     </div>
 
 </div>
