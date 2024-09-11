@@ -124,8 +124,10 @@ export const sendEmail = async (req, res, next) => {
     <body>
     <h1>Password Reset Request</h1>
     <p>Dear ${user.username}, </p>
-    <p>We have received a request to reset your password for your account with ArmoredCode. To complete the password reset process, please click on the button below:</p> <a href=${process.env.LIVE_URL}/reset/${token}><button style="background-color: #4CAF50; color: white; padding: 14px 20px; border: none;
-    cursor: pointer; border-radius: 4px;">Reset Password</button></a>
+    <p>We have received a request to reset your password for your account with ArmoredCode. To complete the password reset process, please click on the button below:</p>
+
+    <a href=${process.env.LIVE_URL}/reset/${token}> clique aqui para resetar a senha </a>
+
     <p>Thank you,</p>
     <p>Please note that this link is only valid for a 5mins. If you did not request a password reset, please disregard this message.</p>
     <p>ArmoredCode Team</p>
@@ -134,6 +136,8 @@ export const sendEmail = async (req, res, next) => {
 
     };
 
+    // <button style="background-color: #4CAF50; color: white; padding: 14px 20px; border: none; cursor: pointer; border-radius: 4px;">Reset Password</button>
+    
     mailTransporter.sendMail(mailDetails, async (err, data) => {
         if (err) {
             console.log(err);
@@ -150,7 +154,7 @@ export const sendEmail = async (req, res, next) => {
 export const resetPassword = async (req, res, next) => {
     const token = req.body.token;
     const newPassword = req.body.password;
-    console.log("Entrou na func");
+    
     jwt.verify(token, process.env.JWT_SECRET, async (err, data) => {
         if (err) {
             return next(createError(500, "Reset Link is Expired!"))
