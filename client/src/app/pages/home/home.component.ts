@@ -13,21 +13,29 @@ import { Router, RouterModule } from '@angular/router';
 })
 export default class HomeComponent {
   fb = inject(FormBuilder);
-  authService = inject(AuthService);
   router = inject(Router);
-
+  authService = inject(AuthService);
+  
   homeForm !: FormGroup;
 
+  userRole: string | null = null; 
   isClient: boolean = false; //false is default
 
   ngOnInit(): void {
+    this.userRole = this.authService.getUserRole();
+
+    if (this.userRole === 'CLIENT') {
+      this.isClient = true;
+    } else if (this.userRole === 'FREELANCER') {
+      this.isClient = false;
+    } else {
+      console.log("invalid role");
+    }
     this.homeForm = this.fb.group({
       
     },
     );
   }
 
-  get clientId(){
-    return localStorage.getItem("user_id");
-  } 
+  
 }

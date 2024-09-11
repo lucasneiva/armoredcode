@@ -1,11 +1,12 @@
-<!-- profile.component.html -->
-<div *ngIf="isLoading" class="w-full flex justify-center items-center py-10">
-    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
-</div>
+<div class="flex flex-col min-h-screen h-fit bg-white">
 
-<ng-container *ngIf="!isLoading && profile">
-    <div class="min-h-screen h-fit bg-white">
-        <div class="w-full flex justify-start max-lg:justify-center items-center p-8 bg-slate-300 shadow-lg">
+    <div *ngIf="isLoading" class="w-full flex justify-center items-center py-10">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+    </div>
+
+    <ng-container *ngIf="!isLoading && profile">
+
+        <div class="w-full flex justify-start max-lg:justify-center items-center mt-24 p-8 bg-slate-300 shadow-lg">
             <object
                 class="rounded-full bg-black w-32 h-32 -mb-24 flex justify-center items-center border-slate-300 border-4"
                 *ngIf="profile.logo; else defaultImage" [data]="profile.logo" type="image/png">
@@ -30,13 +31,13 @@
             <div class="flex justify-center max-lg:w-full max-lg:justify-between px-8 py-4 h-fit">
                 <button
                     class="flex justify-center items-center rounded max-lg:text-nowrap font-semibold
-                     text-gray-700 bg-transparent mr-2 py-4 px-8 border border-gray-500 hover:bg-red-500 hover:text-white hover:border-transparent">
+                         text-gray-700 bg-transparent mr-2 py-4 px-8 border border-gray-500 hover:bg-red-500 hover:text-white hover:border-transparent">
                     <object class="w-3 h-3 mx-2" data="../../../assets/images/garbage-trash-svgrepo-com.svg"></object>
                     Delete Account
                 </button>
                 <button
                     class="flex justify-center items-center rounded max-lg:text-nowrap font-semibold
-                     text-gray-700 bg-transparent ml-2 py-4 px-8 border border-gray-500 hover:bg-blue-500 hover:text-white hover:border-transparent">
+                         text-gray-700 bg-transparent ml-2 py-4 px-8 border border-gray-500 hover:bg-blue-500 hover:text-white hover:border-transparent">
                     <object class="w-3 h-3 mx-2 -mb-1"
                         data="../../../assets/images/pencil-edit-svgrepo-com.svg"></object>
                     Edit Profile
@@ -139,23 +140,25 @@
             <!--template end-->
 
         </div>
-    </div>
-</ng-container>
 
-<ng-container *ngIf="!profile">
-    <div class="block text-wrap max-w-md shadow-lg mt-56 p-10 mx-auto bg-white">
-        <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
-        <p class="text-left text-2xl text-gray-600 mt-4">
-            You don't have a profile yet.
-            but you can create one clicking in the "create Profile" button.
-        </p>
-    </div>
+    </ng-container>
 
-    <div class="fixed bottom-12 left-1/2 transform -translate-x-1/2">
-        <button routerLink="/create-profile"
-            class="bg-blue-500 hover:bg-blue-700 text-xl text-white font-bold py-4 px-8 rounded cursor-pointer">
-            Create profile
-        </button>
-    </div>
+    <ng-container *ngIf="!profile">
+        <div class="block text-wrap max-w-md shadow-lg mt-56 p-10 mx-auto bg-white">
+            <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
+            <p class="text-left text-2xl text-gray-600 mt-4">
+                You don't have a profile yet.
+                but you can create one clicking in the "create Profile" button.
+            </p>
+        </div>
 
-</ng-container>
+        <div class="fixed bottom-12 left-1/2 transform -translate-x-1/2">
+            <button routerLink="/create-profile"
+                class="bg-blue-500 hover:bg-blue-700 text-xl text-white font-bold py-4 px-8 rounded cursor-pointer">
+                Create profile
+            </button>
+        </div>
+
+    </ng-container>
+
+</div>

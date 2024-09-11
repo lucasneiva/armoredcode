@@ -1,235 +1,355 @@
-<h4 class="text-4xl text-center mt-10 font-bold">Welcome to ArmoredCode</h4>
+<div class="grid min-h-screen h-fit my-24">
+    <!--grid start-->
+    <div class="grid justify-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4
+         p-10 my-auto mx-auto bg-transparent">
+         <!--client feed start-->
+        <ng-container *ngIf="isClient">
 
-<!--grid-->
-<ng-container *ngIf="isClient">
-    <div class="grid justify-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
-        <!--freelancer card placeholder--
-        <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
-            <div class="flex justify-between items-center">
-                <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Freelancer_Card</h3>
-                <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+            <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+                <div class="flex justify-between items-center">
+                    <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Freelancer_Card</h3>
+                    <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+                </div>
+                <p class="text-gray-600 mt-4">profession</p>
+                <p class="mt-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt
+                    ut
+                    labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip
+                    ex ea
+                    commodo consequat."</p>
+                <div class="flex justify-center mt-5 gap-4">
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
+                        here</button>
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
+                        here</button>
+                </div>
             </div>
-            <p class="text-gray-600 mt-4">profession</p>
-            <p class="mt-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                ut
-                labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip
-                ex ea
-                commodo consequat."</p>
-            <div class="flex justify-center mt-5 gap-4">
-                <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-          hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
-                    here</button>
-                <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-          hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
-                    here</button>
+
+            <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+                <div class="flex justify-between items-center">
+                    <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Freelancer_Card</h3>
+                    <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+                </div>
+                <p class="text-gray-600 mt-4">profession</p>
+                <p class="mt-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt
+                    ut
+                    labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip
+                    ex ea
+                    commodo consequat."</p>
+                <div class="flex justify-center mt-5 gap-4">
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
+                        here</button>
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
+                        here</button>
+                </div>
             </div>
-        </div>
-        ---->
-        <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
-            <div class="flex justify-between items-center">
-                <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Lisa</h3>
-                <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+
+            <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+                <div class="flex justify-between items-center">
+                    <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Freelancer_Card</h3>
+                    <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+                </div>
+                <p class="text-gray-600 mt-4">profession</p>
+                <p class="mt-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt
+                    ut
+                    labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip
+                    ex ea
+                    commodo consequat."</p>
+                <div class="flex justify-center mt-5 gap-4">
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
+                        here</button>
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
+                        here</button>
+                </div>
             </div>
-            <p class="text-gray-600 mt-4">Full-Stack Web Developer</p>
-            <p class="mt-4">A highly skilled developer, fluent in multiple programming languages, who can build
-                beautiful,
-                responsive websites and web applications from the ground up.
-                Known for clean code, efficient problem-solving,
-                and a passion for creating exceptional user experiences.</p>
-            <div class="flex justify-center mt-5 gap-4">
-                <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-          hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
-                    here</button>
-                <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-          hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
-                    here</button>
+
+            <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+                <div class="flex justify-between items-center">
+                    <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Freelancer_Card</h3>
+                    <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+                </div>
+                <p class="text-gray-600 mt-4">profession</p>
+                <p class="mt-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt
+                    ut
+                    labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip
+                    ex ea
+                    commodo consequat."</p>
+                <div class="flex justify-center mt-5 gap-4">
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
+                        here</button>
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
+                        here</button>
+                </div>
             </div>
-        </div>
-        <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
-            <div class="flex justify-between items-center">
-                <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Kai</h3>
-                <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+
+            <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+                <div class="flex justify-between items-center">
+                    <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Freelancer_Card</h3>
+                    <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+                </div>
+                <p class="text-gray-600 mt-4">profession</p>
+                <p class="mt-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt
+                    ut
+                    labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip
+                    ex ea
+                    commodo consequat."</p>
+                <div class="flex justify-center mt-5 gap-4">
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
+                        here</button>
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
+                        here</button>
+                </div>
             </div>
-            <p class="text-gray-600 mt-4">Data Scientist </p>
-            <p class="mt-4">Unveils hidden patterns and valuable insights from complex datasets.
-                Specializes in data mining, machine learning, and predictive analytics.
-                Turns raw data into actionable intelligence for businesses.</p>
-            <div class="flex justify-center mt-5 gap-4">
-                <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-          hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
-                    here</button>
-                <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-          hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
-                    here</button>
+
+            <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+                <div class="flex justify-between items-center">
+                    <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Freelancer_Card</h3>
+                    <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+                </div>
+                <p class="text-gray-600 mt-4">profession</p>
+                <p class="mt-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt
+                    ut
+                    labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip
+                    ex ea
+                    commodo consequat."</p>
+                <div class="flex justify-center mt-5 gap-4">
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
+                        here</button>
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
+                        here</button>
+                </div>
             </div>
-        </div>
-        <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
-            <div class="flex justify-between items-center">
-                <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Zephyr</h3>
-                <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+
+            <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+                <div class="flex justify-between items-center">
+                    <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Freelancer_Card</h3>
+                    <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+                </div>
+                <p class="text-gray-600 mt-4">profession</p>
+                <p class="mt-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt
+                    ut
+                    labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip
+                    ex ea
+                    commodo consequat."</p>
+                <div class="flex justify-center mt-5 gap-4">
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
+                        here</button>
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
+                        here</button>
+                </div>
             </div>
-            <p class="text-gray-600 mt-4">Ethical Hacker & Security Consultant</p>
-            <p class="mt-4"> A white-hat hacker who proactively identifies vulnerabilities in systems and networks.
-                Provides comprehensive security audits, penetration testing,
-                and security training to protect clients from cyber threats.</p>
-            <div class="flex justify-center mt-5 gap-4">
-                <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-          hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
-                    here</button>
-                <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-          hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
-                    here</button>
+
+            <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+                <div class="flex justify-between items-center">
+                    <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Freelancer_Card</h3>
+                    <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+                </div>
+                <p class="text-gray-600 mt-4">profession</p>
+                <p class="mt-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt
+                    ut
+                    labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip
+                    ex ea
+                    commodo consequat."</p>
+                <div class="flex justify-center mt-5 gap-4">
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
+                        here</button>
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
+                        here</button>
+                </div>
             </div>
-        </div>
-        <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
-            <div class="flex justify-between items-center">
-                <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Eira </h3>
-                <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+
+            <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+                <div class="flex justify-between items-center">
+                    <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Freelancer_Card</h3>
+                    <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+                </div>
+                <p class="text-gray-600 mt-4">profession</p>
+                <p class="mt-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt
+                    ut
+                    labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip
+                    ex ea
+                    commodo consequat."</p>
+                <div class="flex justify-center mt-5 gap-4">
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
+                        here</button>
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+              hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
+                        here</button>
+                </div>
             </div>
-            <p class="text-gray-600 mt-4">UI/UX Designer </p>
-            <p class="mt-4">Creates visually stunning and intuitive user interfaces for websites, mobile apps,
-                and software. Focuses on user research, wireframing, prototyping,
-                and visual design to deliver engaging and user-friendly digital experiences.</p>
-            <div class="flex justify-center mt-5 gap-4">
-                <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-          hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
-                    here</button>
-                <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-          hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
-                    here</button>
+
+        </ng-container>
+        <!--client feed end-->
+
+        <!--freelancer feed start-->
+        <ng-container *ngIf="!isClient">
+
+            <div style="top: calc(1rem * 1);"
+                class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+                <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
+                    <span class="block pb-2">Title of the Project</span>
+                    <span class="block text-sm text-gray-700">Name of the User </span>
+                </h2>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum,
+                    perspiciatis blanditiis accusamus commodi consectetur id tempora rem
+                    iure eligendi quos eos et autem ratione exercitationem earum laborum ad
+                    a sequi!
+                </p>
+                <div class="flex justify-center mt-5">
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+            hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">
+                        Click here
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
-            <div class="flex justify-between items-center">
-                <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Ronan</h3>
-                <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+        
+            <div style="top: calc(1rem * 1);"
+                class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+                <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
+                    <span class="block pb-2">Title of the Project</span>
+                    <span class="block text-sm text-gray-700">Name of the User </span>
+                </h2>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum,
+                    perspiciatis blanditiis accusamus commodi consectetur id tempora rem
+                    iure eligendi quos eos et autem ratione exercitationem earum laborum ad
+                    a sequi!
+                </p>
+                <div class="flex justify-center mt-5">
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+            hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">
+                        Click here
+                    </button>
+                </div>
             </div>
-            <p class="text-gray-600 mt-4">Cloud Solutions Architect </p>
-            <p class="mt-4">Designs, deploys, and manages scalable and cost-effective cloud infrastructure solutions
-                for businesses of all sizes. Expert in cloud platforms like AWS, Azure, and GCP.</p>
-            <div class="flex justify-center mt-5 gap-4">
-                <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-          hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
-                    here</button>
-                <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-          hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
-                    here</button>
+        
+            <div style="top: calc(1rem * 1);"
+                class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+                <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
+                    <span class="block pb-2">Title of the Project</span>
+                    <span class="block text-sm text-gray-700">Name of the User </span>
+                </h2>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum,
+                    perspiciatis blanditiis accusamus commodi consectetur id tempora rem
+                    iure eligendi quos eos et autem ratione exercitationem earum laborum ad
+                    a sequi!
+                </p>
+                <div class="flex justify-center mt-5">
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+            hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">
+                        Click here
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
-            <div class="flex justify-between items-center">
-                <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Anya </h3>
-                <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+        
+            <div style="top: calc(1rem * 1);"
+                class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+                <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
+                    <span class="block pb-2">Title of the Project</span>
+                    <span class="block text-sm text-gray-700">Name of the User </span>
+                </h2>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum,
+                    perspiciatis blanditiis accusamus commodi consectetur id tempora rem
+                    iure eligendi quos eos et autem ratione exercitationem earum laborum ad
+                    a sequi!
+                </p>
+                <div class="flex justify-center mt-5">
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+            hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">
+                        Click here
+                    </button>
+                </div>
             </div>
-            <p class="text-gray-600 mt-4">IT Project Manager & Consultant</p>
-            <p class="mt-4">Bridges the gap between technical teams and business stakeholders.
-                Possesses strong communication skills, project management expertise,
-                and a deep understanding of technology to guide projects to successful completion.</p>
-            <div class="flex justify-center mt-5 gap-4">
-                <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-          hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
-                    here</button>
-                <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-          hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
-                    here</button>
+        
+            <div style="top: calc(1rem * 1);"
+                class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+                <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
+                    <span class="block pb-2">Title of the Project</span>
+                    <span class="block text-sm text-gray-700">Name of the User </span>
+                </h2>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum,
+                    perspiciatis blanditiis accusamus commodi consectetur id tempora rem
+                    iure eligendi quos eos et autem ratione exercitationem earum laborum ad
+                    a sequi!
+                </p>
+                <div class="flex justify-center mt-5">
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+            hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">
+                        Click here
+                    </button>
+                </div>
             </div>
-        </div>
+        
+            <div style="top: calc(1rem * 1);"
+                class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+                <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
+                    <span class="block pb-2">Title of the Project</span>
+                    <span class="block text-sm text-gray-700">Name of the User </span>
+                </h2>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum,
+                    perspiciatis blanditiis accusamus commodi consectetur id tempora rem
+                    iure eligendi quos eos et autem ratione exercitationem earum laborum ad
+                    a sequi!
+                </p>
+                <div class="flex justify-center mt-5">
+                    <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
+            hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">
+                        Click here
+                    </button>
+                </div>
+            </div>
+        
+        </ng-container>
+        <!--freelancer feed end-->
     </div>
-</ng-container>
-<!---->
-<ng-container *ngIf="!isClient">
-    <div class="grid justify-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
-        <!--projects card placeholder--
-        <div style="top: calc(1rem * 1);"
-            class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
-            <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-                <span class="block pb-2">Title of the Project</span>
-                <span class="block text-sm text-gray-700">Name of the User </span>
-            </h2>
-            <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum,
-                perspiciatis blanditiis accusamus commodi consectetur id tempora rem
-                iure eligendi quos eos et autem ratione exercitationem earum laborum ad
-                a sequi!
-            </p>
-            <div class="flex justify-center mt-5">
-                <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-    hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">
-                    Click here
-                </button>
-            </div>
-        </div>
-        -->
-        <div style="top: calc(1rem * 1);"
-            class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
-            <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-                <span class="block pb-2">Project Phoenix: Legacy System Modernization</span>
-                <span class="block text-sm text-gray-700">Client One </span>
-            </h2>
-            <p>
-                This project aims to replace or update an outdated legacy system with modern technology.
-                This will improve efficiency, security, and user experience, while also reducing maintenance costs.
-            </p>
-        </div>
-        <div style="top: calc(1rem * 1);"
-            class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
-            <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-                <span class="block pb-2">Operation Streamline: Workflow Automation & Optimization</span>
-                <span class="block text-sm text-gray-700">Client One </span>
-            </h2>
-            <p>
-                This project focuses on identifying and automating manual, repetitive tasks within the organization.
-                The goal is to improve productivity, reduce errors, and free up employees for more strategic work.
-            </p>
-        </div>
-        <div style="top: calc(1rem * 1);"
-            class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
-            <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-                <span class="block pb-2"> Project Insight: Business Intelligence Dashboard Implementation</span>
-                <span class="block text-sm text-gray-700">Client One </span>
-            </h2>
-            <p>
-                This project will implement a centralized business intelligence dashboard,
-                providing real-time data visualization and analysis capabilities.
-                This will enable data-driven decision-making across departments.
-            </p>
-        </div>
-        <div style="top: calc(1rem * 1);"
-            class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
-            <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-                <span class="block pb-2">SecureGate: Cybersecurity Infrastructure Overhaul</span>
-                <span class="block text-sm text-gray-700">Client One </span>
-            </h2>
-            <p>
-                This project focuses on enhancing the organization's cybersecurity posture by upgrading existing
-                security
-                infrastructure, implementing new security protocols, and conducting comprehensive security audits.
-            </p>
-        </div>
-        <div style="top: calc(1rem * 1);"
-            class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
-            <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-                <span class="block pb-2">Project Bridge: Cross-Platform Application Integration</span>
-                <span class="block text-sm text-gray-700">Client One </span>
-            </h2>
-            <p>
-                This project aims to seamlessly integrate various software applications used across
-                different departments, improving data flow and collaboration between teams.
-            </p>
-        </div>
-        <div style="top: calc(1rem * 1);"
-            class="w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-slate-50 hover:border-black">
-            <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-                <span class="block pb-2">Empower: Digital Adoption & Training Program</span>
-                <span class="block text-sm text-gray-700">Client One </span>
-            </h2>
-            <p>
-                This project focuses on creating and delivering comprehensive training programs to
-                increase employee adoption and proficiency in using new and existing IT systems and software.
-                This will empower employees and maximize the return on technology investments.
-            </p>
-        </div>
-    </div>
-</ng-container>
+    <!--grid end-->
+
+</div>
