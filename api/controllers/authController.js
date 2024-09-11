@@ -48,7 +48,7 @@ export const login = async (req, res, next) => {
         );
 
         if (!isPasswordCorrect) {
-            return createError(400, "Password is incorrect!");
+            return next(createError(400, "Password is incorrect!"));
         }
 
         const token = jwt.sign(
@@ -137,7 +137,7 @@ export const sendEmail = async (req, res, next) => {
     };
 
     // <button style="background-color: #4CAF50; color: white; padding: 14px 20px; border: none; cursor: pointer; border-radius: 4px;">Reset Password</button>
-    
+
     mailTransporter.sendMail(mailDetails, async (err, data) => {
         if (err) {
             console.log(err);
