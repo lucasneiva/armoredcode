@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup,
+import { FormBuilder, FormControl, FormGroup,
         ReactiveFormsModule, Validators} from '@angular/forms';
 import { ProjectService } from '../../services/project.service';
 import { Router, RouterModule } from '@angular/router';
@@ -27,9 +27,9 @@ export default class CreateProjectComponent implements OnInit {
   projectCategories: any[] = []; // Array to store categories
   skills: any[] = []; //array to store skills
   filteredSkills: any[] = []; // Array to store filtered skills
-  // ... your other properties
+  
+  currentPage = 1; // Start with the first page
   showSkillsList: boolean = false; 
-  isTopFormHidden = false; 
 
   ngOnInit() {
     this.fetchSkills();
@@ -88,6 +88,34 @@ export default class CreateProjectComponent implements OnInit {
 
   get clientId() {
     return this.authService.getUserId();
+  }
+
+  nextPage() {
+    this.currentPage++;
+  }
+
+  previousPage() {
+    this.currentPage--;
+  }
+
+  showPage1() {
+    return this.currentPage === 1;
+  }
+
+  showPage2() {
+    return this.currentPage === 2;
+  }
+
+  showPage3() {
+    return this.currentPage === 3;
+  }
+
+  showPage4() {
+    return this.currentPage === 4;
+  }
+
+  showPage5() {
+    return this.currentPage === 5;
   }
 
   CreateProject() {
@@ -241,7 +269,4 @@ export default class CreateProjectComponent implements OnInit {
     return skillIdsControl.value.length > 0; 
   }
 
-  toggleTopForm() {
-    this.isTopFormHidden = !this.isTopFormHidden;
-  }
 }
