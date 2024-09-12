@@ -77,7 +77,7 @@ export const login = async (req, res, next) => {
                 status: 200,
                 message: "Login Success",
                 data: user,
-                token: token, 
+                token: token,
                 userRole: user.role // Add userRole to the response 
             });
     } catch (error) {
@@ -113,10 +113,30 @@ export const sendEmail = async (req, res, next) => {
         }
     })
 
+    //modified
     let mailDetails = {
         from: "armoredcode2@gmail.com",
         to: email,
         subject: "Reset Password",
+        html: `<html>
+        <head>
+        <title>Password Reset Request</title>
+        </head>
+        <body>
+        <h1>Password Reset Request</h1>
+        <p>Dear ${user.username}, </p>
+        <p style="margin-bottom: 3rem">We have received a request to reset your password for your account with ArmoredCode. To complete the password reset process, please click on the button below:</p>
+        
+        <a href="${process.env.LIVE_URL}/reset/${token}" style="background-color: #4CAF50; color: white; padding: 14px 20px; border: none; cursor: pointer; border-radius: 4px; text-decoration: none;">Reset Password</a>
+        
+        <p style="margin-top: 3rem">Thank you,</p>
+        <p>Please note that this link is only valid for a 5mins. If you did not request a password reset, please disregard this message.</p>
+        <p>ArmoredCode Team</p>
+        </body>
+        </html>`,
+
+
+        /*
         html: `<html>
     <head>
     <title>Password Reset Request</title>
@@ -133,7 +153,7 @@ export const sendEmail = async (req, res, next) => {
     <p>ArmoredCode Team</p>
     </body>
 </html>`,
-
+*/
     };
 
     // <button style="background-color: #4CAF50; color: white; padding: 14px 20px; border: none; cursor: pointer; border-radius: 4px;">Reset Password</button>
@@ -154,7 +174,7 @@ export const sendEmail = async (req, res, next) => {
 export const resetPassword = async (req, res, next) => {
     const token = req.body.token;
     const newPassword = req.body.password;
-    
+
     jwt.verify(token, process.env.JWT_SECRET, async (err, data) => {
         if (err) {
             return next(createError(500, "Reset Link is Expired!"))

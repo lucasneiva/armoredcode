@@ -17,9 +17,9 @@
                 <span *ngIf="resetForm.hasError('confirmPasswordValidator', 'confirmPassword')" class="text-red-500">*Password didnt matched!</span>
             </div>
             
-            <div class="mt-2">
+            <div class="flex justify-center mt-2">
                 <button (click)="reset()" [disabled]="resetForm.invalid" [class.disabled]="resetForm.invalid" 
-             class="bg-indigo-500 w-1/4 mr-3 p-2 rounded-md text-gray-50">Submit</button>
+             class="bg-indigo-500 w-full mx-auto p-2 rounded-md text-gray-50">Submit</button>
             </div>
             
         </form>
