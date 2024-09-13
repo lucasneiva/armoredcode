@@ -1,24 +1,18 @@
 <div class="grid justify-center align-middle min-h-screen h-fit">
-
     <!--filler form start-->
     <div class="w-full shadow-lg bg-white p-8 my-auto">
-        
-        <!-- Navigation indicator--> <!--optimize-->
+
+        <!-- Navigation indicator-->
         <div class="flex justify-center my-auto">
-            <div *ngIf="currentPage == 1" class="h-3 w-3 rounded-full bg-blue-500 mx-2"></div>
-            <div *ngIf="currentPage != 1" class="h-3 w-3 rounded-full bg-slate-400 mx-2"></div>
-            <div *ngIf="currentPage == 2" class="h-3 w-3 rounded-full bg-blue-500 mx-2"></div>
-            <div *ngIf="currentPage != 2" class="h-3 w-3 rounded-full bg-slate-400 mx-2"></div>
-            <div *ngIf="currentPage == 3" class="h-3 w-3 rounded-full bg-blue-500 mx-2"></div>
-            <div *ngIf="currentPage != 3" class="h-3 w-3 rounded-full bg-slate-400 mx-2"></div>
-            <div *ngIf="currentPage == 4" class="h-3 w-3 rounded-full bg-blue-500 mx-2"></div>
-            <div *ngIf="currentPage != 4" class="h-3 w-3 rounded-full bg-slate-400 mx-2"></div>
-            <div *ngIf="currentPage == 5" class="h-3 w-3 rounded-full bg-blue-500 mx-2"></div>
-            <div *ngIf="currentPage != 5" class="h-3 w-3 rounded-full bg-slate-400 mx-2"></div>
+            <div *ngFor="let page of pageNumbers" class="rounded-full mx-2">
+                <div [class.bg-blue-500]="currentPage === page" [class.bg-gray-300]="currentPage !== page"
+                    class="h-4 w-4 rounded-full">
+                </div>
+            </div>
         </div>
 
         <form [formGroup]="createProjectForm">
-            <div *ngIf="showPage1()" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
+            <div *ngIf="showPage(1)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
                 <!--Project title Start-->
                 <div class="my-auto mx-auto h-fit w-full">
                     <h2 class="font-semibold mt-4">Project Name:</h2>
@@ -41,18 +35,18 @@
                 <!--Project duration Start-->
                 <div class="my-auto mx-auto h-fit w-full">
                     <h2 class="font-semibold mt-4">Estimated duration:</h2>
-                    <input formControlName="estimatedDuration" placeholder="Type the project duration (hours)" type="text"
-                        class="p-2 px-4 border max-h-16 border-gray-300 rounded w-full" />
+                    <input formControlName="estimatedDuration" placeholder="Type the project duration (hours)"
+                        type="text" class="p-2 px-4 border max-h-16 border-gray-300 rounded w-full" />
                 </div>
                 <!--Project duration End-->
             </div>
 
-            <div *ngIf="showPage2()" class="min-h-96 min-w-96 grid justify-center align-middle">
+            <div *ngIf="showPage(2)" class="min-h-96 min-w-96 grid justify-center align-middle">
                 <!--Project pricing Start-->
                 <div class="my-auto mx-auto h-fit w-full">
                     <h2 class="font-semibold mt-4 text-center">Project Pricing:</h2>
                 </div>
-                
+
                 <div class="my-auto mx-auto h-fit">
                     <div class="flex justify-center align-middle">
                         <div class="m-3">
@@ -100,7 +94,7 @@
                 <!--Project pricing End-->
             </div>
 
-            <div *ngIf="showPage3()" class="min-h-96 min-w-96 grid justify-center align-middle">
+            <div *ngIf="showPage(3)" class="min-h-96 min-w-96 grid justify-center align-middle">
                 <!--Project scope Module Start-->
                 <h2 class="font-semibold mt-4">Scope:</h2>
                 <div class="p-1 my-2 flex align-middle items-center h-fit">
@@ -163,7 +157,7 @@
                 <!--Project Workspace type Module End-->
             </div>
 
-            <div *ngIf="showPage4()" class="min-h-96 min-w-96 grid align-middle">
+            <div *ngIf="showPage(4)" class="min-h-96 min-w-96 grid align-middle">
                 <!--Project descripition Module Start-->
                 <div class="h-fit grid align-top">
                     <h2 class="font-semibold my-3 text-3xl">Overview:</h2>
@@ -173,7 +167,7 @@
                 <!--Project descripition Module End-->
             </div>
 
-            <div *ngIf="showPage5()" class="min-h-96 min-w-96 grid align-middle">
+            <div *ngIf="showPage(5)" class="min-h-96 min-w-96 grid align-middle">
                 <!--Search Skills Module Start-->
                 <div class="h-fit grid align-top w-full">
                     <h2 class="font-semibold my-3 text-3xl">Skills:</h2>
@@ -182,7 +176,8 @@
                             <i class="fa fa-search font-light" aria-hidden="true"></i>
                         </span>
                         <input type="text" placeholder="Search skills"
-                            class="w-full p-2 pl-9 rounded rounded-r-none text-gray-600" (input)="searchSkills($event)" />
+                            class="w-full p-2 pl-9 rounded rounded-r-none text-gray-600"
+                            (input)="searchSkills($event)" />
                     </div>
 
                     <div *ngIf="showSkillsList" class="row rounded-b-lg bg-slate-50 border-slate-100 overflow-hidden">
@@ -195,10 +190,10 @@
                             </li>
                         </ul>
                     </div>
-    
+
                     <div *ngIf="hasSelectedSkills()" class="grid justify-center grid-cols-2 gap-2 max-lg:grid-cols-1
                          mt-4 p-4 bg-slate-50 border-2 border-slate-200 rounded-lg">
-    
+
                         <div *ngFor="let skillId of createProjectForm.get('skillIds')?.value"
                             class="flex mb-2 h-8 rounded bg-blue-500 w-fit">
                             <div class="text-white py-1 px-4 flex pr-4 text-nowrap overflow-clip">
@@ -235,14 +230,18 @@
     </div>
     <!--filler form end-->
 
-    <!-- Navigation -->
     <div class="flex justify-center w-full right-0 left-0 my-auto bottom-20 max-lg:bottom-14 fixed">
-        <button *ngIf="currentPage > 1" (click)="previousPage()"
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded p-4 max-lg:w-full w-64 mx-1">
+        <!-- Previous Button -->
+        <button (click)="previousPage()" [disabled]="currentPage === 1"
+            class="bg-blue-600 text-white font-semibold rounded p-4 max-lg:w-full w-64 mx-1"
+            [ngClass]="{'hover:bg-blue-700': currentPage > 1, 'opacity-50 cursor-not-allowed': currentPage === 1}">
             Previous
         </button>
-        <button *ngIf="currentPage < 5" (click)="nextPage()"
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded p-4 max-lg:w-full w-64 mx-1">
+
+        <!-- Next Button -->
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages"
+            class="bg-blue-600 text-white font-semibold rounded p-4 max-lg:w-full w-64 mx-1"
+            [ngClass]="{'hover:bg-blue-700': currentPage < totalPages, 'opacity-50 cursor-not-allowed': currentPage === totalPages}">
             Next
         </button>
     </div>

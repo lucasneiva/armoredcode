@@ -29,9 +29,13 @@ export default class CreateProjectComponent implements OnInit {
   filteredSkills: any[] = []; // Array to store filtered skills
   
   currentPage = 1; // Start with the first page
+  totalPages = 5; // Total number of pages
+  pageNumbers: number[] = []; 
   showSkillsList: boolean = false; 
 
   ngOnInit() {
+    // Correctly initialize pageNumbers array:
+    this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     this.fetchSkills();
     this.getProjectCategories();
     this.createProjectForm = this.fb.group({
@@ -92,30 +96,16 @@ export default class CreateProjectComponent implements OnInit {
 
   nextPage() {
     this.currentPage++;
+    /*debug*///alert(this.currentPage);
   }
 
   previousPage() {
     this.currentPage--;
+    /*debug*///alert(this.currentPage);
   }
 
-  showPage1() {
-    return this.currentPage === 1;
-  }
-
-  showPage2() {
-    return this.currentPage === 2;
-  }
-
-  showPage3() {
-    return this.currentPage === 3;
-  }
-
-  showPage4() {
-    return this.currentPage === 4;
-  }
-
-  showPage5() {
-    return this.currentPage === 5;
+  showPage(pageNumber: number): boolean {
+    return this.currentPage === pageNumber;
   }
 
   CreateProject() {
