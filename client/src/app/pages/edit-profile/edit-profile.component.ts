@@ -8,9 +8,10 @@ import { Router, RouterModule } from '@angular/router';
 import { SkillService } from '../../services/skill.service';
 import { SpecializationService } from '../../services/specialization.service';
 import { IndustryService } from '../../services/industry.service';
-import { Profile, ProfileData, ProfileService } from '../../services/profile.service';
+import { ProfileService, Profile, ProfileResponse } from '../../services/profile.service';
 import { UserService, User } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
+import { firstValueFrom } from 'rxjs'; // Import firstValueFrom
 
 @Component({
   selector: 'app-edit-profile',
@@ -37,6 +38,8 @@ export default class EditProfileComponent implements OnInit {
   //constants
   userRole: string | null = null;
   isClient: boolean = false;
+  isLoading = true;
+  profile: Profile | null = null;
   currentPage!: number; // Start with the first page
   totalPages!: number; // Total number of pages
 
@@ -46,9 +49,6 @@ export default class EditProfileComponent implements OnInit {
   specializations: any[] = [];
   industries: any[] = [];
   pageNumbers: number[] = [];
-
-  // Store profile data
-  profileData: ProfileData = { hasProfile: false, profile: null };
 
   ngOnInit() {
     this.authService.getUserId();
@@ -72,7 +72,16 @@ export default class EditProfileComponent implements OnInit {
     }
 
     this.initForms();
-    this.fetchAndPopulateProfile();
+    this.loadProfile() 
+    .then(() => {
+      if (this.profile) {
+        this.populateForms(this.profile);
+      }
+    })
+    .catch(error => {
+      // Handle the error appropriately, e.g., show an error message
+      console.error('Error loading profile in ngOnInit:', error); 
+    }); 
   }
 
   // Initialize forms and load data if available
@@ -123,20 +132,25 @@ export default class EditProfileComponent implements OnInit {
     });
   }
 
-  // Fetch and populate the form with the user's profile
-  fetchAndPopulateProfile() {
+  //get the profile data
+  loadProfile(): Promise<void> { // Now returns a Promise
+    this.isLoading = true;
     const userId = this.authService.getUserId();
-    if (userId) {
-      this.profileService.getProfile(userId).subscribe({
-        next: (res: ProfileData) => {
-          this.profileData = res;
-          this.populateForms(res.profile);
-        },
-        error: (err) => {
-          console.error('Error fetching profile:', err);
-        }
-      });
-    }
+    const profile$ = this.profileService.getProfile(userId);
+  
+    return firstValueFrom(profile$).then((response: ProfileResponse) => { 
+      console.log("Full API response:", response);
+      if (response.data && response.data.hasProfile) {
+        this.profile = response.data.profile;
+      } else {
+        console.log('No profile found for this user.');
+      }
+      this.isLoading = false;
+    }).catch((error) => {
+      console.error("Error loading profile:", error);
+      this.isLoading = false;
+      throw error; // Re-throw error for potential handling elsewhere
+    });
   }
 
   // Populate form fields with fetched profile data
