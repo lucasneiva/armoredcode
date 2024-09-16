@@ -10,6 +10,6 @@ router.get( "/:id", verifyToken, getProfileByUserId );
 
 router.patch("/", verifyToken, updateProfile);
 
-router.delete("/", verifyToken, deleteProfile);
+router.delete("/:id", verifyToken, deleteProfile);
 
 export default router;

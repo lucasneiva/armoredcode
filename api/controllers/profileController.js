@@ -121,5 +121,29 @@ export const updateProfile = async ( req, res, next ) => {
 };
 
 export const deleteProfile = async (req, res, next) => {
-    
+    const userId = req.user.id;
+    const role = req.user.role;
+
+    try {
+        let deletedProfile;
+
+        if (role === "CLIENT") {
+            deletedProfile = await ClientProfile.findOneAndDelete({ userId: userId });
+        } else if (role === "FREELANCER") {
+            deletedProfile = await FreelancerProfile.findOneAndDelete({ userId: userId });
+        } else {
+            return next(createError(400, "Invalid role!"));
+        }
+
+        if (!deletedProfile) {
+            return next(createError(404, "Profile not found!"));
+        }
+
+        // You might also want to delete the associated user account here if needed:
+        // await User.findByIdAndDelete(userId);
+
+        return next(createSuccess(200, "Profile deleted successfully!"));
+    } catch (error) {
+        return next(createError(500, "Error deleting profile", error));
+    }
 }
