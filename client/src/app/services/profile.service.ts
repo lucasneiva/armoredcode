@@ -42,7 +42,37 @@ export class ProfileService {
         })
       );
   }
-  
+
+  editProfile(profileData: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true
+    };
+
+    const userRole = this.authService.getUserRole();
+    if (!userRole) {
+      console.error("User role not found!");
+      return throwError(() => new Error("User role not found!"));
+    }
+
+    // Include the role in the profileData
+    const dataToSend = { ...profileData, role: userRole };
+
+    return this.http.patch<any>(`${apiUrls.profileServiceApi}`, dataToSend, httpOptions)
+      .pipe(
+        tap((res) => {
+          console.log('Profile edited:', res);
+          this.hasProfile$.next(true);
+        }),
+        catchError((error) => {
+          console.error('Error editing profile:', error);
+          throw error;
+        })
+      );
+  }
+
   getProfile(userId: string | null): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -70,10 +100,10 @@ export class ProfileService {
 export type ProfileResponse = {
   success: boolean;
   status: number;
-  message: string; 
+  message: string;
   data: {
     hasProfile: boolean;
-    profile: Profile | null; 
+    profile: Profile | null;
   };
 }
 

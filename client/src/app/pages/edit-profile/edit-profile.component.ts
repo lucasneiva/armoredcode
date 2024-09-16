@@ -236,21 +236,22 @@ export default class EditProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.freelancerProfileForm.value);
     if (this.isClient && this.clientProfileForm.valid) {
-      this.profileService.createProfile(this.clientProfileForm.value)
+      /*debug*/ //console.log(this.clientProfileForm.value);
+      this.profileService.editProfile(this.clientProfileForm.value)
         .subscribe({
           next: (res) => {
             alert("Client Profile edited sucessfully!");
             this.profileService.hasProfile$.next(true);
             this.clientProfileForm.reset();
-            this.router.navigate(['profile']);
+            this.router.navigate(['manage-profile']);
           },
           error: (err) => {
             console.error('Error editing client profile:', err);
           }
         });
     } else if (!this.isClient && this.freelancerProfileForm.valid) {
+      /*debug*/ //console.log(this.freelancerProfileForm.value);
 
       // Prepare the data for the freelancer profile
       const formData = this.freelancerProfileForm.value;
@@ -258,13 +259,13 @@ export default class EditProfileComponent implements OnInit {
       // Convert selectedSkills array to a simple array of skill IDs
       formData.skillIds = formData.selectedSkills;
 
-      this.profileService.createProfile(formData)
+      this.profileService.editProfile(formData)
         .subscribe({
           next: (res) => {
             alert("Freelancer Profile edited sucessfully!");
             this.profileService.hasProfile$.next(true);
             this.freelancerProfileForm.reset();
-            this.router.navigate(['profile']);
+            this.router.navigate(['manage-profile']);
           },
           error: (err) => {
             console.error('Error editing freelancer profile:', err);
@@ -278,7 +279,7 @@ export default class EditProfileComponent implements OnInit {
 
   cancelSubmit() {
     alert("profile edition Canceled!")
-    this.router.navigate(['profile'])
+    this.router.navigate(['manage-profile'])
     if (this.isClient) {
       this.clientProfileForm.reset();
     }
@@ -434,7 +435,6 @@ export default class EditProfileComponent implements OnInit {
       this.selectedSkillId = '';
     }
   }
-
 
   removeSkill(index: number) {
     this.selectedSkills.removeAt(index);
