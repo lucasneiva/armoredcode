@@ -119,3 +119,7 @@ export const updateProfile = async ( req, res, next ) => {
         return next( createError( 500, "Error updating profile", error ) );
     }
 };
+
+export const deleteProfile = async (req, res, next) => {
+    
+}
