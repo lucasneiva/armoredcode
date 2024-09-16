@@ -79,7 +79,6 @@ export default class CreateProfileComponent implements OnInit {
       location: this.fb.group({
         cep: ['', Validators.required],
         streetAddress: ['', Validators.required],
-        number: ['', Validators.required],
         neighborhood: ['', Validators.required],
         city: ['', Validators.required],
         state: ['SP'],
@@ -102,7 +101,6 @@ export default class CreateProfileComponent implements OnInit {
       location: this.fb.group({
         cep: ['', Validators.required],
         streetAddress: ['', Validators.required],
-        number: ['', Validators.required],
         neighborhood: ['', Validators.required],
         city: ['', Validators.required],
         state: ['SP'],

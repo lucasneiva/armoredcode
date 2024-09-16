@@ -71,23 +71,18 @@
                                 placeholder="Example: 12345-678" id="cep" name="cep" formControlName="cep" required>
                         </div>
                         <div class="w-full pl-2">
-                            <h2 class="font-semibold mt-4" for="streetAddress">Rua</h2>
-                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                placeholder="Street Name" id="streetAddress" name="streetAddress"
-                                formControlName="streetAddress" required>
-                        </div>
-                    </div>
-                    <div class="my-auto mx-auto h-fit w-full flex">
-                        <div class="w-full pr-2">
-                            <h2 class="font-semibold mt-4" for="number">Número</h2>
-                            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Number"
-                                id="number" name="number" formControlName="number" required>
-                        </div>
-                        <div class="w-full pl-2">
                             <h2 class="font-semibold mt-4">Bairro</h2>
                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
                                 placeholder="Neighborhood Name" id="neighborhood" name="neighborhood"
                                 formControlName="neighborhood" required>
+                        </div>
+                    </div>
+                    <div class="my-auto mx-auto h-fit w-full flex">
+                        <div class="w-full">
+                            <h2 class="font-semibold mt-4" for="streetAddress">Rua</h2>
+                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                placeholder="Street Name" id="streetAddress" name="streetAddress"
+                                formControlName="streetAddress" required>
                         </div>
                     </div>
                     <div class="my-auto mx-auto h-fit w-full grid">
@@ -467,23 +462,18 @@
                                 placeholder="Example: 12345-678" id="cep" name="cep" formControlName="cep" required>
                         </div>
                         <div class="w-full pl-2">
-                            <h2 class="font-semibold mt-4" for="streetAddress">Rua</h2>
-                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                placeholder="Street Name" id="streetAddress" name="streetAddress"
-                                formControlName="streetAddress" required>
-                        </div>
-                    </div>
-                    <div class="my-auto mx-auto h-fit w-full flex">
-                        <div class="w-full pr-2">
-                            <h2 class="font-semibold mt-4" for="number">Número</h2>
-                            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Number"
-                                id="number" name="number" formControlName="number" required>
-                        </div>
-                        <div class="w-full pl-2">
                             <h2 class="font-semibold mt-4">Bairro</h2>
                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
                                 placeholder="Neighborhood Name" id="neighborhood" name="neighborhood"
                                 formControlName="neighborhood" required>
+                        </div>
+                    </div>
+                    <div class="my-auto mx-auto h-fit w-full flex">
+                        <div class="w-full">
+                            <h2 class="font-semibold mt-4" for="streetAddress">Rua</h2>
+                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                placeholder="Street Name" id="streetAddress" name="streetAddress"
+                                formControlName="streetAddress" required>
                         </div>
                     </div>
                     <div class="my-auto mx-auto h-fit w-full grid">
@@ -519,8 +509,8 @@
                     <!--localization module end-->
                     <!--buttons-->
                     <div class="mt-10 mx-auto h-fit w-full flex justify-between">
-                        <button [disabled]="freelancerProfileForm.invalid" [class.disabled]="freelancerProfileForm.invalid"
-                            (click)="onSubmit()"
+                        <button [disabled]="freelancerProfileForm.invalid"
+                            [class.disabled]="freelancerProfileForm.invalid" (click)="onSubmit()"
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold mr-2 p-2 rounded cursor-pointer w-full">
                             Salvar
                         </button>
