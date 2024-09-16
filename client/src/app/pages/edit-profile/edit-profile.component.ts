@@ -8,7 +8,7 @@ import { Router, RouterModule } from '@angular/router';
 import { SkillService } from '../../services/skill.service';
 import { SpecializationService } from '../../services/specialization.service';
 import { IndustryService } from '../../services/industry.service';
-import { ProfileService } from '../../services/profile.service';
+import { Profile, ProfileData, ProfileService } from '../../services/profile.service';
 import { UserService, User } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -45,7 +45,10 @@ export default class EditProfileComponent implements OnInit {
   skills: any[] = [];
   specializations: any[] = [];
   industries: any[] = [];
-  pageNumbers: number[] = []; 
+  pageNumbers: number[] = [];
+
+  // Store profile data
+  profileData: ProfileData = { hasProfile: false, profile: null };
 
   ngOnInit() {
     this.authService.getUserId();
@@ -54,20 +57,26 @@ export default class EditProfileComponent implements OnInit {
     if (this.userRole === 'CLIENT') {
       this.isClient = true;
       this.fetchIndustries();
-      this.currentPage = 1; // Start with the first page
-      this.totalPages = 2; // Total number of pages
+      this.currentPage = 1;
+      this.totalPages = 2;
       this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     } else if (this.userRole === 'FREELANCER') {
       this.isClient = false;
       this.fetchSkills();
       this.fetchSpecializations();
-      this.currentPage = 1; // Start with the first page
-      this.totalPages = 7; // Total number of pages
+      this.currentPage = 1;
+      this.totalPages = 7;
       this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     } else {
-      console.log("invalid role");
+      console.log("Invalid role");
     }
 
+    this.initForms();
+    this.fetchAndPopulateProfile();
+  }
+
+  // Initialize forms and load data if available
+  initForms() {
     this.clientProfileForm = this.fb.group({
       userId: [this.authService.getUserId(), Validators.required],
       companyName: ['', Validators.required],
@@ -79,7 +88,6 @@ export default class EditProfileComponent implements OnInit {
       location: this.fb.group({
         cep: ['', Validators.required],
         streetAddress: ['', Validators.required],
-        number: ['', Validators.required],
         neighborhood: ['', Validators.required],
         city: ['', Validators.required],
         state: ['SP'],
@@ -102,18 +110,101 @@ export default class EditProfileComponent implements OnInit {
       location: this.fb.group({
         cep: ['', Validators.required],
         streetAddress: ['', Validators.required],
-        number: ['', Validators.required],
         neighborhood: ['', Validators.required],
         city: ['', Validators.required],
         state: ['SP'],
         country: ['Brasil'],
       }),
-      selectedSkills: this.fb.array([]), // Initialize as an empty array
+      selectedSkills: this.fb.array([]),
       portfolioItems: this.fb.array([this.createPortfolioItem()]),
       education: this.fb.array([this.createEducationForm()]),
       certifications: this.fb.array([this.createCertificationForm()]),
       workExperiences: this.fb.array([this.createExperienceForm()]),
     });
+  }
+
+  // Fetch and populate the form with the user's profile
+  fetchAndPopulateProfile() {
+    const userId = this.authService.getUserId();
+    if (userId) {
+      this.profileService.getProfile(userId).subscribe({
+        next: (res: ProfileData) => {
+          this.profileData = res;
+          this.populateForms(res.profile);
+        },
+        error: (err) => {
+          console.error('Error fetching profile:', err);
+        }
+      });
+    }
+  }
+
+  // Populate form fields with fetched profile data
+  populateForms(profile: Profile | null) {
+    if (profile) {
+      if (this.isClient) {
+        // Populate client form
+        this.clientProfileForm.patchValue({
+          companyName: profile.companyName,
+          companyDescription: profile.companyDescription,
+          companySize: profile.companySize,
+          logo: profile.logo,
+          industryId: profile.industryId,
+          website: profile.website,
+          location: {
+            cep: profile.location?.cep || '',
+            streetAddress: profile.location?.streetAddress || '',
+            neighborhood: profile.location?.neighborhood || '',
+            city: profile.location?.city || '',
+            state: profile.location?.state || '',
+            country: profile.location?.country || '',
+          }
+        });
+      } else {
+        // Populate freelancer form
+        this.freelancerProfileForm.patchValue({
+          firstName: profile.firstName,
+          lastName: profile.lastName,
+          specializationId: profile.specializationId?._id,
+          profileSummary: profile.profileSummary,
+          experienceLevel: profile.experienceLevel,
+          hourlyRate: {
+            min: profile.hourlyRate?.min,
+            max: profile.hourlyRate?.max,
+            // currency should already be 'R$'
+          },
+          location: {
+            cep: profile.location?.cep || '',
+            streetAddress: profile.location?.streetAddress || '',
+            neighborhood: profile.location?.neighborhood || '',
+            city: profile.location?.city || '',
+            state: profile.location?.state || '',
+            country: profile.location?.country || '',
+          }
+        });
+
+        // Populate FormArrays
+        profile.skillIds?.forEach(skill =>
+          this.selectedSkills.push(new FormControl(skill._id))
+        );
+
+        profile.portfolioItems?.forEach(item =>
+          this.portfolioItems.push(this.fb.group(item))
+        );
+
+        profile.educations?.forEach(edu =>
+          this.education.push(this.fb.group(edu))
+        );
+
+        profile.certifications?.forEach(cert =>
+          this.certifications.push(this.fb.group(cert))
+        );
+
+        profile.workExperiences?.forEach(exp =>
+          this.workExperiences.push(this.fb.group(exp))
+        );
+      }
+    }
   }
 
   nextPage() {

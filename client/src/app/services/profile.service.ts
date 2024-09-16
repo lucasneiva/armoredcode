@@ -90,7 +90,11 @@ export type Profile = {
 
   // Common fields (present in both profiles)
   location?: {
+    streetAddress: string,
+    neighborhood: string,
     city: string,
+    state: string,
+    cep: string,
     country: string
   };
 
