@@ -6,13 +6,13 @@ import { AuthService } from '../../services/auth.service';
 import { ProfileService, Profile, ProfileResponse } from '../../services/profile.service';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-manage-profile',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss'
+  templateUrl: './manage-profile.component.html',
+  styleUrl: './manage-profile.component.scss'
 })
-export default class ProfileComponent implements OnInit {
+export default class ManageProfileComponent implements OnInit {
   fb = inject(FormBuilder);
   router = inject(Router);
   authService = inject(AuthService);
@@ -54,4 +54,3 @@ export default class ProfileComponent implements OnInit {
   }
 
 }
-

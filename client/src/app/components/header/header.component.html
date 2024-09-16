@@ -54,9 +54,8 @@
                 <span class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Convites</span>
                 <span routerLink="/login" (click)="logOut()"
                     class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Logout</span>
-                <img [src]="profilePath" alt="Default Profile" routerLink="/profile"
+                <img [src]="profilePath" alt="Default Profile" routerLink="/manage-profile"
                     class="h-12 w-12 my-auto mx-4 rounded-full border-white border-solid border-2 cursor-pointer">
-                <!--<div routerLink="/profile" class=" cursor-pointer m-4 hover:underline hover:text-indigo-200">Perfil</div>-->
             </div>
             <div class="flex justify-center align-middle w-fit lg:min-w-96 lg:justify-end lg:hidden">
                 <img [src]="menuPath" alt="Menu Icon" (click)="toggleMenu()" class="h-12 w-12 my-auto cursor-pointer">
@@ -72,7 +71,7 @@
         <div class="bg-sky-700 text-gray-200 text-2xl font-bold px-16 fixed z-10 top-20 h-full w-full
             max-lg:text-center max-lg:justify-center max-lg:grid max-lg:align-middle">
             <div class="grid h-full mt-10">
-                <div routerLink="/profile" 
+                <div routerLink="/manage-profile" 
                     class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Perfil</div>
                 <div routerLink="/manage-project" 
                     class="cursor-pointer hover:underline hover:text-indigo-200">Projetos</div>
