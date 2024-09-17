@@ -73,6 +73,35 @@ export class ProfileService {
       );
   }
 
+  deleteProfile(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true
+    };
+
+    const userId = this.authService.getUserId(); // Assuming authService has a method to get userId
+
+    if (!userId) {
+      // Handle the case where the user ID is not found (maybe redirect to login)
+      console.error("User ID not found!");
+      return throwError(() => new Error("User ID not found!"));
+    }
+
+    return this.http.delete<any>(`${apiUrls.profileServiceApi}/${userId}`, httpOptions)
+      .pipe(
+        tap((res) => {
+          console.log('Profile deleted:', res);
+          this.hasProfile$.next(false); // Update hasProfile$
+        }),
+        catchError((error) => {
+          console.error('Error deleting profile:', error);
+          throw error;
+        })
+      );
+  }
+
   getProfile(userId: string | null): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({

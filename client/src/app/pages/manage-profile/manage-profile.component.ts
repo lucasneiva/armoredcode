@@ -22,6 +22,7 @@ export default class ManageProfileComponent implements OnInit {
 
   profile: Profile | null = null;
   isLoading = true;
+  showConfirmationModal = false; // Flag for the confirmation modal
 
   ngOnInit(): void {
     this.loadProfile();
@@ -47,6 +48,38 @@ export default class ManageProfileComponent implements OnInit {
           this.isLoading = false;
         }
       });
+  }
+
+  // Function to show the confirmation modal
+  showDeleteConfirmation() {
+    this.showConfirmationModal = true;
+  }
+
+  // Function to handle the confirmation modal response
+  handleConfirmation(confirmed: boolean) {
+    this.showConfirmationModal = false; // Close the modal
+
+    if (confirmed) {
+      this.deleteProfile(); // Proceed with deletion
+    }
+  }
+
+  deleteProfile() {
+    this.profileService.deleteProfile()
+      .subscribe(() => {
+        alert("Profile deleted sucessfully!");
+        localStorage.removeItem("user_id");
+        localStorage.removeItem('user_role');
+        localStorage.removeItem('token');
+        this.authService.isLoggedIn$.next(false);
+        console.log('Profile deleted successfully.');
+        this.router.navigate(['login']);
+      },
+        (error) => {
+          // Handle error (e.g., display an error message)
+          console.error('Error deleting profile:', error);
+        }
+      );
   }
 
   logOut() {
