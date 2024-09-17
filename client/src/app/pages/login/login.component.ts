@@ -60,8 +60,15 @@ export default class LoginComponent {
             });
         },
         error: (err) => {
+          if (err.status === 404) {
+            alert(err.error.message || 'User not found.');
+          } else if (err.status === 400) {
+            alert(err.error.message || 'Incorrect password.');
+          } else {
+            console.error(err);
+            alert(err.error || 'An error occurred. Please try again.');
+          }
           console.log(err);
-          alert(err.error);
         }
       });
   }
