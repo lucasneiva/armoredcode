@@ -1,38 +1,48 @@
 <div class="grid min-h-screen h-fit">
     <!--if no projects-->
-    <ng-container *ngIf="projects.length <= 0">
-        <div *ngIf="isClient" class="block text-wrap max-w-md shadow-lg mt-56 p-10 mx-auto bg-white">
-            <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
-            <p class="text-left text-2xl text-gray-600 mt-4">
-                You dont have any projects in your workspace for now,
-                but you can create one clicking in the "create project" button.
-            </p>
+    <ng-container *ngIf="isLoading">
+        <div class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
+            <h1 class="text-center text-4xl text-gray-700">Loading projects...</h1>
         </div>
+    </ng-container>
 
-        <div *ngIf="!isClient" class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
-            <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
-            <p class="text-left text-2xl text-gray-600 mt-4">
-                You dont have any projects in your workspace for now
-            </p>
-        </div>
+    <!--if data-->
+    <ng-container *ngIf="!isLoading">
+        <!--if projects-->
+        <ng-container *ngIf="projects.length <= 0">
+            <div *ngIf="isClient" class="block text-wrap max-w-md shadow-lg mt-56 p-10 mx-auto bg-white">
+                <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
+                <p class="text-left text-2xl text-gray-600 mt-4">
+                    You dont have any projects in your workspace for now,
+                    but you can create one clicking in the "create project" button.
+                </p>
+            </div>
+
+            <div *ngIf="!isClient" class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
+                <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
+                <p class="text-left text-2xl text-gray-600 mt-4">
+                    You dont have any projects in your workspace for now
+                </p>
+            </div>
+        </ng-container>
+        <!--grid start-->
+        <ng-container *ngIf="projects.length > 0">
+            <div class="grid justify-center gap-4 my-28">
+                <!--app-project-card-->
+                <ng-container *ngFor="let project of projects">
+                    <app-project-card [project]="project"></app-project-card>
+                </ng-container>
+            </div>
+        </ng-container>
+        <!--grid end-->
+        <!--button-->
+        <ng-container *ngIf="isClient">
+            <div class="fixed bottom-12 left-1/2 transform -translate-x-1/2">
+                <button routerLink="/create-project"
+                    class="bg-blue-500 hover:bg-blue-700 text-xl text-white font-bold py-4 px-8 -mb-0.5 rounded cursor-pointer">
+                    Create project
+                </button>
+            </div>
+        </ng-container>
     </ng-container>
-    <!--grid start-->
-    <ng-container *ngIf="projects.length > 0">
-        <div class="grid justify-center gap-4 my-28">
-            <!--app-project-card-->
-            <ng-container *ngFor="let project of projects">
-                <app-project-card [project]="project"></app-project-card>
-            </ng-container>
-        </div>
-    </ng-container>
-    <!--grid end-->
-    <ng-container *ngIf="isClient">
-        <div class="fixed bottom-12 left-1/2 transform -translate-x-1/2">
-            <button routerLink="/create-project"
-                class="bg-blue-500 hover:bg-blue-700 text-xl text-white font-bold py-4 px-8 -mb-0.5 rounded cursor-pointer">
-                Create project
-            </button>
-        </div>
-    </ng-container>
-    
 </div>

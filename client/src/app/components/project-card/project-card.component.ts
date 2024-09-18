@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Project } from '../../services/project.service';
 
-
 @Component({
   selector: 'app-project-card',
   standalone: true,
