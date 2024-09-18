@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <form [formGroup]="createProjectForm">
+        <form [formGroup]="editProjectForm">
             <div *ngIf="showPage(1)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
                 <!--Project title Start-->
                 <div class="my-auto mx-auto h-fit w-full">
@@ -60,7 +60,7 @@
                             <label for="pricingType">Hourly Rate</label>
                         </div>
                     </div>
-                    <div *ngIf="createProjectForm.get('pricingType')?.value === 'BUDGET'" formGroupName="projectBudget"
+                    <div *ngIf="editProjectForm.get('pricingType')?.value === 'BUDGET'" formGroupName="projectBudget"
                         class="flex justify-center align-middle h-fit">
                         <!-- Budget inputs -->
                         <div class="m-3">
@@ -75,7 +75,7 @@
                         </div>
                     </div>
 
-                    <div *ngIf="createProjectForm.get('pricingType')?.value === 'HOURLY_RATE'"
+                    <div *ngIf="editProjectForm.get('pricingType')?.value === 'HOURLY_RATE'"
                         formGroupName="projectHourlyRate" class="flex justify-center align-middle h-fit">
                         <!-- Hourly Rate inputs -->
                         <div class="m-3">
@@ -194,7 +194,7 @@
                     <div *ngIf="hasSelectedSkills()" class="grid justify-center grid-cols-2 gap-2 max-lg:grid-cols-1
                          mt-4 p-4 bg-slate-50 border-2 border-slate-200 rounded-lg">
 
-                        <div *ngFor="let skillId of createProjectForm.get('skillIds')?.value"
+                        <div *ngFor="let skillId of editProjectForm.get('skillIds')?.value"
                             class="flex mb-2 h-8 rounded bg-blue-500 w-fit">
                             <div class="text-white py-1 px-4 flex pr-4 text-nowrap overflow-clip">
                                 {{ getSkillNameById(skillId) }}
@@ -212,12 +212,12 @@
 
         <!--buttons-->
         <div *ngIf="currentPage === 5" class="flex justify-center place-items-end mt-10">
-            <button [disabled]="createProjectForm.invalid" [class.disabled]="createProjectForm.invalid"
-                (click)="CreateProject()"
+            <button [disabled]="editProjectForm.invalid" [class.disabled]="editProjectForm.invalid"
+                (click)="EditProject()"
                 class="bg-blue-600 hover:bg-blue-700 text-white text-2xl font-semibold w-full py-3 ml-4 rounded">
                 Save
             </button>
-            <button [disabled]="createProjectForm.invalid" [class.disabled]="createProjectForm.invalid"
+            <button [disabled]="editProjectForm.invalid" [class.disabled]="editProjectForm.invalid"
                 (click)="PostProject()"
                 class="bg-blue-600 hover:bg-blue-700 text-white text-2xl font-semibold w-full py-3 mx-4 rounded">
                 Publish

@@ -31,7 +31,7 @@ export class ProjectService {
     return this.http.put<any>(`${apiUrls.projectServiceApi}/${projectId}`, projectObj, httpOptions);
   }
 
-  getProjectById(projectId: string): Observable<any> {
+  getProjectById(projectId: string | null): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -60,7 +60,23 @@ export class ProjectService {
     };
     return this.http.get<any>(`${apiUrls.projectServiceApi}user`, httpOptions);
   }
+}
+// Define a clear interface for your API response
+export type ProjectResponse = {
+  success: boolean;
+  status: number;
+  message: string;
+  data: {
+    isDraft: boolean;
+    isPosted: boolean;
+    project: Project | null;
+  };
+}
 
+export type ProjectData = {
+  isDraft: boolean;
+  isPosted: boolean;
+  project: Project | null;
 }
 
 // Type for Location (replace with your actual locationModel structure)
