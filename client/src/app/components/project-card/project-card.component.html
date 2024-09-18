@@ -1,6 +1,7 @@
 <!--card-->
 <ng-container *ngIf="project">
-  <div style="top: calc(1rem * 1);"
+
+  <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{'bg-gray-100': showDetails}"
     class="sticky w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
     <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
       <span class="block py-2 mr-2">{{project.projectTitle}}</span>
@@ -9,4 +10,57 @@
         {{project.projectStatus}}</span>
     </h2>
   </div>
+
+  <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center z-10" *ngIf="showDetails">
+    <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl w-full" style="max-height: 90vh; overflow-y: auto;">
+      <h2 class="text-2xl font-bold mb-4">{{project.projectTitle}}</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4"> 
+        <div>
+          <p><strong>Description:</strong> {{project.projectDescription}}</p>
+          <p><strong>Budget:</strong> 
+            <ng-container *ngIf="project.projectBudget; else hourlyRate">
+              {{project.projectBudget.min}} - {{project.projectBudget.max}} {{project.projectBudget.currency}}
+            </ng-container>
+            <ng-template #hourlyRate>
+              {{project.projectHourlyRate?.min}} - {{project.projectHourlyRate?.max}} {{project.projectHourlyRate?.currency}}
+            </ng-template>
+          </p>
+          <p><strong>Deadline:</strong> {{project.estimatedDuration}}</p>
+          <p><strong>Skills:</strong> {{project.skillIds}}</p>
+          <p><strong>Location:</strong> 
+            <ng-container *ngIf="project.location; else noLocation">
+              {{project.location.streetAddress}}<br>
+              {{project.location.neighborhood}}<br>
+              {{project.location.city}}, {{project.location.state}} {{project.location.cep}}<br>
+              {{project.location.country}}
+            </ng-container>
+            <ng-template #noLocation>
+              Not Specified
+            </ng-template>
+          </p>
+        </div>
+        <div>
+          <p><strong>Experience Level:</strong> {{project.experienceLevel}}</p>
+          <p><strong>Work Model:</strong> {{project.workModel}}</p>
+          <p><strong>Pricing Type:</strong> {{project.pricingType}}</p>
+          <p><strong>Estimated Duration:</strong> {{project.estimatedDuration}} {{project.estimatedDuration > 1 ? 'days' : 'day'}}</p>
+          <p><strong>Project Size:</strong> {{project.projectSize}}</p>
+          <p><strong>Created by:</strong> {{project.clientId}}</p>
+          <p><strong>Status:</strong> {{project.projectStatus}}</p>
+        </div>
+      </div>
+
+      <!-- Add a close button -->
+      <button class="mt-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+        (click)="toggleDetails()">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+        Close
+      </button>
+    </div>
+  </div>
+
 </ng-container>

@@ -11,4 +11,9 @@ import { Project } from '../../services/project.service';
 })
 export class ProjectCardComponent {
   @Input({required: true}) project!: Project;
+  showDetails = false; // Flag to control showing details
+
+  toggleDetails() {
+    this.showDetails = !this.showDetails;
+  }
 }
