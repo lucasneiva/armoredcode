@@ -21,6 +21,26 @@ export class ProjectService {
     return this.http.post<any>(`${apiUrls.projectServiceApi}`, projectObj, httpOptions);
   }
 
+  updateProject(projectId: string, projectObj: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true  // VERY IMPORTANT: Include cookies in requests
+    };
+    return this.http.put<any>(`${apiUrls.projectServiceApi}/${projectId}`, projectObj, httpOptions);
+  }
+
+  getProjectById(projectId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true // VERY IMPORTANT: Include cookies in requests
+    };
+    return this.http.get<any>(`${apiUrls.projectServiceApi}/${projectId}`, httpOptions);
+  }
+
   getProjectCategories(): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({

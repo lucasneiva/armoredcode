@@ -1,15 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { Project } from '../../services/project.service';
 
 @Component({
   selector: 'app-project-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './project-card.component.html',
   styleUrl: './project-card.component.scss'
 })
 export class ProjectCardComponent {
+  router = inject(Router);
   @Input({required: true}) project!: Project;
   showDetails = false; // Flag to control showing details
 
@@ -28,8 +30,7 @@ export class ProjectCardComponent {
   }
 
   editProject() {
-    // Implement logic to navigate to the "edit-project" page
     console.log("Edit Project button clicked");
-    // Example: navigate to /edit-project/:id
+    this.router.navigate(['edit-project']);
   }
 }
