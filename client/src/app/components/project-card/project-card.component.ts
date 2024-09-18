@@ -16,4 +16,20 @@ export class ProjectCardComponent {
   toggleDetails() {
     this.showDetails = !this.showDetails;
   }
+
+  postProject() {
+    // Implement logic to post the project (e.g., make an API call)
+    console.log("Post Project button clicked");
+  }
+
+  cancelProject() {
+    // Implement logic to cancel the project (e.g., make an API call)
+    console.log("Cancel Project button clicked");
+  }
+
+  editProject() {
+    // Implement logic to navigate to the "edit-project" page
+    console.log("Edit Project button clicked");
+    // Example: navigate to /edit-project/:id
+  }
 }
