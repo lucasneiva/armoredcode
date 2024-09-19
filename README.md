@@ -51,7 +51,9 @@ O ArmoredCode resolve esse problema fornecendo uma plataforma feita sob medida p
 ### 4. Sistema de Propostas
 - Freelancers podem enviar propostas para projetos
 - Cada proposta inclui: valor proposto, prazo estimado e descrição do plano de trabalho
-- Clientes podem visualizar, aceitar ou recusar propostas
+- Cliente podem vizualizar as propostas por projeto
+- Clientes podem aceitar ou recusar propostas
+- Ao recusar uma proposta o cliente deve escrever o motivo
 
 ### 5. Comunicação
 - Canal de comunicação único para cada proposta
