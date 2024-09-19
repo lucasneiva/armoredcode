@@ -29,35 +29,36 @@
         </button>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+       
+      <div *ngIf="detailedProject" class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <p><strong>Created by:</strong> {{project.clientId}}</p>
+          <p><strong>Created by:</strong> {{detailedProject.clientId}}</p>
           <p><strong>Worked by:</strong> 
-            <ng-container *ngIf="project.freelancerId; else noFreelancer">
-              {{project.freelancerId}}
+            <ng-container *ngIf="detailedProject.freelancerId; else noFreelancer">
+              {{detailedProject.freelancerId}}
             </ng-container>
             <ng-template #noFreelancer>
               Not Specified
             </ng-template>
           </p>
-          <p><strong>Description:</strong> {{project.projectDescription}}</p>
+          <p><strong>Description:</strong> {{detailedProject.projectDescription}}</p>
           <p><strong>Budget:</strong>
-            <ng-container *ngIf="project.projectBudget; else hourlyRate">
-              {{project.projectBudget.min}} - {{project.projectBudget.max}} {{project.projectBudget.currency}}
+            <ng-container *ngIf="detailedProject.projectBudget; else hourlyRate">
+              {{detailedProject.projectBudget.min}} - {{detailedProject.projectBudget.max}} {{detailedProject.projectBudget.currency}}
             </ng-container>
             <ng-template #hourlyRate>
-              {{project.projectHourlyRate?.min}} - {{project.projectHourlyRate?.max}}
-              {{project.projectHourlyRate?.currency}}
+              {{detailedProject.projectHourlyRate?.min}} - {{detailedProject.projectHourlyRate?.max}}
+              {{detailedProject.projectHourlyRate?.currency}}
             </ng-template>
           </p>
-          <p><strong>Deadline:</strong> {{project.estimatedDuration}}</p>
-          <p><strong>Skills:</strong> {{project.skillIds}}</p>
+          <p><strong>Deadline:</strong> {{detailedProject.estimatedDuration}}</p>
+          <p><strong>Skills:</strong> {{detailedProject.skillIds}}</p>
           <p><strong>Location:</strong>
-            <ng-container *ngIf="project.location; else noLocation">
-              {{project.location.streetAddress}}<br>
-              {{project.location.neighborhood}}<br>
-              {{project.location.city}}, {{project.location.state}} {{project.location.cep}}<br>
-              {{project.location.country}}
+            <ng-container *ngIf="detailedProject.location; else noLocation">
+              {{detailedProject.location.streetAddress}}<br>
+              {{detailedProject.location.neighborhood}}<br>
+              {{detailedProject.location.city}}, {{detailedProject.location.state}} {{detailedProject.location.cep}}<br>
+              {{detailedProject.location.country}}
             </ng-container>
             <ng-template #noLocation>
               Not Specified
@@ -65,13 +66,13 @@
           </p>
         </div>
         <div>
-          <p><strong>Experience Level:</strong> {{project.experienceLevel}}</p>
-          <p><strong>Work Model:</strong> {{project.workModel}}</p>
-          <p><strong>Pricing Type:</strong> {{project.pricingType}}</p>
-          <p><strong>Estimated Duration:</strong> {{project.estimatedDuration}} {{project.estimatedDuration > 1 ? 'days'
+          <p><strong>Experience Level:</strong> {{detailedProject.experienceLevel}}</p>
+          <p><strong>Work Model:</strong> {{detailedProject.workModel}}</p>
+          <p><strong>Pricing Type:</strong> {{detailedProject.pricingType}}</p>
+          <p><strong>Estimated Duration:</strong> {{detailedProject.estimatedDuration}} {{detailedProject.estimatedDuration > 1 ? 'days'
             : 'day'}}</p>
-          <p><strong>Project Size:</strong> {{project.projectSize}}</p>
-          <p><strong>Status:</strong> {{project.projectStatus}}</p>
+          <p><strong>Project Size:</strong> {{detailedProject.projectSize}}</p>
+          <p><strong>Status:</strong> {{detailedProject.projectStatus}}</p>
         </div>
       </div>
 

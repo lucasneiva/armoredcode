@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { Project } from '../../services/project.service';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-project-card',
@@ -12,11 +12,36 @@ import { Project } from '../../services/project.service';
 })
 export class ProjectCardComponent {
   router = inject(Router);
-  @Input({required: true}) project!: Project;
+  projectService = inject(ProjectService);
+
+  @Input() project: any;
+  detailedProject: any = null;  // Separate object for detailed data
   showDetails = false; // Flag to control showing details
 
   toggleDetails() {
+    if (this.showDetails) {
+      this.detailedProject = null; // Clear project details when closing
+    } else {
+      this.loadProjectDetails(); // Load new data when opening
+    }
     this.showDetails = !this.showDetails;
+  }  
+
+  loadProjectDetails() {
+    const projectId = this.project._id;
+    this.projectService.getProjectById(projectId).subscribe(
+      (response) => {
+        if (response.success) {
+          this.detailedProject = response.data;  // Access the 'data' property from the response
+          //debug /* console.log('Full Project Data:', this.detailedProject); */
+        } else {
+          console.error('Failed to retrieve project details:', response.message);
+        }
+      },
+      (error) => {
+        console.error('Error fetching project details:', error);
+      }
+    );
   }
 
   postProject() {
