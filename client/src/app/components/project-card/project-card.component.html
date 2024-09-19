@@ -3,6 +3,7 @@
   <!--card start-->
   <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{'bg-gray-100': showDetails}"
     class="sticky w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+    <p class="text-sm text-gray-500">Project ID: {{project._id}}</p>  <!-- Added this line -->
     <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
       <span class="block py-2 mr-2">{{project.projectTitle}}</span>
       <span class="block w-fit p-2 border-2 border-transparent rounded-md text-white"
@@ -14,7 +15,9 @@
   <!--card details start-->
   <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10" *ngIf="showDetails">
     <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl w-full" style="max-height: 90vh; overflow-y: auto;">
+      <p class="text-sm text-gray-500">Project ID: {{project._id}}</p>  <!-- Added this line -->
       <div class="flex justify-between align-middle">
+        
         <h2 class="text-2xl font-bold mb-4">{{project.projectTitle}}</h2>
 
         <button (click)="toggleDetails()"
@@ -28,6 +31,15 @@
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
+          <p><strong>Created by:</strong> {{project.clientId}}</p>
+          <p><strong>Worked by:</strong> 
+            <ng-container *ngIf="project.freelancerId; else noFreelancer">
+              {{project.freelancerId}}
+            </ng-container>
+            <ng-template #noFreelancer>
+              Not Specified
+            </ng-template>
+          </p>
           <p><strong>Description:</strong> {{project.projectDescription}}</p>
           <p><strong>Budget:</strong>
             <ng-container *ngIf="project.projectBudget; else hourlyRate">
@@ -59,7 +71,6 @@
           <p><strong>Estimated Duration:</strong> {{project.estimatedDuration}} {{project.estimatedDuration > 1 ? 'days'
             : 'day'}}</p>
           <p><strong>Project Size:</strong> {{project.projectSize}}</p>
-          <p><strong>Created by:</strong> {{project.clientId}}</p>
           <p><strong>Status:</strong> {{project.projectStatus}}</p>
         </div>
       </div>
