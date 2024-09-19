@@ -51,12 +51,31 @@ export class ProjectCardComponent {
   }
 
   cancelProject() {
-    // Implement logic to cancel the project (e.g., make an API call)
-    console.log("Cancel Project button clicked");
+    const projectId = this.project._id; 
+
+    if (confirm("Are you sure you want to cancel this project?")) { 
+      this.projectService.deleteProject(projectId).subscribe(
+        (response) => {
+          if (response.success) {
+            console.log('Project cancelled successfully');
+            window.location.reload(); 
+            // You might need to emit an event to notify a parent component
+          } else {
+            console.error('Error cancelling project:', response.message);
+            // Show an error message to the user
+          }
+        },
+        (error) => {
+          console.error('Error cancelling project:', error);
+          // Show an error message to the user
+        }
+      );
+    }
   }
 
   editProject() {
     console.log("Edit Project button clicked");
     this.router.navigate(['../edit-project', this.project._id], { relativeTo: this.route });
   }
+
 }

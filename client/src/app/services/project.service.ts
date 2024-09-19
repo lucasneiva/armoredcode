@@ -31,6 +31,16 @@ export class ProjectService {
     return this.http.put<any>(`${apiUrls.projectServiceApi}/${projectId}`, projectObj, httpOptions);
   }
 
+  deleteProject(projectId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true 
+    };
+    return this.http.delete<any>(`${apiUrls.projectServiceApi}/${projectId}`, httpOptions);
+  }
+
   getProjectById(projectId: string | null): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
