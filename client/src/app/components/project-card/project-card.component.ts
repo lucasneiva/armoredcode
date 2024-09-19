@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 import { ProjectService } from '../../services/project.service';
 
 @Component({
@@ -12,6 +12,7 @@ import { ProjectService } from '../../services/project.service';
 })
 export class ProjectCardComponent {
   router = inject(Router);
+  route = inject(ActivatedRoute); // Inject ActivatedRoute
   projectService = inject(ProjectService);
 
   @Input() project: any;
@@ -25,7 +26,7 @@ export class ProjectCardComponent {
       this.loadProjectDetails(); // Load new data when opening
     }
     this.showDetails = !this.showDetails;
-  }  
+  }
 
   loadProjectDetails() {
     const projectId = this.project._id;
@@ -56,6 +57,6 @@ export class ProjectCardComponent {
 
   editProject() {
     console.log("Edit Project button clicked");
-    this.router.navigate(['edit-project']);
+    this.router.navigate(['../edit-project', this.project._id], { relativeTo: this.route });
   }
 }

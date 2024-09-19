@@ -5,10 +5,9 @@ import {
   ReactiveFormsModule, Validators
 } from '@angular/forms';
 import { Project, ProjectResponse, ProjectService } from '../../services/project.service';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 import { AuthService } from '../../services/auth.service';
 import { SkillService } from '../../services/skill.service';
-import { ActivatedRoute } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -41,7 +40,7 @@ export default class EditProjectComponent implements OnInit {
   isLoading = true;
   project: Project | null = null;
 
-  projectId!: string; // Add to store project ID
+  projectId!: string;
 
   ngOnInit() {
     // Correctly initialize pageNumbers array:
@@ -51,16 +50,22 @@ export default class EditProjectComponent implements OnInit {
     this.getProjectCategories();
 
     this.initForms();
-    this.loadProject()
-      .then(() => {
-        if (this.project) {
-          this.populateForms(this.project);
-        }
-      })
-      .catch(error => {
-        // Handle the error appropriately, e.g., show an error message
-        console.error('Error loading project in ngOnInit:', error);
-      });
+    // Get project ID from route parameters
+    this.route.params.subscribe(params => {
+      this.projectId = params['id'];
+
+      // Load project data after getting the ID
+      this.loadProject()
+        .then(() => {
+          if (this.project) {
+            this.populateForms(this.project);
+          }
+        })
+        .catch(error => {
+          // Handle the error appropriately, e.g., show an error message
+          console.error('Error loading project in ngOnInit:', error);
+        });
+    });
   }
 
   // Initialize forms and load data if available

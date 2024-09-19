@@ -11,7 +11,7 @@ export const routes: Routes = [
     {path:'edit-profile', loadComponent: ()=> import('./pages/edit-profile/edit-profile.component')},
     {path:'manage-project', loadComponent: ()=> import('./pages/manage-project/manage-project.component')},
     {path:'create-project', loadComponent: ()=> import('./pages/create-project/create-project.component')},
-    {path:'edit-project', loadComponent: ()=> import('./pages/edit-project/edit-project.component')},
+    { path: 'edit-project/:id', loadComponent: () => import('./pages/edit-project/edit-project.component') },
     
     {path:'freelancer-profile', loadComponent: ()=> import('./pages/freelancer-profile/freelancer-profile.component')},
 ];
