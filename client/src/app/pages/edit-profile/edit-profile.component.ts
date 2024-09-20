@@ -1,11 +1,10 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import {
   FormArray, FormBuilder, FormControl, FormGroup,
   ReactiveFormsModule, Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { SkillService } from '../../services/skill.service';
 import { SpecializationService } from '../../services/specialization.service';
 import { IndustryService } from '../../services/industry.service';
 import { ProfileService, Profile, ProfileResponse } from '../../services/profile.service';
@@ -18,15 +17,16 @@ import { firstValueFrom } from 'rxjs'; // Import firstValueFrom
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './edit-profile.component.html',
-  styleUrl: './edit-profile.component.scss'
+  styleUrl: './edit-profile.component.scss',
+  providers: [DatePipe] // Forneça o DatePipe aqui
 })
 export default class EditProfileComponent implements OnInit {
   fb = inject(FormBuilder);
   router = inject(Router);
+  datePipe = inject(DatePipe);
   //services
   authService = inject(AuthService);
   industryService = inject(IndustryService);
-  skillService = inject(SkillService);
   specializationService = inject(SpecializationService);
   profileService = inject(ProfileService);
   userService = inject(UserService);
@@ -44,8 +44,6 @@ export default class EditProfileComponent implements OnInit {
   totalPages!: number; // Total number of pages
 
   //arrays:
-  selectedSkillId: string = '';
-  skills: any[] = [];
   specializations: any[] = [];
   industries: any[] = [];
   pageNumbers: number[] = [];
@@ -62,7 +60,6 @@ export default class EditProfileComponent implements OnInit {
       this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     } else if (this.userRole === 'FREELANCER') {
       this.isClient = false;
-      this.fetchSkills();
       this.fetchSpecializations();
       this.currentPage = 1;
       this.totalPages = 7;
@@ -72,16 +69,16 @@ export default class EditProfileComponent implements OnInit {
     }
 
     this.initForms();
-    this.loadProfile() 
-    .then(() => {
-      if (this.profile) {
-        this.populateForms(this.profile);
-      }
-    })
-    .catch(error => {
-      // Handle the error appropriately, e.g., show an error message
-      console.error('Error loading profile in ngOnInit:', error); 
-    }); 
+    this.loadProfile()
+      .then(() => {
+        if (this.profile) {
+          this.populateForms(this.profile);
+        }
+      })
+      .catch(error => {
+        // Handle the error appropriately, e.g., show an error message
+        console.error('Error loading profile in ngOnInit:', error);
+      });
   }
 
   // Initialize forms and load data if available
@@ -124,11 +121,10 @@ export default class EditProfileComponent implements OnInit {
         state: ['SP'],
         country: ['Brasil'],
       }),
-      selectedSkills: this.fb.array([]),
-      portfolioItems: this.fb.array([this.createPortfolioItem()]),
-      education: this.fb.array([this.createEducationForm()]),
-      certifications: this.fb.array([this.createCertificationForm()]),
-      workExperiences: this.fb.array([this.createExperienceForm()]),
+      portfolioItems: this.fb.array([]),
+      education: this.fb.array([]),
+      certifications: this.fb.array([]),
+      workExperiences: this.fb.array([]),
     });
   }
 
@@ -137,8 +133,8 @@ export default class EditProfileComponent implements OnInit {
     this.isLoading = true;
     const userId = this.authService.getUserId();
     const profile$ = this.profileService.getProfile(userId);
-  
-    return firstValueFrom(profile$).then((response: ProfileResponse) => { 
+
+    return firstValueFrom(profile$).then((response: ProfileResponse) => {
       console.log("Full API response:", response);
       if (response.data && response.data.hasProfile) {
         this.profile = response.data.profile;
@@ -197,26 +193,71 @@ export default class EditProfileComponent implements OnInit {
           }
         });
 
-        // Populate FormArrays
-        profile.skillIds?.forEach(skill =>
-          this.selectedSkills.push(new FormControl(skill._id))
-        );
+        // Preenche os FormArrays somente se houver dados no perfil
+        // portfolio
+        if (profile.portfolioItems?.length) {
+          profile.portfolioItems.forEach(item => {
+            const PortfolioTitle = item.title;
+            const PortfolioDescripition = item.description;
+            const PortfolioURL = item.url;
+            this.portfolioItems.push(this.fb.group({
+              title: PortfolioTitle,
+              description: PortfolioDescripition,
+              url: PortfolioURL
+            }));
+          });
+        }
 
-        profile.portfolioItems?.forEach(item =>
-          this.portfolioItems.push(this.fb.group(item))
-        );
+        // Educacional
+        if (profile.educations?.length) {
+          profile.educations.forEach(edu => {
+            const DegreeName = edu.degreeName;
+            const FieldOfStudy = edu.fieldOfStudy;
+            const Institution = edu.institution;
+            const formattedStartDate = this.datePipe.transform(edu.startDate, 'yyyy-MM-dd');
+            const formattedEndDate = this.datePipe.transform(edu.endDate, 'yyyy-MM-dd');
+            this.education.push(this.fb.group({
+              degreeName: DegreeName,
+              fieldOfStudy: FieldOfStudy,
+              institution: Institution,
+              startDate: formattedStartDate,
+              endDate: formattedEndDate
+            }));
+          });
+        }
 
-        profile.educations?.forEach(edu =>
-          this.education.push(this.fb.group(edu))
-        );
+        //certificacoes
+        if (profile.certifications?.length) {
+          profile.certifications.forEach(cert => {
+            const certificationName = cert.name;
+            const certificationOrganization = cert.issuingOrganization;
+            const formattedIssueDate = this.datePipe.transform(cert.issueDate, 'yyyy-MM-dd'); // Formate a data
+            this.certifications.push(this.fb.group({
+              name: certificationName,
+              issuingOrganization: certificationOrganization,
+              issueDate: formattedIssueDate // Adicione a data formatada
+            }));
+          });
+        }
 
-        profile.certifications?.forEach(cert =>
-          this.certifications.push(this.fb.group(cert))
-        );
+        // Experiência profissional
+        if (profile.workExperiences?.length) {
+          profile.workExperiences.forEach(exp => {
+            const CompanyName = exp.companyName;
+            const JobTitle = exp.jobTitle;
+            const formattedStartDate = this.datePipe.transform(exp.startDate, 'yyyy-MM-dd');
+            const formattedEndDate = this.datePipe.transform(exp.endDate, 'yyyy-MM-dd');
+            const JobDescription = exp.jobDescription;
+            this.workExperiences.push(this.fb.group({
+              companyName: CompanyName,
+              jobTitle: JobTitle,
+              startDate: formattedStartDate,
+              endDate: formattedEndDate,
+              jobDescription: JobDescription
+            }));
+          });
+        }
 
-        profile.workExperiences?.forEach(exp =>
-          this.workExperiences.push(this.fb.group(exp))
-        );
       }
     }
   }
@@ -255,9 +296,6 @@ export default class EditProfileComponent implements OnInit {
 
       // Prepare the data for the freelancer profile
       const formData = this.freelancerProfileForm.value;
-
-      // Convert selectedSkills array to a simple array of skill IDs
-      formData.skillIds = formData.selectedSkills;
 
       this.profileService.editProfile(formData)
         .subscribe({
@@ -411,42 +449,6 @@ export default class EditProfileComponent implements OnInit {
         console.error("Error fetching specializations:", error);
       }
     );
-  }
-
-
-  fetchSkills() {
-    this.skillService.getSkills().subscribe(
-      (response: any) => {
-        this.skills = response.data;
-      },
-      (error) => {
-        console.error("Error fetching skills:", error);
-      }
-    );
-  }
-
-  onSkillSelected(event: any) {
-    this.selectedSkillId = event.target.value;
-  }
-
-  addSkill() {
-    if (this.selectedSkillId) {
-      this.selectedSkills.push(new FormControl(this.selectedSkillId));
-      this.selectedSkillId = '';
-    }
-  }
-
-  removeSkill(index: number) {
-    this.selectedSkills.removeAt(index);
-  }
-
-  getSkillName(skillId: string): string {
-    const skill = this.skills.find((s) => s._id === skillId);
-    return skill ? skill.skillName : '';
-  }
-
-  get selectedSkills(): FormArray {
-    return this.freelancerProfileForm.get('selectedSkills') as FormArray;
   }
 
   private displayFormErrors(formGroup: FormGroup) {
