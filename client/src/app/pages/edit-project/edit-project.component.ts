@@ -164,7 +164,7 @@ export default class EditProjectComponent implements OnInit {
       this.editProjectForm.patchValue({
         clientId: project.clientId,
         freelancerId: project.freelancerId,
-        projectCategoryId: project.projectCategoryId,
+        projectCategoryId: project.projectCategoryId?._id,
         projectTitle: project.projectTitle,
         projectDescription: project.projectDescription,
         pricingType: project.pricingType,
@@ -180,10 +180,26 @@ export default class EditProjectComponent implements OnInit {
         projectSize: project.projectSize,
         experienceLevel: project.experienceLevel,
         workModel: project.workModel,
-        location: project.location || {},
+        location: {
+          cep: project.location?.cep || '',
+          streetAddress: project.location?.streetAddress || '',
+          neighborhood: project.location?.neighborhood || '',
+          city: project.location?.city || '',
+          state: project.location?.state || '',
+          country: project.location?.country || '',
+        },
         startDate: project.startDate,
         endDate: project.endDate,
       });
+
+      // Populate skillIds array correctly
+      const skillIdsControl = this.editProjectForm.get('skillIds') as FormControl;
+      skillIdsControl.setValue(project.skillIds.map((skill: any) => skill._id)); 
+
+      // Populate FormArrays
+      project.skillIds?.forEach((skill: { _id: any; }) =>
+        this.skills.push(new FormControl(skill._id))
+      );
       // Populate budget or hourly rate based on pricing type
       if (project.pricingType === 'BUDGET') {
         this.editProjectForm.get('projectBudget')?.patchValue(project.projectBudget);
