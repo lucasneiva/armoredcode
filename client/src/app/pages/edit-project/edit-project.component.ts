@@ -17,30 +17,36 @@ import { firstValueFrom } from 'rxjs';
 export default class EditProjectComponent implements OnInit {
   fb = inject(FormBuilder);
   router = inject(Router);
+  route = inject(ActivatedRoute);
+
   authService = inject(AuthService);
   projectService = inject(ProjectService);
   skillService = inject(SkillService);
-  route = inject(ActivatedRoute);
 
   editProjectForm!: FormGroup;
+
   isLoading = true;
-  project: any;
+  showSkillsList = false;
+
   projectCategories: any[] = [];
   skills: any[] = [];
   filteredSkills: any[] = [];
+  pageNumbers: number[] = [];
+
   currentPage = 1;
   totalPages = 5;
-  pageNumbers: number[] = [];
-  showSkillsList = false;
+  project: any;
   projectId!: string;
 
   ngOnInit(): void {
+    this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+
+    this.fetchSkills();
+    this.getProjectCategories();
     this.initForms();  // Initialize the form early in ngOnInit
-    // Add this log to check if projectId is being correctly passed
+
     this.route.params.subscribe(params => {
       this.projectId = params['id'];
-      console.log('Project ID:', this.projectId);  // Log projectId for debugging
-  
       if (this.projectId) {
         this.loadProject();  // Load the project only if projectId is valid
       } else {
@@ -48,7 +54,62 @@ export default class EditProjectComponent implements OnInit {
       }
     });
   }
-  
+
+  // Navigation between form pages
+  showPage(pageNumber: number): boolean {
+    return this.currentPage === pageNumber;
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) this.currentPage--;
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) this.currentPage++;
+  }
+
+  EditProject() {
+    this.editProjectForm.patchValue({ projectStatus: 'DRAFT' });
+    /*debug*/ console.log(this.editProjectForm.value);
+    this.projectService
+      .updateProject(this.projectId, this.editProjectForm.value)
+      .subscribe({
+        next: (res) => {
+          alert('project Edited!');
+          //localStorage.setItem("project_id", res.data._id);
+          this.projectService.isDraft$.next(true);
+          this.editProjectForm.reset();
+          this.router.navigate(['manage-project']);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
+
+  PostProject() {
+    this.editProjectForm.patchValue({ projectStatus: 'POSTED' });
+    /*debug*/ console.log(this.editProjectForm.value);
+    this.projectService
+      .updateProject(this.projectId, this.editProjectForm.value)
+      .subscribe({
+        next: (res) => {
+          alert('project Edited and Posted!');
+          this.projectService.isPosted$.next(true);
+          this.router.navigate(['manage-project']);
+          this.editProjectForm.reset();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
+
+  CancelProject() {
+    alert('project edition Canceled!');
+    this.router.navigate(['manage-project']);
+    this.editProjectForm.reset();
+  }
 
   // Initialize form structure
   initForms(): void {
@@ -85,18 +146,53 @@ export default class EditProjectComponent implements OnInit {
     });
   }
 
-  loadProject(): Promise<void> {
+  loadProject(): void {
     this.isLoading = true;
-    return firstValueFrom(this.projectService.getProjectById(this.projectId)).then(response => {
+    this.projectService.getProjectById(this.projectId).subscribe(response => {
       this.project = response.data;
-      console.log('Project loaded:', this.project);  // Debug log
+      /*Debug*/ //console.log('Project loaded:', this.project);  
       this.isLoading = false;
-    }).catch(error => {
-      console.error('Error loading project:', error);
-      this.isLoading = false;
+      if (this.project) {
+        this.populateForms(this.project);  // Pass the project object here
+      }
     });
   }
-  
+
+  // Populate form with fetched project data
+  populateForms(project: any): void {
+    if (project) {
+      this.editProjectForm.patchValue({
+        clientId: project.clientId,
+        freelancerId: project.freelancerId,
+        projectCategoryId: project.projectCategoryId,
+        projectTitle: project.projectTitle,
+        projectDescription: project.projectDescription,
+        pricingType: project.pricingType,
+        projectBudget: {
+          min: project.projectBudget.min,
+          max: project.projectBudget.max,
+        },
+        projectHourlyRate: {
+          min: project.projectHourlyRate.min,
+          max: project.projectHourlyRate.max,
+        },
+        estimatedDuration: project.estimatedDuration,
+        projectSize: project.projectSize,
+        experienceLevel: project.experienceLevel,
+        workModel: project.workModel,
+        location: project.location || {},
+        startDate: project.startDate,
+        endDate: project.endDate,
+      });
+      // Populate budget or hourly rate based on pricing type
+      if (project.pricingType === 'BUDGET') {
+        this.editProjectForm.get('projectBudget')?.patchValue(project.projectBudget);
+      } else {
+        this.editProjectForm.get('projectHourlyRate')?.patchValue(project.projectHourlyRate);
+      }
+    }
+  }
+
   // Fetch project categories
   getProjectCategories(): void {
     this.projectService.getProjectCategories().subscribe(response => {
@@ -189,66 +285,4 @@ export default class EditProjectComponent implements OnInit {
     });
   }
 
-  // Populate form with fetched project data
-  populateForms(project: any): void {
-    if (project) {
-      this.editProjectForm.patchValue({
-        clientId: project.clientId,
-        freelancerId: project.freelancerId,
-        projectCategoryId: project.projectCategoryId,
-        projectTitle: project.projectTitle,
-        projectDescription: project.projectDescription,
-        pricingType: project.pricingType,
-        estimatedDuration: project.estimatedDuration,
-        projectSize: project.projectSize,
-        experienceLevel: project.experienceLevel,
-        workModel: project.workModel,
-        location: project.location || {},
-        startDate: project.startDate,
-        endDate: project.endDate,
-      });
-      // Populate budget or hourly rate based on pricing type
-      if (project.pricingType === 'BUDGET') {
-        this.editProjectForm.get('projectBudget')?.patchValue(project.projectBudget);
-      } else {
-        this.editProjectForm.get('projectHourlyRate')?.patchValue(project.projectHourlyRate);
-      }
-    }
-  }
-
-  showPage(pageNumber: number): boolean {
-    return this.currentPage === pageNumber;
-  }
-
-  // Navigation between form pages
-  previousPage(): void {
-    if (this.currentPage > 1) this.currentPage--;
-  }
-
-  nextPage(): void {
-    if (this.currentPage < this.totalPages) this.currentPage++;
-  }
-
-  // Form submission methods
-  EditProject(): void {
-    if (this.editProjectForm.valid) {
-      this.editProjectForm.patchValue({ projectStatus: 'DRAFT' });
-      this.projectService.updateProject(this.projectId, this.editProjectForm.value).subscribe(() => {
-        this.router.navigate(['/projects']);
-      });
-    }
-  }
-
-  PostProject(): void {
-    if (this.editProjectForm.valid) {
-      this.editProjectForm.patchValue({ projectStatus: 'POSTED' });
-      this.projectService.updateProject(this.projectId, this.editProjectForm.value).subscribe(() => {
-        this.router.navigate(['/projects']);
-      });
-    }
-  }
-
-  CancelProject(): void {
-    this.router.navigate(['/projects']);
-  }
 }
