@@ -116,6 +116,7 @@ export default class EditProjectComponent implements OnInit {
     this.editProjectForm = this.fb.group({
       clientId: [this.authService.getUserId(), Validators.required],
       freelancerId: [''],
+      projectStatus: [''],
       projectCategoryId: ['', Validators.required],
       skillIds: [[], Validators.required],
       projectTitle: ['', Validators.required],
@@ -164,6 +165,7 @@ export default class EditProjectComponent implements OnInit {
       this.editProjectForm.patchValue({
         clientId: project.clientId,
         freelancerId: project.freelancerId,
+        projectStatus: project.projectStatus,
         projectCategoryId: project.projectCategoryId?._id,
         projectTitle: project.projectTitle,
         projectDescription: project.projectDescription,
