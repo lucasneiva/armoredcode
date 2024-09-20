@@ -112,12 +112,11 @@ export default class EditProjectComponent implements OnInit {
     //const userId = this.authService.getUserId();
     //fazer forma de pegar projectId
     const project$ = this.projectService.getProjectById(this.projectId);
+    alert(this.projectId);
 
     return firstValueFrom(project$).then((response: ProjectResponse) => {
       console.log("Full API response:", response);
-      if (response.data && response.data.isDraft) {
-        this.project = response.data.project;
-      } else if (response.data && response.data.isPosted) {
+      if (response.data && response.data) {
         this.project = response.data.project;
       } else {
         console.log('No project found for this ID.');
