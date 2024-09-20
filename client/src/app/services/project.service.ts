@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiUrls } from '../api.urls';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +48,9 @@ export class ProjectService {
       }),
       withCredentials: true // VERY IMPORTANT: Include cookies in requests
     };
-    return this.http.get<any>(`${apiUrls.projectServiceApi}/${projectId}`, httpOptions);
+    return this.http.get<any>(`${apiUrls.projectServiceApi}/${projectId}`, httpOptions).pipe(
+      tap(response => console.log('API response:', response))  // Log API response
+    );
   }
 
   getProjectCategories(): Observable<any> {

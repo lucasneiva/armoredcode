@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <form [formGroup]="editProjectForm">
                 <div *ngIf="showPage(1)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
                     <!--Project title Start-->
@@ -46,13 +46,13 @@
                     </div>
                     <!--Project duration End-->
                 </div>
-    
+
                 <div *ngIf="showPage(2)" class="min-h-96 min-w-96 grid justify-center align-middle">
                     <!--Project pricing Start-->
                     <div class="my-auto mx-auto h-fit w-full">
                         <h2 class="font-semibold mt-4 text-center">Project Pricing:</h2>
                     </div>
-    
+
                     <div class="my-auto mx-auto h-fit">
                         <div class="flex justify-center align-middle">
                             <div class="m-3">
@@ -66,8 +66,8 @@
                                 <label for="pricingType">Hourly Rate</label>
                             </div>
                         </div>
-                        <div *ngIf="editProjectForm.get('pricingType')?.value === 'BUDGET'" formGroupName="projectBudget"
-                            class="flex justify-center align-middle h-fit">
+                        <div *ngIf="editProjectForm.get('pricingType')?.value === 'BUDGET'"
+                            formGroupName="projectBudget" class="flex justify-center align-middle h-fit">
                             <!-- Budget inputs -->
                             <div class="m-3">
                                 <h2 class="font-semibold mt-2">Min Budget:</h2>
@@ -80,7 +80,7 @@
                                     class="text-center max-w-24 p-1 border rounded" />
                             </div>
                         </div>
-    
+
                         <div *ngIf="editProjectForm.get('pricingType')?.value === 'HOURLY_RATE'"
                             formGroupName="projectHourlyRate" class="flex justify-center align-middle h-fit">
                             <!-- Hourly Rate inputs -->
@@ -89,7 +89,7 @@
                                 <input formControlName="min" type="number" placeholder="Min" id="minHourlyRate" required
                                     class="text-center max-w-24 p-1 border rounded" />
                             </div>
-    
+
                             <div class="m-3">
                                 <h2 class="font-semibold mt-2">Max Rate:</h2>
                                 <input formControlName="max" type="number" placeholder="Max" id="maxHourlyRate" required
@@ -99,7 +99,7 @@
                     </div>
                     <!--Project pricing End-->
                 </div>
-    
+
                 <div *ngIf="showPage(3)" class="min-h-96 min-w-96 grid justify-center align-middle">
                     <!--Project scope Module Start-->
                     <h2 class="font-semibold mt-4">Scope:</h2>
@@ -125,8 +125,8 @@
                     <h2 class="font-semibold mt-4">Experience Level:</h2>
                     <div class="p-1 my-2 flex align-middle items-center h-fit">
                         <div class="m-0.5">
-                            <input type="radio" id="experienceLevel" formControlName="experienceLevel" value="ENTRY-LEVEL"
-                                class="m-2 font-normal" checked />
+                            <input type="radio" id="experienceLevel" formControlName="experienceLevel"
+                                value="ENTRY-LEVEL" class="m-2 font-normal" checked />
                             <label for="experienceLevel">Entry Level</label>
                         </div>
                         <div class="m-0.5">
@@ -162,7 +162,7 @@
                     </div>
                     <!--Project Workspace type Module End-->
                 </div>
-    
+
                 <div *ngIf="showPage(4)" class="min-h-96 min-w-96 grid align-middle">
                     <!--Project descripition Module Start-->
                     <div class="h-fit grid align-top">
@@ -172,7 +172,7 @@
                     </div>
                     <!--Project descripition Module End-->
                 </div>
-    
+
                 <div *ngIf="showPage(5)" class="min-h-96 min-w-96 grid align-middle">
                     <!--Search Skills Module Start-->
                     <div class="h-fit grid align-top w-full">
@@ -185,8 +185,9 @@
                                 class="w-full p-2 pl-9 rounded rounded-r-none text-gray-600"
                                 (input)="searchSkills($event)" />
                         </div>
-    
-                        <div *ngIf="showSkillsList" class="row rounded-b-lg bg-slate-50 border-slate-100 overflow-hidden">
+
+                        <div *ngIf="showSkillsList"
+                            class="row rounded-b-lg bg-slate-50 border-slate-100 overflow-hidden">
                             <ul>
                                 <li *ngFor="let skill of filteredSkills">
                                     <button class="w-full border-2 border-slate-100 hover:bg-slate-200"
@@ -196,10 +197,10 @@
                                 </li>
                             </ul>
                         </div>
-    
+
                         <div *ngIf="hasSelectedSkills()" class="grid justify-center grid-cols-2 gap-2 max-lg:grid-cols-1
                              mt-4 p-4 bg-slate-50 border-2 border-slate-200 rounded-lg">
-    
+
                             <div *ngFor="let skillId of editProjectForm.get('skillIds')?.value"
                                 class="flex mb-2 h-8 rounded bg-blue-500 w-fit">
                                 <div class="text-white py-1 px-4 flex pr-4 text-nowrap overflow-clip">
@@ -215,7 +216,7 @@
                     <!--Search Skills Module End-->
                 </div>
             </form>
-    
+
             <!--buttons-->
             <div *ngIf="currentPage === 5" class="flex justify-center place-items-end mt-10">
                 <button [disabled]="editProjectForm.invalid" [class.disabled]="editProjectForm.invalid"
@@ -235,7 +236,7 @@
             </div>
         </div>
         <!--filler form end-->
-    
+
         <div class="flex justify-center w-full right-0 left-0 my-auto bottom-20 max-lg:bottom-14 fixed">
             <!-- Previous Button -->
             <button (click)="previousPage()" [disabled]="currentPage === 1"
@@ -243,7 +244,7 @@
                 [ngClass]="{'hover:bg-blue-700': currentPage > 1, 'opacity-50 cursor-not-allowed': currentPage === 1}">
                 Previous
             </button>
-    
+
             <!-- Next Button -->
             <button (click)="nextPage()" [disabled]="currentPage === totalPages"
                 class="bg-blue-600 text-white font-semibold rounded p-4 max-lg:w-full w-64 mx-1"
@@ -252,5 +253,5 @@
             </button>
         </div>
     </ng-container>
-    
+
 </div>
