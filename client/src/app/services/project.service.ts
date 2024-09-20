@@ -28,7 +28,7 @@ export class ProjectService {
       }),
       withCredentials: true  // VERY IMPORTANT: Include cookies in requests
     };
-    return this.http.put<any>(`${apiUrls.projectServiceApi}/${projectId}`, projectObj, httpOptions);
+    return this.http.patch<any>(`${apiUrls.projectServiceApi}/${projectId}`, projectObj, httpOptions);
   }
 
   deleteProject(projectId: string): Observable<any> {
