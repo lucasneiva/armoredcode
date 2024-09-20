@@ -2,7 +2,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import {
   FormArray, FormBuilder, FormControl, FormGroup,
-  ReactiveFormsModule, Validators,
+  ReactiveFormsModule, FormsModule, Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { SpecializationService } from '../../services/specialization.service';
@@ -11,11 +11,12 @@ import { ProfileService, Profile, ProfileResponse } from '../../services/profile
 import { UserService, User } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { firstValueFrom } from 'rxjs'; // Import firstValueFrom
+import { SkillService } from '../../services/skill.service';
 
 @Component({
   selector: 'app-edit-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, FormsModule],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.scss',
   providers: [DatePipe] // Forneça o DatePipe aqui
@@ -27,6 +28,7 @@ export default class EditProfileComponent implements OnInit {
   //services
   authService = inject(AuthService);
   industryService = inject(IndustryService);
+  skillService = inject(SkillService); // Inject SkillService
   specializationService = inject(SpecializationService);
   profileService = inject(ProfileService);
   userService = inject(UserService);
@@ -36,6 +38,13 @@ export default class EditProfileComponent implements OnInit {
   freelancerProfileForm!: FormGroup;
 
   //constants
+  selectedSkillControl = new FormControl(''); // FormControl for the dropdown
+  // Getter for skillIds FormArray (for easier access in template)
+  get skillIds(): FormArray {
+    return this.freelancerProfileForm.get('skillIds') as FormArray;
+  }
+
+  selectedSkillId: string = ''; // Initialize with an empty string
   userRole: string | null = null;
   isClient: boolean = false;
   isLoading = true;
@@ -44,6 +53,7 @@ export default class EditProfileComponent implements OnInit {
   totalPages!: number; // Total number of pages
 
   //arrays:
+  skills: any[] = []; // Array to store skills
   specializations: any[] = [];
   industries: any[] = [];
   pageNumbers: number[] = [];
@@ -60,6 +70,7 @@ export default class EditProfileComponent implements OnInit {
       this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     } else if (this.userRole === 'FREELANCER') {
       this.isClient = false;
+      this.fetchSkills(); // Fetch skills in ngOnInit for freelancer
       this.fetchSpecializations();
       this.currentPage = 1;
       this.totalPages = 7;
@@ -69,16 +80,19 @@ export default class EditProfileComponent implements OnInit {
     }
 
     this.initForms();
-    this.loadProfile()
-      .then(() => {
+    // Fetch skills first
+    this.fetchSkills().then(() => {
+      // Then load profile and populate forms
+      this.loadProfile().then(() => {
         if (this.profile) {
           this.populateForms(this.profile);
         }
-      })
-      .catch(error => {
-        // Handle the error appropriately, e.g., show an error message
+      }).catch(error => {
         console.error('Error loading profile in ngOnInit:', error);
       });
+    }).catch(error => {
+      console.error('Error fetching skills:', error);
+    });
   }
 
   // Initialize forms and load data if available
@@ -121,6 +135,7 @@ export default class EditProfileComponent implements OnInit {
         state: ['SP'],
         country: ['Brasil'],
       }),
+      skillIds: this.fb.array([]), // Initialize as an empty FormArray
       portfolioItems: this.fb.array([]),
       education: this.fb.array([]),
       certifications: this.fb.array([]),
@@ -255,6 +270,19 @@ export default class EditProfileComponent implements OnInit {
               endDate: formattedEndDate,
               jobDescription: JobDescription
             }));
+          });
+        }
+
+        // Populate skillIds FormArray and ensure skill names are available
+        if (profile && profile.skillIds && profile.skillIds.length > 0) {
+          const skillIdsControl = this.freelancerProfileForm.get('skillIds') as FormArray;
+          profile.skillIds.forEach(skillId => {
+            const skill = this.skills.find(s => s._id === skillId); // Find skill object
+            if (skill) {
+              skillIdsControl.push(new FormControl(skill._id));
+            } else {
+              console.warn(`Skill with ID ${skillId} not found in the skills list`);
+            }
           });
         }
 
@@ -427,7 +455,6 @@ export default class EditProfileComponent implements OnInit {
     });
   }
 
-
   fetchIndustries() {
     this.industryService.getIndustries().subscribe(
       (response: any) => {
@@ -439,7 +466,6 @@ export default class EditProfileComponent implements OnInit {
     );
   }
 
-
   fetchSpecializations() {
     this.specializationService.getSpecializations().subscribe(
       (response: any) => {
@@ -449,6 +475,41 @@ export default class EditProfileComponent implements OnInit {
         console.error("Error fetching specializations:", error);
       }
     );
+  }
+
+  fetchSkills(): Promise<void> {
+    return firstValueFrom(this.skillService.getSkills()).then(response => {
+      this.skills = response.data;
+    });
+  }
+
+  // Add selected skill (modified for dropdown)
+  addSelectedSkill(): void {
+    const selectedSkillId = this.selectedSkillControl.value;
+    if (selectedSkillId && !this.skillIds.value.includes(selectedSkillId)) {
+      this.skillIds.push(new FormControl(selectedSkillId));
+      this.selectedSkillControl.reset(); // Reset the dropdown after adding
+    }
+  }
+
+  removeSkill(index: number): void {
+    this.skillIds.removeAt(index);
+  }
+
+  // Check if skills are selected
+  hasSelectedSkills(): boolean {
+    const skillIdsControl = this.freelancerProfileForm.get('skillIds') as FormControl;
+    return skillIdsControl.value && skillIdsControl.value.length > 0;
+  }
+
+  // Method to get skill object by ID
+  getSkillObjectById(skillId: string): any | undefined {
+    return this.skills.find((s) => s._id === skillId);
+  }
+
+  // Method to get skill name by ID (updated)
+  getSkillNameById(skill: any): string {
+    return skill ? skill.skillName : '';
   }
 
   private displayFormErrors(formGroup: FormGroup) {
