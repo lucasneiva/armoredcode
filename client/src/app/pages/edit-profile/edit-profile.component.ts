@@ -2,7 +2,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import {
   FormArray, FormBuilder, FormControl, FormGroup,
-  ReactiveFormsModule, FormsModule, Validators,
+  ReactiveFormsModule, Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { SpecializationService } from '../../services/specialization.service';
@@ -16,7 +16,7 @@ import { SkillService } from '../../services/skill.service';
 @Component({
   selector: 'app-edit-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.scss',
   providers: [DatePipe] // Forneça o DatePipe aqui
@@ -483,12 +483,11 @@ export default class EditProfileComponent implements OnInit {
     });
   }
 
-  // Add selected skill (modified for dropdown)
   addSelectedSkill(): void {
     const selectedSkillId = this.selectedSkillControl.value;
     if (selectedSkillId && !this.skillIds.value.includes(selectedSkillId)) {
       this.skillIds.push(new FormControl(selectedSkillId));
-      this.selectedSkillControl.reset(); // Reset the dropdown after adding
+      this.selectedSkillControl.setValue(selectedSkillId);
     }
   }
 
