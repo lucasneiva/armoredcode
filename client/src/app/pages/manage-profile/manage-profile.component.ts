@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ProfileService, Profile, ProfileResponse } from '../../services/profile.service';
+import { Industry, IndustryService } from '../../services/industry.service';
 
 @Component({
   selector: 'app-manage-profile',
@@ -17,10 +18,13 @@ export default class ManageProfileComponent implements OnInit {
   router = inject(Router);
   authService = inject(AuthService);
   profileService = inject(ProfileService);
+  industryService = inject(IndustryService);
 
   profileForm !: FormGroup;
 
   profile: Profile | null = null;
+  industry: Industry | null = null;
+
   isLoading = true;
   showConfirmationModal = false; // Flag for the confirmation modal
 
@@ -41,11 +45,29 @@ export default class ManageProfileComponent implements OnInit {
             // Handle the case where there is no profile, maybe set a flag
             console.log('No profile found for this user.');
           }
+
+          // If there's an industry ID, fetch the industry data
+          if (this.profile?.industryId) {
+            this.loadIndustry(this.profile.industryId);
+          }
           this.isLoading = false;
         },
         error: (error) => {
           console.error("Error loading profile:", error);
           this.isLoading = false;
+        }
+      });
+  }
+
+  loadIndustry(industryId: string) {
+    this.industryService.getIndustryById(industryId)
+      .subscribe({
+        next: (industryData) => {
+          this.industry = industryData.data;
+          console.log(industryData);
+        },
+        error: (error) => {
+          console.error("Error loading industry:", error);
         }
       });
   }

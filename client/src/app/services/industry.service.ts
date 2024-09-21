@@ -28,6 +28,16 @@ export class IndustryService {
     };
     return this.http.get<any>(`${apiUrls.industryServiceApi}`, httpOptions);
   }
+
+  getIndustryById(industryId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true  // Include cookies in requests
+    };
+    return this.http.get<any>(`${apiUrls.industryServiceApi}/${industryId}`, httpOptions);
+  }
   
 }
 export type Industry = {
