@@ -82,6 +82,11 @@ export default class ManageProfileComponent implements OnInit {
   }
 
   loadSkills(skillIds: { _id: string; name: string; }[]){
+
+    skillIds.forEach((_id) => {
+      console.log(_id);
+    });
+    /*
     const array: any[] = skillIds;
     array.forEach(skillId => {
       this.skillService.getSkillById(skillId)
@@ -96,6 +101,7 @@ export default class ManageProfileComponent implements OnInit {
         }
       });
     })
+      */
   }
   
   // Function to show the confirmation modal

@@ -183,6 +183,7 @@ export type Profile = {
   skillIds?: Array<{
     _id: string;
     name: string; // Assuming you also fetch skill names
+    description: string;
   }>;
   portfolioItems?: Array<{
     title: string;
