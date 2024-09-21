@@ -28,8 +28,7 @@ export default class ManageProfileComponent implements OnInit {
 
   profile: Profile | null = null;
   industry: Industry | null = null;
-  skill: Skill | null = null;
-  skills: string[] = []; 
+  skills: string[] = [];
 
   isLoading = true;
   showConfirmationModal = false; // Flag for the confirmation modal
@@ -58,7 +57,7 @@ export default class ManageProfileComponent implements OnInit {
             /*debug*/ //console.log(this.profile.skillIds);
             this.loadSkills(this.profile.skillIds);
           }
-         
+
           this.isLoading = false;
         },
         error: (error) => {
@@ -81,29 +80,21 @@ export default class ManageProfileComponent implements OnInit {
       });
   }
 
-  loadSkills(skillIds: { _id: string; name: string; }[]){
-
-    skillIds.forEach((_id) => {
-      console.log(_id);
-    });
-    /*
-    const array: any[] = skillIds;
-    array.forEach(skillId => {
+  loadSkills(skillIds: any[] ) {
+    skillIds.forEach((skillId) => {
       this.skillService.getSkillById(skillId)
       .subscribe({
         next: (skillData) => {
-          this.skill = skillData.data;
           this.skills.push(skillData.data.skillName);
-          console.log(this.skills);
+          /*debug*/ //console.log("skill: " + this.skills); console.log("id: " + skillId);
         },
         error: (error) => {
           console.error("Error loading skill:", error);
         }
       });
-    })
-      */
+    });
   }
-  
+
   // Function to show the confirmation modal
   showDeleteConfirmation() {
     this.showConfirmationModal = true;

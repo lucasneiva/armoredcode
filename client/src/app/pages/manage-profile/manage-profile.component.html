@@ -92,8 +92,8 @@
                 <div *ngIf="profile.skillIds && profile.skillIds.length > 0">
                     <h4 class="font-bold text-2xl py-2">Skills</h4>
                     <ul>
-                        <li *ngFor="let skill of profile.skillIds">
-                            {{ skills }}
+                        <li *ngFor="let skillName of skills"> <!-- Iterate over this.skills -->
+                            {{ skillName }} 
                         </li>
                     </ul>
                 </div>
