@@ -7,10 +7,8 @@
     <ng-container *ngIf="!isLoading && profile">
 
         <div class="w-full flex justify-start max-lg:justify-center items-center mt-24 p-8 bg-slate-300 shadow-lg">
-            <object
-                class="rounded-full bg-black w-32 h-32 -mb-24 flex justify-center items-center border-slate-300 border-4"
-                *ngIf="profile.logo; else defaultImage" [data]="profile.logo" type="image/png">
-            </object>
+            <img class="rounded-full bg-black w-32 h-32 -mb-24 flex justify-center items-center border-slate-300 border-4"
+                *ngIf="profile.logo; else defaultImage" [src]="profile.logo" type="image/png" alt="Profile Logo">
             <ng-template #defaultImage>
                 <img src="../../../assets/images/prf_icon.png" class="w-28 h-28 overflow-hidden">
             </ng-template>

@@ -28,6 +28,16 @@ export class SkillService {
     };
     return this.http.get<any>(`${apiUrls.skillServiceApi}`, httpOptions);
   }
+
+  getSkillById(skillId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true  // Include cookies in requests
+    };
+    return this.http.get<any>(`${apiUrls.skillServiceApi}/${skillId}`, httpOptions);
+  }
   
 }
 export type Skill = {

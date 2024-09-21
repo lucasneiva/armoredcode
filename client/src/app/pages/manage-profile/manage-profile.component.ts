@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../services/auth.service';
 import { ProfileService, Profile, ProfileResponse } from '../../services/profile.service';
 import { Industry, IndustryService } from '../../services/industry.service';
+import { SkillService } from '../../services/skill.service';
 
 @Component({
   selector: 'app-manage-profile',
@@ -19,6 +20,7 @@ export default class ManageProfileComponent implements OnInit {
   authService = inject(AuthService);
   profileService = inject(ProfileService);
   industryService = inject(IndustryService);
+  skillService = inject(SkillService);
 
   profileForm !: FormGroup;
 
@@ -41,15 +43,18 @@ export default class ManageProfileComponent implements OnInit {
           console.log("Full API response:", response);
           if (response.data && response.data.hasProfile) {
             this.profile = response.data.profile;
+            console.log(response.data.profile);
           } else {
             // Handle the case where there is no profile, maybe set a flag
             console.log('No profile found for this user.');
           }
-
-          // If there's an industry ID, fetch the industry data
           if (this.profile?.industryId) {
             this.loadIndustry(this.profile.industryId);
           }
+          if (this.profile?.skillIds) {
+            console.log(this.profile.skillIds);
+          }
+         
           this.isLoading = false;
         },
         error: (error) => {
