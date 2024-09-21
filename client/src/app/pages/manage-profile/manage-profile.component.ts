@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../services/auth.service';
 import { ProfileService, Profile, ProfileResponse } from '../../services/profile.service';
 import { Industry, IndustryService } from '../../services/industry.service';
-import { SkillService } from '../../services/skill.service';
+import { Skill, SkillService } from '../../services/skill.service';
 
 @Component({
   selector: 'app-manage-profile',
@@ -26,6 +26,7 @@ export default class ManageProfileComponent implements OnInit {
 
   profile: Profile | null = null;
   industry: Industry | null = null;
+  skill: Skill | undefined;
 
   isLoading = true;
   showConfirmationModal = false; // Flag for the confirmation modal
@@ -52,7 +53,8 @@ export default class ManageProfileComponent implements OnInit {
             this.loadIndustry(this.profile.industryId);
           }
           if (this.profile?.skillIds) {
-            console.log(this.profile.skillIds);
+            /*debug*/ //console.log(this.profile.skillIds);
+            this.loadSkills(this.profile.skillIds);
           }
          
           this.isLoading = false;
@@ -75,6 +77,23 @@ export default class ManageProfileComponent implements OnInit {
           console.error("Error loading industry:", error);
         }
       });
+  }
+
+  loadSkills(skillIds: { _id: string; name: string; }[]){
+    const array: any[] = skillIds;
+    array.forEach(skillId => {
+      this.skillService.getSkillById(skillId)
+      .subscribe({
+        next: (skillData) => {
+          this.skill = skillData.data;
+          console.log(skillData);
+        },
+        error: (error) => {
+          console.error("Error loading skill:", error);
+        }
+      });
+    })
+    
   }
 
   // Function to show the confirmation modal
