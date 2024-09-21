@@ -6,6 +6,8 @@ import { AuthService } from '../../services/auth.service';
 import { ProfileService, Profile, ProfileResponse } from '../../services/profile.service';
 import { Industry, IndustryService } from '../../services/industry.service';
 import { Skill, SkillService } from '../../services/skill.service';
+import { forkJoin } from 'rxjs';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-manage-profile',
@@ -26,7 +28,8 @@ export default class ManageProfileComponent implements OnInit {
 
   profile: Profile | null = null;
   industry: Industry | null = null;
-  skill: Skill | undefined;
+  skill: Skill | null = null;
+  skills: string[] = []; 
 
   isLoading = true;
   showConfirmationModal = false; // Flag for the confirmation modal
@@ -44,7 +47,6 @@ export default class ManageProfileComponent implements OnInit {
           console.log("Full API response:", response);
           if (response.data && response.data.hasProfile) {
             this.profile = response.data.profile;
-            console.log(response.data.profile);
           } else {
             // Handle the case where there is no profile, maybe set a flag
             console.log('No profile found for this user.');
@@ -86,16 +88,16 @@ export default class ManageProfileComponent implements OnInit {
       .subscribe({
         next: (skillData) => {
           this.skill = skillData.data;
-          console.log(skillData);
+          this.skills.push(skillData.data.skillName);
+          console.log(this.skills);
         },
         error: (error) => {
           console.error("Error loading skill:", error);
         }
       });
     })
-    
   }
-
+  
   // Function to show the confirmation modal
   showDeleteConfirmation() {
     this.showConfirmationModal = true;
