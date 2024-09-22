@@ -3,6 +3,7 @@ import { Component, inject, Input } from '@angular/core';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 import { ProjectService } from '../../services/project.service';
 import { SkillService } from '../../services/skill.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-project-card',
@@ -16,10 +17,13 @@ export class ProjectCardComponent {
   route = inject(ActivatedRoute); // Inject ActivatedRoute
   projectService = inject(ProjectService);
   skillService = inject(SkillService);
+  userService = inject(UserService);
 
   @Input() project: any;
   detailedProject: any = null;  // Separate object for detailed data
   showDetails = false; // Flag to control showing details
+
+  creatorName = '';
   skills: string[] = [];
 
   toggleDetails() {
@@ -39,6 +43,8 @@ export class ProjectCardComponent {
           this.detailedProject = response.data;  // Access the 'data' property from the response
           /*debug*/ //console.log('Full Project Data:', this.detailedProject);
           const skillIds = this.detailedProject.skillIds;
+          const creatorId = this.detailedProject.clientId._id;
+          this.loadCreatorName(creatorId); // Load creator's username
           this.loadSkills(skillIds);
         } else {
           console.error('Failed to retrieve project details:', response.message);
@@ -50,6 +56,20 @@ export class ProjectCardComponent {
     );
   }
 
+  loadCreatorName(userId: string) {
+    this.userService.getUser(userId).subscribe(
+      (response) => {
+        if (response.success) {
+          this.creatorName = response.data.username; // Assuming the username is in the 'username' field
+        } else {
+          console.error('Failed to retrieve creator details:', response.message);
+        }
+      },
+      (error) => {
+        console.error('Error fetching creator details:', error);
+      });
+  }
+
   loadSkills(skillIds: any[]) {
     skillIds.forEach((skillId) => {
       // Extract the _id from the skillId object
@@ -59,7 +79,7 @@ export class ProjectCardComponent {
         .subscribe({
           next: (skillData) => {
             this.skills.push(skillData.data.skillName);
-          /*debug*/ //console.log("skill: " + this.skills); console.log("id: " + skillIdValue);
+            /*debug*/ //console.log("skill: " + this.skills); console.log("id: " + skillIdValue);
           },
           error: (error) => {
             console.error("Error loading skill:", error);

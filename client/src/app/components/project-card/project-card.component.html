@@ -31,7 +31,7 @@
 
       <div *ngIf="detailedProject" class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <p><strong>Created by:</strong> {{detailedProject.clientId}}</p>
+          <p><strong>Created by:</strong> {{creatorName}}</p>
           <p><strong>Worked by:</strong>
             <ng-container *ngIf="detailedProject.freelancerId; else noFreelancer">
               {{detailedProject.freelancerId}}
@@ -75,10 +75,10 @@
 
           <p><strong>Location:</strong>
             <ng-container *ngIf="detailedProject.location; else noLocation">
-              {{detailedProject.location.streetAddress}}<br>
-              {{detailedProject.location.neighborhood}}<br>
-              {{detailedProject.location.city}}, {{detailedProject.location.state}} {{detailedProject.location.cep}}<br>
-              {{detailedProject.location.country}}
+              <br>{{detailedProject.location.streetAddress}}
+              <br>{{detailedProject.location.neighborhood}}
+              <br>{{detailedProject.location.city}}, {{detailedProject.location.state}} {{detailedProject.location.cep}}
+              <br>{{detailedProject.location.country}}
             </ng-container>
             <ng-template #noLocation>
               Not Specified

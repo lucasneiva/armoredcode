@@ -9,8 +9,14 @@ import { BehaviorSubject, catchError, map, of, throwError, Observable, tap } fro
 export class UserService {
   http = inject(HttpClient);
   
-  getUser(){
-    return this.http.get<any>(`${apiUrls.userServiceApi}/:id`);
+  getUser(userId: string): Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true 
+    };
+    return this.http.get<any>(`${apiUrls.userServiceApi}/${userId}`, httpOptions);
   }
 
   getUserRole(): Observable<any> {
