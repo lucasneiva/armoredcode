@@ -34,7 +34,7 @@ export class ProjectCardComponent {
       (response) => {
         if (response.success) {
           this.detailedProject = response.data;  // Access the 'data' property from the response
-          //debug /* console.log('Full Project Data:', this.detailedProject); */
+          /*debug*/ //console.log('Full Project Data:', this.detailedProject);
         } else {
           console.error('Failed to retrieve project details:', response.message);
         }

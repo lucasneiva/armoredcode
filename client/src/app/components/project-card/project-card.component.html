@@ -42,15 +42,25 @@
             </ng-template>
           </p>
           <p><strong>Description:</strong> {{detailedProject.projectDescription}}</p>
-          <p><strong>Budget:</strong>
-            <ng-container *ngIf="detailedProject.projectBudget; else hourlyRate">
-              {{detailedProject.projectBudget.min}} - {{detailedProject.projectBudget.max}} {{detailedProject.projectBudget.currency}}
-            </ng-container>
-            <ng-template #hourlyRate>
-              {{detailedProject.projectHourlyRate?.min}} - {{detailedProject.projectHourlyRate?.max}}
-              {{detailedProject.projectHourlyRate?.currency}}
-            </ng-template>
-          </p>
+          <ng-container *ngIf="detailedProject.pricingType == 'BUDGET'">
+            <p>
+              <strong>Budget:</strong>
+              {{detailedProject.projectBudget.currency}}{{detailedProject.projectBudget.min}} 
+              - 
+              {{detailedProject.projectBudget.currency}}{{detailedProject.projectBudget.max}}
+            </p>
+          </ng-container>
+          
+
+          <ng-container *ngIf="detailedProject.pricingType == 'HOURLY_RATE'">
+            <p>
+              <strong>Hourly rate:</strong>
+              {{detailedProject.projectHourlyRate.currency}}{{detailedProject.projectHourlyRate.min}} 
+              - 
+              {{detailedProject.projectHourlyRate.currency}}{{detailedProject.projectHourlyRate.max}}
+            </p>
+          </ng-container>
+          
           <p><strong>Deadline:</strong> {{detailedProject.estimatedDuration}}</p>
           <p><strong>Skills:</strong> {{detailedProject.skillIds}}</p>
           <p><strong>Location:</strong>
