@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 import { ProjectService } from '../../services/project.service';
+import { SkillService } from '../../services/skill.service';
 
 @Component({
   selector: 'app-project-card',
@@ -14,10 +15,12 @@ export class ProjectCardComponent {
   router = inject(Router);
   route = inject(ActivatedRoute); // Inject ActivatedRoute
   projectService = inject(ProjectService);
+  skillService = inject(SkillService);
 
   @Input() project: any;
   detailedProject: any = null;  // Separate object for detailed data
   showDetails = false; // Flag to control showing details
+  skills: string[] = [];
 
   toggleDetails() {
     if (this.showDetails) {
@@ -35,6 +38,8 @@ export class ProjectCardComponent {
         if (response.success) {
           this.detailedProject = response.data;  // Access the 'data' property from the response
           /*debug*/ //console.log('Full Project Data:', this.detailedProject);
+          const skillIds = this.detailedProject.skillIds;
+          this.loadSkills(skillIds);
         } else {
           console.error('Failed to retrieve project details:', response.message);
         }
@@ -45,20 +50,38 @@ export class ProjectCardComponent {
     );
   }
 
+  loadSkills(skillIds: any[]) {
+    skillIds.forEach((skillId) => {
+      // Extract the _id from the skillId object
+      const skillIdValue = skillId._id; // assuming skillId is an object with an _id property
+
+      this.skillService.getSkillById(skillIdValue)
+        .subscribe({
+          next: (skillData) => {
+            this.skills.push(skillData.data.skillName);
+          /*debug*/ //console.log("skill: " + this.skills); console.log("id: " + skillIdValue);
+          },
+          error: (error) => {
+            console.error("Error loading skill:", error);
+          }
+        });
+    });
+  }
+
   postProject() {
     // Implement logic to post the project (e.g., make an API call)
     console.log("Post Project button clicked");
   }
 
   cancelProject() {
-    const projectId = this.project._id; 
+    const projectId = this.project._id;
 
-    if (confirm("Are you sure you want to cancel this project?")) { 
+    if (confirm("Are you sure you want to cancel this project?")) {
       this.projectService.deleteProject(projectId).subscribe(
         (response) => {
           if (response.success) {
             console.log('Project cancelled successfully');
-            window.location.reload(); 
+            window.location.reload();
             // You might need to emit an event to notify a parent component
           } else {
             console.error('Error cancelling project:', response.message);

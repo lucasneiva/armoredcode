@@ -5,8 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../services/auth.service';
 import { ProfileService, Profile, ProfileResponse } from '../../services/profile.service';
 import { Industry, IndustryService } from '../../services/industry.service';
-import { Skill, SkillService } from '../../services/skill.service';
-import { forkJoin } from 'rxjs';
+import { SkillService } from '../../services/skill.service';
 import { __values } from 'tslib';
 
 @Component({
