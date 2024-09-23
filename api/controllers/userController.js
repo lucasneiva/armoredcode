@@ -73,5 +73,35 @@ export const updateUser = async ( req, res, next ) => {
 };
 
 export const deleteUser = async ( req, res, next ) => {
-    
+    try {
+        const userIdToDelete = req.params.id;
+        const loggedInUserId = req.user.id; // Assuming you have middleware to get the logged-in user
+
+        // Check if the user ID is valid
+        if (!mongoose.Types.ObjectId.isValid(userIdToDelete)) {
+            return next(createError(400, "Invalid user ID"));
+        }
+
+        // Ensure that only the user themselves or an admin can delete the account
+        if (userIdToDelete !== loggedInUserId && req.user.role !== 'admin') {
+            return next(createError(403, "You do not have permission to delete this user."));
+        }
+
+        // Find the user and delete
+        const deletedUser = await User.findByIdAndDelete(userIdToDelete);
+
+        if (!deletedUser) {
+            return next(createError(404, "User not found"));
+        }
+
+        // You might want to add logic here to handle related data
+        // For example:
+        // - Delete user's projects (if applicable)
+        // - Remove user from teams or groups (if applicable)
+
+        return next(createSuccess(200, "User deleted successfully"));
+    } catch (error) {
+        console.error("Error in deleteUser:", error);
+        return next(createError(500, "Internal server error"));
+    }
 };
