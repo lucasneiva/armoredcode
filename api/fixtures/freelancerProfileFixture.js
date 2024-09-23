@@ -7,7 +7,7 @@ const freelancerProfiles = [
     {
         firstName: "Miguel",
         lastName: "Santos",
-        specializations: [],
+        specializationId: [],
         profileSummary: "Experienced full-stack developer with expertise in React and Node.js.",
         experienceLevel: "MID-LEVEL",
         hourlyRate: {
@@ -60,7 +60,7 @@ const freelancerProfiles = [
     {
         firstName: "Joana",
         lastName: "Silva",
-        specializations: [],
+        specializationId: [],
         profileSummary: "Highly skilled front-end developer with expertise in creating responsive and user-friendly interfaces.",
         experienceLevel: "SENIOR",
         hourlyRate: {
@@ -130,11 +130,11 @@ const seedFreelancerProfiles = async () => {
         const skillDocs = await Skill.find( {} ).lean();
         const freelancerDocs = await User.find( { role: "FREELANCER" } ).lean();
         
-        freelancerProfiles[ 0 ].specializations = [ specializationDocs[ 0 ]._id ];
+        freelancerProfiles[ 0 ].specializationId = [ specializationDocs[ 0 ]._id ];
         freelancerProfiles[ 0 ].skillIds = [ skillDocs[ 0 ]._id, skillDocs[ 1 ]._id ];
         freelancerProfiles[ 0 ].userId = freelancerDocs[ 0 ]._id;
         
-        freelancerProfiles[ 1 ].specializations = [ specializationDocs[ 1 ]._id ];
+        freelancerProfiles[ 1 ].specializationId = [ specializationDocs[ 1 ]._id ];
         freelancerProfiles[ 1 ].skillIds = [ skillDocs[ 2 ]._id, skillDocs[ 3 ]._id ];
         freelancerProfiles[ 1 ].userId = freelancerDocs[ 1 ]._id;
 

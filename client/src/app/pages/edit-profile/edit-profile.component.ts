@@ -190,7 +190,7 @@ export default class EditProfileComponent implements OnInit {
         this.freelancerProfileForm.patchValue({
           firstName: profile.firstName,
           lastName: profile.lastName,
-          specializationId: profile.specializationId?._id,
+          specializationId: profile.specializationId,
           profileSummary: profile.profileSummary,
           experienceLevel: profile.experienceLevel,
           hourlyRate: {

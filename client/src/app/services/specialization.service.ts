@@ -28,6 +28,16 @@ export class SpecializationService {
     };
     return this.http.get<any>(`${apiUrls.specializationServiceApi}`, httpOptions);
   }
+
+  getSpecializationById(specializationId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true 
+    };
+    return this.http.get<any>(`${apiUrls.specializationServiceApi}/${specializationId}`, httpOptions);
+  }
   
 }
 export type Specialization = {

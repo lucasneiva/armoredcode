@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../services/auth.service';
 import { ProfileService, Profile, ProfileResponse } from '../../services/profile.service';
 import { Industry, IndustryService } from '../../services/industry.service';
+import { Specialization, SpecializationService } from '../../services/specialization.service';
 import { SkillService } from '../../services/skill.service';
 import { __values } from 'tslib';
 
@@ -21,12 +22,14 @@ export default class ManageProfileComponent implements OnInit {
   authService = inject(AuthService);
   profileService = inject(ProfileService);
   industryService = inject(IndustryService);
+  specializationService = inject(SpecializationService);
   skillService = inject(SkillService);
 
   profileForm !: FormGroup;
 
   profile: Profile | null = null;
   industry: Industry | null = null;
+  specialization: Specialization | null = null;
   skills: string[] = [];
 
   isLoading = true;
@@ -52,6 +55,13 @@ export default class ManageProfileComponent implements OnInit {
           if (this.profile?.industryId) {
             this.loadIndustry(this.profile.industryId);
           }
+          // Only attempt to load the specialization if there's an ID
+          if (this.profile?.specializationId) {
+            // Add console log here for debugging
+            console.log('Specialization ID being passed:', this.profile.specializationId);
+            this.loadSpecialization(this.profile.specializationId); // Make sure this.profile.specializationId is correct
+          }
+          
           if (this.profile?.skillIds) {
             /*debug*/ //console.log(this.profile.skillIds);
             this.loadSkills(this.profile.skillIds);
@@ -62,6 +72,19 @@ export default class ManageProfileComponent implements OnInit {
         error: (error) => {
           console.error("Error loading profile:", error);
           this.isLoading = false;
+        }
+      });
+  }
+
+  loadSpecialization(specializationId: string) {
+    this.specializationService.getSpecializationById(specializationId)
+      .subscribe({
+        next: (specializationData) => {
+          this.specialization = specializationData.data.specializationName;
+          console.log(specializationData);
+        },
+        error: (error) => {
+          console.error("Error loading specialization:", error);
         }
       });
   }

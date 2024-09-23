@@ -168,10 +168,8 @@ export type Profile = {
   // Freelancer-specific fields
   firstName?: string;
   lastName?: string;
-  specializationId?: {
-    _id: string;
-    name: string; // Assuming you also fetch specialization name
-  };
+  specializationId?: string | null; // Or `null` if there can be no specialization
+    
   profileSummary?: string;
   experienceLevel?: 'JUNIOR' | 'MID-LEVEL' | 'SENIOR';
   hourlyRate?: {
