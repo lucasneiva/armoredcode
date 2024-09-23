@@ -71,3 +71,7 @@ export const updateUser = async ( req, res, next ) => {
         return next( createError( 500, "Internal Server Error!" ) );
     }
 };
+
+export const deleteUser = async ( req, res, next ) => {
+    
+};
