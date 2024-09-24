@@ -8,6 +8,7 @@ import { Industry, IndustryService } from '../../services/industry.service';
 import { Specialization, SpecializationService } from '../../services/specialization.service';
 import { SkillService } from '../../services/skill.service';
 import { __values } from 'tslib';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-manage-profile',
@@ -24,6 +25,7 @@ export default class ManageProfileComponent implements OnInit {
   industryService = inject(IndustryService);
   specializationService = inject(SpecializationService);
   skillService = inject(SkillService);
+  userService = inject(UserService);
 
   profileForm !: FormGroup;
 
@@ -55,13 +57,10 @@ export default class ManageProfileComponent implements OnInit {
           if (this.profile?.industryId) {
             this.loadIndustry(this.profile.industryId);
           }
-          // Only attempt to load the specialization if there's an ID
           if (this.profile?.specializationId) {
-            // Add console log here for debugging
-            console.log('Specialization ID being passed:', this.profile.specializationId);
-            this.loadSpecialization(this.profile.specializationId); // Make sure this.profile.specializationId is correct
+            /*debug*/ //console.log('Specialization ID being passed:', this.profile.specializationId);
+            this.loadSpecialization(this.profile.specializationId);
           }
-          
           if (this.profile?.skillIds) {
             /*debug*/ //console.log(this.profile.skillIds);
             this.loadSkills(this.profile.skillIds);
@@ -81,7 +80,7 @@ export default class ManageProfileComponent implements OnInit {
       .subscribe({
         next: (specializationData) => {
           this.specialization = specializationData.data.specializationName;
-          console.log(specializationData);
+          /*debug*/ //console.log(specializationData);
         },
         error: (error) => {
           console.error("Error loading specialization:", error);
@@ -94,7 +93,7 @@ export default class ManageProfileComponent implements OnInit {
       .subscribe({
         next: (industryData) => {
           this.industry = industryData.data;
-          console.log(industryData);
+          /*debug*/ //console.log(industryData);
         },
         error: (error) => {
           console.error("Error loading industry:", error);
@@ -133,20 +132,31 @@ export default class ManageProfileComponent implements OnInit {
 
   deleteProfile() {
     this.profileService.deleteProfile()
-      .subscribe(() => {
-        alert("Profile deleted sucessfully!");
-        localStorage.removeItem("user_id");
-        localStorage.removeItem('user_role');
-        localStorage.removeItem('token');
-        this.authService.isLoggedIn$.next(false);
-        console.log('Profile deleted successfully.');
-        this.router.navigate(['login']);
-      },
-        (error) => {
-          // Handle error (e.g., display an error message)
+      .subscribe({
+        next: () => {
+          // Profile deletion successful, now delete the user
+          this.userService.deleteUser()
+            .subscribe({
+              next: () => {
+                alert("Profile and user deleted successfully!");
+                localStorage.removeItem("user_id");
+                localStorage.removeItem('user_role');
+                localStorage.removeItem('token');
+                this.authService.isLoggedIn$.next(false);
+                console.log('Profile and user deleted successfully.');
+                this.router.navigate(['login']);
+              },
+              error: (error) => {
+                // Handle error deleting user (e.g., display an error message)
+                console.error('Error deleting user:', error);
+              }
+            });
+        },
+        error: (error) => {
+          // Handle error deleting profile (e.g., display an error message)
           console.error('Error deleting profile:', error);
         }
-      );
+      });
   }
 
   logOut() {

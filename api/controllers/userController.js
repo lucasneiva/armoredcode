@@ -1,7 +1,7 @@
-import { createError } from "../utils/error.js"
-import User from "../models/userModel.js"
+import { createError } from "../utils/error.js";
+import User from "../models/userModel.js";
 import { createSuccess } from "../utils/success.js";
-
+import mongoose from "mongoose"; // Import Mongoose here
 
 
 export const getAllUsers = async ( req, res, next ) => {
@@ -72,7 +72,7 @@ export const updateUser = async ( req, res, next ) => {
     }
 };
 
-export const deleteUser = async ( req, res, next ) => {
+export const deleteUser = async (req, res, next) => {
     try {
         const userIdToDelete = req.params.id;
         const loggedInUserId = req.user.id; // Assuming you have middleware to get the logged-in user
