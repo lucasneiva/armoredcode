@@ -7,6 +7,7 @@ import cors from 'cors';
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import projectRoutes from "./routes/projectRoutes.js";
+// import proposalRoutes from "./routes/proposalRoutes.js"; //modified
 import profileRoutes from "./routes/profileRoutes.js";
 import skillRoutes from "./routes/skillRoutes.js"
 import projectCategoryRoutes from "./routes/projectCategoryRoutes.js";
@@ -47,6 +48,7 @@ app.use( cors( {
 app.use( "/api/auth", authRoutes );
 app.use( "/api/users", userRoutes );
 app.use( "/api/projects", projectRoutes );
+//app.use( "/api/proposals", proposalRoutes ); //modified //falta controller
 app.use( "/api/profiles", profileRoutes );
 app.use( "/api/skills", skillRoutes );
 app.use( "/api/project-categories", projectCategoryRoutes );
