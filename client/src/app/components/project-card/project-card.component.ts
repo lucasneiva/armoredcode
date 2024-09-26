@@ -4,6 +4,7 @@ import { Router, RouterModule, ActivatedRoute } from '@angular/router'; // Impor
 import { ProjectService } from '../../services/project.service';
 import { SkillService } from '../../services/skill.service';
 import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-project-card',
@@ -18,6 +19,10 @@ export class ProjectCardComponent {
   projectService = inject(ProjectService);
   skillService = inject(SkillService);
   userService = inject(UserService);
+  authService = inject(AuthService); // Inject AuthService
+  
+  isClient: boolean = false; 
+  userRole: string | null = null; 
 
   @Input() project: any;
   detailedProject: any = null;  // Separate object for detailed data
@@ -25,6 +30,17 @@ export class ProjectCardComponent {
 
   creatorName = '';
   skills: string[] = [];
+
+  ngOnInit() {
+    this.userRole = this.authService.getUserRole();
+    if (this.userRole === 'CLIENT') {
+      this.isClient = true;
+    } else if (this.userRole === 'FREELANCER') {
+      this.isClient = false;
+    } else {
+      console.log("invalid role");
+    }
+  }
 
   toggleDetails() {
     if (this.showDetails) {

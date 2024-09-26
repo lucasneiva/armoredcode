@@ -203,3 +203,19 @@ export const deleteProject = async ( req, res, next ) => {
             return next(createError(500, "Internal server error"));
         }
 }
+
+export const getAllProjects = async (req, res, next) => {
+    try {
+        // Fetch all projects, optionally with pagination or filtering if needed
+        const allProjects = await project.find()
+            .populate('clientId', 'username email')
+            .populate('freelancerId', 'username email')
+            .populate('projectCategoryId', 'name')
+            .populate('skillIds', 'name');
+
+        return next(createSuccess(200, "All projects retrieved successfully", allProjects));
+    } catch (error) {
+        console.error("Error in updateProject:", error);
+        return next(createError(500, "Internal server error"));
+    }
+}
