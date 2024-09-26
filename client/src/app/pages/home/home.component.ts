@@ -45,19 +45,17 @@ export default class HomeComponent {
     }
 
   }
-  loadProjects(){
-    /* replace logic to fetch all projects
-    this.projectService.getProjects().subscribe({
+  loadProjects() {
+    this.projectService.getAllProjects().subscribe({
       next: (res) => {
-        this.projects = res.data;
-        this.isLoading = false; // Set loading to false after projects are loaded
+        this.projects = res.data; // Assuming your API response structure
+        this.isLoading = false;
       },
       error: (err) => {
         console.error("Error fetching projects:", err);
-        this.isLoading = false; // Set loading to false even on error
+        this.isLoading = false;
       }
     });
-    */
   }
 
   loadFreelancers(){
