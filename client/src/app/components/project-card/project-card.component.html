@@ -1,33 +1,17 @@
 <!--card template-->
 <ng-container *ngIf="project">
-  <ng-container *ngIf="isClient">
-    <!--card start-->
-    <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{'bg-gray-100': showDetails}"
-      class="sticky w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
-      <p class="text-sm text-gray-500">Project ID: {{project._id}}</p> <!-- Added this line -->
-      <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
-        <span class="block py-2 mr-2">{{project.projectTitle}}</span>
-        <span class="block w-fit p-2 border-2 border-transparent rounded-md text-white"
-          [ngClass]="{'bg-blue-500': project.projectStatus === 'DRAFT', 'bg-green-500': project.projectStatus === 'POSTED'}">
-          {{project.projectStatus}}</span>
-      </h2>
-    </div>
-    <!--card end-->
-  </ng-container>
-  <ng-container *ngIf="!isClient">
-    <!--card start-->
-    <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{'bg-gray-100': showDetails}"
-      class="sticky w-full max-w-xl lg:h-64 max-lg:h-96 px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
-      <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-        <span class="block pb-2">{{project.projectTitle}}</span>
-        <span *ngIf="creatorName" class="block text-sm text-gray-700">{{creatorName}}</span> 
-      </h2>
-      <p>
-        {{project.projectDescription}}
-      </p>
-    </div>
-    <!--card end-->
-  </ng-container>
+  <!--card start-->
+  <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{'bg-gray-100': showDetails}"
+    class="sticky w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+    <p class="text-sm text-gray-500">Project ID: {{project._id}}</p> <!-- Added this line -->
+    <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
+      <span class="block py-2 mr-2">{{project.projectTitle}}</span>
+      <span class="block w-fit p-2 border-2 border-transparent rounded-md text-white"
+        [ngClass]="{'bg-blue-500': project.projectStatus === 'DRAFT', 'bg-green-500': project.projectStatus === 'POSTED'}">
+        {{project.projectStatus}}</span>
+    </h2>
+  </div>
+  <!--card end-->
   <!--card details start-->
   <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10" *ngIf="showDetails">
     <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl w-full" style="max-height: 90vh; overflow-y: auto;">
@@ -43,6 +27,7 @@
           </svg>
         </button>
       </div>
+
 
       <div *ngIf="detailedProject" class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
@@ -92,8 +77,7 @@
             <ng-container *ngIf="detailedProject.location; else noLocation">
               <br>{{detailedProject.location.streetAddress}}
               <br>{{detailedProject.location.neighborhood}}
-              <br>{{detailedProject.location.city}}, {{detailedProject.location.state}}
-              {{detailedProject.location.cep}}
+              <br>{{detailedProject.location.city}}, {{detailedProject.location.state}} {{detailedProject.location.cep}}
               <br>{{detailedProject.location.country}}
             </ng-container>
             <ng-template #noLocation>
@@ -114,36 +98,22 @@
       </div>
 
       <!--Buttons start-->
-      <ng-container *ngIf="isClient">
-        <div class="mt-4 flex w-full space-x-4">
-          <button *ngIf="project.projectStatus === 'DRAFT'" (click)="postProject()"
-            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">
-            Post Project
-          </button>
-  
-          <button (click)="cancelProject()"
-            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
-            Cancel Project
-          </button>
-  
-          <button (click)="editProject()"
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-            Edit Project
-          </button>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="!isClient">
-        <div class="mt-4 flex w-full space-x-4">
-          <button
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-            Enter in Contact
-          </button>
-          <button
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-            Make a Proposal
-          </button>
-        </div>
-      </ng-container>
+      <div class="mt-4 flex w-full space-x-4">
+        <button *ngIf="project.projectStatus === 'DRAFT'" (click)="postProject()"
+          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">
+          Post Project
+        </button>
+
+        <button (click)="cancelProject()"
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
+          Cancel Project
+        </button>
+
+        <button (click)="editProject()"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+          Edit Project
+        </button>
+      </div>
       <!--Buttons end-->
     </div>
   </div>
