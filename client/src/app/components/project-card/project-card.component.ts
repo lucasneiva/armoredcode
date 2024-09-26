@@ -139,10 +139,4 @@ export class ProjectCardComponent {
     this.router.navigate(['../edit-project', this.project._id], { relativeTo: this.route });
   }
 
-  makeProposal() {
-    console.log("Proposal button clicked");
-    this.router.navigate(['create-proposal']);
-    //this.router.navigate(['../create-proposal', this.project._id], { relativeTo: this.route });
-  }
-
 }
