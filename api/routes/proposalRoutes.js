@@ -3,7 +3,7 @@ import {
     createProposal, 
     getProposalById, 
     updateProposal, 
-    getProjectProposals, 
+    getProposalsByProjectId, 
     getFreelancerProposals 
 } from '../controllers/proposalController.js';
 import { verifyFreelancer, verifyClient } from '../utils/authMiddleware.js';
@@ -20,7 +20,7 @@ router.get('/:id', verifyFreelancer, getProposalById); // Ou verificar se é o c
 router.put('/:id', verifyFreelancer, updateProposal); // Ou verificar se é o cliente da proposta
 
 // Listar todas as propostas para um projeto específico (Cliente)
-router.get('/project/:projectId', verifyClient, getProjectProposals);
+router.get('/project/:projectId', verifyClient, getProposalsByProjectId);
 
 // Listar todas as propostas enviadas por um freelancer específico (Freelancer)
 router.get('/freelancer/:freelancerId', verifyFreelancer, getFreelancerProposals);

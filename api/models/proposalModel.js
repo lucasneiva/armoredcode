@@ -47,7 +47,7 @@ const ProposalSchema = new Schema( {
     communicationChannelId: { // Referencia ao Canal de Comunicação
         type: Schema.Types.ObjectId,
         ref: 'CommunicationChannel',
-        required: true,
+        required: false,
     },
 }, { timestamps: true } );
 

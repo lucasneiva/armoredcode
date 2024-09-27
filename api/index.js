@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from 'cors';
 
 // Routes
+import proposalRoutes from "./routes/proposalRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import projectRoutes from "./routes/projectRoutes.js";
@@ -48,6 +49,7 @@ app.use( "/api/auth", authRoutes );
 app.use( "/api/users", userRoutes );
 app.use( "/api/projects", projectRoutes );
 app.use( "/api/profiles", profileRoutes );
+app.use( "/api/proposals", proposalRoutes );
 app.use( "/api/skills", skillRoutes );
 app.use( "/api/project-categories", projectCategoryRoutes );
 app.use( "/api/specializations", specializationRoutes );
