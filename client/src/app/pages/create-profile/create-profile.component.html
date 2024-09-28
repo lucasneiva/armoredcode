@@ -273,6 +273,9 @@
                                     class="text-red-500">*Max Rate is required</span>
                             </div>
                         </div>
+                        <span *ngIf="freelancerProfileForm.get('hourlyRate')?.hasError('hourlyRateInvalid')" class="text-red-500">
+                            Min rate cannot be higher than max rate.
+                          </span>
                     </div>
                     <!--professional module end-->
                 </div>
@@ -370,6 +373,10 @@
                                             <span
                                                 *ngIf="experienceForm.hasError('required', 'endDate') && experienceForm.get('endDate')?.touched"
                                                 class="text-red-500">*End Date is required</span>
+                                            <span *ngIf="experienceForm.hasError('endDateInvalid', 'endDate')"
+                                                class="text-red-500">
+                                                End date cannot be before start date.
+                                            </span>
                                         </div>
                                     </div>
 
@@ -456,6 +463,10 @@
                                             <span
                                                 *ngIf="educationForm.hasError('required', 'endDate') && educationForm.get('endDate')?.touched"
                                                 class="text-red-500">*End Date is required</span>
+                                            <span *ngIf="educationForm.hasError('endDateInvalid', 'endDate')"
+                                                class="text-red-500">
+                                                End date cannot be before start date.
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="flex justify-end align-middle">
@@ -499,7 +510,8 @@
                                         <div class="pl-2 w-full">
                                             <h2 class="font-semibold mt-4">Organização Emissora</h2>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                placeholder="Organização Emissora" formControlName="issuingOrganization" required>
+                                                placeholder="Organização Emissora" formControlName="issuingOrganization"
+                                                required>
                                             <span
                                                 *ngIf="certificationForm.hasError('required', 'issuingOrganization') && certificationForm.get('issuingOrganization')?.touched"
                                                 class="text-red-500">*Issuing Organization is required</span>
