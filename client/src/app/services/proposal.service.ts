@@ -89,7 +89,7 @@ export type Proposal = {
     proposedBudget?: number; // Optional if pricingType is 'HOURLY_RATE'
     proposedHourlyRate?: number; // Optional if pricingType is 'BUDGET'
     estimatedDuration: number;
-    status: 'PENDING' | 'ACCEPTED' | 'REJECTED';
+    status: 'DRAFT' | 'PENDING' | 'ACCEPTED' | 'REJECTED';
     communicationChannelId?: string; // Optional
     createdAt: string;
     updatedAt: string;

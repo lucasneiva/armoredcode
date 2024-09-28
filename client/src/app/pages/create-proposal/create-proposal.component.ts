@@ -58,6 +58,13 @@ export default class CreateProposalComponent implements OnInit {
     this.projectService.getProjectById(this.projectId).subscribe(response => {
       this.project = response.data;
       /*Debug*/ //console.log('Project loaded:', this.project);  
+      // Set projectId and clientId in the form after loading the project
+      this.createProposalForm.patchValue({
+        projectId: this.project._id,
+        freelancerId: this.authService.getUserId(),
+        clientId: this.project.clientId._id,
+        pricingType: this.project.pricingType // Set default pricing type
+      });
       this.isLoading = false;
       if (this.project) {
         console.log("project fetched sucessfully!");
@@ -66,10 +73,10 @@ export default class CreateProposalComponent implements OnInit {
   }
 
   CreateProposal() {
-    this.createProposalForm.patchValue({ status: 'PENDING' });
+    this.createProposalForm.patchValue({ status: 'DRAFT' });
     /*debug*/ console.log(this.createProposalForm.value);
-    this.projectService
-      .createProjectService(this.createProposalForm.value)
+    this.proposalService
+      .createProposal(this.createProposalForm.value)
       .subscribe({
         next: (res) => {
           alert('proposal Created!');
@@ -86,8 +93,8 @@ export default class CreateProposalComponent implements OnInit {
   SubmitProposal() {
     this.createProposalForm.patchValue({ status: 'PENDING' });
     /*debug*/ console.log(this.createProposalForm.value);
-    this.projectService
-      .createProjectService(this.createProposalForm.value)
+    this.proposalService
+      .createProposal(this.createProposalForm.value)
       .subscribe({
         next: (res) => {
           alert('Proposal Created and Sent!');

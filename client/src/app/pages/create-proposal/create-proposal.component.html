@@ -6,32 +6,24 @@
 
     <ng-container *ngIf="!isLoading && project">
         <div class="w-full shadow-lg bg-white p-8 my-auto">
-            <!--placeholder--><h2 class="text-2xl font-bold mb-4">Criar Proposta para o Projeto X</h2><!--placeholder-->
-            <!--<h2 class="text-2xl font-bold mb-4">Criar Proposta para "{{ projectTitle }}"</h2>-->
+            
+            <h2 class="text-2xl font-bold mb-4">Criar Proposta para "{{ project.projectTitle }}"</h2>
     
             <!--proposal start-->
             <form [formGroup]="createProposalForm"> <!--(ngSubmit)="onSubmit()"-->
                 <div class="mb-4 my-auto mx-auto h-fit w-full flex">
                     <ng-container *ngIf="project">
                         <div *ngIf="project.pricingType == 'BUDGET'" class="pr-2 w-full">
-                            <label for="proposedBudget" class="block text-gray-700 font-bold mb-2">Valor Proposto:</label>
+                            <label for="proposedBudget" class="block text-gray-700 font-bold mb-2">Valor Proposto (orçamento):</label>
                             <input type="number" id="proposedBudget" name="proposedBudget" formControlName="proposedBudget"
                                 class="p-2 w-full border border-gray-300 rounded" placeholder="Project value" required>
                         </div>
                         <div *ngIf="project.pricingType == 'HOURLY_RATE'" class="pr-2 w-full">
-                            <label for="proposedHourlyRate" class="block text-gray-700 font-bold mb-2">Valor Proposto:</label>
+                            <label for="proposedHourlyRate" class="block text-gray-700 font-bold mb-2">Valor Proposto (por hora):</label>
                             <input type="number" id="proposedHourlyRate" name="proposedHourlyRate" formControlName="proposedHourlyRate"
                                 class="p-2 w-full border border-gray-300 rounded" placeholder="Project value" required>
                         </div>
                     </ng-container>
-    
-                    <!--placeholder-->
-                    <div class="pr-2 w-full">
-                        <label for="proposedValue" class="block text-gray-700 font-bold mb-2">Valor Proposto:</label>
-                        <input type="number" id="proposedValue" name="proposedValue"
-                            class="p-2 w-full border border-gray-300 rounded" placeholder="Project value" required>
-                    </div>
-                    <!--placeholder-->
     
                     <div class="pl-2 w-full">
                         <label for="estimatedDuration" class="block text-gray-700 font-bold mb-2">Prazo Estimado (em
