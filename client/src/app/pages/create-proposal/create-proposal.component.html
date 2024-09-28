@@ -1,51 +1,74 @@
 <div class="grid justify-center align-middle min-h-screen h-fit">
     <!--filler form start-->
-    <div class="w-full shadow-lg bg-white p-8 my-auto">
-        <h2 class="text-2xl font-bold mb-4">Criar Proposta para o Projeto X</h2>
-        <!--<h2 class="text-2xl font-bold mb-4">Criar Proposta para "{{ projectTitle }}"</h2>-->
-
-        <!--proposal start-->
-        <form [formGroup]="createProposalForm"> <!--(ngSubmit)="onSubmit()"-->
-            <div class="mb-4 my-auto mx-auto h-fit w-full flex">
-                <div class="pr-2 w-full">
-                    <label for="propusedValue" class="block text-gray-700 font-bold mb-2">Valor Proposto:</label>
-                    <input type="number" id="propusedValue" name="propusedValue" formControlName="propusedValue"
-                        class="p-2 w-full border border-gray-300 rounded" placeholder="Project value" required>
-                </div>
-                <div class="pl-2 w-full">
-                    <label for="estimatedDuration" class="block text-gray-700 font-bold mb-2">Prazo Estimado (em
-                        dias):</label>
-                    <input type="number" id="estimatedDuration" name="estimatedDuration" formControlName="estimatedDuration"
-                        class="p-2 w-full border border-gray-300 rounded" placeholder="Project duration" required>
-                </div>
-            </div>
-
-            <div class="mb-4 my-auto mx-auto h-fit w-full grid">
-                <label for="workDescription" class="block text-gray-700 font-bold mb-2">Descrição do Plano de
-                    Trabalho:</label>
-                <textarea id="workDescription" name="workDescription" formControlName="workDescription" placeholder="Proposal descripition"
-                    class="bg-white p-3 border-2 min-h-12 max-h-96" rows="5" required></textarea>
-            </div>
-
-            <!--buttons-->
-            <div class="mt-10 mx-auto h-fit w-full flex justify-between">
-                <!--[disabled]="createProposalForm.invalid"
-                    [class.disabled]="createProposalForm.invalid"-->
-                <button (click)="CreateProposal()"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mr-2 p-2 rounded cursor-pointer w-full">
-                    Salvar
-                </button>
-                <button (click)="SubmitProposal()"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mx-2 p-2 rounded cursor-pointer w-full">
-                    Enviar
-                </button>
-                <button (click)="CancelProposal()"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold ml-2 p-2 rounded cursor-pointer w-full">
-                    Cancelar
-                </button>
-            </div>
-            <!--buttons-->
-        </form>
-        <!--proposal end-->
+    <div *ngIf="isLoading" class="w-full flex justify-center items-center py-10">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
     </div>
+
+    <ng-container *ngIf="!isLoading && project">
+        <div class="w-full shadow-lg bg-white p-8 my-auto">
+            <!--placeholder--><h2 class="text-2xl font-bold mb-4">Criar Proposta para o Projeto X</h2><!--placeholder-->
+            <!--<h2 class="text-2xl font-bold mb-4">Criar Proposta para "{{ projectTitle }}"</h2>-->
+    
+            <!--proposal start-->
+            <form [formGroup]="createProposalForm"> <!--(ngSubmit)="onSubmit()"-->
+                <div class="mb-4 my-auto mx-auto h-fit w-full flex">
+                    <ng-container *ngIf="project">
+                        <div *ngIf="project.pricingType == 'BUDGET'" class="pr-2 w-full">
+                            <label for="proposedBudget" class="block text-gray-700 font-bold mb-2">Valor Proposto:</label>
+                            <input type="number" id="proposedBudget" name="proposedBudget" formControlName="proposedBudget"
+                                class="p-2 w-full border border-gray-300 rounded" placeholder="Project value" required>
+                        </div>
+                        <div *ngIf="project.pricingType == 'HOURLY_RATE'" class="pr-2 w-full">
+                            <label for="proposedHourlyRate" class="block text-gray-700 font-bold mb-2">Valor Proposto:</label>
+                            <input type="number" id="proposedHourlyRate" name="proposedHourlyRate" formControlName="proposedHourlyRate"
+                                class="p-2 w-full border border-gray-300 rounded" placeholder="Project value" required>
+                        </div>
+                    </ng-container>
+    
+                    <!--placeholder-->
+                    <div class="pr-2 w-full">
+                        <label for="proposedValue" class="block text-gray-700 font-bold mb-2">Valor Proposto:</label>
+                        <input type="number" id="proposedValue" name="proposedValue"
+                            class="p-2 w-full border border-gray-300 rounded" placeholder="Project value" required>
+                    </div>
+                    <!--placeholder-->
+    
+                    <div class="pl-2 w-full">
+                        <label for="estimatedDuration" class="block text-gray-700 font-bold mb-2">Prazo Estimado (em
+                            dias):</label>
+                        <input type="number" id="estimatedDuration" name="estimatedDuration" formControlName="estimatedDuration"
+                            class="p-2 w-full border border-gray-300 rounded" placeholder="Project duration" required>
+                    </div>
+                </div>
+    
+                <div class="mb-4 my-auto mx-auto h-fit w-full grid">
+                    <label for="coverLetter" class="block text-gray-700 font-bold mb-2">Descrição do Plano de
+                        Trabalho:</label>
+                    <textarea id="coverLetter" name="coverLetter" formControlName="coverLetter" placeholder="Proposal descripition"
+                        class="bg-white p-3 border-2 min-h-12 max-h-96" rows="5" required></textarea>
+                </div>
+    
+                <!--buttons-->
+                <div class="mt-10 mx-auto h-fit w-full flex justify-between">
+                    <!--[disabled]="createProposalForm.invalid"
+                        [class.disabled]="createProposalForm.invalid"-->
+                    <button (click)="CreateProposal()"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold mr-2 p-2 rounded cursor-pointer w-full">
+                        Salvar
+                    </button>
+                    <button (click)="SubmitProposal()"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold mx-2 p-2 rounded cursor-pointer w-full">
+                        Enviar
+                    </button>
+                    <button (click)="CancelProposal()"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold ml-2 p-2 rounded cursor-pointer w-full">
+                        Cancelar
+                    </button>
+                </div>
+                <!--buttons-->
+            </form>
+            <!--proposal end-->
+        </div>
+    </ng-container>
+    
 </div>

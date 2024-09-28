@@ -6,7 +6,6 @@ import { Router, RouterModule, ActivatedRoute } from '@angular/router'; // Impor
 import { ProjectService } from '../../services/project.service';
 import { AuthService } from '../../services/auth.service';
 import { ProposalService } from '../../services/proposal.service';
-//import { ProposalService } from '../../services/proposal.service';
 
 @Component({
   selector: 'app-create-proposal',
@@ -15,7 +14,7 @@ import { ProposalService } from '../../services/proposal.service';
   templateUrl: './create-proposal.component.html',
   styleUrl: './create-proposal.component.scss'
 })
-export default class CreateProposalComponent {
+export default class CreateProposalComponent implements OnInit {
   fb = inject(FormBuilder);
   router = inject(Router);
   route = inject(ActivatedRoute);
@@ -33,11 +32,15 @@ export default class CreateProposalComponent {
 
   ngOnInit() {
     this.createProposalForm = this.fb.group({
-      clientId: ['', Validators.required], //this.clientId
+      projectId: ['', Validators.required], //this.projectId
       freelancerId: ['', Validators.required], //this.freelancerId
-      workDescription: ['', Validators.required],
+      clientId: ['', Validators.required], //this.clientId
+      coverLetter: ['', Validators.required],
+      pricingType: ['BUDGET', Validators.required],
+      proposedBudget: [''],
+      proposedHourlyRate: [''],
       estimatedDuration: ['', Validators.required],
-      propusedValue: ['', Validators.required],
+      status: [''],
     });
 
     this.route.params.subscribe(params => {
@@ -63,7 +66,7 @@ export default class CreateProposalComponent {
   }
 
   CreateProposal() {
-    //this.createProposalForm.patchValue({ projectStatus: 'DRAFT' });
+    this.createProposalForm.patchValue({ status: 'PENDING' });
     /*debug*/ console.log(this.createProposalForm.value);
     this.projectService
       .createProjectService(this.createProposalForm.value)
@@ -81,6 +84,7 @@ export default class CreateProposalComponent {
   }
 
   SubmitProposal() {
+    this.createProposalForm.patchValue({ status: 'PENDING' });
     /*debug*/ console.log(this.createProposalForm.value);
     this.projectService
       .createProjectService(this.createProposalForm.value)
