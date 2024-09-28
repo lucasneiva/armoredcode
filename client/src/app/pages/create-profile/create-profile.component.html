@@ -17,21 +17,22 @@
                     <!--personal module start-->
                     <h2 class="font-semibold my-3 text-2xl">Informações Pessoais</h2>
                     <div class="my-auto mx-auto h-fit w-full flex">
-                        <div class="pr-2 w-full">
-                            <h2 class="font-semibold mt-4" for="companyName">Nome da empresa</h2>
+                        <div class="pr-2 mt-4 w-full">
+                            <label class="font-semibold" for="companyName">Nome da empresa</label>
                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
                                 placeholder="company name" id="companyName" name="companyName"
                                 formControlName="companyName" required>
+                            
                         </div>
-                        <div class="pl-2 w-full">
-                            <h2 class="font-semibold mt-4" for="website">Site da empresa</h2>
+                        <div class="pl-2 mt-4 w-full">
+                            <label class="font-semibold" for="website">Site da empresa</label>
                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
                                 placeholder="company site" id="website" name="website" formControlName="website">
                         </div>
                     </div>
                     <div class="my-auto mx-auto h-fit w-full flex">
-                        <div class="pr-2 w-full">
-                            <h2 class="font-semibold mt-4">Tamanho da empresa</h2>
+                        <div class="pr-2 mt-4 w-full">
+                            <label class="font-semibold" for="companySize">Tamanho da empresa</label>
                             <select name="Option" id="companySize" formControlName="companySize"
                                 class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                                 <option value="" selected>Select the company size</option>
@@ -40,9 +41,9 @@
                                 <option value="LARGE">Grande</option>
                             </select>
                         </div>
-                        <div class="pl-2 w-full">
-                            <h2 class="font-semibold mt-4">Área de atuação</h2>
-                            <select name="industryId" id="industryId" formControlName="industryId"
+                        <div class="pl-2 mt-4 w-full">
+                            <label class="font-semibold" for="industry">Área de atuação</label>
+                            <select name="industry" id="industry" formControlName="industryId"
                                 class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                                 <option value="" selected>Select your industry</option>
                                 <option *ngFor="let industry of industries" [value]="industry._id">
@@ -51,8 +52,8 @@
                             </select>
                         </div>
                     </div>
-                    <div class="h-fit grid align-top">
-                        <h2 class="font-semibold mt-4" for="companyDescription">Descrição da empresa</h2>
+                    <div class="my-auto mt-4 mx-auto h-fit w-full grid align-top">
+                        <label class="font-semibold" for="companyDescription">Descrição da empresa</label>
                         <textarea id="companyDescription" name="companyDescription" rows="4"
                             placeholder="Write the company descripition here" formControlName="companyDescription"
                             class="bg-white p-3 border-2 min-h-12 max-h-96"></textarea>
@@ -65,28 +66,28 @@
                     <!--localization module start-->
                     <h2 class="font-semibold my-3 text-2xl">Localização</h2>
                     <div class="my-auto mx-auto h-fit w-full flex">
-                        <div class="w-full pr-2">
-                            <h2 class="font-semibold mt-4" for="cep">CEP</h2>
+                        <div class="w-full mt-4 pr-2">
+                            <label class="font-semibold" for="cep">CEP</label>
                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
                                 placeholder="Example: 12345-678" id="cep" name="cep" formControlName="cep" required>
                         </div>
-                        <div class="w-full pl-2">
-                            <h2 class="font-semibold mt-4">Bairro</h2>
+                        <div class="w-full mt-4 pl-2">
+                            <label class="font-semibold" for="neighborhood">Bairro</label>
                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
                                 placeholder="Neighborhood Name" id="neighborhood" name="neighborhood"
                                 formControlName="neighborhood" required>
                         </div>
                     </div>
                     <div class="my-auto mx-auto h-fit w-full flex">
-                        <div class="w-full">
-                            <h2 class="font-semibold mt-4" for="streetAddress">Rua</h2>
+                        <div class="w-full mt-4">
+                            <label class="font-semibold" for="streetAddress">Rua</label>
                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
                                 placeholder="Street Name" id="streetAddress" name="streetAddress"
                                 formControlName="streetAddress" required>
                         </div>
                     </div>
-                    <div class="my-auto mx-auto h-fit w-full grid">
-                        <h2 class="font-semibold mt-4">Cidade</h2>
+                    <div class="my-auto mt-4 mx-auto h-fit w-full grid">
+                        <label class="font-semibold" for="city">Cidade</label>
                         <select name="Option" id="city" formControlName="city"
                             class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                             <option value="" selected>Select a city</option>
@@ -104,15 +105,15 @@
                         </select>
                     </div>
                     <div class="my-auto mx-auto h-fit w-full flex">
-                        <div class="pr-2 w-full">
-                            <h2 class="font-semibold mt-4">Estado</h2>
-                            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="SP"
-                                id="state" name="state" disabled>
+                        <div class="pr-2 mt-4 w-full">
+                            <label class="font-semibold" for="state">Estado</label>
+                            <input class="p-2 w-full border border-gray-300 rounded bg-gray-100 text-gray-400" type="text" placeholder="State"
+                                id="state" name="state" formControlName="state" readonly>
                         </div>
-                        <div class="pl-2 w-full">
-                            <h2 class="font-semibold mt-4">País</h2>
-                            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Brasil"
-                                id="country" name="country" disabled>
+                        <div class="pl-2 mt-4 w-full">
+                            <label class="font-semibold" for="country">País</label>
+                            <input class="p-2 w-full border border-gray-300 rounded bg-gray-100  text-gray-400" type="text" placeholder="Country"
+                                id="country" name="country" formControlName="country" readonly>
                         </div>
                     </div>
                     <!--localization module end-->
@@ -260,7 +261,7 @@
                                     formControlName="description" placeholder="Project descripition"></textarea>
                                 <div class="flex justify-end">
                                     <button type="button" (click)="removePortfolioItem(i)"
-                                        class="bg-red-500 hover:bg-red-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
+                                        class="bg-red-500 hover:bg-red-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
                                         Remover
                                     </button>
                                 </div>
@@ -322,7 +323,7 @@
 
                                     <div class="flex justify-end align-middle">
                                         <button type="button" (click)="removeExperience(i)"
-                                            class="bg-red-500 hover:bg-red-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
                                             Remover
                                         </button>
                                     </div>
@@ -331,7 +332,7 @@
                         </div>
                         <div class="flex justify-center align-middle">
                             <button type="button" (click)="addExperience()" *ngIf="workExperiences.length < 2"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
                                 Adicionar Experiência
                             </button>
                         </div>
@@ -383,7 +384,7 @@
                                     </div>
                                     <div class="flex justify-end align-middle">
                                         <button type="button" (click)="removeEducation(i)"
-                                            class="bg-red-500 hover:bg-red-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
                                             Remover
                                         </button>
                                     </div>
@@ -391,7 +392,7 @@
                             </div>
                             <div class="flex justify-center align-middle">
                                 <button type="button" (click)="addEducation()" *ngIf="education.length < 2"
-                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
                                     Adicionar Formação
                                 </button>
                             </div>
@@ -434,7 +435,7 @@
 
                                     <div class="flex justify-end align-middle">
                                         <button type="button" (click)="removeCertification(i)"
-                                            class="bg-red-500 hover:bg-red-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
                                             Remover
                                         </button>
                                     </div>
@@ -442,7 +443,7 @@
                             </div>
                             <div class="flex justify-center align-middle">
                                 <button type="button" (click)="addCertification()" *ngIf="certifications.length < 5"
-                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
                                     Adicionar Certificação
                                 </button>
                             </div>

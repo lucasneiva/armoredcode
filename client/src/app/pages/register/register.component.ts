@@ -24,7 +24,7 @@ export default class RegisterComponent implements OnInit{
       username: ['',Validators.required],
       email: ['',Validators.compose ([Validators.required, Validators.email])],
       password: ['',Validators.required],
-      role: ['',Validators.required]
+      role: ['CLIENT',Validators.required]
     },
     );
   }
