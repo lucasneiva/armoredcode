@@ -5,7 +5,7 @@ import { FormBuilder, FormControl, FormGroup,
 import { Router, RouterModule, ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 import { ProjectService } from '../../services/project.service';
 import { AuthService } from '../../services/auth.service';
-//import { ProposalService } from '../../services/proposal.service';
+import { ProposalService } from '../../services/proposal.service';
 
 @Component({
   selector: 'app-create-proposal',
@@ -14,27 +14,59 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './create-proposal.component.html',
   styleUrl: './create-proposal.component.scss'
 })
-export default class CreateProposalComponent {
+export default class CreateProposalComponent implements OnInit {
   fb = inject(FormBuilder);
   router = inject(Router);
+  route = inject(ActivatedRoute);
+
   authService = inject(AuthService);
   projectService = inject(ProjectService);
-  //proposalService = inject(ProposalService);
+  proposalService = inject(ProposalService);
 
   createProposalForm!: FormGroup;
 
+  isLoading = true;
+
+  project: any;
+  projectId!: string;
+
   ngOnInit() {
     this.createProposalForm = this.fb.group({
-      clientId: ['', Validators.required], //this.clientId
+      projectId: ['', Validators.required], //this.projectId
       freelancerId: ['', Validators.required], //this.freelancerId
-      workDescription: ['', Validators.required],
+      clientId: ['', Validators.required], //this.clientId
+      coverLetter: ['', Validators.required],
+      pricingType: ['BUDGET', Validators.required],
+      proposedBudget: [''],
+      proposedHourlyRate: [''],
       estimatedDuration: ['', Validators.required],
-      propusedValue: ['', Validators.required],
+      status: [''],
+    });
+
+    this.route.params.subscribe(params => {
+      this.projectId = params['id'];
+      if (this.projectId) {
+        this.loadProject();  // Load the project only if projectId is valid
+      } else {
+        console.error('Project ID is missing');
+      }
+    });
+  }
+
+  loadProject(): void {
+    this.isLoading = true;
+    this.projectService.getProjectById(this.projectId).subscribe(response => {
+      this.project = response.data;
+      /*Debug*/ //console.log('Project loaded:', this.project);  
+      this.isLoading = false;
+      if (this.project) {
+        console.log("project fetched sucessfully!");
+      }
     });
   }
 
   CreateProposal() {
-    //this.createProposalForm.patchValue({ projectStatus: 'DRAFT' });
+    this.createProposalForm.patchValue({ status: 'PENDING' });
     /*debug*/ console.log(this.createProposalForm.value);
     this.projectService
       .createProjectService(this.createProposalForm.value)
@@ -52,6 +84,7 @@ export default class CreateProposalComponent {
   }
 
   SubmitProposal() {
+    this.createProposalForm.patchValue({ status: 'PENDING' });
     /*debug*/ console.log(this.createProposalForm.value);
     this.projectService
       .createProjectService(this.createProposalForm.value)

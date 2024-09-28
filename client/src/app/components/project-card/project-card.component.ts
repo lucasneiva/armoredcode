@@ -109,6 +109,11 @@ export class ProjectCardComponent {
     console.log("Post Project button clicked");
   }
 
+  editProject() {
+    console.log("Edit Project button clicked");
+    this.router.navigate(['../edit-project', this.project._id], { relativeTo: this.route });
+  }
+
   cancelProject() {
     const projectId = this.project._id;
 
@@ -132,9 +137,9 @@ export class ProjectCardComponent {
     }
   }
 
-  editProject() {
-    console.log("Edit Project button clicked");
-    this.router.navigate(['../edit-project', this.project._id], { relativeTo: this.route });
+  makeProposal(){
+    console.log("create Proposal button clicked");
+    this.router.navigate(['../create-proposal', this.project._id], { relativeTo: this.route });
   }
 
 }

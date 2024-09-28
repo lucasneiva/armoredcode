@@ -3,27 +3,32 @@
         <h3 class="text-3xl text-center font-semibold py-5">Register</h3>
         <form [formGroup]="registerForm" class="flex flex-col">
             <div class="flex flex-col mt-4 mb-1">
-                <input formControlName="username" class="p-2 border border-gray-300 rounded" type="text" placeholder="Username">
+                <input formControlName="username" name="username" type="text" placeholder="Username"
+                    class="p-2 border border-gray-300 rounded">
                 <span *ngIf="registerForm.hasError('required', 'username') && registerForm.controls['username'].dirty" class="text-red-500">*Username is required</span>
             </div>
             <div class="flex flex-col mt-4 mb-1">
-                <input formControlName="email" class="p-2 border border-gray-300 rounded" type="text" placeholder="Email">
+                <input formControlName="email" name="email" type="text" placeholder="Email"
+                class="p-2 border border-gray-300 rounded">
                 <span *ngIf="registerForm.hasError('required', 'email') && registerForm.controls['email'].dirty" class="text-red-500">*Email is required</span>
                 <span *ngIf="registerForm.hasError('email', 'email')" class="text-red-500">*Email is invalid</span>
             </div>
             <div class="flex flex-col mt-4 mb-1">
-                <input formControlName="password" class="p-2 border border-gray-300 rounded" type="password" placeholder="Password">
+                <input formControlName="password" name="password" type="password" placeholder="Password"
+                class="p-2 border border-gray-300 rounded">
                 <span *ngIf="registerForm.hasError('required', 'password') && registerForm.controls['password'].dirty" class="text-red-500">*Password is required</span>
             </div>
             
             <div class="flex flex-row mt-4 mb-1 justify-around">
-                <div>
-                    <input formControlName="role" name="role" type="radio" value="CLIENT" id="CLIENT" class="p-2 border border-gray-300 rounded">
-                    <label for="CLIENT" class="m-2 font-normal">Client</label>
+                <div class="m-0.5">
+                    <input type="radio" name="role" id="clientRole" formControlName="role" value="CLIENT" 
+                        class="p-2 border border-gray-300 rounded" checked >
+                    <label for="clientRole" class="m-2 font-normal">Client</label>
                 </div>
-                <div>
-                    <input formControlName="role" name="role" type="radio" value="FREELANCER" id="FREELANCER" class="p-2 border border-gray-300 rounded">
-                    <label for="FREELANCER" class="m-2 font-normal">Freelancer</label>
+                <div class="m-0.5">
+                    <input type="radio" name="role" id="freelancerRole" formControlName="role" value="FREELANCER" 
+                        class="p-2 border border-gray-300 rounded">
+                    <label for="freelancerRole" class="m-2 font-normal">Freelancer</label>
                 </div>  
             </div>
             

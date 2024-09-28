@@ -45,7 +45,7 @@ export default class CreateProfileComponent implements OnInit {
   skills: any[] = [];
   specializations: any[] = [];
   industries: any[] = [];
-  pageNumbers: number[] = []; 
+  pageNumbers: number[] = [];
 
   ngOnInit() {
     this.authService.getUserId();
@@ -107,12 +107,16 @@ export default class CreateProfileComponent implements OnInit {
         country: ['Brasil'],
       }),
       selectedSkills: this.fb.array([]), // Initialize as an empty array
-      portfolioItems: this.fb.array([this.createPortfolioItem()]),
+
+      workExperiences: this.fb.array([this.createExperienceForm()]),
       education: this.fb.array([this.createEducationForm()]),
       certifications: this.fb.array([this.createCertificationForm()]),
-      workExperiences: this.fb.array([this.createExperienceForm()]),
+      portfolioItems: this.fb.array([this.createPortfolioItem()]),
+      
     });
+
   }
+  
 
   nextPage() {
     this.currentPage++;
@@ -165,6 +169,12 @@ export default class CreateProfileComponent implements OnInit {
         });
 
     } else {
+      // Mark nested FormArrays as touched before displaying errors
+      this.markFormArrayTouched(this.freelancerProfileForm.get('certifications') as FormArray);
+      this.markFormArrayTouched(this.freelancerProfileForm.get('education') as FormArray);
+      this.markFormArrayTouched(this.freelancerProfileForm.get('workExperiences') as FormArray);
+      this.markFormArrayTouched(this.freelancerProfileForm.get('portfolioItems') as FormArray); // Add this for portfolioItems as well
+
       this.displayFormErrors(this.isClient ? this.clientProfileForm : this.freelancerProfileForm);
     }
   }
@@ -178,6 +188,30 @@ export default class CreateProfileComponent implements OnInit {
     else {
       this.freelancerProfileForm.reset();
     }
+  }
+
+  private markFormArrayTouched(formArray: FormArray) {
+    formArray.markAsTouched();
+    formArray.controls.forEach(control => {
+      if (control instanceof FormControl) {
+        control.markAsTouched();
+      } else if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control); // Use markFormGroupTouched for nested FormGroups
+      }
+    });
+  }
+
+  // Helper function to mark FormGroup and its controls as touched
+  private markFormGroupTouched(formGroup: FormGroup) {
+    formGroup.markAsTouched();
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched();
+      } else if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      }
+    });
   }
 
   // Helper functions to manage FormArrays 
