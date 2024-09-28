@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, FormGroup,
 import { Router, RouterModule, ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 import { ProjectService } from '../../services/project.service';
 import { AuthService } from '../../services/auth.service';
+import { ProposalService } from '../../services/proposal.service';
 //import { ProposalService } from '../../services/proposal.service';
 
 @Component({
@@ -17,11 +18,18 @@ import { AuthService } from '../../services/auth.service';
 export default class CreateProposalComponent {
   fb = inject(FormBuilder);
   router = inject(Router);
+  route = inject(ActivatedRoute);
+
   authService = inject(AuthService);
   projectService = inject(ProjectService);
-  //proposalService = inject(ProposalService);
+  proposalService = inject(ProposalService);
 
   createProposalForm!: FormGroup;
+
+  isLoading = true;
+
+  project: any;
+  projectId!: string;
 
   ngOnInit() {
     this.createProposalForm = this.fb.group({
@@ -30,6 +38,27 @@ export default class CreateProposalComponent {
       workDescription: ['', Validators.required],
       estimatedDuration: ['', Validators.required],
       propusedValue: ['', Validators.required],
+    });
+
+    this.route.params.subscribe(params => {
+      this.projectId = params['id'];
+      if (this.projectId) {
+        this.loadProject();  // Load the project only if projectId is valid
+      } else {
+        console.error('Project ID is missing');
+      }
+    });
+  }
+
+  loadProject(): void {
+    this.isLoading = true;
+    this.projectService.getProjectById(this.projectId).subscribe(response => {
+      this.project = response.data;
+      /*Debug*/ //console.log('Project loaded:', this.project);  
+      this.isLoading = false;
+      if (this.project) {
+        console.log("project fetched sucessfully!");
+      }
     });
   }
 

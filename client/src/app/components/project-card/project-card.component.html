@@ -120,22 +120,23 @@
             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">
             Post Project
           </button>
-
           <button (click)="cancelProject()"
             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
             Cancel Project
           </button>
-
           <button (click)="editProject()"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
             Edit Project
           </button>
         </ng-container>
+
         <ng-container *ngIf="!isClient">
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+          <button 
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
             Enter in Contact
           </button>
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+          <button (click)="makeProposal()"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
             Make a Proposal
           </button>
         </ng-container>
