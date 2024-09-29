@@ -1,0 +1,18 @@
+<!--card template-->
+<ng-container *ngIf="proposal">
+    <!--card start-->
+    <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{'bg-gray-100': showDetails}"
+      class="sticky w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+      <p class="text-sm text-gray-500">Proposal ID: {{proposal._id}}</p> <!-- Added this line -->
+      <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
+        <!--<span class="block py-2 mr-2">{{project.projectTitle}}</span>-->
+        <span class="block w-fit p-2 border-2 border-transparent rounded-md text-white"
+          [ngClass]="{'bg-blue-500': proposal.status === 'DRAFT',
+                      'bg-yellow-500': proposal.status === 'PENDING',
+                      'bg-red-500': proposal.status === 'REJECTED',
+                      'bg-green-500': proposal.status === 'ACCEPTED'}">
+                      {{proposal.status}}</span>
+      </h2>
+    </div>
+    <!--card end-->
+</ng-container>
