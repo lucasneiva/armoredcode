@@ -19,9 +19,9 @@ export default class ManageProposalComponent implements OnInit{
   authService = inject(AuthService);
   projectService = inject(ProjectService);
   proposalService = inject(ProposalService);
-  //projects: Project[] = []; // Array to store projects
+  //projects: Project[] = []; 
   proposals: Proposal[] = [];
-  isLoading = true; // Flag to track loading state
+  isLoading = true; 
 
   userRole: string | null = null; 
   isClient: boolean = false; 
@@ -43,7 +43,7 @@ export default class ManageProposalComponent implements OnInit{
   loadFreelancerProposals() {
     this.proposalService.getFreelancerProposals().subscribe({
       next: (res) => {
-        this.proposals = res.data; // Assuming your API response has a 'data' property with the proposals array
+        this.proposals = res.data;
         this.isLoading = false; 
       },
       error: (err) => {

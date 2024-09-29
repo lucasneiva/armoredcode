@@ -4,24 +4,24 @@
         <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
     </div>
 
-    <ng-container *ngIf="!isLoading && project">
+    <ng-container *ngIf="!isLoading && proposal">
         <div class="w-full shadow-lg bg-white p-8 my-auto">
             
-            <h2 class="text-2xl font-bold mb-4">Criar Proposta para "{{ project.projectTitle }}"</h2>
+            <h2 class="text-2xl font-bold mb-4">Criar Proposta para "{{ proposal.proposalTitle }}"</h2>
     
             <!--proposal start-->
-            <form [formGroup]="createProposalForm"> <!--(ngSubmit)="onSubmit()"-->
+            <form [formGroup]="editProposalForm"> <!--(ngSubmit)="onSubmit()"-->
                 <div class="mb-4 my-auto mx-auto h-fit w-full flex">
-                    <ng-container *ngIf="project">
-                        <div *ngIf="project.pricingType == 'BUDGET'" class="pr-2 w-full">
+                    <ng-container *ngIf="proposal">
+                        <div *ngIf="proposal.pricingType == 'BUDGET'" class="pr-2 w-full">
                             <label for="proposedBudget" class="block text-gray-700 font-bold mb-2">Valor Proposto (orçamento):</label>
                             <input type="number" id="proposedBudget" name="proposedBudget" formControlName="proposedBudget"
-                                class="p-2 w-full border border-gray-300 rounded" placeholder="Project value" required>
+                                class="p-2 w-full border border-gray-300 rounded" placeholder="proposal value" required>
                         </div>
-                        <div *ngIf="project.pricingType == 'HOURLY_RATE'" class="pr-2 w-full">
+                        <div *ngIf="proposal.pricingType == 'HOURLY_RATE'" class="pr-2 w-full">
                             <label for="proposedHourlyRate" class="block text-gray-700 font-bold mb-2">Valor Proposto (por hora):</label>
                             <input type="number" id="proposedHourlyRate" name="proposedHourlyRate" formControlName="proposedHourlyRate"
-                                class="p-2 w-full border border-gray-300 rounded" placeholder="Project value" required>
+                                class="p-2 w-full border border-gray-300 rounded" placeholder="proposal value" required>
                         </div>
                     </ng-container>
     
@@ -29,7 +29,7 @@
                         <label for="estimatedDuration" class="block text-gray-700 font-bold mb-2">Prazo Estimado (em
                             dias):</label>
                         <input type="number" id="estimatedDuration" name="estimatedDuration" formControlName="estimatedDuration"
-                            class="p-2 w-full border border-gray-300 rounded" placeholder="Project duration" required>
+                            class="p-2 w-full border border-gray-300 rounded" placeholder="proposal duration" required>
                     </div>
                 </div>
     
@@ -42,9 +42,9 @@
     
                 <!--buttons-->
                 <div class="mt-10 mx-auto h-fit w-full flex justify-between">
-                    <!--[disabled]="createProposalForm.invalid"
-                        [class.disabled]="createProposalForm.invalid"-->
-                    <button (click)="CreateProposal()"
+                    <!--[disabled]="editProposalForm.invalid"
+                        [class.disabled]="editProposalForm.invalid"-->
+                    <button (click)="EditProposal()"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold mr-2 p-2 rounded cursor-pointer w-full">
                         Salvar
                     </button>

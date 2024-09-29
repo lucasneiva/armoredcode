@@ -31,7 +31,7 @@ export class ProposalService {
       }),
       withCredentials: true // VERY IMPORTANT: Include cookies in requests
     };
-    return this.http.get<any>(`${apiUrls.projectServiceApi}/${proposalId}`, httpOptions).pipe(
+    return this.http.get<any>(`${apiUrls.proposalServiceApi}/${proposalId}`, httpOptions).pipe(
       tap(response => console.log('API response:', response))  // Log API response
     );
   }
@@ -47,14 +47,14 @@ export class ProposalService {
     return this.http.get<any>(`${apiUrls.proposalServiceApi}/freelancer/${freelancerId}`, httpOptions);
   }
 
-  updateProposal(proposalId: string, proposalObj: any): Observable<any> {
+  updateProposal(proposalId: string, proposalObj: any ): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
       withCredentials: true  // VERY IMPORTANT: Include cookies in requests
     };
-    return this.http.patch<any>(`${apiUrls.proposalServiceApi}/${proposalId}`, proposalObj, httpOptions);
+    return this.http.put<any>(`${apiUrls.proposalServiceApi}/${proposalId}`, proposalObj, httpOptions);
   }
 
   /*
