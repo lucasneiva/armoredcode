@@ -31,13 +31,29 @@ export default class ManageProposalComponent implements OnInit{
 
     if (this.userRole === 'CLIENT') {
       this.isClient = true;
+      // Handle client logic if needed (e.g., fetching proposals for their projects)
     } else if (this.userRole === 'FREELANCER') {
       this.isClient = false;
+      this.loadFreelancerProposals(); // Load proposals for the freelancer
     } else {
       console.log("invalid role");
     }
+  }
 
-    /*
+  loadFreelancerProposals() {
+    this.proposalService.getFreelancerProposals().subscribe({
+      next: (res) => {
+        this.proposals = res.data; // Assuming your API response has a 'data' property with the proposals array
+        this.isLoading = false; 
+      },
+      error: (err) => {
+        console.error("Error fetching proposals:", err);
+        this.isLoading = false; 
+      }
+    });
+  }
+
+  /*
     this.projectService.getProjects().subscribe({
       next: (res) => {
         this.projects = res.data;
@@ -49,6 +65,5 @@ export default class ManageProposalComponent implements OnInit{
       }
     });
     */
-  }
 
 }
