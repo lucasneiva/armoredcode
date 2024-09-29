@@ -3,7 +3,7 @@
     <!--card start-->
     <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{'bg-gray-100': showDetails}"
         class="sticky w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
-        <p class="text-sm text-gray-500">Proposal ID: {{proposal._id}}</p> 
+        <p class="text-sm text-gray-500">Proposal ID: {{proposal._id}}</p>
         <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
             <!--<span class="block py-2 mr-2">{{project.projectTitle}}</span>-->
             <span class="block w-fit p-2 border-2 border-transparent rounded-md text-white" [ngClass]="{'bg-blue-500': proposal.status === 'DRAFT',
@@ -17,12 +17,8 @@
     <!--card details start-->
     <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10" *ngIf="showDetails">
         <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl w-full" style="max-height: 90vh; overflow-y: auto;">
-            <p class="text-sm text-gray-500">Project ID: {{proposal.projectId}}</p>
-            <p class="text-sm text-gray-500">Proposal ID: {{proposal._id}}</p>
             <div class="flex justify-between align-middle">
-
-                <!--<h2 class="text-2xl font-bold mb-4">{{project.projectTitle}}</h2>-->
-
+                <h2 *ngIf="project" class="text-2xl font-bold mb-4">{{project.projectTitle}}</h2>
                 <button (click)="toggleDetails()"
                     class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded-full p-1 items-center w-fit h-fit">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -32,6 +28,10 @@
                     </svg>
                 </button>
             </div>
+            <div class="flex justify-start align-middle">
+                <p class="text-sm text-gray-500">Project ID: {{proposal.projectId}} |</p>
+                <p class="text-sm text-gray-500 ml-1"> Proposal ID: {{proposal._id}}</p>
+            </div>
 
 
             <div *ngIf="detailedProposal" class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -39,7 +39,8 @@
                     <p><strong>Created by:</strong> {{creatorName}}</p>
                     <p><strong>Project created by:</strong> {{projectCreatorName}}</p>
                     <p><strong>Description:</strong> {{detailedProposal.coverLetter}}</p>
-
+                </div>
+                <div>
                     <ng-container *ngIf="detailedProposal.pricingType == 'BUDGET'">
                         <p>
                             <strong>Budget:</strong>

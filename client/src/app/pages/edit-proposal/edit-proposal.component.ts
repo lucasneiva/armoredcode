@@ -30,6 +30,7 @@ export default class EditProposalComponent implements OnInit {
   isLoading = true;
 
   proposal: any;
+  project: any;
   proposalId!: string;
 
   ngOnInit() {
@@ -64,11 +65,19 @@ export default class EditProposalComponent implements OnInit {
     this.isLoading = true;
     this.proposalService.getProposalById(this.proposalId).subscribe(response => {
       this.proposal = response.data;
-      /*Debug*/ console.log('Proposal loaded:', this.proposal);
+      /*Debug*/ //console.log('Proposal loaded:', this.proposal);
       this.isLoading = false;
       if (this.proposal) {
+        this.loadProject(this.proposal.projectId);  // Pass the project object here
         this.populateForms(this.proposal);  // Pass the project object here
       }
+    });
+  }
+
+  loadProject(projectId: string | null): void {
+    this.projectService.getProjectById(projectId).subscribe(response => {
+      this.project = response.data;
+      /*Debug*/ //console.log('Project loaded:', this.project);  
     });
   }
 

@@ -7,19 +7,19 @@
     <ng-container *ngIf="!isLoading && project">
         <div class="w-full shadow-lg bg-white p-8 my-auto">
             
-            <h2 class="text-2xl font-bold mb-4">Criar Proposta para "{{ project.projectTitle }}"</h2>
+            <h2 class="text-2xl font-bold mb-4">Criar Proposta para {{ project.projectTitle }}</h2>
     
             <!--proposal start-->
             <form [formGroup]="createProposalForm"> <!--(ngSubmit)="onSubmit()"-->
                 <div class="mb-4 my-auto mx-auto h-fit w-full flex">
                     <ng-container *ngIf="project">
                         <div *ngIf="project.pricingType == 'BUDGET'" class="pr-2 w-full">
-                            <label for="proposedBudget" class="block text-gray-700 font-bold mb-2">Valor Proposto (orçamento):</label>
+                            <label for="proposedBudget" class="block text-gray-700 font-bold mb-2">Orçamento Proposto:</label>
                             <input type="number" id="proposedBudget" name="proposedBudget" formControlName="proposedBudget"
                                 class="p-2 w-full border border-gray-300 rounded" placeholder="Project value" required>
                         </div>
                         <div *ngIf="project.pricingType == 'HOURLY_RATE'" class="pr-2 w-full">
-                            <label for="proposedHourlyRate" class="block text-gray-700 font-bold mb-2">Valor Proposto (por hora):</label>
+                            <label for="proposedHourlyRate" class="block text-gray-700 font-bold mb-2">Valor/Hora Proposto:</label>
                             <input type="number" id="proposedHourlyRate" name="proposedHourlyRate" formControlName="proposedHourlyRate"
                                 class="p-2 w-full border border-gray-300 rounded" placeholder="Project value" required>
                         </div>

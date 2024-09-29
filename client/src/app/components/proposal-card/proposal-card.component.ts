@@ -25,6 +25,7 @@ export class ProposalCardComponent {
   userRole: string | null = null; 
 
   @Input() proposal: any;
+  project: any;
   detailedProposal: any = null;  // Separate object for detailed data
   showDetails = false; // Flag to control showing details
 
@@ -58,8 +59,11 @@ export class ProposalCardComponent {
         if (response.success) {
           this.detailedProposal = response.data;  // Access the 'data' property from the response
           /*debug*/ console.log('Full Proposal Data:', this.detailedProposal);
-          const projectCreatorId = this.detailedProposal.clientId;
+          
           const creatorId = this.detailedProposal.freelancerId;
+          const projectCreatorId = this.detailedProposal.clientId;
+          const projectId = this.detailedProposal.projectId;
+          this.loadProject(projectId);  // Pass the project object here
           this.loadProjectCreatorName(projectCreatorId); // Load creator's username
           this.loadCreatorName(creatorId); // Load creator's username
         } else {
@@ -70,6 +74,13 @@ export class ProposalCardComponent {
         console.error('Error fetching proposal details:', error);
       }
     );
+  }
+
+  loadProject(projectId: string | null): void {
+    this.projectService.getProjectById(projectId).subscribe(response => {
+      this.project = response.data;
+      /*Debug*/ //console.log('Project loaded:', this.project);  
+    });
   }
 
   loadCreatorName(userId: string) {

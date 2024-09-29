@@ -31,7 +31,7 @@ export default class ManageProposalComponent implements OnInit{
 
     if (this.userRole === 'CLIENT') {
       this.isClient = true;
-      // Handle client logic if needed (e.g., fetching proposals for their projects)
+      this.loadClientProposals(); // Load proposals for the client
     } else if (this.userRole === 'FREELANCER') {
       this.isClient = false;
       this.loadFreelancerProposals(); // Load proposals for the freelancer
@@ -51,6 +51,10 @@ export default class ManageProposalComponent implements OnInit{
         this.isLoading = false; 
       }
     });
+  }
+
+  loadClientProposals(){
+    //get the proposals for the client
   }
 
   /*
