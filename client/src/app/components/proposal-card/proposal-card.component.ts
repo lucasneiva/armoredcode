@@ -15,19 +15,19 @@ import { ProposalService } from '../../services/proposal.service';
 })
 export class ProposalCardComponent {
   router = inject(Router);
-  route = inject(ActivatedRoute); // Inject ActivatedRoute
+  route = inject(ActivatedRoute);
+  authService = inject(AuthService);
   projectService = inject(ProjectService);
   proposalService = inject(ProposalService);
   userService = inject(UserService);
-  authService = inject(AuthService); // Inject AuthService
   
   isClient: boolean = false; 
   userRole: string | null = null; 
 
   @Input() proposal: any;
   project: any;
-  detailedProposal: any = null;  // Separate object for detailed data
-  showDetails = false; // Flag to control showing details
+  detailedProposal: any = null;
+  showDetails = false;
 
   creatorName = '';
   projectCreatorName = '';
@@ -36,19 +36,16 @@ export class ProposalCardComponent {
     this.userRole = this.authService.getUserRole();
     if (this.userRole === 'CLIENT') {
       this.isClient = true;
+      this.loadProposaLDetails();
     } else if (this.userRole === 'FREELANCER') {
       this.isClient = false;
+      this.loadProposaLDetails();
     } else {
       console.log("invalid role");
     }
   }
 
   toggleDetails() {
-    if (this.showDetails) {
-      this.detailedProposal = null; // Clear project details when closing
-    } else {
-      this.loadProposaLDetails(); // Load new data when opening
-    }
     this.showDetails = !this.showDetails;
   }
 
@@ -57,15 +54,14 @@ export class ProposalCardComponent {
     this.proposalService.getProposalById(proposalId).subscribe(
       (response) => {
         if (response.success) {
-          this.detailedProposal = response.data;  // Access the 'data' property from the response
-          /*debug*/ console.log('Full Proposal Data:', this.detailedProposal);
-          
+          this.detailedProposal = response.data;
+          /*debug*/ //console.log('Full Proposal Data:', this.detailedProposal);
           const creatorId = this.detailedProposal.freelancerId;
           const projectCreatorId = this.detailedProposal.clientId;
           const projectId = this.detailedProposal.projectId;
-          this.loadProject(projectId);  // Pass the project object here
-          this.loadProjectCreatorName(projectCreatorId); // Load creator's username
-          this.loadCreatorName(creatorId); // Load creator's username
+          this.loadProject(projectId);  
+          this.loadProjectCreatorName(projectCreatorId); 
+          this.loadCreatorName(creatorId);
         } else {
           console.error('Failed to retrieve proposal details:', response.message);
         }
@@ -87,7 +83,7 @@ export class ProposalCardComponent {
     this.userService.getUser(userId).subscribe(
       (response) => {
         if (response.success) {
-          this.creatorName = response.data.username; // Assuming the username is in the 'username' field
+          this.creatorName = response.data.username;
         } else {
           console.error('Failed to retrieve creator details:', response.message);
         }
@@ -101,7 +97,7 @@ export class ProposalCardComponent {
     this.userService.getUser(userId).subscribe(
       (response) => {
         if (response.success) {
-          this.projectCreatorName = response.data.username; // Assuming the username is in the 'username' field
+          this.projectCreatorName = response.data.username;
         } else {
           console.error('Failed to retrieve project creator details:', response.message);
         }
