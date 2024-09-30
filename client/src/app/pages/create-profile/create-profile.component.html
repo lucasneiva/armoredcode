@@ -164,8 +164,8 @@
                     <!--personal module start-->
                     <h2 class="font-semibold my-3 text-2xl">Informações Pessoais</h2>
                     <div class="my-auto mx-auto h-fit w-full flex">
-                        <div class="pr-2 w-full">
-                            <h2 class="font-semibold mt-4" for="firstName">Nome</h2>
+                        <div class="pr-2 w-full mt-4">
+                            <label class="font-semibold" for="firstName">Nome</label>
                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
                                 placeholder="first name" id="firstName" name="firstName" formControlName="firstName"
                                 required>
@@ -173,8 +173,8 @@
                                 *ngIf="freelancerProfileForm.hasError('required', 'firstName') && freelancerProfileForm.get('firstName')?.touched"
                                 class="text-red-500">*First Name is required</span>
                         </div>
-                        <div class="pl-2 w-full">
-                            <h2 class="font-semibold mt-4" for="lastName">Sobrenome</h2>
+                        <div class="pl-2 w-full mt-4">
+                            <label class="font-semibold" for="lastName">Sobrenome</label>
                             <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="last name"
                                 id="lastName" name="lastName" formControlName="lastName" required>
                             <span
@@ -182,8 +182,8 @@
                                 class="text-red-500">*Last Name is required</span>
                         </div>
                     </div>
-                    <div class="h-fit grid align-top">
-                        <h2 class="font-semibold mt-4" for="profileSummary">Sobre</h2>
+                    <div class="h-fit grid align-top mt-4">
+                        <label class="font-semibold" for="profileSummary">Sobre</label>
                         <textarea id="profileSummary" name="profileSummary" rows="4"
                             placeholder="Write the profile Summary here" formControlName="profileSummary"
                             class="bg-white p-3 border-2 min-h-12 max-h-96"></textarea>
@@ -194,22 +194,21 @@
                 <div *ngIf="showPage(2)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
                     <!--professional module start-->
                     <h2 class="font-semibold my-3 text-2xl">Profissional</h2>
-                    <div class="my-auto mx-auto h-fit w-full grid">
-                        <h2 class="font-semibold mt-4">Especialização</h2>
-                        <select name="specializationId" id="specializationId"
-                            class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
-                            formControlName="specializationId">
+                    <div class="my-auto mx-auto h-fit w-full grid mt-4">
+                        <label class="font-semibold" for="specializations">Especialização</label>
+                        <select name="specializations" id="specializations" formControlName="specializationId"
+                            class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                             <option value="" selected>Select your Specialization</option>
                             <option *ngFor="let specialization of specializations" [value]="specialization._id">
                                 {{ specialization.specializationName }}
                             </option>
                         </select>
-                        <span
+                        <!--<span
                             *ngIf="freelancerProfileForm.hasError('required', 'specializationId') && freelancerProfileForm.get('specializationId')?.touched"
-                            class="text-red-500">*Specialization is required</span>
+                            class="text-red-500">*Specialization is required</span>-->
                     </div>
-                    <div class="my-auto mx-auto h-fit w-full grid">
-                        <h2 class="font-semibold mt-4">Nível de Experiência</h2>
+                    <div class="my-auto mx-auto h-fit w-full grid mt-4">
+                        <label class="font-semibold" for="experienceLevel">Nível de Experiência</label>
                         <select name="experienceLevel" id="experienceLevel" formControlName="experienceLevel"
                             class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                             <option value="" selected>Select your experience here</option>
@@ -222,11 +221,11 @@
                             class="text-red-500">*Experience Level is required</span>
                     </div>
                     <!-- Skills Section start -->
-                    <div class="my-auto mx-auto h-fit w-full grid">
-                        <h2 class="font-semibold mt-4">Habilidades</h2>
+                    <div class="my-auto mx-auto h-fit w-full grid mt-4">
+                        <label class="font-semibold" for="skills">Habilidades</label>
                         <div class="flex w-full">
-                            <select class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
-                                (change)="onSkillSelected($event)">
+                            <select (change)="onSkillSelected($event)" name="skills" id="skills"
+                                class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
                                 <option value="" disabled selected>Selecione sua habilidade</option>
                                 <option *ngFor="let skill of skills" [value]="skill._id">
                                     {{ skill.skillName }}
@@ -253,19 +252,19 @@
                         </div>
                     </div>
                     <!-- Skills Section end -->
-                    <div class="my-auto mx-auto h-fit w-full grid">
-                        <h2 class="font-semibold mt-4">Preço por Hora</h2>
-                        <div formGroupName="hourlyRate" class="flex justify-between" id="hourlyRate">
-                            <div class="pr-2 w-full">
-                                <h2 class="font-semibold mt-2">Min Rate:</h2>
+                    <div class="my-auto mx-auto h-fit w-full grid mt-4">
+                        <h2 class="font-semibold" for="hourlyRate">Preço por Hora</h2>
+                        <div formGroupName="hourlyRate" class="flex justify-between" id="hourlyRate" name="hourlyRate">
+                            <div class="pr-2 w-full mt-2">
+                                <label class="font-semibold" for="minHourlyRate">Min Rate:</label>
                                 <input formControlName="min" type="number" placeholder="Min" id="minHourlyRate" required
                                     class="p-2 w-full border border-gray-300 rounded">
                                 <span
                                     *ngIf="freelancerProfileForm.get('hourlyRate')?.hasError('required', 'min') && freelancerProfileForm.get('hourlyRate')?.get('min')?.touched"
                                     class="text-red-500">*Min Rate is required</span>
                             </div>
-                            <div class="pl-2 w-full">
-                                <h2 class="font-semibold mt-2">Max Rate:</h2>
+                            <div class="pl-2 w-full mt-2">
+                                <label class="font-semibold" for="maxHourlyRate">Max Rate:</label>
                                 <input formControlName="max" type="number" placeholder="Max" id="maxHourlyRate" required
                                     class="p-2 w-full border border-gray-300 rounded">
                                 <span
@@ -273,9 +272,10 @@
                                     class="text-red-500">*Max Rate is required</span>
                             </div>
                         </div>
-                        <span *ngIf="freelancerProfileForm.get('hourlyRate')?.hasError('hourlyRateInvalid')" class="text-red-500">
+                        <span *ngIf="freelancerProfileForm.get('hourlyRate')?.hasError('hourlyRateInvalid')"
+                            class="text-red-500">
                             Min rate cannot be higher than max rate.
-                          </span>
+                        </span>
                     </div>
                     <!--professional module end-->
                 </div>
@@ -291,23 +291,31 @@
                                     <h3 class="font-semibold text-lg">Portfolio {{ i + 1 }}</h3>
                                     <div class="flex mt-4">
                                         <div class="pr-2 w-full">
+                                            <label class="font-semibold" for="portfolioTitle">Portfolio Title</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                placeholder="Project Title" formControlName="title" required>
+                                                id="portfolioTitle" name="portfolioTitle" placeholder="Project Title"
+                                                formControlName="title" required>
                                             <span
                                                 *ngIf="portfolioItem.hasError('required', 'title') && portfolioItem.get('title')?.touched"
                                                 class="text-red-500">*Portfolio title is required</span>
                                         </div>
                                         <div class="pl-2 w-full">
+                                            <label class="font-semibold" for="portfolioURL">Portfolio URL</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                placeholder="Project URL" formControlName="url" required>
+                                                id="portfolioURL" name="portfolioURL" placeholder="Project URL"
+                                                formControlName="url" required>
                                             <span
                                                 *ngIf="portfolioItem.hasError('required', 'url') && portfolioItem.get('url')?.touched"
                                                 class="text-red-500">*URL is required</span>
                                         </div>
                                     </div>
-                                    <textarea class="bg-white mt-4 p-3 border-2 min-h-12 max-h-96 w-full rounded"
-                                        rows="4" formControlName="description"
-                                        placeholder="Project descripition"></textarea>
+                                    <div class="row mt-4">
+                                        <label class="font-semibold" for="portfolioDescription">Portfolio Description</label>
+                                        <textarea class="bg-white p-3 border-2 min-h-12 max-h-96 w-full rounded"
+                                            rows="4" formControlName="description" id="portfolioDescription"
+                                            name="portfolioDescription" placeholder="Portfolio descripition"></textarea>
+                                    </div>
+
                                     <div class="flex justify-end">
                                         <button type="button" (click)="removePortfolioItem(i)"
                                             class="bg-red-500 hover:bg-red-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
@@ -339,18 +347,18 @@
                                     <h3 class="font-semibold text-lg">Experiência {{ i + 1 }}</h3>
 
                                     <div class="flex justify-between">
-                                        <div class="pr-2 w-full">
-                                            <h2 class="font-semibold mt-4" for="companyName">Nome da Empresa</h2>
-                                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                placeholder="Nome da Empresa" formControlName="companyName" required>
+                                        <div class="pr-2 w-full mt-4">
+                                            <label class="font-semibold" for="companyName">Nome da Empresa</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="text" name="companyName"
+                                               id="companyName" placeholder="Nome da Empresa" formControlName="companyName" required>
                                             <span
                                                 *ngIf="experienceForm.hasError('required', 'companyName') && experienceForm.get('companyName')?.touched"
                                                 class="text-red-500">*Company name is required</span>
                                         </div>
-                                        <div class="pl-2 w-full">
-                                            <h2 class="font-semibold mt-4" for="jobTitle">Cargo</h2>
-                                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                placeholder="Cargo" formControlName="jobTitle" required>
+                                        <div class="pl-2 w-full mt-4">
+                                            <label class="font-semibold" for="jobTitle">Cargo</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="text" name="jobTitle"
+                                                id="jobTitle" placeholder="Cargo" formControlName="jobTitle" required>
                                             <span
                                                 *ngIf="experienceForm.hasError('required', 'jobTitle') && experienceForm.get('jobTitle')?.touched"
                                                 class="text-red-500">*job title is required</span>
@@ -358,18 +366,18 @@
                                     </div>
 
                                     <div class="flex justify-between">
-                                        <div class="pr-2 w-full">
-                                            <h2 class="font-semibold mt-4">Data de Início</h2>
-                                            <input class="p-2 w-full border border-gray-300 rounded" type="date"
-                                                placeholder="Data de Início" formControlName="startDate" required>
+                                        <div class="pr-2 w-full mt-4">
+                                            <label class="font-semibold" for="startDate">Data de Início</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="date" name="startDate"
+                                                id="startDate" placeholder="Data de Início" formControlName="startDate" required>
                                             <span
                                                 *ngIf="experienceForm.hasError('required', 'startDate') && experienceForm.get('startDate')?.touched"
                                                 class="text-red-500">*Start Date is required</span>
                                         </div>
-                                        <div class="pl-2 w-full">
-                                            <h2 class="font-semibold mt-4">Data de Término</h2>
-                                            <input class="p-2 w-full border border-gray-300 rounded" type="date"
-                                                placeholder="Data de Término" formControlName="endDate" required>
+                                        <div class="pl-2 w-full mt-4">
+                                            <label class="font-semibold" for="endDate">Data de Término</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="date" name="endDate"
+                                                id="endDate" placeholder="Data de Término" formControlName="endDate" required>
                                             <span
                                                 *ngIf="experienceForm.hasError('required', 'endDate') && experienceForm.get('endDate')?.touched"
                                                 class="text-red-500">*End Date is required</span>
@@ -381,10 +389,9 @@
                                     </div>
 
                                     <div class="mt-4">
-                                        <h2 class="font-semibold mt-4" for="jobDescription">Descrição das atividades
-                                        </h2>
-                                        <textarea class="bg-white p-3 border-2 min-h-12 max-h-96 w-full rounded"
-                                            rows="4" formControlName="jobDescription"
+                                        <label class="font-semibold" for="jobDescription">Descrição das atividades</label>
+                                        <textarea class="bg-white p-3 border-2 min-h-12 max-h-96 w-full rounded" rows="4"
+                                            name="jobDescription" id="jobDescription" formControlName="jobDescription" 
                                             placeholder="Descreva suas atividades"></textarea>
                                     </div>
 
@@ -417,19 +424,18 @@
                                     <h3 class="font-semibold text-lg">Formação {{ i + 1 }}</h3>
 
                                     <div class="flex justify-between">
-                                        <div class="pr-2 w-full">
-                                            <h2 class="font-semibold mt-4">Curso</h2>
-                                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                placeholder="Degree name" formControlName="degreeName" required>
+                                        <div class="pr-2 w-full mt-4">
+                                            <label class="font-semibold" for="degreeName">Curso</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="text" name="degreeName"
+                                                id="degreeName" placeholder="Degree name" formControlName="degreeName" required>
                                             <span
                                                 *ngIf="educationForm.hasError('required', 'degreeName') && educationForm.get('degreeName')?.touched"
                                                 class="text-red-500">*Degree name is required</span>
-
                                         </div>
-                                        <div class="pl-2 w-full">
-                                            <h2 class="font-semibold mt-4">Área de estudo</h2>
-                                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                placeholder="Field of study" formControlName="fieldOfStudy" required>
+                                        <div class="pl-2 w-full mt-4">
+                                            <label class="font-semibold" for="fieldOfStudy">Área de estudo</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="text" name="fieldOfStudy"
+                                                id="fieldOfStudy" placeholder="Field of study" formControlName="fieldOfStudy" required>
                                             <span
                                                 *ngIf="educationForm.hasError('required', 'fieldOfStudy') && educationForm.get('fieldOfStudy')?.touched"
                                                 class="text-red-500">*Field of Study is required</span>
@@ -437,10 +443,10 @@
                                     </div>
 
                                     <div class="flex justify-between">
-                                        <div class="pr-2 w-full">
-                                            <h2 class="font-semibold mt-4">Instituição</h2>
-                                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                placeholder="Institution" formControlName="institution" required>
+                                        <div class="pr-2 w-full mt-4">
+                                            <label class="font-semibold" for="institution">Instituição</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="text" name="institution"
+                                                id="institution" placeholder="Institution" formControlName="institution" required>
                                             <span
                                                 *ngIf="educationForm.hasError('required', 'institution') && educationForm.get('institution')?.touched"
                                                 class="text-red-500">*Institution is required</span>
@@ -448,18 +454,18 @@
                                     </div>
 
                                     <div class="flex justify-between">
-                                        <div class="pr-2 w-full">
-                                            <h2 class="font-semibold mt-4">Data de Início</h2>
-                                            <input class="p-2 w-full border border-gray-300 rounded" type="date"
-                                                placeholder="Data de Início" formControlName="startDate" required>
+                                        <div class="pr-2 w-full mt-4">
+                                            <label class="font-semibold" for="startDate">Data de Início</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="date" name="startDate"
+                                                id="startDate" placeholder="Data de Início" formControlName="startDate" required>
                                             <span
                                                 *ngIf="educationForm.hasError('required', 'startDate') && educationForm.get('startDate')?.touched"
                                                 class="text-red-500">*Start Date is required</span>
                                         </div>
-                                        <div class="pl-2 w-full">
-                                            <h2 class="font-semibold mt-4">Data de Término</h2>
-                                            <input class="p-2 w-full border border-gray-300 rounded" type="date"
-                                                placeholder="Data de Término" formControlName="endDate" required>
+                                        <div class="pl-2 w-full mt-4">
+                                            <label class="font-semibold" for="endDate">Data de Término</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="date" name="endDate"
+                                                id="endDate" placeholder="Data de Término" formControlName="endDate" required>
                                             <span
                                                 *ngIf="educationForm.hasError('required', 'endDate') && educationForm.get('endDate')?.touched"
                                                 class="text-red-500">*End Date is required</span>
@@ -499,18 +505,18 @@
                                     <h3 class="font-semibold text-lg">Certificação {{ i + 1 }}</h3>
 
                                     <div class="flex justify-between">
-                                        <div class="pr-2 w-full">
-                                            <h2 class="font-semibold mt-4">Título da Certificação</h2>
-                                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                placeholder="Título da Certificação" formControlName="name" required>
+                                        <div class="pr-2 w-full mt-4">
+                                            <label class="font-semibold" for="certificationTitle">Título da Certificação</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="text" name="certificationTitle"
+                                                id="certificationTitle" placeholder="Título da Certificação" formControlName="name" required>
                                             <span
                                                 *ngIf="certificationForm.hasError('required', 'name') && certificationForm.get('name')?.touched"
                                                 class="text-red-500">*Certification Name is required</span>
                                         </div>
-                                        <div class="pl-2 w-full">
-                                            <h2 class="font-semibold mt-4">Organização Emissora</h2>
-                                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                placeholder="Organização Emissora" formControlName="issuingOrganization"
+                                        <div class="pl-2 w-full mt-4">
+                                            <label class="font-semibold" for="issuingOrganization">Organização Emissora</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="text" name="issuingOrganization"
+                                                id="issuingOrganization" placeholder="Organização Emissora" formControlName="issuingOrganization"
                                                 required>
                                             <span
                                                 *ngIf="certificationForm.hasError('required', 'issuingOrganization') && certificationForm.get('issuingOrganization')?.touched"
@@ -519,10 +525,10 @@
                                     </div>
 
                                     <div class="flex justify-between">
-                                        <div class="pr-2 w-full">
-                                            <h2 class="font-semibold mt-4">Data da Certificação</h2>
-                                            <input class="p-2 w-full border border-gray-300 rounded" type="date"
-                                                placeholder="Data da Certificação" formControlName="issueDate" required>
+                                        <div class="pr-2 w-full mt-4">
+                                            <label class="font-semibold" for="issueDate">Data da Certificação</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="date" name="issueDate"
+                                                id="issueDate" placeholder="Data da Certificação" formControlName="issueDate" required>
                                             <span
                                                 *ngIf="certificationForm.hasError('required', 'issueDate') && certificationForm.get('issueDate')?.touched"
                                                 class="text-red-500">*Issue Date is required</span>
