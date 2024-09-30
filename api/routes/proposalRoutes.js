@@ -4,7 +4,8 @@ import {
     getProposalById, 
     updateProposal, 
     getProposalsByProjectId, 
-    getFreelancerProposals 
+    getFreelancerProposals,
+    deleteProposal
 } from '../controllers/proposalController.js';
 import { verifyFreelancer, verifyClient } from '../utils/authMiddleware.js';
 
@@ -24,5 +25,9 @@ router.get('/project/:projectId', verifyClient, getProposalsByProjectId);
 
 // Listar todas as propostas enviadas por um freelancer específico (Freelancer)
 router.get('/freelancer/:freelancerId', verifyFreelancer, getFreelancerProposals);
+
+router.delete('/:id', verifyFreelancer, deleteProposal);
+
+router.patch('/:id', verifyFreelancer, updateProposal);
 
 export default router;

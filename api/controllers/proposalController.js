@@ -3,9 +3,33 @@ import { createError } from "../utils/error.js";
 import { handleValidationError } from "../utils/handleValidationError.js";
 import { createSuccess } from "../utils/success.js";
 
+// export const createProposal = async (req, res, next) => {
+//     try {
+//         // Assuming you have middleware to verify the token and add the user to req
+//         const freelancerId = req.user.id; 
+
+//         const newProposalData = req.body;
+//         newProposalData.freelancerId = freelancerId; // Add freelancerId to the data
+
+//         // Perform data validation here
+
+//         const newProposal = new Proposal(newProposalData);
+//         await newProposal.save();
+
+//         return next(createSuccess(201, "Proposal Created!", newProposal));
+//     } catch (error) {
+        
+//         return handleValidationError(error, next);
+//     }
+// };
+
 export const createProposal = async (req, res, next) => {
     try {
+        // Assuming you have middleware to verify the token and add the user to req
+        const freelancerId = req.user.id; 
+
         const newProposalData = req.body;
+        newProposalData.freelancerId = freelancerId; // Add freelancerId to the data
 
         // Perform data validation here
 
@@ -21,7 +45,7 @@ export const createProposal = async (req, res, next) => {
 
 export const getProposalsByProjectId = async (req, res, next) => {
     try {
-        const projectId = req.params.id;
+        const projectId = req.params.projectId;
 
         const proposals = await Proposal.find({ projectId: projectId });
 
