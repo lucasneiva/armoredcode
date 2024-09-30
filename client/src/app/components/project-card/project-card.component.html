@@ -78,8 +78,9 @@
 
           <p><strong>Deadline:</strong> {{detailedProject.estimatedDuration}}</p>
 
+
+          <strong>Skills:</strong>
           <ng-container *ngIf="skills.length > 0; else noSkills">
-            <strong>Skills:</strong>
             <span *ngFor="let skill of skills; let i = index">
               {{ skill }}
               <span *ngIf="i < skills.length - 1">, </span>
@@ -131,8 +132,7 @@
         </ng-container>
 
         <ng-container *ngIf="!isClient">
-          <button 
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
             Enter in Contact
           </button>
           <button (click)="makeProposal()"

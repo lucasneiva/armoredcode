@@ -42,8 +42,8 @@ export default class CreateProjectComponent implements OnInit {
     this.fetchSkills();
     this.getProjectCategories();
     this.createProjectForm = this.fb.group({
-      clientId: [this.clientId, Validators.required],
-      freelancerId: [this.freelancerId],
+      clientId: [this.authService.getUserId(), Validators.required],
+      freelancerId: [],
       projectCategoryId: ['', Validators.required],
       skillIds: [[]], // Initialize as an empty array
       projectTitle: ['', Validators.required],
@@ -75,26 +75,20 @@ export default class CreateProjectComponent implements OnInit {
       startDate: [''],
       endDate: ['', [endDateValidator]], // Apply endDateValidator here
     });
-  }
-
-  set projectStatus(value: String) {
-    this.projectStatus = value;
-  }
-
-  set projectBudget(value: any) {
-    this.projectBudget = value;
-  }
-
-  set projectHourlyRate(value: any) {
-    this.projectHourlyRate = value;
-  }
-
-  set freelancerId(value: null) {
-    this.freelancerId = value;
-  }
-
-  get clientId() {
-    return this.authService.getUserId();
+     // Subscribe to pricingType changes to enable/disable hourlyRate fields
+     this.createProjectForm.get('pricingType')?.valueChanges.subscribe(pricingType => {
+      const BudgetControl = this.createProjectForm.get('projectBudget');
+      const hourlyRateControl = this.createProjectForm.get('projectHourlyRate');
+      if (pricingType === 'BUDGET') {
+        hourlyRateControl?.disable(); 
+        hourlyRateControl?.reset();
+        BudgetControl?.enable();
+      } else {
+        BudgetControl?.disable(); 
+        BudgetControl?.reset();
+        hourlyRateControl?.enable();
+      }
+    });
   }
 
   nextPage() {
@@ -113,14 +107,12 @@ export default class CreateProjectComponent implements OnInit {
 
   CreateProject() {
     this.createProjectForm.patchValue({ projectStatus: 'DRAFT' });
-    /*debug*/ console.log(this.createProjectForm.value);
+    /*debug*/ //console.log(this.createProjectForm.value);
     this.projectService
       .createProjectService(this.createProjectForm.value)
       .subscribe({
         next: (res) => {
           alert('project Created!');
-
-          //localStorage.setItem("project_id", res.data._id);
           this.projectService.isDraft$.next(true);
           this.createProjectForm.reset();
           this.router.navigate(['manage-project']);
@@ -133,13 +125,12 @@ export default class CreateProjectComponent implements OnInit {
 
   PostProject() {
     this.createProjectForm.patchValue({ projectStatus: 'POSTED' });
-    /*debug*/ console.log(this.createProjectForm.value);
+    /*debug*/ //console.log(this.createProjectForm.value);
     this.projectService
       .createProjectService(this.createProjectForm.value)
       .subscribe({
         next: (res) => {
           alert('project Created and Posted!');
-
           this.projectService.isPosted$.next(true);
           this.router.navigate(['manage-project']);
           this.createProjectForm.reset();
@@ -154,42 +145,6 @@ export default class CreateProjectComponent implements OnInit {
     alert('project Canceled!');
     this.router.navigate(['manage-project']);
     this.createProjectForm.reset();
-  }
-
-  updateHourlyRate(newMin: number, newMax: number) {
-    this.createProjectForm.patchValue({
-      projectHourlyRate: {
-        min: newMin,
-        max: newMax,
-      },
-    });
-  }
-
-  updateBudget(newMin: number, newMax: number) {
-    this.createProjectForm.patchValue({
-      projectBudget: {
-        min: newMin,
-        max: newMax,
-      },
-    });
-  }
-
-  TestValue(selectedOption: string) {
-    this.createProjectForm.patchValue({ pricingType: selectedOption }); 
-
-    switch (selectedOption) {
-      case 'BUDGET':
-        this.createProjectForm.patchValue({ projectHourlyRate: null });
-        this.updateHourlyRate(0, 0);
-        break;
-      case 'HOURLY_RATE':
-        this.createProjectForm.patchValue({ projectBudget: null });
-        this.updateBudget(0, 0);
-        break;
-      default:
-        // Handle default values or reset to initial values
-        break;
-    }
   }
 
   getProjectCategories() {

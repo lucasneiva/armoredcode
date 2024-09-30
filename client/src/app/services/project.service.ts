@@ -124,7 +124,7 @@ export type Project =
     estimatedDuration: number;
     workModel: "REMOTE" | "HYBRID" | "ON-SITE";
   } & ( // Properties that can be undefined 
-    { freelancerId: string; } | { freelancerId: undefined }
+    { freelancerId?: string; } | { freelancerId?: undefined } | { freelancerId?: null }
   ) & (
     { projectHourlyRate: { min: number; max: number; currency: string; }; } | { projectHourlyRate: undefined }
   ) & (
