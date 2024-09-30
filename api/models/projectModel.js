@@ -96,12 +96,14 @@ const ProjectSchema = new Schema( {
 
     projectStatus: {
         type: String,
-        enum: [ "DRAFT", "POSTED" ]
+        enum: [ "DRAFT", "POSTED" ],
+        required: true,
     },
 
     experienceLevel: {
         type: String,
-        enum: [ "ENTRY-LEVEL", "MID-LEVEL", "SENIOR" ]
+        enum: [ "ENTRY-LEVEL", "MID-LEVEL", "SENIOR" ],
+        required: true,
     },
 
     workModel: {

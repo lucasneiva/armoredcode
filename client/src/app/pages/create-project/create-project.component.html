@@ -14,15 +14,18 @@
         <form [formGroup]="createProjectForm">
             <div *ngIf="showPage(1)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
                 <!--Project title Start-->
-                <div class="my-auto mx-auto h-fit w-full">
-                    <h2 class="font-semibold mt-4">Project Name:</h2>
-                    <input formControlName="projectTitle" type="text" placeholder="Type the project name"
-                        class="p-2 px-4 max-h-16 border border-gray-300 rounded w-full" />
+                <div class="my-auto mx-auto h-fit w-full mt-4">
+                    <label class="font-semibold" for="projectTitle">Project Name:</label>
+                    <input formControlName="projectTitle" type="text" placeholder="Type the project name" name="projectTitle"
+                        id="projectTitle" class="p-2 px-4 max-h-16 border border-gray-300 rounded w-full" required/>
+                        <span *ngIf="createProjectForm.get('projectTitle')?.hasError('required') && createProjectForm.get('projectTitle')?.touched" class="text-red-500">
+                            Project Title is required.
+                        </span>
                 </div>
                 <!--Project title End-->
                 <!--Project category Start-->
-                <div class="my-auto mx-auto h-fit w-full">
-                    <h2 class="font-semibold mt-4">Project Category:</h2>
+                <div class="my-auto mx-auto h-fit w-full mt-4">
+                    <label class="font-semibold" for="projCategory">Project Category:</label>
                     <select formControlName="projectCategoryId" name="Option" id="projCategory" required
                         class="p-2 px-4 max-h-16 border border-gray-300 rounded text-gray-500 w-full">
                         <option value="" selected>Select the project category</option>
@@ -30,13 +33,19 @@
                             {{ category.categoryName }}
                         </option>
                     </select>
+                    <span *ngIf="createProjectForm.get('projectCategoryId')?.hasError('required') && createProjectForm.get('projectCategoryId')?.touched" class="text-red-500">
+                        Project Category is required.
+                      </span>
                 </div>
                 <!--Project category End-->
                 <!--Project duration Start-->
-                <div class="my-auto mx-auto h-fit w-full">
-                    <h2 class="font-semibold mt-4">Estimated duration:</h2>
-                    <input formControlName="estimatedDuration" placeholder="Type the project duration (hours)"
-                        type="text" class="p-2 px-4 border max-h-16 border-gray-300 rounded w-full" />
+                <div class="my-auto mx-auto h-fit w-full mt-4">
+                    <label class="font-semibold" for="estimatedDuration">Estimated duration:</label>
+                    <input formControlName="estimatedDuration" name="estimatedDuration" id="estimatedDuration" type="number"
+                    placeholder="Type the project duration (in days)" class="p-2 px-4 border max-h-16 border-gray-300 rounded w-full" required/>
+                        <span *ngIf="createProjectForm.get('estimatedDuration')?.hasError('required') && createProjectForm.get('estimatedDuration')?.touched" class="text-red-500">
+                            Estimated Duration is required.
+                        </span>
                 </div>
                 <!--Project duration End-->
             </div>
@@ -50,46 +59,66 @@
                 <div class="my-auto mx-auto h-fit">
                     <div class="flex justify-center align-middle">
                         <div class="m-3">
-                            <input class="mr-2" type="radio" id="pricingType" (change)="TestValue('BUDGET')"
+                            <input class="mr-2" type="radio" id="budgetType" (change)="TestValue('BUDGET')"
                                 formControlName="pricingType" value="BUDGET" checked />
-                            <label for="pricingType">Budget</label>
+                            <label for="budgetType">Budget</label>
                         </div>
                         <div class="m-3">
-                            <input class="mr-2" type="radio" id="pricingType" (change)="TestValue('HOURLY_RATE')"
-                                formControlName="pricingType" value="HOURLY_RATE" />
-                            <label for="pricingType">Hourly Rate</label>
+                            <input class="mr-2" type="radio" id="hourlyRateType" (change)="TestValue('HOURLY_RATE')"
+                                formControlName="pricingType" value="HOURLY_RATE"/>
+                            <label for="hourlyRateType">Hourly Rate</label>
                         </div>
                     </div>
+                    <!-- Budget inputs -->
                     <div *ngIf="createProjectForm.get('pricingType')?.value === 'BUDGET'" formGroupName="projectBudget"
                         class="flex justify-center align-middle h-fit">
-                        <!-- Budget inputs -->
-                        <div class="m-3">
-                            <h2 class="font-semibold mt-2">Min Budget:</h2>
-                            <input formControlName="min" type="number" placeholder="Min" id="minbudget" required
-                                class="text-center max-w-24 p-1 border rounded" />
+                        <div class="grid m-3 mt-2">
+                            <label class="font-semibold" for="minbudget">Min Budget:</label>
+                            <input formControlName="min" type="number" placeholder="Min" id="minbudget" 
+                                class="text-center max-w-24 p-1 border rounded" required/>
                         </div>
-                        <div class="m-3">
-                            <h2 class="font-semibold mt-2">Max Budget:</h2>
-                            <input formControlName="max" type="number" placeholder="Max" id="maxbudget" required
-                                class="text-center max-w-24 p-1 border rounded" />
+                        <div class="grid m-3 mt-2">
+                            <label class="font-semibold" for="maxbudget">Max Budget:</label>
+                            <input formControlName="max" type="number" placeholder="Max" id="maxbudget" 
+                                class="text-center max-w-24 p-1 border rounded" required/>
                         </div>
                     </div>
-
+                    <span *ngIf="createProjectForm.get('projectBudget')?.hasError('budgetInvalid')"
+                        class="text-red-500">
+                        Min rate cannot be higher than max rate.
+                    </span>
+                    <span
+                        *ngIf="createProjectForm.get('projectBudget')?.hasError('required', 'min') && createProjectForm.get('projectBudget')?.get('min')?.touched"
+                        class="text-red-500 mx-1">*Min Rate is required</span>
+                    <span
+                        *ngIf="createProjectForm.get('projectBudget')?.hasError('required', 'max') && createProjectForm.get('projectBudget')?.get('max')?.touched"
+                        class="text-red-500 mx-1">*Max Rate is required</span>
+                    <!-- Budget inputs -->
+                    <!-- Hourly Rate inputs -->
                     <div *ngIf="createProjectForm.get('pricingType')?.value === 'HOURLY_RATE'"
                         formGroupName="projectHourlyRate" class="flex justify-center align-middle h-fit">
-                        <!-- Hourly Rate inputs -->
-                        <div class="m-3">
-                            <h2 class="font-semibold mt-2">Min Rate:</h2>
-                            <input formControlName="min" type="number" placeholder="Min" id="minHourlyRate" required
-                                class="text-center max-w-24 p-1 border rounded" />
+                        <div class="grid m-3 mt-2">
+                            <label class="font-semibold" for="minHourlyRate">Min Rate:</label>
+                            <input formControlName="min" type="number" placeholder="Min" id="minHourlyRate" 
+                                class="text-center max-w-24 p-1 border rounded" required/>
                         </div>
-
-                        <div class="m-3">
-                            <h2 class="font-semibold mt-2">Max Rate:</h2>
-                            <input formControlName="max" type="number" placeholder="Max" id="maxHourlyRate" required
-                                class="text-center max-w-24 p-1 border rounded" />
+                        <div class="grid m-3 mt-2">
+                            <label class="font-semibold" for="minHourlyRate">Max Rate:</label>
+                            <input formControlName="max" type="number" placeholder="Max" id="maxHourlyRate" 
+                                class="text-center max-w-24 p-1 border rounded" required/>
                         </div>
                     </div>
+                    <span *ngIf="createProjectForm.get('projectHourlyRate')?.hasError('hourlyRateInvalid')"
+                        class="text-red-500">
+                        Min rate cannot be higher than max rate.
+                    </span>
+                    <span
+                        *ngIf="createProjectForm.get('projectHourlyRate')?.hasError('required', 'min') && createProjectForm.get('projectHourlyRate')?.get('min')?.touched"
+                        class="text-red-500 mx-1">*Min Rate is required</span>
+                    <span
+                        *ngIf="createProjectForm.get('projectHourlyRate')?.hasError('required', 'max') && createProjectForm.get('projectHourlyRate')?.get('max')?.touched"
+                        class="text-red-500 mx-1">*Max Rate is required</span>
+                    <!-- Hourly Rate inputs -->
                 </div>
                 <!--Project pricing End-->
             </div>
@@ -99,60 +128,69 @@
                 <h2 class="font-semibold mt-4">Scope:</h2>
                 <div class="p-1 my-2 flex align-middle items-center h-fit">
                     <div class="m-0.5">
-                        <input type="radio" id="projectSize" formControlName="projectSize" value="SMALL"
+                        <input type="radio" id="smallSize" formControlName="projectSize" value="SMALL"
                             class="m-2 font-normal" checked />
-                        <label for="projectSize">Small</label>
+                        <label for="smallSize">Small</label>
                     </div>
                     <div class="m-0.5">
-                        <input type="radio" id="projectSize" formControlName="projectSize" value="MEDIUM"
-                            class="m-2 font-normal" />
-                        <label for="projectSize">Medium</label>
+                        <input type="radio" id="mediumSize" formControlName="projectSize" value="MEDIUM"
+                            class="m-2 font-normal"/>
+                        <label for="mediumSize">Medium</label>
                     </div>
                     <div class="m-0.5">
-                        <input type="radio" id="projectSize" formControlName="projectSize" value="LARGE"
-                            class="m-2 font-normal" />
-                        <label for="projectSize">Large</label>
+                        <input type="radio" id="largeSize" formControlName="projectSize" value="LARGE"
+                            class="m-2 font-normal"/>
+                        <label for="largeSize">Large</label>
                     </div>
+                    <span *ngIf="createProjectForm.get('projectSize')?.hasError('required') && createProjectForm.get('projectSize')?.touched" class="text-red-500">
+                        Project Size is required.
+                    </span>
                 </div>
                 <!--Project scope Module End-->
                 <!--Project xp lvl Module Start-->
                 <h2 class="font-semibold mt-4">Experience Level:</h2>
                 <div class="p-1 my-2 flex align-middle items-center h-fit">
                     <div class="m-0.5">
-                        <input type="radio" id="experienceLevel" formControlName="experienceLevel" value="ENTRY-LEVEL"
+                        <input type="radio" id="entryLevel" formControlName="experienceLevel" value="ENTRY-LEVEL"
                             class="m-2 font-normal" checked />
-                        <label for="experienceLevel">Entry Level</label>
+                        <label for="entryLevel">Entry Level</label>
                     </div>
                     <div class="m-0.5">
-                        <input type="radio" id="experienceLevel" formControlName="experienceLevel" value="MID-LEVEL"
+                        <input type="radio" id="midLevel" formControlName="experienceLevel" value="MID-LEVEL"
                             class="m-2 font-normal" />
-                        <label for="experienceLevel">Mid Level</label>
+                        <label for="midLevel">Mid Level</label>
                     </div>
                     <div class="m-0.5">
-                        <input type="radio" id="experienceLevel" formControlName="experienceLevel" value="SENIOR"
+                        <input type="radio" id="seniorLevel" formControlName="experienceLevel" value="SENIOR"
                             class="m-2 font-normal" />
-                        <label for="experienceLevel">Senior Level</label>
+                        <label for="seniorLevel">Senior Level</label>
                     </div>
+                    <span *ngIf="createProjectForm.get('experienceLevel')?.hasError('required') && createProjectForm.get('experienceLevel')?.touched" class="text-red-500">
+                        Experience Level is required.
+                    </span>
                 </div>
                 <!--Project xp lvl Module End-->
                 <!--Project Workspace type Module Start-->
                 <h2 class="font-semibold mt-4">Workspace:</h2>
                 <div class="p-1 my-2 flex align-middle items-center h-fit">
                     <div class="m-0.5">
-                        <input type="radio" id="workModel" formControlName="workModel" value="REMOTE"
+                        <input type="radio" id="remoteModel" formControlName="workModel" value="REMOTE"
                             class="m-2 font-normal" checked />
-                        <label for="workModel">Remote</label>
+                        <label for="remoteModel">Remote</label>
                     </div>
                     <div class="m-0.5">
-                        <input type="radio" id="workModel" formControlName="workModel" value="HYBRID"
+                        <input type="radio" id="hybridModel" formControlName="workModel" value="HYBRID"
                             class="m-2 font-normal" />
-                        <label for="workModel">Hybrid</label>
+                        <label for="hybridModel">Hybrid</label>
                     </div>
                     <div class="m-0.5">
-                        <input type="radio" id="workModel" formControlName="workModel" value="ON_SITE"
+                        <input type="radio" id="siteModel" formControlName="workModel" value="ON_SITE"
                             class="m-2 font-normal" />
-                        <label for="workModel">On Site</label>
+                        <label for="siteModel">On Site</label>
                     </div>
+                    <span *ngIf="createProjectForm.get('workModel')?.hasError('required') && createProjectForm.get('workModel')?.touched" class="text-red-500">
+                        Work Model is required.
+                    </span>
                 </div>
                 <!--Project Workspace type Module End-->
             </div>
@@ -161,8 +199,11 @@
                 <!--Project descripition Module Start-->
                 <div class="h-fit grid align-top">
                     <h2 class="font-semibold my-3 text-3xl">Overview:</h2>
-                    <textarea formControlName="projectDescription" placeholder="Write the project description here"
-                        class="bg-gray-50 p-3 border-2 min-h-14 max-h-96 w-full"></textarea>
+                    <textarea formControlName="projectDescription" placeholder="Write the project description here" name="projectDescription"
+                         id="projectDescription" class="bg-gray-50 p-3 border-2 min-h-14 max-h-96 w-full"></textarea>
+                        <span *ngIf="createProjectForm.get('projectDescription')?.hasError('required') && createProjectForm.get('projectDescription')?.touched" class="text-red-500">
+                            Project Description is required.
+                        </span>
                 </div>
                 <!--Project descripition Module End-->
             </div>
@@ -175,7 +216,7 @@
                         <span class="absolute mt-1.5 mx-3">
                             <i class="fa fa-search font-light" aria-hidden="true"></i>
                         </span>
-                        <input type="text" placeholder="Search skills"
+                        <input type="text" placeholder="Search skills" name="searchSkills" id="searchSkills"
                             class="w-full p-2 pl-9 rounded rounded-r-none text-gray-600"
                             (input)="searchSkills($event)" />
                     </div>

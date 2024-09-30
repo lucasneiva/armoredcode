@@ -6,6 +6,9 @@ import { ProjectService } from '../../services/project.service';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { SkillService } from '../../services/skill.service';
+import { hourlyRateValidator } from '../../validators/hourly-rate.validator';
+import { endDateValidator } from '../../validators/date.validator';
+import { budgetValidator } from '../../validators/budget.validator';
 
 @Component({
   selector: 'app-create-project',
@@ -48,17 +51,17 @@ export default class CreateProjectComponent implements OnInit {
       projectHourlyRate: this.fb.group({
         min: [, Validators.required],
         max: [, Validators.required],
-      }),
+      }, { validators: hourlyRateValidator }), 
       projectBudget: this.fb.group({
         min: [, Validators.required],
         max: [, Validators.required],
-      }),
+      }, { validators: budgetValidator }),
       pricingType: ['BUDGET', Validators.required],
       estimatedDuration: ['', Validators.required],
-      projectSize: [''],
+      projectSize: ['SMALL'],
       projectStatus: [''],
-      experienceLevel: [''],
-      workModel: ['', Validators.required],
+      experienceLevel: ['ENTRY-LEVEL'],
+      workModel: ['REMOTE', Validators.required],
       location: this.fb.group({
         streetAddress: ['Av. Eng. Carlos Reinaldo Mendes, 2015'],
         neighborhood: ['EDEN'],
@@ -70,7 +73,7 @@ export default class CreateProjectComponent implements OnInit {
 
       // CAMPOS CALCULADOS
       startDate: [''],
-      endDate: [''],
+      endDate: ['', [endDateValidator]], // Apply endDateValidator here
     });
   }
 
