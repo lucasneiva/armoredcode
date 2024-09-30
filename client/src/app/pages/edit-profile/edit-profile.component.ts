@@ -5,6 +5,8 @@ import {
   ReactiveFormsModule, Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { endDateValidator } from '../../validators/date.validator'; // Import the validator
+import { hourlyRateValidator } from '../../validators/hourly-rate.validator'; // Import the validator
 import { SpecializationService } from '../../services/specialization.service';
 import { IndustryService } from '../../services/industry.service';
 import { ProfileService, Profile, ProfileResponse } from '../../services/profile.service';
@@ -126,7 +128,7 @@ export default class EditProfileComponent implements OnInit {
         min: [''],
         max: [''],
         currency: ['R$']
-      }),
+      }, { validators: hourlyRateValidator }), // Apply the validator to the FormGroup
       location: this.fb.group({
         cep: ['', Validators.required],
         streetAddress: ['', Validators.required],
@@ -400,7 +402,7 @@ export default class EditProfileComponent implements OnInit {
       companyName: [''],
       jobTitle: [''],
       startDate: [''],
-      endDate: [''],
+      endDate: ['', [Validators.required, endDateValidator]], // Use the imported validator
       jobDescription: ['']
     });
   }
@@ -416,7 +418,7 @@ export default class EditProfileComponent implements OnInit {
       fieldOfStudy: [''],
       institution: [''],
       startDate: [''],
-      endDate: [''],
+      endDate: ['', [Validators.required, endDateValidator]], // Use the imported validator
     });
   }
 

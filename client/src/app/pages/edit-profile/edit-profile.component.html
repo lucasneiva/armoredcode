@@ -1,555 +1,679 @@
 <div class="grid justify-center align-middle min-h-screen h-fit">
     <!--filler form start-->
-
-    <div *ngIf="isLoading" class="w-full flex justify-center items-center py-10">
-        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
-    </div>
-
-    <ng-container *ngIf="!isLoading && profile">
-        <div class="w-full shadow-lg bg-white p-8 my-auto">
-            <!-- Navigation indicator-->
-            <div class="flex justify-center my-auto">
-                <div *ngFor="let page of pageNumbers" class="rounded-full mx-2">
-                    <div [class.bg-blue-500]="currentPage === page" [class.bg-gray-300]="currentPage !== page"
-                        class="h-3 w-3 rounded-full">
-                    </div>
+    <div class="w-full shadow-lg bg-white p-8 my-auto">
+        <!-- Navigation indicator-->
+        <div class="flex justify-center my-auto">
+            <div *ngFor="let page of pageNumbers" class="rounded-full mx-2">
+                <div [class.bg-blue-500]="currentPage === page" [class.bg-gray-300]="currentPage !== page"
+                    class="h-3 w-3 rounded-full">
                 </div>
             </div>
+        </div>
 
-            <!--Client form-->
-            <ng-container *ngIf="isClient">
-                <form class="grid overflow-hidden" [formGroup]="clientProfileForm">
-                    <div *ngIf="showPage(1)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
-                        <!--personal module start-->
-                        <h2 class="font-semibold my-3 text-2xl">Informações Pessoais</h2>
-                        <div class="my-auto mx-auto h-fit w-full flex">
-                            <div class="pr-2 w-full">
-                                <h2 class="font-semibold mt-4" for="companyName">Nome da empresa</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="company name" id="companyName" name="companyName"
-                                    formControlName="companyName" required>
-                            </div>
-                            <div class="pl-2 w-full">
-                                <h2 class="font-semibold mt-4" for="website">Site da empresa</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="company site" id="website" name="website" formControlName="website">
-                            </div>
+        <!--Client form-->
+        <ng-container *ngIf="isClient">
+            <form class="grid overflow-hidden" [formGroup]="clientProfileForm">
+                <div *ngIf="showPage(1)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
+                    <!--personal module start-->
+                    <h2 class="font-semibold my-3 text-2xl">Informações Pessoais</h2>
+                    <div class="my-auto mx-auto h-fit w-full flex">
+                        <div class="pr-2 mt-4 w-full">
+                            <label class="font-semibold" for="companyName">Nome da empresa</label>
+                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                placeholder="company name" id="companyName" name="companyName"
+                                formControlName="companyName" required>
+                            <span
+                                *ngIf="clientProfileForm.hasError('required', 'companyName') && clientProfileForm.controls['companyName'].dirty"
+                                class="text-red-500">*company name is required</span>
                         </div>
-                        <div class="my-auto mx-auto h-fit w-full flex">
-                            <div class="pr-2 w-full">
-                                <h2 class="font-semibold mt-4">Tamanho da empresa</h2>
-                                <select name="Option" id="companySize" formControlName="companySize"
-                                    class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
-                                    <option value="" selected>Select the company size</option>
-                                    <option value="SMALL">Pequena</option>
-                                    <option value="MEDIUM">Média</option>
-                                    <option value="LARGE">Grande</option>
-                                </select>
-                            </div>
-                            <div class="pl-2 w-full">
-                                <h2 class="font-semibold mt-4">Área de atuação</h2>
-                                <select name="industryId" id="industryId" formControlName="industryId"
-                                    class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
-                                    <option value="" selected>Select your industry</option>
-                                    <option *ngFor="let industry of industries" [value]="industry._id">
-                                        {{ industry.name }}
-                                    </option>
-                                </select>
-                            </div>
+                        <div class="pl-2 mt-4 w-full">
+                            <label class="font-semibold" for="website">Site da empresa</label>
+                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                placeholder="company site" id="website" name="website" formControlName="website">
                         </div>
-                        <div class="h-fit grid align-top">
-                            <h2 class="font-semibold mt-4" for="companyDescription">Descrição da empresa</h2>
-                            <textarea id="companyDescription" name="companyDescription" rows="4"
-                                placeholder="Write the company descripition here" formControlName="companyDescription"
-                                class="bg-white p-3 border-2 min-h-12 max-h-96"></textarea>
-                        </div>
-                        <!--personal module end-->
                     </div>
-
-                    <div *ngIf="showPage(2)" class="form-section min-h-96 min-w-96 grid justify-center align-middle"
-                        formGroupName="location" id="location">
-                        <!--localization module start-->
-                        <h2 class="font-semibold my-3 text-2xl">Localização</h2>
-                        <div class="my-auto mx-auto h-fit w-full flex">
-                            <div class="w-full pr-2">
-                                <h2 class="font-semibold mt-4" for="cep">CEP</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="Example: 12345-678" id="cep" name="cep" formControlName="cep" required>
-                            </div>
-                            <div class="w-full pl-2">
-                                <h2 class="font-semibold mt-4">Bairro</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="Neighborhood Name" id="neighborhood" name="neighborhood"
-                                    formControlName="neighborhood" required>
-                            </div>
-                        </div>
-                        <div class="my-auto mx-auto h-fit w-full flex">
-                            <div class="w-full">
-                                <h2 class="font-semibold mt-4" for="streetAddress">Rua</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="Street Name" id="streetAddress" name="streetAddress"
-                                    formControlName="streetAddress" required>
-                            </div>
-                        </div>
-                        <div class="my-auto mx-auto h-fit w-full grid">
-                            <h2 class="font-semibold mt-4">Cidade</h2>
-                            <select name="Option" id="city" formControlName="city"
+                    <div class="my-auto mx-auto h-fit w-full flex">
+                        <div class="pr-2 mt-4 w-full">
+                            <label class="font-semibold" for="companySize">Tamanho da empresa</label>
+                            <select name="Option" id="companySize" formControlName="companySize"
                                 class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
-                                <option value="" selected>Select a city</option>
-                                <option value="ARAÇOIABA DA SERRA">Araçoiaba da serra</option>
-                                <option value="BOITUVA">Boituva</option>
-                                <option value="CAPELA DO ALTO">Capela do alto</option>
-                                <option value="CERQUILHO">Cerquilho</option>
-                                <option value="IPERÓ">Iperó</option>
-                                <option value="ITU">Itu</option>
-                                <option value="SALTO DE PIRAPORA">Salto</option>
-                                <option value="SÃO ROQUE">São Roque</option>
-                                <option value="SOROCABA">Sorocaba</option>
-                                <option value="TATUÍ">Tatuí</option>
-                                <option value="VOTORANTIM">Votorantim</option>
+                                <option value="" selected>Select the company size</option>
+                                <option value="SMALL">Pequena</option>
+                                <option value="MEDIUM">Média</option>
+                                <option value="LARGE">Grande</option>
                             </select>
+                            <span
+                                *ngIf="clientProfileForm.hasError('required', 'companySize') && clientProfileForm.controls['companySize']?.touched"
+                                class="text-red-500">*company size is required</span>
                         </div>
-                        <div class="my-auto mx-auto h-fit w-full flex">
-                            <div class="pr-2 w-full">
-                                <h2 class="font-semibold mt-4">Estado</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="SP"
-                                    id="state" name="state" disabled>
-                            </div>
-                            <div class="pl-2 w-full">
-                                <h2 class="font-semibold mt-4">País</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="Brasil" id="country" name="country" disabled>
-                            </div>
-                        </div>
-                        <!--localization module end-->
-                        <!--buttons-->
-                        <div class="mt-10 mx-auto h-fit w-full flex justify-between">
-                            <button [disabled]="clientProfileForm.invalid" [class.disabled]="clientProfileForm.invalid"
-                                (click)="onSubmit()"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold mr-2 p-2 rounded cursor-pointer w-full">
-                                Salvar
-                            </button>
-                            <button (click)="cancelSubmit()"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold ml-2 p-2 rounded cursor-pointer w-full">
-                                Cancelar
-                            </button>
-                        </div>
-                        <!--buttons-->
-                    </div>
-                </form>
-
-            </ng-container>
-
-            <!--Freelancer form-->
-            <ng-container *ngIf="!isClient">
-                <form class="grid overflow-hidden" [formGroup]="freelancerProfileForm">
-                    <div *ngIf="showPage(1)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
-                        <!--personal module start-->
-                        <h2 class="font-semibold my-3 text-2xl">Informações Pessoais</h2>
-                        <div class="my-auto mx-auto h-fit w-full flex">
-                            <div class="pr-2 w-full">
-                                <h2 class="font-semibold mt-4" for="firstName">Nome</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="first name" id="firstName" name="firstName" formControlName="firstName"
-                                    required>
-                            </div>
-                            <div class="pl-2 w-full">
-                                <h2 class="font-semibold mt-4" for="lastName">Sobrenome</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="last name" id="lastName" name="lastName" formControlName="lastName"
-                                    required>
-                            </div>
-                        </div>
-                        <div class="h-fit grid align-top">
-                            <h2 class="font-semibold mt-4" for="profileSummary">Sobre</h2>
-                            <textarea id="profileSummary" name="profileSummary" rows="4"
-                                placeholder="Write the profile Summary here" formControlName="profileSummary"
-                                class="bg-white p-3 border-2 min-h-12 max-h-96"></textarea>
-                        </div>
-                        <!--personal module end-->
-                    </div>
-
-                    <div *ngIf="showPage(2)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
-                        <!--professional module start-->
-                        <h2 class="font-semibold my-3 text-2xl">Profissional</h2>
-                        <div class="my-auto mx-auto h-fit w-full grid">
-                            <h2 class="font-semibold mt-4">Especialização</h2>
-                            <select name="specializationId" id="specializationId"
-                                class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
-                                formControlName="specializationId">
-                                <option value="" selected>Select your Specialization</option>
-                                <option *ngFor="let specialization of specializations" [value]="specialization._id">
-                                    {{ specialization.specializationName }}
+                        <div class="pl-2 mt-4 w-full">
+                            <label class="font-semibold" for="industry">Área de atuação</label>
+                            <select name="industry" id="industry" formControlName="industryId"
+                                class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
+                                <option value="" selected>Select your industry</option>
+                                <option *ngFor="let industry of industries" [value]="industry._id">
+                                    {{ industry.name }}
                                 </option>
                             </select>
+                            <span
+                                *ngIf="clientProfileForm.hasError('required', 'industryId') && clientProfileForm.controls['industryId']?.touched"
+                                class="text-red-500">*company industry is required</span>
                         </div>
-                        <div class="my-auto mx-auto h-fit w-full grid">
-                            <h2 class="font-semibold mt-4">Nível de Experiência</h2>
-                            <select name="experienceLevel" id="experienceLevel" formControlName="experienceLevel"
-                                class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
-                                <option value="" selected>Select your experience here</option>
-                                <option value="JUNIOR">Junior</option>
-                                <option value="MID-LEVEL">Pleno</option>
-                                <option value="SENIOR">Senior</option>
+                    </div>
+                    <div class="my-auto mt-4 mx-auto h-fit w-full grid align-top">
+                        <label class="font-semibold" for="companyDescription">Descrição da empresa</label>
+                        <textarea id="companyDescription" name="companyDescription" rows="4"
+                            placeholder="Write the company descripition here" formControlName="companyDescription"
+                            class="bg-white p-3 border-2 min-h-12 max-h-96"></textarea>
+                    </div>
+                    <!--personal module end-->
+                </div>
+
+                <div *ngIf="showPage(2)" class="form-section min-h-96 min-w-96 grid justify-center align-middle"
+                    formGroupName="location" id="location">
+                    <!--localization module start-->
+                    <h2 class="font-semibold my-3 text-2xl">Localização</h2>
+                    <div class="my-auto mx-auto h-fit w-full flex">
+                        <div class="w-full mt-4 pr-2">
+                            <label class="font-semibold" for="cep">CEP</label>
+                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                placeholder="Example: 12345-678" id="cep" name="cep" formControlName="cep" required>
+                            <span
+                                *ngIf="clientProfileForm.get('location')?.hasError('required', 'cep') && clientProfileForm.get('location')?.get('cep')?.touched"
+                                class="text-red-500">*CEP is required</span>
+                        </div>
+                        <div class="w-full mt-4 pl-2">
+                            <label class="font-semibold" for="neighborhood">Bairro</label>
+                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                placeholder="Neighborhood Name" id="neighborhood" name="neighborhood"
+                                formControlName="neighborhood" required>
+                            <span
+                                *ngIf="clientProfileForm.get('location')?.hasError('required', 'neighborhood') && clientProfileForm.get('location')?.get('neighborhood')?.touched"
+                                class="text-red-500">*Neighborhood is required</span>
+                        </div>
+                    </div>
+                    <div class="my-auto mx-auto h-fit w-full flex">
+                        <div class="w-full mt-4">
+                            <label class="font-semibold" for="streetAddress">Rua</label>
+                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                placeholder="Street Name" id="streetAddress" name="streetAddress"
+                                formControlName="streetAddress" required>
+                            <span
+                                *ngIf="clientProfileForm.get('location')?.hasError('required', 'streetAddress') && clientProfileForm.get('location')?.get('streetAddress')?.touched"
+                                class="text-red-500">*Street Address is required</span>
+                        </div>
+                    </div>
+                    <div class="my-auto mt-4 mx-auto h-fit w-full grid">
+                        <label class="font-semibold" for="city">Cidade</label>
+                        <select name="Option" id="city" formControlName="city"
+                            class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
+                            <option value="" selected>Select a city</option>
+                            <option value="ARAÇOIABA DA SERRA">Araçoiaba da serra</option>
+                            <option value="BOITUVA">Boituva</option>
+                            <option value="CAPELA DO ALTO">Capela do alto</option>
+                            <option value="CERQUILHO">Cerquilho</option>
+                            <option value="IPERÓ">Iperó</option>
+                            <option value="ITU">Itu</option>
+                            <option value="SALTO DE PIRAPORA">Salto</option>
+                            <option value="SÃO ROQUE">São Roque</option>
+                            <option value="SOROCABA">Sorocaba</option>
+                            <option value="TATUÍ">Tatuí</option>
+                            <option value="VOTORANTIM">Votorantim</option>
+                        </select>
+                        <span
+                            *ngIf="clientProfileForm.get('location')?.hasError('required', 'city') && clientProfileForm.get('location')?.get('city')?.touched"
+                            class="text-red-500">*City is required</span>
+                    </div>
+                    <div class="my-auto mx-auto h-fit w-full flex">
+                        <div class="pr-2 mt-4 w-full">
+                            <label class="font-semibold" for="state">Estado</label>
+                            <input class="p-2 w-full border border-gray-300 rounded bg-gray-100 text-gray-400"
+                                type="text" placeholder="State" id="state" name="state" formControlName="state"
+                                readonly>
+                        </div>
+                        <div class="pl-2 mt-4 w-full">
+                            <label class="font-semibold" for="country">País</label>
+                            <input class="p-2 w-full border border-gray-300 rounded bg-gray-100  text-gray-400"
+                                type="text" placeholder="Country" id="country" name="country" formControlName="country"
+                                readonly>
+                        </div>
+                    </div>
+                    <!--localization module end-->
+                    <!--buttons-->
+                    <div class="mt-10 mx-auto h-fit w-full flex justify-between">
+                        <button [disabled]="clientProfileForm.invalid" [class.disabled]="clientProfileForm.invalid"
+                            (click)="onSubmit()"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold mr-2 p-2 rounded cursor-pointer w-full">
+                            Salvar
+                        </button>
+                        <button (click)="cancelSubmit()"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold ml-2 p-2 rounded cursor-pointer w-full">
+                            Cancelar
+                        </button>
+                    </div>
+                    <!--buttons-->
+                </div>
+            </form>
+
+        </ng-container>
+
+        <!--Freelancer form-->
+        <ng-container *ngIf="!isClient">
+            <form class="grid overflow-hidden" [formGroup]="freelancerProfileForm">
+                <div *ngIf="showPage(1)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
+                    <!--personal module start-->
+                    <h2 class="font-semibold my-3 text-2xl">Informações Pessoais</h2>
+                    <div class="my-auto mx-auto h-fit w-full flex">
+                        <div class="pr-2 w-full mt-4">
+                            <label class="font-semibold" for="firstName">Nome</label>
+                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                placeholder="first name" id="firstName" name="firstName" formControlName="firstName"
+                                required>
+                            <span
+                                *ngIf="freelancerProfileForm.hasError('required', 'firstName') && freelancerProfileForm.get('firstName')?.touched"
+                                class="text-red-500">*First Name is required</span>
+                        </div>
+                        <div class="pl-2 w-full mt-4">
+                            <label class="font-semibold" for="lastName">Sobrenome</label>
+                            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="last name"
+                                id="lastName" name="lastName" formControlName="lastName" required>
+                            <span
+                                *ngIf="freelancerProfileForm.hasError('required', 'lastName') && freelancerProfileForm.get('lastName')?.touched"
+                                class="text-red-500">*Last Name is required</span>
+                        </div>
+                    </div>
+                    <div class="h-fit grid align-top mt-4">
+                        <label class="font-semibold" for="profileSummary">Sobre</label>
+                        <textarea id="profileSummary" name="profileSummary" rows="4"
+                            placeholder="Write the profile Summary here" formControlName="profileSummary"
+                            class="bg-white p-3 border-2 min-h-12 max-h-96"></textarea>
+                    </div>
+                    <!--personal module end-->
+                </div>
+
+                <div *ngIf="showPage(2)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
+                    <!--professional module start-->
+                    <h2 class="font-semibold my-3 text-2xl">Profissional</h2>
+                    <div class="my-auto mx-auto h-fit w-full grid mt-4">
+                        <label class="font-semibold" for="specializations">Especialização</label>
+                        <select name="specializations" id="specializations" formControlName="specializationId"
+                            class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
+                            <option value="" selected>Select your Specialization</option>
+                            <option *ngFor="let specialization of specializations" [value]="specialization._id">
+                                {{ specialization.specializationName }}
+                            </option>
+                        </select>
+                        <!--<span
+                            *ngIf="freelancerProfileForm.hasError('required', 'specializationId') && freelancerProfileForm.get('specializationId')?.touched"
+                            class="text-red-500">*Specialization is required</span>-->
+                    </div>
+                    <div class="my-auto mx-auto h-fit w-full grid mt-4">
+                        <label class="font-semibold" for="experienceLevel">Nível de Experiência</label>
+                        <select name="experienceLevel" id="experienceLevel" formControlName="experienceLevel"
+                            class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
+                            <option value="" selected>Select your experience here</option>
+                            <option value="JUNIOR">Junior</option>
+                            <option value="MID-LEVEL">Pleno</option>
+                            <option value="SENIOR">Senior</option>
+                        </select>
+                        <span
+                            *ngIf="freelancerProfileForm.hasError('required', 'experienceLevel') && freelancerProfileForm.get('experienceLevel')?.touched"
+                            class="text-red-500">*Experience Level is required</span>
+                    </div>
+                    <!-- Skills Module Start -->
+                    <div class="my-auto mx-auto h-fit w-full grid mt-4">
+                        <label class="font-semibold" for="skills">Habilidades</label>
+                        <div class="flex w-full">
+                            <select class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
+                                [formControl]="selectedSkillControl" name="skills" id="skills">
+                                <option value="" disabled selected>Select a skill</option>
+                                <option *ngFor="let skill of skills" [value]="skill._id">
+                                    {{ skill.skillName }}
+                                </option>
                             </select>
+                            <div class="pl-2">
+                                <button type="button" (click)="addSelectedSkill()"
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold ml-2 py-2 px-4 rounded cursor-pointer">
+                                    Adicionar
+                                </button>
+                            </div>
                         </div>
-
-                        <!-- Skills Module Start -->
-                        <h2 class="font-semibold mt-4">Habilidades</h2>
-                        <div class="grid max-h-96 overflow-auto">
-                            <div class="border p-2 rounded my-2">
-                                <div class="flex">
-                                    <select class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
-                                        [formControl]="selectedSkillControl" name="selectedSkillId">
-                                        <option value="" disabled selected>Select a skill</option>
-                                        <option *ngFor="let skill of skills" [value]="skill._id">
-                                            {{ skill.skillName }}
-                                        </option>
-                                    </select>
-                                    <button type="button" (click)="addSelectedSkill()"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold ml-2 py-2 px-4 rounded cursor-pointer">
-                                        Adicionar
-                                    </button>
+                    </div>
+                    <div class="my-auto mx-auto h-fit w-full grid">
+                        <div *ngIf="hasSelectedSkills()"
+                            class="grid justify-center grid-cols-2 gap-2 max-lg:grid-cols-1 mt-4 p-4 bg-slate-50 border-2 border-slate-200 rounded-lg">
+                            <div *ngFor="let skillId of skillIds.controls; let i = index"
+                                class="flex mb-2 h-8 rounded bg-blue-500 w-fit">
+                                <div class="text-white py-1 px-4 flex pr-4 text-nowrap overflow-clip">
+                                    {{ getSkillNameById(getSkillObjectById(skillId.value)) }}
                                 </div>
+                                <button type="button" (click)="removeSkill(i)"
+                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded cursor-pointer">
+                                    X
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Skills Module End -->
+                    <div class="my-auto mx-auto h-fit w-full grid mt-4">
+                        <h2 class="font-semibold" for="hourlyRate">Preço por Hora</h2>
+                        <div formGroupName="hourlyRate" class="flex justify-between" id="hourlyRate" name="hourlyRate">
+                            <div class="pr-2 w-full mt-2">
+                                <label class="font-semibold" for="minHourlyRate">Min Rate:</label>
+                                <input formControlName="min" type="number" placeholder="Min" id="minHourlyRate" required
+                                    class="p-2 w-full border border-gray-300 rounded">
+                                <span
+                                    *ngIf="freelancerProfileForm.get('hourlyRate')?.hasError('required', 'min') && freelancerProfileForm.get('hourlyRate')?.get('min')?.touched"
+                                    class="text-red-500">*Min Rate is required</span>
+                            </div>
+                            <div class="pl-2 w-full mt-2">
+                                <label class="font-semibold" for="maxHourlyRate">Max Rate:</label>
+                                <input formControlName="max" type="number" placeholder="Max" id="maxHourlyRate" required
+                                    class="p-2 w-full border border-gray-300 rounded">
+                                <span
+                                    *ngIf="freelancerProfileForm.get('hourlyRate')?.hasError('required', 'max') && freelancerProfileForm.get('hourlyRate')?.get('max')?.touched"
+                                    class="text-red-500">*Max Rate is required</span>
+                            </div>
+                        </div>
+                        <span *ngIf="freelancerProfileForm.get('hourlyRate')?.hasError('hourlyRateInvalid')"
+                            class="text-red-500">
+                            Min rate cannot be higher than max rate.
+                        </span>
+                    </div>
+                    <!--professional module end-->
+                </div>
 
-                                <div *ngIf="hasSelectedSkills()" 
-                                class="grid justify-center grid-cols-2 gap-2 max-lg:grid-cols-1 mt-4 p-4 bg-slate-50 border-2 border-slate-200 rounded-lg">
-                                    <div *ngFor="let skillId of skillIds.controls; let i = index"
-                                        class="flex mb-2 h-8 rounded bg-blue-500 w-fit">
-                                        <div class="text-white py-1 px-4 flex pr-4 text-nowrap overflow-clip">
-                                            {{ getSkillNameById(getSkillObjectById(skillId.value)) }}
+                <div *ngIf="showPage(3)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
+                    <!--personal projects module start-->
+                    <h2 class="font-semibold my-3 text-2xl">Portfolio</h2>
+                    <div formArrayName="portfolioItems">
+                        <div class="grid max-h-96 overflow-auto">
+                            <div *ngFor="let portfolioItem of portfolioItems.controls; let i = index"
+                                class="border p-4 rounded my-2">
+                                <div *ngIf="portfolioItems.length > 0" [formGroupName]="i" class="grid justify-between">
+                                    <h3 class="font-semibold text-lg">Portfolio {{ i + 1 }}</h3>
+                                    <div class="flex mt-4">
+                                        <div class="pr-2 w-full">
+                                            <label class="font-semibold" for="portfolioTitle">Portfolio Title</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                                id="portfolioTitle" name="portfolioTitle" placeholder="Project Title"
+                                                formControlName="title" required>
+                                            <span
+                                                *ngIf="portfolioItem.hasError('required', 'title') && portfolioItem.get('title')?.touched"
+                                                class="text-red-500">*Portfolio title is required</span>
                                         </div>
-                                        <button type="button" (click)="removeSkill(i)" 
-                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded cursor-pointer">
-                                            X
+                                        <div class="pl-2 w-full">
+                                            <label class="font-semibold" for="portfolioURL">Portfolio URL</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                                id="portfolioURL" name="portfolioURL" placeholder="Project URL"
+                                                formControlName="url" required>
+                                            <span
+                                                *ngIf="portfolioItem.hasError('required', 'url') && portfolioItem.get('url')?.touched"
+                                                class="text-red-500">*URL is required</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <label class="font-semibold" for="portfolioDescription">Portfolio
+                                            Description</label>
+                                        <textarea class="bg-white p-3 border-2 min-h-12 max-h-96 w-full rounded"
+                                            rows="4" formControlName="description" id="portfolioDescription"
+                                            name="portfolioDescription" placeholder="Portfolio descripition"></textarea>
+                                    </div>
+
+                                    <div class="flex justify-end">
+                                        <button type="button" (click)="removePortfolioItem(i)"
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
+                                            Remover
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Skills Module End -->
+                        <div class="flex justify-center align-middle">
+                            <button type="button" (click)="addPortfolioItem()" *ngIf="portfolioItems.length < 3"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-2 py-2 px-4 rounded cursor-pointer">
+                                Adicionar Item ao Portfólio
+                            </button>
+                        </div>
+                    </div>
+                    <!--personal projects module end-->
+                </div>
 
-                        <div class="my-auto mx-auto h-fit w-full grid">
-                            <h2 class="font-semibold mt-4">Preço por Hora</h2>
-                            <div formGroupName="hourlyRate" class="flex justify-between" id="hourlyRate">
-                                <div class="pr-2 w-full">
-                                    <h2 class="font-semibold mt-2">Min Rate:</h2>
-                                    <input formControlName="min" type="number" placeholder="Min" id="minHourlyRate"
-                                        required class="p-2 w-full border border-gray-300 rounded">
-                                </div>
-                                <div class="pl-2 w-full">
-                                    <h2 class="font-semibold mt-2">Max Rate:</h2>
-                                    <input formControlName="max" type="number" placeholder="Max" id="maxHourlyRate"
-                                        required class="p-2 w-full border border-gray-300 rounded">
+                <div *ngIf="showPage(4)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
+                    <!--Experience Module Start -->
+                    <h2 class="font-semibold my-3 text-2xl">Experiência Profissional</h2>
+                    <div formArrayName="workExperiences">
+                        <div class="grid max-h-96 overflow-auto">
+                            <div *ngFor="let experienceForm of workExperiences.controls; let i = index"
+                                class="border p-4 rounded my-2">
+                                <div *ngIf="workExperiences.length > 0" [formGroupName]="i"
+                                    class="grid justify-between">
+                                    <h3 class="font-semibold text-lg">Experiência {{ i + 1 }}</h3>
+
+                                    <div class="flex justify-between">
+                                        <div class="pr-2 w-full mt-4">
+                                            <label class="font-semibold" for="companyName">Nome da Empresa</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                                name="companyName" id="companyName" placeholder="Nome da Empresa"
+                                                formControlName="companyName" required>
+                                            <span
+                                                *ngIf="experienceForm.hasError('required', 'companyName') && experienceForm.get('companyName')?.touched"
+                                                class="text-red-500">*Company name is required</span>
+                                        </div>
+                                        <div class="pl-2 w-full mt-4">
+                                            <label class="font-semibold" for="jobTitle">Cargo</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                                name="jobTitle" id="jobTitle" placeholder="Cargo"
+                                                formControlName="jobTitle" required>
+                                            <span
+                                                *ngIf="experienceForm.hasError('required', 'jobTitle') && experienceForm.get('jobTitle')?.touched"
+                                                class="text-red-500">*job title is required</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex justify-between">
+                                        <div class="pr-2 w-full mt-4">
+                                            <label class="font-semibold" for="startDate">Data de Início</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="date"
+                                                name="startDate" id="startDate" placeholder="Data de Início"
+                                                formControlName="startDate" required>
+                                            <span
+                                                *ngIf="experienceForm.hasError('required', 'startDate') && experienceForm.get('startDate')?.touched"
+                                                class="text-red-500">*Start Date is required</span>
+                                        </div>
+                                        <div class="pl-2 w-full mt-4">
+                                            <label class="font-semibold" for="endDate">Data de Término</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="date"
+                                                name="endDate" id="endDate" placeholder="Data de Término"
+                                                formControlName="endDate" required>
+                                            <span
+                                                *ngIf="experienceForm.hasError('required', 'endDate') && experienceForm.get('endDate')?.touched"
+                                                class="text-red-500">*End Date is required</span>
+                                            <span *ngIf="experienceForm.hasError('endDateInvalid', 'endDate')"
+                                                class="text-red-500">
+                                                End date cannot be before start date.
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <label class="font-semibold" for="jobDescription">Descrição das
+                                            atividades</label>
+                                        <textarea class="bg-white p-3 border-2 min-h-12 max-h-96 w-full rounded"
+                                            rows="4" name="jobDescription" id="jobDescription"
+                                            formControlName="jobDescription"
+                                            placeholder="Descreva suas atividades"></textarea>
+                                    </div>
+
+                                    <div class="flex justify-end align-middle">
+                                        <button type="button" (click)="removeExperience(i)"
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
+                                            Remover
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!--professional module end-->
+                        <div class="flex justify-center align-middle">
+                            <button type="button" (click)="addExperience()" *ngIf="workExperiences.length < 2"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
+                                Adicionar Experiência
+                            </button>
+                        </div>
                     </div>
+                    <!--Experience Module End -->
+                </div>
 
-                    <div *ngIf="showPage(3)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
-                        <!--personal projects module start-->
-                        <h2 class="font-semibold my-3 text-2xl">Portfolio</h2>
-                        <div formArrayName="portfolioItems">
-                            <div class="grid max-h-96 overflow-auto">
-                                <div *ngFor="let portfolioItem of portfolioItems.controls; let i = index"
-                                    [formGroupName]="i" class="border p-4 rounded my-2">
-                                    <div class="flex justify-start">
-                                        <h3 class="font-semibold text-lg">Portfolio {{ i + 1 }}</h3>
-                                    </div>
-                                    <div class="flex mt-4">
-                                        <div class="pr-2 w-full">
+                <div *ngIf="showPage(5)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
+                    <!--educational module start-->
+                    <h2 class="font-semibold my-3 text-2xl">Educacional</h2>
+                    <div formArrayName="education">
+                        <div class="grid max-h-96 overflow-auto">
+                            <div *ngFor="let educationForm of education.controls; let i = index">
+                                <div *ngIf="education.length > 0" [formGroupName]="i" class="border p-4 rounded my-2">
+                                    <h3 class="font-semibold text-lg">Formação {{ i + 1 }}</h3>
+
+                                    <div class="flex justify-between">
+                                        <div class="pr-2 w-full mt-4">
+                                            <label class="font-semibold" for="degreeName">Curso</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                placeholder="Project Title" formControlName="title" required>
+                                                name="degreeName" id="degreeName" placeholder="Degree name"
+                                                formControlName="degreeName" required>
+                                            <span
+                                                *ngIf="educationForm.hasError('required', 'degreeName') && educationForm.get('degreeName')?.touched"
+                                                class="text-red-500">*Degree name is required</span>
                                         </div>
-                                        <div class="pl-2 w-full">
+                                        <div class="pl-2 w-full mt-4">
+                                            <label class="font-semibold" for="fieldOfStudy">Área de estudo</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                placeholder="Project URL" formControlName="url" required>
+                                                name="fieldOfStudy" id="fieldOfStudy" placeholder="Field of study"
+                                                formControlName="fieldOfStudy" required>
+                                            <span
+                                                *ngIf="educationForm.hasError('required', 'fieldOfStudy') && educationForm.get('fieldOfStudy')?.touched"
+                                                class="text-red-500">*Field of Study is required</span>
                                         </div>
                                     </div>
-                                    <textarea class="bg-white mt-4 p-3 border-2 min-h-12 max-h-96 w-full rounded"
-                                        rows="4" formControlName="description"
-                                        placeholder="Project descripition"></textarea>
-                                    <div class="flex justify-end">
-                                        <button type="button" (click)="removePortfolioItem(i)"
-                                            class="bg-red-500 hover:bg-red-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
+
+                                    <div class="flex justify-between">
+                                        <div class="pr-2 w-full mt-4">
+                                            <label class="font-semibold" for="institution">Instituição</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                                name="institution" id="institution" placeholder="Institution"
+                                                formControlName="institution" required>
+                                            <span
+                                                *ngIf="educationForm.hasError('required', 'institution') && educationForm.get('institution')?.touched"
+                                                class="text-red-500">*Institution is required</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex justify-between">
+                                        <div class="pr-2 w-full mt-4">
+                                            <label class="font-semibold" for="startDate">Data de Início</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="date"
+                                                name="startDate" id="startDate" placeholder="Data de Início"
+                                                formControlName="startDate" required>
+                                            <span
+                                                *ngIf="educationForm.hasError('required', 'startDate') && educationForm.get('startDate')?.touched"
+                                                class="text-red-500">*Start Date is required</span>
+                                        </div>
+                                        <div class="pl-2 w-full mt-4">
+                                            <label class="font-semibold" for="endDate">Data de Término</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="date"
+                                                name="endDate" id="endDate" placeholder="Data de Término"
+                                                formControlName="endDate" required>
+                                            <span
+                                                *ngIf="educationForm.hasError('required', 'endDate') && educationForm.get('endDate')?.touched"
+                                                class="text-red-500">*End Date is required</span>
+                                            <span *ngIf="educationForm.hasError('endDateInvalid', 'endDate')"
+                                                class="text-red-500">
+                                                End date cannot be before start date.
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-end align-middle">
+                                        <button type="button" (click)="removeEducation(i)"
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
                                             Remover
                                         </button>
                                     </div>
                                 </div>
                             </div>
                             <div class="flex justify-center align-middle">
-                                <button type="button" (click)="addPortfolioItem()" *ngIf="portfolioItems.length < 3"
-                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-2 py-2 px-4 rounded cursor-pointer">
-                                    Adicionar Item ao Portfólio
+                                <button type="button" (click)="addEducation()" *ngIf="education.length < 2"
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
+                                    Adicionar Formação
                                 </button>
                             </div>
                         </div>
-                        <!--personal projects module end-->
                     </div>
+                    <!--educational module end-->
+                </div>
 
-                    <div *ngIf="showPage(4)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
-                        <!--Experience Module Start -->
-                        <h2 class="font-semibold my-3 text-2xl">Experiência Profissional</h2>
-                        <div formArrayName="workExperiences">
-                            <div class="grid max-h-96 overflow-auto">
-                                <div *ngFor="let experienceForm of workExperiences.controls; let i = index"
-                                    class="border p-4 rounded my-2">
-                                    <div [formGroupName]="i">
-                                        <h3 class="font-semibold text-lg">Experiência {{ i + 1 }}</h3>
+                <div *ngIf="showPage(6)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
+                    <!-- Certification Module Start -->
+                    <h2 class="font-semibold my-3 text-2xl">Certificações</h2>
+                    <div formArrayName="certifications">
+                        <div class="grid max-h-96 overflow-auto">
+                            <div *ngFor="let certificationForm of certifications.controls; let i = index"
+                                class="border p-4 rounded my-2">
+                                <div *ngIf="certifications.length > 0" [formGroupName]="i" class="grid justify-between">
+                                    <h3 class="font-semibold text-lg">Certificação {{ i + 1 }}</h3>
 
-                                        <div class="flex justify-between">
-                                            <div class="pr-2 w-full">
-                                                <h2 class="font-semibold mt-4" for="companyName">Nome da Empresa</h2>
-                                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                    placeholder="Nome da Empresa" formControlName="companyName">
-                                            </div>
-                                            <div class="pl-2 w-full">
-                                                <h2 class="font-semibold mt-4" for="jobTitle">Cargo</h2>
-                                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                    placeholder="Cargo" formControlName="jobTitle">
-                                            </div>
+                                    <div class="flex justify-between">
+                                        <div class="pr-2 w-full mt-4">
+                                            <label class="font-semibold" for="certificationTitle">Título da
+                                                Certificação</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                                name="certificationTitle" id="certificationTitle"
+                                                placeholder="Título da Certificação" formControlName="name" required>
+                                            <span
+                                                *ngIf="certificationForm.hasError('required', 'name') && certificationForm.get('name')?.touched"
+                                                class="text-red-500">*Certification Name is required</span>
                                         </div>
-
-                                        <div class="flex justify-between">
-                                            <div class="pr-2 w-full">
-                                                <h2 class="font-semibold mt-4">Data de Início</h2>
-                                                <input class="p-2 w-full border border-gray-300 rounded" type="date"
-                                                    placeholder="Data de Início" formControlName="startDate">
-                                            </div>
-                                            <div class="pl-2 w-full">
-                                                <h2 class="font-semibold mt-4">Data de Término</h2>
-                                                <input class="p-2 w-full border border-gray-300 rounded" type="date"
-                                                    placeholder="Data de Término" formControlName="endDate">
-                                            </div>
+                                        <div class="pl-2 w-full mt-4">
+                                            <label class="font-semibold" for="issuingOrganization">Organização
+                                                Emissora</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                                name="issuingOrganization" id="issuingOrganization"
+                                                placeholder="Organização Emissora" formControlName="issuingOrganization"
+                                                required>
+                                            <span
+                                                *ngIf="certificationForm.hasError('required', 'issuingOrganization') && certificationForm.get('issuingOrganization')?.touched"
+                                                class="text-red-500">*Issuing Organization is required</span>
                                         </div>
+                                    </div>
 
-                                        <div class="mt-4">
-                                            <h2 class="font-semibold mt-4" for="jobDescription">Descrição das atividades
-                                            </h2>
-                                            <textarea class="bg-white p-3 border-2 min-h-12 max-h-96 w-full rounded"
-                                                rows="4" formControlName="jobDescription"
-                                                placeholder="Descreva suas atividades"></textarea>
+                                    <div class="flex justify-between">
+                                        <div class="pr-2 w-full mt-4">
+                                            <label class="font-semibold" for="issueDate">Data da Certificação</label>
+                                            <input class="p-2 w-full border border-gray-300 rounded" type="date"
+                                                name="issueDate" id="issueDate" placeholder="Data da Certificação"
+                                                formControlName="issueDate" required>
+                                            <span
+                                                *ngIf="certificationForm.hasError('required', 'issueDate') && certificationForm.get('issueDate')?.touched"
+                                                class="text-red-500">*Issue Date is required</span>
                                         </div>
+                                    </div>
 
-                                        <div class="flex justify-end align-middle">
-                                            <button type="button" (click)="removeExperience(i)"
-                                                class="bg-red-500 hover:bg-red-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
-                                                Remover
-                                            </button>
-                                        </div>
+                                    <div class="flex justify-end align-middle">
+                                        <button type="button" (click)="removeCertification(i)"
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
+                                            Remover
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                             <div class="flex justify-center align-middle">
-                                <button type="button" (click)="addExperience()" *ngIf="workExperiences.length < 2"
-                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
-                                    Adicionar Experiência
+                                <button type="button" (click)="addCertification()" *ngIf="certifications.length < 5"
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
+                                    Adicionar Certificação
                                 </button>
                             </div>
                         </div>
-                        <!--Experience Module End -->
                     </div>
+                    <!-- Certification Module End -->
+                </div>
 
-                    <div *ngIf="showPage(5)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
-                        <!--educational module start-->
-                        <h2 class="font-semibold my-3 text-2xl">Educacional</h2>
-                        <div formArrayName="education">
-                            <div class="grid max-h-96 overflow-auto">
-                                <div *ngFor="let educationForm of education.controls; let i = index">
-                                    <div [formGroupName]="i" class="border p-4 rounded my-2">
-                                        <h3 class="font-semibold text-lg">Formação {{ i + 1 }}</h3>
-
-                                        <div class="flex justify-between">
-                                            <div class="pr-2 w-full">
-                                                <h2 class="font-semibold mt-4">Curso</h2>
-                                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                    placeholder="Degree name" formControlName="degreeName">
-                                            </div>
-                                            <div class="pl-2 w-full">
-                                                <h2 class="font-semibold mt-4">Área de estudo</h2>
-                                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                    placeholder="Field of study" formControlName="fieldOfStudy">
-                                            </div>
-                                        </div>
-
-                                        <div class="flex justify-between">
-                                            <div class="pr-2 w-full">
-                                                <h2 class="font-semibold mt-4">Instituição</h2>
-                                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                    placeholder="Institution" formControlName="institution">
-                                            </div>
-                                        </div>
-
-                                        <div class="flex justify-between">
-                                            <div class="pr-2 w-full">
-                                                <h2 class="font-semibold mt-4">Data de Início</h2>
-                                                <input class="p-2 w-full border border-gray-300 rounded" type="date"
-                                                    placeholder="Data de Início" formControlName="startDate">
-                                            </div>
-                                            <div class="pl-2 w-full">
-                                                <h2 class="font-semibold mt-4">Data de Término</h2>
-                                                <input class="p-2 w-full border border-gray-300 rounded" type="date"
-                                                    placeholder="Data de Término" formControlName="endDate">
-                                            </div>
-                                        </div>
-                                        <div class="flex justify-end align-middle">
-                                            <button type="button" (click)="removeEducation(i)"
-                                                class="bg-red-500 hover:bg-red-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
-                                                Remover
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-center align-middle">
-                                    <button type="button" (click)="addEducation()" *ngIf="education.length < 2"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
-                                        Adicionar Formação
-                                    </button>
-                                </div>
-                            </div>
+                <div *ngIf="showPage(7)" class="form-section min-h-96 min-w-96 grid justify-center align-middle"
+                    formGroupName="location" id="location">
+                    <!--localization module start-->
+                    <h2 class="font-semibold my-3 text-2xl">Localização</h2>
+                    <div class="my-auto mx-auto h-fit w-full flex">
+                        <div class="w-full mt-4 pr-2">
+                            <label class="font-semibold" for="cep">CEP</label>
+                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                placeholder="Example: 12345-678" id="cep" name="cep" formControlName="cep" required>
+                            <span
+                                *ngIf="freelancerProfileForm.get('location')?.hasError('required', 'cep') && freelancerProfileForm.get('location')?.get('cep')?.touched"
+                                class="text-red-500">*CEP is required</span>
                         </div>
-                        <!--educational module end-->
+                        <div class="w-full mt-4 pl-2">
+                            <label class="font-semibold" for="neighborhood">Bairro</label>
+                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                placeholder="Neighborhood Name" id="neighborhood" name="neighborhood"
+                                formControlName="neighborhood" required>
+                            <span
+                                *ngIf="freelancerProfileForm.get('location')?.hasError('required', 'neighborhood') && freelancerProfileForm.get('location')?.get('neighborhood')?.touched"
+                                class="text-red-500">*Neighborhood is required</span>
+                        </div>
                     </div>
-
-                    <div *ngIf="showPage(6)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
-                        <!-- Certification Module Start -->
-                        <h2 class="font-semibold my-3 text-2xl">Certificações</h2>
-                        <div formArrayName="certifications">
-                            <div class="grid max-h-96 overflow-auto">
-                                <div *ngFor="let certificationForm of certifications.controls; let i = index"
-                                    class="border p-4 rounded my-2">
-                                    <div [formGroupName]="i">
-                                        <h3 class="font-semibold text-lg">Certificação {{ i + 1 }}</h3>
-
-                                        <div class="flex justify-between">
-                                            <div class="pr-2 w-full">
-                                                <h2 class="font-semibold mt-4">Título da Certificação</h2>
-                                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                    placeholder="Título da Certificação" formControlName="name">
-                                            </div>
-                                            <div class="pl-2 w-full">
-                                                <h2 class="font-semibold mt-4">Organização Emissora</h2>
-                                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                    placeholder="Organização Emissora"
-                                                    formControlName="issuingOrganization">
-                                            </div>
-                                        </div>
-
-                                        <div class="flex justify-between">
-                                            <div class="pr-2 w-full">
-                                                <h2 class="font-semibold mt-4">Data da Certificação</h2>
-                                                <input class="p-2 w-full border border-gray-300 rounded" type="date"
-                                                    placeholder="Data da Certificação" formControlName="issueDate">
-                                            </div>
-                                        </div>
-
-                                        <div class="flex justify-end align-middle">
-                                            <button type="button" (click)="removeCertification(i)"
-                                                class="bg-red-500 hover:bg-red-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
-                                                Remover
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-center align-middle">
-                                    <button type="button" (click)="addCertification()" *ngIf="certifications.length < 5"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer">
-                                        Adicionar Certificação
-                                    </button>
-                                </div>
-                            </div>
+                    <div class="my-auto mx-auto h-fit w-full flex">
+                        <div class="w-full mt-4">
+                            <label class="font-semibold" for="streetAddress">Rua</label>
+                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                placeholder="Street Name" id="streetAddress" name="streetAddress"
+                                formControlName="streetAddress" required>
+                            <span
+                                *ngIf="freelancerProfileForm.get('location')?.hasError('required', 'streetAddress') && freelancerProfileForm.get('location')?.get('streetAddress')?.touched"
+                                class="text-red-500">*Street Address is required</span>
                         </div>
-                        <!-- Certification Module End -->
                     </div>
-
-                    <div *ngIf="showPage(7)" class="form-section min-h-96 min-w-96 grid justify-center align-middle"
-                        formGroupName="location" id="location">
-                        <!--localization module start-->
-                        <h2 class="font-semibold my-3 text-2xl">Localização</h2>
-                        <div class="my-auto mx-auto h-fit w-full flex">
-                            <div class="w-full pr-2">
-                                <h2 class="font-semibold mt-4" for="cep">CEP</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="Example: 12345-678" id="cep" name="cep" formControlName="cep" required>
-                            </div>
-                            <div class="w-full pl-2">
-                                <h2 class="font-semibold mt-4">Bairro</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="Neighborhood Name" id="neighborhood" name="neighborhood"
-                                    formControlName="neighborhood" required>
-                            </div>
-                        </div>
-                        <div class="my-auto mx-auto h-fit w-full flex">
-                            <div class="w-full">
-                                <h2 class="font-semibold mt-4" for="streetAddress">Rua</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="Street Name" id="streetAddress" name="streetAddress"
-                                    formControlName="streetAddress" required>
-                            </div>
-                        </div>
-                        <div class="my-auto mx-auto h-fit w-full grid">
-                            <h2 class="font-semibold mt-4">Cidade</h2>
-                            <select name="Option" id="city" formControlName="city"
-                                class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
-                                <option value="" selected>Select a city</option>
-                                <option value="ARAÇOIABA DA SERRA">Araçoiaba da serra</option>
-                                <option value="BOITUVA">Boituva</option>
-                                <option value="CAPELA DO ALTO">Capela do alto</option>
-                                <option value="CERQUILHO">Cerquilho</option>
-                                <option value="IPERÓ">Iperó</option>
-                                <option value="ITU">Itu</option>
-                                <option value="SALTO DE PIRAPORA">Salto</option>
-                                <option value="SÃO ROQUE">São Roque</option>
-                                <option value="SOROCABA">Sorocaba</option>
-                                <option value="TATUÍ">Tatuí</option>
-                                <option value="VOTORANTIM">Votorantim</option>
-                            </select>
-                        </div>
-                        <div class="my-auto mx-auto h-fit w-full flex">
-                            <div class="pr-2 w-full">
-                                <h2 class="font-semibold mt-4">Estado</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="SP"
-                                    id="state" name="state" disabled>
-                            </div>
-                            <div class="pl-2 w-full">
-                                <h2 class="font-semibold mt-4">País</h2>
-                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                    placeholder="Brasil" id="country" name="country" disabled>
-                            </div>
-                        </div>
-                        <!--localization module end-->
-                        <!--buttons-->
-                        <div class="mt-10 mx-auto h-fit w-full flex justify-between">
-                            <button [disabled]="freelancerProfileForm.invalid"
-                                [class.disabled]="freelancerProfileForm.invalid" (click)="onSubmit()"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold mr-2 p-2 rounded cursor-pointer w-full">
-                                Salvar
-                            </button>
-                            <button (click)="cancelSubmit()"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold ml-2 p-2 rounded cursor-pointer w-full">
-                                Cancelar
-                            </button>
-                        </div>
-                        <!--buttons-->
+                    <div class="my-auto mt-4 mx-auto h-fit w-full grid">
+                        <label class="font-semibold" for="city">Cidade</label>
+                        <select name="Option" id="city" formControlName="city"
+                            class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
+                            <option value="" selected>Select a city</option>
+                            <option value="ARAÇOIABA DA SERRA">Araçoiaba da serra</option>
+                            <option value="BOITUVA">Boituva</option>
+                            <option value="CAPELA DO ALTO">Capela do alto</option>
+                            <option value="CERQUILHO">Cerquilho</option>
+                            <option value="IPERÓ">Iperó</option>
+                            <option value="ITU">Itu</option>
+                            <option value="SALTO DE PIRAPORA">Salto</option>
+                            <option value="SÃO ROQUE">São Roque</option>
+                            <option value="SOROCABA">Sorocaba</option>
+                            <option value="TATUÍ">Tatuí</option>
+                            <option value="VOTORANTIM">Votorantim</option>
+                        </select>
+                        <span
+                            *ngIf="freelancerProfileForm.get('location')?.hasError('required', 'city') && freelancerProfileForm.get('location')?.get('city')?.touched"
+                            class="text-red-500">*City is required</span>
                     </div>
-                </form>
-            </ng-container>
-            <div class="flex justify-center w-full right-0 left-0 my-auto bottom-20 max-lg:bottom-14 fixed">
-                <!-- Previous Button -->
-                <button (click)="previousPage()" [disabled]="currentPage === 1"
-                    class="bg-blue-600 text-white font-semibold rounded p-4 max-lg:w-full w-64 mx-1"
-                    [ngClass]="{'hover:bg-blue-700': currentPage > 1, 'opacity-50 cursor-not-allowed': currentPage === 1}">
-                    Previous
-                </button>
+                    <div class="my-auto mx-auto h-fit w-full flex">
+                        <div class="pr-2 mt-4 w-full">
+                            <label class="font-semibold" for="state">Estado</label>
+                            <input class="p-2 w-full border border-gray-300 rounded bg-gray-100 text-gray-400"
+                                type="text" placeholder="State" id="state" name="state" formControlName="state"
+                                readonly>
+                        </div>
+                        <div class="pl-2 mt-4 w-full">
+                            <label class="font-semibold" for="country">País</label>
+                            <input class="p-2 w-full border border-gray-300 rounded bg-gray-100  text-gray-400"
+                                type="text" placeholder="Country" id="country" name="country" formControlName="country"
+                                readonly>
+                        </div>
+                    </div>
+                    <!--localization module end-->
+                    <!--buttons-->
+                    <div class="mt-10 mx-auto h-fit w-full flex justify-between">
+                        <button [disabled]="freelancerProfileForm.invalid"
+                            [class.disabled]="freelancerProfileForm.invalid" (click)="onSubmit()"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold mr-2 p-2 rounded cursor-pointer w-full">
+                            Salvar
+                        </button>
+                        <button (click)="cancelSubmit()"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold ml-2 p-2 rounded cursor-pointer w-full">
+                            Cancelar
+                        </button>
+                    </div>
+                    <!--buttons-->
+                </div>
+            </form>
+        </ng-container>
+        <div class="flex justify-center w-full right-0 left-0 my-auto bottom-20 max-lg:bottom-14 fixed">
+            <!-- Previous Button -->
+            <button (click)="previousPage()" [disabled]="currentPage === 1"
+                class="bg-blue-600 text-white font-semibold rounded p-4 max-lg:w-full w-64 mx-1"
+                [ngClass]="{'hover:bg-blue-700': currentPage > 1, 'opacity-50 cursor-not-allowed': currentPage === 1}">
+                Previous
+            </button>
 
-                <!-- Next Button -->
-                <button (click)="nextPage()" [disabled]="currentPage === totalPages"
-                    class="bg-blue-600 text-white font-semibold rounded p-4 max-lg:w-full w-64 mx-1"
-                    [ngClass]="{'hover:bg-blue-700': currentPage < totalPages, 'opacity-50 cursor-not-allowed': currentPage === totalPages}">
-                    Next
-                </button>
-            </div>
+            <!-- Next Button -->
+            <button (click)="nextPage()" [disabled]="currentPage === totalPages"
+                class="bg-blue-600 text-white font-semibold rounded p-4 max-lg:w-full w-64 mx-1"
+                [ngClass]="{'hover:bg-blue-700': currentPage < totalPages, 'opacity-50 cursor-not-allowed': currentPage === totalPages}">
+                Next
+            </button>
         </div>
-    </ng-container>
+    </div>
 </div>

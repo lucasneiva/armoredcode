@@ -16,10 +16,11 @@ import { AuthService } from '../../services/auth.service';
 
 export default class ResetComponent implements OnInit {
   fb = inject(FormBuilder);
-  resetForm !: FormGroup;
   activatedRoute = inject(ActivatedRoute);
   router = inject(Router);
   authService = inject(AuthService);
+
+  resetForm !: FormGroup;
 
   token!: string;
 

@@ -15,18 +15,18 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ProjectCardComponent {
   router = inject(Router);
-  route = inject(ActivatedRoute); // Inject ActivatedRoute
+  route = inject(ActivatedRoute);
   projectService = inject(ProjectService);
   skillService = inject(SkillService);
   userService = inject(UserService);
-  authService = inject(AuthService); // Inject AuthService
+  authService = inject(AuthService);
   
   isClient: boolean = false; 
   userRole: string | null = null; 
 
   @Input() project: any;
-  detailedProject: any = null;  // Separate object for detailed data
-  showDetails = false; // Flag to control showing details
+  detailedProject: any = null;
+  showDetails = false;
 
   creatorName = '';
   skills: string[] = [];
@@ -35,19 +35,16 @@ export class ProjectCardComponent {
     this.userRole = this.authService.getUserRole();
     if (this.userRole === 'CLIENT') {
       this.isClient = true;
+      this.loadProjectDetails();
     } else if (this.userRole === 'FREELANCER') {
       this.isClient = false;
+      this.loadProjectDetails();
     } else {
       console.log("invalid role");
     }
   }
 
   toggleDetails() {
-    if (this.showDetails) {
-      this.detailedProject = null; // Clear project details when closing
-    } else {
-      this.loadProjectDetails(); // Load new data when opening
-    }
     this.showDetails = !this.showDetails;
   }
 
@@ -56,11 +53,11 @@ export class ProjectCardComponent {
     this.projectService.getProjectById(projectId).subscribe(
       (response) => {
         if (response.success) {
-          this.detailedProject = response.data;  // Access the 'data' property from the response
+          this.detailedProject = response.data;
           /*debug*/ //console.log('Full Project Data:', this.detailedProject);
           const skillIds = this.detailedProject.skillIds;
           const creatorId = this.detailedProject.clientId._id;
-          this.loadCreatorName(creatorId); // Load creator's username
+          this.loadCreatorName(creatorId);
           this.loadSkills(skillIds);
         } else {
           console.error('Failed to retrieve project details:', response.message);
@@ -76,7 +73,7 @@ export class ProjectCardComponent {
     this.userService.getUser(userId).subscribe(
       (response) => {
         if (response.success) {
-          this.creatorName = response.data.username; // Assuming the username is in the 'username' field
+          this.creatorName = response.data.username;
         } else {
           console.error('Failed to retrieve creator details:', response.message);
         }
@@ -88,9 +85,7 @@ export class ProjectCardComponent {
 
   loadSkills(skillIds: any[]) {
     skillIds.forEach((skillId) => {
-      // Extract the _id from the skillId object
-      const skillIdValue = skillId._id; // assuming skillId is an object with an _id property
-
+      const skillIdValue = skillId._id;
       this.skillService.getSkillById(skillIdValue)
         .subscribe({
           next: (skillData) => {

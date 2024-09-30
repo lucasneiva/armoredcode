@@ -41,8 +41,8 @@ const ProposalSchema = new Schema( {
     },
     status: {
         type: String,
-        enum: [ 'PENDING', 'ACCEPTED', 'REJECTED' ],
-        default: 'PENDING',
+        enum: [ 'DRAFT', 'PENDING', 'ACCEPTED', 'REJECTED' ],
+        default: 'DRAFT',
     },
     communicationChannelId: { // Referencia ao Canal de Comunicação
         type: Schema.Types.ObjectId,
