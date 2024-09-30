@@ -6,6 +6,9 @@ import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { SkillService } from '../../services/skill.service';
 import { firstValueFrom } from 'rxjs';
+import { hourlyRateValidator } from '../../validators/hourly-rate.validator';
+import { budgetValidator } from '../../validators/budget.validator';
+import { endDateValidator } from '../../validators/date.validator';
 
 @Component({
   selector: 'app-edit-project',
@@ -68,54 +71,11 @@ export default class EditProjectComponent implements OnInit {
     if (this.currentPage < this.totalPages) this.currentPage++;
   }
 
-  EditProject() {
-    this.editProjectForm.patchValue({ projectStatus: 'DRAFT' });
-    /*debug*/ console.log(this.editProjectForm.value);
-    this.projectService
-      .updateProject(this.projectId, this.editProjectForm.value)
-      .subscribe({
-        next: (res) => {
-          alert('project Edited!');
-          //localStorage.setItem("project_id", res.data._id);
-          this.projectService.isDraft$.next(true);
-          this.editProjectForm.reset();
-          this.router.navigate(['manage-project']);
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
-  }
-
-  PostProject() {
-    this.editProjectForm.patchValue({ projectStatus: 'POSTED' });
-    /*debug*/ console.log(this.editProjectForm.value);
-    this.projectService
-      .updateProject(this.projectId, this.editProjectForm.value)
-      .subscribe({
-        next: (res) => {
-          alert('project Edited and Posted!');
-          this.projectService.isPosted$.next(true);
-          this.router.navigate(['manage-project']);
-          this.editProjectForm.reset();
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
-  }
-
-  CancelProject() {
-    alert('project edition Canceled!');
-    this.router.navigate(['manage-project']);
-    this.editProjectForm.reset();
-  }
-
   // Initialize form structure
   initForms(): void {
     this.editProjectForm = this.fb.group({
-      clientId: [this.authService.getUserId(), Validators.required],
-      freelancerId: [''],
+      clientId: ['' , Validators.required],
+      freelancerId: [],
       projectStatus: [''],
       projectCategoryId: ['', Validators.required],
       skillIds: [[], Validators.required],
@@ -124,12 +84,14 @@ export default class EditProjectComponent implements OnInit {
       projectHourlyRate: this.fb.group({
         min: [, Validators.required],
         max: [, Validators.required],
-      }),
+        currency: ['R$'],
+      }, { validators: hourlyRateValidator }), 
       projectBudget: this.fb.group({
         min: [, Validators.required],
         max: [, Validators.required],
-      }),
-      pricingType: ['BUDGET', Validators.required],
+        currency: ['R$'],
+      }, { validators: budgetValidator }),
+      pricingType: ['', Validators.required],
       estimatedDuration: ['', Validators.required],
       projectSize: [''],
       experienceLevel: [''],
@@ -143,7 +105,21 @@ export default class EditProjectComponent implements OnInit {
         country: [''],
       }),
       startDate: [''],
-      endDate: [''],
+      endDate: ['', [endDateValidator]], // Apply endDateValidator here
+    });
+    // Subscribe to pricingType changes to enable/disable fields
+    this.editProjectForm.get('pricingType')?.valueChanges.subscribe(pricingType => {
+      const BudgetControl = this.editProjectForm.get('projectBudget');
+      const hourlyRateControl = this.editProjectForm.get('projectHourlyRate');
+      if (pricingType === 'BUDGET') {
+        hourlyRateControl?.disable(); 
+        hourlyRateControl?.patchValue({ min: null, max: null, currency: 'R$' }); 
+        BudgetControl?.enable();
+      } else {
+        BudgetControl?.disable(); 
+        BudgetControl?.patchValue({ min: null, max: null, currency: 'R$' }); 
+        hourlyRateControl?.enable();
+      }
     });
   }
 
@@ -170,14 +146,7 @@ export default class EditProjectComponent implements OnInit {
         projectTitle: project.projectTitle,
         projectDescription: project.projectDescription,
         pricingType: project.pricingType,
-        projectBudget: {
-          min: project.projectBudget.min,
-          max: project.projectBudget.max,
-        },
-        projectHourlyRate: {
-          min: project.projectHourlyRate.min,
-          max: project.projectHourlyRate.max,
-        },
+        //pricing type
         estimatedDuration: project.estimatedDuration,
         projectSize: project.projectSize,
         experienceLevel: project.experienceLevel,
@@ -202,6 +171,7 @@ export default class EditProjectComponent implements OnInit {
       project.skillIds?.forEach((skill: { _id: any; }) =>
         this.skills.push(new FormControl(skill._id))
       );
+
       // Populate budget or hourly rate based on pricing type
       if (project.pricingType === 'BUDGET') {
         this.editProjectForm.get('projectBudget')?.patchValue(project.projectBudget);
@@ -209,6 +179,48 @@ export default class EditProjectComponent implements OnInit {
         this.editProjectForm.get('projectHourlyRate')?.patchValue(project.projectHourlyRate);
       }
     }
+  }
+
+  EditProject() {
+    this.editProjectForm.patchValue({ projectStatus: 'DRAFT' });
+    /*debug*/ //console.log(this.editProjectForm.value);
+    this.projectService
+      .updateProject(this.projectId, this.editProjectForm.value)
+      .subscribe({
+        next: (res) => {
+          alert('project Edited!');
+          this.projectService.isDraft$.next(true);
+          this.editProjectForm.reset();
+          this.router.navigate(['manage-project']);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
+
+  PostProject() {
+    this.editProjectForm.patchValue({ projectStatus: 'POSTED' });
+    /*debug*/ //console.log(this.editProjectForm.value);
+    this.projectService
+      .updateProject(this.projectId, this.editProjectForm.value)
+      .subscribe({
+        next: (res) => {
+          alert('project Edited and Posted!');
+          this.projectService.isPosted$.next(true);
+          this.router.navigate(['manage-project']);
+          this.editProjectForm.reset();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
+
+  CancelProject() {
+    alert('project edition Canceled!');
+    this.router.navigate(['manage-project']);
+    this.editProjectForm.reset();
   }
 
   // Fetch project categories
@@ -265,42 +277,6 @@ export default class EditProjectComponent implements OnInit {
   hasSelectedSkills(): boolean {
     const skillIdsControl = this.editProjectForm.get('skillIds') as FormControl;
     return skillIdsControl.value.length > 0;
-  }
-
-  TestValue(selectedOption: string) {
-    this.editProjectForm.patchValue({ pricingType: selectedOption });
-
-    switch (selectedOption) {
-      case 'BUDGET':
-        this.editProjectForm.patchValue({ projectHourlyRate: null });
-        this.updateHourlyRate(0, 0);
-        break;
-      case 'HOURLY_RATE':
-        this.editProjectForm.patchValue({ projectBudget: null });
-        this.updateBudget(0, 0);
-        break;
-      default:
-        // Handle default values or reset to initial values
-        break;
-    }
-  }
-
-  updateHourlyRate(newMin: number, newMax: number) {
-    this.editProjectForm.patchValue({
-      projectHourlyRate: {
-        min: newMin,
-        max: newMax,
-      },
-    });
-  }
-
-  updateBudget(newMin: number, newMax: number) {
-    this.editProjectForm.patchValue({
-      projectBudget: {
-        min: newMin,
-        max: newMax,
-      },
-    });
   }
 
 }

@@ -51,10 +51,12 @@ export default class CreateProjectComponent implements OnInit {
       projectHourlyRate: this.fb.group({
         min: [, Validators.required],
         max: [, Validators.required],
+        currency: ['R$'],
       }, { validators: hourlyRateValidator }), 
       projectBudget: this.fb.group({
         min: [, Validators.required],
         max: [, Validators.required],
+        currency: ['R$'],
       }, { validators: budgetValidator }),
       pricingType: ['BUDGET', Validators.required],
       estimatedDuration: ['', Validators.required],
@@ -75,7 +77,7 @@ export default class CreateProjectComponent implements OnInit {
       startDate: [''],
       endDate: ['', [endDateValidator]], // Apply endDateValidator here
     });
-     // Subscribe to pricingType changes to enable/disable hourlyRate fields
+     // Subscribe to pricingType changes to enable/disable fields
      this.createProjectForm.get('pricingType')?.valueChanges.subscribe(pricingType => {
       const BudgetControl = this.createProjectForm.get('projectBudget');
       const hourlyRateControl = this.createProjectForm.get('projectHourlyRate');
