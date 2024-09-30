@@ -256,9 +256,8 @@
                             </ul>
                         </div>
 
-                        <div *ngIf="hasSelectedSkills()" class="grid justify-center grid-cols-2 gap-2 max-lg:grid-cols-1
-                         mt-4 p-4 bg-slate-50 border-2 border-slate-200 rounded-lg">
-
+                        <div *ngIf="hasSelectedSkills()"
+                            class="grid justify-center grid-cols-2 gap-2 max-lg:grid-cols-1 mt-4 p-4 bg-slate-50 border-2 border-slate-200 rounded-lg">
                             <div *ngFor="let skillId of editProjectForm.get('skillIds')?.value"
                                 class="flex mb-2 h-8 rounded bg-blue-500 w-fit">
                                 <div class="text-white py-1 px-4 flex pr-4 text-nowrap overflow-clip">

@@ -78,7 +78,7 @@ export default class EditProjectComponent implements OnInit {
       freelancerId: [],
       projectStatus: [''],
       projectCategoryId: ['', Validators.required],
-      skillIds: [[], Validators.required],
+      skillIds: [[]],
       projectTitle: ['', Validators.required],
       projectDescription: ['', Validators.required],
       projectHourlyRate: this.fb.group({

@@ -16,11 +16,14 @@
                 <!--Project title Start-->
                 <div class="my-auto mx-auto h-fit w-full mt-4">
                     <label class="font-semibold" for="projectTitle">Project Name:</label>
-                    <input formControlName="projectTitle" type="text" placeholder="Type the project name" name="projectTitle"
-                        id="projectTitle" class="p-2 px-4 max-h-16 border border-gray-300 rounded w-full" required/>
-                        <span *ngIf="createProjectForm.get('projectTitle')?.hasError('required') && createProjectForm.get('projectTitle')?.touched" class="text-red-500">
-                            Project Title is required.
-                        </span>
+                    <input formControlName="projectTitle" type="text" placeholder="Type the project name"
+                        name="projectTitle" id="projectTitle"
+                        class="p-2 px-4 max-h-16 border border-gray-300 rounded w-full" required />
+                    <span
+                        *ngIf="createProjectForm.get('projectTitle')?.hasError('required') && createProjectForm.get('projectTitle')?.touched"
+                        class="text-red-500">
+                        Project Title is required.
+                    </span>
                 </div>
                 <!--Project title End-->
                 <!--Project category Start-->
@@ -33,19 +36,24 @@
                             {{ category.categoryName }}
                         </option>
                     </select>
-                    <span *ngIf="createProjectForm.get('projectCategoryId')?.hasError('required') && createProjectForm.get('projectCategoryId')?.touched" class="text-red-500">
+                    <span
+                        *ngIf="createProjectForm.get('projectCategoryId')?.hasError('required') && createProjectForm.get('projectCategoryId')?.touched"
+                        class="text-red-500">
                         Project Category is required.
-                      </span>
+                    </span>
                 </div>
                 <!--Project category End-->
                 <!--Project duration Start-->
                 <div class="my-auto mx-auto h-fit w-full mt-4">
                     <label class="font-semibold" for="estimatedDuration">Estimated duration:</label>
-                    <input formControlName="estimatedDuration" name="estimatedDuration" id="estimatedDuration" type="number"
-                    placeholder="Type the project duration (in days)" class="p-2 px-4 border max-h-16 border-gray-300 rounded w-full" required/>
-                        <span *ngIf="createProjectForm.get('estimatedDuration')?.hasError('required') && createProjectForm.get('estimatedDuration')?.touched" class="text-red-500">
-                            Estimated Duration is required.
-                        </span>
+                    <input formControlName="estimatedDuration" name="estimatedDuration" id="estimatedDuration"
+                        type="number" placeholder="Type the project duration (in days)"
+                        class="p-2 px-4 border max-h-16 border-gray-300 rounded w-full" required />
+                    <span
+                        *ngIf="createProjectForm.get('estimatedDuration')?.hasError('required') && createProjectForm.get('estimatedDuration')?.touched"
+                        class="text-red-500">
+                        Estimated Duration is required.
+                    </span>
                 </div>
                 <!--Project duration End-->
             </div>
@@ -59,13 +67,13 @@
                 <div class="my-auto mx-auto h-fit">
                     <div class="flex justify-center align-middle">
                         <div class="m-3">
-                            <input class="mr-2" type="radio" id="budgetType"
-                                formControlName="pricingType" value="BUDGET" checked />
+                            <input class="mr-2" type="radio" id="budgetType" formControlName="pricingType"
+                                value="BUDGET" checked />
                             <label for="budgetType">Budget</label>
                         </div>
                         <div class="m-3">
-                            <input class="mr-2" type="radio" id="hourlyRateType"
-                                formControlName="pricingType" value="HOURLY_RATE"/>
+                            <input class="mr-2" type="radio" id="hourlyRateType" formControlName="pricingType"
+                                value="HOURLY_RATE" />
                             <label for="hourlyRateType">Hourly Rate</label>
                         </div>
                     </div>
@@ -74,13 +82,13 @@
                         class="flex justify-center align-middle h-fit">
                         <div class="grid m-3 mt-2">
                             <label class="font-semibold" for="minbudget">Min Budget:</label>
-                            <input formControlName="min" type="number" placeholder="Min" id="minbudget" 
-                                class="text-center max-w-24 p-1 border rounded" required/>
+                            <input formControlName="min" type="number" placeholder="Min" id="minbudget"
+                                class="text-center max-w-24 p-1 border rounded" required />
                         </div>
                         <div class="grid m-3 mt-2">
                             <label class="font-semibold" for="maxbudget">Max Budget:</label>
-                            <input formControlName="max" type="number" placeholder="Max" id="maxbudget" 
-                                class="text-center max-w-24 p-1 border rounded" required/>
+                            <input formControlName="max" type="number" placeholder="Max" id="maxbudget"
+                                class="text-center max-w-24 p-1 border rounded" required />
                         </div>
                     </div>
                     <span *ngIf="createProjectForm.get('projectBudget')?.hasError('budgetInvalid')"
@@ -99,13 +107,13 @@
                         formGroupName="projectHourlyRate" class="flex justify-center align-middle h-fit">
                         <div class="grid m-3 mt-2">
                             <label class="font-semibold" for="minHourlyRate">Min Rate:</label>
-                            <input formControlName="min" type="number" placeholder="Min" id="minHourlyRate" 
-                                class="text-center max-w-24 p-1 border rounded" required/>
+                            <input formControlName="min" type="number" placeholder="Min" id="minHourlyRate"
+                                class="text-center max-w-24 p-1 border rounded" required />
                         </div>
                         <div class="grid m-3 mt-2">
                             <label class="font-semibold" for="minHourlyRate">Max Rate:</label>
-                            <input formControlName="max" type="number" placeholder="Max" id="maxHourlyRate" 
-                                class="text-center max-w-24 p-1 border rounded" required/>
+                            <input formControlName="max" type="number" placeholder="Max" id="maxHourlyRate"
+                                class="text-center max-w-24 p-1 border rounded" required />
                         </div>
                     </div>
                     <span *ngIf="createProjectForm.get('projectHourlyRate')?.hasError('hourlyRateInvalid')"
@@ -134,15 +142,17 @@
                     </div>
                     <div class="m-0.5">
                         <input type="radio" id="mediumSize" formControlName="projectSize" value="MEDIUM"
-                            class="m-2 font-normal"/>
+                            class="m-2 font-normal" />
                         <label for="mediumSize">Medium</label>
                     </div>
                     <div class="m-0.5">
                         <input type="radio" id="largeSize" formControlName="projectSize" value="LARGE"
-                            class="m-2 font-normal"/>
+                            class="m-2 font-normal" />
                         <label for="largeSize">Large</label>
                     </div>
-                    <span *ngIf="createProjectForm.get('projectSize')?.hasError('required') && createProjectForm.get('projectSize')?.touched" class="text-red-500">
+                    <span
+                        *ngIf="createProjectForm.get('projectSize')?.hasError('required') && createProjectForm.get('projectSize')?.touched"
+                        class="text-red-500">
                         Project Size is required.
                     </span>
                 </div>
@@ -165,7 +175,9 @@
                             class="m-2 font-normal" />
                         <label for="seniorLevel">Senior Level</label>
                     </div>
-                    <span *ngIf="createProjectForm.get('experienceLevel')?.hasError('required') && createProjectForm.get('experienceLevel')?.touched" class="text-red-500">
+                    <span
+                        *ngIf="createProjectForm.get('experienceLevel')?.hasError('required') && createProjectForm.get('experienceLevel')?.touched"
+                        class="text-red-500">
                         Experience Level is required.
                     </span>
                 </div>
@@ -188,7 +200,9 @@
                             class="m-2 font-normal" />
                         <label for="siteModel">On Site</label>
                     </div>
-                    <span *ngIf="createProjectForm.get('workModel')?.hasError('required') && createProjectForm.get('workModel')?.touched" class="text-red-500">
+                    <span
+                        *ngIf="createProjectForm.get('workModel')?.hasError('required') && createProjectForm.get('workModel')?.touched"
+                        class="text-red-500">
                         Work Model is required.
                     </span>
                 </div>
@@ -199,11 +213,14 @@
                 <!--Project descripition Module Start-->
                 <div class="h-fit grid align-top">
                     <h2 class="font-semibold my-3 text-3xl">Overview:</h2>
-                    <textarea formControlName="projectDescription" placeholder="Write the project description here" name="projectDescription"
-                         id="projectDescription" class="bg-gray-50 p-3 border-2 min-h-14 max-h-96 w-full"></textarea>
-                        <span *ngIf="createProjectForm.get('projectDescription')?.hasError('required') && createProjectForm.get('projectDescription')?.touched" class="text-red-500">
-                            Project Description is required.
-                        </span>
+                    <textarea formControlName="projectDescription" placeholder="Write the project description here"
+                        name="projectDescription" id="projectDescription"
+                        class="bg-gray-50 p-3 border-2 min-h-14 max-h-96 w-full"></textarea>
+                    <span
+                        *ngIf="createProjectForm.get('projectDescription')?.hasError('required') && createProjectForm.get('projectDescription')?.touched"
+                        class="text-red-500">
+                        Project Description is required.
+                    </span>
                 </div>
                 <!--Project descripition Module End-->
             </div>
@@ -232,9 +249,8 @@
                         </ul>
                     </div>
 
-                    <div *ngIf="hasSelectedSkills()" class="grid justify-center grid-cols-2 gap-2 max-lg:grid-cols-1
-                         mt-4 p-4 bg-slate-50 border-2 border-slate-200 rounded-lg">
-
+                    <div *ngIf="hasSelectedSkills()"
+                        class="grid justify-center grid-cols-2 gap-2 max-lg:grid-cols-1 mt-4 p-4 bg-slate-50 border-2 border-slate-200 rounded-lg">
                         <div *ngFor="let skillId of createProjectForm.get('skillIds')?.value"
                             class="flex mb-2 h-8 rounded bg-blue-500 w-fit">
                             <div class="text-white py-1 px-4 flex pr-4 text-nowrap overflow-clip">
