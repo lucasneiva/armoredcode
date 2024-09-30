@@ -240,7 +240,8 @@
                         </div>
                     </div>
                     <div class="my-auto mx-auto h-fit w-full grid">
-                        <div *ngIf="selectedSkills.length > 0" formArrayName="selectedSkills" class="border-2 mt-4 p-2">
+                        <div *ngIf="selectedSkills.length > 0" formArrayName="selectedSkills" 
+                            class="grid justify-center grid-cols-2 gap-2 max-lg:grid-cols-1 mt-4 p-4 bg-slate-50 border-2 border-slate-200 rounded-lg">
                             <div *ngFor="let skillControl of selectedSkills.controls; let i = index"
                                 class="flex w-fit mb-2 rounded bg-blue-500">
                                 <div class="text-white py-1 px-4 flex w-fit pr-4">
