@@ -118,8 +118,22 @@ export class ProposalCardComponent {
   }
 
   cancelProposal() {
-    alert('Proposal Canceled!');
-    //delete proposal logic
+    const proposalId = this.proposal._id;
+    if (confirm("Are you sure you want to cancel this proposal?")) {
+      this.proposalService.deleteProposal(proposalId).subscribe(
+        (response) => {
+          if (response.success) {
+            console.log('Proposal cancelled successfully');
+            window.location.reload();
+          } else {
+            console.error('Error cancelling proposal:', response.message);
+          }
+        },
+        (error) => {
+          console.error('Error cancelling proposal:', error);
+        }
+      );
+    }
   }
 
   makeCounterProposal() {

@@ -57,7 +57,6 @@ export class ProposalService {
     return this.http.put<any>(`${apiUrls.proposalServiceApi}/${proposalId}`, proposalObj, httpOptions);
   }
 
-  /*
   deleteProposal(proposalId: string): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -67,7 +66,6 @@ export class ProposalService {
     };
     return this.http.delete<any>(`${apiUrls.proposalServiceApi}/${proposalId}`, httpOptions);
   }
-  */
 
 }
 
