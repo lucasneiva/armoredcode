@@ -7,7 +7,7 @@ import {
     getFreelancerProposals,
     deleteProposal
 } from '../controllers/proposalController.js';
-import { verifyFreelancer, verifyClient } from '../utils/authMiddleware.js';
+import { verifyFreelancer, verifyClient, verifyToken } from '../utils/authMiddleware.js';
 
 const router = express.Router();
 
@@ -15,7 +15,7 @@ const router = express.Router();
 router.post('/', verifyFreelancer, createProposal);
 
 // Obter os detalhes de uma proposta (Freelancer ou Cliente) - Requer verificação se o usuário está envolvido na proposta
-router.get('/:id', verifyFreelancer, getProposalById); // Ou verificar se é o cliente da proposta
+router.get('/:id', verifyToken, getProposalById); // Ou verificar se é o cliente da proposta
 
 // Atualizar uma proposta (Freelancer ou Cliente) - Requer verificação se o usuário está envolvido na proposta
 router.put('/:id', verifyFreelancer, updateProposal); // Ou verificar se é o cliente da proposta
