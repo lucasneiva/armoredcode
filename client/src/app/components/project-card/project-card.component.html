@@ -1,9 +1,10 @@
 <!--card template-->
 <ng-container *ngIf="project">
-  <ng-container *ngIf="isClient">
+  <!--client part start-->
+  <ng-container *ngIf="userRole == 'CLIENT'">
     <!--card start-->
-    <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{'bg-gray-100': showDetails}"
-      class="sticky w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+    <div style="top: calc(1rem * 1);" [ngClass]="{'bg-gray-100': showDetails}"
+      class="sticky w-full max-w-xl px-8 pt-8 pb-2 mx-auto space-y-4 z-10 bg-white border rounded-lg shadow-lg">
       <p class="text-sm text-gray-500">Project ID: {{project._id}}</p> <!-- Added this line -->
       <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
         <span class="block py-2 mr-2">{{project.projectTitle}}</span>
@@ -11,10 +12,22 @@
           [ngClass]="{'bg-blue-500': project.projectStatus === 'DRAFT', 'bg-green-500': project.projectStatus === 'POSTED'}">
           {{project.projectStatus}}</span>
       </h2>
+      <div class="flex mt-2 py-4 space-x-2">
+        <button (click)="toggleDetails()"
+          class="bg-transparent hover:bg-blue-500 hover:text-white text-black border font-bold py-2 px-4 rounded w-full">
+          Ver Detalhes
+        </button>
+        <button (click)="showProposals = !showProposals"
+          class="bg-transparent hover:bg-blue-500 hover:text-white text-black border font-bold py-2 px-4 rounded w-full">
+          {{ showProposals ? 'Esconder Propostas' : 'Mostrar Propostas' }}
+        </button>
+      </div>
     </div>
     <!--card end-->
   </ng-container>
-  <ng-container *ngIf="!isClient">
+  <!--client part end-->
+  <!--freelancer part start-->
+  <ng-container *ngIf="userRole == 'FREELANCER'">
     <!--card start-->
     <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{'bg-gray-100': showDetails}"
       class="sticky w-full max-w-xl lg:h-64 max-lg:h-96 px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
@@ -28,8 +41,31 @@
     </div>
     <!--card end-->
   </ng-container>
+  <!--freelancer part end-->
+  <!--proposals for the project-->
+  <ng-container *ngIf="userRole == 'CLIENT'">
+    <div *ngIf="showProposals"
+      class="w-full max-w-xl px-8 py-12 -mt-2 space-y-4 bg-transparent border border-gray-50 rounded-b-lg shadow-lg">
+      <!--grid start-->
+      <ng-container *ngIf="proposals.length > 0; else noProposals">
+        <div class="grid justify-center gap-4 mt-2">
+          <!--app-project-card-->
+          <ng-container *ngFor="let proposal of proposals">
+            <app-proposal-card [proposal]="proposal"></app-proposal-card>
+          </ng-container>
+        </div>
+      </ng-container>
+      <!--grid end-->
+      <ng-template #noProposals>
+        <div class="w-full max-w-xl py-8 bg-white rounded-lg shadow-lg">
+          <p class="text-center">Ainda não há propostas para este projeto.</p>
+        </div>
+      </ng-template>
+    </div>
+  </ng-container>
+  <!--proposals for the project-->
   <!--card details start-->
-  <div class="fixed inset-0 bg-black bg-opacity-50 grid items-center justify-center z-10" *ngIf="showDetails">
+  <div class="fixed inset-0 bg-black bg-opacity-50 grid items-center justify-center z-30" *ngIf="showDetails">
     <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl w-full" style="max-height: 90vh; overflow-y: auto;">
       <p class="text-sm text-gray-500">Project ID: {{project._id}}</p> <!-- Added this line -->
       <div class="flex justify-between align-middle">
@@ -116,7 +152,7 @@
 
       <!--Buttons start-->
       <div class="mt-4 flex w-full space-x-4">
-        <ng-container *ngIf="isClient">
+        <ng-container *ngIf="userRole == 'CLIENT'">
           <button *ngIf="project.projectStatus === 'DRAFT'" (click)="postProject()"
             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">
             Post Project
@@ -129,13 +165,9 @@
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
             Edit Project
           </button>
-          <button (click)="showProposals = !showProposals"
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-            {{ showProposals ? 'Esconder Propostas' : 'Mostrar Propostas' }}
-          </button>
         </ng-container>
 
-        <ng-container *ngIf="!isClient">
+        <ng-container *ngIf="userRole == 'FREELANCER'">
           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
             Enter in Contact
           </button>
@@ -147,26 +179,6 @@
       </div>
       <!--Buttons end-->
     </div>
-    <!--proposals for the project-->
-    <div *ngIf="showProposals && isClient" style="top: calc(1rem * 1);" 
-      class="sticky w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-transparent border border-gray-50 rounded-lg shadow-lg">
-      <!--grid start-->
-      <ng-container *ngIf="proposals.length > 0; else noProposals">
-        <div class="grid justify-center gap-4 my-28">
-          <!--app-project-card-->
-          <ng-container *ngFor="let proposal of proposals">
-            <app-proposal-card [proposal]="proposal"></app-proposal-card>
-          </ng-container>
-        </div>
-      </ng-container>
-      <!--grid end-->
-      <ng-template #noProposals>
-        <div class="sticky w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white rounded-lg shadow-lg">
-          <p>Ainda não há propostas para este projeto.</p>
-        </div>
-      </ng-template>
-    </div>
-    <!--proposals for the project-->
   </div>
   <!--card details end-->
 </ng-container>
