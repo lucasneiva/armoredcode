@@ -36,6 +36,18 @@ export class ProposalService {
     );
   }
 
+  getProposalsByProjectId(projectId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true // VERY IMPORTANT: Include cookies in requests
+    };
+    return this.http.get<any>(`${apiUrls.proposalServiceApi}/project/${projectId}`, httpOptions).pipe(
+      tap(response => console.log('API response:', response))  // Log API response
+    );
+  }
+
   getFreelancerProposals(): Observable<any> {
     const freelancerId = this.authService.getUserId(); // Get the logged-in freelancer's ID
     const httpOptions = {

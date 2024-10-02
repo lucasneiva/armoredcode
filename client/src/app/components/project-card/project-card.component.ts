@@ -5,11 +5,13 @@ import { ProjectService } from '../../services/project.service';
 import { SkillService } from '../../services/skill.service';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
+import { Proposal, ProposalService } from '../../services/proposal.service';
+import { ProposalCardComponent } from '../proposal-card/proposal-card.component'; // Importe aqui
 
 @Component({
   selector: 'app-project-card',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ProposalCardComponent],
   templateUrl: './project-card.component.html',
   styleUrl: './project-card.component.scss'
 })
@@ -17,19 +19,22 @@ export class ProjectCardComponent {
   router = inject(Router);
   route = inject(ActivatedRoute);
   projectService = inject(ProjectService);
+  proposalService = inject(ProposalService);
   skillService = inject(SkillService);
   userService = inject(UserService);
   authService = inject(AuthService);
-  
-  isClient: boolean = false; 
-  userRole: string | null = null; 
+
+  isClient: boolean = false;
+  userRole: string | null = null;
 
   @Input() project: any;
   detailedProject: any = null;
   showDetails = false;
+  showProposals: boolean = false;
 
   creatorName = '';
   skills: string[] = [];
+  proposals: Proposal[] = [];
 
   ngOnInit() {
     this.userRole = this.authService.getUserRole();
@@ -59,12 +64,29 @@ export class ProjectCardComponent {
           const creatorId = this.detailedProject.clientId._id;
           this.loadCreatorName(creatorId);
           this.loadSkills(skillIds);
+          this.loadProposals();
         } else {
           console.error('Failed to retrieve project details:', response.message);
         }
       },
       (error) => {
         console.error('Error fetching project details:', error);
+      }
+    );
+  }
+
+  loadProposals() {
+    // Buscar as propostas relacionadas ao projeto
+    this.proposalService.getProposalsByProjectId(this.project._id).subscribe(
+      (response) => {
+        if (response.success) {
+          this.proposals = response.data;
+        } else {
+          console.error('Failed to retrieve proposals:', response.message);
+        }
+      },
+      (error) => {
+        console.error('Error fetching proposals:', error);
       }
     );
   }
@@ -132,7 +154,7 @@ export class ProjectCardComponent {
     }
   }
 
-  makeProposal(){
+  makeProposal() {
     console.log("create Proposal button clicked");
     this.router.navigate(['../create-proposal', this.project._id], { relativeTo: this.route });
   }

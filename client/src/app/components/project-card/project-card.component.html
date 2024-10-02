@@ -29,7 +29,7 @@
     <!--card end-->
   </ng-container>
   <!--card details start-->
-  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10" *ngIf="showDetails">
+  <div class="fixed inset-0 bg-black bg-opacity-50 grid items-center justify-center z-10" *ngIf="showDetails">
     <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl w-full" style="max-height: 90vh; overflow-y: auto;">
       <p class="text-sm text-gray-500">Project ID: {{project._id}}</p> <!-- Added this line -->
       <div class="flex justify-between align-middle">
@@ -129,6 +129,10 @@
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
             Edit Project
           </button>
+          <button (click)="showProposals = !showProposals"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+            {{ showProposals ? 'Esconder Propostas' : 'Mostrar Propostas' }}
+          </button>
         </ng-container>
 
         <ng-container *ngIf="!isClient">
@@ -142,6 +146,24 @@
         </ng-container>
       </div>
       <!--Buttons end-->
+    </div>
+    <div *ngIf="showProposals" style="top: calc(1rem * 1);" 
+      class="sticky w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-transparent border border-gray-50 rounded-lg shadow-lg">
+      <!--grid start-->
+      <ng-container *ngIf="proposals.length > 0; else noProposals">
+        <div class="grid justify-center gap-4 my-28">
+          <!--app-project-card-->
+          <ng-container *ngFor="let proposal of proposals">
+            <app-proposal-card [proposal]="proposal"></app-proposal-card>
+          </ng-container>
+        </div>
+      </ng-container>
+      <!--grid end-->
+      <ng-template #noProposals>
+        <div class="sticky w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white rounded-lg shadow-lg">
+          <p>Ainda não há propostas para este projeto.</p>
+        </div>
+      </ng-template>
     </div>
   </div>
   <!--card details end-->
