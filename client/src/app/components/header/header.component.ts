@@ -19,10 +19,12 @@ export class HeaderComponent implements OnInit {
   menuPath = '../../assets/images/menu-svgrepo-com.svg';
 
   isLoggedIn: boolean = false;
+  userRole: string | null = null;
   showMenu: boolean = false;
 
   ngOnInit(): void {
     this.authService.isLoggedIn$.subscribe(res => {
+      this.userRole = this.authService.getUserRole();
       this.isLoggedIn = this.authService.isLoggedIn();
     });
 

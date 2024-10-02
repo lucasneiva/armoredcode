@@ -147,7 +147,8 @@
       </div>
       <!--Buttons end-->
     </div>
-    <div *ngIf="showProposals" style="top: calc(1rem * 1);" 
+    <!--proposals for the project-->
+    <div *ngIf="showProposals && isClient" style="top: calc(1rem * 1);" 
       class="sticky w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-transparent border border-gray-50 rounded-lg shadow-lg">
       <!--grid start-->
       <ng-container *ngIf="proposals.length > 0; else noProposals">
@@ -165,6 +166,7 @@
         </div>
       </ng-template>
     </div>
+    <!--proposals for the project-->
   </div>
   <!--card details end-->
 </ng-container>

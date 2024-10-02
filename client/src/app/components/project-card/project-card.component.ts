@@ -64,7 +64,9 @@ export class ProjectCardComponent {
           const creatorId = this.detailedProject.clientId._id;
           this.loadCreatorName(creatorId);
           this.loadSkills(skillIds);
-          this.loadProposals();
+          if(this.isClient){
+            this.loadProposals();
+          }
         } else {
           console.error('Failed to retrieve project details:', response.message);
         }
