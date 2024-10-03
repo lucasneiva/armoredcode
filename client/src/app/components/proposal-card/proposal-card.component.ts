@@ -108,7 +108,6 @@ export class ProposalCardComponent {
   }
 
   editProposal() {
-    console.log("Edit Proposal button clicked");
     this.router.navigate(['../edit-proposal', this.proposal._id], { relativeTo: this.route });
   }
 

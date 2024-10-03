@@ -41,18 +41,17 @@ export class AuthService {
     localStorage.removeItem('user_role');
     localStorage.removeItem('token');
     this.isLoggedIn$.next(false);
-    // Potentially redirect to login or perform other logout actions
   }
   
   getUserRole(): string | null {
     const role = localStorage.getItem('user_role');
-    /*console.log("User Role from localStorage:", role); //debug */
+    /*debug*/ //console.log("User Role from localStorage:", role);
     return role;
   }
 
   getUserId(): string | null {
     const user_id = localStorage.getItem('user_id');
-    /*console.log("User Role from localStorage:", role); //debug */
+    /*debug*/ //console.log("User Role from localStorage:", role);
     return user_id;
   }
 }

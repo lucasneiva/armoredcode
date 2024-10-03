@@ -38,14 +38,14 @@ export class HeaderComponent implements OnInit {
 
   logOut() {
     this.authService.logout();
+    this.router.navigate(['login']);
   }
 
   toggleMenu() {
     this.showMenu = !this.showMenu;
   }
 
-   // Helper function to close the menu
-   private closeMenu() {
+  private closeMenu() {
     this.showMenu = false; 
   }
 }
