@@ -70,22 +70,22 @@
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
                         Cancel Proposal
                     </button>
-                    <button *ngIf="proposal.status !== 'PENDING'" (click)="editProposal()"
+                    <button *ngIf="proposal.status !== 'ACCEPTED'" (click)="editProposal()"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
                         Edit Proposal
                     </button>
                 </ng-container>
 
                 <ng-container *ngIf="userRole == 'CLIENT'">
-                    <button (click)="acceptProposal()"
+                    <button *ngIf="proposal.status === 'PENDING'" (click)="acceptProposal()"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
                         Accept Proposal
                     </button>
-                    <button (click)="rejectProposal()"
+                    <button *ngIf="proposal.status === 'PENDING'" (click)="rejectProposal()"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
                         Reject Proposal
                     </button>
-                    <button (click)="makeCounterProposal()"
+                    <button *ngIf="proposal.status === 'PENDING'" (click)="makeCounterProposal()"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
                         Make a Counter Proposal
                     </button>

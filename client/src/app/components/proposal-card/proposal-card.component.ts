@@ -176,6 +176,7 @@ export class ProposalCardComponent {
                 // Handle error (e.g., show an error message to the user)
               }
             );
+            window.location.reload();
 
           } else {
             console.error('Error accepting proposal:', response.message);

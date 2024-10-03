@@ -166,7 +166,7 @@
             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
             Cancel Project
           </button>
-          <button (click)="editProject()"
+          <button *ngIf="project.projectStatus !== 'IN_PROGRESS'" (click)="editProject()"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
             Edit Project
           </button>
@@ -176,7 +176,7 @@
           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
             Enter in Contact
           </button>
-          <button (click)="makeProposal()"
+          <button *ngIf="project.projectStatus === 'POSTED'" (click)="makeProposal()"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
             Make a Proposal
           </button>

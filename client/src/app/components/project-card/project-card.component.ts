@@ -59,7 +59,7 @@ export class ProjectCardComponent {
           const creatorId = this.detailedProject.clientId._id;
           this.loadCreatorName(creatorId);
           this.loadSkills(skillIds);
-          if(this.userRole == "CLIENT"){
+          if (this.userRole == "CLIENT") {
             this.loadProposals();
           }
         } else {
@@ -119,8 +119,25 @@ export class ProjectCardComponent {
   }
 
   postProject() {
-    // Implement logic to post the project (e.g., make an API call)
-    console.log("Post Project button clicked");
+    const projectId = this.project._id;
+    this.projectService.updateProjectStatus(projectId, 'POSTED').subscribe(
+      (response) => {
+        if (response.success) {
+          console.log('Project posted successfully');
+          this.project.projectStatus = 'POSTED'; // Update the local project status
+          this.detailedProject.projectStatus = 'POSTED'; // Update the detailed project status
+          // You might need to emit an event to notify a parent component
+        } else {
+          console.error('Error posting project:', response.message);
+          // Show an error message to the user
+        }
+        window.location.reload();
+      },
+      (error) => {
+        console.error('Error posting project:', error);
+        // Show an error message to the user
+      }
+    );
   }
 
   editProject() {
