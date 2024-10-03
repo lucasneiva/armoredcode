@@ -61,7 +61,7 @@
 
             <!--Buttons start-->
             <div class="mt-4 flex w-full space-x-4">
-                <ng-container *ngIf="!isClient">
+                <ng-container *ngIf="userRole == 'FREELANCER'">
                     <button *ngIf="proposal.status === 'DRAFT'" (click)="sendProposal()"
                         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">
                         Send Proposal
@@ -76,7 +76,7 @@
                     </button>
                 </ng-container>
 
-                <ng-container *ngIf="isClient">
+                <ng-container *ngIf="userRole == 'CLIENT'">
                     <button (click)="acceptProposal()"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
                         Accept Proposal

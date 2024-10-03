@@ -21,7 +21,6 @@ export class ProposalCardComponent {
   proposalService = inject(ProposalService);
   userService = inject(UserService);
   
-  isClient: boolean = false; 
   userRole: string | null = null; 
 
   @Input() proposal: any;
@@ -34,11 +33,7 @@ export class ProposalCardComponent {
 
   ngOnInit() {
     this.userRole = this.authService.getUserRole();
-    if (this.userRole === 'CLIENT') {
-      this.isClient = true;
-      this.loadProposaLDetails();
-    } else if (this.userRole === 'FREELANCER') {
-      this.isClient = false;
+    if (this.userRole === 'CLIENT' || this.userRole === 'FREELANCER') {
       this.loadProposaLDetails();
     } else {
       console.log("invalid role");

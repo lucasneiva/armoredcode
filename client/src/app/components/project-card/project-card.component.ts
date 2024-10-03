@@ -24,7 +24,6 @@ export class ProjectCardComponent {
   userService = inject(UserService);
   authService = inject(AuthService);
 
-  isClient: boolean = false;
   userRole: string | null = null;
 
   @Input() project: any;
@@ -38,11 +37,7 @@ export class ProjectCardComponent {
 
   ngOnInit() {
     this.userRole = this.authService.getUserRole();
-    if (this.userRole === 'CLIENT') {
-      this.isClient = true;
-      this.loadProjectDetails();
-    } else if (this.userRole === 'FREELANCER') {
-      this.isClient = false;
+    if (this.userRole === 'CLIENT' || this.userRole === 'FREELANCER') {
       this.loadProjectDetails();
     } else {
       console.log("invalid role");
@@ -64,7 +59,7 @@ export class ProjectCardComponent {
           const creatorId = this.detailedProject.clientId._id;
           this.loadCreatorName(creatorId);
           this.loadSkills(skillIds);
-          if(this.isClient){
+          if(this.userRole == "CLIENT"){
             this.loadProposals();
           }
         } else {
@@ -135,7 +130,6 @@ export class ProjectCardComponent {
 
   cancelProject() {
     const projectId = this.project._id;
-
     if (confirm("Are you sure you want to cancel this project?")) {
       this.projectService.deleteProject(projectId).subscribe(
         (response) => {
