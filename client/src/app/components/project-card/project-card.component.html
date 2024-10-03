@@ -35,7 +35,7 @@
   <ng-container *ngIf="userRole == 'FREELANCER'">
     <!--card start-->
     <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{'bg-gray-100': showDetails}"
-      class="sticky w-full max-w-xl lg:h-64 max-lg:h-96 px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+      class="sticky w-full max-w-xl lg:h-64 max-lg:h-96 px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
       <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
         <span class="block pb-2">{{project.projectTitle}}</span>
         <span *ngIf="creatorName" class="block text-sm text-gray-700">{{creatorName}}</span>
