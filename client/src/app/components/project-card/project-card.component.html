@@ -9,7 +9,12 @@
       <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
         <span class="block py-2 mr-2">{{project.projectTitle}}</span>
         <span class="block w-fit p-2 border-2 border-transparent rounded-md text-white"
-          [ngClass]="{'bg-blue-500': project.projectStatus === 'DRAFT', 'bg-green-500': project.projectStatus === 'POSTED'}">
+          [ngClass]="{'bg-blue-500': project.projectStatus === 'DRAFT', 
+          'bg-green-500': project.projectStatus === 'POSTED',
+          'bg-yellow-500': project.projectStatus === 'IN_PROGRESS',
+          'bg-red-500': project.projectStatus === 'CANCELLED',
+          'bg-purple-500': project.projectStatus === 'COMPLETED',
+          }">
           {{project.projectStatus}}</span>
       </h2>
       <div class="flex mt-2 py-4 space-x-2">
@@ -86,7 +91,7 @@
           <p><strong>Created by:</strong> {{creatorName}}</p>
           <p><strong>Worked by:</strong>
             <ng-container *ngIf="detailedProject.freelancerId; else noFreelancer">
-              {{detailedProject.freelancerId}}
+              {{detailedProject.freelancerId.username}}
             </ng-container>
             <ng-template #noFreelancer>
               Not Specified

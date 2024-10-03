@@ -96,7 +96,7 @@ const ProjectSchema = new Schema( {
 
     projectStatus: {
         type: String,
-        enum: [ "DRAFT", "POSTED" ],
+        enum: [ "DRAFT", "POSTED", 'IN_PROGRESS', 'COMPLETED', 'CANCELLED' ],
         required: true,
     },
 

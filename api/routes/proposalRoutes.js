@@ -5,7 +5,9 @@ import {
     updateProposal, 
     getProposalsByProjectId, 
     getFreelancerProposals,
-    deleteProposal
+    deleteProposal,
+    acceptProposal,
+    rejectProposal
 } from '../controllers/proposalController.js';
 import { verifyFreelancer, verifyClient, verifyToken } from '../utils/authMiddleware.js';
 
@@ -29,5 +31,11 @@ router.get('/freelancer/:freelancerId', verifyFreelancer, getFreelancerProposals
 router.delete('/:id', verifyFreelancer, deleteProposal);
 
 router.patch('/:id', verifyFreelancer, updateProposal);
+
+// Accept a proposal (Client)
+router.patch('/:id/accept', verifyClient, acceptProposal);
+
+// Reject a proposal (Client)
+router.patch('/:id/reject', verifyClient, rejectProposal);
 
 export default router;

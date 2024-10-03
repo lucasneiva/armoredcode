@@ -31,6 +31,28 @@ export class ProjectService {
     return this.http.patch<any>(`${apiUrls.projectServiceApi}/${projectId}`, projectObj, httpOptions);
   }
 
+  updateProjectFreelancer(projectId: string, freelancerId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true 
+    };
+    const updateData = { freelancerId: freelancerId };
+    return this.http.patch<any>(`${apiUrls.projectServiceApi}/${projectId}`, updateData, httpOptions);
+  }
+
+  updateProjectStatus(projectId: string, newStatus: string): Observable<any> {
+    const httpOptions = { 
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true
+    };
+    const updateData = { projectStatus: newStatus }; 
+    return this.http.patch<any>(`${apiUrls.projectServiceApi}/${projectId}`, updateData, httpOptions);
+  }
+
   deleteProject(projectId: string): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({

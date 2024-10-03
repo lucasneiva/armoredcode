@@ -32,7 +32,7 @@ export class ProposalService {
       withCredentials: true // VERY IMPORTANT: Include cookies in requests
     };
     return this.http.get<any>(`${apiUrls.proposalServiceApi}/${proposalId}`, httpOptions).pipe(
-      tap(response => console.log('API response:', response))  // Log API response
+      //tap(response => console.log('API response:', response))  // Log API response
     );
   }
 
@@ -44,7 +44,7 @@ export class ProposalService {
       withCredentials: true // VERY IMPORTANT: Include cookies in requests
     };
     return this.http.get<any>(`${apiUrls.proposalServiceApi}/project/${projectId}`, httpOptions).pipe(
-      tap(response => console.log('API response:', response))  // Log API response
+      //tap(response => console.log('API response:', response))  // Log API response
     );
   }
 
@@ -77,6 +77,26 @@ export class ProposalService {
       withCredentials: true 
     };
     return this.http.delete<any>(`${apiUrls.proposalServiceApi}/${proposalId}`, httpOptions);
+  }
+
+  acceptProposal(proposalId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true
+    };
+    return this.http.patch<any>(`${apiUrls.proposalServiceApi}/${proposalId}/accept`, {}, httpOptions);
+  }
+
+  rejectProposal(proposalId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true
+    };
+    return this.http.patch<any>(`${apiUrls.proposalServiceApi}/${proposalId}/reject`, {}, httpOptions);
   }
 
 }

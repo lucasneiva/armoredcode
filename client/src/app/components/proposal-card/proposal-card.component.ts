@@ -136,6 +136,85 @@ export class ProposalCardComponent {
     }
   }
 
+  acceptProposal() {
+    const proposalId = this.proposal._id;
+    if (confirm("Are you sure you want to accept this proposal?")) {
+      this.proposalService.acceptProposal(proposalId).subscribe(
+        (response) => {
+          if (response.success) {
+            console.log('Proposal accepted successfully');
+
+            // 1. Update proposal status in the UI
+            this.proposal.status = 'ACCEPTED';
+
+            // 2. Update the project with freelancer ID
+            const projectId = this.proposal.projectId;
+            const freelancerId = this.proposal.freelancerId;
+
+            this.projectService.updateProjectFreelancer(projectId, freelancerId).subscribe(
+              (updateResponse) => {
+                if (updateResponse.success) {
+                  console.log('Project freelancerId updated successfully');
+                  // You might want to update the project object in your component if needed:
+                  this.project.freelancerId = freelancerId; 
+                } else {
+                  console.error('Error updating project freelancerId:', updateResponse.message);
+                  // Handle error (e.g., show an error message to the user)
+                }
+              },
+              (error) => {
+                console.error('Error updating project freelancerId:', error);
+                // Handle error (e.g., show an error message to the user)
+              }
+            );
+            this.projectService.updateProjectStatus(projectId, 'IN_PROGRESS').subscribe(
+              (updateStatusResponse) => {
+                if (updateStatusResponse.success) {
+                  console.log('Project status updated successfully');
+                  this.project.projectStatus = 'IN_PROGRESS'; // Update status in the component
+                } else {
+                  console.error('Error updating project status:', updateStatusResponse.message);
+                  // Handle error (e.g., show an error message to the user)
+                }
+              },
+              (error) => {
+                console.error('Error updating project status:', error);
+                // Handle error (e.g., show an error message to the user)
+              }
+            );
+
+          } else {
+            console.error('Error accepting proposal:', response.message);
+          }
+        },
+        (error) => {
+          console.error('Error accepting proposal:', error);
+        }
+      );
+    }
+  }
+
+  rejectProposal() {
+    const proposalId = this.proposal._id;
+    if (confirm("Are you sure you want to reject this proposal?")) {
+      this.proposalService.rejectProposal(proposalId).subscribe(
+        (response) => {
+          if (response.success) {
+            console.log('Proposal rejected successfully');
+            // Update the proposal status in the UI or reload the page
+            this.proposal.status = 'REJECTED'; 
+            window.location.reload();
+          } else {
+            console.error('Error rejecting proposal:', response.message);
+          }
+        },
+        (error) => {
+          console.error('Error rejecting proposal:', error);
+        }
+      );
+    }
+  }
+
   makeCounterProposal() {
     console.log("Counter Proposal button clicked");
     //this.router.navigate(['../edit-proposal', this.proposal._id], { relativeTo: this.route });

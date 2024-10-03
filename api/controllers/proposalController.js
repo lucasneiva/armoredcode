@@ -108,6 +108,49 @@ export const deleteProposal = async (req, res, next) => {
     }
 };
 
+export const acceptProposal = async (req, res, next) => {
+    try {
+        const proposalId = req.params.id;
+
+        const updatedProposal = await Proposal.findByIdAndUpdate(
+            proposalId,
+            { status: 'ACCEPTED' }, // Update status to ACCEPTED
+            { new: true } 
+        );
+
+        if (!updatedProposal) {
+            return next(createError(404, "Proposal not found!"));
+        }
+
+        // Optionally add logic to update project members or other related data
+        // For example, you might add the freelancer to the project's team
+
+        return next(createSuccess(200, "Proposal accepted successfully!", updatedProposal));
+    } catch (error) {
+        return next(createError(500, "Internal Server Error!"));
+    }
+};
+
+export const rejectProposal = async (req, res, next) => {
+    try {
+        const proposalId = req.params.id;
+
+        const updatedProposal = await Proposal.findByIdAndUpdate(
+            proposalId,
+            { status: 'REJECTED' }, // Update status to REJECTED
+            { new: true } 
+        );
+
+        if (!updatedProposal) {
+            return next(createError(404, "Proposal not found!"));
+        }
+
+        return next(createSuccess(200, "Proposal rejected successfully!", updatedProposal));
+    } catch (error) {
+        return next(createError(500, "Internal Server Error!"));
+    }
+};
+
 export const getFreelancerProposals = async (req, res, next) => {
     try {
         const freelancerId = req.params.freelancerId;
