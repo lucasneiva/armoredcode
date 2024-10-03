@@ -40,22 +40,21 @@ export default class EditProfileComponent implements OnInit {
   freelancerProfileForm!: FormGroup;
 
   //constants
-  selectedSkillControl = new FormControl(''); // FormControl for the dropdown
+  selectedSkillControl = new FormControl('');
   // Getter for skillIds FormArray (for easier access in template)
   get skillIds(): FormArray {
     return this.freelancerProfileForm.get('skillIds') as FormArray;
   }
 
-  selectedSkillId: string = ''; // Initialize with an empty string
+  selectedSkillId: string = ''; 
   userRole: string | null = null;
-  isClient: boolean = false;
   isLoading = true;
   profile: Profile | null = null;
   currentPage!: number; // Start with the first page
   totalPages!: number; // Total number of pages
 
   //arrays:
-  skills: any[] = []; // Array to store skills
+  skills: any[] = [];
   specializations: any[] = [];
   industries: any[] = [];
   pageNumbers: number[] = [];
@@ -65,14 +64,12 @@ export default class EditProfileComponent implements OnInit {
     this.userRole = this.authService.getUserRole();
 
     if (this.userRole === 'CLIENT') {
-      this.isClient = true;
       this.fetchIndustries();
       this.currentPage = 1;
       this.totalPages = 2;
       this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     } else if (this.userRole === 'FREELANCER') {
-      this.isClient = false;
-      this.fetchSkills(); // Fetch skills in ngOnInit for freelancer
+      this.fetchSkills();
       this.fetchSpecializations();
       this.currentPage = 1;
       this.totalPages = 7;
@@ -169,7 +166,7 @@ export default class EditProfileComponent implements OnInit {
   // Populate form fields with fetched profile data
   populateForms(profile: Profile | null) {
     if (profile) {
-      if (this.isClient) {
+      if (this.userRole == "CLIENT") {
         // Populate client form
         this.clientProfileForm.patchValue({
           companyName: profile.companyName,
@@ -307,7 +304,7 @@ export default class EditProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.isClient && this.clientProfileForm.valid) {
+    if (this.userRole == "CLIENT" && this.clientProfileForm.valid) {
       /*debug*/ //console.log(this.clientProfileForm.value);
       this.profileService.editProfile(this.clientProfileForm.value)
         .subscribe({
@@ -321,7 +318,7 @@ export default class EditProfileComponent implements OnInit {
             console.error('Error editing client profile:', err);
           }
         });
-    } else if (!this.isClient && this.freelancerProfileForm.valid) {
+    } else if (this.userRole == "FREELANCER" && this.freelancerProfileForm.valid) {
       /*debug*/ //console.log(this.freelancerProfileForm.value);
 
       // Prepare the data for the freelancer profile
@@ -341,14 +338,14 @@ export default class EditProfileComponent implements OnInit {
         });
 
     } else {
-      this.displayFormErrors(this.isClient ? this.clientProfileForm : this.freelancerProfileForm);
+      this.displayFormErrors(this.userRole == "CLIENT" ? this.clientProfileForm : this.freelancerProfileForm);
     }
   }
 
   cancelSubmit() {
     alert("profile edition Canceled!")
     this.router.navigate(['manage-profile'])
-    if (this.isClient) {
+    if (this.userRole == "CLIENT") {
       this.clientProfileForm.reset();
     }
     else {

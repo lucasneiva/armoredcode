@@ -13,7 +13,7 @@
             <div class="grid justify-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4
              p-10 my-auto  bg-transparent">
                 <!--client feed start-->
-                <ng-container *ngIf="isClient">
+                <ng-container *ngIf="this.userRole == 'CLIENT'">
                     <!--
               <ng-container *ngFor="let freelancer of freelancers">
                   <app-freelancer-card [freelancer]="freelancer"></app-freelancer-card>
@@ -45,7 +45,7 @@
                 <!--client feed end-->
 
                 <!--freelancer feed start-->
-                <ng-container *ngIf="!isClient">
+                <ng-container *ngIf="this.userRole == 'FREELANCER'">
 
                     <ng-container *ngFor="let project of projects">
                         <app-project-card [project]="project"></app-project-card>

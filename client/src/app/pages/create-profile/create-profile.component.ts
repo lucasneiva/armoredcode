@@ -38,7 +38,6 @@ export default class CreateProfileComponent implements OnInit {
 
   //constants
   userRole: string | null = null;
-  isClient: boolean = false;
   currentPage!: number; // Start with the first page
   totalPages!: number; // Total number of pages
 
@@ -52,21 +51,20 @@ export default class CreateProfileComponent implements OnInit {
   ngOnInit() {
     this.authService.getUserId();
     this.userRole = this.authService.getUserRole();
-
     if (this.userRole === 'CLIENT') {
-      this.isClient = true;
       this.fetchIndustries();
       this.currentPage = 1; // Start with the first page
       this.totalPages = 2; // Total number of pages
       this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-    } else if (this.userRole === 'FREELANCER') {
-      this.isClient = false;
+    } 
+    else if (this.userRole === 'FREELANCER'){
       this.fetchSkills();
       this.fetchSpecializations();
       this.currentPage = 1; // Start with the first page
       this.totalPages = 7; // Total number of pages
       this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-    } else {
+    }
+    else {
       console.log("invalid role");
     }
 
@@ -136,7 +134,7 @@ export default class CreateProfileComponent implements OnInit {
 
   onSubmit() {
     console.log(this.freelancerProfileForm.value);
-    if (this.isClient && this.clientProfileForm.valid) {
+    if (this.userRole == "CLIENT" && this.clientProfileForm.valid) {
       this.profileService.createProfile(this.clientProfileForm.value)
         .subscribe({
           next: (res) => {
@@ -149,7 +147,7 @@ export default class CreateProfileComponent implements OnInit {
             console.error('Error creating client profile:', err);
           }
         });
-    } else if (!this.isClient && this.freelancerProfileForm.valid) {
+    } else if (this.userRole == "FREELANCER" && this.freelancerProfileForm.valid) {
 
       // Prepare the data for the freelancer profile
       const formData = this.freelancerProfileForm.value;
@@ -177,14 +175,14 @@ export default class CreateProfileComponent implements OnInit {
       this.markFormArrayTouched(this.freelancerProfileForm.get('workExperiences') as FormArray);
       this.markFormArrayTouched(this.freelancerProfileForm.get('portfolioItems') as FormArray); // Add this for portfolioItems as well
 
-      this.displayFormErrors(this.isClient ? this.clientProfileForm : this.freelancerProfileForm);
+      this.displayFormErrors(this.userRole == "CLIENT" ? this.clientProfileForm : this.freelancerProfileForm);
     }
   }
 
   cancelSubmit() {
     alert("profile creation Canceled!")
     this.router.navigate(['login'])
-    if (this.isClient) {
+    if (this.userRole == "CLIENT") {
       this.clientProfileForm.reset();
     }
     else {

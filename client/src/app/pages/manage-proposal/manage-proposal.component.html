@@ -10,14 +10,14 @@
     <ng-container *ngIf="!isLoading">
         <!--if projects-->
         <ng-container *ngIf="proposals.length <= 0">
-            <div *ngIf="isClient" class="block text-wrap max-w-md shadow-lg p-10 mx-auto my-auto bg-white h-fit">
+            <div *ngIf="this.userRole === 'CLIENT'" class="block text-wrap max-w-md shadow-lg p-10 mx-auto my-auto bg-white h-fit">
                 <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
                 <p class="text-left text-2xl text-gray-600 mt-4">
                     You dont have any proposal in your workspace for now.
                 </p>
             </div>
 
-            <div *ngIf="!isClient" class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
+            <div *ngIf="this.userRole === 'FREELANCER'" class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
                 <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
                 <p class="text-left text-2xl text-gray-600 mt-4">
                     You don't have any submitted proposals yet. Start browsing projects and submitting your expertise!

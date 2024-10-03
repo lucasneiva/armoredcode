@@ -10,7 +10,7 @@
     <ng-container *ngIf="!isLoading">
         <!--if projects-->
         <ng-container *ngIf="projects.length <= 0">
-            <div *ngIf="isClient" class="block text-wrap max-w-md shadow-lg p-10 mx-auto my-auto bg-white h-fit">
+            <div *ngIf="this.userRole == 'CLIENT'" class="block text-wrap max-w-md shadow-lg p-10 mx-auto my-auto bg-white h-fit">
                 <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
                 <p class="text-left text-2xl text-gray-600 mt-4">
                     You dont have any projects in your workspace for now,
@@ -18,7 +18,7 @@
                 </p>
             </div>
 
-            <div *ngIf="!isClient" class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
+            <div *ngIf="this.userRole == 'FREELANCER'" class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
                 <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
                 <p class="text-left text-2xl text-gray-600 mt-4">
                     You dont have any projects in your workspace for now
@@ -36,7 +36,7 @@
         </ng-container>
         <!--grid end-->
         <!--button-->
-        <ng-container *ngIf="isClient">
+        <ng-container *ngIf="this.userRole == 'CLIENT'">
             <div class="fixed bottom-12 left-1/2 transform -translate-x-1/2 z-20">
                 <button routerLink="/create-project"
                     class="bg-blue-500 hover:bg-blue-700 text-xl text-white font-bold py-4 px-8 -mb-0.5 rounded cursor-pointer">

@@ -29,16 +29,12 @@ export default class HomeComponent {
 
   isLoading = false; // default is true
   userRole: string | null = null; 
-  isClient: boolean = false; 
 
   ngOnInit(): void {
     this.userRole = this.authService.getUserRole();
-
     if (this.userRole === 'CLIENT') {
-      this.isClient = true;
       this.loadFreelancers();
     } else if (this.userRole === 'FREELANCER') {
-      this.isClient = false;
       this.loadProjects();
     } else {
       console.log("invalid role");

@@ -11,7 +11,7 @@
         </div>
 
         <!--Client form-->
-        <ng-container *ngIf="isClient">
+        <ng-container *ngIf="userRole == 'CLIENT'">
             <form class="grid overflow-hidden" [formGroup]="clientProfileForm">
                 <div *ngIf="showPage(1)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
                     <!--personal module start-->
@@ -158,7 +158,7 @@
         </ng-container>
 
         <!--Freelancer form-->
-        <ng-container *ngIf="!isClient">
+        <ng-container *ngIf="userRole == 'FREELANCER'">
             <form class="grid overflow-hidden" [formGroup]="freelancerProfileForm">
                 <div *ngIf="showPage(1)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
                     <!--personal module start-->

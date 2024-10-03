@@ -19,22 +19,18 @@ export default class ManageProposalComponent implements OnInit{
   authService = inject(AuthService);
   projectService = inject(ProjectService);
   proposalService = inject(ProposalService);
-  //projects: Project[] = []; 
-  proposals: Proposal[] = [];
+ 
   isLoading = true; 
-
   userRole: string | null = null; 
-  isClient: boolean = false; 
+  proposals: Proposal[] = [];
 
   ngOnInit(): void {
     this.userRole = this.authService.getUserRole();
 
     if (this.userRole === 'CLIENT') {
-      this.isClient = true;
-      this.loadClientProposals(); // Load proposals for the client
+      //NOTHING
     } else if (this.userRole === 'FREELANCER') {
-      this.isClient = false;
-      this.loadFreelancerProposals(); // Load proposals for the freelancer
+      this.loadFreelancerProposals(); 
     } else {
       console.log("invalid role");
     }
@@ -52,22 +48,5 @@ export default class ManageProposalComponent implements OnInit{
       }
     });
   }
-
-  loadClientProposals(){
-    //get the proposals for the client
-  }
-
-  /*
-    this.projectService.getProjects().subscribe({
-      next: (res) => {
-        this.projects = res.data;
-        this.isLoading = false; // Set loading to false after projects are loaded
-      },
-      error: (err) => {
-        console.error("Error fetching projects:", err);
-        this.isLoading = false; // Set loading to false even on error
-      }
-    });
-    */
 
 }
