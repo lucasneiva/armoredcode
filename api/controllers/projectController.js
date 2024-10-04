@@ -204,10 +204,9 @@ export const deleteProject = async ( req, res, next ) => {
         }
 }
 
-export const getAllProjects = async (req, res, next) => {
+export const getPostedProjects = async (req, res, next) => {
     try {
-        // Fetch all projects, optionally with pagination or filtering if needed
-        const allProjects = await project.find()
+        const allProjects = await project.find({ projectStatus: "POSTED" })
             .populate('clientId', 'username email')
             .populate('freelancerId', 'username email')
             .populate('projectCategoryId', 'name')

@@ -42,7 +42,7 @@ export default class HomeComponent {
 
   }
   loadProjects() {
-    this.projectService.getAllProjects().subscribe({
+    this.projectService.getPostedProjects().subscribe({
       next: (res) => {
         this.projects = res.data; // Assuming your API response structure
         this.isLoading = false;

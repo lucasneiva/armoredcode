@@ -95,7 +95,7 @@ export class ProjectService {
     return this.http.get<any>(`${apiUrls.projectServiceApi}user`, httpOptions);
   }
 
-  getAllProjects(): Observable<any> {
+  getPostedProjects(): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
