@@ -40,9 +40,12 @@
         <span class="block pb-2">{{project.projectTitle}}</span>
         <span *ngIf="creatorName" class="block text-sm text-gray-700">{{creatorName}}</span>
       </h2>
-      <p>
-        {{project.projectDescription}}
+      <p *ngIf="detailedProject?.projectDescription; else noDescripition">
+        {{detailedProject.projectDescription}}
       </p>
+      <ng-template #noDescripition>
+        <p>No description provided</p>
+      </ng-template>
     </div>
     <!--card end-->
   </ng-container>
@@ -173,12 +176,16 @@
         </ng-container>
 
         <ng-container *ngIf="userRole == 'FREELANCER'">
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+          <button *ngIf="project.projectStatus !== 'IN_PROGRESS'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
             Enter in Contact
           </button>
           <button *ngIf="project.projectStatus === 'POSTED'" (click)="makeProposal()"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
             Make a Proposal
+          </button>
+          <button *ngIf="project.projectStatus === 'IN_PROGRESS'" (click)="cancelProject()"
+            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
+            Cancel Project
           </button>
         </ng-container>
       </div>

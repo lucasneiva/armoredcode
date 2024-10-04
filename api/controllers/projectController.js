@@ -117,13 +117,38 @@ export const createProject = async ( req, res, next ) => {
     }
 
 };
-
+/*
 export const getUserProjects = async ( req, res, next ) => {
     try {
         const userId = req.user.id;
         const userObjId = new mongoose.Types.ObjectId(userId);
 
         const projects = await project.find( {clientId: userObjId}, 'projectTitle projectStatus _id');
+
+        return next( createSuccess( 200, 'User Projects', projects ) );
+
+    } catch ( error ) {
+        // Handle other potential errors 
+
+        console.log(error);
+        return next( createError( 500, 'Internal Server Error' ) );
+
+    }
+};
+*/
+//modified
+export const getUserProjects = async ( req, res, next ) => {
+    try {
+        const userId = req.user.id;
+        const userObjId = new mongoose.Types.ObjectId(userId);
+
+        // Find projects where the user is either the client OR the freelancer
+        const projects = await project.find({ 
+            $or: [
+                { clientId: userObjId }, 
+                { freelancerId: userObjId }
+            ]
+        }, 'projectTitle projectStatus _id');
 
         return next( createSuccess( 200, 'User Projects', projects ) );
 

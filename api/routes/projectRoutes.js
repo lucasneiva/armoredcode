@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get( '/search', searchProjects );
 
-router.get('/user', verifyClient, getUserProjects);
+router.get('/user', verifyToken, getUserProjects);
 
 router.get( '/:id', verifyToken, getProjectById );
 
