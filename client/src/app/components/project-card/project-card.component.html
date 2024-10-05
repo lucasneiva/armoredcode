@@ -29,26 +29,6 @@
           </button>
         </div>
       </div>
-      <!--
-      <div *ngIf="showProposals"
-        class="flex max-w-lg h-fit w-full px-8 py-12 -ml-2 space-x-4 bg-transparent border border-gray-50 rounded-r-lg shadow-lg overflow-x-auto overflow-y-hidden">
-        
-        <ng-container *ngIf="proposals.length > 0; else noProposals">
-          <div class="flex justify-start gap-4 -my-12">
-            
-            <ng-container *ngFor="let proposal of proposals">
-              <app-proposal-card [proposal]="proposal"></app-proposal-card>
-            </ng-container>
-          </div>
-        </ng-container>
-        
-        <ng-template #noProposals>
-          <div class="w-full flex justify-center items-center max-w-xl p-8 bg-white rounded-lg shadow-lg">
-            <p class="text-center">Ainda não há propostas para este projeto.</p>
-          </div>
-        </ng-template>
-      </div>
-      -->
       <!--card end-->
     </div>
 
@@ -83,7 +63,7 @@
     <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{
       'bg-stone-100': project.projectStatus === 'COMPLETED',
       'bg-white': project.projectStatus !== 'COMPLETED'}"
-      class="sticky w-full lg:max-w-lg max-lg:max-w-md p-8 mx-auto space-y-4 z-10 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
+      class="sticky w-full lg:max-w-lg max-lg:max-w-md lg:h-56 max-lg:h-64 p-8 mx-auto space-y-4 z-10 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
       <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
         <span class="block pb-2">{{project.projectTitle}}</span>
         <span *ngIf="creatorName" class="block text-sm text-gray-700">{{creatorName}}</span>
