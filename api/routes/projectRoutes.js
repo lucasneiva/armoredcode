@@ -12,7 +12,7 @@ router.get( '/:id', verifyToken, getProjectById );
 
 router.post( '/', verifyClient, createProject );
 
-router.patch('/:id', verifyClient, updateProject);
+router.patch('/:id', verifyToken, updateProject);
 
 router.delete('/:id', verifyClient, deleteProject); 
 

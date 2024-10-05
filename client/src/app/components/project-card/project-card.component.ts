@@ -167,6 +167,28 @@ export class ProjectCardComponent {
     }
   }
 
+  finishProject() {
+    const projectId = this.project._id;
+    this.projectService.updateProjectStatus(projectId, 'COMPLETED').subscribe(
+      (response) => {
+        if (response.success) {
+          console.log('Project finished successfully');
+          this.project.projectStatus = 'COMPLETED'; 
+          this.detailedProject.projectStatus = 'COMPLETED'; 
+          // You might need to emit an event to notify a parent component
+        } else {
+          console.error('Error finishing project:', response.message);
+          // Show an error message to the user
+        }
+        window.location.reload();
+      },
+      (error) => {
+        console.error('Error finishing project:', error);
+        // Show an error message to the user
+      }
+    );
+  }
+
   makeProposal() {
     console.log("create Proposal button clicked");
     this.router.navigate(['../create-proposal', this.project._id], { relativeTo: this.route });

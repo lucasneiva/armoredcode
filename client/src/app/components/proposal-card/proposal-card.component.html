@@ -1,8 +1,10 @@
 <!--card template-->
 <ng-container *ngIf="proposal">
     <!--card start-->
-    <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{'bg-gray-100': showDetails}"
-        class="sticky w-full max-w-xl px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
+    <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{
+        'bg-stone-100': project.projectStatus === 'COMPLETED',
+        'bg-white': project.projectStatus !== 'COMPLETED'}"
+        class="sticky w-full lg:max-w-lg max-lg:max-w-md px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
         <p class="text-sm text-gray-500">Proposal ID: {{proposal._id}}</p>
         <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
             <span *ngIf="project" class="block py-2 mr-2">{{project.projectTitle}}</span>
@@ -85,10 +87,12 @@
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
                         Reject Proposal
                     </button>
+                    <!--
                     <button *ngIf="proposal.status === 'PENDING'" (click)="makeCounterProposal()"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
                         Make a Counter Proposal
                     </button>
+                    -->
                 </ng-container>
             </div>
             <!--Buttons end-->

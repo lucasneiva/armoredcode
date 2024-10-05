@@ -4,25 +4,26 @@
   <ng-container *ngIf="userRole == 'CLIENT'">
     <div class="flex">
       <!--card start-->
-      <div style="top: calc(1rem * 1);" [ngClass]="{'bg-gray-100': showDetails}"
-        class="sticky w-full max-w-xl px-8 pt-8 pb-2 mx-auto space-y-4 z-10 bg-white border rounded-lg shadow-lg">
+      <div style="top: calc(1rem * 1);" [ngClass]="{
+      'bg-stone-100': project.projectStatus === 'COMPLETED',
+      'bg-white': project.projectStatus !== 'COMPLETED'}"
+        class="sticky w-full lg:max-w-lg max-lg:max-w-md px-8 pt-8 pb-2 mx-auto space-y-4 z-10 border rounded-lg shadow-lg">
         <p class="text-sm text-gray-500">Project ID: {{project._id}}</p>
         <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
           <span class="block py-2 mr-2">{{project.projectTitle}}</span>
-          <span class="block w-fit p-2 border-2 border-transparent rounded-md text-white" [ngClass]="{'bg-blue-500': project.projectStatus === 'DRAFT', 
-        'bg-green-500': project.projectStatus === 'POSTED',
-        'bg-yellow-500': project.projectStatus === 'IN_PROGRESS',
-        'bg-red-500': project.projectStatus === 'CANCELLED',
-        'bg-purple-500': project.projectStatus === 'COMPLETED',
-        }">
-            {{project.projectStatus}}</span>
+          <span class="block w-fit p-2 border-2 border-transparent rounded-md text-white" 
+          [ngClass]="{'bg-blue-500': project.projectStatus === 'DRAFT', 
+          'bg-green-500': project.projectStatus === 'POSTED',
+          'bg-yellow-500': project.projectStatus === 'IN_PROGRESS',
+          'bg-red-500': project.projectStatus === 'CANCELLED',
+          'bg-purple-500': project.projectStatus === 'COMPLETED',}">{{project.projectStatus}}</span>
         </h2>
         <div class="flex mt-2 py-4 space-x-2">
           <button (click)="toggleDetails()"
             class="bg-transparent hover:bg-blue-500 hover:text-white text-black border font-bold py-2 px-4 rounded w-full">
             Ver Detalhes
           </button>
-          <button (click)="showProposals = !showProposals"
+          <button *ngIf="project.projectStatus !== 'DRAFT'" (click)="showProposals = !showProposals"
             class="bg-transparent hover:bg-blue-500 hover:text-white text-black border font-bold py-2 px-4 rounded w-full">
             {{ showProposals ? 'Esconder Propostas' : 'Mostrar Propostas' }}
           </button>
@@ -54,7 +55,7 @@
     <ng-container *ngIf="proposals">
       <!--proposals for the project-->
       <div *ngIf="showProposals"
-        class="flex h-fit max-w-xl w-full px-8 py-12 -mt-2 space-x-4 bg-transparent border border-gray-50 rounded-b-lg shadow-lg overflow-y-auto overflow-x-hidden">
+        class="flex h-fit lg:max-w-lg max-lg:max-w-md w-full px-8 py-12 -mt-2 space-x-4 bg-transparent border border-gray-50 rounded-b-lg shadow-lg overflow-y-auto overflow-x-hidden">
         <!--grid start-->
         <ng-container *ngIf="proposals.length > 0; else noProposals">
           <div class="grid justify-start gap-4">
@@ -79,8 +80,10 @@
   <!--freelancer part start-->
   <ng-container *ngIf="userRole == 'FREELANCER'">
     <!--card start-->
-    <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{'bg-gray-100': showDetails}"
-      class="sticky w-full max-w-xl lg:h-64 max-lg:h-96 px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
+    <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{
+      'bg-stone-100': project.projectStatus === 'COMPLETED',
+      'bg-white': project.projectStatus !== 'COMPLETED'}"
+      class="sticky w-full lg:max-w-lg max-lg:max-w-md p-8 mx-auto space-y-4 z-10 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
       <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
         <span class="block pb-2">{{project.projectTitle}}</span>
         <span *ngIf="creatorName" class="block text-sm text-gray-700">{{creatorName}}</span>
@@ -189,13 +192,17 @@
             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">
             Post Project
           </button>
-          <button (click)="cancelProject()"
+          <button *ngIf="project.projectStatus !== 'COMPLETED'" (click)="cancelProject()"
             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
             Cancel Project
           </button>
-          <button *ngIf="project.projectStatus !== 'IN_PROGRESS'" (click)="editProject()"
+          <button *ngIf="project.projectStatus !== 'IN_PROGRESS' && project.projectStatus !== 'COMPLETED'" (click)="editProject()"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
             Edit Project
+          </button>
+          <button *ngIf="project.projectStatus === 'IN_PROGRESS'" (click)="finishProject()"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+            Finish Project
           </button>
         </ng-container>
 
@@ -208,9 +215,13 @@
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
             Make a Proposal
           </button>
-          <button *ngIf="project.projectStatus === 'IN_PROGRESS'" (click)="cancelProject()"
+          <button *ngIf="project.projectStatus === 'IN_PROGRESS' && project.projectStatus !== 'COMPLETED'" (click)="cancelProject()"
             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
             Cancel Project
+          </button>
+          <button *ngIf="project.projectStatus === 'IN_PROGRESS'" (click)="finishProject()"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+            Finish Project
           </button>
         </ng-container>
       </div>
