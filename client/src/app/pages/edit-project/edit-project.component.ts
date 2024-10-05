@@ -242,12 +242,14 @@ export default class EditProjectComponent implements OnInit {
     });
   }
 
-  // Search for skills
   searchSkills(event: any): void {
     const searchTerm = event.target.value.toLowerCase();
     this.showSkillsList = searchTerm.length > 0;
     if (this.showSkillsList) {
-      this.filteredSkills = this.skills.filter(skill => skill.skillName.toLowerCase().includes(searchTerm));
+      this.filteredSkills = this.skills.filter(skill => {
+        // Check if skill.skillName exists before calling toLowerCase()
+        return skill.skillName ? skill.skillName.toLowerCase().includes(searchTerm) : false; 
+      });
     }
   }
 
