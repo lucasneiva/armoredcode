@@ -62,7 +62,6 @@ export class FreelancerCardComponent {
           const skillIds = this.detailedfreelancer.skillIds || []; // Handle null skillIds
           this.loadFreelancerName(freelancerId);
           this.loadSkills(skillIds);
-          // Load specialization name if specializationId is present
           if (this.detailedfreelancer.specializationId) {
             this.loadSpecializationName(this.detailedfreelancer.specializationId);
           }
@@ -80,7 +79,7 @@ export class FreelancerCardComponent {
     this.userService.getUser(userId).subscribe(
       (response) => {
         if (response.success) {
-          this.freelancerName = response.data.username; // Assuming the username is in the 'username' field
+          this.freelancerName = response.data.username;
         } else {
           console.error('Failed to retrieve freelancer name:', response.message);
         }
@@ -95,7 +94,7 @@ export class FreelancerCardComponent {
       (response) => {
         if (response.success) {
           this.specializationName = response.data.specializationName; // Assuming the name is in the 'specializationName' field
-          console.log(this.specializationName);
+          /*debug*/ //console.log(this.specializationName);
         } else {
           console.error('Failed to retrieve specialization details:', response.message);
         }

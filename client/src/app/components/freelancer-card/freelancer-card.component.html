@@ -1,17 +1,22 @@
 <!-- card start -->
 <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
     <div class="flex justify-between items-center">
-        <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">{{ freelancer.firstName }} {{ freelancer.lastName }}</h3>
-        <div class="w-16 h-16 bg-gray-400 rounded-full"></div> 
+        <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
+            {{ freelancer.firstName }} {{ freelancer.lastName }}
+        </h3>
+        <div *ngIf="freelancer.image; else defaultImage" class="w-16 h-16 rounded-full overflow-hidden"></div> 
+        <ng-template #defaultImage>
+            <img src="../../../assets/images/prf_icon.png" class="w-16 h-16 bg-gray-400 rounded-full overflow-hidden">
+        </ng-template>
     </div>
 
     <p class="text-gray-600 mt-4">
         {{ specializationName || 'No Specialization' }} 
     </p>
 
-    
     <p class="mt-4">{{ freelancer.profileSummary || 'No profile summary available.' }}</p>
 
+    <!-- testing
     <button (click)="toggleDetails()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         {{ showDetails ? 'Hide Details' : 'Show Details' }}
     </button>
@@ -43,13 +48,19 @@
             </div>
         </div>
     </div>
-
-    <div class="flex justify-center mt-5 gap-4">
-        <button routerLink="/profile/{{ freelancer.userId }}" class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">
+-->
+    <!--Buttons start-->
+    <div class="mt-4 flex w-full space-x-4">
+        <ng-container *ngIf="userRole == 'CLIENT'">
+          <button routerLink="/profile/{{ freelancer.userId }}"
+            class="bg-transparent hover:bg-blue-500 text-black hover:text-white font-bold py-2 px-4 border-2 border-slate-200 rounded w-full">
             View Profile
-        </button>
-        <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">
-            Contact 
-        </button>
+          </button>
+          <button 
+            class="bg-transparent hover:bg-blue-500 text-black hover:text-white font-bold py-2 px-4 border-2 border-slate-200 rounded w-full">
+            Contact
+          </button>
+        </ng-container>
     </div>
+    <!--Buttons end-->
 </div>
