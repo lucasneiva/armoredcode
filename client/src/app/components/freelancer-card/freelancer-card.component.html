@@ -1,24 +1,51 @@
-<!--card template-->
+<!-- card start -->
 <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
     <div class="flex justify-between items-center">
-        <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Freelancer_Card</h3>
-        <div class="w-16 h-16 bg-gray-400 rounded-full"></div>
+        <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">{{ freelancer.firstName }} {{ freelancer.lastName }}</h3> 
+        <div class="w-16 h-16 bg-gray-400 rounded-full"></div> <!-- Replace with actual profile picture if available -->
     </div>
-    <p class="text-gray-600 mt-4">profession</p>
-    <p class="mt-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt
-        ut
-        labore
-        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-        aliquip
-        ex ea
-        commodo consequat."</p>
+
+    <p class="text-gray-600 mt-4">{{ freelancer.specializationId?.name || 'No Specialization' }}</p> <!-- Assuming specializationId has a name property -->
+    <p class="mt-4">{{ freelancer.profileSummary || 'No profile summary available.' }}</p>
+
+    <!-- Toggle details -->
+    <button (click)="toggleDetails()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        {{ showDetails ? 'Hide Details' : 'Show Details' }}
+    </button>
+
+    <!-- Details section (shown when showDetails is true) -->
+    <div *ngIf="showDetails" class="space-y-2">
+        <div *ngIf="detailedfreelancer">
+            <p><strong>Experience Level:</strong> {{ detailedfreelancer.experienceLevel }}</p>
+            <p><strong>Hourly Rate:</strong> {{ detailedfreelancer.hourlyRate?.min }} - {{ detailedfreelancer.hourlyRate?.max }} {{ detailedfreelancer.hourlyRate?.currency }}</p>
+            <p><strong>Skills:</strong> 
+                <span *ngFor="let skill of skills; let last = last">{{ skill }}{{ !last ? ', ' : '' }}</span> 
+            </p>
+            
+            <!-- Add more details as needed (e.g., location, portfolio items, etc.) -->
+            <!-- Example: -->
+            <div *ngIf="detailedfreelancer.location">
+                <p><strong>Location:</strong> {{ detailedfreelancer.location.city }}, {{ detailedfreelancer.location.state }}</p>
+            </div>
+            
+            <div *ngIf="detailedfreelancer.portfolioItems && detailedfreelancer.portfolioItems.length > 0">
+                <h4 class="text-lg font-bold">Portfolio:</h4>
+                <ul>
+                    <li *ngFor="let item of detailedfreelancer.portfolioItems">
+                        <a href="{{ item.url }}" target="_blank">{{ item.title }}</a> 
+                        <p *ngIf="item.description">{{ item.description }}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <div class="flex justify-center mt-5 gap-4">
-        <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-  hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Profile
-            here</button>
-        <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold
-  hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">Contact
-            here</button>
+        <button routerLink="/profile/{{ freelancer.userId }}" class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">
+            View Profile
+        </button>
+        <button class="bg-transparent hover:bg-blue-500 text-gray-700 font-semibold hover:text-white py-2 px-10 border border-gray-500 hover:border-transparent rounded -mb-4">
+            Contact 
+        </button>
     </div>
 </div>

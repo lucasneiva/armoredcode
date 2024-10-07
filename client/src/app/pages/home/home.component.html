@@ -14,11 +14,11 @@
              p-10 my-auto  bg-transparent">
                 <!--client feed start-->
                 <ng-container *ngIf="this.userRole == 'CLIENT'">
-                    <!--
+                    
               <ng-container *ngFor="let freelancer of freelancers">
                   <app-freelancer-card [freelancer]="freelancer"></app-freelancer-card>
               </ng-container>
-              -->
+              <!--
                     <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
                         <div class="flex justify-between items-center">
                             <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">Freelancer_Card</h3>
@@ -40,7 +40,7 @@
                             </button>
                         </div>
                     </div>
-
+                    -->
                 </ng-container>
                 <!--client feed end-->
 

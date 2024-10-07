@@ -23,7 +23,7 @@ export default class HomeComponent {
   profileService = inject(ProfileService);
 
   projects: Project[] = [];
-  //freelancers: Freelancer[] = [];
+  freelancers: Profile[] = []; // Create an array to hold freelancer profiles
   
   homeForm !: FormGroup;
 
@@ -55,7 +55,16 @@ export default class HomeComponent {
   }
 
   loadFreelancers(){
-    //TODO
+    this.profileService.getAllFreelancerProfiles().subscribe({
+      next: (res) => {
+        this.freelancers = res.data; 
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error("Error fetching freelancer profiles:", err);
+        this.isLoading = false;
+      }
+    });
   }
   
 }

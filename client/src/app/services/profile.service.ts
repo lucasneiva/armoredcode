@@ -123,6 +123,26 @@ export class ProfileService {
     */
   }
 
+  getAllFreelancerProfiles(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true
+    };
+
+    return this.http.get<any>(`${apiUrls.profileServiceApi}/freelancers`, httpOptions)
+      .pipe(
+        tap((res) => {
+          console.log('Freelancer profiles fetched:', res);
+        }),
+        catchError((error) => {
+          console.error('Error fetching freelancer profiles:', error);
+          throw error;
+        })
+      );
+  }
+
 }
 
 // Define a clear interface for your API response (ProfileResponse)

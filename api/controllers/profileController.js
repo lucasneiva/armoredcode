@@ -147,3 +147,13 @@ export const deleteProfile = async (req, res, next) => {
         return next(createError(500, "Error deleting profile", error));
     }
 }
+
+export const getAllFreelancerProfiles = async (req, res, next) => {
+    try {
+        const freelancerProfiles = await FreelancerProfile.find().populate("userId", "firstName lastName email"); // Populate user data if needed
+        return next(createSuccess(200, "Freelancer profiles fetched successfully", freelancerProfiles));
+    } catch (error) {
+        console.error("Error fetching freelancer profiles:", error);
+        return next(createError(500, "Error fetching freelancer profiles", error));
+    }
+};
