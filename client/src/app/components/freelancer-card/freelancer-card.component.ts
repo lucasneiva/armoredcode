@@ -4,6 +4,8 @@ import { Router, RouterModule, ActivatedRoute } from '@angular/router'; // Impor
 import { ProfileService } from '../../services/profile.service';
 import { SkillService } from '../../services/skill.service';
 import { UserService } from '../../services/user.service';
+import { SpecializationService } from '../../services/specialization.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-freelancer-card',
@@ -17,14 +19,28 @@ export class FreelancerCardComponent {
   route = inject(ActivatedRoute);
   profileService = inject(ProfileService);
   skillService = inject(SkillService);
+  specializationService = inject(SpecializationService);
   userService = inject(UserService);
+  authService = inject(AuthService);
+
+  userRole: string | null = null;
 
   @Input() freelancer: any;
   detailedfreelancer: any = null;
   showDetails = false; // Flag to control showing details
 
   freelancerName = '';
+  specializationName: string = '';
   skills: string[] = [];
+
+  ngOnInit() {
+    this.userRole = this.authService.getUserRole();
+    if (this.userRole === 'CLIENT') {
+      this.loadFreelancerDetails();
+    } else {
+      console.log("invalid role");
+    }
+  }
 
   toggleDetails() {
     if (this.showDetails) {
@@ -35,28 +51,30 @@ export class FreelancerCardComponent {
     this.showDetails = !this.showDetails;
   }
 
-  
   loadFreelancerDetails() {
-    const freelancerId = this.freelancer._id;
-    this.userService.getUser(freelancerId).subscribe(
+    const freelancerId = this.freelancer.userId._id; // Access the _id property
+    /*debug*/ //console.log("Freelancer data:", this.freelancer)
+    this.profileService.getProfile(freelancerId).subscribe(
       (response) => {
         if (response.success) {
-          this.detailedfreelancer = response.data;  // Access the 'data' property from the response
-          /*debug*/ //console.log('Full Project Data:', this.detailedProject);
-          const skillIds = this.detailedfreelancer.skillIds;
-          const freelancerId = this.detailedfreelancer.clientId._id;
-          this.loadFreelancerName(freelancerId); // Load creator's username
+          this.detailedfreelancer = response.data.profile;
+          /*debug*/ //console.log("Detailed Freelancer:", this.detailedfreelancer);
+          const skillIds = this.detailedfreelancer.skillIds || []; // Handle null skillIds
+          this.loadFreelancerName(freelancerId);
           this.loadSkills(skillIds);
+          // Load specialization name if specializationId is present
+          if (this.detailedfreelancer.specializationId) {
+            this.loadSpecializationName(this.detailedfreelancer.specializationId);
+          }
         } else {
-          console.error('Failed to retrieve project details:', response.message);
+          console.error('Failed to retrieve freelancer details:', response.message);
         }
       },
       (error) => {
-        console.error('Error fetching project details:', error);
+        console.error('Error fetching freelancer details:', error);
       }
     );
   }
-  
 
   loadFreelancerName(userId: string) {
     this.userService.getUser(userId).subscribe(
@@ -64,29 +82,45 @@ export class FreelancerCardComponent {
         if (response.success) {
           this.freelancerName = response.data.username; // Assuming the username is in the 'username' field
         } else {
-          console.error('Failed to retrieve creator details:', response.message);
+          console.error('Failed to retrieve freelancer name:', response.message);
         }
       },
       (error) => {
-        console.error('Error fetching creator details:', error);
+        console.error('Error fetching freelancer name:', error);
       });
   }
 
-  loadSkills(skillIds: any[]) {
-    skillIds.forEach((skillId) => {
-      // Extract the _id from the skillId object
-      const skillIdValue = skillId._id; // assuming skillId is an object with an _id property
+  loadSpecializationName(specializationId: string) {
+    this.specializationService.getSpecializationById(specializationId).subscribe(
+      (response) => {
+        if (response.success) {
+          this.specializationName = response.data.specializationName; // Assuming the name is in the 'specializationName' field
+          console.log(this.specializationName);
+        } else {
+          console.error('Failed to retrieve specialization details:', response.message);
+        }
+      },
+      (error) => {
+        console.error('Error fetching specialization details:', error);
+      }
+    );
+  }
 
-      this.skillService.getSkillById(skillIdValue)
-        .subscribe({
-          next: (skillData) => {
-            this.skills.push(skillData.data.skillName);
-            /*debug*/ //console.log("skill: " + this.skills); console.log("id: " + skillIdValue);
-          },
-          error: (error) => {
-            console.error("Error loading skill:", error);
+  loadSkills(skillIds: string[]) {
+    skillIds.forEach((skillId) => {
+      this.skillService.getSkillById(skillId).subscribe({
+        next: (skillData) => {
+          const skillName = skillData.data.skillName;
+  
+          // Check if the skill is already in the array
+          if (!this.skills.includes(skillName)) {
+            this.skills.push(skillName);
           }
-        });
+        },
+        error: (error) => {
+          console.error("Error loading skill:", error);
+        }
+      });
     });
   }
 }

@@ -189,7 +189,7 @@ export type Profile = {
   firstName?: string;
   lastName?: string;
   specializationId?: string | null; // Or `null` if there can be no specialization
-    
+
   profileSummary?: string;
   experienceLevel?: 'JUNIOR' | 'MID-LEVEL' | 'SENIOR';
   hourlyRate?: {
