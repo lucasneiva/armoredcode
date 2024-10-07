@@ -16,5 +16,5 @@ export const routes: Routes = [
     {path:'create-proposal/:id', loadComponent: ()=> import('./pages/create-proposal/create-proposal.component')},
     {path:'edit-proposal/:id', loadComponent: () => import('./pages/edit-proposal/edit-proposal.component')},
 
-    {path:'freelancer-profile', loadComponent: ()=> import('./pages/freelancer-profile/freelancer-profile.component')},
+    {path:'freelancer-profile/:id', loadComponent: ()=> import('./pages/freelancer-profile/freelancer-profile.component')},
 ];
