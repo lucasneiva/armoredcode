@@ -109,7 +109,7 @@ export default class CreateProfileComponent implements OnInit {
       selectedSkills: this.fb.array([]), // Initialize as an empty array
 
       workExperiences: this.fb.array([this.createExperienceForm()]),
-      education: this.fb.array([this.createEducationForm()]),
+      educations: this.fb.array([this.createEducationsForm()]),
       certifications: this.fb.array([this.createCertificationForm()]),
       portfolioItems: this.fb.array([this.createPortfolioItem()]),
       
@@ -171,7 +171,7 @@ export default class CreateProfileComponent implements OnInit {
     } else {
       // Mark nested FormArrays as touched before displaying errors
       this.markFormArrayTouched(this.freelancerProfileForm.get('certifications') as FormArray);
-      this.markFormArrayTouched(this.freelancerProfileForm.get('education') as FormArray);
+      this.markFormArrayTouched(this.freelancerProfileForm.get('educations') as FormArray);
       this.markFormArrayTouched(this.freelancerProfileForm.get('workExperiences') as FormArray);
       this.markFormArrayTouched(this.freelancerProfileForm.get('portfolioItems') as FormArray); // Add this for portfolioItems as well
 
@@ -265,12 +265,12 @@ export default class CreateProfileComponent implements OnInit {
     });
   }
 
-  // Education 
-  get education(): FormArray {
-    return this.freelancerProfileForm.get('education') as FormArray;
+  // educations 
+  get educations(): FormArray {
+    return this.freelancerProfileForm.get('educations') as FormArray;
   }
 
-  createEducationForm(): FormGroup {
+  createEducationsForm(): FormGroup {
     return this.fb.group({
       degreeName: [''],
       fieldOfStudy: [''],
@@ -280,15 +280,15 @@ export default class CreateProfileComponent implements OnInit {
     });
   }
 
-  addEducation() {
-    if (this.education.length < 2) {
-      const newEducationForm = this.createEducationForm();
-      this.education.push(newEducationForm);
+  addEducations() {
+    if (this.educations.length < 2) {
+      const neweducationsForm = this.createEducationsForm();
+      this.educations.push(neweducationsForm);
     }
   }
 
-  removeEducation(index: number) {
-    this.education.removeAt(index);
+  removeEducations(index: number) {
+    this.educations.removeAt(index);
   }
 
   // Certifications

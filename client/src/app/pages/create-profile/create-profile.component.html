@@ -416,12 +416,12 @@
                 </div>
 
                 <div *ngIf="showPage(5)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">
-                    <!--educational module start-->
+                    <!--educationsal module start-->
                     <h2 class="font-semibold my-3 text-2xl">Educacional</h2>
-                    <div formArrayName="education">
+                    <div formArrayName="educations">
                         <div class="grid max-h-96 overflow-auto">
-                            <div *ngFor="let educationForm of education.controls; let i = index">
-                                <div *ngIf="education.length > 0" [formGroupName]="i" class="border p-4 rounded my-2">
+                            <div *ngFor="let educationsForm of educations.controls; let i = index">
+                                <div *ngIf="educations.length > 0" [formGroupName]="i" class="border p-4 rounded my-2">
                                     <h3 class="font-semibold text-lg">Formação {{ i + 1 }}</h3>
 
                                     <div class="flex justify-between">
@@ -430,7 +430,7 @@
                                             <input class="p-2 w-full border border-gray-300 rounded" type="text" name="degreeName"
                                                 id="degreeName" placeholder="Degree name" formControlName="degreeName" required>
                                             <span
-                                                *ngIf="educationForm.hasError('required', 'degreeName') && educationForm.get('degreeName')?.touched"
+                                                *ngIf="educationsForm.hasError('required', 'degreeName') && educationsForm.get('degreeName')?.touched"
                                                 class="text-red-500">*Degree name is required</span>
                                         </div>
                                         <div class="pl-2 w-full mt-4">
@@ -438,7 +438,7 @@
                                             <input class="p-2 w-full border border-gray-300 rounded" type="text" name="fieldOfStudy"
                                                 id="fieldOfStudy" placeholder="Field of study" formControlName="fieldOfStudy" required>
                                             <span
-                                                *ngIf="educationForm.hasError('required', 'fieldOfStudy') && educationForm.get('fieldOfStudy')?.touched"
+                                                *ngIf="educationsForm.hasError('required', 'fieldOfStudy') && educationsForm.get('fieldOfStudy')?.touched"
                                                 class="text-red-500">*Field of Study is required</span>
                                         </div>
                                     </div>
@@ -449,7 +449,7 @@
                                             <input class="p-2 w-full border border-gray-300 rounded" type="text" name="institution"
                                                 id="institution" placeholder="Institution" formControlName="institution" required>
                                             <span
-                                                *ngIf="educationForm.hasError('required', 'institution') && educationForm.get('institution')?.touched"
+                                                *ngIf="educationsForm.hasError('required', 'institution') && educationsForm.get('institution')?.touched"
                                                 class="text-red-500">*Institution is required</span>
                                         </div>
                                     </div>
@@ -460,7 +460,7 @@
                                             <input class="p-2 w-full border border-gray-300 rounded" type="date" name="startDate"
                                                 id="startDate" placeholder="Data de Início" formControlName="startDate" required>
                                             <span
-                                                *ngIf="educationForm.hasError('required', 'startDate') && educationForm.get('startDate')?.touched"
+                                                *ngIf="educationsForm.hasError('required', 'startDate') && educationsForm.get('startDate')?.touched"
                                                 class="text-red-500">*Start Date is required</span>
                                         </div>
                                         <div class="pl-2 w-full mt-4">
@@ -468,16 +468,16 @@
                                             <input class="p-2 w-full border border-gray-300 rounded" type="date" name="endDate"
                                                 id="endDate" placeholder="Data de Término" formControlName="endDate" required>
                                             <span
-                                                *ngIf="educationForm.hasError('required', 'endDate') && educationForm.get('endDate')?.touched"
+                                                *ngIf="educationsForm.hasError('required', 'endDate') && educationsForm.get('endDate')?.touched"
                                                 class="text-red-500">*End Date is required</span>
-                                            <span *ngIf="educationForm.hasError('endDateInvalid', 'endDate')"
+                                            <span *ngIf="educationsForm.hasError('endDateInvalid', 'endDate')"
                                                 class="text-red-500">
                                                 End date cannot be before start date.
                                             </span>
                                         </div>
                                     </div>
                                     <div class="flex justify-end align-middle">
-                                        <button type="button" (click)="removeEducation(i)"
+                                        <button type="button" (click)="removeEducations(i)"
                                             class="bg-red-500 hover:bg-red-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
                                             Remover
                                         </button>
@@ -485,14 +485,14 @@
                                 </div>
                             </div>
                             <div class="flex justify-center align-middle">
-                                <button type="button" (click)="addEducation()" *ngIf="education.length < 2"
+                                <button type="button" (click)="addEducations()" *ngIf="educations.length < 2"
                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
                                     Adicionar Formação
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <!--educational module end-->
+                    <!--educationsal module end-->
                 </div>
 
                 <div *ngIf="showPage(6)" class="form-section min-h-96 min-w-96 grid justify-center align-middle">

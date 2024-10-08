@@ -8,7 +8,7 @@ const freelancerProfiles = [
         firstName: "Miguel",
         lastName: "Santos",
         specializationId: [],
-        profileSummary: "Experienced full-stack developer with expertise in React and Node.js.",
+        profileSummary: "A highly motivated and experienced full-stack developer with 5+ years of expertise in building robust and scalable web applications using React and Node.js. Possesses a strong understanding of front-end and back-end development principles, and a proven track record of delivering high-quality projects on time and within budget. Passionate about staying up-to-date with the latest technologies and best practices in the industry.",
         experienceLevel: "MID-LEVEL",
         hourlyRate: {
             min: 50,
@@ -61,7 +61,7 @@ const freelancerProfiles = [
         firstName: "Joana",
         lastName: "Silva",
         specializationId: [],
-        profileSummary: "Highly skilled front-end developer with expertise in creating responsive and user-friendly interfaces.",
+        profileSummary: "A highly skilled and experienced front-end developer with a passion for creating beautiful, responsive, and user-friendly interfaces. Possesses extensive knowledge of HTML, CSS, JavaScript, and various front-end frameworks such as React and Angular. Proven ability to translate design concepts into functional and engaging web experiences. Strong advocate for user-centered design principles and accessibility standards. Dedicated to delivering high-quality work and exceeding client expectations.",
         experienceLevel: "SENIOR",
         hourlyRate: {
             min: 80,

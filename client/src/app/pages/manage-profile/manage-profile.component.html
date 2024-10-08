@@ -103,17 +103,21 @@
                     <h4 class="font-bold text-2xl py-2">Portfolio</h4>
                     <ul>
                         <li *ngFor="let item of profile.portfolioItems">
-                            <a [href]="item.url" target="_blank">{{ item.title }}</a> - {{ item.description }}
+                            <div class="flex space-x-2">
+                                <h2 class="font-bold">{{ item.title }} |</h2>
+                                <a class="text-blue-500 hover:text-blue-600">{{ item.url }}</a>
+                            </div> 
+                            <p>Description: <br> {{ item.description }}</p>
                         </li>
                     </ul>
                 </div>
 
                 <div *ngIf="profile.educations && profile.educations.length > 0">
-                    <h4 class="font-bold text-2xl py-2">Education</h4>
+                    <h4 class="font-bold text-2xl py-2">educations</h4>
                     <ul>
                         <li *ngFor="let edu of profile.educations">
                             {{ edu.degreeName }} in {{ edu.fieldOfStudy }} - {{ edu.institution }} ({{ edu.startDate |
-                            date:'yyyy' }} - {{ edu.endDate ? (edu.endDate | date:'yyyy') : 'Present' }})
+                            date:'MMM/yyyy' }} - {{ edu.endDate ? (edu.endDate | date:'MMM/yyyy') : 'Present' }})
                         </li>
                     </ul>
                 </div>

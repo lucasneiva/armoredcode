@@ -25,7 +25,7 @@ const EducationSchema = new Schema( {
     },
 
     endDate: {
-        type: Number,
+        type: Date,
         required: false
     }
 
@@ -121,7 +121,9 @@ const FreelancerProfileSchema = new Schema( {
     },
 
     profileSummary: {
-        type: String
+        type: String,
+        required: false,
+        maxLength: 1024,
     },
 
     experienceLevel: {

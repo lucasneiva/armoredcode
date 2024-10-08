@@ -19,7 +19,7 @@ const ClientProfileSchema = new Schema( {
 
     companyDescription: {
         type: String,
-        maxLength: 500,
+        maxLength: 1024,
         required: true ,
     },
 

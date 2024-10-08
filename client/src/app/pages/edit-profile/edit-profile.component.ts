@@ -136,7 +136,7 @@ export default class EditProfileComponent implements OnInit {
       }),
       skillIds: this.fb.array([]), // Initialize as an empty FormArray
       portfolioItems: this.fb.array([]),
-      education: this.fb.array([]),
+      educations: this.fb.array([]),
       certifications: this.fb.array([]),
       workExperiences: this.fb.array([]),
     });
@@ -230,7 +230,7 @@ export default class EditProfileComponent implements OnInit {
             const Institution = edu.institution;
             const formattedStartDate = this.datePipe.transform(edu.startDate, 'yyyy-MM-dd');
             const formattedEndDate = this.datePipe.transform(edu.endDate, 'yyyy-MM-dd');
-            this.education.push(this.fb.group({
+            this.educations.push(this.fb.group({
               degreeName: DegreeName,
               fieldOfStudy: FieldOfStudy,
               institution: Institution,
@@ -404,12 +404,12 @@ export default class EditProfileComponent implements OnInit {
     });
   }
 
-  // Education 
-  get education(): FormArray {
-    return this.freelancerProfileForm.get('education') as FormArray;
+  // educations 
+  get educations(): FormArray {
+    return this.freelancerProfileForm.get('educations') as FormArray;
   }
 
-  createEducationForm(): FormGroup {
+  createEducationsForm(): FormGroup {
     return this.fb.group({
       degreeName: [''],
       fieldOfStudy: [''],
@@ -419,15 +419,15 @@ export default class EditProfileComponent implements OnInit {
     });
   }
 
-  addEducation() {
-    if (this.education.length < 2) {
-      const newEducationForm = this.createEducationForm();
-      this.education.push(newEducationForm);
+  addEducations() {
+    if (this.educations.length < 2) {
+      const neweducationsForm = this.createEducationsForm();
+      this.educations.push(neweducationsForm);
     }
   }
 
-  removeEducation(index: number) {
-    this.education.removeAt(index);
+  removeEducations(index: number) {
+    this.educations.removeAt(index);
   }
 
   // Certifications
