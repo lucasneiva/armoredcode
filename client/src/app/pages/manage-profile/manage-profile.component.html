@@ -46,27 +46,26 @@
         <div class="grid justify-center h-fit p-8 mb-8 border-t-2 ">
             <!--template start-->
             <ng-container *ngIf="profile.companyName; else freelancerContent">
-                <h3 class="font-bold text-3xl py-3">About</h3>
                 <!-- Client Profile Content -->
-                <p class="text-xl py-3">{{ profile.companyDescription }}</p>
-                <ul class="text-xl py-3">
-                    <li *ngIf="profile?.industryId">
-                        <strong>Industry:</strong> {{ industry?.name }}
-                    </li>
-                    <li><strong>Company Size:</strong> {{ profile.companySize }}</li>
-                    <li *ngIf="profile.location">
-                        <strong>Location:</strong> {{ profile.location.city }}, {{ profile.location.country }}
-                    </li>
-                </ul>
-                <ul class="text-xl py-3" *ngIf="profile.website">
-                    <li>
-                        <span><strong>Website: </strong></span>
-                        <a [href]="profile.website" target="_blank">{{ profile.website }}</a>
-                    </li>
-                </ul>
+                <div class="w-full grid justify-center lg:px-32">
+                    <h3 class="font-bold text-3xl py-3">About</h3>
+                    <div class="w-full lg:flex max-lg:grid justify-between lg:space-x-32">
+                        <p class="flex w-full justify-start text-xl py-3">{{ profile.companyDescription }}</p>
+
+                        <ul class="block w-full justify-start text-xl py-3">
+                            <li *ngIf="profile?.industryId"><strong>Industry:</strong> {{ industry?.name }}</li>
+                            <li><strong>Company Size:</strong> {{ profile.companySize }}</li>
+                            <li *ngIf="profile.location"><strong>Location:</strong>
+                                {{ profile.location.city }}, {{ profile.location.country }}
+                            </li>
+                            <li *ngIf="profile.website"><span><strong>Website: </strong></span>
+                                <a class="text-blue-500 hover:text-blue-600" [href]="profile.website" target="_blank">{{ profile.website }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Client Profile Content -->
             </ng-container>
-
-
 
             <ng-template #freelancerContent>
                 <!-- Freelancer Profile Content -->
@@ -75,8 +74,8 @@
                     <div class="w-full lg:flex max-lg:grid justify-between lg:space-x-32">
                         <p class="flex w-full justify-start text-xl py-3">{{ profile.profileSummary }}</p>
 
-                        <ul class="grid w-full justify-start text-xl py-3">
-                            <li *ngIf="profile.specializationId">
+                        <ul class="block w-full justify-start text-xl py-3 text-nowrap">
+                            <li *ngIf="profile.specializationId" >
                                 <strong>Specialization:</strong> {{ specialization }}
                             </li>
                             <li>
@@ -84,8 +83,8 @@
                             </li>
                             <li *ngIf="profile.hourlyRate">
                                 <strong>Hourly Rate:</strong>
-                                {{ profile.hourlyRate.currency }} {{ profile.hourlyRate.min }} -
-                                {{ profile.hourlyRate.currency }} {{ profile.hourlyRate.max }}
+                                {{ profile.hourlyRate.currency }}{{ profile.hourlyRate.min }} -
+                                {{ profile.hourlyRate.currency }}{{ profile.hourlyRate.max }}
                             </li>
                             <li>
                                 <strong>Availability:</strong> {{ profile.isAvailable ? 'Available' : 'Not Available' }}
@@ -98,8 +97,9 @@
 
                     <div *ngIf="profile.skillIds && profile.skillIds.length > 0">
                         <h4 class="font-bold text-2xl py-2">Skills</h4>
-                        <ul class="flex space-x-2">
-                            <li *ngFor="let skillName of skills" class=""> <!-- Iterate over this.skills -->
+                        <ul class="flex flex-wrap justify-start gap-2"> 
+                            <li *ngFor="let skillName of skills" 
+                                class="flex w-fit h-fit justify-center align-middle text-nowrap text-white bg-blue-500 py-1 px-4 rounded-full"> <!-- Iterate over this.skills -->
                                 {{ skillName }}
                             </li>
                         </ul>
@@ -107,62 +107,64 @@
 
                     <div class="lg:flex max-lg:grid lg:justify-between lg:space-x-32">
                         <div *ngIf="profile.portfolioItems && profile.portfolioItems.length > 0"
-                            class="grid w-full justify-start">
-                            <h4 class="font-bold text-2xl py-2">Portfolio</h4>
-                            <ul>
-                                <li *ngFor="let item of profile.portfolioItems">
+                            class="block w-full justify-start mt-4">
+                            <h4 class="font-bold text-2xl h-fit">Portfolio</h4>
+                            <ul class="text-xl">
+                                <li *ngFor="let item of profile.portfolioItems" class="mt-2 align-top">
                                     <div class="flex space-x-2">
                                         <h2 class="font-bold">{{ item.title }} |</h2>
-                                        <a class="text-blue-500 hover:text-blue-600">{{ item.url }}</a>
+                                        <a class="text-blue-500 hover:text-blue-600 cursor-pointer">{{ item.url }}</a>
                                     </div>
                                     <p>{{ item.description }}</p>
                                 </li>
                             </ul>
                         </div>
-    
+
                         <div *ngIf="profile.workExperiences && profile.workExperiences.length > 0"
-                            class="grid w-full justify-start">
-                            <h4 class="font-bold text-2xl py-2">Work Experience</h4>
-                            <ul>
-                                <li *ngFor="let work of profile.workExperiences">
-                                    {{ work.jobTitle }} at {{ work.companyName }} ({{ work.startDate | date:'MMM yyyy' }} -
+                            class="block w-full justify-start items-start mt-4">
+                            <h4 class="font-bold text-2xl h-fit">Work Experience</h4>
+                            <ul class="text-xl">
+                                <li *ngFor="let work of profile.workExperiences" class="mt-2">
+                                    {{ work.jobTitle }} at {{ work.companyName }} ({{ work.startDate | date:'MMM yyyy'
+                                    }} -
                                     {{ work.endDate ? (work.endDate | date:'MMM yyyy') : 'Present' }})
                                     <p *ngIf="work.jobDescription">{{ work.jobDescription }}</p>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    
+
 
                     <div class="lg:flex max-lg:grid lg:justify-between lg:space-x-32">
                         <div *ngIf="profile.educations && profile.educations.length > 0"
-                            class="grid w-full justify-start">
-                            <h4 class="font-bold text-2xl py-2">Educations</h4>
-                            <ul>
-                                <li *ngFor="let edu of profile.educations">
-                                    {{ edu.degreeName }} in {{ edu.fieldOfStudy }} - {{ edu.institution }} ({{ edu.startDate
+                            class="block w-full justify-start items-start mt-4">
+                            <h4 class="font-bold text-2xl h-fit">Educations</h4>
+                            <ul class="text-xl">
+                                <li *ngFor="let edu of profile.educations" class="mt-2 align-top">
+                                    {{ edu.degreeName }} in {{ edu.fieldOfStudy }} - {{ edu.institution }} ({{
+                                    edu.startDate
                                     |
-                                    date:'MMM/yyyy' }} - {{ edu.endDate ? (edu.endDate | date:'MMM/yyyy') : 'Present' }})
-                                </li>
-                            </ul>
-                        </div>
-    
-                        <div *ngIf="profile.certifications && profile.certifications.length > 0"
-                            class="grid w-full justify-start">
-                            <h4 class="font-bold text-2xl py-2">Certifications</h4>
-                            <ul>
-                                <li *ngFor="let cert of profile.certifications">
-                                    {{ cert.name }} - {{ cert.issuingOrganization }} ({{ cert.issueDate | date:'MMM yyyy'
+                                    date:'MMM/yyyy' }} - {{ edu.endDate ? (edu.endDate | date:'MMM/yyyy') : 'Present'
                                     }})
                                 </li>
                             </ul>
                         </div>
+
+                        <div *ngIf="profile.certifications && profile.certifications.length > 0"
+                            class="block w-full justify-start items-start mt-4">
+                            <h4 class="font-bold text-2xl h-fit">Certifications</h4>
+                            <ul class="text-xl">
+                                <li *ngFor="let cert of profile.certifications" class="mt-2 align-top">
+                                    {{ cert.name }} - {{ cert.issuingOrganization }} 
+                                    ({{ cert.issueDate | date:'MMM/yyyy'}})
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    
                 </div>
+                <!-- Freelancer Profile Content -->
             </ng-template>
             <!--template end-->
-
         </div>
 
     </ng-container>
