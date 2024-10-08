@@ -23,14 +23,14 @@ const freelancerProfiles = [
             neighborhood: "Centro",
         },
         skillIds: [],
-        portfolio: [
+        portfolioItems: [
             {
                 title: "E-commerce Website",
                 description: "Developed a fully functional e-commerce website using React and Node.js",
                 url: "https://example-ecommerce.com"
             }
         ],
-        education: [
+        educations: [
             {
                 degreeName: "Bachelor of Science in Computer Science",
                 fieldOfStudy: "Computer Science",
@@ -46,7 +46,7 @@ const freelancerProfiles = [
                 issueDate: new Date( "2018-03-01" )
             }
         ],
-        workExperience: [
+        workExperiences: [
             {
                 companyName: "Tech Solutions Inc.",
                 jobTitle: "Software Engineer",
@@ -76,7 +76,7 @@ const freelancerProfiles = [
             neighborhood: "Centro",
         },
         skillIds: [],
-        portfolio: [
+        portfolioItems: [
             {
                 title: "Responsive Website Redesign",
                 description: "Redesigned a website to be responsive and mobile-friendly using HTML, CSS, and JavaScript",
@@ -88,7 +88,7 @@ const freelancerProfiles = [
                 url: "https://example-elearning.com"
             }
         ],
-        education: [
+        educations: [
             {
                 degreeName: "Master of Science in Human-Computer Interaction",
                 fieldOfStudy: "Human-Computer Interaction",
@@ -104,7 +104,7 @@ const freelancerProfiles = [
                 issueDate: new Date( "2018-03-01" )
             }
         ],
-        workExperience: [
+        workExperiences: [
             {
                 companyName: "DesignLab",
                 jobTitle: "Senior Front-end Developer",
