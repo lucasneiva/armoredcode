@@ -63,12 +63,12 @@
     <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{
       'bg-stone-100': project.projectStatus === 'COMPLETED',
       'bg-white': project.projectStatus !== 'COMPLETED'}"
-      class="sticky w-full lg:max-w-lg max-lg:max-w-md lg:h-56 max-lg:h-64 p-8 mx-auto space-y-4 z-10 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
+      class="sticky w-full lg:max-w-lg max-lg:max-w-md lg:h-56 max-lg:h-64 p-8 space-y-4 mx-auto z-10 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
       <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-        <span class="block pb-2">{{project.projectTitle}}</span>
+        <span class="block pb-2 text-nowrap text-ellipsis overflow-hidden line-clamp-1">{{project.projectTitle}}</span>
         <span *ngIf="creatorName" class="block text-sm text-gray-700">{{creatorName}}</span>
       </h2>
-      <p *ngIf="detailedProject?.projectDescription; else noDescripition">
+      <p class="line-clamp-4 overflow-hidden" *ngIf="detailedProject?.projectDescription; else noDescripition">
         {{detailedProject.projectDescription}}
       </p>
       <ng-template #noDescripition>
