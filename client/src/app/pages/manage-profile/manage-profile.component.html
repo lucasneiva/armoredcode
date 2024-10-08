@@ -1,16 +1,17 @@
 <div class="flex flex-col min-h-screen h-fit bg-white">
 
-    <div *ngIf="isLoading" class="w-full flex justify-center items-center py-10">
+    <div *ngIf="isLoading" class="w-full flex justify-center items-center py-10 my-auto">
         <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
     </div>
 
     <ng-container *ngIf="!isLoading && profile">
 
-        <div class="w-full flex justify-start max-lg:justify-center items-center mt-24 p-8 bg-slate-300 shadow-lg">
-            <img class="rounded-full bg-black w-32 h-32 -mb-24 flex justify-center items-center border-slate-300 border-4"
-                *ngIf="profile.logo; else defaultImage" [src]="profile.logo" type="image/png" alt="Profile Logo">
+        <div class="flex min-h-64 justify-start max-lg:justify-center items-center px-8 bg-slate-300 shadow-lg">
+            <img *ngIf="profile.logo; else defaultImage" [src]="profile.logo" type="image/png" alt="Profile Logo"
+                class="flex justify-center items-center bg-black rounded-full w-32 h-32 -mb-60 border-slate-300 border-4">
             <ng-template #defaultImage>
-                <img src="../../../assets/images/prf_icon.png" class="w-28 h-28 overflow-hidden">
+                <img src="../../../assets/images/prf_icon.png" 
+                    class="flex justify-center items-center bg-black rounded-full w-32 h-32 -mb-60 p-2 border-slate-300 border-4">
             </ng-template>
         </div>
 
