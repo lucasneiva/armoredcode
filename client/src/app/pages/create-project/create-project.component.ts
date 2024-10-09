@@ -32,7 +32,7 @@ export default class CreateProjectComponent implements OnInit {
   filteredSkills: any[] = []; // Array to store filtered skills
   
   currentPage = 1; // Start with the first page
-  totalPages = 5; // Total number of pages
+  totalPages = 4; // Total number of pages
   pageNumbers: number[] = []; 
   showSkillsList: boolean = false; 
 
