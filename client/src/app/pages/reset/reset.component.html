@@ -1,28 +1,28 @@
 <div class="flex flex-row justify-center align-middle min-h-screen h-fit">
     <div class="lg:w-3/12  p-10 rounded-md shadow-lg mx-auto my-auto h-fit bg-white">
-        <h3 class="text-3xl text-center font-semibold py-5">Reset your Password</h3>
+        <h3 class="text-3xl text-center font-semibold py-5">Resete a sua Senha</h3>
         <form [formGroup]="resetForm" class="flex flex-col">
-            <span class="mb-2">Please use an strong password.</span>
+            <span class="mb-2">Por favor use uma Senha Forte.</span>
 
             <div class="flex flex-col mt-4 mb-1">
-                <input formControlName="password" type="password" name="password" id="password" placeholder="Password"
+                <input formControlName="password" type="password" name="password" id="password" placeholder="Senha"
                     class="p-2 border border-gray-300 rounded" required>
                 <span *ngIf="resetForm.hasError('required', 'password') && resetForm.controls['password'].dirty"
-                    class="text-red-500">*Password is required</span>
+                    class="text-red-500">*Senha é requerida</span>
             </div>
 
             <div class="flex flex-col mt-4 mb-1">
                 <input formControlName="confirmPassword" type="password" name="comfirmPassword" id="comfirmPassword"
-                    class="p-2 border border-gray-300 rounded" placeholder="Confirm Password" required>
+                    class="p-2 border border-gray-300 rounded" placeholder="Confirmar Senha" required>
                 <span *ngIf="resetForm.hasError('required', 'password') && resetForm.controls['password'].dirty"
-                    class="text-red-500">*Confirm Password is required</span>
+                    class="text-red-500">*Confirmar Senha é requerida</span>
                 <span *ngIf="resetForm.hasError('confirmPasswordValidator', 'confirmPassword')"
-                    class="text-red-500">*Password didnt matched!</span>
+                    class="text-red-500">*As Senhas não Coencidem!</span>
             </div>
 
             <div class="flex justify-center mt-2">
                 <button (click)="reset()" [disabled]="resetForm.invalid" [class.disabled]="resetForm.invalid"
-                    class="bg-indigo-500 w-full mx-auto p-2 rounded-md text-gray-50">Submit</button>
+                    class="bg-indigo-500 w-full mx-auto p-2 rounded-md text-gray-50">Enviar</button>
             </div>
 
         </form>
