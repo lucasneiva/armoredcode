@@ -1,9 +1,10 @@
 import express from 'express';
 import { 
     getFreelancerNotifications, 
-    markNotificationAsRead 
+    markNotificationAsRead,
+    createNotification
 } from '../controllers/notificationController.js';
-import { verifyFreelancer } from '../utils/authMiddleware.js';
+import { verifyFreelancer, verifyClient } from '../utils/authMiddleware.js';
 
 const router = express.Router();
 
