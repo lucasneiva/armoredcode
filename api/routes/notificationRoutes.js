@@ -1,9 +1,10 @@
 import express from 'express';
 import { 
     getFreelancerNotifications, 
-    markNotificationAsRead 
+    markNotificationAsRead,
+    createNotification
 } from '../controllers/notificationController.js';
-import { verifyFreelancer } from '../utils/authMiddleware.js';
+import { verifyFreelancer, verifyClient } from '../utils/authMiddleware.js';
 
 const router = express.Router();
 
@@ -12,5 +13,9 @@ router.get('/freelancer/:freelancerId', verifyFreelancer, getFreelancerNotificat
 
 // Marcar uma notificação como lida
 router.put('/:id', verifyFreelancer, markNotificationAsRead);
+
+// Create a new notification (Client)
+router.post('/', verifyClient, createNotification);
+
 
 export default router;

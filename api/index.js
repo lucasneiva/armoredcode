@@ -14,6 +14,7 @@ import projectCategoryRoutes from "./routes/projectCategoryRoutes.js";
 import industryRoutes from "./routes/industryRoutes.js";
 import specializationRoutes from "./routes/specializationRoutes.js";
 import cookieParser from "cookie-parser";
+import notificationRoutes from "./routes/notificationRoutes.js";
 
 // Fixtures
 import seedProjectCategories from './fixtures/projectCategoryFixture.js';
@@ -54,6 +55,7 @@ app.use( "/api/skills", skillRoutes );
 app.use( "/api/project-categories", projectCategoryRoutes );
 app.use( "/api/specializations", specializationRoutes );
 app.use( "/api/industries", industryRoutes );
+app.use( "/api/notifications", notificationRoutes)
 
 const connectMongoDB = async () => {
     try {
