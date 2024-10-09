@@ -13,4 +13,8 @@ router.get('/freelancer/:freelancerId', verifyFreelancer, getFreelancerNotificat
 // Marcar uma notificação como lida
 router.put('/:id', verifyFreelancer, markNotificationAsRead);
 
+// Create a new notification (Client)
+router.post('/', verifyClient, createNotification);
+
+
 export default router;
