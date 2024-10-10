@@ -2,8 +2,8 @@
 <ng-container *ngIf="proposal">
     <!--card start-->
     <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{
-        'bg-stone-100': project.projectStatus === 'COMPLETED',
-        'bg-white': project.projectStatus !== 'COMPLETED'}"
+        'bg-stone-100': project?.projectStatus === 'COMPLETED',
+        'bg-white': project?.projectStatus !== 'COMPLETED'}"
         class="sticky w-full lg:max-w-lg max-lg:max-w-md px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
         <p class="text-sm text-gray-500">ID da Proposta: {{proposal._id}}</p>
         <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
@@ -12,6 +12,7 @@
                       'bg-yellow-500': proposal.status === 'PENDING',
                       'bg-red-500': proposal.status === 'REJECTED',
                       'bg-green-500': proposal.status === 'ACCEPTED'}">
+                      <ng-container *ngIf="proposal.status === 'DRAFT'">Rascunho</ng-container>
                 <ng-container *ngIf="proposal.status === 'PENDING'">Pendente</ng-container>
                 <ng-container *ngIf="proposal.status === 'REJECTED'">Rejeitada</ng-container>
                 <ng-container *ngIf="proposal.status === 'ACCEPTED'">Aceita</ng-container>
