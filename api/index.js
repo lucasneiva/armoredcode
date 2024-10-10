@@ -25,6 +25,7 @@ import seedUsers from "./fixtures/userFixture.js";
 import seedFreelancerProfiles from "./fixtures/freelancerProfileFixture.js";
 import seedClientProfiles from "./fixtures/clientProfileFixture.js";
 import seedProjects from "./fixtures/projectFixture.js";
+import seedNotifications from "./fixtures/notificationFixture.js";
 
 import { searchProjects, getProjectById, createProject } from './controllers/projectController.js';
 
@@ -102,6 +103,8 @@ app.listen( 8800, async () => {
 
         await seedProjects(); 
         //
+        await seedNotifications();
+
 
     } catch ( error ) {
         console.error( `Error connecting to MongoDB: ${error}` );
