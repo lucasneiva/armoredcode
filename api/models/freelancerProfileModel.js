@@ -103,6 +103,10 @@ const FreelancerProfileSchema = new Schema( {
         required: true,
     },
 
+    profileImage: {
+        type: String
+    },
+
     firstName: {
         type: String,
         required: true,
