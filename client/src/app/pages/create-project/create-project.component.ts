@@ -77,17 +77,25 @@ export default class CreateProjectComponent implements OnInit {
       startDate: [''],
       endDate: ['', [endDateValidator]], // Apply endDateValidator here
     });
+    // Initialize the form with 'BUDGET' selected and disable the hourly rate group
+    this.createProjectForm.get('pricingType')?.setValue('BUDGET');
+    this.createProjectForm.get('projectHourlyRate')?.disable();
+    // Clear validators of the disabled hourly rate group
+    this.createProjectForm.get('projectHourlyRate')?.clearValidators();
+
      // Subscribe to pricingType changes to enable/disable fields
      this.createProjectForm.get('pricingType')?.valueChanges.subscribe(pricingType => {
-      const BudgetControl = this.createProjectForm.get('projectBudget');
+      const budgetControl = this.createProjectForm.get('projectBudget');
       const hourlyRateControl = this.createProjectForm.get('projectHourlyRate');
       if (pricingType === 'BUDGET') {
-        hourlyRateControl?.disable(); 
+        hourlyRateControl?.disable();
+        hourlyRateControl?.clearValidators(); 
         hourlyRateControl?.reset();
-        BudgetControl?.enable();
+        budgetControl?.enable();
       } else {
-        BudgetControl?.disable(); 
-        BudgetControl?.reset();
+        budgetControl?.disable(); 
+        budgetControl?.reset();
+        budgetControl?.clearValidators();
         hourlyRateControl?.enable();
       }
     });
