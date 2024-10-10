@@ -1,0 +1,28 @@
+.form-body {
+    background-color: white;
+    margin: 8rem 0rem 2rem 0rem;
+}
+
+.form-page {
+    overflow: auto;
+    min-height: 44rem;
+    display: grid;
+    padding: 2rem;
+    width: 100%;
+
+    @media (min-width: 1024px) {
+        width: 64rem
+            /* 1024px */
+        ;
+    }
+
+    @media not all and (min-width: 1024px) {
+        width: 90svw
+            /* 90%screen */
+        ;
+    }
+}
+
+.button-container {
+    text-align: center;
+}

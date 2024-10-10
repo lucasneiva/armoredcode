@@ -1,0 +1,9 @@
+nav {
+    transition: 250ms ease-in-out;
+    top: 0rem;
+
+    &.hide {
+        transition: 350ms ease-in-out;
+        top: -8rem;
+    }
+}

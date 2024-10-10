@@ -2,7 +2,7 @@
     <!--if no projects-->
     <ng-container *ngIf="isLoading">
         <div class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
-            <h1 class="text-center text-4xl text-gray-700">Loading proposals...</h1>
+            <h1 class="text-center text-4xl text-gray-700">Carregando Propostas...</h1>
         </div>
     </ng-container>
 
@@ -11,16 +11,17 @@
         <!--if projects-->
         <ng-container *ngIf="proposals.length <= 0">
             <div *ngIf="this.userRole === 'CLIENT'" class="block text-wrap max-w-md shadow-lg p-10 mx-auto my-auto bg-white h-fit">
-                <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
+                <h1 class="text-center text-4xl text-gray-700">Que Vazio!</h1>
                 <p class="text-left text-2xl text-gray-600 mt-4">
-                    You dont have any proposal in your workspace for now.
+                    Voçê ainda não tem nenhuma proposta na sua área de trabalho.
                 </p>
             </div>
 
             <div *ngIf="this.userRole === 'FREELANCER'" class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
-                <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
+                <h1 class="text-center text-4xl text-gray-700">Que Vazio!</h1>
                 <p class="text-left text-2xl text-gray-600 mt-4">
-                    You don't have any submitted proposals yet. Start browsing projects and submitting your expertise!
+                    Voçê ainda não tem nenhuma proposta na sua área de trabalho.
+                    Procure projetos e compartilhe sua expertise com propostas!
                 </p>
             </div>
 

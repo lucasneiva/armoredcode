@@ -31,14 +31,14 @@
                     class="flex justify-center items-center rounded
                  max-lg:text-nowrap font-semibold text-gray-700 bg-transparent mr-2 py-4 px-8 border border-gray-500 hover:bg-red-500 hover:text-white hover:border-transparent">
                     <object class="w-3 h-3 mx-2" data="../../../assets/images/garbage-trash-svgrepo-com.svg"></object>
-                    Delete Account
+                    Deletar Conta
                 </button>
                 <button routerLink="/edit-profile"
                     class="flex justify-center items-center rounded max-lg:text-nowrap font-semibold
                          text-gray-700 bg-transparent ml-2 py-4 px-8 border border-gray-500 hover:bg-blue-500 hover:text-white hover:border-transparent">
                     <object class="w-3 h-3 mx-2 -mb-1"
                         data="../../../assets/images/pencil-edit-svgrepo-com.svg"></object>
-                    Edit Profile
+                    Editar Perfil
                 </button>
             </div>
         </div>
@@ -48,17 +48,17 @@
             <ng-container *ngIf="profile.companyName; else freelancerContent">
                 <!-- Client Profile Content -->
                 <div class="w-full grid justify-center lg:px-32">
-                    <h3 class="font-bold text-3xl py-3">About</h3>
+                    <h3 class="font-bold text-3xl py-3">Sobre</h3>
                     <div class="w-full lg:flex max-lg:grid justify-between lg:space-x-32">
                         <p class="flex w-full justify-start text-xl py-3">{{ profile.companyDescription }}</p>
 
                         <ul class="block w-full justify-start text-xl py-3">
-                            <li *ngIf="profile?.industryId"><strong>Industry:</strong> {{ industry?.name }}</li>
-                            <li><strong>Company Size:</strong> {{ profile.companySize }}</li>
-                            <li *ngIf="profile.location"><strong>Location:</strong>
+                            <li *ngIf="profile?.industryId"><strong>Indústria:</strong> {{ industry?.name }}</li>
+                            <li><strong>Tamanho da Empresa:</strong> {{ profile.companySize }}</li>
+                            <li *ngIf="profile.location"><strong>Localização:</strong>
                                 {{ profile.location.city }}, {{ profile.location.country }}
                             </li>
-                            <li *ngIf="profile.website"><span><strong>Website: </strong></span>
+                            <li *ngIf="profile.website"><span><strong>Site: </strong></span>
                                 <a class="text-blue-500 hover:text-blue-600" [href]="profile.website" target="_blank">{{ profile.website }}</a>
                             </li>
                         </ul>
@@ -70,33 +70,33 @@
             <ng-template #freelancerContent>
                 <!-- Freelancer Profile Content -->
                 <div class="w-full grid justify-center lg:px-32">
-                    <h3 class="font-bold text-3xl py-3">About</h3>
+                    <h3 class="font-bold text-3xl py-3">Sobre</h3>
                     <div class="w-full lg:flex max-lg:grid justify-between lg:space-x-32">
                         <p class="flex w-full justify-start text-xl py-3">{{ profile.profileSummary }}</p>
 
                         <ul class="block w-full justify-start text-xl py-3 text-nowrap">
                             <li *ngIf="profile.specializationId" >
-                                <strong>Specialization:</strong> {{ specialization }}
+                                <strong>Expecialização:</strong> {{ specialization }}
                             </li>
                             <li>
-                                <strong>Experience Level:</strong> {{ profile.experienceLevel }}
+                                <strong>Nível de Experiência:</strong> {{ profile.experienceLevel }}
                             </li>
                             <li *ngIf="profile.hourlyRate">
-                                <strong>Hourly Rate:</strong>
+                                <strong>Preço por Hora:</strong>
                                 {{ profile.hourlyRate.currency }}{{ profile.hourlyRate.min }} -
                                 {{ profile.hourlyRate.currency }}{{ profile.hourlyRate.max }}
                             </li>
                             <li>
-                                <strong>Availability:</strong> {{ profile.isAvailable ? 'Available' : 'Not Available' }}
+                                <strong>Status:</strong> {{ profile.isAvailable ? 'Available' : 'Not Available' }}
                             </li>
                             <li *ngIf="profile.location">
-                                <strong>Location:</strong> {{ profile.location.city }}, {{ profile.location.country }}
+                                <strong>Localização:</strong> {{ profile.location.city }}, {{ profile.location.country }}
                             </li>
                         </ul>
                     </div>
 
                     <div *ngIf="profile.skillIds && profile.skillIds.length > 0">
-                        <h4 class="font-bold text-2xl py-2">Skills</h4>
+                        <h4 class="font-bold text-2xl py-2">Habilidades</h4>
                         <ul class="flex flex-wrap justify-start gap-2"> 
                             <li *ngFor="let skillName of skills" 
                                 class="flex w-fit h-fit justify-center align-middle text-nowrap text-white bg-blue-500 py-1 px-4 rounded-full"> <!-- Iterate over this.skills -->
@@ -122,12 +122,12 @@
 
                         <div *ngIf="profile.workExperiences && profile.workExperiences.length > 0"
                             class="block w-full justify-start items-start mt-4">
-                            <h4 class="font-bold text-2xl h-fit">Work Experience</h4>
+                            <h4 class="font-bold text-2xl h-fit">Experiencia Profissional</h4>
                             <ul class="text-xl">
                                 <li *ngFor="let work of profile.workExperiences" class="mt-2">
-                                    {{ work.jobTitle }} at {{ work.companyName }} ({{ work.startDate | date:'MMM yyyy'
+                                    {{ work.jobTitle }} em {{ work.companyName }} ({{ work.startDate | date:'MMM yyyy'
                                     }} -
-                                    {{ work.endDate ? (work.endDate | date:'MMM yyyy') : 'Present' }})
+                                    {{ work.endDate ? (work.endDate | date:'MMM yyyy') : 'Presente' }})
                                     <p *ngIf="work.jobDescription">{{ work.jobDescription }}</p>
                                 </li>
                             </ul>
@@ -138,13 +138,13 @@
                     <div class="lg:flex max-lg:grid lg:justify-between lg:space-x-32">
                         <div *ngIf="profile.educations && profile.educations.length > 0"
                             class="block w-full justify-start items-start mt-4">
-                            <h4 class="font-bold text-2xl h-fit">Educations</h4>
+                            <h4 class="font-bold text-2xl h-fit">Formação Acadêmica</h4>
                             <ul class="text-xl">
                                 <li *ngFor="let edu of profile.educations" class="mt-2 align-top">
-                                    {{ edu.degreeName }} in {{ edu.fieldOfStudy }} - {{ edu.institution }} ({{
+                                    {{ edu.degreeName }} em {{ edu.fieldOfStudy }} - {{ edu.institution }} ({{
                                     edu.startDate
                                     |
-                                    date:'MMM/yyyy' }} - {{ edu.endDate ? (edu.endDate | date:'MMM/yyyy') : 'Present'
+                                    date:'MMM/yyyy' }} - {{ edu.endDate ? (edu.endDate | date:'MMM/yyyy') : 'Presente'
                                     }})
                                 </li>
                             </ul>
@@ -152,7 +152,7 @@
 
                         <div *ngIf="profile.certifications && profile.certifications.length > 0"
                             class="block w-full justify-start items-start mt-4">
-                            <h4 class="font-bold text-2xl h-fit">Certifications</h4>
+                            <h4 class="font-bold text-2xl h-fit">Certificações</h4>
                             <ul class="text-xl">
                                 <li *ngFor="let cert of profile.certifications" class="mt-2 align-top">
                                     {{ cert.name }} - {{ cert.issuingOrganization }} 
@@ -171,17 +171,17 @@
 
     <ng-container *ngIf="!profile">
         <div class="block text-wrap max-w-md shadow-lg mt-56 p-10 mx-auto bg-white">
-            <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
+            <h1 class="text-center text-4xl text-gray-700">Que Vazio!</h1>
             <p class="text-left text-2xl text-gray-600 mt-4">
-                You don't have a profile yet.
-                but you can create one clicking in the "create Profile" button.
+                Você ainda não tem um perfil.
+                Mas você pode criar um clicando no botão de "Criar Perfil".
             </p>
         </div>
 
         <div class="fixed bottom-12 left-1/2 transform -translate-x-1/2">
             <button routerLink="/create-profile"
                 class="bg-blue-500 hover:bg-blue-700 text-xl text-white font-bold py-4 px-8 rounded cursor-pointer">
-                Create profile
+                Criar Perfil
             </button>
         </div>
 
@@ -190,16 +190,16 @@
     <!-- Confirmation Modal start-->
     <div *ngIf="showConfirmationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
         <div class="bg-white rounded-lg shadow-lg p-6 w-96">
-            <h2 class="text-xl font-bold mb-4">Are you sure you want to delete your account?</h2>
-            <p class="mb-4">This action is irreversible. Your profile and data will be permanently deleted.</p>
+            <h2 class="text-xl font-bold mb-4">Gostaria de Deletar a sua Conta?</h2>
+            <p class="mb-4">Essa ação é irreversivel. Seu Perfil e informações serão permanentemente apagados.</p>
             <div class="flex justify-center">
                 <button (click)="handleConfirmation(false)"
                     class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 w-full rounded mx-1">
-                    No
+                    Não
                 </button>
                 <button (click)="handleConfirmation(true)"
                     class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 w-full rounded mx-1">
-                    Yes
+                    Sim
                 </button>
             </div>
         </div>

@@ -8,15 +8,20 @@
       'bg-stone-100': project.projectStatus === 'COMPLETED',
       'bg-white': project.projectStatus !== 'COMPLETED'}"
         class="sticky w-full lg:max-w-lg max-lg:max-w-md px-8 pt-8 pb-2 mx-auto space-y-4 z-10 border rounded-lg shadow-lg">
-        <p class="text-sm text-gray-500">Project ID: {{project._id}}</p>
+        <p class="text-sm text-gray-500">ID do Projeto: {{project._id}}</p>
         <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
           <span class="block py-2 mr-2">{{project.projectTitle}}</span>
-          <span class="block w-fit p-2 border-2 border-transparent rounded-md text-white" 
-          [ngClass]="{'bg-blue-500': project.projectStatus === 'DRAFT', 
+          <span class="block w-fit p-2 border-2 border-transparent rounded-md text-white text-nowrap" [ngClass]="{'bg-blue-500': project.projectStatus === 'DRAFT', 
           'bg-green-500': project.projectStatus === 'POSTED',
           'bg-yellow-500': project.projectStatus === 'IN_PROGRESS',
           'bg-red-500': project.projectStatus === 'CANCELLED',
-          'bg-purple-500': project.projectStatus === 'COMPLETED',}">{{project.projectStatus}}</span>
+          'bg-purple-500': project.projectStatus === 'COMPLETED',}">
+            <ng-container *ngIf="project.projectStatus === 'DRAFT'">Rascunho</ng-container>
+            <ng-container *ngIf="project.projectStatus === 'POSTED'">Postado</ng-container>
+            <ng-container *ngIf="project.projectStatus === 'IN_PROGRESS'">Em Progresso</ng-container>
+            <ng-container *ngIf="project.projectStatus === 'CANCELLED'">Cancelado</ng-container>
+            <ng-container *ngIf="project.projectStatus === 'COMPLETED'">Finalizado</ng-container>
+          </span>
         </h2>
         <div class="flex mt-2 py-4 space-x-2">
           <button (click)="toggleDetails()"
@@ -72,7 +77,7 @@
         {{detailedProject.projectDescription}}
       </p>
       <ng-template #noDescripition>
-        <p>No description provided</p>
+        <p>Sem Descrição provida pelo Autor</p>
       </ng-template>
     </div>
     <!--card end-->
@@ -82,7 +87,7 @@
   <!--card details start-->
   <div class="fixed inset-0 bg-black bg-opacity-50 grid items-center justify-center z-30" *ngIf="showDetails">
     <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl w-full" style="max-height: 90vh; overflow-y: auto;">
-      <p class="text-sm text-gray-500">Project ID: {{project._id}}</p> <!-- Added this line -->
+      <p class="text-sm text-gray-500">ID do Projeto: {{project._id}}</p>
       <div class="flex justify-between align-middle">
 
         <h2 class="text-2xl font-bold mb-4">{{project.projectTitle}}</h2>
@@ -98,19 +103,19 @@
 
       <div *ngIf="detailedProject" class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <p><strong>Created by:</strong> {{creatorName}}</p>
-          <p><strong>Worked by:</strong>
+          <p><strong>Criado por:</strong>{{creatorName}}</p>
+          <p><strong>Trabalhado por:</strong>
             <ng-container *ngIf="detailedProject.freelancerId; else noFreelancer">
               {{detailedProject.freelancerId.username}}
             </ng-container>
             <ng-template #noFreelancer>
-              Not Specified
+              Não especificado
             </ng-template>
           </p>
-          <p><strong>Description:</strong> <br> {{detailedProject.projectDescription}}</p>
+          <p><strong>Descrição:</strong> <br> {{detailedProject.projectDescription}}</p>
           <ng-container *ngIf="detailedProject.pricingType == 'BUDGET'">
             <p>
-              <strong>Budget:</strong>
+              <strong>Orçamento:</strong>
               {{detailedProject.projectBudget.currency}}{{detailedProject.projectBudget.min}}
               -
               {{detailedProject.projectBudget.currency}}{{detailedProject.projectBudget.max}}
@@ -120,17 +125,14 @@
 
           <ng-container *ngIf="detailedProject.pricingType == 'HOURLY_RATE'">
             <p>
-              <strong>Hourly rate:</strong>
+              <strong>Preço por Hora:</strong>
               {{detailedProject.projectHourlyRate.currency}}{{detailedProject.projectHourlyRate.min}}
               -
               {{detailedProject.projectHourlyRate.currency}}{{detailedProject.projectHourlyRate.max}}
             </p>
           </ng-container>
 
-          <p><strong>Deadline:</strong> {{detailedProject.estimatedDuration}}</p>
-
-
-          <strong>Skills:</strong>
+          <strong>Habilidades:</strong>
           <ng-container *ngIf="skills.length > 0; else noSkills">
             <span *ngFor="let skill of skills; let i = index">
               {{ skill }}
@@ -138,10 +140,10 @@
             </span>
           </ng-container>
           <ng-template #noSkills>
-            Not Specified
+            Não especificado
           </ng-template>
 
-          <p><strong>Location:</strong>
+          <p><strong>Localização:</strong>
             <ng-container *ngIf="detailedProject.location; else noLocation">
               <br>{{detailedProject.location.streetAddress}}
               <br>{{detailedProject.location.neighborhood}}
@@ -149,19 +151,19 @@
               <br>{{detailedProject.location.country}}
             </ng-container>
             <ng-template #noLocation>
-              Not Specified
+              Não especificado
             </ng-template>
           </p>
         </div>
         <div>
-          <p><strong>Experience Level:</strong> {{detailedProject.experienceLevel}}</p>
-          <p><strong>Work Model:</strong> {{detailedProject.workModel}}</p>
-          <p><strong>Pricing Type:</strong> {{detailedProject.pricingType}}</p>
-          <p><strong>Estimated Duration:</strong> {{detailedProject.estimatedDuration}}
-            {{detailedProject.estimatedDuration > 1 ? 'days'
-            : 'day'}}</p>
-          <p><strong>Project Size:</strong> {{detailedProject.projectSize}}</p>
-          <p><strong>Status:</strong> {{detailedProject.projectStatus}}</p>
+          <p><strong>Nível de Experiência:</strong> {{detailedProject.experienceLevel}}</p>
+          <p><strong>Forma de trabalho:</strong> {{detailedProject.workModel}}</p>
+          <p><strong>Tipo de Precificação:</strong> {{detailedProject.pricingType}}</p>
+          <p><strong>Duração estimada:</strong> {{detailedProject.estimatedDuration}}
+            {{detailedProject.estimatedDuration > 1 ? 'dias'
+            : 'dia'}}</p>
+          <p><strong>Escopo do Projeto:</strong> {{detailedProject.projectSize}}</p>
+          <p><strong>Status do Projeto:</strong> {{detailedProject.projectStatus}}</p>
         </div>
       </div>
 
@@ -170,38 +172,38 @@
         <ng-container *ngIf="userRole == 'CLIENT'">
           <button *ngIf="project.projectStatus === 'DRAFT'" (click)="postProject()"
             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">
-            Post Project
+            Postar Projeto
           </button>
           <button *ngIf="project.projectStatus !== 'COMPLETED'" (click)="cancelProject()"
             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
-            Cancel Project
+            Cancelar Projeto
           </button>
-          <button *ngIf="project.projectStatus !== 'IN_PROGRESS' && project.projectStatus !== 'COMPLETED'" (click)="editProject()"
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-            Edit Project
+          <button *ngIf="project.projectStatus !== 'IN_PROGRESS' && project.projectStatus !== 'COMPLETED'"
+            (click)="editProject()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+            Editar Projeto
           </button>
           <button *ngIf="project.projectStatus === 'IN_PROGRESS'" (click)="finishProject()"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-            Finish Project
+            Finalizar Projeto
           </button>
         </ng-container>
 
         <ng-container *ngIf="userRole == 'FREELANCER'">
           <button *ngIf="project.projectStatus !== 'IN_PROGRESS'"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-            Enter in Contact
+            Entrar em Contato
           </button>
           <button *ngIf="project.projectStatus === 'POSTED'" (click)="makeProposal()"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-            Make a Proposal
+            Fazer Proposta
           </button>
-          <button *ngIf="project.projectStatus === 'IN_PROGRESS' && project.projectStatus !== 'COMPLETED'" (click)="cancelProject()"
-            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
-            Cancel Project
+          <button *ngIf="project.projectStatus === 'IN_PROGRESS' && project.projectStatus !== 'COMPLETED'"
+            (click)="cancelProject()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
+            Cancelar Projeto
           </button>
           <button *ngIf="project.projectStatus === 'IN_PROGRESS'" (click)="finishProject()"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-            Finish Project
+            Finalizar Projeto
           </button>
         </ng-container>
       </div>

@@ -2,7 +2,7 @@
     <!--if no projects-->
     <ng-container *ngIf="isLoading">
         <div class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
-            <h1 class="text-center text-4xl text-gray-700">Loading projects...</h1>
+            <h1 class="text-center text-4xl text-gray-700">Carregando projetos...</h1>
         </div>
     </ng-container>
 
@@ -11,17 +11,17 @@
         <!--if projects-->
         <ng-container *ngIf="projects.length <= 0">
             <div *ngIf="this.userRole == 'CLIENT'" class="block text-wrap max-w-md shadow-lg p-10 mx-auto my-auto bg-white h-fit">
-                <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
+                <h1 class="text-center text-4xl text-gray-700">Que vazio!</h1>
                 <p class="text-left text-2xl text-gray-600 mt-4">
-                    You dont have any projects in your workspace for now,
-                    but you can create one clicking in the "create project" button.
+                    Voçê ainda não tem nenhum projeto na sua área de trabalho,
+                    mas voçê pode criar um clicando no botão de "criar projeto".
                 </p>
             </div>
 
             <div *ngIf="this.userRole == 'FREELANCER'" class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
-                <h1 class="text-center text-4xl text-gray-700">Such empty!</h1>
+                <h1 class="text-center text-4xl text-gray-700">Que vazio!</h1>
                 <p class="text-left text-2xl text-gray-600 mt-4">
-                    You dont have any projects in your workspace for now
+                    Voçê ainda não tem nenhum projeto na sua área de trabalho.
                 </p>
             </div>
         </ng-container>
@@ -40,7 +40,7 @@
             <div class="fixed bottom-12 left-1/2 transform -translate-x-1/2 z-20">
                 <button routerLink="/create-project"
                     class="bg-blue-500 hover:bg-blue-700 text-xl text-white font-bold py-4 px-8 -mb-0.5 rounded cursor-pointer">
-                    Create project
+                    Criar Projeto
                 </button>
             </div>
         </ng-container>

@@ -171,7 +171,7 @@
                                 required>
                             <span
                                 *ngIf="freelancerProfileForm.hasError('required', 'firstName') && freelancerProfileForm.get('firstName')?.touched"
-                                class="text-red-500">*First Name is required</span>
+                                class="text-red-500">*Nome é requerido</span>
                         </div>
                         <div class="pl-2 w-full mt-4">
                             <label class="font-semibold" for="lastName">Sobrenome</label>
@@ -179,7 +179,7 @@
                                 id="lastName" name="lastName" formControlName="lastName" required>
                             <span
                                 *ngIf="freelancerProfileForm.hasError('required', 'lastName') && freelancerProfileForm.get('lastName')?.touched"
-                                class="text-red-500">*Last Name is required</span>
+                                class="text-red-500">*Sobrenome é requerido</span>
                         </div>
                     </div>
                     <div class="h-fit grid align-top mt-4">
@@ -198,7 +198,7 @@
                         <label class="font-semibold" for="specializations">Especialização</label>
                         <select name="specializations" id="specializations" formControlName="specializationId"
                             class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
-                            <option value="" selected>Select your Specialization</option>
+                            <option value="" selected>Selecione sua Expecialização</option>
                             <option *ngFor="let specialization of specializations" [value]="specialization._id">
                                 {{ specialization.specializationName }}
                             </option>
@@ -211,14 +211,14 @@
                         <label class="font-semibold" for="experienceLevel">Nível de Experiência</label>
                         <select name="experienceLevel" id="experienceLevel" formControlName="experienceLevel"
                             class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
-                            <option value="" selected>Select your experience here</option>
+                            <option value="" selected>Selecione sua Experiencia</option>
                             <option value="JUNIOR">Junior</option>
                             <option value="MID-LEVEL">Pleno</option>
                             <option value="SENIOR">Senior</option>
                         </select>
                         <span
                             *ngIf="freelancerProfileForm.hasError('required', 'experienceLevel') && freelancerProfileForm.get('experienceLevel')?.touched"
-                            class="text-red-500">*Experience Level is required</span>
+                            class="text-red-500">*Nível de Experiência é requerido</span>
                     </div>
                     <!-- Skills Section start -->
                     <div class="my-auto mx-auto h-fit w-full grid mt-4">
@@ -257,25 +257,25 @@
                         <h2 class="font-semibold" for="hourlyRate">Preço por Hora</h2>
                         <div formGroupName="hourlyRate" class="flex justify-between" id="hourlyRate" name="hourlyRate">
                             <div class="pr-2 w-full mt-2">
-                                <label class="font-semibold" for="minHourlyRate">Min Rate:</label>
+                                <label class="font-semibold" for="minHourlyRate">Preço por Hora Mínimo:</label>
                                 <input formControlName="min" type="number" placeholder="Min" id="minHourlyRate" required
                                     class="p-2 w-full border border-gray-300 rounded">
                                 <span
                                     *ngIf="freelancerProfileForm.get('hourlyRate')?.hasError('required', 'min') && freelancerProfileForm.get('hourlyRate')?.get('min')?.touched"
-                                    class="text-red-500">*Min Rate is required</span>
+                                    class="text-red-500">*Mínimo é requerido</span>
                             </div>
                             <div class="pl-2 w-full mt-2">
-                                <label class="font-semibold" for="maxHourlyRate">Max Rate:</label>
+                                <label class="font-semibold" for="maxHourlyRate">Preço por Hora Máximo:</label>
                                 <input formControlName="max" type="number" placeholder="Max" id="maxHourlyRate" required
                                     class="p-2 w-full border border-gray-300 rounded">
                                 <span
                                     *ngIf="freelancerProfileForm.get('hourlyRate')?.hasError('required', 'max') && freelancerProfileForm.get('hourlyRate')?.get('max')?.touched"
-                                    class="text-red-500">*Max Rate is required</span>
+                                    class="text-red-500">*Máximo é requerido</span>
                             </div>
                         </div>
                         <span *ngIf="freelancerProfileForm.get('hourlyRate')?.hasError('hourlyRateInvalid')"
                             class="text-red-500">
-                            Min rate cannot be higher than max rate.
+                            O valor Mínimo não pode ser maior que o Máximo.
                         </span>
                     </div>
                     <!--professional module end-->
@@ -292,26 +292,26 @@
                                     <h3 class="font-semibold text-lg">Portfolio {{ i + 1 }}</h3>
                                     <div class="flex mt-4">
                                         <div class="pr-2 w-full">
-                                            <label class="font-semibold" for="portfolioTitle">Portfolio Title</label>
+                                            <label class="font-semibold" for="portfolioTitle">Titulo do Portfolio</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
                                                 id="portfolioTitle" name="portfolioTitle" placeholder="Project Title"
                                                 formControlName="title" required>
                                             <span
                                                 *ngIf="portfolioItem.hasError('required', 'title') && portfolioItem.get('title')?.touched"
-                                                class="text-red-500">*Portfolio title is required</span>
+                                                class="text-red-500">*Titulo do Portfolio é requerido</span>
                                         </div>
                                         <div class="pl-2 w-full">
-                                            <label class="font-semibold" for="portfolioURL">Portfolio URL</label>
+                                            <label class="font-semibold" for="portfolioURL">Link do Portfolio</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
                                                 id="portfolioURL" name="portfolioURL" placeholder="Project URL"
                                                 formControlName="url" required>
                                             <span
                                                 *ngIf="portfolioItem.hasError('required', 'url') && portfolioItem.get('url')?.touched"
-                                                class="text-red-500">*URL is required</span>
+                                                class="text-red-500">*Link do Portfolio é requerido</span>
                                         </div>
                                     </div>
                                     <div class="row mt-4">
-                                        <label class="font-semibold" for="portfolioDescription">Portfolio Description</label>
+                                        <label class="font-semibold" for="portfolioDescription">Descrição do Portfolio</label>
                                         <textarea class="bg-white p-3 border-2 min-h-12 max-h-96 w-full rounded"
                                             rows="4" formControlName="description" id="portfolioDescription"
                                             name="portfolioDescription" placeholder="Portfolio descripition"></textarea>
