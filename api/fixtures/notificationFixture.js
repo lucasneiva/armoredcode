@@ -8,7 +8,7 @@ const seedNotifications = async () => {
         const projects = await Project.find({}).lean(); // Fetch projects
         const notificationData = [];
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 20; i++) {
             const randomFreelancer = freelancerProfiles[Math.floor(Math.random() * freelancerProfiles.length)];
             const randomFreelancerId = randomFreelancer._id;
             const randomProject = projects[Math.floor(Math.random() * projects.length)]; // Get a random project
