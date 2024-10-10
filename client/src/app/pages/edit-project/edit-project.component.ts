@@ -37,7 +37,7 @@ export default class EditProjectComponent implements OnInit {
   pageNumbers: number[] = [];
 
   currentPage = 1;
-  totalPages = 5;
+  totalPages = 3;
   project: any;
   projectId!: string;
 
