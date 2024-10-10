@@ -1,6 +1,6 @@
 <div class="grid justify-center align-middle min-h-screen h-fit">
 
-    <div class="form-body shadow-lg rounded-md">
+    <div class="form-body shadow-lg rounded-md overflow-hidden">
 
         <!-- Navigation indicator-->
         <div class="flex justify-center my-auto py-6">
@@ -14,7 +14,8 @@
 
         <!--filler form start-->
         <form [formGroup]="createProjectForm">
-            <div *ngIf="showPage(1)" class="grid px-8 w-full">
+            <!-- Page Start-->
+            <div *ngIf="showPage(1)" class="form-page">
                 <h2 class="font-semibold my-3 text-3xl">Principais Detalhes:</h2>
                 <!--Project title Start-->
                 <div class="my-auto mx-auto h-fit w-full mt-4">
@@ -29,195 +30,313 @@
                     </span>
                 </div>
                 <!--Project title End-->
-                <!--Project category Start-->
-                <div class="my-auto mx-auto h-fit w-full mt-4">
-                    <label class="font-semibold" for="projCategory">Categoria do Projeto:</label>
-                    <select formControlName="projectCategoryId" name="Option" id="projCategory" required
-                        class="p-2 px-4 max-h-16 border border-gray-300 rounded text-gray-500 w-full">
-                        <option value="" selected>Selecione a categoria do projeto</option>
-                        <option *ngFor="let category of projectCategories" [value]="category._id">
-                            {{ category.categoryName }}
-                        </option>
-                    </select>
-                    <span
-                        *ngIf="createProjectForm.get('projectCategoryId')?.hasError('required') && createProjectForm.get('projectCategoryId')?.touched"
-                        class="text-red-500">
-                        Categoria do Projeto é requirida.
-                    </span>
-                </div>
-                <!--Project category End-->
-                <!--Project duration Start-->
-                <div class="my-auto mx-auto h-fit w-full mt-4">
-                    <label class="font-semibold" for="estimatedDuration">Duração Estimada:</label>
-                    <input formControlName="estimatedDuration" name="estimatedDuration" id="estimatedDuration"
-                        type="number" placeholder="Digite a duração estimada (em dias)"
-                        class="p-2 px-4 border max-h-16 border-gray-300 rounded w-full" required />
-                    <span
-                        *ngIf="createProjectForm.get('estimatedDuration')?.hasError('required') && createProjectForm.get('estimatedDuration')?.touched"
-                        class="text-red-500">
-                        Duração Estimada é requirida.
-                    </span>
-                </div>
-                <!--Project duration End-->
-                <div class="max-lg:grid lg:flex lg:w-full lg:justify-start lg:space-x-24">
-                    <!--Project pricing Start--
+                <div class="lg:flex max-lg:grid lg:space-x-4">
+                    <!--Project category Start-->
                     <div class="my-auto mx-auto h-fit w-full mt-4">
-                        <h2 class="font-semibold mt-4">Tipo de Preço:</h2>
-                        <div class="flex justify-start align-middle">
-                            <div class="m-3">
-                                <input class="mr-2" type="radio" id="budgetType" formControlName="pricingType"
-                                    value="BUDGET" checked />
-                                <label for="budgetType">Orçamento</label>
-                            </div>
-                            <div class="m-3">
-                                <input class="mr-2" type="radio" id="hourlyRateType" formControlName="pricingType"
-                                    value="HOURLY_RATE" />
-                                <label for="hourlyRateType">Por Hora</label>
-                            </div>
-                        </div>
-                        <!-- Budget inputs --
-                        <div *ngIf="createProjectForm.get('pricingType')?.value === 'BUDGET'"
-                            formGroupName="projectBudget" class="flex justify-center align-middle h-fit space-x-4">
-                            <div class="grid w-full">
-                                <label class="font-semibold" for="minbudget">Orçamento Mínimo:</label>
-                                <input formControlName="min" type="number" placeholder="Mínimo" id="minbudget"
-                                    class="text-center w-full p-1 border rounded" required />
-                            </div>
-                            <div class="grid w-full">
-                                <label class="font-semibold" for="maxbudget">Orçamento Máximo:</label>
-                                <input formControlName="max" type="number" placeholder="Máximo" id="maxbudget"
-                                    class="text-center w-full p-1 border rounded" required />
-                            </div>
-                        </div>
-                        <span *ngIf="createProjectForm.get('projectBudget')?.hasError('budgetInvalid')"
+                        <label class="font-semibold" for="projCategory">Categoria do Projeto:</label>
+                        <select formControlName="projectCategoryId" name="Option" id="projCategory" required
+                            class="p-2 px-4 max-h-16 border border-gray-300 rounded text-gray-500 w-full">
+                            <option value="" selected>Selecione a categoria do projeto</option>
+                            <option *ngFor="let category of projectCategories" [value]="category._id">
+                                {{ category.categoryName }}
+                            </option>
+                        </select>
+                        <span
+                            *ngIf="createProjectForm.get('projectCategoryId')?.hasError('required') && createProjectForm.get('projectCategoryId')?.touched"
                             class="text-red-500">
-                            O valor Mínimo não pode ser maior que o Máximo.
+                            Categoria do Projeto é requirida.
                         </span>
+                    </div>
+                    <!--Project category End-->
+                    <!--Project duration Start-->
+                    <div class="my-auto mx-auto h-fit w-full mt-4">
+                        <label class="font-semibold" for="estimatedDuration">Duração Estimada:</label>
+                        <input formControlName="estimatedDuration" name="estimatedDuration" id="estimatedDuration"
+                            type="number" placeholder="Digite a duração estimada (em dias)"
+                            class="p-2 px-4 border max-h-16 border-gray-300 rounded w-full" required />
                         <span
-                            *ngIf="createProjectForm.get('projectBudget')?.hasError('required', 'min') && createProjectForm.get('projectBudget')?.get('min')?.touched"
-                            class="text-red-500 mx-1">*Mínimo é requerido</span>
-                        <span
-                            *ngIf="createProjectForm.get('projectBudget')?.hasError('required', 'max') && createProjectForm.get('projectBudget')?.get('max')?.touched"
-                            class="text-red-500 mx-1">*Máximo é requerido</span>
-                        <!-- Budget inputs -->
-                        <!-- Hourly Rate inputs --
-                        <div *ngIf="createProjectForm.get('pricingType')?.value === 'HOURLY_RATE'"
-                            formGroupName="projectHourlyRate" class="flex justify-center align-middle h-fit space-x-4">
-                            <div class="grid w-full">
-                                <label class="font-semibold" for="minHourlyRate">Preço por Hora Mínimo:</label>
-                                <input formControlName="min" type="number" placeholder="Mínimo" id="minHourlyRate"
-                                    class="text-center w-full p-1 border rounded" required />
-                            </div>
-                            <div class="grid w-full">
-                                <label class="font-semibold" for="minHourlyRate">Preço por Hora Máximo:</label>
-                                <input formControlName="max" type="number" placeholder="Máximo" id="maxHourlyRate"
-                                    class="text-center w-full p-1 border rounded" required />
-                            </div>
-                        </div>
-                        <span *ngIf="createProjectForm.get('projectHourlyRate')?.hasError('hourlyRateInvalid')"
+                            *ngIf="createProjectForm.get('estimatedDuration')?.hasError('required') && createProjectForm.get('estimatedDuration')?.touched"
                             class="text-red-500">
-                            O valor Mínimo não pode ser maior que o Máximo.
+                            Duração Estimada é requirida.
                         </span>
-
-                        <span
-                            *ngIf="createProjectForm.get('projectHourlyRate')?.hasError('required', 'min') && createProjectForm.get('projectHourlyRate')?.get('min')?.touched"
-                            class="text-red-500 mx-1">*Mínimo é requerido</span>
-                        <span
-                            *ngIf="createProjectForm.get('projectHourlyRate')?.hasError('required', 'max') && createProjectForm.get('projectHourlyRate')?.get('max')?.touched"
-                            class="text-red-500 mx-1">*Máximo é requerido</span>
-
-                        <!-- Hourly Rate inputs --
                     </div>
-                    <!--Project pricing End-->
-                    <!--Project scope Module Start-->
-                    <div class="grid">
-                        <h2 class="font-semibold mt-4">Escopo do Projeto:</h2>
-                        <div class="p-1 my-2 max-lg:flex lg:grid align-middle items-center h-fit">
-                            <div class="m-0.5">
-                                <input type="radio" id="smallSize" formControlName="projectSize" value="SMALL"
-                                    class="m-2 font-normal" checked />
-                                <label for="smallSize">Pequeno</label>
-                            </div>
-                            <div class="m-0.5">
-                                <input type="radio" id="mediumSize" formControlName="projectSize" value="MEDIUM"
-                                    class="m-2 font-normal" />
-                                <label for="mediumSize">Médio</label>
-                            </div>
-                            <div class="m-0.5">
-                                <input type="radio" id="largeSize" formControlName="projectSize" value="LARGE"
-                                    class="m-2 font-normal" />
-                                <label for="largeSize">Grande</label>
-                            </div>
-                            <span
-                                *ngIf="createProjectForm.get('projectSize')?.hasError('required') && createProjectForm.get('projectSize')?.touched"
-                                class="text-red-500">
-                                Escopo do Projeto é requerido.
-                            </span>
-                        </div>
-                        <!--Project scope Module End-->
-                    </div>
-                    <div class="grid">
-                        <!--Project xp lvl Module Start-->
-                        <h2 class="font-semibold mt-4">Nível de Experiencia:</h2>
-                        <div class="p-1 my-2 max-lg:flex lg:grid align-middle items-center h-fit">
-                            <div class="m-0.5">
-                                <input type="radio" id="entryLevel" formControlName="experienceLevel"
-                                    value="ENTRY-LEVEL" class="m-2 font-normal" checked />
-                                <label for="entryLevel">Júnior</label>
-                            </div>
-                            <div class="m-0.5">
-                                <input type="radio" id="midLevel" formControlName="experienceLevel" value="MID-LEVEL"
-                                    class="m-2 font-normal" />
-                                <label for="midLevel">Pleno</label>
-                            </div>
-                            <div class="m-0.5">
-                                <input type="radio" id="seniorLevel" formControlName="experienceLevel" value="SENIOR"
-                                    class="m-2 font-normal" />
-                                <label for="seniorLevel">Senior</label>
-                            </div>
-                            <span
-                                *ngIf="createProjectForm.get('experienceLevel')?.hasError('required') && createProjectForm.get('experienceLevel')?.touched"
-                                class="text-red-500">
-                                Nível de Experiencia é requerido.
-                            </span>
-                        </div>
-                        <!--Project xp lvl Module End-->
-                    </div>
-                    <div class="grid">
-                        <!--Project Workspace type Module Start-->
-                        <h2 class="font-semibold mt-4">Forma de Trabalho:</h2>
-                        <div class="p-1 my-2 max-lg:flex lg:grid align-middle items-center h-fit">
-                            <div class="m-0.5">
-                                <input type="radio" id="remoteModel" formControlName="workModel" value="REMOTE"
-                                    class="m-2 font-normal" checked />
-                                <label for="remoteModel">Remoto</label>
-                            </div>
-                            <div class="m-0.5">
-                                <input type="radio" id="hybridModel" formControlName="workModel" value="HYBRID"
-                                    class="m-2 font-normal" />
-                                <label for="hybridModel">Hibrido</label>
-                            </div>
-                            <div class="m-0.5">
-                                <input type="radio" id="siteModel" formControlName="workModel" value="ON_SITE"
-                                    class="m-2 font-normal" />
-                                <label for="siteModel">Presencial</label>
-                            </div>
-                            <span
-                                *ngIf="createProjectForm.get('workModel')?.hasError('required') && createProjectForm.get('workModel')?.touched"
-                                class="text-red-500">
-                                Forma de Trabalho é requerido.
-                            </span>
-                        </div>
-                        <!--Project Workspace type Module End-->
-                    </div>
-
-
-
+                    <!--Project duration End-->
                 </div>
 
+                <!--Project Options Start-->
+                <div class="grid w-full">
+                    <div class="lg:flex max-lg:grid w-full lg:space-x-4">
+                        <div class="grid w-full">
+                            <!--Project pricing Start-->
+                            <h2 class="font-semibold mt-4">Tipo de Preço:</h2>
+                            <div class="p-1 my-2 grid align-middle items-center h-fit">
+                                <!--Pricing Options-->
+                                <div class="flex">
+                                    <div class="flex m-3">
+                                        <input class="mr-2" type="radio" id="budgetType" formControlName="pricingType"
+                                            value="BUDGET" checked />
+                                        <label for="budgetType">Orçamento</label>
+                                    </div>
+                                    <div class="flex m-3">
+                                        <input class="mr-2" type="radio" id="hourlyRateType"
+                                            formControlName="pricingType" value="HOURLY_RATE" />
+                                        <label for="hourlyRateType">Por Hora</label>
+                                    </div>
+                                </div>
+                                <!--Pricing Options-->
+                                <!-- Budget inputs start -->
+                                <div *ngIf="createProjectForm.get('pricingType')?.value === 'BUDGET'"
+                                    formGroupName="projectBudget"
+                                    class="flex justify-center align-middle h-fit space-x-4">
+                                    <div class="grid w-full">
+                                        <label class="font-semibold" for="minbudget">Orçamento Mínimo:</label>
+                                        <input formControlName="min" type="number" placeholder="Mínimo" id="minbudget"
+                                            class="text-center w-full p-1 border rounded" required />
+                                    </div>
+                                    <div class="grid w-full">
+                                        <label class="font-semibold" for="maxbudget">Orçamento Máximo:</label>
+                                        <input formControlName="max" type="number" placeholder="Máximo" id="maxbudget"
+                                            class="text-center w-full p-1 border rounded" required />
+                                    </div>
+                                </div>
+                                <span *ngIf="createProjectForm.get('projectBudget')?.hasError('budgetInvalid')"
+                                    class="text-red-500">
+                                    O valor Mínimo não pode ser maior que o Máximo.
+                                </span>
+                                <span
+                                    *ngIf="createProjectForm.get('projectBudget')?.hasError('required', 'min') && createProjectForm.get('projectBudget')?.get('min')?.touched"
+                                    class="text-red-500 mx-1">*Mínimo é requerido</span>
+                                <span
+                                    *ngIf="createProjectForm.get('projectBudget')?.hasError('required', 'max') && createProjectForm.get('projectBudget')?.get('max')?.touched"
+                                    class="text-red-500 mx-1">*Máximo é requerido</span>
+                                <!-- Budget inputs end -->
+                                <!-- Hourly Rate inputs -->
+                                <div *ngIf="createProjectForm.get('pricingType')?.value === 'HOURLY_RATE'"
+                                    formGroupName="projectHourlyRate"
+                                    class="flex justify-center align-middle h-fit space-x-4">
+                                    <div class="grid w-full">
+                                        <label class="font-semibold" for="minHourlyRate">Preço por Hora Mínimo:</label>
+                                        <input formControlName="min" type="number" placeholder="Mínimo"
+                                            id="minHourlyRate" class="text-center w-full p-1 border rounded" required />
+                                    </div>
+                                    <div class="grid w-full">
+                                        <label class="font-semibold" for="minHourlyRate">Preço por Hora Máximo:</label>
+                                        <input formControlName="max" type="number" placeholder="Máximo"
+                                            id="maxHourlyRate" class="text-center w-full p-1 border rounded" required />
+                                    </div>
+                                </div>
+                                <span *ngIf="createProjectForm.get('projectHourlyRate')?.hasError('hourlyRateInvalid')"
+                                    class="text-red-500">
+                                    O valor Mínimo não pode ser maior que o Máximo.
+                                </span>
+
+                                <span
+                                    *ngIf="createProjectForm.get('projectHourlyRate')?.hasError('required', 'min') && createProjectForm.get('projectHourlyRate')?.get('min')?.touched"
+                                    class="text-red-500 mx-1">*Mínimo é requerido</span>
+                                <span
+                                    *ngIf="createProjectForm.get('projectHourlyRate')?.hasError('required', 'max') && createProjectForm.get('projectHourlyRate')?.get('max')?.touched"
+                                    class="text-red-500 mx-1">*Máximo é requerido</span>
+
+                                <!-- Hourly Rate inputs -->
+                            </div>
+                            <!--Project pricing end-->
+                        </div>
+                        <!--Project scope Module Start-->
+                        <div class="grid w-full">
+                            <h2 class="font-semibold mt-4">Escopo do Projeto:</h2>
+                            <div class="p-1 my-2 max-lg:flex lg:grid align-middle items-center h-fit">
+                                <div class="m-0.5">
+                                    <input type="radio" id="smallSize" formControlName="projectSize" value="SMALL"
+                                        class="m-2 font-normal" checked />
+                                    <label for="smallSize">Pequeno</label>
+                                </div>
+                                <div class="m-0.5">
+                                    <input type="radio" id="mediumSize" formControlName="projectSize" value="MEDIUM"
+                                        class="m-2 font-normal" />
+                                    <label for="mediumSize">Médio</label>
+                                </div>
+                                <div class="m-0.5">
+                                    <input type="radio" id="largeSize" formControlName="projectSize" value="LARGE"
+                                        class="m-2 font-normal" />
+                                    <label for="largeSize">Grande</label>
+                                </div>
+                                <span
+                                    *ngIf="createProjectForm.get('projectSize')?.hasError('required') && createProjectForm.get('projectSize')?.touched"
+                                    class="text-red-500">
+                                    Escopo do Projeto é requerido.
+                                </span>
+                            </div>
+                            <!--Project scope Module End-->
+                        </div>
+                    </div>
+                    <div class="lg:flex max-lg:grid w-full lg:space-x-4">
+                        <div class="grid w-full">
+                            <!--Project xp lvl Module Start-->
+                            <h2 class="font-semibold mt-4">Nível de Experiencia:</h2>
+                            <div class="p-1 my-2 max-lg:flex lg:grid align-middle items-center h-fit">
+                                <div class="m-0.5">
+                                    <input type="radio" id="entryLevel" formControlName="experienceLevel"
+                                        value="ENTRY-LEVEL" class="m-2 font-normal" checked />
+                                    <label for="entryLevel">Júnior</label>
+                                </div>
+                                <div class="m-0.5">
+                                    <input type="radio" id="midLevel" formControlName="experienceLevel"
+                                        value="MID-LEVEL" class="m-2 font-normal" />
+                                    <label for="midLevel">Pleno</label>
+                                </div>
+                                <div class="m-0.5">
+                                    <input type="radio" id="seniorLevel" formControlName="experienceLevel"
+                                        value="SENIOR" class="m-2 font-normal" />
+                                    <label for="seniorLevel">Senior</label>
+                                </div>
+                                <span
+                                    *ngIf="createProjectForm.get('experienceLevel')?.hasError('required') && createProjectForm.get('experienceLevel')?.touched"
+                                    class="text-red-500">
+                                    Nível de Experiencia é requerido.
+                                </span>
+                            </div>
+                            <!--Project xp lvl Module End-->
+                        </div>
+                        <div class="grid w-full">
+                            <!--Project Workspace type Module Start-->
+                            <h2 class="font-semibold mt-4">Forma de Trabalho:</h2>
+                            <div class="p-1 my-2 max-lg:flex lg:grid align-middle items-center h-fit">
+                                <div class="m-0.5">
+                                    <input type="radio" id="remoteModel" formControlName="workModel" value="REMOTE"
+                                        class="m-2 font-normal" checked />
+                                    <label for="remoteModel">Remoto</label>
+                                </div>
+                                <div class="m-0.5">
+                                    <input type="radio" id="hybridModel" formControlName="workModel" value="HYBRID"
+                                        class="m-2 font-normal" />
+                                    <label for="hybridModel">Hibrido</label>
+                                </div>
+                                <div class="m-0.5">
+                                    <input type="radio" id="siteModel" formControlName="workModel" value="ON_SITE"
+                                        class="m-2 font-normal" />
+                                    <label for="siteModel">Presencial</label>
+                                </div>
+                                <span
+                                    *ngIf="createProjectForm.get('workModel')?.hasError('required') && createProjectForm.get('workModel')?.touched"
+                                    class="text-red-500">
+                                    Forma de Trabalho é requerido.
+                                </span>
+                            </div>
+                            <!--Project Workspace type Module End-->
+                        </div>
+                    </div>
+                </div>
+                <!--Project Options End-->
             </div>
+            <!-- Page End -->
+            <!-- Page Start -->
+            <div *ngIf="showPage(2)" class="form-page">
+                <!--Search Skills Module Start-->
+                <div class="h-fit grid align-top w-full">
+                    <h2 class="font-semibold my-3 text-3xl">Habilidades Necessárias:</h2>
+                    <div class="search relative shadow-md flex w-full h-10 border border-gray-300 rounded">
+                        <span class="absolute mt-1.5 mx-3">
+                            <i class="fa fa-search font-light" aria-hidden="true"></i>
+                        </span>
+                        <input type="text" placeholder="Pesquisar Habilidades" name="searchSkills" id="searchSkills"
+                            class="w-full p-2 pl-9 rounded rounded-r-none text-gray-600"
+                            (input)="searchSkills($event)" />
+                    </div>
+
+                    <div *ngIf="showSkillsList" class="row rounded-b-lg bg-slate-50 border-slate-100 overflow-hidden">
+                        <ul>
+                            <li *ngFor="let skill of filteredSkills">
+                                <button class="w-full border-2 border-slate-100 hover:bg-slate-200"
+                                    (click)="addSkill(skill._id)">
+                                    {{ skill.skillName }}
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div *ngIf="hasSelectedSkills()"
+                        class="grid justify-center grid-cols-3 gap-2 max-lg:grid-cols-2 mt-4 p-4 bg-slate-50 border-2 border-slate-200 rounded-lg">
+                        <div *ngFor="let skillId of createProjectForm.get('skillIds')?.value"
+                            class="flex mb-2 h-8 rounded bg-blue-500 w-fit">
+                            <div class="text-white py-1 px-4 flex pr-4 text-nowrap overflow-clip">
+                                {{ getSkillNameById(skillId) }}
+                            </div>
+                            <button type="button" (click)="removeSkill(skillId)" class="bg-red-500 hover:bg-red-700
+                                     text-white font-bold py-1 px-2 rounded cursor-pointer">
+                                X
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!--Search Skills Module End-->
+                <!--Project descripition Module Start-->
+                <div class="block align-top">
+                    <h2 class="font-semibold my-3 text-3xl">Resumo:</h2>
+                    <textarea formControlName="projectDescription" placeholder="Escreva a descrição do projeto aqui"
+                        name="projectDescription" id="projectDescription"
+                        class="shadow-md border-gray-300 border-2 min-h-14 max-h-96 p-3 w-full"></textarea>
+                    <span
+                        *ngIf="createProjectForm.get('projectDescription')?.hasError('required') && createProjectForm.get('projectDescription')?.touched"
+                        class="text-red-500">
+                        Descrição do Projeto é requerida.
+                    </span>
+                </div>
+                <!--Project descripition Module End-->
+            </div>
+            <!-- Page End -->
+             <!-- Page Start -->
+            <div *ngIf="showPage(3)" class="form-page grid px-8"> 
+                <h2 class="font-semibold mt-8 text-3xl text-center">O que Deseja Fazer?</h2>
+                <!--Buttons-->
+                <div class="grid justify-center gap-4"> 
+                    <div class="button-container">
+                        <button [disabled]="createProjectForm.invalid" [class.disabled]="createProjectForm.invalid"
+                                (click)="CreateProject()"
+                                class="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-6 rounded">
+                            Salvar Projeto como Rascunho
+                        </button>
+                        <p class="text-gray-600 text-md mt-2">Salve seu projeto como um rascunho para editar ou publicar mais tarde.</p>
+                    </div>
+            
+                    <div class="button-container">
+                        <button [disabled]="createProjectForm.invalid" [class.disabled]="createProjectForm.invalid"
+                                (click)="PostProject()"
+                                class="bg-green-600 hover:bg-green-700 text-white text-lg font-semibold py-3 px-6 rounded">
+                            Publicar Projeto
+                        </button>
+                        <p class="text-gray-600 text-md mt-2">Publique seu projeto para que freelancers possam encontrá-lo e enviar propostas.</p>
+                    </div>
+            
+                    <div class="button-container">
+                        <button type="button" (click)="CancelProject()" 
+                                class="bg-gray-400 hover:bg-gray-500 text-white text-lg font-semibold py-3 px-6 rounded">
+                            Cancelar Projeto
+                        </button>
+                        <p class="text-gray-600 text-md mt-2">Cancele a criação do projeto e descarte as informações inseridas.</p>
+                    </div>
+                </div>
+                <!--Buttons-->
+            </div>
+            <!-- Page End -->
         </form>
         <!--filler form end-->
+        <!-- Navigation inputs -->
+        <div class="flex justify-center w-full">
+            <!-- Previous Button -->
+            <button (click)="previousPage()" [disabled]="currentPage === 1"
+                class="bg-slate-400 text-white font-semibold py-4 w-full"
+                [ngClass]="{'hover:bg-slate-500': currentPage > 1, 'opacity-50 cursor-not-allowed': currentPage === 1}">
+                Previous
+            </button>
+
+            <!-- Next Button -->
+            <button (click)="nextPage()" [disabled]="currentPage === totalPages"
+                class="bg-slate-400 text-white font-semibold py-4 w-full"
+                [ngClass]="{'hover:bg-slate-500': currentPage < totalPages, 'opacity-50 cursor-not-allowed': currentPage === totalPages}">
+                Next
+            </button>
+        </div>
+        <!-- Navigation inputs -->
     </div>
 </div>
 

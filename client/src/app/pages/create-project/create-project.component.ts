@@ -13,7 +13,7 @@ import { budgetValidator } from '../../validators/budget.validator';
 @Component({
   selector: 'app-create-project',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule,],
   templateUrl: './create-project.component.html',
   styleUrl: './create-project.component.scss',
 })
@@ -32,7 +32,7 @@ export default class CreateProjectComponent implements OnInit {
   filteredSkills: any[] = []; // Array to store filtered skills
   
   currentPage = 1; // Start with the first page
-  totalPages = 4; // Total number of pages
+  totalPages = 3; // Total number of pages
   pageNumbers: number[] = []; 
   showSkillsList: boolean = false; 
 
