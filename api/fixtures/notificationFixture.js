@@ -17,7 +17,7 @@ const seedNotifications = async () => {
             notificationData.push({
                 freelancerProfileId: randomFreelancerId,
                 clientId: clientIdFromProject, // Use client ID from project
-                projectId: "64e14b11856613527727a280", // You might want to randomize this too
+                projectId: randomProject._id, // You might want to randomize this too
                 message: "Com a mais elevada consideração, tomo a liberdade de dirigir-me a Vossa Senhoria para formular um convite à participação em um projeto que, por certo, se avolumará com o fulgor de vossa notável sapiência e talento.",
                 read: false,
                 createdAt: new Date(),
