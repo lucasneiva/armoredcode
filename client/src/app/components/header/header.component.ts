@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, HostListener, OnInit, inject } from '@angular/core';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -21,6 +21,23 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
   userRole: string | null = null;
   showMenu: boolean = false;
+  showHeader: boolean = true;
+  previousScrollPosition: number = 0;
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: Event) {
+    const currentScrollPosition = window.pageYOffset;
+
+    if (currentScrollPosition === 0) {
+      this.showHeader = true;
+    } else if (currentScrollPosition < this.previousScrollPosition) {
+      this.showHeader = true;
+    } else if (currentScrollPosition > this.previousScrollPosition) {
+      this.showHeader = false;
+    }
+
+    this.previousScrollPosition = currentScrollPosition;
+  }
 
   ngOnInit(): void {
     this.authService.isLoggedIn$.subscribe(res => {
