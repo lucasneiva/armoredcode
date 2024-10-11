@@ -1,7 +1,6 @@
 import Proposal from "../models/proposalModel.js";
-import FreelancerProfile from "../models/freelancerProfileModel.js";
 import Project from "../models/projectModel.js";
-
+import User from "../models/userModel.js";
 
 const proposalData = [
     {
@@ -52,19 +51,26 @@ const proposalData = [
 // I don't know if this is what you want luzak, but if it's to take random ids, i take the notifications and make for proposal - comunicação ruim em inglês
 const seedProposals = async () => {
     try {
-        const freelancerProfiles = await FreelancerProfile.find({}).lean();
-        const projects = await Project.find({}).lean(); 
+        // Find freelancers (users with role 'freelancer')
+        const freelancers = await User.find({ role: 'FREELANCER' }).lean();
+        const projects = await Project.find({}).lean();
         const proposalData = [];
 
+        //console.log("Freelancers found:", freelancers);
+        //console.log("Number of freelancers:", freelancers.length);
+
         for (let i = 0; i < 20; i++) {
-            const randomFreelancer = freelancerProfiles[Math.floor(Math.random() * freelancerProfiles.length)];
-            const randomFreelancerId = randomFreelancer._id;
+            const randomFreelancer = freelancers[Math.floor(Math.random() * freelancers.length)];
+            const randomFreelancerId = randomFreelancer._id; // This is the User ID
             const randomProject = projects[Math.floor(Math.random() * projects.length)];
             const projectId = randomProject._id;
+            // Get the clientId from the project
+            const clientId = randomProject.clientId; 
 
             proposalData.push({
-                projectId: projectId, 
+                projectId: projectId,
                 freelancerId: randomFreelancerId,
+                clientId: clientId, // Add the clientId to the proposal data
                 coverLetter: "This is a sample proposal description.", // You can randomize this as needed
                 pricingType: "HOURLY_RATE",
                 proposedHourlyRate: Math.floor(Math.random() * 50) + 25, // Random hourly rate between 25 and 75
@@ -78,24 +84,10 @@ const seedProposals = async () => {
         await Proposal.deleteMany({});
         await Proposal.insertMany(proposalData);
         console.log("Proposal data seeded successfully!");
+        //console.log("Proposal data:", proposalData);
     } catch (error) {
         console.error("Error seeding Proposal data:", error);
     }
 };
 
-/*
-const seedProposals = async () => {
-    try {
-        await Proposal.deleteMany({});
-        await Proposal.insertMany(proposalData);
-        console.log("Proposal data seeded successfully!");
-    } catch (error) {
-        console.error("Error seeding Proposal data:", error);
-    }
-};
-*/
 export default seedProposals;
-// projectId: 64e14b11856613527727a280
-// projectId: 64e14b11856613527727a281
-// freelancerId: 64e14b11856613527727a27e
-// freelancerId: 64e14b11856613527727a27f

@@ -97,8 +97,10 @@ app.listen( 8800, async () => {
         seedSpecializations();
         await seedSkills();
 
-        await seedUsers();
+        // Seed Users First!
+        await seedUsers(); 
 
+        // Then seed profiles (which depend on users)
         await seedFreelancerProfiles();
         await seedClientProfiles();
 
