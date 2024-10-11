@@ -41,16 +41,6 @@ const proposalData = [
         createdAt: new Date(),
         updatedAt: new Date(),
     },
-    {
-        projectId: "projectId",
-        freelancerId: "freelancerId",
-        proposalDescription: "description of the proposal.",
-        hourlyRate: 65,
-        estimatedTime: 165,
-        status: "PENDING",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-    },
 ];
 
 const seedProposals = async () => {
