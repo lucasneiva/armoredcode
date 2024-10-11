@@ -41,6 +41,16 @@ const proposalData = [
         createdAt: new Date(),
         updatedAt: new Date(),
     },
+    {
+        projectId: "projectId",
+        freelancerId: "freelancerId",
+        proposalDescription: "I am a passionate mobile app developer with a focus on creating user-centric and engaging apps. I am confident that I can deliver a mobile app that meets your specific needs and exceeds your expectations.",
+        hourlyRate: 65,
+        estimatedTime: 165,
+        status: "PENDING",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    },
 ];
 
 const seedProposals = async () => {
@@ -54,7 +64,7 @@ const seedProposals = async () => {
 };
 
 export default seedProposals;
-// 64e14b11856613527727a280
-// 64e14b11856613527727a281
-// 64e14b11856613527727a27e
-// 64e14b11856613527727a27f
+// projectId: 64e14b11856613527727a280
+// projectId: 64e14b11856613527727a281
+// freelancerId: 64e14b11856613527727a27e
+// freelancerId: 64e14b11856613527727a27f
