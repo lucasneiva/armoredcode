@@ -44,7 +44,7 @@ const proposalData = [
     {
         projectId: "projectId",
         freelancerId: "freelancerId",
-        proposalDescription: "I am a passionate mobile app developer with a focus on creating user-centric and engaging apps. I am confident that I can deliver a mobile app that meets your specific needs and exceeds your expectations.",
+        proposalDescription: "description of the proposal.",
         hourlyRate: 65,
         estimatedTime: 165,
         status: "PENDING",
