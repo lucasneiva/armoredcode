@@ -1,4 +1,7 @@
+import FreelancerProfile from "../models/freelancerProfileModel.js";
+import Project from "../models/projectModel.js";
 import Proposal from "../models/proposalModel.js";
+
 
 const proposalData = [
     {

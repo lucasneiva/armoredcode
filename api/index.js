@@ -103,6 +103,7 @@ app.listen( 8800, async () => {
         await seedClientProfiles();
 
         await seedProjects(); 
+        await seedProposals(); 
         //
         await seedNotifications();
 
