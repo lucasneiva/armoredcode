@@ -172,7 +172,7 @@ export default class EditProfileComponent implements OnInit {
           companyName: profile.companyName,
           companyDescription: profile.companyDescription,
           companySize: profile.companySize,
-          logo: profile.logo,
+          profileImage: profile.profileImage,
           industryId: profile.industryId,
           website: profile.website,
           location: {

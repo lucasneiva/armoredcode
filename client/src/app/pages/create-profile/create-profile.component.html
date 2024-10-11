@@ -80,85 +80,102 @@
                     <!--personal module end-->
                 </div>
 
-                <div *ngIf="showPage(2)" class="form-page space-y-1" formGroupName="location" id="location">
+                <div *ngIf="showPage(2)" class="form-page space-y-1">
+                    <!-- Profile Image start -->
+                    <div class="my-auto mx-auto h-fit w-full grid align-top">
+                        <h2 class="font-semibold my-3 text-2xl">Foto de Perfil</h2>
+                        <div class="max-lg:flex lg:grid align-middle w-full mx-auto my-2 max-lg:h-20 lg:h-fit bg-slate-200 border-2 border-slate-100 rounded">
+                            <label for="profileImage" class="custom-file-upload my-auto lg:w-full">
+                                Escolher Foto
+                            </label>
+                            <input type="file" id="profileImage" (change)="onFileSelected($event)" accept="image/*"
+                                class="bg-slate-200">
+                            <img [src]="profileImagePreview" *ngIf="profileImagePreview" alt="Profile Image Preview"
+                                class="lg:w-32 max-lg:w-16 lg:h-32 max-lg:h-16 my-2 block mx-auto rounded-full overflow-hidden">
+                        </div>
+
+                    </div>
+                    <!-- Profile Image end -->
                     <!--localization module start-->
-                    <h2 class="font-semibold my-3 text-2xl">Localização</h2>
-                    <div class="lg:flex max-lg:grid lg:space-x-4 h-fit">
-                        <!--CEP start-->
-                        <div class="my-2 mx-auto h-fit w-full">
-                            <label class="font-semibold" for="cep">CEP</label>
-                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                placeholder="Exemplo: 12345-678" id="cep" name="cep" formControlName="cep" required>
-                            <span
-                                *ngIf="clientProfileForm.get('location')?.hasError('required', 'cep') && clientProfileForm.get('location')?.get('cep')?.touched"
-                                class="text-red-500">*CEP is required</span>
+                    <div formGroupName="location" id="location">
+                        <h2 class="font-semibold my-3 text-2xl">Localização</h2>
+                        <div class="lg:flex max-lg:grid lg:space-x-4 h-fit">
+                            <!--CEP start-->
+                            <div class="my-2 mx-auto h-fit w-full">
+                                <label class="font-semibold" for="cep">CEP</label>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="Exemplo: 12345-678" id="cep" name="cep" formControlName="cep" required>
+                                <span
+                                    *ngIf="clientProfileForm.get('location')?.hasError('required', 'cep') && clientProfileForm.get('location')?.get('cep')?.touched"
+                                    class="text-red-500">*CEP is required</span>
+                            </div>
+                            <!--CEP end-->
+                            <!--neighborhood start-->
+                            <div class="my-2 mx-auto h-fit w-full">
+                                <label class="font-semibold" for="neighborhood">Bairro</label>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="Bairro" id="neighborhood" name="neighborhood"
+                                    formControlName="neighborhood" required>
+                                <span
+                                    *ngIf="clientProfileForm.get('location')?.hasError('required', 'neighborhood') && clientProfileForm.get('location')?.get('neighborhood')?.touched"
+                                    class="text-red-500">*Neighborhood is required</span>
+                            </div>
+                            <!--neighborhood end-->
                         </div>
-                        <!--CEP end-->
-                        <!--neighborhood start-->
-                        <div class="my-2 mx-auto h-fit w-full">
-                            <label class="font-semibold" for="neighborhood">Bairro</label>
-                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                placeholder="Bairro" id="neighborhood" name="neighborhood"
-                                formControlName="neighborhood" required>
-                            <span
-                                *ngIf="clientProfileForm.get('location')?.hasError('required', 'neighborhood') && clientProfileForm.get('location')?.get('neighborhood')?.touched"
-                                class="text-red-500">*Neighborhood is required</span>
+                        <div class="lg:flex max-lg:grid lg:space-x-4 h-fit">
+                            <!--street start-->
+                            <div class="my-2 mx-auto h-fit w-full">
+                                <label class="font-semibold" for="streetAddress">Rua</label>
+                                <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    placeholder="Rua e Número da residência" id="streetAddress" name="streetAddress"
+                                    formControlName="streetAddress" required>
+                                <span
+                                    *ngIf="clientProfileForm.get('location')?.hasError('required', 'streetAddress') && clientProfileForm.get('location')?.get('streetAddress')?.touched"
+                                    class="text-red-500">*Street Address is required</span>
+                            </div>
+                            <!--street end-->
+                            <!--city start-->
+                            <div class="my-2 mx-auto h-fit w-full grid">
+                                <label class="font-semibold" for="city">Cidade</label>
+                                <select name="Option" id="city" formControlName="city"
+                                    class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
+                                    <option value="" selected>Selecione a sua Cidade</option>
+                                    <option value="ARAÇOIABA DA SERRA">Araçoiaba da serra</option>
+                                    <option value="BOITUVA">Boituva</option>
+                                    <option value="CAPELA DO ALTO">Capela do alto</option>
+                                    <option value="CERQUILHO">Cerquilho</option>
+                                    <option value="IPERÓ">Iperó</option>
+                                    <option value="ITU">Itu</option>
+                                    <option value="SALTO DE PIRAPORA">Salto</option>
+                                    <option value="SÃO ROQUE">São Roque</option>
+                                    <option value="SOROCABA">Sorocaba</option>
+                                    <option value="TATUÍ">Tatuí</option>
+                                    <option value="VOTORANTIM">Votorantim</option>
+                                </select>
+                                <span
+                                    *ngIf="clientProfileForm.get('location')?.hasError('required', 'city') && clientProfileForm.get('location')?.get('city')?.touched"
+                                    class="text-red-500">*City is required</span>
+                            </div>
+                            <!--city end-->
                         </div>
-                        <!--neighborhood end-->
-                    </div>
-                    <div class="lg:flex max-lg:grid lg:space-x-4 h-fit">
-                        <!--street start-->
-                        <div class="my-2 mx-auto h-fit w-full">
-                            <label class="font-semibold" for="streetAddress">Rua</label>
-                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                placeholder="Rua e Número da residência" id="streetAddress" name="streetAddress"
-                                formControlName="streetAddress" required>
-                            <span
-                                *ngIf="clientProfileForm.get('location')?.hasError('required', 'streetAddress') && clientProfileForm.get('location')?.get('streetAddress')?.touched"
-                                class="text-red-500">*Street Address is required</span>
+                        <div class="lg:flex max-lg:grid lg:space-x-4 h-fit">
+                            <!--state start-->
+                            <div class="my-2 mx-auto h-fit w-full">
+                                <label class="font-semibold" for="state">Estado</label>
+                                <input class="p-2 w-full border border-gray-300 rounded bg-gray-100 text-gray-400"
+                                    type="text" placeholder="Estado" id="state" name="state" formControlName="state"
+                                    readonly>
+                            </div>
+                            <!--state end-->
+                            <!--country start-->
+                            <div class="my-2 mx-auto h-fit w-full">
+                                <label class="font-semibold" for="country">País</label>
+                                <input class="p-2 w-full border border-gray-300 rounded bg-gray-100  text-gray-400"
+                                    type="text" placeholder="País" id="country" name="country" formControlName="country"
+                                    readonly>
+                            </div>
+                            <!--country end-->
                         </div>
-                        <!--street end-->
-                        <!--city start-->
-                        <div class="my-2 mx-auto h-fit w-full grid">
-                            <label class="font-semibold" for="city">Cidade</label>
-                            <select name="Option" id="city" formControlName="city"
-                                class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
-                                <option value="" selected>Selecione a sua Cidade</option>
-                                <option value="ARAÇOIABA DA SERRA">Araçoiaba da serra</option>
-                                <option value="BOITUVA">Boituva</option>
-                                <option value="CAPELA DO ALTO">Capela do alto</option>
-                                <option value="CERQUILHO">Cerquilho</option>
-                                <option value="IPERÓ">Iperó</option>
-                                <option value="ITU">Itu</option>
-                                <option value="SALTO DE PIRAPORA">Salto</option>
-                                <option value="SÃO ROQUE">São Roque</option>
-                                <option value="SOROCABA">Sorocaba</option>
-                                <option value="TATUÍ">Tatuí</option>
-                                <option value="VOTORANTIM">Votorantim</option>
-                            </select>
-                            <span
-                                *ngIf="clientProfileForm.get('location')?.hasError('required', 'city') && clientProfileForm.get('location')?.get('city')?.touched"
-                                class="text-red-500">*City is required</span>
-                        </div>
-                        <!--city end-->
-                    </div>
-                    <div class="lg:flex max-lg:grid lg:space-x-4 h-fit">
-                        <!--state start-->
-                        <div class="my-2 mx-auto h-fit w-full">
-                            <label class="font-semibold" for="state">Estado</label>
-                            <input class="p-2 w-full border border-gray-300 rounded bg-gray-100 text-gray-400"
-                                type="text" placeholder="Estado" id="state" name="state" formControlName="state"
-                                readonly>
-                        </div>
-                        <!--state end-->
-                        <!--country start-->
-                        <div class="my-2 mx-auto h-fit w-full">
-                            <label class="font-semibold" for="country">País</label>
-                            <input class="p-2 w-full border border-gray-300 rounded bg-gray-100  text-gray-400"
-                                type="text" placeholder="País" id="country" name="country" formControlName="country"
-                                readonly>
-                        </div>
-                        <!--country end-->
                     </div>
                     <!--localization module end-->
                     <!--buttons-->

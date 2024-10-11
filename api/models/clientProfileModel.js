@@ -29,7 +29,7 @@ const ClientProfileSchema = new Schema( {
         required: true
     },
     
-    logo: {
+    profileImage: {
         type: String
     },
 

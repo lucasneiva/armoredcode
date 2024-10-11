@@ -40,6 +40,7 @@ export default class CreateProfileComponent implements OnInit {
   userRole: string | null = null;
   currentPage!: number; // Start with the first page
   totalPages!: number; // Total number of pages
+  profileImagePreview: string | ArrayBuffer | null = null;
 
   //arrays:
   selectedSkillId: string = '';
@@ -73,7 +74,7 @@ export default class CreateProfileComponent implements OnInit {
       companyName: ['', Validators.required],
       companyDescription: [''],
       companySize: ['', Validators.required],
-      logo: [''],
+      profileImage: [''],
       industryId: ['', Validators.required],
       website: [''],
       location: this.fb.group({
@@ -90,6 +91,7 @@ export default class CreateProfileComponent implements OnInit {
       userId: [this.authService.getUserId(), Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      profileImage: [''],
       specializationId: [''],
       profileSummary: [''],
       experienceLevel: ['', Validators.required],
@@ -375,6 +377,77 @@ export default class CreateProfileComponent implements OnInit {
 
   get selectedSkills(): FormArray {
     return this.freelancerProfileForm.get('selectedSkills') as FormArray;
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+
+    if (file) {
+      this.resizeImage(file, 512, 512).then(resizedImage => {
+        const reader = new FileReader();
+        reader.readAsDataURL(resizedImage);
+
+        reader.onload = () => {
+          this.profileImagePreview = reader.result;
+
+          if (this.userRole === 'CLIENT') {
+            this.clientProfileForm.patchValue({
+              profileImage: this.profileImagePreview
+            });
+          } else if (this.userRole === 'FREELANCER') {
+            this.freelancerProfileForm.patchValue({
+              profileImage: this.profileImagePreview
+            });
+          }
+        };
+      });
+    }
+  }
+
+  // Resize the image to the specified dimensions
+  private resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+
+        if (width > maxWidth) {
+          height *= maxWidth / width;
+          width = maxWidth;
+        }
+
+        if (height > maxHeight) {
+          width *= maxHeight / height;
+          height = maxHeight;
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob(blob => {
+            if (blob) {
+              resolve(blob);
+            } else {
+              reject(new Error('Error creating resized image blob.'));
+            }
+          }, file.type);
+        } else {
+          reject(new Error('Error getting 2D rendering context.'));
+        }
+      };
+
+      img.onerror = () => {
+        reject(new Error('Error loading image.'));
+      };
+    });
   }
 
   private displayFormErrors(formGroup: FormGroup) {

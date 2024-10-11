@@ -164,6 +164,7 @@ export type ProfileData = { // Use an interface for type safety
 export type Profile = {
   _id?: string;
   userId: string;
+  profileImage?: string;
   createdAt?: string;
   updatedAt?: string;
 
@@ -181,7 +182,6 @@ export type Profile = {
   companyName?: string;
   companyDescription?: string;
   companySize?: 'SMALL' | 'MEDIUM' | 'LARGE';
-  logo?: string;
   industryId?: string;
   website?: string;
 
@@ -189,7 +189,6 @@ export type Profile = {
   firstName?: string;
   lastName?: string;
   specializationId?: string | null; // Or `null` if there can be no specialization
-
   profileSummary?: string;
   experienceLevel?: 'JUNIOR' | 'MID-LEVEL' | 'SENIOR';
   hourlyRate?: {
