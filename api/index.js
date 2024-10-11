@@ -22,6 +22,7 @@ import seedIndustries from './fixtures/industryFixture.js';
 import seedSpecializations from './fixtures/specializationFixture.js';
 import seedSkills from './fixtures/skillFixture.js';
 import seedUsers from "./fixtures/userFixture.js";
+import seedProposals from "./fixtures/proposalFixture.js";
 import seedFreelancerProfiles from "./fixtures/freelancerProfileFixture.js";
 import seedClientProfiles from "./fixtures/clientProfileFixture.js";
 import seedProjects from "./fixtures/projectFixture.js";
