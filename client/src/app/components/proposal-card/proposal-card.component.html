@@ -12,7 +12,7 @@
                       'bg-yellow-500': proposal.status === 'PENDING',
                       'bg-red-500': proposal.status === 'REJECTED',
                       'bg-green-500': proposal.status === 'ACCEPTED'}">
-                      <ng-container *ngIf="proposal.status === 'DRAFT'">Rascunho</ng-container>
+                <ng-container *ngIf="proposal.status === 'DRAFT'">Rascunho</ng-container>
                 <ng-container *ngIf="proposal.status === 'PENDING'">Pendente</ng-container>
                 <ng-container *ngIf="proposal.status === 'REJECTED'">Rejeitada</ng-container>
                 <ng-container *ngIf="proposal.status === 'ACCEPTED'">Aceita</ng-container>

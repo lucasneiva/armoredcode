@@ -133,7 +133,8 @@ export default class CreateProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.freelancerProfileForm.value);
+    /*debug*/ //console.log(this.clientProfileForm.value);
+    /*debug*/ //console.log(this.freelancerProfileForm.value);
     if (this.userRole == "CLIENT" && this.clientProfileForm.valid) {
       this.profileService.createProfile(this.clientProfileForm.value)
         .subscribe({
