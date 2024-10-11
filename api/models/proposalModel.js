@@ -12,11 +12,13 @@ const ProposalSchema = new Schema( {
         ref: 'User', // Referencia ao usuário Freelancer
         required: true,
     },
+    /* //modified
     clientId: {
         type: Schema.Types.ObjectId,
         ref: 'User', // Referencia ao usuário Cliente
         required: true,
     },
+    */
     coverLetter: {
         type: String,
         required: true,
