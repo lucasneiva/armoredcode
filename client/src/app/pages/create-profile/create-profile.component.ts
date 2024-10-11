@@ -62,7 +62,7 @@ export default class CreateProfileComponent implements OnInit {
       this.fetchSkills();
       this.fetchSpecializations();
       this.currentPage = 1; // Start with the first page
-      this.totalPages = 7; // Total number of pages
+      this.totalPages = 6; // Total number of pages
       this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     }
     else {
