@@ -444,7 +444,7 @@
                                             <label class="font-semibold" for="startDate">Data de Início</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="date"
                                                 name="startDate" id="startDate" placeholder="Data de Início"
-                                                formControlName="startDate" required>
+                                                formControlName="startDate" required (change)="onDateChange(i)">
                                             <span
                                                 *ngIf="experienceForm.hasError('required', 'startDate') && experienceForm.get('startDate')?.touched"
                                                 class="text-red-500">*Start Date is required</span>
@@ -455,7 +455,7 @@
                                             <label class="font-semibold" for="endDate">Data de Término</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="date"
                                                 name="endDate" id="endDate" placeholder="Data de Término"
-                                                formControlName="endDate" required>
+                                                formControlName="endDate" required (change)="onDateChange(i)">
                                             <span
                                                 *ngIf="experienceForm.hasError('required', 'endDate') && experienceForm.get('endDate')?.touched"
                                                 class="text-red-500">*End Date is required</span>
