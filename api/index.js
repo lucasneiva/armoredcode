@@ -108,7 +108,7 @@ app.listen( 8800, async () => {
         await seedProposals(); 
         //
         await seedNotifications();
-
+        
 
     } catch ( error ) {
         console.error( `Error connecting to MongoDB: ${error}` );
