@@ -444,7 +444,7 @@
                                             <label class="font-semibold" for="startDate">Data de Início</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="date"
                                                 name="startDate" id="startDate" placeholder="Data de Início"
-                                                formControlName="startDate" required (change)="onDateChange(i)">
+                                                formControlName="startDate" required (change)="onDateChange(workExperiences,i)">
                                             <span
                                                 *ngIf="experienceForm.hasError('required', 'startDate') && experienceForm.get('startDate')?.touched"
                                                 class="text-red-500">*Start Date is required</span>
@@ -455,7 +455,7 @@
                                             <label class="font-semibold" for="endDate">Data de Término</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="date"
                                                 name="endDate" id="endDate" placeholder="Data de Término"
-                                                formControlName="endDate" required (change)="onDateChange(i)">
+                                                formControlName="endDate" required (change)="onDateChange(workExperiences,i)">
                                             <span
                                                 *ngIf="experienceForm.hasError('required', 'endDate') && experienceForm.get('endDate')?.touched"
                                                 class="text-red-500">*End Date is required</span>
@@ -548,7 +548,7 @@
                                             <label class="font-semibold" for="startDate">Data de Início</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="date"
                                                 name="startDate" id="startDate" placeholder="Data de Início"
-                                                formControlName="startDate" required>
+                                                formControlName="startDate" required (change)="onDateChange(educations,i)">
                                             <span
                                                 *ngIf="educationsForm.hasError('required', 'startDate') && educationsForm.get('startDate')?.touched"
                                                 class="text-red-500">*Start Date is required</span>
@@ -559,7 +559,7 @@
                                             <label class="font-semibold" for="endDate">Data de Término</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="date"
                                                 name="endDate" id="endDate" placeholder="Data de Término"
-                                                formControlName="endDate" required>
+                                                formControlName="endDate" required (change)="onDateChange(educations,i)">
                                             <span
                                                 *ngIf="educationsForm.hasError('required', 'endDate') && educationsForm.get('endDate')?.touched"
                                                 class="text-red-500">*End Date is required</span>
@@ -598,7 +598,7 @@
                             <div *ngFor="let certificationForm of certifications.controls; let i = index"
                                 class="border p-4 rounded my-2">
                                 <!-- certification start-->
-                                <div *ngIf="certifications.length > 0" [formGroupName]="i" class="grid justify-between">
+                                <div *ngIf="certifications.length > 0" [formGroupName]="i" class="border p-4 rounded my-2">
                                     <h3 class="font-semibold text-lg">Certificação {{ i + 1 }}</h3>
                                     <div class="lg:flex max-lg:grid lg:space-x-4 h-fit">
                                         <!-- title start-->
