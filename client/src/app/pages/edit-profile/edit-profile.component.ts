@@ -52,6 +52,7 @@ export default class EditProfileComponent implements OnInit {
   profile: Profile | null = null;
   currentPage!: number; // Start with the first page
   totalPages!: number; // Total number of pages
+  profileImagePreview: string | ArrayBuffer | null = null;
 
   //arrays:
   skills: any[] = [];
@@ -72,7 +73,7 @@ export default class EditProfileComponent implements OnInit {
       this.fetchSkills();
       this.fetchSpecializations();
       this.currentPage = 1;
-      this.totalPages = 7;
+      this.totalPages = 6;
       this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     } else {
       console.log("Invalid role");
@@ -101,7 +102,7 @@ export default class EditProfileComponent implements OnInit {
       companyName: ['', Validators.required],
       companyDescription: [''],
       companySize: ['', Validators.required],
-      logo: [''],
+      profileImage: [''],
       industryId: ['', Validators.required],
       website: [''],
       location: this.fb.group({
@@ -119,6 +120,7 @@ export default class EditProfileComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       specializationId: [''],
+      profileImage: [''],
       profileSummary: [''],
       experienceLevel: ['', Validators.required],
       hourlyRate: this.fb.group({
@@ -190,6 +192,7 @@ export default class EditProfileComponent implements OnInit {
           firstName: profile.firstName,
           lastName: profile.lastName,
           specializationId: profile.specializationId,
+          profileImage: profile.profileImage,
           profileSummary: profile.profileSummary,
           experienceLevel: profile.experienceLevel,
           hourlyRate: {
@@ -508,6 +511,77 @@ export default class EditProfileComponent implements OnInit {
   // Method to get skill name by ID (updated)
   getSkillNameById(skill: any): string {
     return skill ? skill.skillName : '';
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+
+    if (file) {
+      this.resizeImage(file, 512, 512).then(resizedImage => {
+        const reader = new FileReader();
+        reader.readAsDataURL(resizedImage);
+
+        reader.onload = () => {
+          this.profileImagePreview = reader.result;
+
+          if (this.userRole === 'CLIENT') {
+            this.clientProfileForm.patchValue({
+              profileImage: this.profileImagePreview
+            });
+          } else if (this.userRole === 'FREELANCER') {
+            this.freelancerProfileForm.patchValue({
+              profileImage: this.profileImagePreview
+            });
+          }
+        };
+      });
+    }
+  }
+
+  // Resize the image to the specified dimensions
+  private resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+
+        if (width > maxWidth) {
+          height *= maxWidth / width;
+          width = maxWidth;
+        }
+
+        if (height > maxHeight) {
+          width *= maxHeight / height;
+          height = maxHeight;
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob(blob => {
+            if (blob) {
+              resolve(blob);
+            } else {
+              reject(new Error('Error creating resized image blob.'));
+            }
+          }, file.type);
+        } else {
+          reject(new Error('Error getting 2D rendering context.'));
+        }
+      };
+
+      img.onerror = () => {
+        reject(new Error('Error loading image.'));
+      };
+    });
   }
 
   private displayFormErrors(formGroup: FormGroup) {

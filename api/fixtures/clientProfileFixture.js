@@ -7,7 +7,7 @@ const clientProfiles = [
         companyName: "TechSol Ltda.",
         companyDescription: "TechSol Ltda. is a dynamic and innovative software company specializing in providing cutting-edge solutions for small businesses. Our team of experienced developers and designers are passionate about creating user-friendly and efficient software that helps businesses streamline their operations, improve productivity, and achieve their goals. We offer a wide range of services, including custom software development, web application development, mobile app development, and cloud-based solutions. Our commitment to quality, affordability, and customer satisfaction has made us a trusted partner for businesses of all sizes.",
         companySize: "SMALL",
-        profileImage: "https://www.techsol.com.br/logo.png",
+        profileImage: null,
         industryId: "645b6c612345678901234567",
         website: "https://www.techsol.com.br",
         location: {
@@ -22,7 +22,7 @@ const clientProfiles = [
         companyName: "Metalúrgica Sorocabana S.A.",
         companyDescription: "Metalúrgica Sorocabana S.A. is a renowned and established manufacturer of high-precision metal parts and components. With decades of experience in the industry, we have built a reputation for delivering exceptional quality, reliability, and innovation. Our state-of-the-art facilities and skilled workforce enable us to produce a wide range of metal parts for various industries, including automotive, aerospace, construction, and machinery. We are committed to meeting the stringent requirements of our customers and exceeding their expectations through continuous improvement and a strong focus on customer satisfaction.",
         companySize: "MEDIUM",
-        profileImage: "https://www.metalsocabana.com.br/logo.jpg",
+        profileImage: null,
         industryId: "645b6c612345678901234568",
         website: "https://www.metalsocabana.com.br",
         location: {

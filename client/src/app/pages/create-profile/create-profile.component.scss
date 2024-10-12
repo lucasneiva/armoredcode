@@ -12,7 +12,7 @@
 
     @media (min-width: 1024px) {
         width: 48rem
-            /*  */
+            /* 768px */
         ;
     }
 
@@ -33,7 +33,6 @@
     display: none;
 }
 
-/* create-profile.component.scss */
 .custom-file-upload {
     display: inline-block;
     height: 3rem;
@@ -43,9 +42,8 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  
-    /* Hover effect */
+
     &:hover {
-      background-color: rgb(8, 108, 230);
+        background-color: rgb(8, 108, 230);
     }
-  }
+}
