@@ -5,19 +5,17 @@ import jwt from 'jsonwebtoken';
 import { connectToDatabase } from "../db.js";
 import mongoose, { Mongoose, Schema } from "mongoose";
 import { handleValidationError } from "../utils/handleValidationError.js";
-// import projectJoiSchema from "../validators/projectValidator.js"
 
 export const searchProjects = async ( req, res, next ) => {
     try {
         const db = await connectToDatabase();
         const collection = db.collection( 'projects' );
 
-        const searchTerm = req.query.q; // Search term 
-        const categoryId = req.query.category; // Category ID for filtering
+        const searchTerm = req.query.q;
+        const categoryId = req.query.category;
 
         console.log( categoryId );
 
-        // 1. Build the Search Stage
         const searchStage = {
             $search: {
                 index: 'projects',
@@ -28,23 +26,20 @@ export const searchProjects = async ( req, res, next ) => {
             }
         };
 
-        // 2. Build the Match Stage (for category filtering)
         const matchStage = {};
         if ( categoryId ) {
             matchStage.$match = { projectCategoryId: new mongoose.Types.ObjectId( categoryId ) };
         }
 
-        // 3. Construct the Aggregation Pipeline 
         const aggregationPipeline = [];
         if ( searchTerm ) {
-            aggregationPipeline.push( searchStage ); // Add text search if there's a search term
+            aggregationPipeline.push( searchStage );
         }
 
         if ( categoryId ) {
-            aggregationPipeline.push( matchStage ); // Add category filter if a category is provided
+            aggregationPipeline.push( matchStage );
         }
 
-        // 4. Execute the Aggregation 
         const results = await collection.aggregate( aggregationPipeline ).toArray();
 
         return next( createSuccess( 200, 'Search Results', results ) );
@@ -56,47 +51,41 @@ export const searchProjects = async ( req, res, next ) => {
 };
 
 
-export const getProjectById = async (req, res, next) => {
+export const getProjectById = async ( req, res, next ) => {
     try {
         const projectId = req.params.id;
-        const userId = req.user.id; // Assumindo que o middleware de autenticação adiciona o user ao req
+        const userId = req.user.id;
 
-        const projectObjectId = new mongoose.Types.ObjectId(projectId);
+        const projectObjectId = new mongoose.Types.ObjectId( projectId );
 
-        // Verificar se o projectId é um ObjectId válido
-        if (!mongoose.Types.ObjectId.isValid(projectId)) {
-            return next(createError(400, "Invalid project ID"));
+        if ( !mongoose.Types.ObjectId.isValid( projectId ) ) {
+            return next( createError( 400, "Invalid project ID" ) );
         }
 
-        // Buscar o projeto
-        const projectDetails = await project.findById(projectId)
-            .populate('clientId', 'username email') // Popula informações básicas do cliente
-            .populate('freelancerId', 'username email') // Popula informações básicas do freelancer, se atribuído
-            .populate('projectCategoryId', 'name') // Popula o nome da categoria do projeto
-            .populate('skillIds', 'name'); // Popula os nomes das habilidades requeridas
+        const projectDetails = await project.findById( projectId )
+            .populate( 'clientId', 'username email' )
+            .populate( 'freelancerId', 'username email' )
+            .populate( 'projectCategoryId', 'name' )
+            .populate( 'skillIds', 'name' );
 
-        // Verificar se o projeto existe
-        if (!projectDetails) {
-            return next(createError(404, "Project not found"));
+        if ( !projectDetails ) {
+            return next( createError( 404, "Project not found" ) );
         }
 
-        // Verificar permissões
-        // O usuário pode ver o projeto se for o cliente, o freelancer atribuído, ou se o status for "POSTED"
-        if (projectDetails.clientId._id.toString() !== userId && 
-            (projectDetails.freelancerId && projectDetails.freelancerId._id.toString() !== userId) && 
-            projectDetails.projectStatus !== "POSTED") {
-            return next(createError(403, "You don't have permission to view this project"));
+        if ( projectDetails.clientId._id.toString() !== userId &&
+            ( projectDetails.freelancerId && projectDetails.freelancerId._id.toString() !== userId ) &&
+            projectDetails.projectStatus !== "POSTED" ) {
+            return next( createError( 403, "You don't have permission to view this project" ) );
         }
 
-        // Se tudo estiver ok, retornar os detalhes do projeto
-        return next(createSuccess(200, "Project details retrieved successfully", projectDetails));
+        return next( createSuccess( 200, "Project details retrieved successfully", projectDetails ) );
 
-} catch (error) {
-        console.error("Error in getProjectById:", error);
-        return next(createError(500, "Internal server error"));
+    } catch ( error ) {
+        console.error( "Error in getProjectById:", error );
+        return next( createError( 500, "Internal server error" ) );
     }
 };
-  
+
 export const createProject = async ( req, res, next ) => {
     try {
         const token = req.cookies.acess_token;
@@ -117,45 +106,24 @@ export const createProject = async ( req, res, next ) => {
     }
 
 };
-/*
+
 export const getUserProjects = async ( req, res, next ) => {
     try {
         const userId = req.user.id;
-        const userObjId = new mongoose.Types.ObjectId(userId);
+        const userObjId = new mongoose.Types.ObjectId( userId );
 
-        const projects = await project.find( {clientId: userObjId}, 'projectTitle projectStatus _id');
-
-        return next( createSuccess( 200, 'User Projects', projects ) );
-
-    } catch ( error ) {
-        // Handle other potential errors 
-
-        console.log(error);
-        return next( createError( 500, 'Internal Server Error' ) );
-
-    }
-};
-*/
-//modified
-export const getUserProjects = async ( req, res, next ) => {
-    try {
-        const userId = req.user.id;
-        const userObjId = new mongoose.Types.ObjectId(userId);
-
-        // Find projects where the user is either the client OR the freelancer
-        const projects = await project.find({ 
+        const projects = await project.find( {
             $or: [
-                { clientId: userObjId }, 
+                { clientId: userObjId },
                 { freelancerId: userObjId }
             ]
-        }, 'projectTitle projectStatus _id');
+        }, 'projectTitle projectStatus _id' );
 
         return next( createSuccess( 200, 'User Projects', projects ) );
 
     } catch ( error ) {
-        // Handle other potential errors 
 
-        console.log(error);
+        console.log( error );
         return next( createError( 500, 'Internal Server Error' ) );
 
     }
@@ -164,82 +132,64 @@ export const getUserProjects = async ( req, res, next ) => {
 export const updateProject = async ( req, res, next ) => {
     try {
         const projectId = req.params.id;
-        const userId = req.user.id; // Assuming authentication middleware adds user to req
-        const updateData = req.body; // Data to update the project with
-    
-        // 1. Validation
-        //    - Validate projectId (ensure it's a valid ObjectId)
-        if (!mongoose.Types.ObjectId.isValid(projectId)) {
-          return next(createError(400, "Invalid project ID"));
+        const userId = req.user.id;
+        const updateData = req.body;
+
+        if ( !mongoose.Types.ObjectId.isValid( projectId ) ) {
+            return next( createError( 400, "Invalid project ID" ) );
         }
-    
-        //    - Validate updateData (optional but recommended):
-        //      - Use a validation library like Joi to ensure data types and formats 
-        //        are correct and prevent unexpected data from being saved to your database.
-        //      - Example:
-        //        const { error } = projectJoiSchema.validate(updateData);
-        //        if (error) {
-        //          return next(createError(400, error.details[0].message)); 
-        //        } 
-    
-        // 2. Fetch the project
-        const existingProject = await project.findById(projectId);
-    
-        if (!existingProject) {
-          return next(createError(404, "Project not found"));
+
+        const existingProject = await project.findById( projectId );
+
+        if ( !existingProject ) {
+            return next( createError( 404, "Project not found" ) );
         }
-    
-        // 5. Update the project
-        //    - Option 1: Direct update (less verbose but less control):
-        Object.assign(existingProject, updateData);
+
+        Object.assign( existingProject, updateData );
         await existingProject.save();
-    
-        // Return the updated project
-        return next(createSuccess(200, "Project updated successfully", existingProject));
-    
-      } catch (error) {
-        console.error("Error in updateProject:", error);
-        return next(createError(500, "Internal server error"));
-      }
+
+        return next( createSuccess( 200, "Project updated successfully", existingProject ) );
+
+    } catch ( error ) {
+        console.error( "Error in updateProject:", error );
+        return next( createError( 500, "Internal server error" ) );
+    }
 }
 
 export const deleteProject = async ( req, res, next ) => {
     try {
         const projectId = req.params.id;
-        const userId = req.user.id; // Assuming you have middleware to get the logged-in user
-        
-        // Check if the project ID is valid
-        if (!mongoose.Types.ObjectId.isValid(projectId)) {
-            return next(createError(400, "Invalid project ID"));
+        const userId = req.user.id;
+
+        if ( !mongoose.Types.ObjectId.isValid( projectId ) ) {
+            return next( createError( 400, "Invalid project ID" ) );
         }
 
-        // Find the project and ensure the user is the owner (clientId)
-        const projectToDelete = await project.findOne({ _id: projectId, clientId: userId });
+        const projectToDelete = await project.findOne( { _id: projectId, clientId: userId } );
 
-        if (!projectToDelete) {
-          return next(createError(404, "Project not found or you don't have permission to delete it"));
+        if ( !projectToDelete ) {
+            return next( createError( 404, "Project not found or you don't have permission to delete it" ) );
         }
 
-        // Delete the project
-        await projectToDelete.deleteOne(); 
-        return next(createSuccess(200, "Project deleted successfully"));
-        } catch (error) {
-            console.error("Error in deleteProject:", error);
-            return next(createError(500, "Internal server error"));
-        }
+        await projectToDelete.deleteOne();
+        return next( createSuccess( 200, "Project deleted successfully" ) );
+    } catch ( error ) {
+        console.error( "Error in deleteProject:", error );
+        return next( createError( 500, "Internal server error" ) );
+    }
 }
 
-export const getPostedProjects = async (req, res, next) => {
+export const getPostedProjects = async ( req, res, next ) => {
     try {
-        const allProjects = await project.find({ projectStatus: "POSTED" })
-            .populate('clientId', 'username email')
-            .populate('freelancerId', 'username email')
-            .populate('projectCategoryId', 'name')
-            .populate('skillIds', 'name');
+        const allProjects = await project.find( { projectStatus: "POSTED" } )
+            .populate( 'clientId', 'username email' )
+            .populate( 'freelancerId', 'username email' )
+            .populate( 'projectCategoryId', 'name' )
+            .populate( 'skillIds', 'name' );
 
-        return next(createSuccess(200, "All projects retrieved successfully", allProjects));
-    } catch (error) {
-        console.error("Error in updateProject:", error);
-        return next(createError(500, "Internal server error"));
+        return next( createSuccess( 200, "All projects retrieved successfully", allProjects ) );
+    } catch ( error ) {
+        console.error( "Error in updateProject:", error );
+        return next( createError( 500, "Internal server error" ) );
     }
 }

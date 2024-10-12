@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const NotificationSchema = new Schema( {
-    freelancerProfileId: {
+    freelancerId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,
