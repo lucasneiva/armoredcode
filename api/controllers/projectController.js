@@ -13,6 +13,7 @@ export const searchProjects = async ( req, res, next ) => {
 
         const searchTerm = req.query.q;
         const categoryId = req.query.category;
+        const skillIds = req.query.skillIds; // Get skill IDs from query parameter
 
         console.log( categoryId );
 
@@ -31,6 +32,13 @@ export const searchProjects = async ( req, res, next ) => {
             matchStage.$match = { projectCategoryId: new mongoose.Types.ObjectId( categoryId ) };
         }
 
+        const skillsMatchStage = {};
+        if ( skillIds && skillIds.length > 0 ) {
+            skillsMatchStage.$match = {
+                skillIds: { $all: skillIds.map( id => new mongoose.Types.ObjectId( id ) ) }
+            };
+        }
+
         const aggregationPipeline = [];
         if ( searchTerm ) {
             aggregationPipeline.push( searchStage );
@@ -38,6 +46,10 @@ export const searchProjects = async ( req, res, next ) => {
 
         if ( categoryId ) {
             aggregationPipeline.push( matchStage );
+        }
+
+        if ( skillIds && skillIds.length > 0 ) {
+            aggregationPipeline.push( skillsMatchStage );
         }
 
         const results = await collection.aggregate( aggregationPipeline ).toArray();
