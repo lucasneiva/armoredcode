@@ -37,21 +37,27 @@ const generateProjectData = () => {
     const workModels = [ "REMOTE", "HYBRID", "ON_SITE" ];
     const statusTypes = [ "DRAFT", "POSTED" ];
 
+    // Generate min value first
+    const minBudget = faker.finance.amount( { min: 500, max: 10000 } );
+    const minHourlyRate = faker.finance.amount( { min: 500, max: 10000 } );
+
     return {
         projectTitle: faker.lorem.words( 5 ),
         projectDescription: faker.lorem.paragraph(),
         pricingType: faker.helpers.arrayElement( pricingTypes ),
         projectBudget: {
-            min: faker.finance.amount( { min: 500, max: 10000 } ),
-            max: faker.finance.amount( { min: 500, max: 10000 } ),
+            min: minBudget,
+            // Ensure max is greater than or equal to min
+            max: faker.finance.amount( { min: parseFloat(minBudget), max: 15000 } ), 
             currency: "R$"
         },
         projectHourlyRate: {
-            min: faker.finance.amount( { min: 500, max: 10000 } ),
-            max: faker.finance.amount( { min: 500, max: 10000 } ),
+            min: minHourlyRate,
+            // Ensure max is greater than or equal to min
+            max: faker.finance.amount( { min: parseFloat(minHourlyRate), max: 15000 } ),
             currency: "R$"
         },
-        estimatedDuration: faker.number.int(),
+        estimatedDuration: faker.number.int({ min: 1, max: 1095 }), // Changed to be between 1 and 1095
         projectSize: faker.helpers.arrayElement( projectSizes ),
         experienceLevel: faker.helpers.arrayElement( experienceLevels ),
         workModel: faker.helpers.arrayElement( workModels ),

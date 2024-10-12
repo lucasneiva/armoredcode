@@ -103,8 +103,8 @@
 
       <div *ngIf="detailedProject" class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <p><strong>Criado por:</strong>{{creatorName}}</p>
-          <p><strong>Trabalhado por:</strong>
+          <p><strong>Criado por: </strong>{{creatorName}}</p>
+          <p><strong>Trabalhado por: </strong>
             <ng-container *ngIf="detailedProject.freelancerId; else noFreelancer">
               {{detailedProject.freelancerId.username}}
             </ng-container>

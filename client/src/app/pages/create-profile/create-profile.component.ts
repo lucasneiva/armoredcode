@@ -119,7 +119,6 @@ export default class CreateProfileComponent implements OnInit {
 
   }
   
-
   nextPage() {
     this.currentPage++;
     /*debug*///alert(this.currentPage);
@@ -218,7 +217,7 @@ export default class CreateProfileComponent implements OnInit {
   }
 
   // Helper functions to manage FormArrays 
-  //Portfolio
+  //Portfolio methods
   get portfolioItems(): FormArray {
     return this.freelancerProfileForm.get('portfolioItems') as FormArray;
   }
@@ -268,7 +267,7 @@ export default class CreateProfileComponent implements OnInit {
     });
   }
 
-  // educations 
+  // education methods
   get educations(): FormArray {
     return this.freelancerProfileForm.get('educations') as FormArray;
   }
@@ -294,7 +293,7 @@ export default class CreateProfileComponent implements OnInit {
     this.educations.removeAt(index);
   }
 
-  // Certifications
+  // Certification methods
   get certifications(): FormArray {
     return this.freelancerProfileForm.get('certifications') as FormArray;
   }
@@ -318,7 +317,7 @@ export default class CreateProfileComponent implements OnInit {
     });
   }
 
-
+  //fetchs
   fetchIndustries() {
     this.industryService.getIndustries().subscribe(
       (response: any) => {
@@ -329,7 +328,6 @@ export default class CreateProfileComponent implements OnInit {
       }
     );
   }
-
 
   fetchSpecializations() {
     this.specializationService.getSpecializations().subscribe(
@@ -342,7 +340,6 @@ export default class CreateProfileComponent implements OnInit {
     );
   }
 
-
   fetchSkills() {
     this.skillService.getSkills().subscribe(
       (response: any) => {
@@ -354,6 +351,7 @@ export default class CreateProfileComponent implements OnInit {
     );
   }
 
+  //skill methods
   onSkillSelected(event: any) {
     this.selectedSkillId = event.target.value;
   }
@@ -364,7 +362,6 @@ export default class CreateProfileComponent implements OnInit {
       this.selectedSkillId = '';
     }
   }
-
 
   removeSkill(index: number) {
     this.selectedSkills.removeAt(index);
@@ -379,6 +376,7 @@ export default class CreateProfileComponent implements OnInit {
     return this.freelancerProfileForm.get('selectedSkills') as FormArray;
   }
 
+  //image methods
   onFileSelected(event: any) {
     const file = event.target.files[0];
 

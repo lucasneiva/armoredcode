@@ -7,7 +7,7 @@ export function endDateValidator(control: FormControl): { [s: string]: boolean }
   if (startDateControl && control.value) {
     const startDate = new Date(startDateControl.value);
     const endDate = new Date(control.value);
-    /*debug*/console.log("dates received");
+    /*debug*/ //console.log("dates received");
 
     if (endDate < startDate) {
       return { 'endDateInvalid': true };

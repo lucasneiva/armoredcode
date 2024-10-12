@@ -224,8 +224,6 @@ export default class EditProfileComponent implements OnInit {
         if (profile.educations?.length) {
           profile.educations.forEach((edu) => {
             const educationForm = this.createEducationsForm(); // Create the form
-
-            // Use setValue() to populate the form with data from the API
             educationForm.setValue({
               degreeName: edu.degreeName,
               fieldOfStudy: edu.fieldOfStudy,
@@ -252,7 +250,6 @@ export default class EditProfileComponent implements OnInit {
         if (profile.workExperiences?.length) {
           profile.workExperiences.forEach(exp => {
             const experienceForm = this.createExperienceForm();
-
             experienceForm.setValue({
               companyName: exp.companyName,
               jobTitle: exp.jobTitle,
@@ -283,12 +280,12 @@ export default class EditProfileComponent implements OnInit {
 
   nextPage() {
     this.currentPage++;
-    /*debug*///alert(this.currentPage);
+    /*debug*/ //alert(this.currentPage);
   }
 
   previousPage() {
     this.currentPage--;
-    /*debug*///alert(this.currentPage);
+    /*debug*/ //alert(this.currentPage);
   }
 
   showPage(pageNumber: number): boolean {
@@ -346,7 +343,7 @@ export default class EditProfileComponent implements OnInit {
   }
 
   // Helper functions to manage FormArrays 
-  //Portfolio
+  //Portfolio methods
   get portfolioItems(): FormArray {
     return this.freelancerProfileForm.get('portfolioItems') as FormArray;
   }
@@ -396,7 +393,7 @@ export default class EditProfileComponent implements OnInit {
     });
   }
 
-  // educations 
+  // education methods
   get educations(): FormArray {
     return this.freelancerProfileForm.get('educations') as FormArray;
   }
@@ -422,7 +419,7 @@ export default class EditProfileComponent implements OnInit {
     this.educations.removeAt(index);
   }
 
-  // Certifications
+  // Certification methods
   get certifications(): FormArray {
     return this.freelancerProfileForm.get('certifications') as FormArray;
   }
@@ -446,6 +443,7 @@ export default class EditProfileComponent implements OnInit {
     });
   }
 
+  //fetchs
   fetchIndustries() {
     this.industryService.getIndustries().subscribe(
       (response: any) => {
@@ -474,6 +472,7 @@ export default class EditProfileComponent implements OnInit {
     });
   }
 
+  // skill methods
   addSelectedSkill(): void {
     const selectedSkillId = this.selectedSkillControl.value;
     if (selectedSkillId && !this.skillIds.value.includes(selectedSkillId)) {
@@ -486,22 +485,20 @@ export default class EditProfileComponent implements OnInit {
     this.skillIds.removeAt(index);
   }
 
-  // Check if skills are selected
   hasSelectedSkills(): boolean {
     const skillIdsControl = this.freelancerProfileForm.get('skillIds') as FormControl;
     return skillIdsControl.value && skillIdsControl.value.length > 0;
   }
 
-  // Method to get skill object by ID
   getSkillObjectById(skillId: string): any | undefined {
     return this.skills.find((s) => s._id === skillId);
   }
 
-  // Method to get skill name by ID (updated)
   getSkillNameById(skill: any): string {
     return skill ? skill.skillName : '';
   }
 
+  //image methods
   onFileSelected(event: any) {
     const file = event.target.files[0];
 
@@ -573,14 +570,14 @@ export default class EditProfileComponent implements OnInit {
     });
   }
 
+  //date method
   onDateChange(formArray: FormArray, index: number, controlName: string): void {
     const formGroup = formArray.at(index) as FormGroup;
 
     formGroup.get(controlName)?.updateValueAndValidity();
-    /*debug*/console.log("inicio: ", formGroup.get('startDate')?.value);
-    /*debug*/console.log("fim: ", formGroup.get('endDate')?.value);
+    /*debug*/ //console.log("inicio: ", formGroup.get('startDate')?.value);
+    /*debug*/ //console.log("fim: ", formGroup.get('endDate')?.value);
   }
-
 
   private displayFormErrors(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {

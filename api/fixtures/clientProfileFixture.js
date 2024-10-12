@@ -5,7 +5,7 @@ import User from "../models/userModel.js";
 const clientProfiles = [
     {
         companyName: "TechSol Ltda.",
-        companyDescription: "TechSol Ltda. is a dynamic and innovative software company specializing in providing cutting-edge solutions for small businesses. Our team of experienced developers and designers are passionate about creating user-friendly and efficient software that helps businesses streamline their operations, improve productivity, and achieve their goals. We offer a wide range of services, including custom software development, web application development, mobile app development, and cloud-based solutions. Our commitment to quality, affordability, and customer satisfaction has made us a trusted partner for businesses of all sizes.",
+        companyDescription: "TechSol Ltda. é uma empresa de software dinâmica e inovadora, especializada em fornecer soluções de ponta para pequenas empresas. Nossa equipe de desenvolvedores e designers experientes é apaixonada por criar software eficiente e fácil de usar que ajuda as empresas a otimizar suas operações, melhorar a produtividade e atingir seus objetivos. Oferecemos uma ampla gama de serviços, incluindo desenvolvimento de software personalizado, desenvolvimento de aplicativos web, desenvolvimento de aplicativos móveis e soluções baseadas em nuvem. Nosso compromisso com a qualidade, preço acessível e satisfação do cliente nos tornou um parceiro confiável para empresas de todos os tamanhos.",
         companySize: "SMALL",
         profileImage: null,
         industryId: "645b6c612345678901234567",
@@ -20,7 +20,7 @@ const clientProfiles = [
 
     {
         companyName: "Metalúrgica Sorocabana S.A.",
-        companyDescription: "Metalúrgica Sorocabana S.A. is a renowned and established manufacturer of high-precision metal parts and components. With decades of experience in the industry, we have built a reputation for delivering exceptional quality, reliability, and innovation. Our state-of-the-art facilities and skilled workforce enable us to produce a wide range of metal parts for various industries, including automotive, aerospace, construction, and machinery. We are committed to meeting the stringent requirements of our customers and exceeding their expectations through continuous improvement and a strong focus on customer satisfaction.",
+        companyDescription: "A Metalúrgica Sorocabana S.A. é uma renomada e consolidada fabricante de peças e componentes metálicos de alta precisão. Com décadas de experiência no setor, construímos uma reputação de oferecer qualidade, confiabilidade e inovação excepcionais. Nossas instalações de última geração e mão de obra qualificada nos permitem produzir uma ampla variedade de peças metálicas para diversos setores, incluindo automotivo, aeroespacial, construção e maquinário. Estamos empenhados em satisfazer os rigorosos requisitos dos nossos clientes e superar as suas expectativas através da melhoria contínua e de um forte foco na satisfação do cliente.",
         companySize: "MEDIUM",
         profileImage: null,
         industryId: "645b6c612345678901234568",
