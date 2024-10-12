@@ -407,6 +407,15 @@ export default class EditProfileComponent implements OnInit {
     });
   }
 
+  onDateChange(index: number): void {
+    const experienceForm = this.workExperiences.at(index) as FormGroup;
+  
+    // Trigger validation for endDate whenever startDate or endDate is changed
+    experienceForm.get('startDate')?.updateValueAndValidity();
+    experienceForm.get('endDate')?.updateValueAndValidity();
+    console.log(this.workExperiences);
+  }
+
   // educations 
   get educations(): FormArray {
     return this.freelancerProfileForm.get('educations') as FormArray;
