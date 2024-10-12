@@ -222,15 +222,17 @@ export default class EditProfileComponent implements OnInit {
 
         // Populate educations
         if (profile.educations?.length) {
-          profile.educations.forEach(edu => {
-            const educationForm = this.fb.group({
+          profile.educations.forEach((edu) => {
+            const educationForm = this.createEducationsForm(); // Create the form
+
+            // Use setValue() to populate the form with data from the API
+            educationForm.setValue({
               degreeName: edu.degreeName,
               fieldOfStudy: edu.fieldOfStudy,
               institution: edu.institution,
               startDate: this.datePipe.transform(edu.startDate, 'yyyy-MM-dd'),
               endDate: this.datePipe.transform(edu.endDate, 'yyyy-MM-dd')
-            }, { validators: endDateValidator }); // Attach the validator
-
+            });
             this.educations.push(educationForm);
           });
         }
@@ -249,13 +251,15 @@ export default class EditProfileComponent implements OnInit {
         // Populate work experiences
         if (profile.workExperiences?.length) {
           profile.workExperiences.forEach(exp => {
-            const experienceForm = this.fb.group({
+            const experienceForm = this.createExperienceForm();
+
+            experienceForm.setValue({
               companyName: exp.companyName,
               jobTitle: exp.jobTitle,
               startDate: this.datePipe.transform(exp.startDate, 'yyyy-MM-dd'),
               endDate: this.datePipe.transform(exp.endDate, 'yyyy-MM-dd'),
               jobDescription: exp.jobDescription
-            }, { validators: endDateValidator }); // Attach the validator
+            });
 
             this.workExperiences.push(experienceForm);
           });
@@ -276,7 +280,6 @@ export default class EditProfileComponent implements OnInit {
       }
     }
   }
-
 
   nextPage() {
     this.currentPage++;
@@ -570,16 +573,14 @@ export default class EditProfileComponent implements OnInit {
     });
   }
 
-  onDateChange(formArray: FormArray, index: number): void {
+  onDateChange(formArray: FormArray, index: number, controlName: string): void {
     const formGroup = formArray.at(index) as FormGroup;
-  
-    // Trigger validation for startDate and endDate
-    formGroup.get('startDate')?.updateValueAndValidity();
-    formGroup.get('endDate')?.updateValueAndValidity();
+
+    formGroup.get(controlName)?.updateValueAndValidity();
     /*debug*/console.log("inicio: ", formGroup.get('startDate')?.value);
     /*debug*/console.log("fim: ", formGroup.get('endDate')?.value);
   }
-  
+
 
   private displayFormErrors(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {

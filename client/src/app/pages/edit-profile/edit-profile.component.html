@@ -444,7 +444,7 @@
                                             <label class="font-semibold" for="startDate">Data de Início</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="date"
                                                 name="startDate" id="startDate" placeholder="Data de Início"
-                                                formControlName="startDate" required (change)="onDateChange(workExperiences,i)">
+                                                formControlName="startDate" required (change)="onDateChange(workExperiences, i, 'startDate')">
                                             <span
                                                 *ngIf="experienceForm.hasError('required', 'startDate') && experienceForm.get('startDate')?.touched"
                                                 class="text-red-500">*Start Date is required</span>
@@ -455,7 +455,7 @@
                                             <label class="font-semibold" for="endDate">Data de Término</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="date"
                                                 name="endDate" id="endDate" placeholder="Data de Término"
-                                                formControlName="endDate" required (change)="onDateChange(workExperiences,i)">
+                                                formControlName="endDate" required (change)="onDateChange(workExperiences, i, 'endDate')">
                                             <span
                                                 *ngIf="experienceForm.hasError('required', 'endDate') && experienceForm.get('endDate')?.touched"
                                                 class="text-red-500">*End Date is required</span>
@@ -548,7 +548,7 @@
                                             <label class="font-semibold" for="startDate">Data de Início</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="date"
                                                 name="startDate" id="startDate" placeholder="Data de Início"
-                                                formControlName="startDate" required (change)="onDateChange(educations,i)">
+                                                formControlName="startDate" required (change)="onDateChange(educations, i, 'startDate')">
                                             <span
                                                 *ngIf="educationsForm.hasError('required', 'startDate') && educationsForm.get('startDate')?.touched"
                                                 class="text-red-500">*Start Date is required</span>
@@ -559,7 +559,7 @@
                                             <label class="font-semibold" for="endDate">Data de Término</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="date"
                                                 name="endDate" id="endDate" placeholder="Data de Término"
-                                                formControlName="endDate" required (change)="onDateChange(educations,i)">
+                                                formControlName="endDate" required (change)="onDateChange(educations, i, 'endDate')">
                                             <span
                                                 *ngIf="educationsForm.hasError('required', 'endDate') && educationsForm.get('endDate')?.touched"
                                                 class="text-red-500">*End Date is required</span>
