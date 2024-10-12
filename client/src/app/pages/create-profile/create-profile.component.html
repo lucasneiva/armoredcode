@@ -596,7 +596,7 @@
                             <div *ngFor="let certificationForm of certifications.controls; let i = index"
                                 class="border p-4 rounded my-2">
                                 <!-- certification start-->
-                                <div *ngIf="certifications.length > 0" [formGroupName]="i" class="grid justify-between">
+                                <div *ngIf="certifications.length > 0" [formGroupName]="i" class="border p-4 rounded my-2">
                                     <h3 class="font-semibold text-lg">Certificação {{ i + 1 }}</h3>
                                     <div class="lg:flex max-lg:grid lg:space-x-4 h-fit">
                                         <!-- title start-->

@@ -46,7 +46,7 @@ export default class EditProfileComponent implements OnInit {
     return this.freelancerProfileForm.get('skillIds') as FormArray;
   }
 
-  selectedSkillId: string = ''; 
+  selectedSkillId: string = '';
   userRole: string | null = null;
   isLoading = true;
   profile: Profile | null = null;
@@ -168,7 +168,7 @@ export default class EditProfileComponent implements OnInit {
   // Populate form fields with fetched profile data
   populateForms(profile: Profile | null) {
     if (profile) {
-      if (this.userRole == "CLIENT") {
+      if (this.userRole === "CLIENT") {
         // Populate client form
         this.clientProfileForm.patchValue({
           companyName: profile.companyName,
@@ -198,7 +198,6 @@ export default class EditProfileComponent implements OnInit {
           hourlyRate: {
             min: profile.hourlyRate?.min,
             max: profile.hourlyRate?.max,
-            // currency should already be 'R$'
           },
           location: {
             cep: profile.location?.cep || '',
@@ -210,76 +209,63 @@ export default class EditProfileComponent implements OnInit {
           }
         });
 
-        // Preenche os FormArrays somente se houver dados no perfil
-        // portfolio
+        // Populate portfolio items
         if (profile.portfolioItems?.length) {
           profile.portfolioItems.forEach(item => {
-            const PortfolioTitle = item.title;
-            const PortfolioDescripition = item.description;
-            const PortfolioURL = item.url;
             this.portfolioItems.push(this.fb.group({
-              title: PortfolioTitle,
-              description: PortfolioDescripition,
-              url: PortfolioURL
+              title: item.title,
+              description: item.description,
+              url: item.url
             }));
           });
         }
 
-        // Educacional
+        // Populate educations
         if (profile.educations?.length) {
           profile.educations.forEach(edu => {
-            const DegreeName = edu.degreeName;
-            const FieldOfStudy = edu.fieldOfStudy;
-            const Institution = edu.institution;
-            const formattedStartDate = this.datePipe.transform(edu.startDate, 'yyyy-MM-dd');
-            const formattedEndDate = this.datePipe.transform(edu.endDate, 'yyyy-MM-dd');
-            this.educations.push(this.fb.group({
-              degreeName: DegreeName,
-              fieldOfStudy: FieldOfStudy,
-              institution: Institution,
-              startDate: formattedStartDate,
-              endDate: formattedEndDate
-            }));
+            const educationForm = this.fb.group({
+              degreeName: edu.degreeName,
+              fieldOfStudy: edu.fieldOfStudy,
+              institution: edu.institution,
+              startDate: this.datePipe.transform(edu.startDate, 'yyyy-MM-dd'),
+              endDate: this.datePipe.transform(edu.endDate, 'yyyy-MM-dd')
+            }, { validators: endDateValidator }); // Attach the validator
+
+            this.educations.push(educationForm);
           });
         }
 
-        //certificacoes
+        // Populate certifications
         if (profile.certifications?.length) {
           profile.certifications.forEach(cert => {
-            const certificationName = cert.name;
-            const certificationOrganization = cert.issuingOrganization;
-            const formattedIssueDate = this.datePipe.transform(cert.issueDate, 'yyyy-MM-dd'); // Formate a data
             this.certifications.push(this.fb.group({
-              name: certificationName,
-              issuingOrganization: certificationOrganization,
-              issueDate: formattedIssueDate // Adicione a data formatada
+              name: cert.name,
+              issuingOrganization: cert.issuingOrganization,
+              issueDate: this.datePipe.transform(cert.issueDate, 'yyyy-MM-dd')
             }));
           });
         }
 
-        // Experiência profissional
+        // Populate work experiences
         if (profile.workExperiences?.length) {
           profile.workExperiences.forEach(exp => {
-            const CompanyName = exp.companyName;
-            const JobTitle = exp.jobTitle;
-            const formattedStartDate = this.datePipe.transform(exp.startDate, 'yyyy-MM-dd');
-            const formattedEndDate = this.datePipe.transform(exp.endDate, 'yyyy-MM-dd');
-            const JobDescription = exp.jobDescription;
-            this.workExperiences.push(this.fb.group({
-              companyName: CompanyName,
-              jobTitle: JobTitle,
-              startDate: formattedStartDate,
-              endDate: formattedEndDate,
-              jobDescription: JobDescription
-            }));
+            const experienceForm = this.fb.group({
+              companyName: exp.companyName,
+              jobTitle: exp.jobTitle,
+              startDate: this.datePipe.transform(exp.startDate, 'yyyy-MM-dd'),
+              endDate: this.datePipe.transform(exp.endDate, 'yyyy-MM-dd'),
+              jobDescription: exp.jobDescription
+            }, { validators: endDateValidator }); // Attach the validator
+
+            this.workExperiences.push(experienceForm);
           });
         }
 
-        // Populate skillIds FormArray and ensure skill names are available
-        if (profile && profile.skillIds && profile.skillIds.length > 0) {
+        // Populate skillIds FormArray
+        if (profile.skillIds && profile.skillIds.length > 0) {
           const skillIdsControl = this.freelancerProfileForm.get('skillIds') as FormArray;
           profile.skillIds.forEach(skillId => {
-            const skill = this.skills.find(s => s._id === skillId); // Find skill object
+            const skill = this.skills.find(s => s._id === skillId);
             if (skill) {
               skillIdsControl.push(new FormControl(skill._id));
             } else {
@@ -287,10 +273,10 @@ export default class EditProfileComponent implements OnInit {
             }
           });
         }
-
       }
     }
   }
+
 
   nextPage() {
     this.currentPage++;
@@ -405,15 +391,6 @@ export default class EditProfileComponent implements OnInit {
       endDate: ['', [Validators.required, endDateValidator]], // Use the imported validator
       jobDescription: ['']
     });
-  }
-
-  onDateChange(index: number): void {
-    const experienceForm = this.workExperiences.at(index) as FormGroup;
-  
-    // Trigger validation for endDate whenever startDate or endDate is changed
-    experienceForm.get('startDate')?.updateValueAndValidity();
-    experienceForm.get('endDate')?.updateValueAndValidity();
-    console.log(this.workExperiences);
   }
 
   // educations 
@@ -592,6 +569,17 @@ export default class EditProfileComponent implements OnInit {
       };
     });
   }
+
+  onDateChange(formArray: FormArray, index: number): void {
+    const formGroup = formArray.at(index) as FormGroup;
+  
+    // Trigger validation for startDate and endDate
+    formGroup.get('startDate')?.updateValueAndValidity();
+    formGroup.get('endDate')?.updateValueAndValidity();
+    /*debug*/console.log("inicio: ", formGroup.get('startDate')?.value);
+    /*debug*/console.log("fim: ", formGroup.get('endDate')?.value);
+  }
+  
 
   private displayFormErrors(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
