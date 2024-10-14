@@ -31,7 +31,7 @@ export default class ManageInviteComponent implements OnInit{
           this.isLoading = false;
         },
         error: (err) => {
-          console.error("Error fetching projects:", err);
+          console.error("Error fetching invites:", err);
           this.isLoading = false;
         }
       });

@@ -47,7 +47,8 @@
             <ng-container *ngIf="isLoggedIn">
                 <div class="flex w-full text-gray-200 text-2xl font-bold max-lg:hidden">
                     <span class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Busca</span>
-                    <span class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Convites</span>
+                    <span routerLink="/manage-invite" 
+                        class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Convites</span>
                     <span class="cursor-pointer m-4 hover:underline hover:text-indigo-200">Mensagens</span>
                     <span routerLink="/manage-project"
                         class=" cursor-pointer m-4 hover:underline hover:text-indigo-200">Projetos
@@ -74,7 +75,8 @@
                     <div class="flex justify-center py-8 hover:bg-sky-800 cursor-pointer hover:underline hover:text-indigo-200">
                         Busca
                     </div>
-                    <div class="flex justify-center py-8 hover:bg-sky-800 cursor-pointer hover:underline hover:text-indigo-200">
+                    <div routerLink="/manage-invite" 
+                        class="flex justify-center py-8 hover:bg-sky-800 cursor-pointer hover:underline hover:text-indigo-200">
                         Convites
                     </div>
                     <div class="flex justify-center py-8 hover:bg-sky-800 cursor-pointer hover:underline hover:text-indigo-200">
