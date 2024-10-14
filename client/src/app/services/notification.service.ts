@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiUrls } from '../api.urls';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,9 @@ export class NotificationService {
       }),
       withCredentials: true
     };
-    return this.http.get<any>(`${apiUrls.notificationServiceApi}/${freelancerId}`, httpOptions);
+    return this.http.get<any>(`${apiUrls.notificationServiceApi}/freelancer/${freelancerId}`, httpOptions).pipe(
+      tap(response => console.log('API response:', response))  // Log API response
+    );
   }
 
   getInviteById(inviteId: string | null): Observable<any> {

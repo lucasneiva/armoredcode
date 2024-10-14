@@ -28,6 +28,7 @@ export default class ManageInviteComponent implements OnInit{
       this.notificationService.getFreelancerNotifications(this.authService.getUserId()).subscribe({
         next: (res) => {
           this.invites = res.data;
+          /*debug*/ console.log("invites fetched:", res.data);
           this.isLoading = false;
         },
         error: (err) => {
