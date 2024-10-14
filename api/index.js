@@ -15,6 +15,7 @@ import industryRoutes from "./routes/industryRoutes.js";
 import specializationRoutes from "./routes/specializationRoutes.js";
 import cookieParser from "cookie-parser";
 import notificationRoutes from "./routes/notificationRoutes.js";
+import searchRoutes from "./routes/searchRoutes.js";
 
 // Fixtures
 import seedProjectCategories from './fixtures/projectCategoryFixture.js';
@@ -27,8 +28,6 @@ import seedFreelancerProfiles from "./fixtures/freelancerProfileFixture.js";
 import seedClientProfiles from "./fixtures/clientProfileFixture.js";
 import seedProjects from "./fixtures/projectFixture.js";
 import seedNotifications from "./fixtures/notificationFixture.js";
-
-import { searchProjects, getProjectById, createProject } from './controllers/projectController.js';
 
 const app = express();
 dotenv.config();
@@ -57,7 +56,8 @@ app.use( "/api/skills", skillRoutes );
 app.use( "/api/project-categories", projectCategoryRoutes );
 app.use( "/api/specializations", specializationRoutes );
 app.use( "/api/industries", industryRoutes );
-app.use( "/api/notifications", notificationRoutes)
+app.use( "/api/notifications", notificationRoutes );
+app.use( "/api/search", searchRoutes );
 
 const connectMongoDB = async () => {
     try {
@@ -98,17 +98,17 @@ app.listen( 8800, async () => {
         await seedSkills();
 
         // Seed Users First!
-        await seedUsers(); 
+        await seedUsers();
 
         // Then seed profiles (which depend on users)
         await seedFreelancerProfiles();
         await seedClientProfiles();
 
-        await seedProjects(); 
-        await seedProposals(); 
+        await seedProjects();
+        await seedProposals();
         //
         await seedNotifications();
-        
+
 
     } catch ( error ) {
         console.error( `Error connecting to MongoDB: ${error}` );
