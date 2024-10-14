@@ -1,0 +1,176 @@
+// landig-page.component.scss
+
+/* Variáveis */
+$primary-color: #007bff; // Azul
+$secondary-color: #6c757d; // Cinza
+$light-gray: #f8f9fa;
+
+/* Estilos Gerais */
+body {
+  font-family: sans-serif;
+}
+
+.landing-page {
+  /* Estilos gerais da página */
+  background-color: white;
+}
+
+/* Seção Hero */
+.hero {
+  background-color: $light-gray;
+  padding: 100px 0;
+  text-align: center;
+
+  .hero-content {
+    h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-buttons {
+      .btn {
+        margin: 0 1rem;
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background-color: $primary-color;
+        color: white;
+      }
+
+      .btn-secondary {
+        background-color: $secondary-color;
+        color: white;
+      }
+    }
+  }
+}
+
+/* Seção Problema & Solução */
+.problem-solution {
+  padding: 50px 0;
+
+  .row {
+    align-items: center; // Alinha verticalmente
+
+    div {
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}
+
+/* Seção Benefícios */
+.benefits {
+  background-color: $light-gray;
+  padding: 50px 0;
+  text-align: center;
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .row {
+    div {
+      h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          font-size: 1.2rem;
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+/* Seção Como Funciona */
+.how-it-works {
+  padding: 50px 0;
+  text-align: center;
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .row {
+    .step {
+      margin-bottom: 2rem;
+
+      .step-number {
+        font-size: 2rem;
+        font-weight: bold;
+        border-radius: 50%;
+        background-color: $primary-color;
+        color: white;
+        width: 40px;
+        height: 40px;
+        display: inline-block;
+        line-height: 40px;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}
+
+/* Seção Chamada para Ação Final */
+.call-to-action {
+  background-color: $primary-color;
+  color: white;
+  padding: 50px 0;
+  text-align: center;
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .cta-buttons {
+    .btn {
+      margin: 0 1rem;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: white;
+      color: $primary-color;
+    }
+
+    .btn-secondary {
+      background-color: $secondary-color;
+      color: white;
+    }
+  }
+}
+
+/* Rodapé */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
