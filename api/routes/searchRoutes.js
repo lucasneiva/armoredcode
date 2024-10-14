@@ -4,6 +4,6 @@ const router = express.Router();
 
 router.get('/projects/', searchProjects);
 
-router.get('/freelacers/', searchFreelancers);
+router.get('/freelancers/', searchFreelancers);
 
 export default router;
