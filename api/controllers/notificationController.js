@@ -8,16 +8,16 @@ import { handleValidationError } from '../utils/handleValidationError.js';
 
 export const createNotification = async ( req, res ) => {
     try {
-        const { projectId, freelancerProfileId, message } = req.body;
+        const { projectId, freelancerId, message } = req.body;
 
         // Validate input
-        if ( !projectId || !freelancerProfileId ) {
+        if ( !projectId || !freelancerId ) {
             return res.status( 400 ).json( { error: 'Missing required fields' } );
         }
 
         // Find the project and freelancerProfile
         const project = await Project.findById( projectId );
-        const freelancerProfile = await FreelancerProfile.findById( freelancerProfileId );
+        const freelancerProfile = await FreelancerProfile.findById( freelancerId );
 
         if ( !project || !freelancerProfile ) {
             return res.status( 404 ).json( { error: 'Project or freelancerProfile not found' } );
@@ -28,7 +28,7 @@ export const createNotification = async ( req, res ) => {
 
         // Create the notification
         const notification = new Notification( {
-            freelancerProfileId,
+            freelancerId,
             clientId: req.user.id, // deve ser id perfil kkkk arrumar
             projectId,
             message,
@@ -39,17 +39,17 @@ export const createNotification = async ( req, res ) => {
 
         res.status( 201 ).json( { message: 'Notification created successfully', notification } );
     } catch ( error ) {
-        console.error( error );
+        console.error( error.message );
         handleValidationError( error, next );
     }
 };
 
 export const getFreelancerNotifications = async ( req, res ) => {
     try {
-        const { freelancerProfileId } = req.params;
+        const { freelancerId } = req.params;
 
         // Find all notifications for the freelancerProfile
-        const notifications = await Notification.find( { freelancerProfileId } ).sort( { createdAt: -1 } );
+        const notifications = await Notification.find( { freelancerId } ).sort( { createdAt: -1 } );
 
         res.status( 200 ).json( notifications );
     } catch ( error ) {
