@@ -7,11 +7,13 @@ import { UserService } from '../../services/user.service';
 import { SpecializationService } from '../../services/specialization.service';
 import { AuthService } from '../../services/auth.service';
 import { NotificationService } from '../../services/notification.service';
+import { ProjectListComponent } from '../project-list/project-list.component';
+import { Project } from '../../services/project.service';
 
 @Component({
   selector: 'app-freelancer-card',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ProjectListComponent],
   templateUrl: './freelancer-card.component.html',
   styleUrl: './freelancer-card.component.scss'
 })
@@ -30,6 +32,8 @@ export class FreelancerCardComponent {
   @Input() freelancer: any;
   detailedfreelancer: any = null;
   showDetails = false; // Flag to control showing details
+  showProjectList = false;
+  selectedProject: Project | null = null;
 
   freelancerName = '';
   specializationName: string = '';
@@ -112,7 +116,7 @@ export class FreelancerCardComponent {
       this.skillService.getSkillById(skillId).subscribe({
         next: (skillData) => {
           const skillName = skillData.data.skillName;
-  
+
           // Check if the skill is already in the array
           if (!this.skills.includes(skillName)) {
             this.skills.push(skillName);
@@ -131,13 +135,21 @@ export class FreelancerCardComponent {
   }
 
   sendInvite() {
+    this.showProjectList = true; // Show the project list when "Send Invite" is clicked
+  }
+  
+  handleProjectSelection(project: Project) {
+    this.selectedProject = project;
+    this.showProjectList = false; // Hide the list after selection
     const clientId = this.authService.getUserId(); // Assuming you have a method to get the logged-in client's ID
-    const freelancerId = this.freelancer._id; 
+    const freelancerId = this.freelancer._id;
+    const projectId = this.selectedProject?._id; // Get the selected project ID 
 
     if (clientId && freelancerId) {
       const notificationObj = {
         clientId: clientId,
         freelancerId: freelancerId,
+        projectId: projectId,
         message: "You have been invited to a project!", // Customize the message as needed
       };
 
