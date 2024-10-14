@@ -34,8 +34,9 @@
                     </svg>
                 </button>
             </div>
-            <div class="flex justify-start align-middle">
-                <p class="text-sm text-gray-500">ID do Projeto: {{proposal.projectId}} |</p>
+            <div class="lg:flex max-lg:grid justify-start align-middle">
+                <p class="text-sm text-gray-500">ID do Projeto: {{proposal.projectId}} <span
+                        class="lg:visible max-lg:hidden">|</span></p>
                 <p class="text-sm text-gray-500 ml-1"> ID da Proposta: {{proposal._id}}</p>
             </div>
 
@@ -49,6 +50,7 @@
                     <ng-container *ngIf="detailedProposal.pricingType == 'BUDGET'">
                         <p>
                             <strong>Orçamento:</strong>
+                            {{project.projectBudget.currency}}
                             {{detailedProposal.proposedBudget}}
                         </p>
                     </ng-container>
@@ -56,12 +58,21 @@
                     <ng-container *ngIf="detailedProposal.pricingType == 'HOURLY_RATE'">
                         <p>
                             <strong>Preço por Hora:</strong>
+                            {{project.projectHourlyRate.currency}}
                             {{detailedProposal.proposedHourlyRate}}
                         </p>
                     </ng-container>
 
-                    <p><strong>Duração Estimada :</strong> {{detailedProposal.estimatedDuration}}</p>
-                    <p><strong>Status da Proposta:</strong> {{detailedProposal.status}}</p>
+                    <p><strong>Duração Estimada: </strong>
+                        {{detailedProposal.estimatedDuration}} {{detailedProposal.estimatedDuration > 1 ? 'dias'
+                        : 'dia'}}
+                    </p>
+                    <p><strong>Status da Proposta: </strong>
+                        <ng-container *ngIf="proposal.status === 'DRAFT'">Rascunho</ng-container>
+                        <ng-container *ngIf="proposal.status === 'PENDING'">Pendente</ng-container>
+                        <ng-container *ngIf="proposal.status === 'REJECTED'">Rejeitada</ng-container>
+                        <ng-container *ngIf="proposal.status === 'ACCEPTED'">Aceita</ng-container>
+                    </p>
                 </div>
             </div>
 

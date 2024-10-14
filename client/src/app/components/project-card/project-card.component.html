@@ -156,14 +156,36 @@
           </p>
         </div>
         <div>
-          <p><strong>Nível de Experiência:</strong> {{detailedProject.experienceLevel}}</p>
-          <p><strong>Forma de trabalho:</strong> {{detailedProject.workModel}}</p>
-          <p><strong>Tipo de Precificação:</strong> {{detailedProject.pricingType}}</p>
-          <p><strong>Duração estimada:</strong> {{detailedProject.estimatedDuration}}
-            {{detailedProject.estimatedDuration > 1 ? 'dias'
-            : 'dia'}}</p>
-          <p><strong>Escopo do Projeto:</strong> {{detailedProject.projectSize}}</p>
-          <p><strong>Status do Projeto:</strong> {{detailedProject.projectStatus}}</p>
+          <p><strong>Nível de Experiência: </strong>
+            <ng-container *ngIf="detailedProject.experienceLevel === 'ENTRY-LEVEL'">Júnior</ng-container>
+            <ng-container *ngIf="detailedProject.experienceLevel === 'MID-LEVEL'">Pleno</ng-container>
+            <ng-container *ngIf="detailedProject.experienceLevel === 'SENIOR'">Senior</ng-container>
+          </p>
+          <p><strong>Forma de trabalho: </strong>
+            <ng-container *ngIf="detailedProject.workModel === 'REMOTE'">Remoto</ng-container>
+            <ng-container *ngIf="detailedProject.workModel === 'ON_SITE'">Presencial</ng-container>
+            <ng-container *ngIf="detailedProject.workModel === 'HYBRID'">Hibrido</ng-container>
+          </p>
+          <p><strong>Tipo de Precificação: </strong>
+            <ng-container *ngIf="detailedProject.pricingType === 'BUDGET'">Orçamento</ng-container>
+            <ng-container *ngIf="detailedProject.pricingType === 'HOURLY_RATE'">Preço por Hora</ng-container>
+          </p>
+          <p><strong>Duração estimada:</strong> 
+            {{detailedProject.estimatedDuration}}
+            {{detailedProject.estimatedDuration > 1 ? 'dias': 'dia'}}
+          </p>
+          <p><strong>Escopo do Projeto: </strong>
+            <ng-container *ngIf="detailedProject.projectSize === 'SMALL'">Pequeno</ng-container>
+            <ng-container *ngIf="detailedProject.projectSize === 'MEDIUM'">Médio</ng-container>
+            <ng-container *ngIf="detailedProject.projectSize === 'LARGE'">Grande</ng-container>
+          </p>
+          <p><strong>Status do Projeto: </strong>
+            <ng-container *ngIf="project.projectStatus === 'DRAFT'">Rascunho</ng-container>
+            <ng-container *ngIf="project.projectStatus === 'POSTED'">Postado</ng-container>
+            <ng-container *ngIf="project.projectStatus === 'IN_PROGRESS'">Em Progresso</ng-container>
+            <ng-container *ngIf="project.projectStatus === 'CANCELLED'">Cancelado</ng-container>
+            <ng-container *ngIf="project.projectStatus === 'COMPLETED'">Finalizado</ng-container>
+          </p>
         </div>
       </div>
 
