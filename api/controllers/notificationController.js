@@ -2,6 +2,9 @@ import Notification from '../models/notificationModel.js';
 import Project from '../models/projectModel.js';
 import FreelancerProfile from '../models/freelancerProfileModel.js';
 import ClientProfile from '../models/clientProfileModel.js';
+import { createError } from '../utils/error.js';
+import { createSuccess } from '../utils/success.js';
+import { handleValidationError } from '../utils/handleValidationError.js';
 
 export const createNotification = async ( req, res ) => {
     try {
@@ -37,7 +40,7 @@ export const createNotification = async ( req, res ) => {
         res.status( 201 ).json( { message: 'Notification created successfully', notification } );
     } catch ( error ) {
         console.error( error );
-        res.status( 500 ).json( { error: 'Failed to create notification' } );
+        handleValidationError( error, next );
     }
 };
 
