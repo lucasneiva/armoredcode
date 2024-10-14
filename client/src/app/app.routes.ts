@@ -7,6 +7,7 @@ export const routes: Routes = [
     {path:'forget-password', loadComponent: ()=> import('./pages/forget-password/forget-password.component')},
     {path:'reset/:token', loadComponent: ()=> import('./pages/reset/reset.component')},
     {path:'home', loadComponent: ()=> import('./pages/home/home.component')},
+    {path:'manage-invite', loadComponent: ()=> import('./pages/manage-invite/manage-invite.component')},
     {path:'manage-profile', loadComponent: ()=> import('./pages/manage-profile/manage-profile.component')},
     {path:'create-profile', loadComponent: ()=> import('./pages/create-profile/create-profile.component')},
     {path:'edit-profile', loadComponent: ()=> import('./pages/edit-profile/edit-profile.component')},
