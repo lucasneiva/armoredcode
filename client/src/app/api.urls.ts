@@ -8,4 +8,5 @@ export const apiUrls = {
     skillServiceApi: 'http://localhost:8800/api/skills',
     specializationServiceApi: 'http://localhost:8800/api/specializations',
     userServiceApi: 'http://localhost:8800/api/users',
+    notificationServiceApi: 'http://localhost:8800/api/notifications',
 }
