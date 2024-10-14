@@ -8,10 +8,10 @@
                 <p class="lg:text-2xl max-lg:text-xl my-8">Plataforma que une empresas e desenvolvedores freelancers na
                     região de Sorocaba.</p>
                 <div class="hero-buttons lg:space-x-4 max-lg:space-y-4">
-                    <button routerLink="/register" class="btn bg-blue-400 hover:bg-blue-500">
+                    <button routerLink="/register" class="btn text-white bg-blue-400 hover:bg-blue-500">
                         Cadastre-se como Freelancer
                     </button>
-                    <button routerLink="/register" class="btn bg-gray-400 hover:bg-gray-500">
+                    <button routerLink="/register" class="btn text-white bg-gray-400 hover:bg-gray-500">
                         Encontre um Desenvolvedor
                     </button>
                 </div>
@@ -67,32 +67,24 @@
         <!-- Benefits section end -->
         <!-- how it work section start -->
         <section class="how-it-works">
-            <div class="container">
-                <h2>É Simples e Eficaz</h2>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="step">
-                            <span class="step-number">1</span>
-                            <p>Clientes postam projetos detalhados.</p>
-                        </div>
+            <div class="container justify-center mx-auto">
+                <h2 class="text-4xl">É Simples e Eficaz</h2>
+                <div class="lg:flex max-lg:grid lg:space-x-6 max-lg:space-y-6 justify-center align-middle">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <p class="p-4 text-lg">Clientes postam projetos detalhados.</p>
                     </div>
-                    <div class="col-md-3">
-                        <div class="step">
-                            <span class="step-number">2</span>
-                            <p>Freelancers se candidatam com propostas personalizadas.</p>
-                        </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <p class="p-4 text-lg">Freelancers se candidatam com propostas.</p>
                     </div>
-                    <div class="col-md-3">
-                        <div class="step">
-                            <span class="step-number">3</span>
-                            <p>Clientes escolhem o freelancer ideal.</p>
-                        </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <p class="p-4 text-lg">Clientes escolhem o freelancer ideal.</p>
                     </div>
-                    <div class="col-md-3">
-                        <div class="step">
-                            <span class="step-number">4</span>
-                            <p>Projeto é desenvolvido e entregue com sucesso.</p>
-                        </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <p class="p-4 text-lg">Projeto é desenvolvido e entregue.</p>
                     </div>
                 </div>
             </div>
@@ -100,11 +92,15 @@
         <!-- how it work section end -->
         <!-- final action start -->
         <section class="call-to-action">
-            <div class="container">
-                <h2>Junte-se à Comunidade ArmoredCode!</h2>
-                <div class="cta-buttons">
-                    <button routerLink="/register" class="btn btn-primary">Cadastre-se como Freelancer</button>
-                    <button routerLink="/projects" class="btn btn-secondary">Encontre um Desenvolvedor</button>
+            <div class="container justify-center mx-auto">
+                <h2 class="text-4xl">Junte-se à Comunidade ArmoredCode!</h2>
+                <div class="mt-8">
+                    <button routerLink="/register" class="btn bg-transparent hover:bg-white hover:text-black">
+                        Cadastre-se como Freelancer
+                    </button>
+                    <button routerLink="/register" class="btn bg-transparent hover:bg-white hover:text-black">
+                        Encontre um Desenvolvedor
+                    </button>
                 </div>
             </div>
         </section>

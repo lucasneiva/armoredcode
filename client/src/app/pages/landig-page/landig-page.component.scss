@@ -5,109 +5,85 @@ $light-gray: #f8f9fa;
 
 /* Estilos Gerais */
 body {
-  font-family: sans-serif;
+    font-family: sans-serif;
 }
 
 .landing-page {
-  background-color: white;
+    background-color: white;
 }
 
 .btn {
     font-size: larger;
     font-weight: 500;
     text-align: center;
-    color: white;
     padding: 1rem 6rem 1rem 6rem;
     border-radius: 0.5rem;
 }
 
 /* Seção Hero */
 .hero {
-  background-color: $light-gray;
-  padding: 100px 0;
-  text-align: center;
+    background-color: $light-gray;
+    padding: 100px 0;
+    text-align: center;
 
-  .hero-content {
-    padding: 5rem 1rem 0rem 1rem;
-    h1 {
-      font-weight: bold;
+    .hero-content {
+        padding: 5rem 1rem 0rem 1rem;
+
+        h1 {
+            font-weight: bold;
+        }
+
     }
-
-  }
 }
 
 /* Seção Problema & Solução */
 .problem-solution {
-  display: flex;
-  justify-content: center;
-  padding: 0rem 1rem;
+    display: flex;
+    justify-content: center;
+    padding: 0rem 1rem;
 
-  .container-row {
-    @media (min-width: 1024px) {
-        width: 64rem;
+    .container-row {
+        @media (min-width: 1024px) {
+            width: 64rem;
+        }
+
     }
-    
-  }
 }
 
 /* Seção Benefícios */
 .benefits {
-  background-color: $light-gray;
-  padding: 5rem 0rem;
-  text-align: center;
+    background-color: $light-gray;
+    padding: 5rem 0rem;
+    text-align: center;
 }
 
 /* Seção Como Funciona */
 .how-it-works {
-  padding: 50px 0;
-  text-align: center;
+    padding: 5rem 0rem;
+    text-align: center;
 
-  h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .row {
-    .step {
-      margin-bottom: 2rem;
-
-      .step-number {
-        font-size: 2rem;
-        font-weight: bold;
-        border-radius: 50%;
-        background-color: $primary-color;
-        color: white;
-        width: 40px;
-        height: 40px;
-        display: inline-block;
-        line-height: 40px;
-        margin-bottom: 0.5rem;
-      }
+    .step{
+        margin: 2rem 0rem;
+        @media (min-width: 1024px) {
+            width: 32rem;
+        }
+        .step-number{
+            margin-left: auto; margin-right: auto;
+            line-height: 3.5rem;
+            background-color: #007bff;
+            font-size: xx-large;
+            color: white;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 100%;
+        }
     }
-  }
 }
 
 /* Seção Chamada para Ação Final */
 .call-to-action {
-  background-color: $primary-color;
-  color: white;
-  padding: 50px 0;
-  text-align: center;
-
-  h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .cta-buttons {
-    .btn {
-      margin: 0 1rem;
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      border-radius: 5px;
-      border: none;
-      cursor: pointer;
-    }
-
-  }
+    background-color: $primary-color;
+    color: white;
+    padding: 3rem 0rem;
+    text-align: center;
 }
