@@ -64,3 +64,9 @@
     </div>
     <!--Buttons end-->
 </div>
+
+<!-- projects to select -->
+<ng-container *ngIf="userRole == 'CLIENT' && showProjectList">
+    <app-project-list (projectSelected)="handleProjectSelection($event)"></app-project-list>
+  </ng-container>
+<!-- projects to select -->
