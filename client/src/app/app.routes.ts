@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { LandigPageComponent } from '../app/pages/landig-page/landig-page.component'; // Importe o componente
 
 export const routes: Routes = [
     {path:'login', loadComponent: ()=> import('./pages/login/login.component')},
@@ -17,4 +18,7 @@ export const routes: Routes = [
     {path:'edit-proposal/:id', loadComponent: () => import('./pages/edit-proposal/edit-proposal.component')},
 
     {path:'freelancer-profile/:id', loadComponent: ()=> import('./pages/freelancer-profile/freelancer-profile.component')},
+
+    { path: '', redirectTo: '/landing', pathMatch: 'full' }, // Redireciona a raiz
+    { path: 'landing', component: LandigPageComponent }, // Rota para a landing page
 ];
