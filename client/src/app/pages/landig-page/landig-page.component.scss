@@ -1,5 +1,3 @@
-// landig-page.component.scss
-
 /* Variáveis */
 $primary-color: #007bff; // Azul
 $secondary-color: #6c757d; // Cinza
@@ -11,8 +9,16 @@ body {
 }
 
 .landing-page {
-  /* Estilos gerais da página */
   background-color: white;
+}
+
+.btn {
+    font-size: larger;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    padding: 1rem 6rem 1rem 6rem;
+    border-radius: 0.5rem;
 }
 
 /* Seção Hero */
@@ -22,37 +28,11 @@ body {
   text-align: center;
 
   .hero-content {
+    padding: 5rem 1rem 0rem 1rem;
     h1 {
-      font-size: 3rem;
       font-weight: bold;
-      margin-bottom: 1rem;
     }
 
-    p {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .hero-buttons {
-      .btn {
-        margin: 0 1rem;
-        padding: 1rem 2rem;
-        font-size: 1.2rem;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-      }
-
-      .btn-primary {
-        background-color: $primary-color;
-        color: white;
-      }
-
-      .btn-secondary {
-        background-color: $secondary-color;
-        color: white;
-      }
-    }
   }
 }
 
@@ -155,15 +135,6 @@ body {
       cursor: pointer;
     }
 
-    .btn-primary {
-      background-color: white;
-      color: $primary-color;
-    }
-
-    .btn-secondary {
-      background-color: $secondary-color;
-      color: white;
-    }
   }
 }
 
