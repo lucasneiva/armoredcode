@@ -17,6 +17,7 @@ export class ProjectListComponent {
   projects: Project[] = [];
 
   @Output() projectSelected = new EventEmitter<Project>();
+  @Output() projectListClosed = new EventEmitter<void>(); // New event emitter
 
   ngOnInit() {
     this.loadProjects();
@@ -42,5 +43,9 @@ export class ProjectListComponent {
 
   selectProject(project: Project) {
     this.projectSelected.emit(project);
+  }
+
+  closeProjectList() {
+    this.projectListClosed.emit(); 
   }
 }

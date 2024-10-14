@@ -65,23 +65,18 @@ export class NotificationService {
 export type Notification = {
   clientId: {
     type: String,
-    required: true,
   }
   freelancerId: {
     type: String,
-    required: true,
   }
   projectId?: {
     type: String,
-    required: false,
   }
   message: {
     type: String,
-    required: true,
   },
   timestamp: {
     type: Date,
-    required: false,
   },
   isRead: {
     type: Boolean,

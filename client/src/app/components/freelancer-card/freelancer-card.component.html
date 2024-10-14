@@ -4,14 +4,15 @@
         <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
             {{ freelancer.firstName }} {{ freelancer.lastName }}
         </h3>
-        <div *ngIf="freelancer.image; else defaultImage" class="w-16 h-16 rounded-full overflow-hidden"></div> 
+        <div *ngIf="freelancer.image; else defaultImage" class="w-16 h-16 rounded-full overflow-hidden"></div>
         <ng-template #defaultImage>
-            <img src="../../../assets/images/prf_icon.png" class="w-16 h-16 p-1 bg-gray-400 rounded-full overflow-hidden">
+            <img src="../../../assets/images/prf_icon.png"
+                class="w-16 h-16 p-1 bg-gray-400 rounded-full overflow-hidden">
         </ng-template>
     </div>
 
     <p class="text-gray-600 mt-4">
-        {{ specializationName || 'No Specialization' }} 
+        {{ specializationName || 'No Specialization' }}
     </p>
 
     <p class="mt-4 line-clamp-4 overflow-hidden">{{ freelancer.profileSummary || 'No profile summary available.' }}</p>
@@ -52,14 +53,14 @@
     <!--Buttons start-->
     <div class="mt-4 flex w-full space-x-4">
         <ng-container *ngIf="userRole == 'CLIENT'">
-          <button (click)="viewFreelancerProfile()"
-            class="bg-transparent hover:bg-blue-500 text-black hover:text-white font-bold py-2 px-4 border-2 border-slate-200 rounded w-full">
-            Ver Perfil
-          </button>
-          <button (click)="sendInvite()"
-            class="bg-transparent hover:bg-blue-500 text-black hover:text-white font-bold py-2 px-4 border-2 border-slate-200 rounded w-full">
-            Mandar Convite
-          </button>
+            <button (click)="viewFreelancerProfile()"
+                class="bg-transparent hover:bg-blue-500 text-black hover:text-white font-bold py-2 px-4 border-2 border-slate-200 rounded w-full">
+                Ver Perfil
+            </button>
+            <button (click)="sendInvite()"
+                class="bg-transparent hover:bg-blue-500 text-black hover:text-white font-bold py-2 px-4 border-2 border-slate-200 rounded w-full">
+                Mandar Convite
+            </button>
         </ng-container>
     </div>
     <!--Buttons end-->
@@ -67,6 +68,7 @@
 
 <!-- projects to select -->
 <ng-container *ngIf="userRole == 'CLIENT' && showProjectList">
-    <app-project-list (projectSelected)="handleProjectSelection($event)"></app-project-list>
-  </ng-container>
+    <app-project-list (projectSelected)="handleProjectSelection($event)" (projectListClosed)="showProjectList = false">
+    </app-project-list>
+</ng-container>
 <!-- projects to select -->
