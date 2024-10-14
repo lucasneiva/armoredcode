@@ -15,6 +15,7 @@ const NotificationSchema = new Schema( {
     projectId: { // Opcional
         type: Schema.Types.ObjectId,
         ref: 'Project',
+        required: false,
     },
     message: {
         type: String,
@@ -23,6 +24,7 @@ const NotificationSchema = new Schema( {
     timestamp: {
         type: Date,
         default: Date.now,
+        required: false,
     },
     isRead: {
         type: Boolean,

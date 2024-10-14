@@ -6,6 +6,7 @@ import { SkillService } from '../../services/skill.service';
 import { UserService } from '../../services/user.service';
 import { SpecializationService } from '../../services/specialization.service';
 import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-freelancer-card',
@@ -22,6 +23,7 @@ export class FreelancerCardComponent {
   specializationService = inject(SpecializationService);
   userService = inject(UserService);
   authService = inject(AuthService);
+  notificationService = inject(NotificationService);
 
   userRole: string | null = null;
 
@@ -126,5 +128,40 @@ export class FreelancerCardComponent {
   viewFreelancerProfile() {
     console.log("view Profile button clicked");
     this.router.navigate(['../freelancer-profile', this.freelancer._id], { relativeTo: this.route });
+  }
+
+  sendInvite() {
+    const clientId = this.authService.getUserId(); // Assuming you have a method to get the logged-in client's ID
+    const freelancerId = this.freelancer._id; 
+
+    if (clientId && freelancerId) {
+      const notificationObj = {
+        clientId: clientId,
+        freelancerId: freelancerId,
+        message: "You have been invited to a project!", // Customize the message as needed
+      };
+
+      /*debug*///
+      console.log(notificationObj);
+
+      this.notificationService.createNotification(notificationObj).subscribe({
+        next: (response) => {
+          if (response.success) {
+            console.log("Invite sent successfully!");
+            // You can add a success message or other actions here, like disabling the button
+          } else {
+            console.error("Failed to send invite:", response.message);
+            // Handle error, e.g., show an error message to the user
+          }
+        },
+        error: (error) => {
+          console.error("Error sending invite:", error);
+          // Handle error, e.g., show an error message to the user
+        }
+      });
+    } else {
+      console.error("Client ID or Freelancer ID is missing!");
+      // Handle the case where IDs are not available 
+    }
   }
 }

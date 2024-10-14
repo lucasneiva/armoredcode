@@ -1,1 +1,38 @@
-<p>manage-invite works!</p>
+<div class="grid min-h-screen h-fit">
+    <!--if no projects-->
+    <ng-container *ngIf="isLoading">
+        <div class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
+            <h1 class="text-center text-4xl text-gray-700">Carregando projetos...</h1>
+        </div>
+    </ng-container>
+
+    <!--if data-->
+    <ng-container *ngIf="!isLoading">
+        <!--if projects-->
+        <ng-container *ngIf="invites.length <= 0">
+            <div *ngIf="this.userRole == 'CLIENT'" class="block text-wrap max-w-md shadow-lg p-10 mx-auto my-auto bg-white h-fit">
+                <h1 class="text-center text-4xl text-gray-700">Que vazio!</h1>
+                <p class="text-left text-2xl text-gray-600 mt-4">
+                    Voçê ainda não tem nenhum convite na sua área de trabalho.
+                </p>
+            </div>
+
+            <div *ngIf="this.userRole == 'FREELANCER'" class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
+                <h1 class="text-center text-4xl text-gray-700">Que vazio!</h1>
+                <p class="text-left text-2xl text-gray-600 mt-4">
+                    Voçê ainda não tem nenhum convite na sua área de trabalho.
+                </p>
+            </div>
+        </ng-container>
+        <!--grid start-->
+        <ng-container *ngIf="invites.length > 0">
+            <div class="grid justify-center gap-4 my-28">
+                <!--app-project-card-->
+                <ng-container *ngFor="let invite of invites">
+                    <app-invite-card [invite]="invite"></app-invite-card>
+                </ng-container>
+            </div>
+        </ng-container>
+        <!--grid end-->
+    </ng-container>
+</div>
