@@ -8,8 +8,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class NotificationService {
   http = inject(HttpClient);
-  
-  createNotification(notificationObj: any){
+
+  createNotification(notificationObj: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -18,13 +18,13 @@ export class NotificationService {
     };
     return this.http.post<any>(`${apiUrls.notificationServiceApi}`, notificationObj, httpOptions);
   }
-  
-  getFreelancerNotifications(freelancerId: string|null): Observable<any> {
+
+  getFreelancerNotifications(freelancerId: string | null): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
-      withCredentials: true 
+      withCredentials: true
     };
     return this.http.get<any>(`${apiUrls.notificationServiceApi}/${freelancerId}`, httpOptions);
   }
@@ -40,7 +40,7 @@ export class NotificationService {
       //tap(response => console.log('API response:', response))  // Log API response
     );
   }
-  
+
   acceptInvite(inviteId: string): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -60,28 +60,31 @@ export class NotificationService {
     };
     return this.http.patch<any>(`${apiUrls.notificationServiceApi}/${inviteId}/reject`, {}, httpOptions);
   }
-  
+
 }
 export type Notification = {
-    clientId: {
-        type: String,
-        required: true,
-    }
-    freelancerId: {
-        type: String,
-        required: true,
-    }
-    projectId?: {
-        type: String,
-        required: false,
-    }
-    message: {
-        type: String,
-        required: true,
-    },
-    timestamp: Date;
-    isRead: {
-        type: Boolean,
-        default: false,
-    },
+  clientId: {
+    type: String,
+    required: true,
+  }
+  freelancerId: {
+    type: String,
+    required: true,
+  }
+  projectId?: {
+    type: String,
+    required: false,
+  }
+  message: {
+    type: String,
+    required: true,
+  },
+  timestamp: {
+    type: Date,
+    required: false,
+  },
+  isRead: {
+    type: Boolean,
+    default: false,
+  },
 }

@@ -28,11 +28,11 @@ export default class ManageInviteComponent implements OnInit{
       this.notificationService.getFreelancerNotifications(this.authService.getUserId()).subscribe({
         next: (res) => {
           this.invites = res.data;
-          this.isLoading = false; // Set loading to false after projects are loaded
+          this.isLoading = false;
         },
         error: (err) => {
           console.error("Error fetching projects:", err);
-          this.isLoading = false; // Set loading to false even on error
+          this.isLoading = false;
         }
       });
     }

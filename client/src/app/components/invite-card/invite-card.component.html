@@ -1,1 +1,39 @@
-<p>invite-card works!</p>
+<!--card template-->
+<ng-container *ngIf="invite">
+    <!--card start-->
+    <div style="top: calc(1rem * 1);" [ngClass]="{
+        'bg-stone-100': project?.projectStatus === 'COMPLETED',
+        'bg-white': project?.projectStatus !== 'COMPLETED'}"
+        class="sticky w-full lg:max-w-lg max-lg:max-w-md px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
+        <p class="text-sm text-gray-500">ID do convite: {{invite._id}}</p>
+        <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
+            <span *ngIf="project" class="block py-2 mr-2">{{project.projectTitle}}</span>
+            <span class="block w-fit p-2 border-2 border-transparent rounded-md text-white" [ngClass]="{'bg-yellow-500': invite.status === 'PENDING',
+                        'bg-red-500': invite.status === 'REJECTED',
+                        'bg-green-500': invite.status === 'ACCEPTED'}">
+                <ng-container *ngIf="invite.status === 'PENDING'">Pendente</ng-container>
+                <ng-container *ngIf="invite.status === 'REJECTED'">Rejeitado</ng-container>
+                <ng-container *ngIf="invite.status === 'ACCEPTED'">Aceito</ng-container>
+            </span>
+        </h2>
+    </div>
+    <!--card end-->
+    <!--Buttons start-->
+    <div class="mt-4 flex w-full space-x-4">
+        <ng-container *ngIf="userRole == 'FREELANCER'">
+            <button *ngIf="invite.status === 'PENDING'" (click)="acceptInvite()"
+                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">
+                Aceitar Convite
+            </button>
+            <button *ngIf="invite.status === 'PENDING'" (click)="rejectInvite()"
+                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
+                Rejeitar Convite
+            </button>
+        </ng-container>
+
+        <ng-container *ngIf="userRole == 'CLIENT'">
+            
+        </ng-container>
+    </div>
+    <!--Buttons end-->
+</ng-container>
