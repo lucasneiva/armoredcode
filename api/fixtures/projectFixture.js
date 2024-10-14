@@ -30,6 +30,9 @@ const generateLocationData = () => {
     };
 };
 
+// vetor com 30 paragrafos para cada projeto
+// Titulo e Paragrafo
+
 const generateProjectData = () => {
     const pricingTypes = [ "BUDGET", "HOURLY_RATE" ];
     const projectSizes = [ "SMALL", "MEDIUM", "LARGE" ];
