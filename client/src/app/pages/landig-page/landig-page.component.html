@@ -8,10 +8,12 @@
                 <p class="lg:text-2xl max-lg:text-xl my-8">Plataforma que une empresas e desenvolvedores freelancers na
                     região de Sorocaba.</p>
                 <div class="hero-buttons lg:space-x-4 max-lg:space-y-4">
-                    <button routerLink="/register" class="btn text-white bg-blue-400 hover:bg-blue-500">
+                    <button routerLink="/register" [queryParams]="{ role: 'FREELANCER' }" 
+                        class="btn text-white bg-blue-400 hover:bg-blue-500">
                         Cadastre-se como Freelancer
                     </button>
-                    <button routerLink="/register" class="btn text-white bg-gray-400 hover:bg-gray-500">
+                    <button routerLink="/register" [queryParams]="{ role: 'CLIENT' }" 
+                        class="btn text-white bg-gray-400 hover:bg-gray-500">
                         Encontre um Desenvolvedor
                     </button>
                 </div>
@@ -94,11 +96,13 @@
         <section class="call-to-action">
             <div class="container justify-center mx-auto">
                 <h2 class="text-4xl">Junte-se à Comunidade ArmoredCode!</h2>
-                <div class="mt-8">
-                    <button routerLink="/register" class="btn bg-transparent hover:bg-white hover:text-black">
+                <div class="mt-8 lg:space-x-4 max-lg:space-y-4">
+                    <button routerLink="/register" [queryParams]="{ role: 'FREELANCER' }" 
+                        class="btn text-white bg-transparent hover:bg-white hover:text-black">
                         Cadastre-se como Freelancer
                     </button>
-                    <button routerLink="/register" class="btn bg-transparent hover:bg-white hover:text-black">
+                    <button routerLink="/register" [queryParams]="{ role: 'CLIENT' }" 
+                        class="btn text-white bg-transparent hover:bg-white hover:text-black">
                         Encontre um Desenvolvedor
                     </button>
                 </div>

@@ -3,7 +3,7 @@ import { Component, Inject, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { confirmPasswordValidator } from '../../../app/validators/confirm-password.validator';
 import { AuthService } from '../../services/auth.service';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +17,7 @@ export default class RegisterComponent implements OnInit{
   fb = inject(FormBuilder);
   authService = inject(AuthService);
   router = inject(Router);
+  route: ActivatedRoute = inject(ActivatedRoute); 
   registerForm !: FormGroup;
 
   ngOnInit(): void {
@@ -24,9 +25,14 @@ export default class RegisterComponent implements OnInit{
       username: ['',Validators.required],
       email: ['',Validators.compose ([Validators.required, Validators.email])],
       password: ['',Validators.required],
-      role: ['CLIENT',Validators.required]
+      role: [this.getRoleFromQueryParams(), Validators.required] 
     },
     );
+  }
+
+  private getRoleFromQueryParams(): string {
+    const role = this.route.snapshot.queryParams['role'];
+    return role ? role : 'CLIENT'; // Default to 'CLIENT' if no role is provided
   }
 
   register(){
