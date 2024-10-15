@@ -16,6 +16,7 @@ const users = [
         role: "CLIENT",
         profileId: null,
     },
+    /*
     {
         username: "freelancer1",
         email: "freelancer1@example.com",
@@ -23,70 +24,18 @@ const users = [
         role: "FREELANCER",
         profileId: null,
     },
-    {
-        username: "freelancer2",
-        email: "freelancer2@example.com",
-        password: await bcrypt.hash( "password123", 10 ),
-        role: "FREELANCER",
-        profileId: null,
-    },
-    {
-        username: "freelancer3",
-        email: "freelancer3@example.com",
-        password: await bcrypt.hash( "password123", 10 ),
-        role: "FREELANCER",
-        profileId: null,
-    },
-    {
-        username: "freelancer4",
-        email: "freelancer4@example.com",
-        password: await bcrypt.hash( "password123", 10 ),
-        role: "FREELANCER",
-        profileId: null,
-    },
-    {
-        username: "freelancer5",
-        email: "freelancer5@example.com",
-        password: await bcrypt.hash( "password123", 10 ),
-        role: "FREELANCER",
-        profileId: null,
-    },
-    {
-        username: "freelancer6",
-        email: "freelancer6@example.com",
-        password: await bcrypt.hash( "password123", 10 ),
-        role: "FREELANCER",
-        profileId: null,
-    },
-    {
-        username: "freelancer7",
-        email: "freelancer7@example.com",
-        password: await bcrypt.hash( "password123", 10 ),
-        role: "FREELANCER",
-        profileId: null,
-    },
-    {
-        username: "freelancer8",
-        email: "freelancer8@example.com",
-        password: await bcrypt.hash( "password123", 10 ),
-        role: "FREELANCER",
-        profileId: null,
-    },
-    {
-        username: "freelancer9",
-        email: "freelancer9@example.com",
-        password: await bcrypt.hash( "password123", 10 ),
-        role: "FREELANCER",
-        profileId: null,
-    },
-    {
-        username: "freelancer10",
-        email: "freelancer10@example.com",
-        password: await bcrypt.hash( "password123", 10 ),
-        role: "FREELANCER",
-        profileId: null,
-    },
+    */
 ];
+
+for (let i = 1; i <= 30; i++) {
+    users.push({
+        username: `freelancer${i}`,
+        email: `freelancer${i}@example.com`,
+        password: await bcrypt.hash("password123", 10),
+        role: "FREELANCER",
+        profileId: null,
+    });
+}
 
 const seedUsers = async () => {
     try {
