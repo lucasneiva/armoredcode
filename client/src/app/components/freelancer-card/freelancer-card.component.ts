@@ -153,13 +153,12 @@ export class FreelancerCardComponent {
         message: "You have been invited to a project!", // Customize the message as needed
       };
 
-      /*debug*///
-      console.log(notificationObj);
+      /*debug*/ //console.log(notificationObj);
 
       this.notificationService.createNotification(notificationObj).subscribe({
         next: (response) => {
           if (response.success) {
-            console.log("Invite sent successfully!");
+            alert("Invite sent successfully!");
             // You can add a success message or other actions here, like disabling the button
           } else {
             console.error("Failed to send invite:", response.message);
