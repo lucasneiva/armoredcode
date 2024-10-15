@@ -1,5 +1,5 @@
 <div class="grid min-h-screen h-fit">
-    <!--if no projects-->
+    <!--if no invites-->
     <ng-container *ngIf="isLoading">
         <div class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
             <h1 class="text-center text-4xl text-gray-700">Carregando convites...</h1>
@@ -8,8 +8,8 @@
 
     <!--if data-->
     <ng-container *ngIf="!isLoading">
-        <!--if projects--
-        <ng-container *ngIf="invites?.length <= 0">
+        <!--if invites-->
+        <ng-container *ngIf="!invites">
             <div *ngIf="this.userRole == 'CLIENT'" class="block text-wrap max-w-md shadow-lg p-10 mx-auto my-auto bg-white h-fit">
                 <h1 class="text-center text-4xl text-gray-700">Que vazio!</h1>
                 <p class="text-left text-2xl text-gray-600 mt-4">
@@ -24,10 +24,9 @@
                 </p>
             </div>
         </ng-container>
-        <!--grid start--
-        <ng-container *ngIf="invites?.length > 0">
+        <!--grid start-->
+        <ng-container *ngIf="invites"> 
             <div class="grid justify-center gap-4 my-28">
-                <!--app-invite-card--
                 <ng-container *ngFor="let invite of invites">
                     <app-invite-card [invite]="invite"></app-invite-card>
                 </ng-container>

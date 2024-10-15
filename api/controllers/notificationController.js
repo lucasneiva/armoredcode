@@ -6,6 +6,49 @@ import { createError } from '../utils/error.js';
 import { createSuccess } from '../utils/success.js';
 import { handleValidationError } from '../utils/handleValidationError.js';
 
+//modified
+export const createNotification = async (req, res, next) => {
+    try {
+        const { projectId, freelancerId, message } = req.body;
+
+        // Validate input
+        if (!projectId || !freelancerId) {
+            return res.status(400).json({ success: false, message: 'Missing required fields' });
+        }
+
+        // Find the project and freelancerProfile
+        const project = await Project.findById(projectId);
+        const freelancerProfile = await FreelancerProfile.findById(freelancerId);
+
+        if (!project || !freelancerProfile) {
+            return res.status(404).json({ success: false, message: 'Project or freelancerProfile not found' });
+        }
+
+        // Find the clientProfile who created the notification
+        const clientProfile = await ClientProfile.findOne({ userId: req.user.id }); // Use findOne instead of find
+
+        if (!clientProfile) {
+            return res.status(404).json({ success: false, message: 'Client profile not found' });
+        }
+
+        // Create the notification
+        const notification = new Notification({
+            freelancerId,
+            clientId: clientProfile._id, // Use clientProfile._id
+            projectId,
+            message,
+            read: false,
+        });
+
+        await notification.save();
+
+        res.status(201).json({ success: true, message: 'Notification created successfully', notification }); 
+    } catch (error) {
+        console.error(error.message);
+        handleValidationError(error, next);
+    }
+};
+/*
 export const createNotification = async ( req, res ) => {
     try {
         const { projectId, freelancerId, message } = req.body;
@@ -43,6 +86,7 @@ export const createNotification = async ( req, res ) => {
         handleValidationError( error, next );
     }
 };
+*/
 
 export const getFreelancerNotifications = async ( req, res ) => {
     try {
@@ -51,7 +95,7 @@ export const getFreelancerNotifications = async ( req, res ) => {
         // Find all notifications for the freelancerProfile
         const notifications = await Notification.find( { freelancerId } ).sort( { createdAt: -1 } );
 
-        res.status( 200 ).json( notifications );
+        res.status(200).json({ success: true, data: notifications }); // Wrap in data object
     } catch ( error ) {
         console.error( error );
         res.status( 500 ).json( { error: 'Failed to fetch notifications' } );

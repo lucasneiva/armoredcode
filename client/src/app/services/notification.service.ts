@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiUrls } from '../api.urls';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,12 @@ export class NotificationService {
       withCredentials: true
     };
     return this.http.get<any>(`${apiUrls.notificationServiceApi}/freelancer/${freelancerId}`, httpOptions).pipe(
-      tap(response => console.log('API response:', response))  // Log API response
+      tap(response => console.log('API response:', response)),
+      catchError(error => {
+        console.error('Error fetching notifications:', error);
+        // Return an empty array or throw an error as needed:
+        return of({ success: false, data: [] }); // Or throwError(() => error);
+      })
     );
   }
 
@@ -65,23 +70,10 @@ export class NotificationService {
 
 }
 export type Notification = {
-  clientId: {
-    type: String,
-  }
-  freelancerId: {
-    type: String,
-  }
-  projectId?: {
-    type: String,
-  }
-  message: {
-    type: String,
-  },
-  timestamp: {
-    type: Date,
-  },
-  isRead: {
-    type: Boolean,
-    default: false,
-  },
-}
+  clientId: string;
+  freelancerId: string;
+  projectId?: string; // Optional
+  message: string;
+  timestamp: string; // Note the Date type
+  isRead: boolean;
+};

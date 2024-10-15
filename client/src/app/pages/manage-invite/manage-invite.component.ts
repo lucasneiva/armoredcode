@@ -25,16 +25,20 @@ export default class ManageInviteComponent implements OnInit{
   ngOnInit(): void {
     this.userRole = this.authService.getUserRole();
     if (this.userRole === 'CLIENT' || this.userRole === 'FREELANCER'){
-      this.notificationService.getFreelancerNotifications(this.authService.getUserId()).subscribe({
+      const userId = this.authService.getUserId();
+      this.notificationService.getFreelancerNotifications(userId).subscribe({
         next: (res) => {
-          this.invites = res.data;
-          /*debug*/ console.log("invites fetched:", res.data);
-          this.isLoading = false;
+          console.log(res);
+          if (res.success) { 
+            this.invites = res.data; // Assign res.data to invites
+            console.log("invites fetched:", this.invites); 
+            this.isLoading = false;
+          } else {
+            console.error("Failed to fetch invites:", res.message);
+            this.isLoading = false;
+          }
         },
-        error: (err) => {
-          console.error("Error fetching invites:", err);
-          this.isLoading = false;
-        }
+        // ... your error handling ...
       });
     }
     else {
