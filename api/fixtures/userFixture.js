@@ -15,7 +15,6 @@ const users = [
         password: await bcrypt.hash( "password123", 10 ),
         role: "CLIENT",
         profileId: null,
-
     },
     {
         username: "freelancer1",
@@ -23,7 +22,6 @@ const users = [
         password: await bcrypt.hash( "password123", 10 ),
         role: "FREELANCER",
         profileId: null,
-
     },
     {
         username: "freelancer2",
@@ -31,7 +29,6 @@ const users = [
         password: await bcrypt.hash( "password123", 10 ),
         role: "FREELANCER",
         profileId: null,
-
     },
     {
         username: "freelancer3",
@@ -39,7 +36,6 @@ const users = [
         password: await bcrypt.hash( "password123", 10 ),
         role: "FREELANCER",
         profileId: null,
-
     },
     {
         username: "freelancer4",
@@ -47,7 +43,6 @@ const users = [
         password: await bcrypt.hash( "password123", 10 ),
         role: "FREELANCER",
         profileId: null,
-
     },
     {
         username: "freelancer5",
@@ -55,7 +50,20 @@ const users = [
         password: await bcrypt.hash( "password123", 10 ),
         role: "FREELANCER",
         profileId: null,
-
+    },
+    {
+        username: "freelancer6",
+        email: "freelancer6@example.com",
+        password: await bcrypt.hash( "password123", 10 ),
+        role: "FREELANCER",
+        profileId: null,
+    },
+    {
+        username: "freelancer7",
+        email: "freelancer7@example.com",
+        password: await bcrypt.hash( "password123", 10 ),
+        role: "FREELANCER",
+        profileId: null,
     },
 ];
 

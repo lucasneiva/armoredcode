@@ -262,7 +262,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-/*
+
     {
         firstName: "Juliana",
         lastName: "Costa",
@@ -358,7 +358,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+/*
     {
         firstName: "Fernanda",
         lastName: "Rodrigues",
