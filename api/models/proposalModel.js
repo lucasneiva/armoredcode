@@ -24,16 +24,16 @@ const ProposalSchema = new Schema( {
     // Campos para representar o custo da proposta
     pricingType: {
         type: String,
-        enum: [ 'BUDGET', 'HOURLY_RATE' ],
+        enum: [ 'BUDGET', 'HOURLY-RATE' ],
         required: true,
     },
     proposedBudget: { // Usado quando pricingType for 'BUDGET'
         type: Number,
         required: function () { return this.pricingType === 'BUDGET'; },
     },
-    proposedHourlyRate: { // Usado quando pricingType for 'HOURLY_RATE'
+    proposedHourlyRate: { // Usado quando pricingType for 'HOURLY-RATE'
         type: Number,
-        required: function () { return this.pricingType === 'HOURLY_RATE'; },
+        required: function () { return this.pricingType === 'HOURLY-RATE'; },
     },
     estimatedDuration: {
         type: Number,

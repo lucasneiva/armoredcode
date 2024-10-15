@@ -79,7 +79,7 @@
                                     </div>
                                     <div class="flex m-3">
                                         <input class="mr-2" type="radio" id="hourlyRateType"
-                                            formControlName="pricingType" value="HOURLY_RATE" />
+                                            formControlName="pricingType" value="HOURLY-RATE" />
                                         <label for="hourlyRateType">Por Hora</label>
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@
 
                                 <!-- Budget inputs end -->
                                 <!-- Hourly Rate inputs -->
-                                <div *ngIf="createProjectForm.get('pricingType')?.value === 'HOURLY_RATE'"
+                                <div *ngIf="createProjectForm.get('pricingType')?.value === 'HOURLY-RATE'"
                                     formGroupName="projectHourlyRate"
                                     class="flex justify-center align-middle h-fit space-x-4">
                                     <div class="grid w-full">
@@ -128,7 +128,7 @@
                                             id="maxHourlyRate" class="text-center w-full p-1 border rounded" required />
                                     </div>
                                 </div>
-                                <div *ngIf="createProjectForm.get('pricingType')?.value === 'HOURLY_RATE'">
+                                <div *ngIf="createProjectForm.get('pricingType')?.value === 'HOURLY-RATE'">
                                     <span
                                         *ngIf="createProjectForm.get('projectHourlyRate')?.hasError('hourlyRateInvalid')"
                                         class="text-red-500">
@@ -216,7 +216,7 @@
                                     <label for="hybridModel">Hibrido</label>
                                 </div>
                                 <div class="m-0.5">
-                                    <input type="radio" id="siteModel" formControlName="workModel" value="ON_SITE"
+                                    <input type="radio" id="siteModel" formControlName="workModel" value="ON-SITE"
                                         class="m-2 font-normal" />
                                     <label for="siteModel">Presencial</label>
                                 </div>

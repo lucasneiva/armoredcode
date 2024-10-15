@@ -6,7 +6,7 @@
     ],
     "projectTitle": "Mobile App Development (Android)",
     "projectDescription": "Need an experienced Android developer to create a feature-rich mobile application with a focus on performance and user experience.",
-    "pricingType": "HOURLY_RATE",
+    "pricingType": "HOURLY-RATE",
     "projectHourlyRate": {
         "min": 80,
         "max": 120,

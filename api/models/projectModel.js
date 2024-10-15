@@ -79,7 +79,7 @@ const ProjectSchema = new Schema( {
 
     pricingType: {
         type: String,
-        enum: [ "BUDGET", "HOURLY_RATE" ],
+        enum: [ "BUDGET", "HOURLY-RATE" ],
         required: true,
     },
 
@@ -95,7 +95,7 @@ const ProjectSchema = new Schema( {
 
     projectStatus: {
         type: String,
-        enum: [ "DRAFT", "POSTED", 'IN_PROGRESS', 'COMPLETED', 'CANCELLED' ],
+        enum: [ "DRAFT", "POSTED", 'IN-PROGRESS', 'COMPLETED', 'CANCELLED' ],
         required: true,
     },
 
@@ -107,7 +107,7 @@ const ProjectSchema = new Schema( {
 
     workModel: {
         type: String,
-        enum: [ "REMOTE", "HYBRID", "ON_SITE" ],
+        enum: [ "REMOTE", "HYBRID", "ON-SITE" ],
         required: true,
     },
 

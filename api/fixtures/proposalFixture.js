@@ -22,7 +22,7 @@ const seedProposals = async () => {
                 freelancerId: randomFreelancerId,
                 clientId: clientId, 
                 coverLetter: "Com o mais profundo respeito e consideração, venho, por meio desta, manifestar meu interesse em colaborar com Vosso nobre Projeto!. Sou profissional experiente e dedicado, preparado para prestar serviços de elevada qualidade, sempre em estrita conformidade com os mais altos padrões de excelência e pontualidade.",
-                pricingType: "HOURLY_RATE",
+                pricingType: "HOURLY-RATE",
                 proposedHourlyRate: Math.floor( Math.random() * 50 ) + 25, 
                 estimatedDuration: Math.floor( Math.random() * 200 ) + 50,
                 status: "PENDING",

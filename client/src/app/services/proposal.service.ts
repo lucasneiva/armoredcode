@@ -128,8 +128,8 @@ export type Proposal = {
   freelancerId: string;
   clientId: string;
   coverLetter: string;
-  pricingType: 'BUDGET' | 'HOURLY_RATE';
-  proposedBudget?: number; // Optional if pricingType is 'HOURLY_RATE'
+  pricingType: 'BUDGET' | 'HOURLY-RATE';
+  proposedBudget?: number; // Optional if pricingType is 'HOURLY-RATE'
   proposedHourlyRate?: number; // Optional if pricingType is 'BUDGET'
   estimatedDuration: number;
   status: 'DRAFT' | 'PENDING' | 'ACCEPTED' | 'REJECTED';

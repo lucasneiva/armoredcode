@@ -142,7 +142,7 @@ export type Project =
     skillIds: string[];
     projectTitle: string;
     projectDescription: string;
-    pricingType: "BUDGET" | "HOURLY_RATE";
+    pricingType: "BUDGET" | "HOURLY-RATE";
     estimatedDuration: number;
     workModel: "REMOTE" | "HYBRID" | "ON-SITE";
   } & ( // Properties that can be undefined 
