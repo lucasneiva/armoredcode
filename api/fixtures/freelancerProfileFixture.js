@@ -54,23 +54,23 @@ const seedFreelancerProfiles = async () => {
         freelancerProfiles[10].specializationId = [specializationDocs[12]._id];
         freelancerProfiles[10].skillIds = [skillDocs[7]._id, skillDocs[31]._id];
         freelancerProfiles[10].userId = freelancerDocs[10]._id;
-        /*
-        freelancerProfiles[11].specializationId = [specializationDocs[0]._id];
-        freelancerProfiles[11].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+
+        freelancerProfiles[11].specializationId = [specializationDocs[8]._id];
+        freelancerProfiles[11].skillIds = [skillDocs[1]._id, skillDocs[17]._id];
         freelancerProfiles[11].userId = freelancerDocs[11]._id;
 
-        freelancerProfiles[12].specializationId = [specializationDocs[0]._id];
-        freelancerProfiles[12].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[12].specializationId = [specializationDocs[1]._id];
+        freelancerProfiles[12].skillIds = [skillDocs[1]._id, skillDocs[16]._id];
         freelancerProfiles[12].userId = freelancerDocs[12]._id;
 
         freelancerProfiles[13].specializationId = [specializationDocs[0]._id];
-        freelancerProfiles[13].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[13].skillIds = [skillDocs[8]._id, skillDocs[0]._id, skillDocs[22]._id, skillDocs[23]._id];
         freelancerProfiles[13].userId = freelancerDocs[13]._id;
 
-        freelancerProfiles[14].specializationId = [specializationDocs[0]._id];
-        freelancerProfiles[14].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[14].specializationId = [specializationDocs[3]._id];
+        freelancerProfiles[14].skillIds = [skillDocs[7]._id, skillDocs[32]._id];
         freelancerProfiles[14].userId = freelancerDocs[14]._id;
-
+        /*
         freelancerProfiles[15].specializationId = [specializationDocs[0]._id];
         freelancerProfiles[15].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
         freelancerProfiles[15].userId = freelancerDocs[15]._id;

@@ -523,7 +523,7 @@ export const freelancerProfiles = [
         },
         isAvailable: true,
         location: {
-            streetAddress: "Rua Botafogo, 13000",
+            streetAddress: "Rua Botafogo, 131",
             city: "SOROCABA",
             cep: "22290-001",
             neighborhood: "Botafogo"
@@ -556,7 +556,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-/*
+
     {
         firstName: "Laura",
         lastName: "Lima",
@@ -571,8 +571,8 @@ export const freelancerProfiles = [
         },
         isAvailable: true,
         location: {
-            streetAddress: "Av. Paulista, 2000",
-            city: "SAO PAULO",
+            streetAddress: "Rua Humberto de Campos, 56",
+            city: "SOROCCABA",
             cep: "01311-000",
             neighborhood: "Bela Vista"
         },
@@ -619,8 +619,8 @@ export const freelancerProfiles = [
         },
         isAvailable: true,
         location: {
-            streetAddress: "Rua Faria Lima, 3000",
-            city: "SAO PAULO",
+            streetAddress: "Av. das Hortências, 309",
+            city: "SOROCABA",
             cep: "04538-133",
             neighborhood: "Itaim Bibi"
         },
@@ -667,8 +667,8 @@ export const freelancerProfiles = [
         },
         isAvailable: true,
         location: {
-            streetAddress: "Rua Oscar Freire, 4000",
-            city: "SAO PAULO",
+            streetAddress: "Rua Alameda dos Antúrios, 412",
+            city: "SOROCABA",
             cep: "01426-001",
             neighborhood: "Jardins"
         },
@@ -703,7 +703,7 @@ export const freelancerProfiles = [
 
     {
         firstName: "Gustavo",
-        lastName: "Correia",
+        lastName: "Barbato",
         specializationId: [],
         profileImage: null,
         profileSummary: "Desenvolvedor Mobile Android nativo com experiência em Java e Kotlin para desenvolvimento de aplicativos. Habilidades em design de interfaces de usuário, integração com APIs RESTful e gerenciamento de banco de dados SQLite. Experiência em publicação de aplicativos na Google Play Store.",
@@ -715,8 +715,8 @@ export const freelancerProfiles = [
         },
         isAvailable: true,
         location: {
-            streetAddress: "Av. Rebouças, 5000",
-            city: "SAO PAULO",
+            streetAddress: "Rua Dalva de Oliveira, 5000",
+            city: "SOROCABA",
             cep: "05402-000",
             neighborhood: "Pinheiros"
         },
@@ -748,7 +748,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+/*16
     {
         firstName: "Mariana",
         lastName: "Barbosa",
@@ -796,7 +796,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+17
     {
         firstName: "Leonardo",
         lastName: "Azevedo",
@@ -844,7 +844,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+18
     {
         firstName: "Camila",
         lastName: "Ramos",
@@ -892,7 +892,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+19
     {
         firstName: "Bruno",
         lastName: "Silva",
@@ -940,7 +940,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+20
     {
         firstName: "Juliana",
         lastName: "Castro",
@@ -988,7 +988,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+21
     {
         firstName: "Victor",
         lastName: "Pereira",
@@ -1036,7 +1036,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+22
     {
         firstName: "Amanda",
         lastName: "Souza",
@@ -1084,7 +1084,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+23
     {
         firstName: "Gabriela",
         lastName: "Melo",
@@ -1132,7 +1132,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+24
     {
         firstName: "Bruno",
         lastName: "Ferreira",
@@ -1180,7 +1180,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+25
     {
         firstName: "Juliana",
         lastName: "Lima",
@@ -1228,7 +1228,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+26
     {
         firstName: "Victor",
         lastName: "Carvalho",
@@ -1276,7 +1276,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+27
     {
         firstName: "Amanda",
         lastName: "Costa",
@@ -1324,7 +1324,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+28
     {
         firstName: "Lucas",
         lastName: "Santos",
@@ -1372,7 +1372,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+29
     {
         firstName: "Gabriela",
         lastName: "Oliveira",
@@ -1420,7 +1420,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+30
     {
         firstName: "Thiago",
         lastName: "Almeida",
@@ -1675,54 +1675,6 @@ export const freelancerProfiles = [
                 startDate: new Date("2019-01-01"),
                 endDate: null,
                 jobDescription: "Pesquisa e desenvolvimento de modelos de aprendizado de máquina para aplicações em diversos setores."
-            }
-        ]
-    },
-
-    {
-        firstName: "Gustavo",
-        lastName: "Ferreira",
-        specializationId: [],
-        profileImage: null,
-        profileSummary: "Desenvolvedor Back-End Java com expertise em Spring Boot, Hibernate e desenvolvimento de APIs RESTful. Habilidades em design e implementação de microsserviços, utilizando bancos de dados relacionais como PostgreSQL e MySQL. Experiência em desenvolvimento de aplicações escaláveis e performáticas.",
-        experienceLevel: "MID-LEVEL",
-        hourlyRate: {
-            min: 85,
-            max: 125,
-            currency: "R$"
-        },
-        isAvailable: true,
-        location: {
-            streetAddress: "Rua Barra da Tijuca, 26000",
-            city: "SOROCABA",
-            cep: "22650-001",
-            neighborhood: "Barra da Tijuca"
-        },
-        skillIds: [],
-        portfolioItems: [
-            {
-                title: "API RESTful para Sistema de Gestão de Recursos Humanos",
-                description: "Desenvolvi a API RESTful para um sistema de gestão de recursos humanos utilizando Spring Boot, Hibernate e PostgreSQL.",
-                url: "https://example-hr-api.com"
-            }
-        ],
-        educations: [
-            {
-                degreeName: "Bacharelado em Engenharia de Software",
-                fieldOfStudy: "Desenvolvimento Back-End",
-                institution: "Universidade Federal de Pernambuco",
-                startDate: new Date("2016-03-01"),
-                endDate: new Date("2020-12-01")
-            }
-        ],
-        certifications: [],
-        workExperiences: [
-            {
-                companyName: "Empresa de Software",
-                jobTitle: "Desenvolvedor Back-End Java",
-                startDate: new Date("2021-01-01"),
-                endDate: null,
-                jobDescription: "Desenvolvimento de microsserviços e APIs RESTful para os sistemas da empresa."
             }
         ]
     },
