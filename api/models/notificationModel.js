@@ -26,6 +26,10 @@ const NotificationSchema = new Schema( {
         default: Date.now,
         required: false,
     },
+    status: {
+        type: String,
+        enum: [ "PENDING", "ACCEPTED", "REJECTED" ],
+    },
     isRead: {
         type: Boolean,
         default: false,

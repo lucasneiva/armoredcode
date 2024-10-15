@@ -91,7 +91,6 @@ const ProjectSchema = new Schema( {
     projectSize: {
         type: String,
         enum: [ "SMALL", "MEDIUM", "LARGE" ],
-
     },
 
     projectStatus: {

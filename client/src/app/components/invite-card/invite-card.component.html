@@ -16,24 +16,21 @@
                 <ng-container *ngIf="invite.status === 'ACCEPTED'">Aceito</ng-container>
             </span>
         </h2>
+        <p class="lg:text-lg">{{invite.message}}</p>
+        <!--Buttons start-->
+        <div class="mt-4 flex w-full space-x-4">
+            <ng-container *ngIf="userRole == 'FREELANCER'">
+                <button *ngIf="invite.status === 'PENDING'" (click)="acceptInvite()"
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">
+                    Aceitar Convite
+                </button>
+                <button *ngIf="invite.status === 'PENDING'" (click)="rejectInvite()"
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
+                    Rejeitar Convite
+                </button>
+            </ng-container>
+        </div>
+        <!--Buttons end-->
     </div>
     <!--card end-->
-    <!--Buttons start-->
-    <div class="mt-4 flex w-full space-x-4">
-        <ng-container *ngIf="userRole == 'FREELANCER'">
-            <button *ngIf="invite.status === 'PENDING'" (click)="acceptInvite()"
-                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">
-                Aceitar Convite
-            </button>
-            <button *ngIf="invite.status === 'PENDING'" (click)="rejectInvite()"
-                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
-                Rejeitar Convite
-            </button>
-        </ng-container>
-
-        <ng-container *ngIf="userRole == 'CLIENT'">
-            
-        </ng-container>
-    </div>
-    <!--Buttons end-->
 </ng-container>

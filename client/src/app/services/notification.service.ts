@@ -76,5 +76,6 @@ export type Notification = {
   projectId?: string; // Optional
   message: string;
   timestamp: string; // Note the Date type
+  status: string;
   isRead: boolean;
 };

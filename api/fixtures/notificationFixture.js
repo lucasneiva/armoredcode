@@ -19,6 +19,7 @@ const seedNotifications = async () => {
                 clientId: clientIdFromProject,
                 projectId: randomProject._id, 
                 message: "Com a mais elevada consideração, tomo a liberdade de dirigir-me a Vossa Senhoria para formular um convite à participação em um projeto que, por certo, se avolumará com o fulgor de vossa notável sapiência e talento.",
+                status: "PENDING",
                 read: false,
                 createdAt: new Date(),
                 updatedAt: new Date(),

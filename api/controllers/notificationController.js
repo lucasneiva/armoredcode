@@ -141,3 +141,58 @@ export const markNotificationAsRead = async ( req, res ) => {
         res.status( 500 ).json( { error: 'Failed to mark notification as read' } );
     }
 };
+
+// Accept an invite
+export const acceptInvite = async ( req, res ) => {
+    try {
+        const notificationId = req.params.id;
+
+        // Find the notification
+        const notification = await Notification.findById(notificationId);
+
+        if (!notification) {
+            return res.status(404).json({ success: false, message: 'Invite not found' });
+        }
+
+        // Check if the invite is still pending
+        if (notification.status !== 'PENDING') {
+            return res.status(400).json({ success: false, message: 'Invite is not pending' });
+        }
+
+        // Update the status to accepted
+        notification.status = 'ACCEPTED';
+        await notification.save();
+
+        res.status(200).json({ success: true, message: 'Invite accepted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Failed to accept invite' });
+    }
+};
+
+export const rejectInvite = async ( req, res ) => {
+    try {
+        const notificationId = req.params.id;
+
+        // Find the notification
+        const notification = await Notification.findById(notificationId);
+
+        if (!notification) {
+            return res.status(404).json({ success: false, message: 'Invite not found' });
+        }
+
+        // Check if the invite is still pending
+        if (notification.status !== 'PENDING') {
+            return res.status(400).json({ success: false, message: 'Invite is not pending' });
+        }
+
+        // Update the status to rejected
+        notification.status = 'REJECTED';
+        await notification.save();
+
+        res.status(200).json({ success: true, message: 'Invite rejected successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Failed to reject invite' });
+    }
+};
