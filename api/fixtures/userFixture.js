@@ -65,6 +65,27 @@ const users = [
         role: "FREELANCER",
         profileId: null,
     },
+    {
+        username: "freelancer8",
+        email: "freelancer8@example.com",
+        password: await bcrypt.hash( "password123", 10 ),
+        role: "FREELANCER",
+        profileId: null,
+    },
+    {
+        username: "freelancer9",
+        email: "freelancer9@example.com",
+        password: await bcrypt.hash( "password123", 10 ),
+        role: "FREELANCER",
+        profileId: null,
+    },
+    {
+        username: "freelancer10",
+        email: "freelancer10@example.com",
+        password: await bcrypt.hash( "password123", 10 ),
+        role: "FREELANCER",
+        profileId: null,
+    },
 ];
 
 const seedUsers = async () => {
