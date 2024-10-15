@@ -508,7 +508,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-    /*
+    
     {
         firstName: "Carlos",
         lastName: "Ferreira",
@@ -523,10 +523,10 @@ export const freelancerProfiles = [
         },
         isAvailable: true,
         location: {
-            streetAddress: "Rua Augusta, 1234",
-            city: "SAO PAULO",
-            cep: "01305-000",
-            neighborhood: "Consolação"
+            streetAddress: "Rua Botafogo, 13000",
+            city: "SOROCABA",
+            cep: "22290-001",
+            neighborhood: "Botafogo"
         },
         skillIds: [],
         portfolioItems: [
@@ -556,7 +556,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-
+/*
     {
         firstName: "Laura",
         lastName: "Lima",
@@ -1086,54 +1086,6 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Lucas",
-        lastName: "Rocha",
-        specializationId: [],
-        profileImage: null,
-        profileSummary: "Desenvolvedor Full Stack JavaScript com expertise em Node.js, React Native e MongoDB. Habilidades em design e implementação de APIs RESTful, utilizando frameworks como Express.js e Mongoose. Experiência em desenvolvimento de aplicações web e mobile escaláveis e performáticas.",
-        experienceLevel: "SENIOR",
-        hourlyRate: {
-            min: 100,
-            max: 150,
-            currency: "R$"
-        },
-        isAvailable: true,
-        location: {
-            streetAddress: "Rua Botafogo, 13000",
-            city: "SOROCABA",
-            cep: "22290-001",
-            neighborhood: "Botafogo"
-        },
-        skillIds: [],
-        portfolioItems: [
-            {
-                title: "Plataforma de Gerenciamento de Finanças Pessoais",
-                description: "Desenvolvi uma plataforma web e mobile para gerenciamento de finanças pessoais utilizando Node.js, React Native, MongoDB e Redux.",
-                url: "https://example-finance-management.com"
-            }
-        ],
-        educations: [
-            {
-                degreeName: "Mestrado em Engenharia de Software",
-                fieldOfStudy: "Desenvolvimento Web e Mobile",
-                institution: "Universidade Federal da Bahia",
-                startDate: new Date("2013-03-01"),
-                endDate: new Date("2015-12-01")
-            }
-        ],
-        certifications: [],
-        workExperiences: [
-            {
-                companyName: "Fintech",
-                jobTitle: "Desenvolvedor Full Stack JavaScript",
-                startDate: new Date("2016-01-01"),
-                endDate: null,
-                jobDescription: "Arquitetura e desenvolvimento de novas funcionalidades para a plataforma de gestão financeira."
-            }
-        ]
-    },
-
-    {
         firstName: "Gabriela",
         lastName: "Melo",
         specializationId: [],
@@ -1420,6 +1372,557 @@ export const freelancerProfiles = [
             }
         ]
     },
+
+    {
+        firstName: "Gabriela",
+        lastName: "Oliveira",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedora Full Stack JavaScript com expertise em Node.js, React e MongoDB. Habilidades em design e implementação de APIs RESTful, utilizando frameworks como Express.js e Mongoose. Experiência em desenvolvimento de aplicações web escaláveis e performáticas, com foco em testes unitários e de integração.",
+        experienceLevel: "MID-LEVEL",
+        hourlyRate: {
+            min: 80,
+            max: 120,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Botafogo, 20000",
+            city: "SOROCABA",
+            cep: "22280-001",
+            neighborhood: "Botafogo"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Plataforma de E-commerce para Livros",
+                description: "Desenvolvi a interface web e a API RESTful para uma plataforma de e-commerce de livros utilizando React, Node.js, Express.js e MongoDB.",
+                url: "https://example-bookstore.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Bacharelado em Ciência da Computação",
+                fieldOfStudy: "Desenvolvimento Web",
+                institution: "Universidade Federal do Amazonas",
+                startDate: new Date("2015-03-01"),
+                endDate: new Date("2019-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Editora de Livros",
+                jobTitle: "Desenvolvedora Full Stack JavaScript",
+                startDate: new Date("2020-02-01"),
+                endDate: null,
+                jobDescription: "Desenvolvimento de novas funcionalidades e manutenção da plataforma de e-commerce."
+            }
+        ]
+    },
+3030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030
+    {
+        firstName: "Thiago",
+        lastName: "Almeida",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Administrador de Banco de Dados (DBA) com expertise em MySQL, PostgreSQL e MongoDB. Habilidades em modelagem de dados, otimização de queries, backup e recuperação de dados, e segurança de banco de dados. Experiência em administração de bancos de dados em ambientes on-premise e cloud.",
+        experienceLevel: "SENIOR",
+        hourlyRate: {
+            min: 100,
+            max: 150,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Flamengo, 21000",
+            city: "SOROCABA",
+            cep: "22220-001",
+            neighborhood: "Flamengo"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Otimização de Performance de Banco de Dados para E-commerce",
+                description: "Realizei a otimização de performance do banco de dados MySQL para uma empresa de e-commerce, reduzindo o tempo de resposta das queries e melhorando a experiência do usuário.",
+                url: "https://example-database-optimization.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Bacharelado em Sistemas de Informação",
+                fieldOfStudy: "Banco de Dados",
+                institution: "Universidade Federal de Goiás",
+                startDate: new Date("2014-03-01"),
+                endDate: new Date("2018-12-01")
+            }
+        ],
+        certifications: [
+            {
+                name: "MySQL DBA Certified Associate",
+                issuingOrganization: "Oracle",
+                issueDate: new Date("2019-05-01")
+            }
+        ],
+        workExperiences: [
+            {
+                companyName: "Empresa de Tecnologia",
+                jobTitle: "Administrador de Banco de Dados",
+                startDate: new Date("2019-01-01"),
+                endDate: null,
+                jobDescription: "Administração e otimização de bancos de dados MySQL e PostgreSQL para os sistemas da empresa."
+            }
+        ]
+    },
+
+    {
+        firstName: "Beatriz",
+        lastName: "Correia",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Especialista em Segurança da Informação com expertise em testes de penetração, análise de vulnerabilidades e desenvolvimento de políticas de segurança. Habilidades em ferramentas de segurança como Kali Linux, Metasploit e Burp Suite. Experiência em implementação de medidas de segurança para proteger sistemas e dados contra ameaças cibernéticas.",
+        experienceLevel: "SENIOR",
+        hourlyRate: {
+            min: 120,
+            max: 170,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Tijuca, 22000",
+            city: "SOROCABA",
+            cep: "20510-001",
+            neighborhood: "Tijuca"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Teste de Penetração para Aplicação Web",
+                description: "Realizei um teste de penetração para uma aplicação web, identificando vulnerabilidades e elaborando um relatório com recomendações para mitigação dos riscos.",
+                url: "https://example-pentest-report.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Mestrado em Segurança da Informação",
+                fieldOfStudy: "Segurança Cibernética",
+                institution: "Universidade de Brasília",
+                startDate: new Date("2013-03-01"),
+                endDate: new Date("2015-12-01")
+            }
+        ],
+        certifications: [
+            {
+                name: "Certified Ethical Hacker (CEH)",
+                issuingOrganization: "EC-Council",
+                issueDate: new Date("2016-08-01")
+            }
+        ],
+        workExperiences: [
+            {
+                companyName: "Empresa de Segurança da Informação",
+                jobTitle: "Especialista em Segurança da Informação",
+                startDate: new Date("2016-01-01"),
+                endDate: null,
+                jobDescription: "Consultoria em segurança da informação, testes de penetração e desenvolvimento de políticas de segurança para clientes corporativos."
+            }
+        ]
+    },
+
+    {
+        firstName: "Marina",
+        lastName: "Rocha",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Designer UX/UI com expertise em design de interfaces para web e mobile, com foco na experiência do usuário e usabilidade. Habilidades em pesquisa com usuários, prototipagem, testes de usabilidade e design de interação. Experiência em ferramentas de design como Figma, Adobe XD e Sketch.",
+        experienceLevel: "MID-LEVEL",
+        hourlyRate: {
+            min: 80,
+            max: 120,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Copacabana, 23000",
+            city: "SOROCABA",
+            cep: "22050-001",
+            neighborhood: "Copacabana"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Design de Aplicativo Mobile para Delivery de Comida",
+                description: "Realizei a pesquisa com usuários, prototipagem e testes de usabilidade para um aplicativo mobile de delivery de comida, criando uma interface intuitiva e fácil de usar.",
+                url: "https://example-food-delivery-app-design.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Bacharelado em Design",
+                fieldOfStudy: "Design de Interação",
+                institution: "Universidade Federal do Rio Grande do Sul",
+                startDate: new Date("2015-03-01"),
+                endDate: new Date("2019-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Agência de Design Digital",
+                jobTitle: "Designer UX/UI",
+                startDate: new Date("2020-01-01"),
+                endDate: null,
+                jobDescription: "Design de interfaces para projetos web e mobile da agência, com foco na experiência do usuário."
+            }
+        ]
+    },
+
+    {
+        firstName: "Pedro",
+        lastName: "Castro",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Gerente de Projetos com expertise em metodologias ágeis como Scrum e Kanban. Habilidades em planejamento, organização, execução e controle de projetos de desenvolvimento de software. Experiência em ferramentas de gestão de projetos como Jira, Trello e Asana.",
+        experienceLevel: "SENIOR",
+        hourlyRate: {
+            min: 110,
+            max: 160,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Ipanema, 24000",
+            city: "SOROCABA",
+            cep: "22440-001",
+            neighborhood: "Ipanema"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Gerenciamento de Projeto de Desenvolvimento de Plataforma E-commerce",
+                description: "Gerenciei o projeto de desenvolvimento de uma plataforma de e-commerce utilizando a metodologia Scrum, garantindo o cumprimento dos prazos, orçamento e escopo do projeto.",
+                url: "https://example-ecommerce-project-management.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "MBA em Gestão de Projetos",
+                fieldOfStudy: "Gestão de Projetos de TI",
+                institution: "Fundação Getulio Vargas",
+                startDate: new Date("2016-03-01"),
+                endDate: new Date("2018-12-01")
+            }
+        ],
+        certifications: [
+            {
+                name: "Project Management Professional (PMP)",
+                issuingOrganization: "Project Management Institute (PMI)",
+                issueDate: new Date("2019-07-01")
+            }
+        ],
+        workExperiences: [
+            {
+                companyName: "Empresa de Tecnologia",
+                jobTitle: "Gerente de Projetos",
+                startDate: new Date("2019-01-01"),
+                endDate: null,
+                jobDescription: "Gerenciamento de projetos de desenvolvimento de software utilizando metodologias ágeis."
+            }
+        ]
+    },
+
+    {
+        firstName: "Isabela",
+        lastName: "Souza",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Engenheira de Machine Learning com expertise em desenvolvimento de modelos preditivos e algoritmos de aprendizado de máquina. Habilidades em Python, TensorFlow, PyTorch e scikit-learn. Experiência em projetos de classificação, regressão, clustering e processamento de linguagem natural (PNL).",
+        experienceLevel: "SENIOR",
+        hourlyRate: {
+            min: 120,
+            max: 170,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Leblon, 25000",
+            city: "SOROCABA",
+            cep: "22460-001",
+            neighborhood: "Leblon"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Modelo de Previsão de Demanda para E-commerce",
+                description: "Desenvolvi um modelo de previsão de demanda para uma empresa de e-commerce utilizando algoritmos de aprendizado de máquina em Python e TensorFlow.",
+                url: "https://example-demand-forecasting.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Doutorado em Ciência da Computação",
+                fieldOfStudy: "Inteligência Artificial",
+                institution: "Universidade Estadual de Campinas",
+                startDate: new Date("2014-03-01"),
+                endDate: new Date("2018-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Empresa de Inteligência Artificial",
+                jobTitle: "Engenheira de Machine Learning",
+                startDate: new Date("2019-01-01"),
+                endDate: null,
+                jobDescription: "Pesquisa e desenvolvimento de modelos de aprendizado de máquina para aplicações em diversos setores."
+            }
+        ]
+    },
+
+    {
+        firstName: "Gustavo",
+        lastName: "Ferreira",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedor Back-End Java com expertise em Spring Boot, Hibernate e desenvolvimento de APIs RESTful. Habilidades em design e implementação de microsserviços, utilizando bancos de dados relacionais como PostgreSQL e MySQL. Experiência em desenvolvimento de aplicações escaláveis e performáticas.",
+        experienceLevel: "MID-LEVEL",
+        hourlyRate: {
+            min: 85,
+            max: 125,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Barra da Tijuca, 26000",
+            city: "SOROCABA",
+            cep: "22650-001",
+            neighborhood: "Barra da Tijuca"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "API RESTful para Sistema de Gestão de Recursos Humanos",
+                description: "Desenvolvi a API RESTful para um sistema de gestão de recursos humanos utilizando Spring Boot, Hibernate e PostgreSQL.",
+                url: "https://example-hr-api.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Bacharelado em Engenharia de Software",
+                fieldOfStudy: "Desenvolvimento Back-End",
+                institution: "Universidade Federal de Pernambuco",
+                startDate: new Date("2016-03-01"),
+                endDate: new Date("2020-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Empresa de Software",
+                jobTitle: "Desenvolvedor Back-End Java",
+                startDate: new Date("2021-01-01"),
+                endDate: null,
+                jobDescription: "Desenvolvimento de microsserviços e APIs RESTful para os sistemas da empresa."
+            }
+        ]
+    },
+
+    {
+        firstName: "Mariana",
+        lastName: "Almeida",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedora Front-End React Native com expertise em desenvolvimento de aplicativos mobile multiplataforma. Habilidades em JavaScript, React, Redux e desenvolvimento de interfaces de usuário para iOS e Android. Experiência em publicação de aplicativos na App Store e Google Play Store.",
+        experienceLevel: "JUNIOR",
+        hourlyRate: {
+            min: 60,
+            max: 80,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Botafogo, 27000",
+            city: "SOROCABA",
+            cep: "22270-001",
+            neighborhood: "Botafogo"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Aplicativo de Lista de Tarefas Multiplataforma",
+                description: "Desenvolvi um aplicativo de lista de tarefas multiplataforma utilizando React Native, Redux e AsyncStorage para persistência de dados.",
+                url: "https://example-todo-app.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Técnico em Informática",
+                fieldOfStudy: "Desenvolvimento Mobile",
+                institution: "SENAI",
+                startDate: new Date("2019-03-01"),
+                endDate: new Date("2021-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Agência de Desenvolvimento Mobile",
+                jobTitle: "Desenvolvedora React Native",
+                startDate: new Date("2022-02-01"),
+                endDate: null,
+                jobDescription: "Desenvolvimento de aplicativos mobile multiplataforma para clientes da agência."
+            }
+        ]
+    },
+
+    {
+        firstName: "Leonardo",
+        lastName: "Correia",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Engenheiro DevOps com expertise em automação de infraestrutura, integração contínua (CI) e entrega contínua (CD). Habilidades em ferramentas como Docker, Kubernetes, Jenkins, Ansible e Terraform. Experiência em implementação de pipelines de CI/CD para automatizar o processo de desenvolvimento e entrega de software.",
+        experienceLevel: "SENIOR",
+        hourlyRate: {
+            min: 120,
+            max: 170,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Flamengo, 28000",
+            city: "SOROCABA",
+            cep: "22230-001",
+            neighborhood: "Flamengo"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Implementação de Pipeline de CI/CD para Aplicação Web",
+                description: "Implementei um pipeline de CI/CD para uma aplicação web utilizando Jenkins, Docker, Kubernetes e AWS, automatizando o processo de build, teste e deploy da aplicação.",
+                url: "https://example-ci-cd-pipeline.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Mestrado em Engenharia de Software",
+                fieldOfStudy: "DevOps",
+                institution: "Universidade Federal de Minas Gerais",
+                startDate: new Date("2013-03-01"),
+                endDate: new Date("2015-12-01")
+            }
+        ],
+        certifications: [
+            {
+                name: "AWS Certified DevOps Engineer - Professional",
+                issuingOrganization: "Amazon Web Services (AWS)",
+                issueDate: new Date("2017-09-01")
+            }
+        ],
+        workExperiences: [
+            {
+                companyName: "Empresa de Tecnologia",
+                jobTitle: "Engenheiro DevOps",
+                startDate: new Date("2016-01-01"),
+                endDate: null,
+                jobDescription: "Automação de infraestrutura, implementação de pipelines de CI/CD e otimização da performance dos sistemas da empresa."
+            }
+        ]
+    },
+
+    {
+        firstName: "Camila",
+        lastName: "Lima",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Designer de Interfaces com expertise em design de interfaces para web e mobile, com foco na experiência do usuário e usabilidade. Habilidades em pesquisa com usuários, prototipagem, testes de usabilidade e design de interação. Experiência em ferramentas de design como Figma, Adobe XD e Sketch.",
+        experienceLevel: "MID-LEVEL",
+        hourlyRate: {
+            min: 80,
+            max: 120,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Tijuca, 29000",
+            city: "SOROCABA",
+            cep: "20530-001",
+            neighborhood: "Tijuca"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Design de Aplicativo Mobile para Rede Social",
+                description: "Realizei a pesquisa com usuários, prototipagem e testes de usabilidade para um aplicativo mobile de rede social, criando uma interface intuitiva e engajadora.",
+                url: "https://example-social-media-app-design.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Bacharelado em Design",
+                fieldOfStudy: "Design de Interação",
+                institution: "Pontifícia Universidade Católica do Rio de Janeiro",
+                startDate: new Date("2015-03-01"),
+                endDate: new Date("2019-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Agência de Design Digital",
+                jobTitle: "Designer de Interfaces",
+                startDate: new Date("2020-01-01"),
+                endDate: null,
+                jobDescription: "Design de interfaces para projetos web e mobile da agência, com foco na experiência do usuário."
+            }
+        ]
+    }
+
+    {
+        firstName: "Rafael",
+        lastName: "Barbosa",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Engenheiro de Dados com expertise em coleta, processamento e armazenamento de grandes volumes de dados. Habilidades em ferramentas como Hadoop, Spark, Hive e Kafka. Experiência em construção de pipelines de dados para análise e aprendizado de máquina.",
+        experienceLevel: "SENIOR",
+        hourlyRate: {
+            min: 110,
+            max: 160,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Copacabana, 30000",
+            city: "SOROCABA",
+            cep: "22070-001",
+            neighborhood: "Copacabana"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Construção de Pipeline de Dados para Análise de Dados de Redes Sociais",
+                description: "Construí um pipeline de dados para coleta, processamento e armazenamento de dados de redes sociais utilizando Hadoop, Spark e Hive.",
+                url: "https://example-data-pipeline.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Mestrado em Ciência da Computação",
+                fieldOfStudy: "Engenharia de Dados",
+                institution: "Universidade Federal do Rio de Janeiro",
+                startDate: new Date("2013-03-01"),
+                endDate: new Date("2015-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Empresa de Big Data",
+                jobTitle: "Engenheiro de Dados",
+                startDate: new Date("2016-01-01"),
+                endDate: null,
+                jobDescription: "Construção e manutenção de pipelines de dados para análise de dados e aprendizado de máquina."
+            }
+        ]
+    }
     */
-    //Criar mais 11 perfils
 ];
