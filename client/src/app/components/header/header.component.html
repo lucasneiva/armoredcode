@@ -1,30 +1,80 @@
-<ng-container>
-    <nav [ngClass]="{'hide': !showHeader && !showMenu}"
-        class="w-full flex justify-between items-center overflow-hidden p-5 bg-sky-600 shadow-lg fixed z-20 top-0">
+<!--nav start-->
+<nav [ngClass]="{'hide': !showHeader && !showMenu}" class="bg-sky-600 shadow-lg">
+    <!--logged out start-->
+    <ng-container *ngIf="!isLoggedIn">
         <!--logo start-->
-        <ng-container *ngIf="!isLoggedIn">
-            <div class="flex lg:min-w-96">
-                <div routerLink="/landing" class="logo flex justify-center align-middle w-full max-w-12 cursor-pointer">
-                    <img [src]="logoPath" alt="Company Logo" class="lg:h-12 lg:w-12 max-lg:h-10 max-lg:w-10">
-                </div>
-                <div routerLink="/landing" class="mx-2 max-xl:hidden cursor-pointer">
-                    <span class="text-gray-200 text-4xl" style="font-family: Michroma;"> ArmoredCode </span>
-                </div>
-            </div>
-        </ng-container>
-        <ng-container *ngIf="isLoggedIn">
-            <div class="flex">
-                <div routerLink="/home" class="logo flex justify-center align-middle w-full max-w-12 cursor-pointer">
-                    <img [src]="logoPath" alt="Company Logo" class="lg:h-12 lg:w-12 max-lg:h-10 max-lg:w-10">
-                </div>
-                <div *ngIf="!showMenu" routerLink="/home" class="mx-2 max-xl:hidden cursor-pointer">
-                    <span class="text-gray-200 text-4xl max-xl:hidden" style="font-family: Michroma;"> ArmoredCode
-                    </span>
-                </div>
-            </div>
-        </ng-container>
+        <div routerLink="/landing" class="logo">
+            <img [src]="logoPath" alt="Company Logo" class="image-logo">
+            <span class="text-logo text-gray-200 text-4xl" style="font-family: Michroma;"> ArmoredCode </span>
+        </div>
         <!--logo end-->
-        <!--searchbar start--
+        <!--nav-items start-->
+        <div class="max-lg:hidden flex align-middle items-center w-full">
+            <div class="nav-items text-gray-200 text-2xl font-bold space-x-8">
+                <span routerLink="/login" class="cursor-pointer hover:underline hover:text-indigo-200">Login</span>
+                <span routerLink="/register" class="cursor-pointer hover:underline hover:text-indigo-200">Registro</span>
+            </div>
+        </div>
+        <div class="lg:hidden flex align-middle items-center w-full">
+            <div class="nav-items text-gray-200 text-2xl font-bold lg:hidden space-x-8 px-4">
+                <i class="fa fa-sign-in cursor-pointer" routerLink="/login"></i>
+                <i class="fa fa-user-plus cursor-pointer" routerLink="/register"></i>
+            </div>
+        </div>
+        <!--nav-items end-->
+    </ng-container>
+    <!--logged out end-->
+    <!--logged in start-->
+    <ng-container *ngIf="isLoggedIn">
+        <!--logo start-->
+        <div routerLink="/home" class="logo">
+            <img [src]="logoPath" alt="Company Logo" class="image-logo">
+            <span *ngIf="!showMenu" class="text-logo text-gray-200 text-4xl" style="font-family: Michroma;"> ArmoredCode </span>
+        </div>
+        <!--logo end-->
+        <div class="nav-items"> <!--IMPLEMENTAR FETCH() PARA FETCH API-->
+            <!--shortcuts start-->
+            <div class="flex py-2 space-x-4">
+                <div class="flex items-center w-full text-gray-200 text-2xl font-bold max-lg:hidden space-x-6">
+                    <span class="cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Busca</span>
+
+                    <span *ngIf="userRole == 'FREELANCER'" routerLink="/manage-invite"
+                        class="cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Convites</span>
+
+                    <span class="cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Mensagens</span>
+
+                    <span routerLink="/manage-project"
+                        class=" cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Projetos</span>
+
+                    <span *ngIf="userRole == 'FREELANCER'" routerLink="/manage-proposal"
+                        class="cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Propostas</span>
+
+                    <span (click)="logOut()"
+                        class="cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Logout</span>
+                </div>
+                <div class="flex items-center w-full text-gray-200 text-2xl font-bold lg:hidden space-x-6">
+                    <i class="fa fa-search cursor-pointer"></i>
+                    <i class="fa fa-envelope cursor-pointer" *ngIf="userRole == 'FREELANCER'"
+                        routerLink="/manage-invite"></i>
+                    <i class="fa fa-comments-o cursor-pointer"></i>
+                    <i class="fa fa-briefcase cursor-pointer" routerLink="/manage-project"></i>
+                    <i class="fa fa-handshake-o cursor-pointer" *ngIf="userRole == 'FREELANCER'"
+                        routerLink="/manage-proposal"></i>
+                    <i class="fa fa-sign-out cursor-pointer" (click)="logOut()"></i>
+                </div>
+                <div class="flex justify-center align-middle w-full max-w-12 lg:mx-2">
+                    <img [src]="profilePath" alt="Default Profile" routerLink="/manage-profile"
+                        class="lg:h-12 lg:w-12 max-lg:h-10 max-lg:w-10 my-auto mx-4 rounded-full border-white border-solid border-2 cursor-pointer">
+                </div>
+            </div>
+            <!--shortcuts end-->
+        </div>
+        <!--logged in end-->
+    </ng-container>
+    <!--nav end-->
+</nav>
+
+<!--searchbar start--
         <ng-container *ngIf="isLoggedIn">
             <div *ngIf="!showMenu" class="flex justify-center mx-2">
                 <div class="search relative flex">
@@ -35,92 +85,3 @@
             </div>
         </ng-container>
         !--searchbar end-->
-        <!--shortcuts start-->
-        <div class="nav-items"> <!--IMPLEMENTAR FETCH() PARA FETCH API-->
-            <ng-container *ngIf="!isLoggedIn">
-                <div class="flex items-center w-full text-gray-200 text-2xl font-bold max-lg:hidden space-x-6">
-                    <span routerLink="/login"
-                        class="cursor-pointer hover:underline hover:text-indigo-200">Login</span>
-                    <span routerLink="/register"
-                        class="cursor-pointer hover:underline hover:text-indigo-200">Registro</span>
-                </div>
-                <div class="flex items-center w-full text-gray-200 text-2xl font-bold lg:hidden space-x-6">
-                    <i class="fa fa-sign-in cursor-pointer" routerLink="/login"></i>
-                    <i class="fa fa-user-plus cursor-pointer" routerLink="/register"></i>
-                </div>
-            </ng-container>
-
-            <ng-container *ngIf="isLoggedIn">
-                <div class="flex py-2 space-x-4">
-                    <div class="flex items-center w-full text-gray-200 text-2xl font-bold max-lg:hidden space-x-6">
-                        <span class="cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Busca</span>
-    
-                        <span *ngIf="userRole == 'FREELANCER'" routerLink="/manage-invite"
-                            class="cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Convites</span>
-    
-                        <span class="cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Mensagens</span>
-    
-                        <span routerLink="/manage-project"
-                            class=" cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Projetos</span>
-    
-                        <span *ngIf="userRole == 'FREELANCER'" routerLink="/manage-proposal"
-                            class="cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Propostas</span>
-    
-                        <span (click)="logOut()"
-                            class="cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Logout</span>
-                    </div>
-                    <div class="flex items-center w-full text-gray-200 text-2xl font-bold lg:hidden space-x-6">
-                        <i class="fa fa-search cursor-pointer"></i>
-                        <i class="fa fa-envelope cursor-pointer" *ngIf="userRole == 'FREELANCER'" routerLink="/manage-invite"></i>
-                        <i class="fa fa-comments-o cursor-pointer"></i>
-                        <i class="fa fa-briefcase cursor-pointer" routerLink="/manage-project"></i>
-                        <i class="fa fa-handshake-o cursor-pointer" *ngIf="userRole == 'FREELANCER'" routerLink="/manage-proposal"></i>
-                        <i class="fa fa-sign-out cursor-pointer" (click)="logOut()"></i>
-                    </div>
-                    <div class="flex justify-center align-middle w-full max-w-12 lg:mx-2">
-                        <img [src]="profilePath" alt="Default Profile" routerLink="/manage-profile"
-                            class="lg:h-12 lg:w-12 max-lg:h-10 max-lg:w-10 my-auto mx-4 rounded-full border-white border-solid border-2 cursor-pointer">
-                    </div>
-                </div>
-            </ng-container>
-        </div>
-        <!--shortcuts end-->
-    </nav>
-
-    <!--shortcuts menu start--
-    <ng-container *ngIf="isLoggedIn">
-        <div *ngIf="showMenu" class="flex w-full h-fit justify-end lg:hidden">
-            <div class="bg-sky-700 text-gray-200 text-3xl font-bold fixed z-30 top-20 h-full w-full text-center">
-                <div
-                    class="flex justify-center py-8 hover:bg-sky-800 cursor-pointer hover:underline hover:text-indigo-200">
-                    Busca
-                </div>
-                <div *ngIf="userRole == 'FREELANCER'" routerLink="/manage-invite"
-                    class="flex justify-center py-8 hover:bg-sky-800 cursor-pointer hover:underline hover:text-indigo-200">
-                    Convites
-                </div>
-                <div
-                    class="flex justify-center py-8 hover:bg-sky-800 cursor-pointer hover:underline hover:text-indigo-200">
-                    Mensagens
-                </div>
-                <div routerLink="/manage-project"
-                    class="flex justify-center py-8 hover:bg-sky-800 cursor-pointer hover:underline hover:text-indigo-200">
-                    Projetos
-                </div>
-                <div *ngIf="userRole == 'FREELANCER'" routerLink="/manage-proposal"
-                    class="flex justify-center py-8 hover:bg-sky-800 cursor-pointer hover:underline hover:text-indigo-200">
-                    Propostas
-                </div>
-                <div routerLink="/manage-profile"
-                    class="flex justify-center py-8 hover:bg-sky-800 cursor-pointer hover:underline hover:text-indigo-200">
-                    Perfil
-                </div>
-                <div (click)="logOut()"
-                    class="flex justify-center py-8 hover:bg-sky-800 cursor-pointer hover:underline hover:text-indigo-200">
-                    Logout
-                </div>
-            </div>
-        </div>
-    </ng-container>
-    !--shortcuts menu end-->
-</ng-container>

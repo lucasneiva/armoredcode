@@ -1,4 +1,12 @@
 nav {
+    display: flex;
+    position: fixed;
+    z-index: 20;
+    top: 0px;
+    width: 100%;
+    padding: 1rem;
+    overflow: hidden;
+
     transition: 250ms ease-in-out;
     top: 0rem;
 
@@ -6,4 +14,62 @@ nav {
         transition: 350ms ease-in-out;
         top: -8rem;
     }
+}
+
+.nav-items {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    padding-left: 1rem
+        /* 16px */
+    ;
+    padding-right: 1rem
+        /* 16px */
+    ;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+
+    @media (min-width: 1024px) {
+        min-width: 25rem;
+    }
+
+    @media not all and (min-width: 1024px) {
+        min-width: 3rem;
+    }
+}
+
+.image-logo {
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+    margin-right: 1rem;
+
+    @media (min-width: 1024px) {
+        height: 3rem;
+        /* 48px */
+        width: 3rem;
+        /* 48px */
+    }
+
+    @media not all and (min-width: 1024px) {
+        height: 2.5rem;
+        /* 48px */
+        width: 2.5rem;
+        /* 48px */
+    }
+
+    cursor: pointer;
+}
+
+.text-logo {
+    display: flex;
+    @media not all and (min-width: 1024px) {
+        display: none;
+    }
+
+    cursor: pointer;
 }
