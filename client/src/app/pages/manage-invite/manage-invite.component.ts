@@ -31,14 +31,13 @@ export default class ManageInviteComponent implements OnInit{
           console.log(res);
           if (res.success) { 
             this.invites = res.data; // Assign res.data to invites
-            console.log("invites fetched:", this.invites); 
+            /*debug*/ //console.log("invites fetched:", this.invites); 
             this.isLoading = false;
           } else {
             console.error("Failed to fetch invites:", res.message);
             this.isLoading = false;
           }
         },
-        // ... your error handling ...
       });
     }
     else {

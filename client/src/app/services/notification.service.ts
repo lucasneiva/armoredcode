@@ -27,12 +27,12 @@ export class NotificationService {
       withCredentials: true
     };
     return this.http.get<any>(`${apiUrls.notificationServiceApi}/freelancer/${freelancerId}`, httpOptions).pipe(
-      tap(response => console.log('API response:', response)),
+      /*tap(response => console.log('API response:', response)),
       catchError(error => {
         console.error('Error fetching notifications:', error);
         // Return an empty array or throw an error as needed:
         return of({ success: false, data: [] }); // Or throwError(() => error);
-      })
+      })*/
     );
   }
 
@@ -44,7 +44,7 @@ export class NotificationService {
       withCredentials: true // VERY IMPORTANT: Include cookies in requests
     };
     return this.http.get<any>(`${apiUrls.notificationServiceApi}/${inviteId}`, httpOptions).pipe(
-      //tap(response => console.log('API response:', response))  // Log API response
+      //tap(response => console.log('API response to this invite:', response))  // Log API response
     );
   }
 
@@ -70,6 +70,7 @@ export class NotificationService {
 
 }
 export type Notification = {
+  _id: string;
   clientId: string;
   freelancerId: string;
   projectId?: string; // Optional

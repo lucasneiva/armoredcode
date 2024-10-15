@@ -88,6 +88,24 @@ export const createNotification = async ( req, res ) => {
 };
 */
 
+//created
+export const getInviteById = async (req, res) => {
+    try {
+        const notificationId = req.params.id; 
+
+        const notification = await Notification.findById(notificationId);
+
+        if (!notification) {
+            return res.status(404).json({ success: false, message: 'Invite not found' });
+        }
+
+        res.status(200).json({ success: true, data: notification });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Failed to fetch invite details' });
+    }
+};
+
 export const getFreelancerNotifications = async ( req, res ) => {
     try {
         const { freelancerId } = req.params;
