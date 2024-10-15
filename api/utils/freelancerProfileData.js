@@ -232,7 +232,7 @@ export const freelancerProfiles = [
             streetAddress: "Av. Sorocabana, 1000",
             city: "SOROCABA",
             cep: "01311-000",
-            neighborhood: "Consolação"
+            neighborhood: "Vila Barao"
         },
         skillIds: [],
         portfolioItems: [
@@ -280,7 +280,7 @@ export const freelancerProfiles = [
             streetAddress: "Rua Frei Caneca, 500",
             city: "SOROCABA",
             cep: "01307-000",
-            neighborhood: "Consolação"
+            neighborhood: "Centro"
         },
         skillIds: [],
         portfolioItems: [
@@ -358,7 +358,7 @@ export const freelancerProfiles = [
             }
         ]
     },
-/*
+
     {
         firstName: "Fernanda",
         lastName: "Rodrigues",
@@ -376,14 +376,14 @@ export const freelancerProfiles = [
             streetAddress: "Rua Santo Menom, 333",
             city: "SOROCABA",
             cep: "01301-000",
-            neighborhood: "Consolação"
+            neighborhood: "Jardim Ana Maria"
         },
         skillIds: [],
         portfolioItems: [
             {
                 title: "API RESTful para E-commerce",
                 description: "Desenvolvi uma API RESTful para um sistema de e-commerce utilizando Node.js, Express.js e MongoDB.",
-                url: null 
+                url: "https://example-ecommerce.com"
             }
         ],
         educations: [
@@ -421,17 +421,17 @@ export const freelancerProfiles = [
         },
         isAvailable: true,
         location: {
-            streetAddress: "Rua Augusta, 1500",
-            city: "SÃO PAULO",
+            streetAddress: "Rua Jair Soares, 265",
+            city: "SOROCABA",
             cep: "01306-000",
-            neighborhood: "Consolação"
+            neighborhood: "Soares"
         },
         skillIds: [],
         portfolioItems: [
             {
                 title: "Aplicativo de Lista de Tarefas",
                 description: "Desenvolvi um aplicativo de lista de tarefas utilizando Flutter com interface moderna e animações.",
-                url: null
+                url: "https://example-task-management.com"
             }
         ],
         educations: [
@@ -469,8 +469,8 @@ export const freelancerProfiles = [
         },
         isAvailable: true,
         location: {
-            streetAddress: "Av. Paulista, 2000",
-            city: "SÃO PAULO",
+            streetAddress: "Rua João Francisco Rosa, 152",
+            city: "SOROCABA",
             cep: "01310-000",
             neighborhood: "Bela Vista"
         },
@@ -508,6 +508,6 @@ export const freelancerProfiles = [
             }
         ]
     }
-*/
+
     //Criar mais 20 perfils
 ];
