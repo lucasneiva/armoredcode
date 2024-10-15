@@ -507,7 +507,919 @@ export const freelancerProfiles = [
                 jobDescription: "Desenvolvimento de sistemas web e APIs para clientes corporativos."
             }
         ]
-    }
+    },
+    /*
+    {
+        firstName: "Carlos",
+        lastName: "Ferreira",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Designer UX/UI com foco em criar experiências digitais intuitivas e atraentes. Habilidades em pesquisa com usuários, prototipagem e testes de usabilidade. Experiência em design de interfaces para web e mobile, utilizando ferramentas como Figma e Adobe XD.",
+        experienceLevel: "MID-LEVEL",
+        hourlyRate: {
+            min: 75,
+            max: 110,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Augusta, 1234",
+            city: "SAO PAULO",
+            cep: "01305-000",
+            neighborhood: "Consolação"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Design de Aplicativo Mobile para Saúde",
+                description: "Realizei a pesquisa com usuários, prototipagem e testes de usabilidade para um aplicativo mobile na área da saúde.",
+                url: "https://example-health-app.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Bacharelado em Design",
+                fieldOfStudy: "Design Gráfico",
+                institution: "Universidade de São Paulo",
+                startDate: new Date("2014-03-01"),
+                endDate: new Date("2018-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Agência Digital",
+                jobTitle: "Designer UX/UI",
+                startDate: new Date("2019-01-01"),
+                endDate: null,
+                jobDescription: "Design de interfaces para projetos web e mobile da agência."
+            }
+        ]
+    },
 
-    //Criar mais 20 perfils
+    {
+        firstName: "Laura",
+        lastName: "Lima",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Engenheira de Machine Learning com expertise em desenvolvimento de modelos preditivos e algoritmos de aprendizado de máquina. Habilidades em Python, TensorFlow e scikit-learn. Experiência em projetos de classificação, regressão e clustering.",
+        experienceLevel: "SENIOR",
+        hourlyRate: {
+            min: 110,
+            max: 160,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Av. Paulista, 2000",
+            city: "SAO PAULO",
+            cep: "01311-000",
+            neighborhood: "Bela Vista"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Modelo de Recomendação de Produtos",
+                description: "Desenvolvi um modelo de recomendação de produtos utilizando algoritmos de aprendizado de máquina em Python.",
+                url: "https://example-recommendation.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Mestrado em Ciência da Computação",
+                fieldOfStudy: "Inteligência Artificial",
+                institution: "Universidade Estadual de Campinas",
+                startDate: new Date("2012-03-01"),
+                endDate: new Date("2014-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Empresa de Tecnologia",
+                jobTitle: "Engenheira de Machine Learning",
+                startDate: new Date("2015-01-01"),
+                endDate: null,
+                jobDescription: "Desenvolvimento de modelos de aprendizado de máquina para otimização de processos."
+            }
+        ]
+    },
+
+    {
+        firstName: "Rafael",
+        lastName: "Cardoso",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedor Back-End Python com experiência em Django e Flask para desenvolvimento web. Habilidades em design e implementação de APIs RESTful, utilizando bancos de dados relacionais e NoSQL. Experiência em desenvolvimento de aplicações web escaláveis e performáticas.",
+        experienceLevel: "MID-LEVEL",
+        hourlyRate: {
+            min: 80,
+            max: 120,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Faria Lima, 3000",
+            city: "SAO PAULO",
+            cep: "04538-133",
+            neighborhood: "Itaim Bibi"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "API RESTful para Sistema de Gestão Financeira",
+                description: "Desenvolvi a API RESTful para um sistema de gestão financeira utilizando Django REST Framework e PostgreSQL.",
+                url: "https://example-finance.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Bacharelado em Ciência da Computação",
+                fieldOfStudy: "Engenharia de Software",
+                institution: "Universidade Federal de Pernambuco",
+                startDate: new Date("2015-03-01"),
+                endDate: new Date("2019-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Startup Financeira",
+                jobTitle: "Desenvolvedor Back-End Python",
+                startDate: new Date("2020-01-01"),
+                endDate: null,
+                jobDescription: "Desenvolvimento de APIs e microsserviços para a plataforma financeira."
+            }
+        ]
+    },
+
+    {
+        firstName: "Isabela",
+        lastName: "Cavalcanti",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedora Front-End React com expertise na construção de interfaces web modernas e responsivas. Domínio de JavaScript, HTML, CSS e bibliotecas como Redux e React Router. Experiência em desenvolvimento de aplicações web com foco em performance e acessibilidade.",
+        experienceLevel: "JUNIOR",
+        hourlyRate: {
+            min: 50,
+            max: 70,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Oscar Freire, 4000",
+            city: "SAO PAULO",
+            cep: "01426-001",
+            neighborhood: "Jardins"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Website Institucional para Empresa de Tecnologia",
+                description: "Desenvolvi o website institucional responsivo utilizando React, Gatsby e Styled Components.",
+                url: "https://example-tech-company.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Técnico em Informática",
+                fieldOfStudy: "Desenvolvimento Web",
+                institution: "SENAI",
+                startDate: new Date("2018-03-01"),
+                endDate: new Date("2020-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Agência de Marketing Digital",
+                jobTitle: "Desenvolvedora Front-End React",
+                startDate: new Date("2021-02-01"),
+                endDate: null,
+                jobDescription: "Desenvolvimento de websites e landing pages para clientes da agência."
+            }
+        ]
+    },
+
+    {
+        firstName: "Gustavo",
+        lastName: "Correia",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedor Mobile Android nativo com experiência em Java e Kotlin para desenvolvimento de aplicativos. Habilidades em design de interfaces de usuário, integração com APIs RESTful e gerenciamento de banco de dados SQLite. Experiência em publicação de aplicativos na Google Play Store.",
+        experienceLevel: "MID-LEVEL",
+        hourlyRate: {
+            min: 70,
+            max: 100,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Av. Rebouças, 5000",
+            city: "SAO PAULO",
+            cep: "05402-000",
+            neighborhood: "Pinheiros"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Aplicativo de E-commerce para Moda",
+                description: "Desenvolvi um aplicativo de e-commerce para uma loja de moda utilizando Java, Android Studio e Firebase.",
+                url: "https://example-fashion-app.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Bacharelado em Sistemas de Informação",
+                fieldOfStudy: "Desenvolvimento Mobile",
+                institution: "Universidade Nove de Julho",
+                startDate: new Date("2016-03-01"),
+                endDate: new Date("2020-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Empresa de Desenvolvimento Mobile",
+                jobTitle: "Desenvolvedor Android Nativo",
+                startDate: new Date("2021-01-01"),
+                endDate: null,
+                jobDescription: "Desenvolvimento de aplicativos Android para clientes de diversos setores."
+            }
+        ]
+    },
+
+    {
+        firstName: "Mariana",
+        lastName: "Barbosa",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedora Full Stack JavaScript com expertise em Node.js, React e MongoDB. Habilidades em design e implementação de APIs RESTful, utilizando frameworks como Express.js e Mongoose. Experiência em desenvolvimento de aplicações web escaláveis e performáticas.",
+        experienceLevel: "SENIOR",
+        hourlyRate: {
+            min: 100,
+            max: 150,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Consolação, 6000",
+            city: "SAO PAULO",
+            cep: "01301-000",
+            neighborhood: "Consolação"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Plataforma de E-learning",
+                description: "Desenvolvi uma plataforma de e-learning completa utilizando Node.js, React, MongoDB e Socket.IO para interação em tempo real.",
+                url: "https://example-elearning-platform.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Mestrado em Engenharia de Software",
+                fieldOfStudy: "Desenvolvimento Web",
+                institution: "Universidade Federal do Rio Grande do Sul",
+                startDate: new Date("2013-03-01"),
+                endDate: new Date("2015-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Empresa de Tecnologia Educacional",
+                jobTitle: "Desenvolvedora Full Stack JavaScript",
+                startDate: new Date("2016-01-01"),
+                endDate: null,
+                jobDescription: "Liderança técnica e desenvolvimento de novas features para a plataforma de e-learning."
+            }
+        ]
+    },
+
+    {
+        firstName: "Leonardo",
+        lastName: "Azevedo",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Cientista de Dados com expertise em Python e suas bibliotecas para análise de dados, aprendizado de máquina e visualização de dados. Habilidades em manipulação de dados com Pandas e NumPy, construção de modelos preditivos com scikit-learn e visualização de dados com Matplotlib e Seaborn. Experiência em projetos de análise de dados em diversos setores.",
+        experienceLevel: "MID-LEVEL",
+        hourlyRate: {
+            min: 85,
+            max: 125,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Av. Brasil, 7000",
+            city: "RIO DE JANEIRO",
+            cep: "20070-002",
+            neighborhood: "Centro"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Análise de Dados de Vendas para Varejo",
+                description: "Realizei a análise de dados de vendas para uma empresa do varejo, identificando padrões de compra e insights para otimização de campanhas de marketing.",
+                url: "https://example-retail-analysis.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Bacharelado em Estatística",
+                fieldOfStudy: "Ciência de Dados",
+                institution: "Universidade Federal do Rio de Janeiro",
+                startDate: new Date("2015-03-01"),
+                endDate: new Date("2019-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Empresa de Consultoria em Dados",
+                jobTitle: "Cientista de Dados",
+                startDate: new Date("2020-02-01"),
+                endDate: null,
+                jobDescription: "Consultoria em projetos de análise de dados para clientes de diversos setores."
+            }
+        ]
+    },
+
+    {
+        firstName: "Camila",
+        lastName: "Ramos",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedora Front-End Angular com expertise na construção de interfaces web complexas e responsivas. Domínio de TypeScript, RxJS e princípios de design de interface. Experiência em desenvolvimento de aplicações web escaláveis e performáticas, utilizando as melhores práticas de desenvolvimento e ferramentas como Angular CLI e NgRx.",
+        experienceLevel: "MID-LEVEL",
+        hourlyRate: {
+            min: 75,
+            max: 110,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua da Penha, 8000",
+            city: "SOROCABA",
+            cep: "21020-001",
+            neighborhood: "Penha"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Sistema de Gerenciamento de RH",
+                description: "Desenvolvi a interface web para um sistema de gerenciamento de RH utilizando Angular, Material Design e NgRx para gerenciamento de estado.",
+                url: "https://example-rh-system.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Bacharelado em Sistemas de Informação",
+                fieldOfStudy: "Desenvolvimento Web",
+                institution: "Universidade Federal Fluminense",
+                startDate: new Date("2016-03-01"),
+                endDate: new Date("2020-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Empresa de Consultoria em TI",
+                jobTitle: "Desenvolvedora Front-End Angular",
+                startDate: new Date("2021-01-01"),
+                endDate: null,
+                jobDescription: "Desenvolvimento de interfaces web para sistemas corporativos de clientes da consultoria."
+            }
+        ]
+    },
+
+    {
+        firstName: "Bruno",
+        lastName: "Silva",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedor Mobile iOS nativo com experiência em Swift e Objective-C para desenvolvimento de aplicativos. Habilidades em design de interfaces de usuário, integração com APIs RESTful e gerenciamento de banco de dados Core Data. Experiência em publicação de aplicativos na App Store.",
+        experienceLevel: "SENIOR",
+        hourlyRate: {
+            min: 110,
+            max: 160,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Av. Copacabana, 9000",
+            city: "SOROCABA",
+            cep: "22020-001",
+            neighborhood: "Copacabana"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Aplicativo de Rede Social para Fotografia",
+                description: "Desenvolvi um aplicativo de rede social para compartilhamento de fotos utilizando Swift, UIKit e Firebase para autenticação e armazenamento.",
+                url: "https://example-photo-app.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Mestrado em Ciência da Computação",
+                fieldOfStudy: "Desenvolvimento Mobile",
+                institution: "Pontifícia Universidade Católica do Rio de Janeiro",
+                startDate: new Date("2012-03-01"),
+                endDate: new Date("2014-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Startup de Tecnologia",
+                jobTitle: "Desenvolvedor iOS Nativo",
+                startDate: new Date("2015-02-01"),
+                endDate: null,
+                jobDescription: "Liderança técnica e desenvolvimento de novos recursos para o aplicativo da startup."
+            }
+        ]
+    },
+
+    {
+        firstName: "Juliana",
+        lastName: "Castro",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedora Full Stack Python com experiência em Django e Flask para desenvolvimento web. Habilidades em design e implementação de APIs RESTful, utilizando bancos de dados relacionais como PostgreSQL e MySQL. Experiência em desenvolvimento de aplicações web escaláveis e performáticas.",
+        experienceLevel: "MID-LEVEL",
+        hourlyRate: {
+            min: 80,
+            max: 120,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Ipanema, 10000",
+            city: "SOROCABA",
+            cep: "22420-001",
+            neighborhood: "Ipanema"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Sistema de Gerenciamento de Loja Virtual",
+                description: "Desenvolvi um sistema de gerenciamento de loja virtual utilizando Django, PostgreSQL e Celery para processamento assíncrono.",
+                url: "https://example-ecommerce-management.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Bacharelado em Ciência da Computação",
+                fieldOfStudy: "Desenvolvimento Web",
+                institution: "Universidade Federal do Ceará",
+                startDate: new Date("2015-03-01"),
+                endDate: new Date("2019-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Empresa de E-commerce",
+                jobTitle: "Desenvolvedora Full Stack Python",
+                startDate: new Date("2020-01-01"),
+                endDate: null,
+                jobDescription: "Desenvolvimento de novas funcionalidades e manutenção da plataforma de e-commerce."
+            }
+        ]
+    },
+
+    {
+        firstName: "Victor",
+        lastName: "Pereira",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedor Front-End React com expertise na construção de interfaces web modernas e responsivas. Domínio de JavaScript, HTML, CSS e bibliotecas como Redux, React Router e Styled Components. Experiência em desenvolvimento de aplicações web com foco em performance e SEO.",
+        experienceLevel: "JUNIOR",
+        hourlyRate: {
+            min: 55,
+            max: 75,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Leblon, 11000",
+            city: "SOROCABA",
+            cep: "22430-001",
+            neighborhood: "Leblon"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Website para Agência de Turismo",
+                description: "Desenvolvi o website responsivo para uma agência de turismo utilizando React, Next.js e Tailwind CSS.",
+                url: "https://example-travel-agency.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Técnico em Informática",
+                fieldOfStudy: "Desenvolvimento Web",
+                institution: "ETEC",
+                startDate: new Date("2019-03-01"),
+                endDate: new Date("2021-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Agência de Marketing Digital",
+                jobTitle: "Desenvolvedor Front-End React",
+                startDate: new Date("2022-02-01"),
+                endDate: null,
+                jobDescription: "Desenvolvimento de websites e landing pages para clientes da agência."
+            }
+        ]
+    },
+
+    {
+        firstName: "Amanda",
+        lastName: "Souza",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedora Mobile Android nativo com experiência em Java e Kotlin para desenvolvimento de aplicativos. Habilidades em design de interfaces de usuário, integração com APIs RESTful e gerenciamento de banco de dados Realm. Experiência em testes unitários e de interface.",
+        experienceLevel: "MID-LEVEL",
+        hourlyRate: {
+            min: 70,
+            max: 100,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Barra da Tijuca, 12000",
+            city: "SOROCABA",
+            cep: "22630-001",
+            neighborhood: "Barra da Tijuca"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Aplicativo de Delivery de Comida",
+                description: "Desenvolvi um aplicativo de delivery de comida utilizando Kotlin, MVVM e Retrofit para integração com a API.",
+                url: "https://example-food-delivery.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Bacharelado em Engenharia de Software",
+                fieldOfStudy: "Desenvolvimento Mobile",
+                institution: "Universidade Federal do Rio Grande do Norte",
+                startDate: new Date("2016-03-01"),
+                endDate: new Date("2020-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Startup de Foodtech",
+                jobTitle: "Desenvolvedora Android Nativo",
+                startDate: new Date("2021-01-01"),
+                endDate: null,
+                jobDescription: "Desenvolvimento de novas funcionalidades e manutenção do aplicativo de delivery."
+            }
+        ]
+    },
+
+    {
+        firstName: "Lucas",
+        lastName: "Rocha",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedor Full Stack JavaScript com expertise em Node.js, React Native e MongoDB. Habilidades em design e implementação de APIs RESTful, utilizando frameworks como Express.js e Mongoose. Experiência em desenvolvimento de aplicações web e mobile escaláveis e performáticas.",
+        experienceLevel: "SENIOR",
+        hourlyRate: {
+            min: 100,
+            max: 150,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Botafogo, 13000",
+            city: "SOROCABA",
+            cep: "22290-001",
+            neighborhood: "Botafogo"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Plataforma de Gerenciamento de Finanças Pessoais",
+                description: "Desenvolvi uma plataforma web e mobile para gerenciamento de finanças pessoais utilizando Node.js, React Native, MongoDB e Redux.",
+                url: "https://example-finance-management.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Mestrado em Engenharia de Software",
+                fieldOfStudy: "Desenvolvimento Web e Mobile",
+                institution: "Universidade Federal da Bahia",
+                startDate: new Date("2013-03-01"),
+                endDate: new Date("2015-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Fintech",
+                jobTitle: "Desenvolvedor Full Stack JavaScript",
+                startDate: new Date("2016-01-01"),
+                endDate: null,
+                jobDescription: "Arquitetura e desenvolvimento de novas funcionalidades para a plataforma de gestão financeira."
+            }
+        ]
+    },
+
+    {
+        firstName: "Gabriela",
+        lastName: "Melo",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Cientista de Dados com expertise em Python e R para análise de dados, aprendizado de máquina e visualização de dados. Habilidades em manipulação de dados com Pandas e dplyr, construção de modelos preditivos com scikit-learn e caret, e visualização de dados com Matplotlib, Seaborn e ggplot2. Experiência em projetos de análise de dados em diversos setores.",
+        experienceLevel: "MID-LEVEL",
+        hourlyRate: {
+            min: 85,
+            max: 125,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Flamengo, 14000",
+            city: "SOROCABA",
+            cep: "22210-001",
+            neighborhood: "Flamengo"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Análise de Dados de Clientes para E-commerce",
+                description: "Realizei a análise de dados de clientes para uma empresa de e-commerce, identificando segmentos de clientes e insights para personalização de ofertas.",
+                url: "https://example-customer-analysis.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Bacharelado em Estatística",
+                fieldOfStudy: "Ciência de Dados",
+                institution: "Universidade Federal do Paraná",
+                startDate: new Date("2015-03-01"),
+                endDate: new Date("2019-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Empresa de Data Science",
+                jobTitle: "Cientista de Dados",
+                startDate: new Date("2020-02-01"),
+                endDate: null,
+                jobDescription: "Desenvolvimento de modelos de aprendizado de máquina e análise de dados para clientes da empresa."
+            }
+        ]
+    },
+
+    {
+        firstName: "Bruno",
+        lastName: "Ferreira",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedor Front-End Angular com expertise na construção de interfaces web complexas e responsivas. Domínio de TypeScript, RxJS e princípios de design de interface. Experiência em desenvolvimento de aplicações web escaláveis e performáticas, utilizando as melhores práticas de desenvolvimento, testes unitários e de integração.",
+        experienceLevel: "SENIOR",
+        hourlyRate: {
+            min: 110,
+            max: 160,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Tijuca, 15000",
+            city: "SOROCABA",
+            cep: "20520-001",
+            neighborhood: "Tijuca"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Sistema de Gestão de Projetos",
+                description: "Desenvolvi a interface web para um sistema de gestão de projetos utilizando Angular, Material Design, NgRx e WebSockets para comunicação em tempo real.",
+                url: "https://example-project-management-system.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Mestrado em Engenharia de Software",
+                fieldOfStudy: "Desenvolvimento Web",
+                institution: "Universidade Federal de Minas Gerais",
+                startDate: new Date("2012-03-01"),
+                endDate: new Date("2014-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Empresa de Software",
+                jobTitle: "Desenvolvedor Front-End Angular",
+                startDate: new Date("2015-01-01"),
+                endDate: null,
+                jobDescription: "Liderança técnica e desenvolvimento de novas funcionalidades para a plataforma de gestão de projetos."
+            }
+        ]
+    },
+
+    {
+        firstName: "Juliana",
+        lastName: "Lima",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedora Mobile iOS nativo com experiência em Swift e Objective-C para desenvolvimento de aplicativos. Habilidades em design de interfaces de usuário, integração com APIs RESTful e gerenciamento de banco de dados Firebase. Experiência em desenvolvimento de aplicativos com foco em performance e segurança.",
+        experienceLevel: "MID-LEVEL",
+        hourlyRate: {
+            min: 75,
+            max: 110,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Copacabana, 16000",
+            city: "SOROCABA",
+            cep: "22040-001",
+            neighborhood: "Copacabana"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Aplicativo de E-commerce para Moda",
+                description: "Desenvolvi um aplicativo de e-commerce para uma loja de moda utilizando Swift, UIKit e Firebase para autenticação, banco de dados e armazenamento.",
+                url: "https://example-fashion-ecommerce.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Bacharelado em Ciência da Computação",
+                fieldOfStudy: "Desenvolvimento Mobile",
+                institution: "Universidade Federal de Santa Catarina",
+                startDate: new Date("2016-03-01"),
+                endDate: new Date("2020-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Empresa de Varejo",
+                jobTitle: "Desenvolvedora iOS Nativo",
+                startDate: new Date("2021-02-01"),
+                endDate: null,
+                jobDescription: "Desenvolvimento de novas funcionalidades e manutenção do aplicativo de e-commerce."
+            }
+        ]
+    },
+
+    {
+        firstName: "Victor",
+        lastName: "Carvalho",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedor Full Stack Python com experiência em Django e Flask para desenvolvimento web. Habilidades em design e implementação de APIs RESTful, utilizando bancos de dados NoSQL como MongoDB e Cassandra. Experiência em desenvolvimento de aplicações web escaláveis e resilientes.",
+        experienceLevel: "SENIOR",
+        hourlyRate: {
+            min: 110,
+            max: 160,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Ipanema, 17000",
+            city: "SOROCABA",
+            cep: "22410-001",
+            neighborhood: "Ipanema"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Plataforma de Streaming de Vídeo",
+                description: "Desenvolvi a API RESTful para uma plataforma de streaming de vídeo utilizando Flask, MongoDB e Redis para caching.",
+                url: "https://example-video-streaming.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Mestrado em Ciência da Computação",
+                fieldOfStudy: "Desenvolvimento Web",
+                institution: "Universidade Estadual Paulista",
+                startDate: new Date("2012-03-01"),
+                endDate: new Date("2014-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Empresa de Mídia",
+                jobTitle: "Desenvolvedor Full Stack Python",
+                startDate: new Date("2015-01-01"),
+                endDate: null,
+                jobDescription: "Arquitetura e desenvolvimento de novas funcionalidades para a plataforma de streaming."
+            }
+        ]
+    },
+
+    {
+        firstName: "Amanda",
+        lastName: "Costa",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedora Front-End React com expertise na construção de interfaces web modernas e responsivas. Domínio de JavaScript, HTML, CSS e bibliotecas como Redux, React Router e Next.js. Experiência em desenvolvimento de aplicações web com foco em performance e acessibilidade.",
+        experienceLevel: "MID-LEVEL",
+        hourlyRate: {
+            min: 75,
+            max: 110,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Leblon, 18000",
+            city: "SOROCABA",
+            cep: "22450-001",
+            neighborhood: "Leblon"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Website para Startup de Fintech",
+                description: "Desenvolvi o website responsivo para uma startup de fintech utilizando React, Next.js e Material UI.",
+                url: "https://example-fintech-startup.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Bacharelado em Sistemas de Informação",
+                fieldOfStudy: "Desenvolvimento Web",
+                institution: "Universidade Federal do Espírito Santo",
+                startDate: new Date("2016-03-01"),
+                endDate: new Date("2020-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Startup de Fintech",
+                jobTitle: "Desenvolvedora Front-End React",
+                startDate: new Date("2021-02-01"),
+                endDate: null,
+                jobDescription: "Desenvolvimento de novas funcionalidades e manutenção da interface web da plataforma."
+            }
+        ]
+    },
+
+    {
+        firstName: "Lucas",
+        lastName: "Santos",
+        specializationId: [],
+        profileImage: null,
+        profileSummary: "Desenvolvedor Mobile Android nativo com experiência em Java e Kotlin para desenvolvimento de aplicativos. Habilidades em design de interfaces de usuário, integração com APIs RESTful e gerenciamento de banco de dados SQLite. Experiência em desenvolvimento de aplicativos com foco em performance e segurança.",
+        experienceLevel: "JUNIOR",
+        hourlyRate: {
+            min: 55,
+            max: 75,
+            currency: "R$"
+        },
+        isAvailable: true,
+        location: {
+            streetAddress: "Rua Barra da Tijuca, 19000",
+            city: "SOROCABA",
+            cep: "22640-001",
+            neighborhood: "Barra da Tijuca"
+        },
+        skillIds: [],
+        portfolioItems: [
+            {
+                title: "Aplicativo de Gerenciamento de Tarefas",
+                description: "Desenvolvi um aplicativo de gerenciamento de tarefas utilizando Java, Android Studio e Room para persistência de dados.",
+                url: "https://example-task-management-app.com"
+            }
+        ],
+        educations: [
+            {
+                degreeName: "Técnico em Informática",
+                fieldOfStudy: "Desenvolvimento Mobile",
+                institution: "SENAC",
+                startDate: new Date("2019-03-01"),
+                endDate: new Date("2021-12-01")
+            }
+        ],
+        certifications: [],
+        workExperiences: [
+            {
+                companyName: "Empresa de Desenvolvimento de Software",
+                jobTitle: "Desenvolvedor Android Nativo",
+                startDate: new Date("2022-01-01"),
+                endDate: null,
+                jobDescription: "Desenvolvimento de aplicativos Android para clientes de diversos setores."
+            }
+        ]
+    },
+    */
+    //Criar mais 11 perfils
 ];
