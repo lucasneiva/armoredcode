@@ -51,85 +51,85 @@ const seedFreelancerProfiles = async () => {
         freelancerProfiles[9].skillIds = [skillDocs[9]._id, skillDocs[22]._id, skillDocs[23]._id];
         freelancerProfiles[9].userId = freelancerDocs[9]._id;
         /*
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[10].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[10].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[10].userId = freelancerDocs[10]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[11].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[11].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[11].userId = freelancerDocs[11]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[12].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[12].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[12].userId = freelancerDocs[12]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[13].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[13].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[13].userId = freelancerDocs[13]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[14].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[14].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[14].userId = freelancerDocs[14]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[15].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[15].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[15].userId = freelancerDocs[15]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[16].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[16].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[16].userId = freelancerDocs[16]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[17].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[17].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[17].userId = freelancerDocs[17]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[18].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[18].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[18].userId = freelancerDocs[18]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
-        
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[19].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[19].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[19].userId = freelancerDocs[19]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[20].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[20].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[20].userId = freelancerDocs[20]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[21].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[21].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[21].userId = freelancerDocs[21]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[22].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[22].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[22].userId = freelancerDocs[22]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[23].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[23].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[23].userId = freelancerDocs[23]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[24].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[24].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[24].userId = freelancerDocs[24]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[25].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[25].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[25].userId = freelancerDocs[25]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[26].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[26].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[26].userId = freelancerDocs[26]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[27].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[27].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[27].userId = freelancerDocs[27]._id;
 
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
+        freelancerProfiles[28].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[28].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[28].userId = freelancerDocs[28]._id;
+
+        freelancerProfiles[29].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[29].skillIds = [skillDocs[0]._id, skillDocs[0]._id, skillDocs[0]._id];
+        freelancerProfiles[29].userId = freelancerDocs[29]._id;
         */
 
         await FreelancerProfile.deleteMany({});
