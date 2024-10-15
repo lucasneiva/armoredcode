@@ -16,15 +16,6 @@ const users = [
         role: "CLIENT",
         profileId: null,
     },
-    /*
-    {
-        username: "freelancer1",
-        email: "freelancer1@example.com",
-        password: await bcrypt.hash( "password123", 10 ),
-        role: "FREELANCER",
-        profileId: null,
-    },
-    */
 ];
 
 for (let i = 1; i <= 30; i++) {
