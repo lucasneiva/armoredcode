@@ -31,15 +31,15 @@ const seedFreelancerProfiles = async () => {
         freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
         freelancerProfiles[4].userId = freelancerDocs[4]._id;
 
+        freelancerProfiles[5].specializationId = [specializationDocs[0]._id];
+        freelancerProfiles[5].skillIds = [skillDocs[9]._id, skillDocs[22]._id];
+        freelancerProfiles[5].userId = freelancerDocs[5]._id;
+
+        freelancerProfiles[6].specializationId = [specializationDocs[7]._id];
+        freelancerProfiles[6].skillIds = [skillDocs[1]._id, skillDocs[28]._id];
+        freelancerProfiles[6].userId = freelancerDocs[6]._id;
+
         /*
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
-
-        freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
-        freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
-        freelancerProfiles[4].userId = freelancerDocs[4]._id;
-
         freelancerProfiles[4].specializationId = [specializationDocs[1]._id];
         freelancerProfiles[4].skillIds = [skillDocs[1]._id, skillDocs[8]._id, skillDocs[15]._id];
         freelancerProfiles[4].userId = freelancerDocs[4]._id;
