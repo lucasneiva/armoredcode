@@ -34,10 +34,10 @@ const generateLocationData = () => {
 // Titulo e Paragrafo
 
 const generateProjectData = () => {
-    const pricingTypes = [ "BUDGET", "HOURLY_RATE" ];
+    const pricingTypes = [ "BUDGET", "HOURLY-RATE" ];
     const projectSizes = [ "SMALL", "MEDIUM", "LARGE" ];
     const experienceLevels = [ "ENTRY-LEVEL", "MID-LEVEL", "SENIOR" ];
-    const workModels = [ "REMOTE", "HYBRID", "ON_SITE" ];
+    const workModels = [ "REMOTE", "HYBRID", "ON-SITE" ];
     const statusTypes = [ "DRAFT", "POSTED" ];
 
     // Generate min value first

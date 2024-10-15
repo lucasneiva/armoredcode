@@ -126,11 +126,11 @@ export class InviteCardComponent {
                 // Handle error (e.g., show an error message to the user)
               }
             );
-            this.projectService.updateProjectStatus(projectId, 'IN_PROGRESS').subscribe(
+            this.projectService.updateProjectStatus(projectId, 'IN-PROGRESS').subscribe(
               (updateStatusResponse) => {
                 if (updateStatusResponse.success) {
                   console.log('Project status updated successfully');
-                  this.project.projectStatus = 'IN_PROGRESS'; // Update status in the component
+                  this.project.projectStatus = 'IN-PROGRESS'; // Update status in the component
                 } else {
                   console.error('Error updating project status:', updateStatusResponse.message);
                   // Handle error (e.g., show an error message to the user)
