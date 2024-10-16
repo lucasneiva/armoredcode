@@ -74,8 +74,8 @@
         <li class="icon-line">
             <i class="icon fa fa-search"></i>
         </li>
-        <li class="icon-line">
-            <i class="icon fa fa-envelope" *ngIf="userRole == 'FREELANCER'" routerLink="/manage-invite"></i>
+        <li *ngIf="userRole == 'FREELANCER'" class="icon-line">
+            <i class="icon fa fa-envelope" routerLink="/manage-invite"></i>
         </li>
         <li class="icon-line">
             <i class="icon fa fa-comments-o"></i>
@@ -83,8 +83,8 @@
         <li class="icon-line">
             <i class="icon fa fa-briefcase" routerLink="/manage-project"></i>
         </li>
-        <li class="icon-line">
-            <i class="icon fa fa-handshake-o" *ngIf="userRole == 'FREELANCER'" routerLink="/manage-proposal"></i>
+        <li *ngIf="userRole == 'FREELANCER'" class="icon-line">
+            <i class="icon fa fa-handshake-o" routerLink="/manage-proposal"></i>
         </li>
         <li class="icon-line">
             <img [src]="profilePath" alt="Default Profile" routerLink="/manage-profile"
