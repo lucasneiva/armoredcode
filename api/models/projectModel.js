@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 import locationModel from './locationModel.js';
+import chatChannelModel from './chatChannelModel.js';
 
 const ProjectSchema = new Schema( {
     clientId: {
@@ -113,6 +114,12 @@ const ProjectSchema = new Schema( {
 
     location: {
         type: locationModel.schema,
+        required: false,
+    },
+
+    chatChannelId: {
+        type: Schema.Types.ObjectId,
+        ref: "ChatChannel",
         required: false,
     },
 
