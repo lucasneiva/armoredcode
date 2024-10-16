@@ -142,7 +142,7 @@ export class FreelancerCardComponent {
     this.selectedProject = project;
     this.showProjectList = false; // Hide the list after selection
     const clientId = this.authService.getUserId(); // Assuming you have a method to get the logged-in client's ID
-    const freelancerId = this.freelancer._id;
+    const freelancerId = this.freelancer.userId._id;
     const projectId = this.selectedProject?._id; // Get the selected project ID 
 
     if (clientId && freelancerId) {

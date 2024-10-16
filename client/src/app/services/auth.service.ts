@@ -58,7 +58,7 @@ export class AuthService {
 
   getUserId(): string | null {
     const user_id = localStorage.getItem('user_id');
-    /*debug*/ //console.log("User Role from localStorage:", role);
+    /*debug*/ //console.log("User ID from localStorage:", user_id);
     return user_id;
   }
 }
