@@ -572,7 +572,7 @@ export const freelancerProfiles = [
         isAvailable: true,
         location: {
             streetAddress: "Rua Humberto de Campos, 56",
-            city: "SOROCCABA",
+            city: "SOROCABA",
             cep: "01311-000",
             neighborhood: "Bela Vista"
         },
