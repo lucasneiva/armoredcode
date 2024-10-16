@@ -150,7 +150,7 @@ export class FreelancerCardComponent {
         clientId: clientId,
         freelancerId: freelancerId,
         projectId: projectId,
-        message: "You have been invited to a project!", // Customize the message as needed
+        message: "Você foi convidado para este projeto!", // Customize the message as needed
       };
 
       /*debug*/ //console.log(notificationObj);
