@@ -1,5 +1,6 @@
 export const freelancerProfiles = [
     {
+        //1
         firstName: "Miguel",
         lastName: "Santos",
         specializationId: [],
@@ -54,6 +55,7 @@ export const freelancerProfiles = [
     },
 
     {
+        //2
         firstName: "Joana",
         lastName: "Silva",
         specializationId: [],
@@ -120,6 +122,7 @@ export const freelancerProfiles = [
     },
 
     {
+        //3
         firstName: "Lucas",
         lastName: "Pereira",
         specializationId: [],
@@ -168,7 +171,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Pedro",
+        //4
+firstName: "Pedro",
         lastName: "Souza",
         specializationId: [], 
         profileImage: null,
@@ -216,7 +220,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Ana",
+        //5
+firstName: "Ana",
         lastName: "Oliveira",
         specializationId: [],
         profileImage: null,
@@ -264,7 +269,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Juliana",
+        //6
+firstName: "Juliana",
         lastName: "Costa",
         specializationId: [],
         profileImage: null,
@@ -312,7 +318,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Ricardo",
+        //7
+firstName: "Ricardo",
         lastName: "Almeida",
         specializationId: [],
         profileImage: null,
@@ -360,7 +367,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Fernanda",
+        //8
+firstName: "Fernanda",
         lastName: "Rodrigues",
         specializationId: [],
         profileImage: null,
@@ -408,7 +416,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Marcelo",
+        //9
+firstName: "Marcelo",
         lastName: "Santos",
         specializationId: [],
         profileImage: null,
@@ -456,7 +465,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Patricia",
+        //10
+firstName: "Patricia",
         lastName: "Gomes",
         specializationId: [],
         profileImage: null,
@@ -510,7 +520,8 @@ export const freelancerProfiles = [
     },
     
     {
-        firstName: "Carlos",
+        //11
+firstName: "Carlos",
         lastName: "Ferreira",
         specializationId: [],
         profileImage: null,
@@ -558,7 +569,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Laura",
+        //12
+firstName: "Laura",
         lastName: "Lima",
         specializationId: [],
         profileImage: null,
@@ -606,7 +618,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Rafael",
+        //13
+firstName: "Rafael",
         lastName: "Cardoso",
         specializationId: [],
         profileImage: null,
@@ -654,7 +667,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Isabela",
+        //14
+firstName: "Isabela",
         lastName: "Cavalcanti",
         specializationId: [],
         profileImage: null,
@@ -702,7 +716,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Gustavo",
+        //15
+firstName: "Gustavo",
         lastName: "Barbato",
         specializationId: [],
         profileImage: null,
@@ -750,7 +765,8 @@ export const freelancerProfiles = [
     },
 /*16
     {
-        firstName: "Mariana",
+        //16
+firstName: "Mariana",
         lastName: "Barbosa",
         specializationId: [],
         profileImage: null,
@@ -798,7 +814,8 @@ export const freelancerProfiles = [
     },
 17
     {
-        firstName: "Leonardo",
+        //17
+firstName: "Leonardo",
         lastName: "Azevedo",
         specializationId: [],
         profileImage: null,
@@ -846,7 +863,8 @@ export const freelancerProfiles = [
     },
 18
     {
-        firstName: "Camila",
+        //18
+firstName: "Camila",
         lastName: "Ramos",
         specializationId: [],
         profileImage: null,
@@ -894,7 +912,8 @@ export const freelancerProfiles = [
     },
 19
     {
-        firstName: "Bruno",
+        //19
+firstName: "Bruno",
         lastName: "Silva",
         specializationId: [],
         profileImage: null,
@@ -942,7 +961,8 @@ export const freelancerProfiles = [
     },
 20
     {
-        firstName: "Juliana",
+        //20
+firstName: "Juliana",
         lastName: "Castro",
         specializationId: [],
         profileImage: null,
@@ -990,7 +1010,8 @@ export const freelancerProfiles = [
     },
 21
     {
-        firstName: "Victor",
+        //21
+firstName: "Victor",
         lastName: "Pereira",
         specializationId: [],
         profileImage: null,
@@ -1038,7 +1059,8 @@ export const freelancerProfiles = [
     },
 22
     {
-        firstName: "Amanda",
+        //22
+firstName: "Amanda",
         lastName: "Souza",
         specializationId: [],
         profileImage: null,
@@ -1086,7 +1108,8 @@ export const freelancerProfiles = [
     },
 23
     {
-        firstName: "Gabriela",
+        //23
+firstName: "Gabriela",
         lastName: "Melo",
         specializationId: [],
         profileImage: null,
@@ -1134,7 +1157,8 @@ export const freelancerProfiles = [
     },
 24
     {
-        firstName: "Bruno",
+        //24
+firstName: "Bruno",
         lastName: "Ferreira",
         specializationId: [],
         profileImage: null,
@@ -1182,7 +1206,8 @@ export const freelancerProfiles = [
     },
 25
     {
-        firstName: "Juliana",
+        //25
+firstName: "Juliana",
         lastName: "Lima",
         specializationId: [],
         profileImage: null,
@@ -1230,7 +1255,8 @@ export const freelancerProfiles = [
     },
 26
     {
-        firstName: "Victor",
+        //26
+firstName: "Victor",
         lastName: "Carvalho",
         specializationId: [],
         profileImage: null,
@@ -1278,7 +1304,8 @@ export const freelancerProfiles = [
     },
 27
     {
-        firstName: "Amanda",
+        //27
+firstName: "Amanda",
         lastName: "Costa",
         specializationId: [],
         profileImage: null,
@@ -1326,7 +1353,8 @@ export const freelancerProfiles = [
     },
 28
     {
-        firstName: "Lucas",
+        //28
+firstName: "Lucas",
         lastName: "Santos",
         specializationId: [],
         profileImage: null,
@@ -1374,7 +1402,8 @@ export const freelancerProfiles = [
     },
 29
     {
-        firstName: "Gabriela",
+        //29
+firstName: "Gabriela",
         lastName: "Oliveira",
         specializationId: [],
         profileImage: null,
@@ -1422,7 +1451,8 @@ export const freelancerProfiles = [
     },
 30
     {
-        firstName: "Thiago",
+        //30
+firstName: "Thiago",
         lastName: "Almeida",
         specializationId: [],
         profileImage: null,
@@ -1476,7 +1506,8 @@ export const freelancerProfiles = [
     },
 3030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030
     {
-        firstName: "Beatriz",
+        //1
+firstName: "Beatriz",
         lastName: "Correia",
         specializationId: [],
         profileImage: null,
@@ -1530,7 +1561,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Marina",
+        //1
+firstName: "Marina",
         lastName: "Rocha",
         specializationId: [],
         profileImage: null,
@@ -1578,7 +1610,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Pedro",
+        //1
+firstName: "Pedro",
         lastName: "Castro",
         specializationId: [],
         profileImage: null,
@@ -1632,7 +1665,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Isabela",
+        //1
+firstName: "Isabela",
         lastName: "Souza",
         specializationId: [],
         profileImage: null,
@@ -1680,7 +1714,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Mariana",
+        //1
+firstName: "Mariana",
         lastName: "Almeida",
         specializationId: [],
         profileImage: null,
@@ -1728,7 +1763,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Leonardo",
+        //1
+firstName: "Leonardo",
         lastName: "Correia",
         specializationId: [],
         profileImage: null,
@@ -1782,7 +1818,8 @@ export const freelancerProfiles = [
     },
 
     {
-        firstName: "Camila",
+        //1
+firstName: "Camila",
         lastName: "Lima",
         specializationId: [],
         profileImage: null,
@@ -1830,7 +1867,8 @@ export const freelancerProfiles = [
     }
 
     {
-        firstName: "Rafael",
+        //1
+firstName: "Rafael",
         lastName: "Barbosa",
         specializationId: [],
         profileImage: null,
