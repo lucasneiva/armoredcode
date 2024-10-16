@@ -67,9 +67,48 @@ nav {
 
 .text-logo {
     display: flex;
+
     @media not all and (min-width: 1024px) {
         display: none;
     }
 
     cursor: pointer;
+}
+
+.mobile-menu {
+    position: fixed; // Or position: absolute; depending on your layout needs
+    top: 6rem;
+    right: -100%; // Initially off-screen to the right
+    height: 100%; 
+    width: 25vw;
+    background-color: rgba(0, 0, 0, 0.25);
+    z-index: 50; 
+    transition: transform 0.3s ease-in-out;
+  
+    &.open { 
+      right: 0; // Slide in from the right
+    }
+  }
+
+.icon {
+    display: flex;
+    color: white;
+
+    font-size: 1.625rem
+        /* 26px */
+    ;
+    line-height: 2rem
+        /* 32px */
+    ;
+
+    margin: auto;
+
+    cursor: pointer;
+}
+
+.icon-line {
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    height: 4rem;
 }

@@ -12,7 +12,8 @@
         <div class="max-lg:hidden flex align-middle items-center w-full">
             <div class="nav-items text-gray-200 text-2xl font-bold space-x-8">
                 <span routerLink="/login" class="cursor-pointer hover:underline hover:text-indigo-200">Login</span>
-                <span routerLink="/register" class="cursor-pointer hover:underline hover:text-indigo-200">Registro</span>
+                <span routerLink="/register"
+                    class="cursor-pointer hover:underline hover:text-indigo-200">Registro</span>
             </div>
         </div>
         <div class="lg:hidden flex align-middle items-center w-full">
@@ -29,7 +30,8 @@
         <!--logo start-->
         <div routerLink="/home" class="logo">
             <img [src]="logoPath" alt="Company Logo" class="image-logo">
-            <span *ngIf="!showMenu" class="text-logo text-gray-200 text-4xl" style="font-family: Michroma;"> ArmoredCode </span>
+            <span *ngIf="!showMenu" class="text-logo text-gray-200 text-4xl" style="font-family: Michroma;"> ArmoredCode
+            </span>
         </div>
         <!--logo end-->
         <div class="nav-items"> <!--IMPLEMENTAR FETCH() PARA FETCH API-->
@@ -51,20 +53,13 @@
 
                     <span (click)="logOut()"
                         class="cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Logout</span>
+
+                        <img [src]="profilePath" alt="Default Profile" routerLink="/manage-profile"
+                        class="h-12 w-12 my-auto mx-4 rounded-full border-white border-solid border-2 cursor-pointer">
                 </div>
                 <div class="flex items-center w-full text-gray-200 text-2xl font-bold lg:hidden space-x-6">
-                    <i class="fa fa-search cursor-pointer"></i>
-                    <i class="fa fa-envelope cursor-pointer" *ngIf="userRole == 'FREELANCER'"
-                        routerLink="/manage-invite"></i>
-                    <i class="fa fa-comments-o cursor-pointer"></i>
-                    <i class="fa fa-briefcase cursor-pointer" routerLink="/manage-project"></i>
-                    <i class="fa fa-handshake-o cursor-pointer" *ngIf="userRole == 'FREELANCER'"
-                        routerLink="/manage-proposal"></i>
-                    <i class="fa fa-sign-out cursor-pointer" (click)="logOut()"></i>
-                </div>
-                <div class="flex justify-center align-middle w-full max-w-12 lg:mx-2">
-                    <img [src]="profilePath" alt="Default Profile" routerLink="/manage-profile"
-                        class="lg:h-12 lg:w-12 max-lg:h-10 max-lg:w-10 my-auto mx-4 rounded-full border-white border-solid border-2 cursor-pointer">
+                    <img [src]="menuPath" alt="Menu Icon" (click)="toggleMenu()"
+                        class="h-12 w-12 my-auto cursor-pointer">
                 </div>
             </div>
             <!--shortcuts end-->
@@ -73,6 +68,37 @@
     </ng-container>
     <!--nav end-->
 </nav>
+<!--mobile menu start-->
+<ng-container *ngIf="showMenu">
+    <div [ngClass]="{'open': showMenu}" class="mobile-menu">
+        <ul class="block w-full">
+            <li class="icon-line">
+                <i class="icon fa fa-search"></i>
+            </li>
+            <li class="icon-line">
+                <i class="icon fa fa-envelope" *ngIf="userRole == 'FREELANCER'" routerLink="/manage-invite"></i>
+            </li>
+            <li class="icon-line">
+                <i class="icon fa fa-comments-o"></i>
+            </li>
+            <li class="icon-line">
+                <i class="icon fa fa-briefcase" routerLink="/manage-project"></i>
+            </li>
+            <li class="icon-line">
+                <i class="icon fa fa-handshake-o" *ngIf="userRole == 'FREELANCER'" routerLink="/manage-proposal"></i>
+            </li>
+            <li class="icon-line">
+                <img [src]="profilePath" alt="Default Profile" routerLink="/manage-profile"
+                class="h-10 w-10 m-auto rounded-full border-white border-solid border-2 cursor-pointer">
+            </li>
+            <li class="icon-line">
+                <i class="icon fa fa-sign-out" (click)="logOut()"></i>
+            </li>
+        </ul>
+    </div>
+</ng-container>
+<!--mobile menu end-->
+
 
 <!--searchbar start--
         <ng-container *ngIf="isLoggedIn">
@@ -84,4 +110,4 @@
                 </div>
             </div>
         </ng-container>
-        !--searchbar end-->
+!--searchbar end-->
