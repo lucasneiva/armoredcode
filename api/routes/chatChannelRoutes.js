@@ -9,7 +9,7 @@ import { verifyUser } from '../utils/authMiddleware.js'; // Verifica se o usuár
 const router = express.Router();
 
 // Criar um novo canal de comunicação (usado internamente, geralmente após a criação de uma proposta)
-router.post('/', createChatChannel); // Pode ser restrito a um administrador ou a uma função específica
+// INTERNO AGORA router.post('/', createChatChannel); // Pode ser restrito a um administrador ou a uma função específica
 
 // Obter os detalhes de um canal de comunicação, incluindo o histórico de mensagens
 // (Freelancer ou Cliente) - Requer verificação se o usuário está envolvido no canal
