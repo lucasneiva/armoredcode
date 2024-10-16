@@ -49,16 +49,16 @@ nav {
     margin-right: 1rem;
 
     @media (min-width: 1024px) {
-        height: 3rem;
-        /* 48px */
-        width: 3rem;
-        /* 48px */
+        height: 3.5rem;
+        /* 56px */
+        width: 3.5rem;
+        /* 56px */
     }
 
     @media not all and (min-width: 1024px) {
-        height: 2.5rem;
+        height: 3rem;
         /* 48px */
-        width: 2.5rem;
+        width: 3rem;
         /* 48px */
     }
 
@@ -92,11 +92,17 @@ nav {
 
 .mobile-menu {
     position: fixed;
+    transition: 250ms ease-in-out;
     top: 6rem;
-    right: 0;
+    right: -8rem;
     height: 100%;
     width: 100%;
     z-index: 50;
+
+    &.open {
+        transition: 350ms ease-in-out;
+        right: 0rem;
+    }
 
     @media not all and (max-width: 1024px) {
         display: none;
