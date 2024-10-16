@@ -60,6 +60,14 @@ export class HeaderComponent implements OnInit {
 
   toggleMenu() {
     this.showMenu = !this.showMenu;
+    setTimeout(() => { 
+      const mobileMenu = document.querySelector('.mobile-menu');
+      if (this.showMenu) {
+        mobileMenu?.classList.add('open');
+      } else {
+        mobileMenu?.classList.remove('open');
+      }
+    }, 0); 
   }
 
   private closeMenu() {
