@@ -76,8 +76,12 @@ nav {
 }
 
 .hamburger-menu {
-    height: 3rem /* 48px */;
-    width: 3rem /* 48px */;
+    height: 3rem
+        /* 48px */
+    ;
+    width: 3rem
+        /* 48px */
+    ;
     margin-top: auto;
     margin-bottom: auto;
 
@@ -87,6 +91,7 @@ nav {
         // Apply rotation when the flag is true
         transform: rotate(90deg);
     }
+
     cursor: pointer;
 }
 
@@ -112,11 +117,15 @@ nav {
         position: absolute;
         top: 0;
         right: 0;
+
         height: 100%;
         width: 7rem;
         padding: 20px;
         list-style: none;
+
         background-color: rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);/* For Safari support */
     }
 }
 
