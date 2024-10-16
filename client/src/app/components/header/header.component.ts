@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit, inject } from '@angular/core';
-import { Router, RouterModule, NavigationEnd } from '@angular/router';
+import { Router, RouterModule, NavigationStart, NavigationEnd } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -13,14 +13,14 @@ import { AuthService } from '../../services/auth.service';
 export class HeaderComponent implements OnInit {
   router = inject(Router);
   authService = inject(AuthService);
-  
+
   profilePath = '../../assets/images/prf_icon.png';
   logoPath = '../../assets/images/logo_branca_sfundo.png';
   menuPath = '../../assets/images/menu-svgrepo-com.svg';
 
   isLoggedIn: boolean = false;
   userRole: string | null = null;
-  
+
   showMenu: boolean = false;
   menuRotated: boolean = false; // Add a flag to track rotation
 
@@ -50,32 +50,41 @@ export class HeaderComponent implements OnInit {
 
     // Subscribe to Router events
     this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.closeMenu(); 
+      if (event instanceof NavigationEnd || event instanceof NavigationStart) {
+        this.closeMenu();
       }
     });
   }
 
-  logOut() {
-    this.authService.logout();
-    this.router.navigate(['login']);
-  }
+  // In your HeaderComponent
+logOut() {
+  this.authService.logout()
+    .then(() => { // Wait for logout to complete
+      this.closeMenu();
+      this.router.navigate(['login']);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
 
   toggleMenu() {
     this.showMenu = !this.showMenu;
-    this.menuRotated = !this.menuRotated; // Toggle rotation flag
+    this.menuRotated = !this.menuRotated;
 
-    setTimeout(() => { 
+    setTimeout(() => {
       const mobileMenu = document.querySelector('.mobile-menu');
       if (this.showMenu) {
         mobileMenu?.classList.add('open');
       } else {
         mobileMenu?.classList.remove('open');
+        this.menuRotated = false; // Reset rotation when closing the menu 
       }
-    }, 0); 
+    }, 0);
   }
 
-  private closeMenu() {
-    this.showMenu = false; 
+  closeMenu() {
+    this.showMenu = false;
+    this.menuRotated = false; // Reset rotation when closing programmatically 
   }
 }

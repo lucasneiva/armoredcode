@@ -101,10 +101,11 @@ nav {
     top: 6rem;
     right: -8rem;
     height: 100%;
-    width: 100%;
+    width: 0%;
     z-index: 50;
 
     &.open {
+        width: 100%;
         transition: 350ms ease-in-out;
         right: 0rem;
     }

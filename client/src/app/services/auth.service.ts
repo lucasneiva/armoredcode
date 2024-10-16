@@ -36,13 +36,20 @@ export class AuthService {
     return !!localStorage.getItem("user_id");
   }
 
-  logout() {
-    localStorage.removeItem('user_id');
-    localStorage.removeItem('user_role');
-    localStorage.removeItem('token');
-    this.isLoggedIn$.next(false);
+  logout(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      try {
+        localStorage.removeItem('user_id');
+        localStorage.removeItem('user_role');
+        localStorage.removeItem('token');
+        this.isLoggedIn$.next(false);
+        resolve(); // Resolve the Promise when logout is successful
+      } catch (error) {
+        reject(error); // Reject the Promise if an error occurs
+      }
+    });
   }
-  
+
   getUserRole(): string | null {
     const role = localStorage.getItem('user_role');
     /*debug*/ //console.log("User Role from localStorage:", role);
