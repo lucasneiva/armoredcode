@@ -20,7 +20,10 @@ export class HeaderComponent implements OnInit {
 
   isLoggedIn: boolean = false;
   userRole: string | null = null;
+  
   showMenu: boolean = false;
+  menuRotated: boolean = false; // Add a flag to track rotation
+
   showHeader: boolean = true;
   previousScrollPosition: number = 0;
 
@@ -60,6 +63,8 @@ export class HeaderComponent implements OnInit {
 
   toggleMenu() {
     this.showMenu = !this.showMenu;
+    this.menuRotated = !this.menuRotated; // Toggle rotation flag
+
     setTimeout(() => { 
       const mobileMenu = document.querySelector('.mobile-menu');
       if (this.showMenu) {
