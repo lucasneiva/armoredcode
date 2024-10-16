@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-const CommunicationChannelSchema = new Schema( {
+const ChatChannelSchema = new Schema( {
     projectId: {
         type: Schema.Types.ObjectId,
         ref: 'Project',
@@ -38,4 +38,4 @@ const CommunicationChannelSchema = new Schema( {
     },
 }, { timestamps: true } );
 
-export default mongoose.model( 'CommunicationChannel', CommunicationChannelSchema );
+export default mongoose.model( 'ChatChannel', ChatChannelSchema );
