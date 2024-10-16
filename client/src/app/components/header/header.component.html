@@ -30,7 +30,7 @@
         <!--logo start-->
         <div routerLink="/home" class="logo">
             <img [src]="logoPath" alt="Company Logo" class="image-logo">
-            <span *ngIf="!showMenu" class="text-logo text-gray-200 text-4xl" style="font-family: Michroma;"> ArmoredCode
+            <span class="text-logo text-gray-200 text-4xl" style="font-family: Michroma;"> ArmoredCode
             </span>
         </div>
         <!--logo end-->
@@ -54,12 +54,12 @@
                     <span (click)="logOut()"
                         class="cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Logout</span>
 
-                        <img [src]="profilePath" alt="Default Profile" routerLink="/manage-profile"
+                    <img [src]="profilePath" alt="Default Profile" routerLink="/manage-profile"
                         class="h-12 w-12 my-auto mx-4 rounded-full border-white border-solid border-2 cursor-pointer">
                 </div>
                 <div class="flex items-center w-full text-gray-200 text-2xl font-bold lg:hidden space-x-6">
-                    <img [src]="menuPath" alt="Menu Icon" (click)="toggleMenu()"
-                    class="hamburger-menu" [ngClass]="{'rotated': menuRotated}">
+                    <img [src]="menuPath" alt="Menu Icon" (click)="toggleMenu()" class="hamburger-menu"
+                        [ngClass]="{'rotated': menuRotated}">
                 </div>
             </div>
             <!--shortcuts end-->
@@ -69,34 +69,32 @@
     <!--nav end-->
 </nav>
 <!--mobile menu start-->
-
-    <div [ngClass]="{'open': showMenu}" class="mobile-menu">
-        <ul class="block">
-            <li class="icon-line">
-                <i class="icon fa fa-search"></i>
-            </li>
-            <li class="icon-line">
-                <i class="icon fa fa-envelope" *ngIf="userRole == 'FREELANCER'" routerLink="/manage-invite"></i>
-            </li>
-            <li class="icon-line">
-                <i class="icon fa fa-comments-o"></i>
-            </li>
-            <li class="icon-line">
-                <i class="icon fa fa-briefcase" routerLink="/manage-project"></i>
-            </li>
-            <li class="icon-line">
-                <i class="icon fa fa-handshake-o" *ngIf="userRole == 'FREELANCER'" routerLink="/manage-proposal"></i>
-            </li>
-            <li class="icon-line">
-                <img [src]="profilePath" alt="Default Profile" routerLink="/manage-profile"
+<div [ngClass]="{'open': showMenu}" class="mobile-menu">
+    <ul class="block">
+        <li class="icon-line">
+            <i class="icon fa fa-search"></i>
+        </li>
+        <li class="icon-line">
+            <i class="icon fa fa-envelope" *ngIf="userRole == 'FREELANCER'" routerLink="/manage-invite"></i>
+        </li>
+        <li class="icon-line">
+            <i class="icon fa fa-comments-o"></i>
+        </li>
+        <li class="icon-line">
+            <i class="icon fa fa-briefcase" routerLink="/manage-project"></i>
+        </li>
+        <li class="icon-line">
+            <i class="icon fa fa-handshake-o" *ngIf="userRole == 'FREELANCER'" routerLink="/manage-proposal"></i>
+        </li>
+        <li class="icon-line">
+            <img [src]="profilePath" alt="Default Profile" routerLink="/manage-profile"
                 class="h-10 w-10 m-auto rounded-full border-white border-solid border-2 cursor-pointer">
-            </li>
-            <li class="icon-line">
-                <i class="icon fa fa-sign-out" (click)="logOut()"></i>
-            </li>
-        </ul>
-    </div>
-
+        </li>
+        <li class="icon-line">
+            <i class="icon fa fa-sign-out" (click)="logOut()"></i>
+        </li>
+    </ul>
+</div>
 <!--mobile menu end-->
 
 
