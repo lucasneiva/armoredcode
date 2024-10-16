@@ -44,9 +44,9 @@ const ProposalSchema = new Schema( {
         enum: [ 'DRAFT', 'PENDING', 'ACCEPTED', 'REJECTED' ],
         default: 'DRAFT',
     },
-    communicationChannelId: { // Referencia ao Canal de Comunicação
+    ChatChannelId: { // Referencia ao Canal de Comunicação
         type: Schema.Types.ObjectId,
-        ref: 'CommunicationChannel',
+        ref: 'ChatChannel',
         required: false,
     },
 }, { timestamps: true } );
