@@ -4,6 +4,7 @@ import User from "../models/userModel.js";
 import ProjectCategory from "../models/projectCategoryModel.js";
 import Location from "../models/locationModel.js";
 import { faker } from '@faker-js/faker';
+import { projectDataPool } from "../utils/projectDataPool.js";
 
 const generateLocationData = () => {
     const cities = [
@@ -33,6 +34,7 @@ const generateLocationData = () => {
 // vetor com 30 paragrafos para cada projeto
 // Titulo e Paragrafo
 
+
 const generateProjectData = () => {
     const pricingTypes = [ "BUDGET", "HOURLY-RATE" ];
     const projectSizes = [ "SMALL", "MEDIUM", "LARGE" ];
@@ -44,9 +46,11 @@ const generateProjectData = () => {
     const minBudget = faker.finance.amount( { min: 500, max: 10000 } );
     const minHourlyRate = faker.finance.amount( { min: 500, max: 10000 } );
 
+    const randomProjectData = faker.helpers.arrayElement(projectDataPool); 
+
     return {
-        projectTitle: faker.lorem.words( 5 ),
-        projectDescription: faker.lorem.paragraph(),
+        projectTitle: randomProjectData.title,
+        projectDescription: randomProjectData.description,
         pricingType: faker.helpers.arrayElement( pricingTypes ),
         projectBudget: {
             min: minBudget,
