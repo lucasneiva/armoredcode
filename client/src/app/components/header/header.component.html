@@ -59,7 +59,7 @@
                 </div>
                 <div class="flex items-center w-full text-gray-200 text-2xl font-bold lg:hidden space-x-6">
                     <img [src]="menuPath" alt="Menu Icon" (click)="toggleMenu()"
-                        class="h-12 w-12 my-auto cursor-pointer">
+                    class="hamburger-menu" [ngClass]="{'rotated': menuRotated}">
                 </div>
             </div>
             <!--shortcuts end-->

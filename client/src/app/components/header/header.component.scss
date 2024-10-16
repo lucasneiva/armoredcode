@@ -75,20 +75,44 @@ nav {
     cursor: pointer;
 }
 
-.mobile-menu {
-    position: fixed; // Or position: absolute; depending on your layout needs
-    top: 6rem;
-    right: -100%; // Initially off-screen to the right
-    height: 100%; 
-    width: 25vw;
-    background-color: rgba(0, 0, 0, 0.25);
-    z-index: 50; 
-    transition: transform 0.3s ease-in-out;
-  
-    &.open { 
-      right: 0; // Slide in from the right
+.hamburger-menu {
+    height: 3rem /* 48px */;
+    width: 3rem /* 48px */;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    transition: transform 0.3s ease-in-out; // Add a transition for smooth rotation
+
+    &.rotated {
+        // Apply rotation when the flag is true
+        transform: rotate(90deg);
     }
-  }
+    cursor: pointer;
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 6rem;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 50;
+
+    @media not all and (max-width: 1024px) {
+        display: none;
+    }
+
+    ul {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 7rem;
+        padding: 20px;
+        list-style: none;
+        background-color: rgba(0, 0, 0, 0.25);
+    }
+}
 
 .icon {
     display: flex;
