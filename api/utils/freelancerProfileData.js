@@ -172,9 +172,9 @@ export const freelancerProfiles = [
 
     {
         //4
-firstName: "Pedro",
+        firstName: "Pedro",
         lastName: "Souza",
-        specializationId: [], 
+        specializationId: [],
         profileImage: null,
         profileSummary: "Desenvolvedor Back-End Java experiente com sólido conhecimento em Spring Boot, Hibernate e desenvolvimento de APIs RESTful. Habilidades em design e implementação de soluções robustas e escaláveis. Forte experiência em trabalho em equipe e metodologias ágeis.",
         experienceLevel: "SENIOR",
@@ -221,7 +221,7 @@ firstName: "Pedro",
 
     {
         //5
-firstName: "Ana",
+        firstName: "Ana",
         lastName: "Oliveira",
         specializationId: [],
         profileImage: null,
@@ -251,7 +251,7 @@ firstName: "Ana",
             {
                 degreeName: "Bacharelado em Engenharia de Software",
                 fieldOfStudy: "Engenharia de Software",
-                institution: "Universidade Federal do Rio de Janeiro",
+                institution: "Universidade Federal de Sorocaba",
                 startDate: new Date("2016-03-01"),
                 endDate: new Date("2020-12-01")
             }
@@ -270,7 +270,7 @@ firstName: "Ana",
 
     {
         //6
-firstName: "Juliana",
+        firstName: "Juliana",
         lastName: "Costa",
         specializationId: [],
         profileImage: null,
@@ -319,7 +319,7 @@ firstName: "Juliana",
 
     {
         //7
-firstName: "Ricardo",
+        firstName: "Ricardo",
         lastName: "Almeida",
         specializationId: [],
         profileImage: null,
@@ -368,7 +368,7 @@ firstName: "Ricardo",
 
     {
         //8
-firstName: "Fernanda",
+        firstName: "Fernanda",
         lastName: "Rodrigues",
         specializationId: [],
         profileImage: null,
@@ -417,7 +417,7 @@ firstName: "Fernanda",
 
     {
         //9
-firstName: "Marcelo",
+        firstName: "Marcelo",
         lastName: "Santos",
         specializationId: [],
         profileImage: null,
@@ -466,7 +466,7 @@ firstName: "Marcelo",
 
     {
         //10
-firstName: "Patricia",
+        firstName: "Patricia",
         lastName: "Gomes",
         specializationId: [],
         profileImage: null,
@@ -518,10 +518,10 @@ firstName: "Patricia",
             }
         ]
     },
-    
+
     {
         //11
-firstName: "Carlos",
+        firstName: "Carlos",
         lastName: "Ferreira",
         specializationId: [],
         profileImage: null,
@@ -570,7 +570,7 @@ firstName: "Carlos",
 
     {
         //12
-firstName: "Laura",
+        firstName: "Laura",
         lastName: "Lima",
         specializationId: [],
         profileImage: null,
@@ -619,7 +619,7 @@ firstName: "Laura",
 
     {
         //13
-firstName: "Rafael",
+        firstName: "Rafael",
         lastName: "Cardoso",
         specializationId: [],
         profileImage: null,
@@ -668,7 +668,7 @@ firstName: "Rafael",
 
     {
         //14
-firstName: "Isabela",
+        firstName: "Isabela",
         lastName: "Cavalcanti",
         specializationId: [],
         profileImage: null,
@@ -717,7 +717,7 @@ firstName: "Isabela",
 
     {
         //15
-firstName: "Gustavo",
+        firstName: "Gustavo",
         lastName: "Barbato",
         specializationId: [],
         profileImage: null,
@@ -763,10 +763,10 @@ firstName: "Gustavo",
             }
         ]
     },
-/*16
+
     {
         //16
-firstName: "Mariana",
+        firstName: "Mariana",
         lastName: "Barbosa",
         specializationId: [],
         profileImage: null,
@@ -780,7 +780,7 @@ firstName: "Mariana",
         isAvailable: true,
         location: {
             streetAddress: "Rua Consolação, 6000",
-            city: "SAO PAULO",
+            city: "ITU",
             cep: "01301-000",
             neighborhood: "Consolação"
         },
@@ -812,10 +812,10 @@ firstName: "Mariana",
             }
         ]
     },
-17
+
     {
         //17
-firstName: "Leonardo",
+        firstName: "Leonardo",
         lastName: "Azevedo",
         specializationId: [],
         profileImage: null,
@@ -829,7 +829,7 @@ firstName: "Leonardo",
         isAvailable: true,
         location: {
             streetAddress: "Av. Brasil, 7000",
-            city: "RIO DE JANEIRO",
+            city: "SALTO DE PIRAPORA",
             cep: "20070-002",
             neighborhood: "Centro"
         },
@@ -845,7 +845,7 @@ firstName: "Leonardo",
             {
                 degreeName: "Bacharelado em Estatística",
                 fieldOfStudy: "Ciência de Dados",
-                institution: "Universidade Federal do Rio de Janeiro",
+                institution: "Universidade Federal de Salto de Pirapora",
                 startDate: new Date("2015-03-01"),
                 endDate: new Date("2019-12-01")
             }
@@ -861,10 +861,10 @@ firstName: "Leonardo",
             }
         ]
     },
-18
+
     {
         //18
-firstName: "Camila",
+        firstName: "Camila",
         lastName: "Ramos",
         specializationId: [],
         profileImage: null,
@@ -910,10 +910,10 @@ firstName: "Camila",
             }
         ]
     },
-19
+
     {
         //19
-firstName: "Bruno",
+        firstName: "Bruno",
         lastName: "Silva",
         specializationId: [],
         profileImage: null,
@@ -943,7 +943,7 @@ firstName: "Bruno",
             {
                 degreeName: "Mestrado em Ciência da Computação",
                 fieldOfStudy: "Desenvolvimento Mobile",
-                institution: "Pontifícia Universidade Católica do Rio de Janeiro",
+                institution: "Pontifícia Universidade Católica de São Roque",
                 startDate: new Date("2012-03-01"),
                 endDate: new Date("2014-12-01")
             }
@@ -959,10 +959,10 @@ firstName: "Bruno",
             }
         ]
     },
-20
+
     {
         //20
-firstName: "Juliana",
+        firstName: "Juliana",
         lastName: "Castro",
         specializationId: [],
         profileImage: null,
@@ -1008,10 +1008,10 @@ firstName: "Juliana",
             }
         ]
     },
-21
+
     {
         //21
-firstName: "Victor",
+        firstName: "Victor",
         lastName: "Pereira",
         specializationId: [],
         profileImage: null,
@@ -1057,10 +1057,10 @@ firstName: "Victor",
             }
         ]
     },
-22
+
     {
         //22
-firstName: "Amanda",
+        firstName: "Amanda",
         lastName: "Souza",
         specializationId: [],
         profileImage: null,
@@ -1106,10 +1106,10 @@ firstName: "Amanda",
             }
         ]
     },
-23
+
     {
         //23
-firstName: "Gabriela",
+        firstName: "Gabriela",
         lastName: "Melo",
         specializationId: [],
         profileImage: null,
@@ -1155,10 +1155,10 @@ firstName: "Gabriela",
             }
         ]
     },
-24
+
     {
         //24
-firstName: "Bruno",
+        firstName: "Bruno",
         lastName: "Ferreira",
         specializationId: [],
         profileImage: null,
@@ -1204,10 +1204,10 @@ firstName: "Bruno",
             }
         ]
     },
-25
+
     {
         //25
-firstName: "Juliana",
+        firstName: "Juliana",
         lastName: "Lima",
         specializationId: [],
         profileImage: null,
@@ -1253,10 +1253,10 @@ firstName: "Juliana",
             }
         ]
     },
-26
+
     {
         //26
-firstName: "Victor",
+        firstName: "Victor",
         lastName: "Carvalho",
         specializationId: [],
         profileImage: null,
@@ -1302,10 +1302,10 @@ firstName: "Victor",
             }
         ]
     },
-27
+
     {
         //27
-firstName: "Amanda",
+        firstName: "Amanda",
         lastName: "Costa",
         specializationId: [],
         profileImage: null,
@@ -1351,10 +1351,10 @@ firstName: "Amanda",
             }
         ]
     },
-28
+
     {
         //28
-firstName: "Lucas",
+        firstName: "Lucas",
         lastName: "Santos",
         specializationId: [],
         profileImage: null,
@@ -1400,10 +1400,10 @@ firstName: "Lucas",
             }
         ]
     },
-29
+
     {
         //29
-firstName: "Gabriela",
+        firstName: "Gabriela",
         lastName: "Oliveira",
         specializationId: [],
         profileImage: null,
@@ -1449,10 +1449,10 @@ firstName: "Gabriela",
             }
         ]
     },
-30
+
     {
         //30
-firstName: "Thiago",
+        firstName: "Thiago",
         lastName: "Almeida",
         specializationId: [],
         profileImage: null,
@@ -1504,10 +1504,10 @@ firstName: "Thiago",
             }
         ]
     },
-3030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030
+    /* //max limit max limit max limit max limit max limit max limit max limit max limit max limit max limit max limit
     {
         //1
-firstName: "Beatriz",
+        firstName: "Beatriz",
         lastName: "Correia",
         specializationId: [],
         profileImage: null,
@@ -1562,7 +1562,7 @@ firstName: "Beatriz",
 
     {
         //1
-firstName: "Marina",
+        firstName: "Marina",
         lastName: "Rocha",
         specializationId: [],
         profileImage: null,
@@ -1611,7 +1611,7 @@ firstName: "Marina",
 
     {
         //1
-firstName: "Pedro",
+        firstName: "Pedro",
         lastName: "Castro",
         specializationId: [],
         profileImage: null,
@@ -1666,7 +1666,7 @@ firstName: "Pedro",
 
     {
         //1
-firstName: "Isabela",
+        firstName: "Isabela",
         lastName: "Souza",
         specializationId: [],
         profileImage: null,
@@ -1715,7 +1715,7 @@ firstName: "Isabela",
 
     {
         //1
-firstName: "Mariana",
+        firstName: "Mariana",
         lastName: "Almeida",
         specializationId: [],
         profileImage: null,
@@ -1764,7 +1764,7 @@ firstName: "Mariana",
 
     {
         //1
-firstName: "Leonardo",
+        firstName: "Leonardo",
         lastName: "Correia",
         specializationId: [],
         profileImage: null,
@@ -1819,7 +1819,7 @@ firstName: "Leonardo",
 
     {
         //1
-firstName: "Camila",
+        firstName: "Camila",
         lastName: "Lima",
         specializationId: [],
         profileImage: null,
@@ -1868,7 +1868,7 @@ firstName: "Camila",
 
     {
         //1
-firstName: "Rafael",
+        firstName: "Rafael",
         lastName: "Barbosa",
         specializationId: [],
         profileImage: null,
