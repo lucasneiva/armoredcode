@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit, inject } from '@angular/core';
 import { Router, RouterModule, NavigationStart, NavigationEnd } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { SearchService, SearchStateService } from '../../services/search.service';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,8 @@ import { AuthService } from '../../services/auth.service';
 export class HeaderComponent implements OnInit {
   router = inject(Router);
   authService = inject(AuthService);
+  searchService = inject(SearchService);
+  searchStateService = inject(SearchStateService);
 
   profilePath = '../../assets/images/prf_icon.png';
   logoPath = '../../assets/images/logo_branca_sfundo.png';
@@ -57,16 +60,20 @@ export class HeaderComponent implements OnInit {
   }
 
   // In your HeaderComponent
-logOut() {
-  this.authService.logout()
-    .then(() => { // Wait for logout to complete
-      this.closeMenu();
-      this.router.navigate(['login']);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-}
+  logOut() {
+    this.authService.logout()
+      .then(() => { // Wait for logout to complete
+        this.closeMenu();
+        this.router.navigate(['login']);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  toggleSearchBar() {
+    this.searchStateService.toggleSearchBarVisibility();
+  }
 
   toggleMenu() {
     this.showMenu = !this.showMenu;

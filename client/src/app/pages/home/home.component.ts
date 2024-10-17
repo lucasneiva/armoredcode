@@ -8,11 +8,12 @@ import { ProjectCardComponent } from '../../components/project-card/project-card
 import { Project, ProjectService } from '../../services/project.service';
 import { Profile, ProfileService } from '../../services/profile.service';
 import { SearchService } from '../../services/search.service';
+import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, FormsModule, ProjectCardComponent, FreelancerCardComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, ProjectCardComponent, FreelancerCardComponent, SearchBarComponent ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -32,8 +33,6 @@ export default class HomeComponent {
   isLoading = false; // default is true
   userRole: string | null = null;
 
-  searchTerm: string = '';
-
   ngOnInit(): void {
     this.userRole = this.authService.getUserRole();
     if (this.userRole === 'CLIENT') {
@@ -42,44 +41,6 @@ export default class HomeComponent {
       this.loadProjects();
     } else {
       console.log("invalid role");
-    }
-  }
-
-  search() {
-    // Check if the search term is empty, if so, load the initial data (optional)
-    if (this.searchTerm.trim() === '') {
-      // Load initial data (e.g., all freelancers or all projects)
-      if (this.userRole === 'CLIENT') {
-        this.loadFreelancers(); // Your existing method to load all freelancers
-      } else if (this.userRole === 'FREELANCER') {
-        this.loadProjects(); // Your existing method to load all projects
-      }
-      return;
-    }
-
-    // Call the appropriate search service method based on the user role
-    if (this.userRole === 'CLIENT') {
-      this.searchService.searchFreelancers(this.searchTerm).subscribe(
-        (freelancers) => {
-          this.freelancers = freelancers;
-          this.isLoading = false;
-        },
-        (error) => {
-          console.error("Error searching freelancers:", error);
-          this.isLoading = false;
-        }
-      );
-    } else if (this.userRole === 'FREELANCER') {
-      this.searchService.searchProjects(this.searchTerm).subscribe(
-        (projects) => {
-          this.projects = projects;
-          this.isLoading = false;
-        },
-        (error) => {
-          console.error("Error searching projects:", error);
-          this.isLoading = false;
-        }
-      );
     }
   }
 

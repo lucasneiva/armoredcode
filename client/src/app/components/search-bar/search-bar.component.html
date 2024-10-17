@@ -1,0 +1,10 @@
+<!--cover-->
+<div *ngIf="isSearchBarVisible" class="page-cover">
+    <!--search bar start-->
+    <div class="search-container">
+        <input class="search-bar" type="text" placeholder="Search..." [(ngModel)]="searchTerm" (input)="search()">
+        <!-- Add more filter inputs if needed (e.g., for skills, experience level, etc.) -->
+    </div>
+    <!--search bar end-->
+</div>
+<!--cover-->

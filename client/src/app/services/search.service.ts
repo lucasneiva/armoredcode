@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Profile } from './profile.service';
 import { Project } from './project.service';
 import { apiUrls } from '../api.urls';
@@ -8,6 +8,14 @@ import { apiUrls } from '../api.urls';
 @Injectable({
     providedIn: 'root'
 })
+export class SearchStateService{
+    private isSearchBarVisible = new BehaviorSubject<boolean>(false);
+  isSearchBarVisible$ = this.isSearchBarVisible.asObservable();
+
+  toggleSearchBarVisibility() {
+    this.isSearchBarVisible.next(!this.isSearchBarVisible.value);
+  }
+}
 export class SearchService {
     http = inject(HttpClient);
 
