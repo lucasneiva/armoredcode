@@ -45,7 +45,7 @@ export class SearchService {
             params = params.append('specializationId', specializationId);
         }
 
-        return this.http.get<Profile[]>(`${apiUrls.searchServiceApi}/search/freelancers`, { params });
+        return this.http.get<Profile[]>(`${apiUrls.searchServiceApi}/freelancers`, { params });
     }
 
     searchProjects(searchTerm?: string, categoryId?: string, skillIds?: string[]): Observable<Project[]> {
@@ -60,6 +60,6 @@ export class SearchService {
             params = params.append('skillIds', skillIds.join(','));
         }
 
-        return this.http.get<Project[]>(`${apiUrls.searchServiceApi}/search/projects`, { params });
+        return this.http.get<Project[]>(`${apiUrls.searchServiceApi}/projects`, { params });
     }
 }
