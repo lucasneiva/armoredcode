@@ -32,40 +32,13 @@ export class SearchBarComponent {
   }
 
   search() {
-    // Check if the search term is empty, if so, load the initial data (optional)
-    if (this.searchTerm.trim() === '') {
-      // Load initial data (e.g., all freelancers or all projects)
-      if (this.userRole === 'CLIENT') {
-        //this.loadFreelancers(); // Your existing method to load all freelancers
-      } else if (this.userRole === 'FREELANCER') {
-        //this.loadProjects(); // Your existing method to load all projects
-      }
-      return;
-    }
-
-    // Call the appropriate search service method based on the user role
-    if (this.userRole === 'CLIENT') {
-      this.searchService.searchFreelancers(this.searchTerm).subscribe(
-        (freelancers) => {
-          this.freelancers = freelancers;
-
-        },
-        (error) => {
-          console.error("Error searching freelancers:", error);
-
-        }
-      );
-    } else if (this.userRole === 'FREELANCER') {
-      this.searchService.searchProjects(this.searchTerm).subscribe(
-        (projects) => {
-          this.projects = projects;
-
-        },
-        (error) => {
-          console.error("Error searching projects:", error);
-
-        }
-      );
+    this.searchStateService.setSearchTerm(this.searchTerm); // Update the search term in the service
+  }
+  
+  searchOnEnterKey(event: Event) {
+    const keyboardEvent = event as KeyboardEvent; // Cast to KeyboardEvent
+    if (keyboardEvent.key === 'Enter') {
+      this.searchStateService.setSearchTerm(this.searchTerm);
     }
   }
 

@@ -24,6 +24,18 @@
             border: 2px grey;
             border-radius: 1.5rem;
         }
+        .search-button {
+            position: relative; 
+            width: 6rem; 
+            height: 3rem;
+            margin-left: -5.8rem;
+            font-size: 1.25rem;
+            color: white;
+            background-color: rgb(114, 114, 114); 
+            border: gray;
+            border-radius: 0rem 1.5rem 1.5rem 0rem;
+            cursor: pointer;
+          }
 
         .close-button {
             position: absolute; 

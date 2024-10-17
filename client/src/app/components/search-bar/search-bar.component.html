@@ -2,9 +2,11 @@
 <div *ngIf="isSearchBarVisible" class="page-cover">
     <!--search bar start-->
     <div class="search-container">
-        <input class="search-bar" type="text" placeholder="Search..." [(ngModel)]="searchTerm" (input)="search()">
+        <input class="search-bar" type="text" placeholder="Pesquisar..." [(ngModel)]="searchTerm"
+            (keyup.enter)="searchOnEnterKey($event)">
+        <button class="search-button" (click)="search()">Buscar</button>
         <!-- Add more filter inputs if needed (e.g., for skills, experience level, etc.) -->
-        <button class="close-button" (click)="closeSearchBar()">X</button> 
+        <button class="close-button" (click)="closeSearchBar()">X</button>
     </div>
     <!--search bar end-->
 </div>

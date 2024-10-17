@@ -7,7 +7,7 @@ import { FreelancerCardComponent } from '../../components/freelancer-card/freela
 import { ProjectCardComponent } from '../../components/project-card/project-card.component';
 import { Project, ProjectService } from '../../services/project.service';
 import { Profile, ProfileService } from '../../services/profile.service';
-import { SearchService } from '../../services/search.service';
+import { SearchService, SearchStateService } from '../../services/search.service'; // Import SearchStateService
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 
 @Component({
@@ -24,24 +24,43 @@ export default class HomeComponent {
   projectService = inject(ProjectService);
   profileService = inject(ProfileService);
   searchService = inject(SearchService);
+  searchStateService = inject(SearchStateService);
+
+  homeForm !: FormGroup;
 
   projects: Project[] = [];
   freelancers: Profile[] = []; // Create an array to hold freelancer profiles
-
-  homeForm !: FormGroup;
 
   isLoading = false; // default is true
   userRole: string | null = null;
 
   ngOnInit(): void {
     this.userRole = this.authService.getUserRole();
-    if (this.userRole === 'CLIENT') {
-      this.loadFreelancers();
-    } else if (this.userRole === 'FREELANCER') {
-      this.loadProjects();
-    } else {
-      console.log("invalid role");
-    }
+    this.searchStateService.searchTerm$.subscribe(searchTerm => {
+      if (searchTerm.trim() === '') {
+        // Load initial data if search term is empty
+        if (this.userRole === 'CLIENT') {
+          this.loadFreelancers();
+        } else if (this.userRole === 'FREELANCER') {
+          this.loadProjects();
+        } else {
+          console.log("invalid role");
+        }
+      } else {
+        // Perform search based on the search term
+        if (this.userRole === 'CLIENT') {
+          this.searchService.searchFreelancers(searchTerm).subscribe(freelancers => {
+            this.freelancers = freelancers;
+            this.isLoading = false;
+          });
+        } else if (this.userRole === 'FREELANCER') {
+          this.searchService.searchProjects(searchTerm).subscribe(projects => {
+            this.projects = projects;
+            this.isLoading = false;
+          });
+        }
+      }
+    });
   }
 
   loadProjects() {

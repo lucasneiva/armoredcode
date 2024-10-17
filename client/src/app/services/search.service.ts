@@ -8,17 +8,24 @@ import { apiUrls } from '../api.urls';
 @Injectable({
     providedIn: 'root'
 })
-export class SearchStateService{
+export class SearchStateService {
     private isSearchBarVisible = new BehaviorSubject<boolean>(false);
-  isSearchBarVisible$ = this.isSearchBarVisible.asObservable();
+    isSearchBarVisible$ = this.isSearchBarVisible.asObservable();
 
-  toggleSearchBarVisibility() {
-    this.isSearchBarVisible.next(!this.isSearchBarVisible.value);
-  }
+    toggleSearchBarVisibility() {
+        this.isSearchBarVisible.next(!this.isSearchBarVisible.value);
+    }
 
-  hideSearchBar() {
-    this.isSearchBarVisible.next(false);
-  }
+    hideSearchBar() {
+        this.isSearchBarVisible.next(false);
+    }
+
+    private searchTerm = new BehaviorSubject<string>('');
+    searchTerm$ = this.searchTerm.asObservable();
+
+    setSearchTerm(term: string) {
+        this.searchTerm.next(term);
+    }
 }
 export class SearchService {
     http = inject(HttpClient);
