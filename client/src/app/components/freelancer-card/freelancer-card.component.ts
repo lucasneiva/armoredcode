@@ -131,7 +131,7 @@ export class FreelancerCardComponent {
 
   viewFreelancerProfile() {
     console.log("view Profile button clicked");
-    this.router.navigate(['../freelancer-profile', this.freelancer._id], { relativeTo: this.route });
+    this.router.navigate(['../freelancer-profile', this.freelancer.userId._id], { relativeTo: this.route });
   }
 
   sendInvite() {

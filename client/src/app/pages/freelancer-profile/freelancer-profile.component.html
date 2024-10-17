@@ -1,147 +1,218 @@
-<div class="grid justify-center align-middle min-h-screen h-fit">
-    <div class="w-full shadow-lg bg-white p-8 my-auto">
-        <p> view profile works!</p>
-        <p> freelancer id: {{profileId}}</p>
+<div class="flex flex-col min-h-screen h-fit bg-white">
+
+    <div *ngIf="isLoading" class="w-full flex justify-center items-center py-10 my-auto">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
     </div>
+
+    <!-- projects to select -->
+    <ng-container *ngIf="showProjectList">
+        <app-project-list (projectSelected)="handleProjectSelection($event)"
+            (projectListClosed)="showProjectList = false">
+        </app-project-list>
+    </ng-container>
+    <!-- projects to select -->
+
+    <ng-container *ngIf="!isLoading && profile">
+
+        <div class="flex min-h-64 justify-start max-lg:justify-center items-center px-8 bg-slate-300 shadow-lg">
+            <img *ngIf="profile.profileImage; else defaultImage" [src]="profile.profileImage" type="image/png"
+                alt="Profile Logo"
+                class="flex justify-center items-center bg-black rounded-full w-32 h-32 -mb-60 border-slate-300 border-4">
+            <ng-template #defaultImage>
+                <img src="../../../assets/images/prf_icon.png"
+                    class="flex justify-center items-center bg-black rounded-full w-32 h-32 -mb-60 p-2 border-slate-300 border-4">
+            </ng-template>
+        </div>
+
+
+        <div class="w-full flex max-lg:grid justify-between max-lg:justify-center py-3 mt-20 h-fit">
+            <div class="px-10 max-lg:p-4 h-fit">
+                <h2 class="font-bold text-3xl">
+                    {{ profile.companyName ? profile.companyName : (profile.firstName ? profile.firstName + ' ' +
+                    profile.lastName : 'User Profile') }}
+                </h2>
+                <h2>
+                    ID: {{profile._id}}
+                </h2>
+            </div>
+            <!--Buttons start-->
+            <div class="flex justify-center max-lg:w-full max-lg:justify-between px-8 py-4 h-fit">
+
+                <button (click)="sendInvite()"
+                    class="bg-transparent hover:bg-blue-500 text-black hover:text-white font-bold mx-auto py-2 px-4 border-2 border-slate-200 rounded">
+                    Mandar Convite
+                </button>
+
+            </div>
+            <!--Buttons end-->
+        </div>
+
+        <div class="grid justify-center h-fit p-8 mb-8 border-t-2 ">
+            <!--template start-->
+            <ng-container *ngIf="profile.companyName; else freelancerContent">
+                <!-- Client Profile Content -->
+                <div class="w-full grid justify-center lg:px-32">
+                    <h3 class="font-bold text-3xl py-3">Sobre</h3>
+                    <div class="w-full lg:flex max-lg:grid justify-between lg:space-x-32">
+                        <p class="flex w-full justify-start text-xl py-3">{{ profile.companyDescription }}</p>
+
+                        <ul class="block w-full justify-start text-xl py-3">
+                            <li *ngIf="profile?.industryId"><strong>Indústria:</strong> {{ industry?.name }}</li>
+                            <ng-container *ngIf="profile.companySize">
+                                <li><strong>Tamanho da Empresa: </strong>
+                                    <ng-container *ngIf="profile.companySize === 'SMALL'">Pequena</ng-container>
+                                    <ng-container *ngIf="profile.companySize === 'MEDIUM'">Média</ng-container>
+                                    <ng-container *ngIf="profile.companySize === 'LARGE'">Grande</ng-container>
+                                </li>
+                            </ng-container>
+                            <li *ngIf="profile.location"><strong>Localização:</strong>
+                                {{ profile.location.city }}, {{ profile.location.country }}
+                            </li>
+                            <li *ngIf="profile.website"><span><strong>Site: </strong></span>
+                                <a class="text-blue-500 hover:text-blue-600" [href]="profile.website" target="_blank">{{
+                                    profile.website }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Client Profile Content -->
+            </ng-container>
+
+            <ng-template #freelancerContent>
+                <!-- Freelancer Profile Content -->
+                <div class="w-full grid justify-center lg:px-32">
+                    <h3 class="font-bold text-3xl py-3">Sobre</h3>
+                    <div class="w-full lg:flex max-lg:grid justify-between lg:space-x-32">
+                        <p class="flex w-full justify-start text-xl py-3">{{ profile.profileSummary }}</p>
+
+                        <ul class="block w-full justify-start text-xl py-3 text-nowrap">
+                            <li *ngIf="profile.specializationId">
+                                <strong>Expecialização:</strong> {{ specialization }}
+                            </li>
+                            <ng-container *ngIf="profile.experienceLevel">
+                                <li>
+                                    <strong>Nível de Experiência: </strong>
+                                    <ng-container *ngIf="profile.experienceLevel === 'JUNIOR'">Júnior</ng-container>
+                                    <ng-container *ngIf="profile.experienceLevel === 'MID-LEVEL'">Pleno</ng-container>
+                                    <ng-container *ngIf="profile.experienceLevel === 'SENIOR'">Senior</ng-container>
+                                </li>
+                            </ng-container>
+
+                            <li *ngIf="profile.hourlyRate">
+                                <strong>Preço por Hora:</strong>
+                                {{ profile.hourlyRate.currency }}{{ profile.hourlyRate.min }} -
+                                {{ profile.hourlyRate.currency }}{{ profile.hourlyRate.max }}
+                            </li>
+                            <ng-container *ngIf="profile.isAvailable">
+                                <li>
+                                    <strong>Status:</strong> {{ profile.isAvailable ? 'Disponível' : 'Indisponível' }}
+                                </li>
+                            </ng-container>
+                            <li *ngIf="profile.location">
+                                <strong>Localização:</strong> {{ profile.location.city }}, {{ profile.location.country
+                                }}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div *ngIf="profile.skillIds && profile.skillIds.length > 0">
+                        <h4 class="font-bold text-2xl py-2">Habilidades</h4>
+                        <ul class="flex flex-wrap justify-start gap-2">
+                            <li *ngFor="let skillName of skills"
+                                class="flex w-fit h-fit justify-center align-middle text-nowrap text-white bg-blue-500 py-1 px-4 rounded-full">
+                                {{ skillName }}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="lg:flex max-lg:grid lg:justify-between lg:space-x-32">
+                        <div *ngIf="profile.portfolioItems && profile.portfolioItems.length > 0"
+                            class="block w-full justify-start mt-4">
+                            <h4 class="font-bold text-2xl h-fit">Portfolio</h4>
+                            <ul class="text-xl">
+                                <li *ngFor="let item of profile.portfolioItems" class="mt-2 align-top">
+                                    <div class="lg:flex max-lg:grid lg:space-x-2 max-lg:space-y-2">
+                                        <h2 class="font-bold">{{ item.title }} <span
+                                                class="lg:visible max-lg:hidden">|</span></h2>
+                                        <a class="text-blue-500 hover:text-blue-600 cursor-pointer">{{ item.url }}</a>
+                                    </div>
+                                    <p>{{ item.description }}</p>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div *ngIf="profile.workExperiences && profile.workExperiences.length > 0"
+                            class="block w-full justify-start items-start mt-4">
+                            <h4 class="font-bold text-2xl h-fit">Experiencia Profissional</h4>
+                            <ul class="text-xl">
+                                <li *ngFor="let work of profile.workExperiences" class="mt-2">
+                                    <div class="max-lg:grid">
+                                        {{ work.jobTitle }} em {{ work.companyName }}
+                                        <span>({{ work.startDate | date:'MMM yyyy'
+                                            }} -
+                                            {{ work.endDate ? (work.endDate | date:'MMM yyyy') : 'Presente' }})</span>
+                                        <p *ngIf="work.jobDescription">{{ work.jobDescription }}</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lg:flex max-lg:grid lg:justify-between lg:space-x-32">
+                        <div *ngIf="profile.educations && profile.educations.length > 0"
+                            class="block w-full justify-start items-start mt-4">
+                            <h4 class="font-bold text-2xl h-fit">Formação Acadêmica</h4>
+                            <ul class="text-xl">
+                                <li *ngFor="let edu of profile.educations"
+                                    class="mt-2 align-top lg:flex max-lg:grid lg:space-x-2 max-lg:space-y-2">
+                                    <div class="max-lg:grid">
+                                        {{ edu.degreeName }} em {{ edu.fieldOfStudy }} <span
+                                            class="lg:visible max-lg:hidden">-</span>
+                                        {{ edu.institution }}
+                                        <span>
+                                            ({{edu.startDate
+                                            |
+                                            date:'MMM/yyyy' }} - {{ edu.endDate ? (edu.endDate | date:'MMM/yyyy') :
+                                            'Presente'
+                                            }})
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div *ngIf="profile.certifications && profile.certifications.length > 0"
+                            class="block w-full justify-start items-start mt-4">
+                            <h4 class="font-bold text-2xl h-fit">Certificações</h4>
+                            <ul class="text-xl">
+                                <li *ngFor="let cert of profile.certifications"
+                                    class="mt-2 align-top lg:flex max-lg:grid lg:space-x-2 max-lg:space-y-2">
+                                    <div class="max-lg:grid">
+                                        {{ cert.name }} <span class="lg:visible max-lg:hidden">-</span> {{
+                                        cert.issuingOrganization }}
+                                        <span>
+                                            ({{ cert.issueDate | date:'MMM/yyyy'}})
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Freelancer Profile Content -->
+            </ng-template>
+            <!--template end-->
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="!profile">
+        <div class="w-full flex justify-center items-center py-10 my-auto">
+            <div class="block text-wrap max-w-md shadow-lg mt-56 p-10 mx-auto bg-white">
+                <h1 class="text-center text-4xl text-gray-700">Ops!</h1>
+                <p class="text-left text-2xl text-gray-600 mt-4">
+                    Este freelancer ainda não tem um Perfil.
+                </p>
+            </div>
+        </div>
+    </ng-container>
 </div>
-<!----
-<div class="lg:w-2/6 mt-5 p-10 shadow-lg mx-auto mb-16">
-    <form [formGroup]="freelancerForm">
-        <h2 class="font-semibold my-3 text-3xl">Informações Pessoais</h2>
-
-        <div class="flex justify-between">
-            <div>
-                <h2 class="font-semibold mt-4" for="firstName">Nome</h2>
-                <input type="text" formControlName="firstName" id="firstName" class="p-2 border border-gray-300 rounded"
-                    required>
-            </div>
-            <div>
-                <h2 class="font-semibold mt-4" for="lastName">Sobrenome</h2>
-                <input type="text" formControlName="lastName" id="lastName" class="p-2 border border-gray-300 rounded"
-                    required>
-            </div>
-        </div>
-
-        <div class="grid">
-            <h2 class="font-semibold mt-4" for="profileSummary">Sobre</h2>
-            <textarea id="profileSummary" formControlName="profileSummary" rows="4"
-                placeholder="Write the profile Summary here" class="bg-white p-3 border-2"></textarea>
-        </div>
-
-        <h2 class="font-bold mt-8 text-center">Educacional</h2>
-        <div formGroupName="education">
-            <h2 class="font-semibold mt-4">Curso</h2>
-            <input type="text" formControlName="degreeName" class="p-2 border border-gray-300 rounded"
-                placeholder="degree Name">
-
-            <h2 class="font-semibold mt-4">Área de estudo</h2>
-            <input type="text" formControlName="fieldOfStudy" class="p-2 border border-gray-300 rounded"
-                placeholder="field of Study">
-
-            <h2 class="font-semibold mt-4">Instituição</h2>
-            <input type="text" formControlName="institution" class="p-2 border border-gray-300 rounded"
-                placeholder="institution">
-
-            <div class="flex justify-between">
-                <div>
-                    <h2 class="font-semibold mt-4">Data de início</h2>
-                    <input type="text" formControlName="startDate" class="p-2 border border-gray-300 rounded"
-                        placeholder="start Date">
-                </div>
-
-                <div>
-                    <h2 class="font-semibold mt-4">Data de Conclusão</h2>
-                    <input type="text" formControlName="endDate" class="p-2 border border-gray-300 rounded"
-                        placeholder="end Date">
-                </div>
-            </div>
-        </div>
-
-        <h2 class="font-bold mt-8 text-center">Certificações</h2>
-        <div formArrayName="certifications">
-            <div >
-                <h2 class="font-semibold mt-4">Titúlo da certificação</h2>
-                <input type="text" formControlName="name" class="p-2 border border-gray-300 rounded"
-                    placeholder="Certification title">
-
-                <h2 class="font-semibold mt-4">Organização Emissora</h2>
-                <input type="text" formControlName="issuingOrganization" class="p-2 border border-gray-300 rounded"
-                    placeholder="issuing Organization">
-
-                <h2 class="font-semibold mt-4">Data da certificação</h2>
-                <input type="text" formControlName="issueDate" class="p-2 border border-gray-300 rounded"
-                    placeholder="issue Date">
-            </div>
-            <button type="button"  class="mt-4">Add Certification</button>
-        </div>
-
-        <h2 class="font-bold mt-8 text-center">Profissional</h2>
-        <div formGroupName="professional">
-            <h2 class="font-semibold mt-4">Portfólio</h2>
-            <input type="text" formControlName="portfolio" class="p-2 border border-gray-300 rounded"
-                placeholder="portfolio">
-
-            <h2 class="font-semibold mt-4">Especializações</h2>
-            <input type="text" formControlName="specializations" class="p-2 border border-gray-300 rounded"
-                placeholder="specializations">
-
-            <h2 class="font-semibold mt-4">Nível de Experiência</h2>
-            <select formControlName="experienceLevel" class="p-2 px-4 border border-gray-300 rounded text-gray-500">
-                <option value="Default" selected>Select your experience here</option>
-                <option value="JUNIOR">Junior</option>
-                <option value="MID-LEVEL">Pleno</option>
-                <option value="SENIOR">Senior</option>
-            </select>
-
-            <h2 class="font-semibold mt-4">Habilidades</h2>
-            <input type="text" formControlName="skillIds" class="p-2 px-4 border border-gray-300 rounded"
-                placeholder="Enter your skills">
-
-            <h2 class="font-semibold mt-4">Salário por Hora</h2>
-            <input type="text" formControlName="hourlyRate" class="p-2 border border-gray-300 rounded"
-                placeholder="hourly rate">
-        </div>
-
-        <h2 class="font-bold mt-8 text-center">Localização</h2>
-        <div formGroupName="location" class="grid">
-            <h2 class="font-semibold mt-4">CEP</h2>
-            <input type="text" formControlName="cep" class="p-2 border border-gray-300 rounded" required>
-
-            <div class="flex justify-between">
-                <div>
-                    <h2 class="font-semibold mt-4" for="street">Rua</h2>
-                    <input type="text" formControlName="street" id="street" class="p-2 border border-gray-300 rounded"
-                        required>
-                </div>
-                <div>
-                    <h2 class="font-semibold mt-4" for="number">Número</h2>
-                    <input type="text" formControlName="number" id="number" class="p-2 border border-gray-300 rounded"
-                        required>
-                </div>
-            </div>
-
-            <h2 class="font-semibold mt-4">Bairro</h2>
-            <input type="text" formControlName="neighborhood" class="p-2 border border-gray-300 rounded" required>
-
-            <h2 class="font-semibold mt-4">Cidade</h2>
-            <input type="text" formControlName="city" class="p-2 border border-gray-300 rounded" required>
-
-            <h2 class="font-semibold mt-4">Estado</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="SP" id="" name="" disabled>
-            <h2 class="font-semibold mt-4">País</h2>
-            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Brasil" id="" name="" disabled>
-        </div>
-
-        <div class="flex justify-between mx-auto">
-            <button type="submit"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer w-5/12">
-                Salvar
-            </button>
-            <button type="button"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-5 py-2 px-4 rounded cursor-pointer w-5/12">
-                Cancelar
-            </button>
-        </div>
-    </form>
-</div>
--->
