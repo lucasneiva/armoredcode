@@ -72,27 +72,27 @@
 <!--mobile menu start-->
 <div [ngClass]="{'open': showMenu}" class="mobile-menu">
     <ul class="block">
-        <li class="icon-line">
-            <i class="icon fa fa-search" (click)="toggleSearchBar()" routerLink="/home"></i>
+        <li class="icon-line" (click)="toggleSearchBar()" routerLink="/home">
+            <i class="icon fa fa-search"></i>
         </li>
-        <li *ngIf="userRole == 'FREELANCER'" class="icon-line">
-            <i class="icon fa fa-envelope" routerLink="/manage-invite"></i>
+        <li *ngIf="userRole == 'FREELANCER'" class="icon-line" routerLink="/manage-invite">
+            <i class="icon fa fa-envelope"></i>
         </li>
         <li class="icon-line">
             <i class="icon fa fa-comments-o"></i>
         </li>
-        <li class="icon-line">
-            <i class="icon fa fa-briefcase" routerLink="/manage-project"></i>
+        <li class="icon-line" routerLink="/manage-project">
+            <i class="icon fa fa-briefcase"></i>
         </li>
-        <li *ngIf="userRole == 'FREELANCER'" class="icon-line">
-            <i class="icon fa fa-handshake-o" routerLink="/manage-proposal"></i>
+        <li *ngIf="userRole == 'FREELANCER'" class="icon-line" routerLink="/manage-proposal">
+            <i class="icon fa fa-handshake-o"></i>
         </li>
-        <li class="icon-line">
-            <img [src]="profilePath" alt="Default Profile" routerLink="/manage-profile"
+        <li class="icon-line" routerLink="/manage-profile">
+            <img [src]="profilePath" alt="Default Profile"
                 class="h-10 w-10 m-auto rounded-full border-white border-solid border-2 cursor-pointer">
         </li>
-        <li class="icon-line">
-            <i class="icon fa fa-sign-out" (click)="logOut()"></i>
+        <li class="icon-line" (click)="logOut()">
+            <i class="icon fa fa-sign-out"></i>
         </li>
     </ul>
 </div>

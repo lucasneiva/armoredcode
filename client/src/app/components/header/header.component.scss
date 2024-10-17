@@ -121,7 +121,7 @@ nav {
 
         height: 100%;
         width: 7rem;
-        padding: 20px;
+        
         list-style: none;
 
         background-color: rgba(0, 0, 0, 0.25);
@@ -148,7 +148,12 @@ nav {
 
 .icon-line {
     display: flex;
+    width: 100%;
     justify-content: center;
     vertical-align: middle;
     height: 4rem;
+
+    &:hover{
+        background-color: rgba(0, 0, 0, 0.125);
+    }
 }
