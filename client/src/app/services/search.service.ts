@@ -15,6 +15,10 @@ export class SearchStateService{
   toggleSearchBarVisibility() {
     this.isSearchBarVisible.next(!this.isSearchBarVisible.value);
   }
+
+  hideSearchBar() {
+    this.isSearchBarVisible.next(false);
+  }
 }
 export class SearchService {
     http = inject(HttpClient);

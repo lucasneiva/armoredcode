@@ -38,7 +38,7 @@
             <!--shortcuts start-->
             <div class="flex py-2 space-x-4">
                 <div class="flex items-center w-full text-gray-200 text-2xl font-bold max-lg:hidden space-x-6">
-                    <span (click)="toggleSearchBar()"
+                    <span (click)="toggleSearchBar()" routerLink="/home"
                         class="cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Busca</span>
 
                     <span *ngIf="userRole == 'FREELANCER'" routerLink="/manage-invite"
@@ -73,7 +73,7 @@
 <div [ngClass]="{'open': showMenu}" class="mobile-menu">
     <ul class="block">
         <li class="icon-line">
-            <i class="icon fa fa-search" (click)="toggleSearchBar()"></i>
+            <i class="icon fa fa-search" (click)="toggleSearchBar()" routerLink="/home"></i>
         </li>
         <li *ngIf="userRole == 'FREELANCER'" class="icon-line">
             <i class="icon fa fa-envelope" routerLink="/manage-invite"></i>

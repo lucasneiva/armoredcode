@@ -68,4 +68,9 @@ export class SearchBarComponent {
       );
     }
   }
+
+  closeSearchBar() {
+    this.searchStateService.hideSearchBar(); 
+    this.searchTerm = ''; // Clear the search term
+  }
 }
