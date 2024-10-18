@@ -10,18 +10,18 @@
             </svg>
         </button>
     </div>
-    <div *ngIf="projects.length > 0; else noProjects" class="grid lg:grid-cols-3 max-lg:gird-cols-1 gap-4 p-8">
+    <div *ngIf="projects.length > 0; else noProjects" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-8 max-lg:w-full mx-auto"> 
         <!--cards start-->
-        <div *ngFor="let project of projects" class="bg-white p-4 rounded-md shadow-md w-96 mx-auto">
+        <div *ngFor="let project of projects" class="bg-white p-4 rounded-md shadow-md"> 
             <h3 class="text-lg font-medium line-clamp-1">{{ project.projectTitle }}</h3>
             <p class="text-gray-600">{{ project.projectDescription }}</p>
             <div class="mt-4 flex justify-center align-middle w-full space-x-4">
                 <button (click)="showProjectDetails(project)"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold my-auto py-2 px-4 rounded w-full h-fit">
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold my-auto py-2 px-4 rounded w-full text-nowrap">
                     Ver Detalhes
                 </button>
                 <button (click)="selectProject(project)"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold my-auto py-2 px-4 rounded w-full h-fit">
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold my-auto py-2 px-4 rounded w-full text-nowrap">
                     Selecionar
                 </button>
             </div>
