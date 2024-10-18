@@ -8,12 +8,11 @@
         <p class="text-sm text-gray-500">ID do convite: {{invite._id}}</p>
         <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
             <span *ngIf="project" class="block py-2 mr-2">{{project.projectTitle}}</span>
-            <span class="block w-fit p-2 border-2 border-transparent rounded-md text-white" [ngClass]="{'bg-yellow-500': invite.status === 'PENDING',
-                        'bg-red-500': invite.status === 'REJECTED',
-                        'bg-green-500': invite.status === 'ACCEPTED'}">
-                <ng-container *ngIf="invite.status === 'PENDING'">Pendente</ng-container>
-                <ng-container *ngIf="invite.status === 'REJECTED'">Rejeitado</ng-container>
-                <ng-container *ngIf="invite.status === 'ACCEPTED'">Aceito</ng-container>
+            <span *ngIf="invite" class="text-sm" [ngClass]="{
+                'text-blue-500': !invite.isRead, 
+                'text-gray-500': invite.isRead
+            }">
+                {{ invite.isRead ? 'Lido' : 'Não Lido' }}
             </span>
         </h2>
         <p class="lg:text-lg">{{invite.message}}</p>

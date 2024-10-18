@@ -52,12 +52,13 @@ export class InviteCardComponent {
         if (response.success) {
           this.invite = response.data;
           /*debug*/ //console.log('Full Invite Data:', this.invite);
+
           const userId = this.invite.freelancerId;
           const creatorId = this.invite.clientId;
           const projectId = this.invite.projectId;
-          this.loadProject(projectId); 
-          this.loadCreatorName(creatorId); 
-          this.loadFreelancerName(userId); 
+          this.loadProject(projectId);
+          this.loadCreatorName(creatorId);
+          this.loadFreelancerName(userId);
         } else {
           console.error('Failed to retrieve invite details:', response.message);
         }
@@ -122,10 +123,27 @@ export class InviteCardComponent {
     });
   }
 
-  // Function to show the project details
   toggleProjectDetails() {
     this.showProjectDetails = !this.showProjectDetails;
+  
+    // Mark as read when the card is clicked (if not already read)
+    if (!this.invite.isRead) {
+      this.notificationService.markInviteAsRead(this.invite._id).subscribe(
+        (markResponse) => {
+          if (markResponse.success) {
+            console.log('Invite marked as read');
+            this.invite.isRead = true; // Update the local invite object
+          } else {
+            console.error('Error marking invite as read:', markResponse.message);
+          }
+        },
+        (error) => {
+          console.error('Error marking invite as read:', error);
+        }
+      );
+    }
   }
+  
 
   // Function to handle the close event from the project details component
   handleCloseProjectDetails() {
