@@ -14,7 +14,7 @@
         <!--cards start-->
         <div *ngFor="let project of projects" class="bg-white p-4 rounded-md shadow-md"> 
             <h3 class="text-lg font-medium line-clamp-1">{{ project.projectTitle }}</h3>
-            <p class="text-gray-600">{{ project.projectDescription }}</p>
+            <p class="text-gray-600 line-clamp-4">{{ project.projectDescription }}</p>
             <div class="mt-4 flex justify-center align-middle w-full space-x-4">
                 <button (click)="showProjectDetails(project)"
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold my-auto py-2 px-4 rounded w-full text-nowrap">

@@ -43,15 +43,13 @@ export class ProjectListComponent {
   loadProjects() {
     const clientId = this.authService.getUserId();
     if (clientId) {
-      this.projectService.getProjects().subscribe({
+      this.projectService.getPostedProjects().subscribe({
         next: (res) => {
           this.projects = res.data;
-          
         },
         error: (err) => {
           console.error("Error fetching projects:", err);
         }
-        
       });
     } else {
       console.error("Client ID is missing!");

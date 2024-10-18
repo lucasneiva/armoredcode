@@ -131,7 +131,7 @@ export class InviteCardComponent {
       this.notificationService.markInviteAsRead(this.invite._id).subscribe(
         (markResponse) => {
           if (markResponse.success) {
-            console.log('Invite marked as read');
+            /*debug*/ //console.log('Invite marked as read');
             this.invite.isRead = true; // Update the local invite object
           } else {
             console.error('Error marking invite as read:', markResponse.message);
