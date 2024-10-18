@@ -1,7 +1,7 @@
 <!--card template-->
 <ng-container *ngIf="invite">
     <!--card start-->
-    <div style="top: calc(1rem * 1);" [ngClass]="{
+    <div style="top: calc(1rem * 1);" (click)="toggleProjectDetails()" [ngClass]="{
         'bg-stone-100': project?.projectStatus === 'COMPLETED',
         'bg-white': project?.projectStatus !== 'COMPLETED'}"
         class="sticky w-full lg:max-w-lg max-lg:max-w-md px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
@@ -17,20 +17,12 @@
             </span>
         </h2>
         <p class="lg:text-lg">{{invite.message}}</p>
-        <!--Buttons start-->
-        <div class="mt-4 flex w-full space-x-4">
-            <ng-container *ngIf="userRole == 'FREELANCER'">
-                <button *ngIf="invite.status === 'PENDING'" (click)="acceptInvite()"
-                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">
-                    Aceitar Convite
-                </button>
-                <button *ngIf="invite.status === 'PENDING'" (click)="rejectInvite()"
-                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
-                    Rejeitar Convite
-                </button>
-            </ng-container>
-        </div>
-        <!--Buttons end-->
     </div>
     <!--card end-->
+
+    <!-- Project Details Component (hidden by default) -->
+    <app-project-details #projectDetails *ngIf="showProjectDetails" [project]="project"
+        [detailedProject]="detailedProject" [creatorName]="creatorName" [skills]="skills" [userRole]="userRole"
+        (close)="handleCloseProjectDetails()">
+    </app-project-details>
 </ng-container>
