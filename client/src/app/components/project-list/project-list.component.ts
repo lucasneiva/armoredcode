@@ -1,4 +1,4 @@
-import { Component, inject, Output, EventEmitter } from '@angular/core';
+import { Component, inject, Output, EventEmitter, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectService, Project } from '../../services/project.service';
 import { AuthService } from '../../services/auth.service';
@@ -27,6 +27,7 @@ export class ProjectListComponent {
   selectedProjectDetails: any | null = null; // Change type to any to accommodate extra data
   creatorName = '';
   
+  @Input() closeOnSelect: boolean = false; // Add this input property
   @Output() projectSelected = new EventEmitter<Project>();
   @Output() projectListClosed = new EventEmitter<void>(); 
   @Output() close = new EventEmitter<void>();
@@ -59,6 +60,9 @@ export class ProjectListComponent {
 
   selectProject(project: Project) {
     this.projectSelected.emit(project);
+    if (this.closeOnSelect) { 
+      this.closeProjectList(); 
+    }
   }
 
   closeProjectList() {

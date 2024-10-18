@@ -68,7 +68,10 @@
 
 <!-- projects to select -->
 <ng-container *ngIf="userRole == 'CLIENT' && showProjectList">
-    <app-project-list (projectSelected)="handleProjectSelection($event)" (projectListClosed)="showProjectList = false">
+    <app-project-list 
+        (projectSelected)="handleProjectSelection($event)" 
+        (close)="showProjectList = false"  
+        [closeOnSelect]="true"> 
     </app-project-list>
 </ng-container>
 <!-- projects to select -->
