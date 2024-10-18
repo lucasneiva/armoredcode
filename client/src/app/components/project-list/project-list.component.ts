@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProjectService, Project } from '../../services/project.service';
 import { AuthService } from '../../services/auth.service';
 import { ProjectDetailsComponent } from '../project-details/project-details.component';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-project-list',
@@ -14,12 +15,16 @@ import { ProjectDetailsComponent } from '../project-details/project-details.comp
 export class ProjectListComponent {
   projectService = inject(ProjectService);
   authService = inject(AuthService);
+  userService = inject(UserService); // Inject UserService
 
   projects: Project[] = [];
-  selectedProjectDetails: Project | null = null;
+  selectedProjectDetails: any | null = null; // Change type to any to accommodate extra data
+  creatorName = '';
+  skills: string[] = []; 
+  userRole: string | null = this.authService.getUserRole(); 
 
   @Output() projectSelected = new EventEmitter<Project>();
-  @Output() projectListClosed = new EventEmitter<void>(); // New event emitter
+  @Output() projectListClosed = new EventEmitter<void>(); 
   @Output() close = new EventEmitter<void>();
 
   ngOnInit() {
@@ -27,15 +32,41 @@ export class ProjectListComponent {
   }
 
   onClose() {
-    this.close.emit(); // Emit the close event
+    this.close.emit(); 
   }
 
   showProjectDetails(project: Project) {
-    this.selectedProjectDetails = project;
+    this.projectService.getProjectById(project._id).subscribe({
+      next: (res) => {
+        this.selectedProjectDetails = res.data; 
+        /*debug*/ //console.log(this.selectedProjectDetails);
+        this.loadCreatorName(this.selectedProjectDetails.clientId._id); // Fetch creator name
+        this.skills = this.selectedProjectDetails.skills || []; // Extract skills
+      },
+      error: (err) => {
+        console.error("Error fetching project details:", err);
+      }
+    });
+  }
+
+  loadCreatorName(userId: string) {
+    this.userService.getUser(userId).subscribe(
+      (response) => {
+        if (response.success) {
+          this.creatorName = response.data.username;
+        } else {
+          console.error('Failed to retrieve creator details:', response.message);
+        }
+      },
+      (error) => {
+        console.error('Error fetching creator details:', error);
+      });
   }
 
   closeProjectDetails() {
     this.selectedProjectDetails = null;
+    this.creatorName = "";
+    this.skills = [];
   }
 
   loadProjects() {
