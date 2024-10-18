@@ -44,7 +44,7 @@ export class ProjectDetailsComponent {
         }
         window.location.reload();
       },
-      (error) => {
+      (error: any) => {
         console.error('Error posting project:', error);
         // Show an error message to the user
       }

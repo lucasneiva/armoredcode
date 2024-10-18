@@ -130,7 +130,7 @@ export class FreelancerCardComponent {
   }
 
   viewFreelancerProfile() {
-    console.log("view Profile button clicked");
+    /*debug*/ //console.log("view Profile button clicked");
     this.router.navigate(['../freelancer-profile', this.freelancer.userId._id], { relativeTo: this.route });
   }
 

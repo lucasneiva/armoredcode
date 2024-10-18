@@ -7,7 +7,7 @@
     <!-- projects to select -->
     <ng-container *ngIf="showProjectList">
         <app-project-list (projectSelected)="handleProjectSelection($event)"
-            (projectListClosed)="showProjectList = false">
+            (projectListClosed)="showProjectList = false" (close)="toggleList()">
         </app-project-list>
     </ng-container>
     <!-- projects to select -->
