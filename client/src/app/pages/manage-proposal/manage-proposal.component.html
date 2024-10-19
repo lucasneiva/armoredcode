@@ -28,6 +28,9 @@
         </ng-container>
         <!--grid start-->
         <ng-container *ngIf="proposals.length > 0">
+            <div class="flex justify-between align-middle items-center lg:max-w-lg max-lg:max-w-md w-full mt-28 -mb-14 mx-auto">
+                <h2 class="text-3xl font-bold text-black"> Minhas Propostas</h2>
+            </div>
             <div class="grid justify-center gap-4 my-28">
                 <!--app-proposal-card-->
                 <ng-container *ngFor="let proposal of proposals">

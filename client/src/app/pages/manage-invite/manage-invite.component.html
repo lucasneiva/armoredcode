@@ -19,6 +19,9 @@
         </ng-container>
         <!--grid start-->
         <ng-container *ngIf="invites.length > 0"> 
+            <div class="flex justify-between align-middle items-center lg:max-w-lg max-lg:max-w-md w-full mt-28 -mb-14 mx-auto">
+                <h2 class="text-3xl font-bold text-black"> Meus Convites</h2>
+            </div>
             <div class="grid justify-center gap-4 my-28">
                 <ng-container *ngFor="let invite of invites">
                     <app-invite-card [invite]="invite"></app-invite-card>
