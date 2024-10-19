@@ -10,7 +10,8 @@
     <ng-container *ngIf="!isLoading">
         <!--if projects-->
         <ng-container *ngIf="projects.length <= 0">
-            <div *ngIf="this.userRole == 'CLIENT'" class="block text-wrap max-w-md shadow-lg p-10 mx-auto my-auto bg-white h-fit">
+            <div *ngIf="this.userRole == 'CLIENT'"
+                class="block text-wrap max-w-md shadow-lg p-10 mx-auto my-auto bg-white h-fit">
                 <h1 class="text-center text-4xl text-gray-700">Que vazio!</h1>
                 <p class="text-left text-2xl text-gray-600 mt-4">
                     Voçê ainda não tem nenhum projeto na sua área de trabalho,
@@ -18,7 +19,8 @@
                 </p>
             </div>
 
-            <div *ngIf="this.userRole == 'FREELANCER'" class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
+            <div *ngIf="this.userRole == 'FREELANCER'"
+                class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
                 <h1 class="text-center text-4xl text-gray-700">Que vazio!</h1>
                 <p class="text-left text-2xl text-gray-600 mt-4">
                     Voçê ainda não tem nenhum projeto na sua área de trabalho.
@@ -27,6 +29,18 @@
         </ng-container>
         <!--grid start-->
         <ng-container *ngIf="projects.length > 0">
+            <div class="flex justify-between align-middle items-center lg:max-w-lg max-lg:max-w-md w-full mt-28 -mb-14 mx-auto">
+                <h2 class="text-3xl font-bold text-black"> Meus Projetos</h2>
+                <!--button-->
+                <ng-container *ngIf="this.userRole == 'CLIENT'">
+                    <button routerLink="/create-project"
+                        class="bg-blue-500 hover:bg-blue-700 max-lg:text-2xl lg:text-3xl text-white font-bold max-lg:h-14 max-lg:w-14 lg:px-4 lg:py-2 max-lg:rounded-full lg:rounded cursor-pointer">
+                        <p class="max-lg:hidden">Criar Projeto</p>
+                        <p class="lg:hidden">+</p>
+                    </button>
+                </ng-container>
+            </div>
+
             <div class="grid justify-center gap-4 my-28">
                 <!--app-project-card-->
                 <ng-container *ngFor="let project of projects">
@@ -35,14 +49,5 @@
             </div>
         </ng-container>
         <!--grid end-->
-        <!--button-->
-        <ng-container *ngIf="this.userRole == 'CLIENT'">
-            <div class="fixed bottom-12 left-1/2 transform -translate-x-1/2 z-20">
-                <button routerLink="/create-project"
-                    class="bg-blue-500 hover:bg-blue-700 text-xl text-white font-bold py-4 px-8 -mb-0.5 rounded cursor-pointer">
-                    Criar Projeto
-                </button>
-            </div>
-        </ng-container>
     </ng-container>
 </div>
