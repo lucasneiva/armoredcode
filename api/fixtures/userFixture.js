@@ -18,6 +18,16 @@ const users = [
     },
 ];
 
+for (let i = 3; i <= 15; i++) {
+    users.push({
+        username: `client${i}`,
+        email: `client${i}@example.com`,
+        password: await bcrypt.hash("password123", 10),
+        role: "CLIENT",
+        profileId: null,
+    });
+}
+
 for (let i = 1; i <= 30; i++) {
     users.push({
         username: `freelancer${i}`,
