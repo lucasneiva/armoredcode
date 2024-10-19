@@ -31,7 +31,7 @@ export default class HomeComponent {
   projects: Project[] = [];
   freelancers: Profile[] = []; // Create an array to hold freelancer profiles
 
-  isLoading = false; // default is true
+  isLoading = true; // default is true
   userRole: string | null = null;
 
   // In home.component.ts
@@ -49,11 +49,17 @@ export default class HomeComponent {
         }
       } else {
         // Perform search based on the search term
+        this.isLoading = true;
         if (this.userRole === 'CLIENT') {
           this.searchService.searchFreelancers(searchTerm).subscribe({
             next: (freelancers) => {
-              console.log("Freelancers from search:", freelancers); // Log the response
-              this.freelancers = freelancers.data || []; // Handle potential missing 'data'
+              /*debug*/ console.log("Freelancers from search:", freelancers); // Log the response
+              this.freelancers = (freelancers.data || []).map((freelancer: { userId: any; }) => {
+                return { 
+                  ...freelancer, 
+                  userId: { _id: freelancer.userId } // Create the userId object
+                };
+              });
               this.isLoading = false;
             },
             error: (err) => {

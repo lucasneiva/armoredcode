@@ -131,7 +131,7 @@ export class ProfileService {
       withCredentials: true
     };
 
-    return this.http.get<any>(`${apiUrls.profileServiceApi}/freelancers`, httpOptions)
+    return this.http.get<any>(`${apiUrls.profileServiceApi}/freelancers`, httpOptions)/*
       .pipe(
         tap((res) => {
           console.log('Freelancer profiles fetched:', res);
@@ -141,6 +141,7 @@ export class ProfileService {
           throw error;
         })
       );
+      */
   }
 
 }

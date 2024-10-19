@@ -59,7 +59,7 @@ export class FreelancerCardComponent {
 
   loadFreelancerDetails() {
     const freelancerId = this.freelancer.userId._id; // Access the _id property
-    /*debug*/ //console.log("Freelancer data:", this.freelancer)
+    /*debug*/ //console.log("Freelancer data:", this.freelancer);
     this.profileService.getProfile(freelancerId).subscribe(
       (response) => {
         if (response.success) {

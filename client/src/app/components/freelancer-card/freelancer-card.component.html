@@ -1,77 +1,79 @@
-<!-- card start -->
-<div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
-    <div class="flex justify-between items-center">
-        <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
-            {{ freelancer.firstName }} {{ freelancer.lastName }}
-        </h3>
-        <div *ngIf="freelancer.image; else defaultImage" class="w-16 h-16 rounded-full overflow-hidden"></div>
-        <ng-template #defaultImage>
-            <img src="../../../assets/images/prf_icon.png"
-                class="w-16 h-16 p-1 bg-gray-400 rounded-full overflow-hidden">
-        </ng-template>
-    </div>
-
-    <p class="text-gray-600 mt-4">
-        {{ specializationName || 'No Specialization' }}
-    </p>
-
-    <p class="mt-4 line-clamp-4 overflow-hidden">{{ freelancer.profileSummary || 'No profile summary available.' }}</p>
-
-    <!-- testing
-    <button (click)="toggleDetails()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        {{ showDetails ? 'Hide Details' : 'Show Details' }}
-    </button>
-
-    <div *ngIf="showDetails" class="space-y-2">
-        <div *ngIf="detailedfreelancer">
-            <p><strong>Experience Level:</strong> {{ detailedfreelancer.experienceLevel }}</p>
-            <p><strong>Hourly Rate:</strong> 
-                {{ detailedfreelancer.hourlyRate?.min || 'Not specified' }} - 
-                {{ detailedfreelancer.hourlyRate?.max || 'Not specified' }} 
-                {{ detailedfreelancer.hourlyRate?.currency || '' }}
-            </p>
-            <p><strong>Skills:</strong> 
-                <span *ngFor="let skill of skills; let last = last">{{ skill }}{{ !last ? ', ' : '' }}</span> 
-            </p>
-
-            <div *ngIf="detailedfreelancer.location">
-                <p><strong>Location:</strong> {{ detailedfreelancer.location.city }}, {{ detailedfreelancer.location.state }}</p>
-            </div>
-
-            <div *ngIf="detailedfreelancer.portfolioItems && detailedfreelancer.portfolioItems.length > 0">
-                <h4 class="text-lg font-bold">Portfolio:</h4>
-                <ul>
-                    <li *ngFor="let item of detailedfreelancer.portfolioItems">
-                        <a href="{{ item.url }}" target="_blank">{{ item.title }}</a>
-                        <p *ngIf="item.description">{{ item.description }}</p>
-                    </li>
-                </ul>
+<!--card template-->
+<ng-container *ngIf="freelancer">
+    <div class="w-full max-w-lg px-8 py-8 mx-auto space-y-4 bg-white border rounded-lg shadow-lg">
+        <div class="flex justify-between items-center">
+            <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
+                {{ freelancer?.firstName }} {{ freelancer?.lastName }}
+            </h3>
+            <div *ngIf="freelancer?.image; else defaultImage" class="w-16 h-16 rounded-full overflow-hidden"></div>
+            <ng-template #defaultImage>
+                <img src="../../../assets/images/prf_icon.png"
+                    class="w-16 h-16 p-1 bg-gray-400 rounded-full overflow-hidden">
+            </ng-template>
+        </div>
+    
+        <p class="text-gray-600 mt-4">
+            {{ specializationName || 'No Specialization' }}
+        </p>
+    
+        <p class="mt-4 line-clamp-4 overflow-hidden">{{ freelancer?.profileSummary || 'No profile summary available.' }}</p>
+    
+        <!-- testing
+        <button (click)="toggleDetails()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            {{ showDetails ? 'Hide Details' : 'Show Details' }}
+        </button>
+    
+        <div *ngIf="showDetails" class="space-y-2">
+            <div *ngIf="detailedfreelancer">
+                <p><strong>Experience Level:</strong> {{ detailedfreelancer.experienceLevel }}</p>
+                <p><strong>Hourly Rate:</strong> 
+                    {{ detailedfreelancer.hourlyRate?.min || 'Not specified' }} - 
+                    {{ detailedfreelancer.hourlyRate?.max || 'Not specified' }} 
+                    {{ detailedfreelancer.hourlyRate?.currency || '' }}
+                </p>
+                <p><strong>Skills:</strong> 
+                    <span *ngFor="let skill of skills; let last = last">{{ skill }}{{ !last ? ', ' : '' }}</span> 
+                </p>
+    
+                <div *ngIf="detailedfreelancer.location">
+                    <p><strong>Location:</strong> {{ detailedfreelancer.location.city }}, {{ detailedfreelancer.location.state }}</p>
+                </div>
+    
+                <div *ngIf="detailedfreelancer.portfolioItems && detailedfreelancer.portfolioItems.length > 0">
+                    <h4 class="text-lg font-bold">Portfolio:</h4>
+                    <ul>
+                        <li *ngFor="let item of detailedfreelancer.portfolioItems">
+                            <a href="{{ item.url }}" target="_blank">{{ item.title }}</a>
+                            <p *ngIf="item.description">{{ item.description }}</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
+    -->
+        <!--Buttons start-->
+        <div class="mt-4 flex w-full space-x-4">
+            <ng-container *ngIf="userRole == 'CLIENT'">
+                <button (click)="viewFreelancerProfile()"
+                    class="bg-transparent hover:bg-blue-500 text-black hover:text-white font-bold py-2 px-4 border-2 border-slate-200 rounded w-full">
+                    Ver Perfil
+                </button>
+                <button (click)="sendInvite()"
+                    class="bg-transparent hover:bg-blue-500 text-black hover:text-white font-bold py-2 px-4 border-2 border-slate-200 rounded w-full">
+                    Mandar Convite
+                </button>
+            </ng-container>
+        </div>
+        <!--Buttons end-->
     </div>
--->
-    <!--Buttons start-->
-    <div class="mt-4 flex w-full space-x-4">
-        <ng-container *ngIf="userRole == 'CLIENT'">
-            <button (click)="viewFreelancerProfile()"
-                class="bg-transparent hover:bg-blue-500 text-black hover:text-white font-bold py-2 px-4 border-2 border-slate-200 rounded w-full">
-                Ver Perfil
-            </button>
-            <button (click)="sendInvite()"
-                class="bg-transparent hover:bg-blue-500 text-black hover:text-white font-bold py-2 px-4 border-2 border-slate-200 rounded w-full">
-                Mandar Convite
-            </button>
-        </ng-container>
-    </div>
-    <!--Buttons end-->
-</div>
-
-<!-- projects to select -->
-<ng-container *ngIf="userRole == 'CLIENT' && showProjectList">
-    <app-project-list 
-        (projectSelected)="handleProjectSelection($event)" 
-        (close)="showProjectList = false"  
-        [closeOnSelect]="true"> 
-    </app-project-list>
+    
+    <!-- projects to select -->
+    <ng-container *ngIf="userRole == 'CLIENT' && showProjectList">
+        <app-project-list 
+            (projectSelected)="handleProjectSelection($event)" 
+            (close)="showProjectList = false"  
+            [closeOnSelect]="true"> 
+        </app-project-list>
+    </ng-container>
+    <!-- projects to select -->
 </ng-container>
-<!-- projects to select -->
