@@ -1,0 +1,34 @@
+@startuml searchProjects
+start
+
+:Freelancer acessa a plataforma;
+:Navega até a seção de busca de projetos;
+
+if (Refinar busca?) then (Sim)
+  :Define critérios de busca
+  (habilidades, categoria, orçamento, etc.);
+endif
+
+:Clica no botão "Buscar";
+:Sistema busca projetos no banco de dados;
+:Exibe lista de projetos com informações resumidas;
+
+repeat 
+  :Freelancer visualiza detalhes do projeto;
+
+  if (Projeto de interesse?) then (Sim)
+    :Clica para ver detalhes completos do projeto;
+    :Analisa os detalhes do projeto; 
+
+    if (Deseja enviar proposta?) then (Sim)
+      :Envia proposta;
+    else (Não)
+      :Volta para a lista de projetos;
+    endif
+
+  endif
+  
+repeat while (Mais projetos a visualizar?) is (Sim)
+
+stop
+@enduml
