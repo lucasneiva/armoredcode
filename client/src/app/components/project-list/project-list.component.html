@@ -1,22 +1,49 @@
 <div class="fixed inset-0 bg-black bg-opacity-50 block items-center justify-center z-30 overflow-auto" *ngIf="projects">
-    <div *ngIf="projects.length > 0; else noProjects" class="grid justify-center py-8"> 
-        <ul class="space-y-4 max-w-96">
-            <li *ngFor="let project of projects" class="bg-white p-4 rounded-md shadow-md">
-                <h3 class="text-lg font-medium line-clamp-1">{{ project.projectTitle }}</h3>
-                <p class="text-gray-600">{{ project.projectDescription }}</p>
-                <button (click)="selectProject(project)"
-                    class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Selecionar Projeto
+    <div class="flex justify-between w-full bg-white py-7 px-8 border-2">
+        <h2 class="text-3xl font-bold"> Meus Projetos</h2>
+        <button (click)="onClose()"
+            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded-full p-1 items-center w-fit h-fit">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                </path>
+            </svg>
+        </button>
+    </div>
+    <div *ngIf="projects.length > 0; else noProjects" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-8 max-lg:w-full mx-auto"> 
+        <!--cards start-->
+        <div *ngFor="let project of projects" class="bg-white p-4 rounded-md shadow-md"> 
+            <h3 class="text-lg font-medium line-clamp-1">{{ project.projectTitle }}</h3>
+            <p class="text-gray-600 line-clamp-4">{{ project.projectDescription }}</p>
+            <div class="mt-4 flex justify-center align-middle w-full space-x-4">
+                <button (click)="showProjectDetails(project)"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold my-auto py-2 px-4 rounded w-full text-nowrap">
+                    Ver Detalhes
                 </button>
-            </li>
-        </ul>
+                <button (click)="selectProject(project)"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold my-auto py-2 px-4 rounded w-full text-nowrap">
+                    Selecionar
+                </button>
+            </div>
+        </div>
+        <!--cards end-->
     </div>
 
     <ng-template #noProjects>
         <div class="grid justify-center align-middle bg-white w-fit p-2 mx-auto">
             <p class="text-gray-600 text-center font-bold py-4">Você ainda não tem projetos</p>
-            <button (click)="closeProjectList()" 
-                    class="text-white bg-blue-500 hover:bg-blue-600 rounded-md px-4 py-2">Voltar</button>
+            <button (click)="closeProjectList()"
+                class="text-white bg-blue-500 hover:bg-blue-600 rounded-md px-4 py-2">Voltar</button>
         </div>
     </ng-template>
 </div>
+
+<app-project-details 
+    *ngIf="selectedProjectDetails" 
+    [project]="selectedProjectDetails" 
+    [detailedProject]="selectedProjectDetails" 
+    [creatorName]="creatorName" 
+    [skills]="skills"
+    [userRole]="userRole"
+    (close)="closeProjectDetails()">
+</app-project-details>

@@ -53,6 +53,10 @@ export default class FreelancerProfileComponent implements OnInit {
     });
   }
 
+  toggleList() {
+    this.showProjectList = !this.showProjectList;
+  }
+
   loadProfile(userId: string) {
     this.isLoading = true;
     this.profileService.getProfile(userId) 
@@ -122,7 +126,7 @@ export default class FreelancerProfileComponent implements OnInit {
   }
 
   sendInvite() {
-    console.log("invite button clicked");
+    /*debug*/ //console.log("invite button clicked");
     this.showProjectList = true; // Show the project list when "Send Invite" is clicked
   }
   

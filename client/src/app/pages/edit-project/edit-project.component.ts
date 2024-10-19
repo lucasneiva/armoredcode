@@ -128,9 +128,9 @@ export default class EditProjectComponent implements OnInit {
     this.projectService.getProjectById(this.projectId).subscribe(response => {
       this.project = response.data;
       /*Debug*/ //console.log('Project loaded:', this.project);  
-      this.isLoading = false;
       if (this.project) {
         this.populateForms(this.project);  // Pass the project object here
+        this.isLoading = false;
       }
     });
   }

@@ -7,17 +7,17 @@ import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { Proposal, ProposalService } from '../../services/proposal.service';
 import { ProposalCardComponent } from '../proposal-card/proposal-card.component'; // Importe aqui
+import { ProjectDetailsComponent } from '../project-details/project-details.component';
 
 @Component({
   selector: 'app-project-card',
   standalone: true,
-  imports: [CommonModule, RouterModule, ProposalCardComponent],
+  imports: [CommonModule, RouterModule, ProposalCardComponent, ProjectDetailsComponent],
   templateUrl: './project-card.component.html',
   styleUrl: './project-card.component.scss'
 })
 export class ProjectCardComponent {
   router = inject(Router);
-  route = inject(ActivatedRoute);
   projectService = inject(ProjectService);
   proposalService = inject(ProposalService);
   skillService = inject(SkillService);
@@ -116,82 +116,6 @@ export class ProjectCardComponent {
           }
         });
     });
-  }
-
-  postProject() {
-    const projectId = this.project._id;
-    this.projectService.updateProjectStatus(projectId, 'POSTED').subscribe(
-      (response) => {
-        if (response.success) {
-          console.log('Project posted successfully');
-          this.project.projectStatus = 'POSTED'; // Update the local project status
-          this.detailedProject.projectStatus = 'POSTED'; // Update the detailed project status
-          // You might need to emit an event to notify a parent component
-        } else {
-          console.error('Error posting project:', response.message);
-          // Show an error message to the user
-        }
-        window.location.reload();
-      },
-      (error) => {
-        console.error('Error posting project:', error);
-        // Show an error message to the user
-      }
-    );
-  }
-
-  editProject() {
-    console.log("Edit Project button clicked");
-    this.router.navigate(['../edit-project', this.project._id], { relativeTo: this.route });
-  }
-
-  cancelProject() {
-    const projectId = this.project._id;
-    if (confirm("Are you sure you want to cancel this project?")) {
-      this.projectService.deleteProject(projectId).subscribe(
-        (response) => {
-          if (response.success) {
-            console.log('Project cancelled successfully');
-            window.location.reload();
-            // You might need to emit an event to notify a parent component
-          } else {
-            console.error('Error cancelling project:', response.message);
-            // Show an error message to the user
-          }
-        },
-        (error) => {
-          console.error('Error cancelling project:', error);
-          // Show an error message to the user
-        }
-      );
-    }
-  }
-
-  finishProject() {
-    const projectId = this.project._id;
-    this.projectService.updateProjectStatus(projectId, 'COMPLETED').subscribe(
-      (response) => {
-        if (response.success) {
-          console.log('Project finished successfully');
-          this.project.projectStatus = 'COMPLETED'; 
-          this.detailedProject.projectStatus = 'COMPLETED'; 
-          // You might need to emit an event to notify a parent component
-        } else {
-          console.error('Error finishing project:', response.message);
-          // Show an error message to the user
-        }
-        window.location.reload();
-      },
-      (error) => {
-        console.error('Error finishing project:', error);
-        // Show an error message to the user
-      }
-    );
-  }
-
-  makeProposal() {
-    console.log("create Proposal button clicked");
-    this.router.navigate(['../create-proposal', this.project._id], { relativeTo: this.route });
   }
 
 }

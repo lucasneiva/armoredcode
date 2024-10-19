@@ -1,0 +1,25 @@
+{
+    "mappings": {
+        "dynamic": false,
+        "fields": {
+            "firstName": {
+                "type": "string"
+            },
+            "lastName": {
+                "type": "string"
+            },
+            "profileSummary": {
+                "type": "string"
+            },
+            "skillIds": {
+                "type": "objectId"
+            },
+            "experienceLevel": {
+                "type": "string"
+            },
+            "specializationId": {
+                "type": "objectId"
+            }
+        }
+    }
+}

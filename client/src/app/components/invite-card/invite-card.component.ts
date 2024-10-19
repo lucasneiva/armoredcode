@@ -1,15 +1,17 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ProjectService } from '../../services/project.service';
 import { NotificationService } from '../../services/notification.service';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { ProjectDetailsComponent } from '../project-details/project-details.component';
+import { SkillService } from '../../services/skill.service';
 
 @Component({
   selector: 'app-invite-card',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ProjectDetailsComponent],
   templateUrl: './invite-card.component.html',
   styleUrl: './invite-card.component.scss'
 })
@@ -19,14 +21,20 @@ export class InviteCardComponent {
   projectService = inject(ProjectService);
   notificationService = inject(NotificationService);
   userService = inject(UserService);
-  
-  userRole: string | null = null; 
+  skillService = inject(SkillService);
+
+  userRole: string | null = null;
 
   @Input() invite: any;
   project: any;
-
+  detailedProject: any; // To store the detailed project data
   creatorName = '';
   freelancerName = '';
+  skills: string[] = [];
+
+  showProjectDetails = false; // To control the visibility of the project details
+
+  @ViewChild('projectDetails') projectDetailsComponent!: ProjectDetailsComponent; // Get a reference to the child component
 
   ngOnInit() {
     this.userRole = this.authService.getUserRole();
@@ -44,12 +52,13 @@ export class InviteCardComponent {
         if (response.success) {
           this.invite = response.data;
           /*debug*/ //console.log('Full Invite Data:', this.invite);
+
           const userId = this.invite.freelancerId;
           const creatorId = this.invite.clientId;
           const projectId = this.invite.projectId;
-          this.loadProject(projectId); 
-          this.loadCreatorName(creatorId); 
-          this.loadFreelancerName(userId); 
+          this.loadProject(projectId);
+          this.loadCreatorName(creatorId);
+          this.loadFreelancerName(userId);
         } else {
           console.error('Failed to retrieve invite details:', response.message);
         }
@@ -63,7 +72,10 @@ export class InviteCardComponent {
   loadProject(projectId: string | null): void {
     this.projectService.getProjectById(projectId).subscribe(response => {
       this.project = response.data;
-      /*Debug*/ //console.log('Project loaded:', this.project);  
+      this.detailedProject = response.data; // Store detailed project data
+      const skillIds = this.detailedProject.skillIds;
+      this.loadSkills(skillIds);
+      /*Debug*/ //console.log('Project loaded:', this.project);
     });
   }
 
@@ -95,83 +107,46 @@ export class InviteCardComponent {
       });
   }
 
-  acceptInvite() {
-    const inviteId = this.invite._id;
-    if (confirm("Are you sure you want to accept this invite?")) {
-      this.notificationService.acceptInvite(inviteId).subscribe(
-        (response: { success: any; message: any; }) => {
-          if (response.success) {
-            console.log('Invite accepted successfully');
+  loadSkills(skillIds: any[]) {
+    skillIds.forEach((skillId) => {
+      const skillIdValue = skillId._id;
+      this.skillService.getSkillById(skillIdValue)
+        .subscribe({
+          next: (skillData) => {
+            this.skills.push(skillData.data.skillName);
+            /*debug*/ //console.log("skill: " + this.skills); console.log("id: " + skillIdValue);
+          },
+          error: (error) => {
+            console.error("Error loading skill:", error);
+          }
+        });
+    });
+  }
 
-            // 1. Update proposal status in the UI
-            this.invite.status = 'ACCEPTED';
-
-            // 2. Update the project with freelancer ID
-            const projectId = this.invite.projectId;
-            const freelancerId = this.invite.freelancerId;
-
-            this.projectService.updateProjectFreelancer(projectId, freelancerId).subscribe(
-              (updateResponse) => {
-                if (updateResponse.success) {
-                  console.log('Project freelancerId updated successfully');
-                  // You might want to update the project object in your component if needed:
-                  this.project.freelancerId = freelancerId; 
-                } else {
-                  console.error('Error updating project freelancerId:', updateResponse.message);
-                  // Handle error (e.g., show an error message to the user)
-                }
-              },
-              (error) => {
-                console.error('Error updating project freelancerId:', error);
-                // Handle error (e.g., show an error message to the user)
-              }
-            );
-            this.projectService.updateProjectStatus(projectId, 'IN-PROGRESS').subscribe(
-              (updateStatusResponse) => {
-                if (updateStatusResponse.success) {
-                  console.log('Project status updated successfully');
-                  this.project.projectStatus = 'IN-PROGRESS'; // Update status in the component
-                } else {
-                  console.error('Error updating project status:', updateStatusResponse.message);
-                  // Handle error (e.g., show an error message to the user)
-                }
-              },
-              (error) => {
-                console.error('Error updating project status:', error);
-                // Handle error (e.g., show an error message to the user)
-              }
-            );
-            window.location.reload();
-
+  toggleProjectDetails() {
+    this.showProjectDetails = !this.showProjectDetails;
+  
+    // Mark as read when the card is clicked (if not already read)
+    if (!this.invite.isRead) {
+      this.notificationService.markInviteAsRead(this.invite._id).subscribe(
+        (markResponse) => {
+          if (markResponse.success) {
+            /*debug*/ //console.log('Invite marked as read');
+            this.invite.isRead = true; // Update the local invite object
           } else {
-            console.error('Error accepting invite:', response.message);
+            console.error('Error marking invite as read:', markResponse.message);
           }
         },
-        (error: any) => {
-          console.error('Error accepting invite:', error);
+        (error) => {
+          console.error('Error marking invite as read:', error);
         }
       );
     }
   }
+  
 
-  rejectInvite() {
-    const inviteId = this.invite._id;
-    if (confirm("Are you sure you want to reject this proposal?")) {
-      this.notificationService.rejectInvite(inviteId).subscribe(
-        (response: { success: any; message: any; }) => {
-          if (response.success) {
-            console.log('Proposal rejected successfully');
-            // Update the proposal status in the UI or reload the page
-            this.invite.status = 'REJECTED'; 
-            window.location.reload();
-          } else {
-            console.error('Error rejecting proposal:', response.message);
-          }
-        },
-        (error: any) => {
-          console.error('Error rejecting proposal:', error);
-        }
-      );
-    }
+  // Function to handle the close event from the project details component
+  handleCloseProjectDetails() {
+    this.showProjectDetails = false;
   }
 }

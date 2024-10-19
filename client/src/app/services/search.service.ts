@@ -30,7 +30,7 @@ export class SearchStateService {
 export class SearchService {
     http = inject(HttpClient);
 
-    searchFreelancers(searchTerm?: string, skillIds?: string[], experienceLevel?: string, specializationId?: string): Observable<Profile[]> {
+    searchFreelancers(searchTerm?: string, skillIds?: string[], experienceLevel?: string, specializationId?: string): Observable<any> {
         let params = new HttpParams();
         if (searchTerm) {
             params = params.append('q', searchTerm);
@@ -48,7 +48,7 @@ export class SearchService {
         return this.http.get<Profile[]>(`${apiUrls.searchServiceApi}/freelancers`, { params });
     }
 
-    searchProjects(searchTerm?: string, categoryId?: string, skillIds?: string[]): Observable<Project[]> {
+    searchProjects(searchTerm?: string, categoryId?: string, skillIds?: string[]): Observable<any> {
         let params = new HttpParams();
         if (searchTerm) {
             params = params.append('q', searchTerm);

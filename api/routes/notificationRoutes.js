@@ -4,8 +4,6 @@ import {
     markNotificationAsRead,
     createNotification,
     getInviteById,
-    acceptInvite,
-    rejectInvite
 } from '../controllers/notificationController.js';
 import { verifyFreelancer, verifyClient } from '../utils/authMiddleware.js';
 
@@ -22,11 +20,5 @@ router.put('/:id', verifyFreelancer, markNotificationAsRead);
 
 // Create a new notification (Client)
 router.post('/', verifyClient, createNotification);
-
-// Reject an invite
-router.patch('/:id/reject', verifyFreelancer, rejectInvite);
-
-// Accept an invite
-router.patch('/:id/accept', verifyFreelancer, acceptInvite);
 
 export default router;

@@ -13,7 +13,7 @@ import { SearchBarComponent } from '../../components/search-bar/search-bar.compo
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, ProjectCardComponent, FreelancerCardComponent, SearchBarComponent ],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, ProjectCardComponent, FreelancerCardComponent, SearchBarComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -31,9 +31,10 @@ export default class HomeComponent {
   projects: Project[] = [];
   freelancers: Profile[] = []; // Create an array to hold freelancer profiles
 
-  isLoading = false; // default is true
+  isLoading = true; // default is true
   userRole: string | null = null;
 
+  // In home.component.ts
   ngOnInit(): void {
     this.userRole = this.authService.getUserRole();
     this.searchStateService.searchTerm$.subscribe(searchTerm => {
@@ -48,15 +49,35 @@ export default class HomeComponent {
         }
       } else {
         // Perform search based on the search term
+        this.isLoading = true;
         if (this.userRole === 'CLIENT') {
-          this.searchService.searchFreelancers(searchTerm).subscribe(freelancers => {
-            this.freelancers = freelancers;
-            this.isLoading = false;
+          this.searchService.searchFreelancers(searchTerm).subscribe({
+            next: (freelancers) => {
+              /*debug*/ console.log("Freelancers from search:", freelancers); // Log the response
+              this.freelancers = (freelancers.data || []).map((freelancer: { userId: any; }) => {
+                return { 
+                  ...freelancer, 
+                  userId: { _id: freelancer.userId } // Create the userId object
+                };
+              });
+              this.isLoading = false;
+            },
+            error: (err) => {
+              console.error("Error searching freelancers:", err);
+              this.isLoading = false;
+            }
           });
         } else if (this.userRole === 'FREELANCER') {
-          this.searchService.searchProjects(searchTerm).subscribe(projects => {
-            this.projects = projects;
-            this.isLoading = false;
+          this.searchService.searchProjects(searchTerm).subscribe({
+            next: (projects) => {
+              console.log("Projects from search:", projects); // Log the response
+              this.projects = projects.data || []; // Handle potential missing 'data'
+              this.isLoading = false;
+            },
+            error: (err) => {
+              console.error("Error searching projects:", err);
+              this.isLoading = false;
+            }
           });
         }
       }
@@ -66,7 +87,8 @@ export default class HomeComponent {
   loadProjects() {
     this.projectService.getPostedProjects().subscribe({
       next: (res) => {
-        this.projects = res.data; // Assuming your API response structure
+        console.log("Initial projects:", res); // Log the initial response
+        this.projects = res.data || []; // Handle potential missing 'data'
         this.isLoading = false;
       },
       error: (err) => {
@@ -79,7 +101,8 @@ export default class HomeComponent {
   loadFreelancers() {
     this.profileService.getAllFreelancerProfiles().subscribe({
       next: (res) => {
-        this.freelancers = res.data;
+        console.log("Initial freelancers:", res); // Log the initial response
+        this.freelancers = res.data || []; // Handle potential missing 'data'
         this.isLoading = false;
       },
       error: (err) => {
@@ -88,5 +111,4 @@ export default class HomeComponent {
       }
     });
   }
-
 }

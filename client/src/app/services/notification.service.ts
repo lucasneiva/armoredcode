@@ -68,6 +68,16 @@ export class NotificationService {
     return this.http.patch<any>(`${apiUrls.notificationServiceApi}/${inviteId}/reject`, {}, httpOptions);
   }
 
+  markInviteAsRead(inviteId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true
+    };
+    return this.http.put<any>(`${apiUrls.notificationServiceApi}/${inviteId}`, { isRead: true }, httpOptions);
+  }
+
 }
 export type Notification = {
   _id: string;
