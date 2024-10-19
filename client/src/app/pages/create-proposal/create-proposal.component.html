@@ -1,9 +1,12 @@
 <div class="grid justify-center align-middle min-h-screen h-fit">
+    
+    <ng-container *ngIf="isLoading">
+        <div class="w-full flex justify-center items-center py-10 my-auto fixed top-0 bottom-0">
+            <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+        </div>
+    </ng-container>
+    
     <!--filler form start-->
-    <div *ngIf="isLoading" class="w-full flex justify-center items-center py-10">
-        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
-    </div>
-
     <ng-container *ngIf="!isLoading && project">
         <div class="w-full shadow-lg bg-white p-8 my-auto">
             

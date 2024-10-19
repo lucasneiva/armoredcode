@@ -1,8 +1,10 @@
 <div class="flex flex-col min-h-screen h-fit bg-white">
 
-    <div *ngIf="isLoading" class="w-full flex justify-center items-center py-10 my-auto">
-        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
-    </div>
+    <ng-container *ngIf="isLoading">
+        <div class="w-full flex justify-center items-center py-10 my-auto fixed top-0 bottom-0">
+            <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+        </div>
+    </ng-container>
 
     <ng-container *ngIf="!isLoading && profile">
 
@@ -203,7 +205,7 @@
 
     </ng-container>
 
-    <ng-container *ngIf="!profile">
+    <ng-container *ngIf="!isLoading && !profile">
         <div class="block text-wrap max-w-md shadow-lg mt-56 p-10 mx-auto bg-white">
             <h1 class="text-center text-4xl text-gray-700">Que Vazio!</h1>
             <p class="text-left text-2xl text-gray-600 mt-4">

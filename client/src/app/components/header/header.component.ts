@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
   logoPath = '../../assets/images/logo_branca_sfundo.png';
   menuPath = '../../assets/images/menu-svgrepo-com.svg';
 
+  isLoading: boolean = true;
   isLoggedIn: boolean = false;
   userRole: string | null = null;
 
@@ -49,6 +50,7 @@ export class HeaderComponent implements OnInit {
     this.authService.isLoggedIn$.subscribe(res => {
       this.userRole = this.authService.getUserRole();
       this.isLoggedIn = this.authService.isLoggedIn();
+      this.isLoading = false;
     });
 
     // Subscribe to Router events

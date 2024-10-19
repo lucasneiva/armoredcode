@@ -1,8 +1,8 @@
 <div class="grid min-h-screen h-fit">
     <!--if no projects-->
     <ng-container *ngIf="isLoading">
-        <div class="block text-wrap max-w-md shadow-lg p-10 my-auto mx-auto bg-white h-fit">
-            <h1 class="text-center text-4xl text-gray-700">Carregando projetos...</h1>
+        <div class="w-full flex justify-center items-center py-10 my-auto fixed top-0 bottom-0">
+            <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
         </div>
     </ng-container>
 
