@@ -1,0 +1,10 @@
+.list-container{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 60;
+    inset: 0px;
+    overflow: auto;
+    background-color:rgba(0, 0, 0, 0.5);
+}

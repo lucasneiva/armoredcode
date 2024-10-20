@@ -116,6 +116,16 @@ export class ProjectService {
     };
     return this.http.get<any>(`${apiUrls.projectServiceApi}`, httpOptions); 
   }
+
+  getUserPostedProjects(userId: string | null): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true
+    };
+    return this.http.get<any>(`${apiUrls.projectServiceApi}/user/posted`, httpOptions); // Changed route
+  }
 }
 // Define a clear interface for your API response
 export type ProjectResponse = {

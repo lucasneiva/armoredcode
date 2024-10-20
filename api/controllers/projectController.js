@@ -64,28 +64,6 @@ export const createProject = async ( req, res, next ) => {
 
 };
 
-export const getUserProjects = async ( req, res, next ) => {
-    try {
-        const userId = req.user.id;
-        const userObjId = new mongoose.Types.ObjectId( userId );
-
-        const projects = await project.find( {
-            $or: [
-                { clientId: userObjId },
-                { freelancerId: userObjId }
-            ]
-        }, 'projectTitle projectStatus _id' );
-
-        return next( createSuccess( 200, 'User Projects', projects ) );
-
-    } catch ( error ) {
-
-        console.log( error );
-        return next( createError( 500, 'Internal Server Error' ) );
-
-    }
-};
-
 export const updateProject = async ( req, res, next ) => {
     try {
         const projectId = req.params.id;
@@ -136,6 +114,28 @@ export const deleteProject = async ( req, res, next ) => {
     }
 }
 
+export const getUserProjects = async ( req, res, next ) => {
+    try {
+        const userId = req.user.id;
+        const userObjId = new mongoose.Types.ObjectId( userId );
+
+        const projects = await project.find( {
+            $or: [
+                { clientId: userObjId },
+                { freelancerId: userObjId }
+            ]
+        }, 'projectTitle projectStatus _id' );
+
+        return next( createSuccess( 200, 'User Projects', projects ) );
+
+    } catch ( error ) {
+
+        console.log( error );
+        return next( createError( 500, 'Internal Server Error' ) );
+
+    }
+};
+
 export const getPostedProjects = async ( req, res, next ) => {
     try {
         const allProjects = await project.find( { projectStatus: "POSTED" } )
@@ -150,3 +150,29 @@ export const getPostedProjects = async ( req, res, next ) => {
         return next( createError( 500, "Internal server error" ) );
     }
 }
+
+//new route
+export const getPostedUserProjects = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        const userObjId = new mongoose.Types.ObjectId(userId);
+
+        const projects = await project.find({
+            $and: [
+                {
+                    $or: [
+                        { clientId: userObjId },
+                        { freelancerId: userObjId }
+                    ]
+                },
+                { projectStatus: "POSTED" }
+            ]
+        }, 'projectTitle projectStatus _id');
+
+        return next(createSuccess(200, 'User Posted Projects', projects));
+
+    } catch (error) {
+        console.log(error);
+        return next(createError(500, 'Internal Server Error'));
+    }
+};

@@ -44,7 +44,7 @@ export class ProjectListComponent {
   loadProjects() {
     const clientId = this.authService.getUserId();
     if (clientId) {
-      this.projectService.getPostedProjects().subscribe({
+      this.projectService.getUserPostedProjects(clientId).subscribe({
         next: (res) => {
           this.projects = res.data;
         },
