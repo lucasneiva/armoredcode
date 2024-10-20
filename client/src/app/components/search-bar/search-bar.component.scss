@@ -16,32 +16,42 @@
         padding: 1.5rem 0rem;
         background-color: gray;
 
-        .search-bar {
-            width: 50vw;
-            padding: 0.75rem 1rem 0.75rem 1rem;
-            background-color: white;
-            color: black;
-            border: 2px grey;
-            border-radius: 1.5rem;
+        @media not all and (min-width: 1024px) {
+            display: flex;
+            justify-content: space-between;
         }
 
-        .search-button {
-            position: relative;
-            width: 6rem;
-            height: 3rem;
-            margin-left: -5.9rem;
-            font-size: 1.25rem;
-            color: white;
-            background-color: rgb(106, 106, 106);
-            border: gray;
-            border-radius: 0rem 1.5rem 1.5rem 0rem;
-            cursor: pointer;
-
-            &:hover {
-                background-color: rgb(90, 90, 90);
+        .search-bar-container {
+            display: flex;
+            padding: 0rem 1rem;
+            .search-bar {
+                width: 50vw;
+                padding: 0.75rem 1rem 0.75rem 1rem;
+                background-color: white;
+                color: black;
+                border: 2px grey;
+                border-radius: 1.5rem 0rem 0rem 1.5rem;
+    
+                @media not all and (min-width: 1024px) {
+                    width: 55vw;
+                }
+            }
+    
+            .search-button {
+                padding: 0rem 1rem;
+                font-size: 1.25rem;
+                color: white;
+                background-color: rgb(106, 106, 106);
+                border: gray;
+                border-radius: 0rem 1.5rem 1.5rem 0rem;
+                cursor: pointer;
+    
+                &:hover {
+                    background-color: rgb(90, 90, 90);
+                }
             }
         }
-
+        
         .close-button {
             position: absolute;
             right: 5vw;
@@ -67,11 +77,12 @@
         height: fit-content;
         width: 100%;
         padding: 0.5rem 0rem;
-        background-color: gray;
+        background-color: rgb(113, 113, 113);
         overflow-x: auto;
 
         @media not all and (min-width: 1024px) {
             display: block;
+            padding: 1rem;
         }
 
         .dropdown-filter {
@@ -94,6 +105,13 @@
             padding: 0rem 0.25rem;
             border-radius: 4px;
             background-color: rgba(255, 255, 255, 0.25);
+
+            @media not all and (min-width: 1024px) {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem /* 8px */;
+                padding: 0.25rem;
+            }
 
             .displayed-skill {
                 display: flex;

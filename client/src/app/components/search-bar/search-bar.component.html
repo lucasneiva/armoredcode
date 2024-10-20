@@ -2,9 +2,11 @@
 <div *ngIf="isSearchBarVisible" class="page-cover">
     <!--search bar start-->
     <div class="search-container">
-        <input class="search-bar" type="text" placeholder="Pesquisar..." [(ngModel)]="searchTerm"
-            (keyup.enter)="searchOnEnterKey($event)">
-        <button class="search-button" (click)="search()">Buscar</button>
+        <div class="search-bar-container">
+            <input class="search-bar" type="text" placeholder="Pesquisar..." [(ngModel)]="searchTerm"
+                (keyup.enter)="searchOnEnterKey($event)">
+            <button class="search-button" (click)="search()">Buscar</button>
+        </div>
         <button class="close-button" (click)="closeSearchBar()">X</button>
     </div>
     <!--search bar end-->
@@ -20,7 +22,6 @@
             </select>
         </div>
         <!-- Experience Level Dropdown end-->
-
         <!-- Specialization Dropdown start-->
         <div class="flex w-fit max-lg:w-full">
             <select class="dropdown-filter" [(ngModel)]="selectedSpecializationId">
@@ -31,12 +32,10 @@
             </select>
         </div>
         <!-- Specialization Dropdown end-->
-
         <!-- Skills start-->
         <div class="flex w-fit max-lg:w-full">
             <!-- Skills Dropdown start-->
-            <select class="dropdown-filter"
-                [formControl]="selectedSkillControl" name="skills" id="skills">
+            <select class="dropdown-filter" [formControl]="selectedSkillControl" name="skills" id="skills">
                 <option value="" disabled selected>Selecione uma habilidade</option>
                 <option *ngFor="let skill of skills" [value]="skill._id">
                     {{ skill.skillName }}
@@ -50,15 +49,13 @@
             </div>
             <!-- Skills Dropdown end-->
         </div>
-
         <!-- Display selected skills -->
-        <div *ngIf="hasSelectedSkills()" class="selected-skills space-x-4">
+        <div *ngIf="hasSelectedSkills()" class="selected-skills lg:space-x-4">
             <div *ngFor="let skillId of selectedSkillIds; let i = index" class="displayed-skill bg-blue-500">
                 <div class="skill-content">
                     {{ getSkillNameById(getSkillObjectById(skillId)) }}
                 </div>
-                <button type="button" (click)="removeSkill(i)"
-                    class="skill-remover bg-red-500 hover:bg-red-700">
+                <button type="button" (click)="removeSkill(i)" class="skill-remover bg-red-500 hover:bg-red-700">
                     X
                 </button>
             </div>
