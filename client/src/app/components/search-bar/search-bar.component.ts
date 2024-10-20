@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { SearchService, SearchStateService } from '../../services/search.service';
-import { Project } from '../../services/project.service';
+import { Project, ProjectService } from '../../services/project.service';
 import { Profile } from '../../services/profile.service';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SpecializationService } from '../../services/specialization.service';
 import { SkillService } from '../../services/skill.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -17,10 +18,12 @@ import { SkillService } from '../../services/skill.service';
   styleUrl: './search-bar.component.scss'
 })
 export class SearchBarComponent {
+  authService = inject(AuthService);
+  projectService = inject(ProjectService);
   searchService = inject(SearchService);
   searchStateService = inject(SearchStateService); 
-  specializationService = inject(SpecializationService);
   skillService = inject(SkillService);
+  specializationService = inject(SpecializationService);
   
   selectedSkillControl = new FormControl('');
   selectedSkillIds: string[] = []; 
@@ -28,18 +31,28 @@ export class SearchBarComponent {
 
   specializations: any[] = [];
   projects: Project[] = [];
+  projectCategories: any[] = []; // Array to store categories
   freelancers: Profile[] = [];
   
   searchTerm: string = '';
   selectedExperienceLevel: string = ''; 
+  selectedProjectCategoryId: string = ''; 
   selectedSpecializationId: string = '';
 
   isSearchBarVisible = false; // Add a property to track visibility
   userRole: string | null = null;
 
   ngOnInit() {
-    this.fetchSpecializations(); 
-    this.fetchSkills();
+    this.userRole = this.authService.getUserRole();
+    if (this.userRole === 'CLIENT') {
+      this.fetchSpecializations(); 
+      this.fetchSkills();
+    } else if (this.userRole === 'FREELANCER'){
+      this.getProjectCategories();
+      this.fetchSkills();
+    } else {
+      console.log("invalid role");
+    }
     this.searchStateService.isSearchBarVisible$.subscribe(isVisible => {
       this.isSearchBarVisible = isVisible;
     });
@@ -47,17 +60,32 @@ export class SearchBarComponent {
 
   search() {
     this.searchStateService.setSearchTerm(this.searchTerm);
-    this.searchService.searchFreelancers(
-      this.searchTerm, 
-      this.selectedSkillIds, 
-      this.selectedExperienceLevel, 
-      this.selectedSpecializationId 
-    ).subscribe(results => {
-      console.log("term: ",this.searchTerm);
-      console.log("skills: ", this.selectedSkillIds);
-      console.log("XP Level: ",this.selectedExperienceLevel);
-      console.log("Specialization: ",this.selectedSpecializationId);
-    });
+    if (this.userRole === 'CLIENT') {
+      this.searchService.searchFreelancers(
+        this.searchTerm, 
+        this.selectedSkillIds, 
+        this.selectedExperienceLevel, 
+        this.selectedSpecializationId 
+      ).subscribe(results => {
+        console.log("term: ",this.searchTerm);
+        console.log("XP Level: ",this.selectedExperienceLevel);
+        console.log("Specialization: ",this.selectedSpecializationId);
+        console.log("skills: ", this.selectedSkillIds);
+      });
+    }
+
+    if (this.userRole === 'FREELANCER') {
+      this.searchService.searchProjects(
+        this.searchTerm, 
+        this.selectedProjectCategoryId,
+        this.selectedSkillIds
+      ).subscribe(results => {
+        console.log("term: ",this.searchTerm);
+        console.log("Project category: ",this.selectedProjectCategoryId);
+        console.log("skills: ", this.selectedSkillIds);
+      });
+    }
+    
   }
   
   searchOnEnterKey(event: Event) {
@@ -111,6 +139,17 @@ export class SearchBarComponent {
 
   getSkillNameById(skill: any): string {
     return skill ? skill.skillName : '';
+  }
+
+  getProjectCategories() {
+    this.projectService.getProjectCategories().subscribe(
+      (response: any) => {
+        this.projectCategories = response.data;
+      },
+      (error) => {
+        console.error('Error fetching project categories:', error);
+      }
+    );
   }
 
 }

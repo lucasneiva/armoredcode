@@ -12,55 +12,71 @@
     <!--search bar end-->
     <!--filsters start-->
     <div class="filters-container max-lg:space-y-4">
-        <!-- Experience Level Dropdown start-->
-        <div class="flex w-fit max-lg:w-full">
-            <select class="dropdown-filter" [(ngModel)]="selectedExperienceLevel">
-                <option value="">Selecione o Nível de Experiência</option>
-                <option value="JUNIOR">Júnior</option>
-                <option value="MID-LEVEL">Pleno</option>
-                <option value="SENIOR">Senior</option>
-            </select>
-        </div>
-        <!-- Experience Level Dropdown end-->
-        <!-- Specialization Dropdown start-->
-        <div class="flex w-fit max-lg:w-full">
-            <select class="dropdown-filter" [(ngModel)]="selectedSpecializationId">
-                <option value="" selected>Selecione a Expecialização</option>
-                <option *ngFor="let specialization of specializations" [value]="specialization._id">
-                    {{ specialization.specializationName }}
-                </option>
-            </select>
-        </div>
-        <!-- Specialization Dropdown end-->
-        <!-- Skills start-->
-        <div class="flex w-fit max-lg:w-full">
-            <!-- Skills Dropdown start-->
-            <select class="dropdown-filter" [formControl]="selectedSkillControl" name="skills" id="skills">
-                <option value="" disabled selected>Selecione uma habilidade</option>
-                <option *ngFor="let skill of skills" [value]="skill._id">
-                    {{ skill.skillName }}
-                </option>
-            </select>
-            <div class="px-1">
-                <button type="button" (click)="addSelectedSkill()"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
-                    Adicionar
-                </button>
+        <ng-container *ngIf="userRole === 'CLIENT'">
+            <!-- Experience Level Dropdown start-->
+            <div class="flex w-fit max-lg:w-full">
+                <select class="dropdown-filter" [(ngModel)]="selectedExperienceLevel">
+                    <option value="">Selecione o Nível de Experiência</option>
+                    <option value="JUNIOR">Júnior</option>
+                    <option value="MID-LEVEL">Pleno</option>
+                    <option value="SENIOR">Senior</option>
+                </select>
             </div>
-            <!-- Skills Dropdown end-->
-        </div>
-        <!-- Display selected skills -->
-        <div *ngIf="hasSelectedSkills()" class="selected-skills lg:space-x-4">
-            <div *ngFor="let skillId of selectedSkillIds; let i = index" class="displayed-skill bg-blue-500">
-                <div class="skill-content">
-                    {{ getSkillNameById(getSkillObjectById(skillId)) }}
+            <!-- Experience Level Dropdown end-->
+            <!-- Specialization Dropdown start-->
+            <div class="flex w-fit max-lg:w-full">
+                <select class="dropdown-filter" [(ngModel)]="selectedSpecializationId">
+                    <option value="" selected>Selecione a Expecialização</option>
+                    <option *ngFor="let specialization of specializations" [value]="specialization._id">
+                        {{ specialization.specializationName }}
+                    </option>
+                </select>
+            </div>
+            <!-- Specialization Dropdown end-->
+        </ng-container>
+        <ng-container *ngIf="userRole === 'FREELANCER'">
+            <!-- Project Categories Dropdown start-->
+            <div class="flex w-fit max-lg:w-full">
+                <select class="dropdown-filter" [(ngModel)]="selectedProjectCategoryId">
+                    <option value="" selected>Selecione a categoria do projeto</option>
+                    <option *ngFor="let category of projectCategories" [value]="category._id">
+                        {{ category.categoryName }}
+                    </option>
+                </select>
+            </div>
+            <!-- Project Categories Dropdown end-->
+        </ng-container>
+        <ng-container *ngIf="userRole === 'CLIENT' || userRole === 'FREELANCER'">
+            <!-- Skills start-->
+            <div class="flex w-fit max-lg:w-full">
+                <!-- Skills Dropdown start-->
+                <select class="dropdown-filter" [formControl]="selectedSkillControl" name="skills" id="skills">
+                    <option value="" disabled selected>Selecione uma habilidade</option>
+                    <option *ngFor="let skill of skills" [value]="skill._id">
+                        {{ skill.skillName }}
+                    </option>
+                </select>
+                <div class="px-1">
+                    <button type="button" (click)="addSelectedSkill()"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
+                        Adicionar
+                    </button>
                 </div>
-                <button type="button" (click)="removeSkill(i)" class="skill-remover bg-red-500 hover:bg-red-700">
-                    X
-                </button>
+                <!-- Skills Dropdown end-->
             </div>
-        </div>
-        <!-- Skills end-->
+            <!-- Display selected skills -->
+            <div *ngIf="hasSelectedSkills()" class="selected-skills lg:space-x-4">
+                <div *ngFor="let skillId of selectedSkillIds; let i = index" class="displayed-skill bg-blue-500">
+                    <div class="skill-content">
+                        {{ getSkillNameById(getSkillObjectById(skillId)) }}
+                    </div>
+                    <button type="button" (click)="removeSkill(i)" class="skill-remover bg-red-500 hover:bg-red-700">
+                        X
+                    </button>
+                </div>
+            </div>
+            <!-- Skills end-->
+        </ng-container>
     </div>
     <!--filsters end-->
 </div>
