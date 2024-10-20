@@ -1,41 +1,40 @@
-<div class="flex flex-row justify-center align-middle min-h-screen h-fit">
-    <div class="lg:w-3/12 max-lg:w-5/6 my-auto p-10 shadow-lg mx-auto bg-white">
-        <h3 class="text-3xl text-center font-semibold py-5">Register</h3>
-        <form [formGroup]="registerForm" class="flex flex-col">
-            <div class="flex flex-col mt-4 mb-1">
-                <input formControlName="username" name="username" type="text" placeholder="Nome de Usuário"
-                    class="p-2 border border-gray-300 rounded">
+<div class="page-container">
+    <div class="register-container shadow-lg">
+        <h3>Registro</h3>
+        <form [formGroup]="registerForm">
+            <div class="input-row">
+                <input formControlName="username" name="username" type="text" placeholder="Nome de Usuário" class="text-input">
                 <span *ngIf="registerForm.hasError('required', 'username') && registerForm.controls['username'].dirty" class="text-red-500">*Nome de Usuário é requerido</span>
             </div>
-            <div class="flex flex-col mt-4 mb-1">
-                <input formControlName="email" name="email" type="text" placeholder="Email"
-                class="p-2 border border-gray-300 rounded">
+            <div class="input-row">
+                <input formControlName="email" name="email" type="text" placeholder="Email" class="text-input">
                 <span *ngIf="registerForm.hasError('required', 'email') && registerForm.controls['email'].dirty" class="text-red-500">*Email é requerido</span>
                 <span *ngIf="registerForm.hasError('email', 'email')" class="text-red-500">*Email é invalido</span>
             </div>
-            <div class="flex flex-col mt-4 mb-1">
-                <input formControlName="password" name="password" type="password" placeholder="Senha"
-                class="p-2 border border-gray-300 rounded">
+            <div class="input-row">
+                <input formControlName="password" name="password" type="password" placeholder="Senha" class="text-input">
                 <span *ngIf="registerForm.hasError('required', 'password') && registerForm.controls['password'].dirty" class="text-red-500">*Senha é requerida</span>
             </div>
             
-            <div class="flex flex-row mt-4 mb-1 justify-around">
-                <div class="m-0.5">
-                    <input type="radio" name="role" id="clientRole" formControlName="role" value="CLIENT" 
-                        class="p-2 border border-gray-300 rounded" checked >
-                    <label for="clientRole" class="m-2 font-normal">Cliente</label>
+            <div class="form-btn-inputs">
+                <div>
+                    <input type="radio" name="role" id="clientRole" formControlName="role" value="CLIENT" class="radio-button" checked >
+                    <label for="clientRole">Cliente</label>
                 </div>
-                <div class="m-0.5">
-                    <input type="radio" name="role" id="freelancerRole" formControlName="role" value="FREELANCER" 
-                        class="p-2 border border-gray-300 rounded">
-                    <label for="freelancerRole" class="m-2 font-normal">Freelancer</label>
+                <div>
+                    <input type="radio" name="role" id="freelancerRole" formControlName="role" value="FREELANCER" class="radio-button">
+                    <label for="freelancerRole">Freelancer</label>
                 </div>  
             </div>
             
-            <button [disabled]="registerForm.invalid" [class.disabled]="registerForm.invalid" (click)="register()" class="bg-indigo-500 text-white p-2 rounded mt-3">Registrar</button>
+            <div class="input-row">
+                <button [disabled]="registerForm.invalid" [class.disabled]="registerForm.invalid" (click)="register()" 
+                class="form-btn">Registrar</button>
+            </div>
+            
         </form>
-        <div class="flex justify-center mt-5">
-            <span>Já tem uma Conta?</span> <a routerLink="/login" class="text-indigo-600 ml-2 cursor-pointer">Faça o Login</a>
+        <div class="link-row">
+            <span>Já tem uma Conta? <a routerLink="/login">Faça o Login</a></span>
         </div>
     </div>
 </div>

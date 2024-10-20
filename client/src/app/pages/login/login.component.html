@@ -1,33 +1,28 @@
-<div class="flex flex-row justify-center align-middle min-h-screen h-fit">
-    <div class="lg:w-3/12 max-lg:w-5/6 my-auto p-10 shadow-lg mx-auto bg-white">
-        <h3 class="text-3xl text-center font-semibold py-5">Login</h3>
-        <form [formGroup]="loginForm" class="flex flex-col">
-    
-            <div class="flex flex-col mt-4 mb-1">
+<div class="page-container">
+    <div class="login-container shadow-lg">
+        <h3>Login</h3>
+        <form [formGroup]="loginForm">
+            <div class="input-row">
                 <input formControlName="email" name="email" type="text" placeholder="Email"
-                    class="p-2 border border-gray-300 rounded">
+                    class="text-input">
                 <span *ngIf="loginForm.hasError('required', 'email') && loginForm.controls['email'].dirty"
                     class="text-red-500">*Email é requerido</span>
                 <span *ngIf="loginForm.hasError('email', 'email')" class="text-red-500">*Email é invalido</span>
             </div>
-    
-            <div class="flex flex-col mt-4 mb-1">
+            <div class="input-row">
                 <input formControlName="password" name="password" type="password" placeholder="Senha"
-                    class="p-2 border border-gray-300 rounded">
+                    class="text-input">
                 <span *ngIf="loginForm.hasError('required', 'password') && loginForm.controls['password'].dirty"
                     class="text-red-500">*Senha é requerida</span>
             </div>
-    
-            <button [disabled]="loginForm.invalid" [class.disabled]="loginForm.invalid" (click)="login()"
-                class="bg-indigo-500 text-white p-2 rounded mt-3">Enviar</button>
+            <div class="input-row">
+                <button [disabled]="loginForm.invalid" [class.disabled]="loginForm.invalid" (click)="login()"
+                class="form-btn">Enviar</button>
+            </div>
         </form>
-        <div class="flex justify-between mt-5">
-            <a routerLink="/forget-password" class="text-indigo-600 ml-2 cursor-pointer max-lg:my-2">
-                Esqueceu a Senha?
-            </a>
-            <a routerLink="/register" class="text-indigo-600 ml-2 cursor-pointer max-lg:my-2">
-                Criar Conta
-            </a>
+        <div class="link-row">
+            <a routerLink="/forget-password">Esqueceu a Senha?</a>
+            <a routerLink="/register">Criar Conta</a>
         </div>
     </div>
 </div>

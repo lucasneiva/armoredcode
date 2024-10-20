@@ -1,0 +1,106 @@
+.page-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    vertical-align: middle;
+    min-height: 100vh;
+    height: fit-content;
+
+    .register-container {
+        width: 32rem;
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 2.5rem;
+
+        background-color: white;
+
+        @media not all and (min-width: 1024px) {
+            width: 90vw;
+        }
+
+        h3 {
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+            padding: 1.25rem 0rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+
+            .input-row {
+                display: flex;
+                flex-direction: column;
+                margin: 0.5rem 0rem;
+
+                .text-input {
+                    padding: 0.5rem;
+                    border-width: 1px;
+                    border-color: rgba(128, 128, 128, 0.5);
+                    border-radius: 0.25rem;
+                }
+            }
+
+            .form-btn-inputs {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                margin: 0.5rem 0rem;
+
+                div {
+                    display: flex;
+                    align-items: center;
+                    vertical-align: middle;
+                    margin: 0.125rem;
+
+                    .radio-button {
+                        padding: 0.5rem;
+                        width: 1rem;
+                        height: 1rem;
+                        border-radius: 50%;
+                        background-color: rgba(99 102 241);
+                    }
+
+                    label {
+                        margin: 0.5rem;
+                    }
+                }
+
+            }
+
+            .form-btn {
+                padding: 0.5rem;
+                color: white;
+                background-color: rgba(99 102 241);
+                border-radius: 0.25rem;
+
+                &:hover {
+                    background-color: rgb(80, 83, 240);
+                }
+            }
+        }
+
+        .link-row {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.25rem;
+
+            a {
+                color: rgb(122, 116, 231);
+
+                &:hover {
+                    color: rgba(79 70 229);
+                }
+
+                cursor: pointer;
+
+                @media not all and (min-width: 1024px) {
+                    margin-top: 0.5rem;
+                    margin-bottom: 0.5rem;
+                }
+            }
+        }
+    }
+}

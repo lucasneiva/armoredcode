@@ -1,0 +1,71 @@
+.page-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    vertical-align: middle;
+    min-height: 100vh;
+    height: fit-content;
+
+    .reset-container {
+        width: 32rem;
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 2.5rem;
+
+        background-color: white;
+
+        @media not all and (min-width: 1024px) {
+            width: 90vw;
+        }
+
+        h3{
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.875rem /* 30px */;
+            line-height: 2.25rem /* 36px */;
+            padding: 1.25rem 0rem;
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+
+            span{
+                
+                text-align: justify;
+                text-wrap: wrap;
+                font-size: 1.125rem ;
+                line-height: 1.5rem ;
+            }
+
+            .input-row{
+                display: flex;
+                flex-direction: column;
+                margin: 0.5rem 0rem;
+
+                .text-input{
+                    padding: 0.5rem /* 8px */;
+                    border-width: 1px;
+                    border-color: rgba(128, 128, 128, 0.5);
+                    border-radius: 0.25rem /* 4px */;
+                }
+            }
+            div{
+                display: flex;
+                width: 100%;
+                margin: 0.5rem 0rem;
+                .form-btn{
+                    padding: 0.5rem /* 8px */;
+                    color: white;
+                    background-color: rgba(99 102 241);
+                    border-radius: 0.25rem /* 4px */;
+                    width: 100%;
+    
+                    &:hover{
+                        background-color: rgb(80, 83, 240);
+                    }
+                }
+            }
+        }
+    }
+}
