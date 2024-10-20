@@ -117,46 +117,26 @@ export const sendEmail = async (req, res, next) => {
     let mailDetails = {
         from: "armoredcode2@gmail.com",
         to: email,
-        subject: "Reset Password",
-        html: `<html>
-        <head>
-        <title>Password Reset Request</title>
-        </head>
-        <body>
-        <h1>Password Reset Request</h1>
-        <p>Dear ${user.username}, </p>
-        <p style="margin-bottom: 3rem">We have received a request to reset your password for your account with ArmoredCode. To complete the password reset process, please click on the button below:</p>
+        subject: "Redefinir Senha",
+        html: 
+        `<html>
+            <head>
+                <title>Pedido de Redefinição de Senha</title>
+            </head>
+            <body style="color: #000000">
+                <h1>Pedido de Redefinição de Senha</h1>
+                <p>Caro(a) ${user.username}, </p>
+                <p style="margin-bottom: 3rem">Recebemos uma solicitação para redefinir a senha da sua conta na ArmoredCode. Para concluir o processo de redefinição de senha, clique no botão abaixo:</p>
         
-        <a href="${process.env.LIVE_URL}/reset/${token}" style="background-color: #4CAF50; color: white; padding: 14px 20px; border: none; cursor: pointer; border-radius: 4px; text-decoration: none;">Reset Password</a>
+                <a href="${process.env.LIVE_URL}/reset/${token}" style="background-color: #4CAF50; color: white; padding: 14px 20px; border: none; cursor: pointer; border-radius: 4px; text-decoration: none;">Redefinir Senha</a>
         
-        <p style="margin-top: 3rem">Thank you,</p>
-        <p>Please note that this link is only valid for a 5mins. If you did not request a password reset, please disregard this message.</p>
-        <p>ArmoredCode Team</p>
-        </body>
+                <p style="margin-top: 3rem">Atenciosamente,</p>
+                <p> Equipe ArmoredCode </p>
+                <p> <strong> Observação: </strong> Este link é válido apenas por 5 minutos. Se você não solicitou a redefinição de senha, ignore esta mensagem.</p>
+                
+            </body>
         </html>`,
-
-
-        /*
-        html: `<html>
-    <head>
-    <title>Password Reset Request</title>
-    </head>
-    <body>
-    <h1>Password Reset Request</h1>
-    <p>Dear ${user.username}, </p>
-    <p>We have received a request to reset your password for your account with ArmoredCode. To complete the password reset process, please click on the button below:</p>
-
-    <a href=${process.env.LIVE_URL}/reset/${token}> clique aqui para resetar a senha </a>
-
-    <p>Thank you,</p>
-    <p>Please note that this link is only valid for a 5mins. If you did not request a password reset, please disregard this message.</p>
-    <p>ArmoredCode Team</p>
-    </body>
-</html>`,
-*/
     };
-
-    // <button style="background-color: #4CAF50; color: white; padding: 14px 20px; border: none; cursor: pointer; border-radius: 4px;">Reset Password</button>
 
     mailTransporter.sendMail(mailDetails, async (err, data) => {
         if (err) {
