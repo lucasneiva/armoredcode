@@ -85,7 +85,7 @@
   <!--freelancer part end-->
 
   <!--project details-->
-  <app-project-details *ngIf="showDetails" [project]="project" [detailedProject]="detailedProject"
+  <app-project-details *ngIf="showDetails" [project]="project" [detailedProject]="detailedProject" [projectCategoryName]="projectCategoryName"
     [creatorName]="creatorName" [skills]="skills" [userRole]="userRole" (close)="toggleDetails()"></app-project-details>
   <!--project details-->
 </ng-container>

@@ -28,6 +28,7 @@ export class InviteCardComponent {
   @Input() invite: any;
   project: any;
   detailedProject: any; // To store the detailed project data
+  projectCategoryName = '';
   creatorName = '';
   freelancerName = '';
   skills: string[] = [];
@@ -74,6 +75,8 @@ export class InviteCardComponent {
       this.project = response.data;
       this.detailedProject = response.data; // Store detailed project data
       const skillIds = this.detailedProject.skillIds;
+      const projectCategoryId = this.detailedProject.projectCategoryId._id;
+      this.loadProjectCategoryName(projectCategoryId);
       this.loadSkills(skillIds);
       /*Debug*/ //console.log('Project loaded:', this.project);
     });
@@ -123,16 +126,31 @@ export class InviteCardComponent {
     });
   }
 
+  loadProjectCategoryName(categoryId: string) {
+    this.projectService.getProjectCategoryById(categoryId).subscribe(
+      (response) => {
+        if (response.success) {
+          this.projectCategoryName = response.data.categoryName;
+          /*debug*/ //console.log(this.projectCategoryName);
+        } else {
+          console.error('Failed to project category details:', response.message);
+        }
+      },
+      (error) => {
+        console.error('Error project category details:', error);
+      });
+
+  }
+
   toggleProjectDetails() {
     this.showProjectDetails = !this.showProjectDetails;
-  
-    // Mark as read when the card is clicked (if not already read)
+
     if (!this.invite.isRead) {
       this.notificationService.markInviteAsRead(this.invite._id).subscribe(
         (markResponse) => {
           if (markResponse.success) {
             /*debug*/ //console.log('Invite marked as read');
-            this.invite.isRead = true; // Update the local invite object
+            this.invite.isRead = true;
           } else {
             console.error('Error marking invite as read:', markResponse.message);
           }
@@ -144,8 +162,6 @@ export class InviteCardComponent {
     }
   }
   
-
-  // Function to handle the close event from the project details component
   handleCloseProjectDetails() {
     this.showProjectDetails = false;
   }

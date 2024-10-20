@@ -85,6 +85,18 @@ export class ProjectService {
     return this.http.get<any>(`${apiUrls.projectCategoryApi}`, httpOptions);
   }
 
+  getProjectCategoryById(projCategoryId: string | null): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true // VERY IMPORTANT: Include cookies in requests
+    };
+    return this.http.get<any>(`${apiUrls.projectCategoryApi}/${projCategoryId}`, httpOptions).pipe(
+      //tap(response => console.log('API response:', response))  // Log API response
+    );
+  }
+
   getProjects() {
     const httpOptions = {
       headers: new HttpHeaders({

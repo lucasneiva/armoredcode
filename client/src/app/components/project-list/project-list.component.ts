@@ -26,6 +26,7 @@ export class ProjectListComponent {
 
   selectedProjectDetails: any | null = null; // Change type to any to accommodate extra data
   creatorName = '';
+  projectCategoryName = '';
   
   @Input() closeOnSelect: boolean = false; // Add this input property
   @Output() projectSelected = new EventEmitter<Project>();
@@ -72,6 +73,7 @@ export class ProjectListComponent {
       next: (res) => {
         this.selectedProjectDetails = res.data; 
         /*debug*/ //console.log(this.selectedProjectDetails);
+        this.loadProjectCategoryName(this.selectedProjectDetails.projectCategoryId._id);
         this.loadCreatorName(this.selectedProjectDetails.clientId._id); // Fetch creator name
         this.loadSkills(this.selectedProjectDetails.skillIds);
       },
@@ -111,9 +113,25 @@ export class ProjectListComponent {
     });
   }
 
+  loadProjectCategoryName(categoryId: string) {
+    this.projectService.getProjectCategoryById(categoryId).subscribe(
+      (response) => {
+        if (response.success) {
+          this.projectCategoryName = response.data.categoryName;
+          /*debug*/ //console.log(this.projectCategoryName);
+        } else {
+          console.error('Failed to project category details:', response.message);
+        }
+      },
+      (error) => {
+        console.error('Error project category details:', error);
+      });
+  }
+
   closeProjectDetails() {
     this.selectedProjectDetails = null;
     this.creatorName = "";
+    this.projectCategoryName = "";
     this.skills = [];
   }
 

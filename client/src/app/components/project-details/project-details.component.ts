@@ -18,6 +18,7 @@ export class ProjectDetailsComponent {
   showDetails = false;
   
   @Input() project: any;
+  @Input() projectCategoryName!: string; // Add input for project category name
   @Input() detailedProject: any;
   @Input() creatorName!: string;
   @Input() skills!: string[];

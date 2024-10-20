@@ -34,12 +34,10 @@ export default class HomeComponent {
   isLoading = true; // default is true
   userRole: string | null = null;
 
-  // In home.component.ts
   ngOnInit(): void {
     this.userRole = this.authService.getUserRole();
     this.searchStateService.searchTerm$.subscribe(searchTerm => {
       if (searchTerm.trim() === '') {
-        // Load initial data if search term is empty
         if (this.userRole === 'CLIENT') {
           this.loadFreelancers();
         } else if (this.userRole === 'FREELANCER') {
@@ -87,8 +85,8 @@ export default class HomeComponent {
   loadProjects() {
     this.projectService.getPostedProjects().subscribe({
       next: (res) => {
-        console.log("Initial projects:", res); // Log the initial response
-        this.projects = res.data || []; // Handle potential missing 'data'
+        console.log("Initial projects:", res); 
+        this.projects = res.data || [];
         this.isLoading = false;
       },
       error: (err) => {
@@ -101,8 +99,8 @@ export default class HomeComponent {
   loadFreelancers() {
     this.profileService.getAllFreelancerProfiles().subscribe({
       next: (res) => {
-        console.log("Initial freelancers:", res); // Log the initial response
-        this.freelancers = res.data || []; // Handle potential missing 'data'
+        console.log("Initial freelancers:", res); 
+        this.freelancers = res.data || [];
         this.isLoading = false;
       },
       error: (err) => {

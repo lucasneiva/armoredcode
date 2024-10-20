@@ -35,12 +35,14 @@
     </ng-template>
 </div>
 
-<app-project-details 
-    *ngIf="selectedProjectDetails" 
-    [project]="selectedProjectDetails" 
-    [detailedProject]="selectedProjectDetails" 
-    [creatorName]="creatorName" 
-    [skills]="skills"
-    [userRole]="userRole"
-    (close)="closeProjectDetails()">
+<!--project details-->
+<app-project-details #projectDetails *ngIf="selectedProjectDetails" 
+  [project]="selectedProjectDetails"  
+  [detailedProject]="selectedProjectDetails"  
+  [projectCategoryName]="projectCategoryName"
+  [creatorName]="creatorName" 
+  [skills]="skills" 
+  [userRole]="userRole" 
+  (close)="closeProjectDetails()">
 </app-project-details>
+<!--project details-->

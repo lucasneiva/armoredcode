@@ -31,6 +31,7 @@ export class ProjectCardComponent {
   showDetails = false;
   showProposals: boolean = false;
 
+  projectCategoryName = '';
   creatorName = '';
   skills: string[] = [];
   proposals: Proposal[] = [];
@@ -57,6 +58,8 @@ export class ProjectCardComponent {
           /*debug*/ //console.log('Full Project Data:', this.detailedProject);
           const skillIds = this.detailedProject.skillIds;
           const creatorId = this.detailedProject.clientId._id;
+          const projectCategoryId = this.detailedProject.projectCategoryId._id;
+          this.loadProjectCategoryName(projectCategoryId);
           this.loadCreatorName(creatorId);
           this.loadSkills(skillIds);
           if (this.userRole == "CLIENT") {
@@ -116,6 +119,21 @@ export class ProjectCardComponent {
           }
         });
     });
+  }
+
+  loadProjectCategoryName(categoryId: string) {
+    this.projectService.getProjectCategoryById(categoryId).subscribe(
+      (response) => {
+        if (response.success) {
+          this.projectCategoryName = response.data.categoryName;
+          /*debug*/ //console.log(this.projectCategoryName);
+        } else {
+          console.error('Failed to project category details:', response.message);
+        }
+      },
+      (error) => {
+        console.error('Error project category details:', error);
+      });
   }
 
 }

@@ -19,9 +19,8 @@
     </div>
     <!--card end-->
 
-    <!-- Project Details Component (hidden by default) -->
-    <app-project-details #projectDetails *ngIf="showProjectDetails" [project]="project"
-        [detailedProject]="detailedProject" [creatorName]="creatorName" [skills]="skills" [userRole]="userRole"
-        (close)="handleCloseProjectDetails()">
-    </app-project-details>
+    <!--project details-->
+    <app-project-details #projectDetails *ngIf="showProjectDetails" [project]="project" [detailedProject]="detailedProject" [projectCategoryName]="projectCategoryName"
+    [creatorName]="creatorName" [skills]="skills" [userRole]="userRole" (close)="handleCloseProjectDetails()"></app-project-details>
+    <!--project details-->
 </ng-container>
