@@ -307,7 +307,7 @@
                         <div class="flex w-full">
                             <select (change)="onSkillSelected($event)" name="skills" id="skills"
                                 class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
-                                <option value="" disabled selected>Selecione sua habilidade</option>
+                                <option value="" disabled selected>Selecione sua Habilidade</option>
                                 <option *ngFor="let skill of skills" [value]="skill._id">
                                     {{ skill.skillName }}
                                 </option>

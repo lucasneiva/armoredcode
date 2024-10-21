@@ -320,7 +320,7 @@
                             <div class="flex w-full">
                                 <select class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500"
                                     [formControl]="selectedSkillControl" name="skills" id="skills">
-                                    <option value="" disabled selected>Select a skill</option>
+                                    <option value="" disabled selected>Selecione sua Habilidade</option>
                                     <option *ngFor="let skill of skills" [value]="skill._id">
                                         {{ skill.skillName }}
                                     </option>
