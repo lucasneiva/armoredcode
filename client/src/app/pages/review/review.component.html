@@ -11,7 +11,7 @@
         <div class="form-body shadow-lg rounded-md">
             <!--client part start-->
             <ng-container *ngIf="userRole === 'CLIENT'">
-                <h2>Avaliando o Freelancer <span>{{ freelancerName }}</span></h2>
+                <h2>Avaliando o Freelancer <span>{{ reviewedUsername }}</span></h2>
                 <form [formGroup]="reviewClientForm">
                     <div class="lg:flex max-lg:grid">
                         <div class="rating-group">
@@ -47,7 +47,7 @@
             <!--client part end-->
             <!--freelancer part start-->
             <ng-container *ngIf="userRole === 'FREELANCER'">
-                <h2>Avaliando o Cliente <span>{{ clientName }}</span></h2>
+                <h2>Avaliando o Cliente <span>{{ reviewedUsername }}</span></h2>
                 <form [formGroup]="reviewFreelancerForm">
                     <div class="lg:flex max-lg:grid">
                         <div class="rating-group">

@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../../services/project.service';
+import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-project-details',
@@ -14,6 +16,8 @@ export class ProjectDetailsComponent {
   router = inject(Router);
   route = inject(ActivatedRoute);
   projectService = inject(ProjectService);
+  authService = inject(AuthService);
+  userService = inject(UserService);
   
   showDetails = false;
   
@@ -99,6 +103,14 @@ export class ProjectDetailsComponent {
         // Show an error message to the user
       }
     );
+  }
+  
+  goToReview() {
+    if (this.userRole === 'CLIENT' && this.detailedProject.freelancerId) {
+      this.router.navigate(['../review', this.detailedProject.freelancerId._id], { relativeTo: this.route });
+    } else if (this.userRole === 'FREELANCER') {
+      this.router.navigate(['../review', this.detailedProject.clientId._id], { relativeTo: this.route });
+    }
   }
 
   makeProposal() {

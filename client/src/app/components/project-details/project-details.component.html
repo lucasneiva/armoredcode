@@ -147,6 +147,13 @@
                     Finalizar Projeto
                 </button>
             </ng-container>
+
+            <ng-container *ngIf="project.projectStatus === 'COMPLETED'">
+                <button (click)="goToReview()"
+                        class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded w-full">
+                  Avaliar
+                </button>
+            </ng-container>
         </div>
         <!--Buttons end-->
     </div>
