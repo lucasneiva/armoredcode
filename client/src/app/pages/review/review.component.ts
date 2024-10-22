@@ -31,8 +31,8 @@ export default class ReviewComponent {
     this.createForm(); // Initialize both forms here
     
     this.activatedRoute.params.subscribe(params => {
-      this.clientName = params['clientName'] || 'Nome do Cliente';
-      this.freelancerName = params['freelancerName'] || 'Nome do Freelancer';
+      this.clientName = params['clientName'] || 'Client_name';
+      this.freelancerName = params['freelancerName'] || 'Freelancer_name';
       this.isLoading = false; // Set isLoading to false after data is loaded 
     });
   }
