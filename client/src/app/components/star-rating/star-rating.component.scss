@@ -1,9 +1,16 @@
 .star-rating {
     span {
-        font-size: 24px;
         cursor: pointer;
 
-        &.filled {
+        @media (min-width: 1024px) {
+            margin: 0.3rem;
+            font-size: 1.5rem;
+        }
+        @media not all and (min-width: 1024px) {
+            margin: 0.25rem;
+            font-size: 1.25rem;
+        }
+        .star-yellow {
             color: gold;
         }
     }

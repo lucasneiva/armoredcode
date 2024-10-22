@@ -1,9 +1,7 @@
 <div class="star-rating">
-    <span *ngFor="let i of getStarArray()" 
-      (click)="setRating(i)"
-      (mouseover)="onRatingHover(i)"
-      (mouseleave)="onRatingLeave()"
-      [class.filled]="i <= rating || (hovered > 0 && i <= hovered)">
-      ⚅ 
-    </span>
-  </div>
+  <span *ngFor="let i of getStarArray()" (click)="setRating(i)" (mouseover)="onRatingHover(i)"
+    (mouseleave)="onRatingLeave()">
+    <i class="fa fa-star" [class.fa-star-o]="i > rating && (hovered === 0 || i > hovered)"
+      [class.star-yellow]="i <= rating || (hovered > 0 && i <= hovered)"></i>
+  </span>
+</div>
