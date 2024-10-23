@@ -44,12 +44,9 @@ export default class HomeComponent {
 
     this.searchStateService.isSearchBarVisible$.subscribe(isVisible => {
       if (isVisible) {
-        this.isLoading = true; // Set isLoading to true before loading initial data
-        if (this.userRole === 'CLIENT') {
-          this.loadFreelancers();
-        } else if (this.userRole === 'FREELANCER') {
-          this.loadProjects();
-        }
+        
+      } else if (!isVisible){
+        
       }
     });
   }
