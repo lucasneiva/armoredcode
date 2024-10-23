@@ -46,10 +46,8 @@ export class SearchService {
         if (specializationId) {
             params = params.append('specializationId', specializationId);
         }
-
         const requestUrl = `${apiUrls.searchServiceApi}/freelancers?${params.toString()}`;
-        console.log("Freelancer Search Request URL:", requestUrl); // Log the URL
-
+        /*debug*/ //console.log("Freelancer Search Request URL:", requestUrl); // Log the URL
         return this.http.get<Profile[]>(requestUrl);
     }
 
@@ -66,10 +64,8 @@ export class SearchService {
                 params = params.append('skillIds[]', skillId); // Append [] for each skillId
             });
         }
-
         const requestUrl = `${apiUrls.searchServiceApi}/projects?${params.toString()}`;
-        console.log("Project Search Request URL:", requestUrl); // Log the URL
-    
+        /*debug*/ //console.log("Project Search Request URL:", requestUrl); // Log the URL
         return this.http.get<Project[]>(requestUrl);
     }
 }

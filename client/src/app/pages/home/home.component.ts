@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { FreelancerCardComponent } from '../../components/freelancer-card/freelancer-card.component';
 import { ProjectCardComponent } from '../../components/project-card/project-card.component';
@@ -13,20 +12,17 @@ import { SearchBarComponent } from '../../components/search-bar/search-bar.compo
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, ProjectCardComponent, FreelancerCardComponent, SearchBarComponent],
+  imports: [CommonModule, RouterModule, ProjectCardComponent, FreelancerCardComponent, SearchBarComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export default class HomeComponent {
-  fb = inject(FormBuilder);
   router = inject(Router);
   authService = inject(AuthService);
   projectService = inject(ProjectService);
   profileService = inject(ProfileService);
   searchService = inject(SearchService);
   searchStateService = inject(SearchStateService);
-
-  homeForm !: FormGroup;
 
   projects: Project[] = [];
   freelancers: Profile[] = []; // Create an array to hold freelancer profiles
@@ -56,7 +52,6 @@ export default class HomeComponent {
         }
       }
     });
-  
   }
 
   handleFiltersChanged(filters: any) {
