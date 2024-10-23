@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { SearchService, SearchStateService } from '../../services/search.service';
 import { Project, ProjectService } from '../../services/project.service';
 import { Profile } from '../../services/profile.service';
@@ -24,6 +24,8 @@ export class SearchBarComponent {
   searchStateService = inject(SearchStateService); 
   skillService = inject(SkillService);
   specializationService = inject(SpecializationService);
+
+  @Output() filtersChanged = new EventEmitter<any>(); // Add an output event
   
   selectedSkillControl = new FormControl('');
   selectedSkillIds: string[] = []; 
@@ -85,6 +87,16 @@ export class SearchBarComponent {
         console.log("skills: ", this.selectedSkillIds);
       });
     }
+
+    // Emit the event with the selected filter values
+    this.filtersChanged.emit({
+      searchTerm: this.searchTerm,
+      skillIds: this.selectedSkillIds,
+      experienceLevel: this.selectedExperienceLevel,
+      specializationId: this.selectedSpecializationId,
+      projectCategoryId: this.selectedProjectCategoryId
+    });
+  
     
   }
   

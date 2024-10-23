@@ -34,58 +34,138 @@ export default class HomeComponent {
   isLoading = true; // default is true
   userRole: string | null = null;
 
+  selectedSkillIds: string[] = []; 
+  selectedExperienceLevel: string = ''; 
+  selectedSpecializationId: string = '';
+  selectedProjectCategoryId: string = ''; 
+
   ngOnInit(): void {
     this.userRole = this.authService.getUserRole();
+  
     this.searchStateService.searchTerm$.subscribe(searchTerm => {
-      if (searchTerm.trim() === '') {
+      this.handleSearch(searchTerm); // Call handleSearch with the search term
+    });
+  
+    this.searchStateService.isSearchBarVisible$.subscribe(isVisible => {
+      if (isVisible && !this.isLoading) { // Only load initial data if not already loading
+        this.isLoading = true;
+      } else if (!isVisible) {
+        this.isLoading = true; // Set isLoading to true before loading initial data
         if (this.userRole === 'CLIENT') {
           this.loadFreelancers();
         } else if (this.userRole === 'FREELANCER') {
           this.loadProjects();
-        } else {
-          console.log("invalid role");
-        }
-      } else {
-        // Perform search based on the search term
-        this.isLoading = true;
-        if (this.userRole === 'CLIENT') {
-          this.searchService.searchFreelancers(searchTerm).subscribe({
-            next: (freelancers) => {
-              /*debug*/ console.log("Freelancers from search:", freelancers); // Log the response
-              this.freelancers = (freelancers.data || []).map((freelancer: { userId: any; }) => {
-                return { 
-                  ...freelancer, 
-                  userId: { _id: freelancer.userId } // Create the userId object
-                };
-              });
-              this.isLoading = false;
-            },
-            error: (err) => {
-              console.error("Error searching freelancers:", err);
-              this.isLoading = false;
-            }
-          });
-        } else if (this.userRole === 'FREELANCER') {
-          this.searchService.searchProjects(searchTerm).subscribe({
-            next: (projects) => {
-              console.log("Projects from search:", projects); // Log the response
-              this.projects = projects.data || []; // Handle potential missing 'data'
-              this.isLoading = false;
-            },
-            error: (err) => {
-              console.error("Error searching projects:", err);
-              this.isLoading = false;
-            }
-          });
         }
       }
     });
+  
+    // Load initial data when the component is initialized
+    if (this.userRole === 'CLIENT') {
+      this.loadFreelancers();
+    } else if (this.userRole === 'FREELANCER') {
+      this.loadProjects();
+    }
+  }
+  
+  handleSearch(searchTerm: string) {
+    if (searchTerm.trim() === '') {
+      return; // Don't perform a search if the term is empty
+    }
+  
+    this.isLoading = true;
+    if (this.userRole === 'CLIENT') {
+      this.searchService.searchFreelancers(
+        searchTerm, 
+        this.selectedSkillIds, 
+        this.selectedExperienceLevel,
+        this.selectedSpecializationId
+      ).subscribe({
+        next: (freelancers) => {
+          console.log("Freelancers from search:", freelancers);
+          this.freelancers = (freelancers.data || []).map((freelancer: { userId: any; }) => {
+            return {
+              ...freelancer,
+              userId: { _id: freelancer.userId }
+            };
+          });
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error("Error searching freelancers:", err);
+          this.isLoading = false;
+        }
+      });
+    } else if (this.userRole === 'FREELANCER') {
+      this.searchService.searchProjects(
+        searchTerm, 
+        this.selectedProjectCategoryId, 
+        this.selectedSkillIds
+      ).subscribe({
+        next: (projects) => {
+          console.log("Projects from search:", projects);
+          this.projects = projects.data || [];
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error("Error searching projects:", err);
+          this.isLoading = false;
+        }
+      });
+    }
+  }
+
+  handleFiltersChanged(filters: any) {
+    this.isLoading = true;
+    this.selectedSkillIds = filters.skillIds;
+    this.selectedExperienceLevel = filters.experienceLevel;
+    this.selectedSpecializationId = filters.specializationId;
+    this.selectedProjectCategoryId = filters.projectCategoryId;
+  
+    if (this.userRole === 'CLIENT') {
+      this.searchService.searchFreelancers(
+        filters.searchTerm,
+        filters.skillIds,
+        filters.experienceLevel,
+        filters.specializationId
+      ).subscribe({
+        next: (freelancers) => {
+          console.log("Freelancers from search:", freelancers);
+          this.freelancers = (freelancers.data || []).map((freelancer: { userId: any; }) => {
+            return {
+              ...freelancer,
+              userId: { _id: freelancer.userId }
+            };
+          });
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error("Error searching freelancers:", err);
+          this.isLoading = false;
+        }
+      });
+    } else if (this.userRole === 'FREELANCER') {
+      this.searchService.searchProjects(
+        filters.searchTerm,
+        filters.projectCategoryId,
+        filters.skillIds
+      ).subscribe({
+        next: (projects) => {
+          console.log("Projects from search:", projects);
+          this.projects = projects.data || [];
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error("Error searching projects:", err);
+          this.isLoading = false;
+        }
+      });
+    }
   }
 
   loadProjects() {
     this.projectService.getPostedProjects().subscribe({
       next: (res) => {
-        console.log("Initial projects:", res); 
+        console.log("Initial projects:", res);
         this.projects = res.data || [];
         this.isLoading = false;
       },
@@ -99,7 +179,7 @@ export default class HomeComponent {
   loadFreelancers() {
     this.profileService.getAllFreelancerProfiles().subscribe({
       next: (res) => {
-        console.log("Initial freelancers:", res); 
+        console.log("Initial freelancers:", res);
         this.freelancers = res.data || [];
         this.isLoading = false;
       },
