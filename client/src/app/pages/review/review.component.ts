@@ -98,12 +98,12 @@ export default class ReviewComponent {
     } else if (this.userRole === 'FREELANCER') {
       /*debug*/ console.log(this.reviewClientForm.value); 
     }
-    console.log("review sent!"); 
+    alert("review sent!"); 
     this.router.navigate(['/manage-project']);
   }
 
   cancelReview() {
-    console.log("review cancelled!"); 
+    alert("review cancelled!"); 
     this.router.navigate(['/manage-project']);
   }
 }

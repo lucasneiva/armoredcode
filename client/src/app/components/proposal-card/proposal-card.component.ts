@@ -5,6 +5,7 @@ import { ProjectService } from '../../services/project.service';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { ProposalService } from '../../services/proposal.service';
+import { switchMap, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-proposal-card',
@@ -132,58 +133,47 @@ export class ProposalCardComponent {
 
   acceptProposal() {
     const proposalId = this.proposal._id;
+    const projectId = this.proposal.projectId;
+    const freelancerId = this.proposal.freelancerId;
+  
     if (confirm("Are you sure you want to accept this proposal?")) {
-      this.proposalService.acceptProposal(proposalId).subscribe(
-        (response) => {
+      this.proposalService.acceptProposal(proposalId).pipe(
+        switchMap((response) => {
           if (response.success) {
             console.log('Proposal accepted successfully');
-
             // 1. Update proposal status in the UI
             this.proposal.status = 'ACCEPTED';
-
             // 2. Update the project with freelancer ID
-            const projectId = this.proposal.projectId;
-            const freelancerId = this.proposal.freelancerId;
-
-            this.projectService.updateProjectFreelancer(projectId, freelancerId).subscribe(
-              (updateResponse) => {
-                if (updateResponse.success) {
-                  console.log('Project freelancerId updated successfully');
-                  // You might want to update the project object in your component if needed:
-                  this.project.freelancerId = freelancerId; 
-                } else {
-                  console.error('Error updating project freelancerId:', updateResponse.message);
-                  // Handle error (e.g., show an error message to the user)
-                }
-              },
-              (error) => {
-                console.error('Error updating project freelancerId:', error);
-                // Handle error (e.g., show an error message to the user)
-              }
-            );
-            this.projectService.updateProjectStatus(projectId, 'IN-PROGRESS').subscribe(
-              (updateStatusResponse) => {
-                if (updateStatusResponse.success) {
-                  console.log('Project status updated successfully');
-                  this.project.projectStatus = 'IN-PROGRESS'; // Update status in the component
-                } else {
-                  console.error('Error updating project status:', updateStatusResponse.message);
-                  // Handle error (e.g., show an error message to the user)
-                }
-              },
-              (error) => {
-                console.error('Error updating project status:', error);
-                // Handle error (e.g., show an error message to the user)
-              }
-            );
-            window.location.reload();
-
+            return this.projectService.updateProjectFreelancer(projectId, freelancerId);
           } else {
-            console.error('Error accepting proposal:', response.message);
+            return throwError(() => new Error('Error accepting proposal'));
+          }
+        }),
+        switchMap((updateResponse) => {
+          if (updateResponse.success) {
+            console.log('Project freelancerId updated successfully');
+            // Update the project object in your component
+            this.project.freelancerId = freelancerId;
+            // 3. Update project status
+            return this.projectService.updateProjectStatus(projectId, 'IN-PROGRESS');
+          } else {
+            return throwError(() => new Error('Error updating project freelancerId'));
+          }
+        })
+      ).subscribe(
+        (updateStatusResponse) => {
+          if (updateStatusResponse.success) {
+            console.log('Project status updated successfully');
+            this.project.projectStatus = 'IN-PROGRESS'; // Update status in the component
+            window.location.reload();
+          } else {
+            console.error('Error updating project status:', updateStatusResponse.message);
+            // Handle error (e.g., show an error message to the user)
           }
         },
         (error) => {
-          console.error('Error accepting proposal:', error);
+          console.error('Error during update process:', error);
+          // Handle error (e.g., show an error message to the user)
         }
       );
     }
