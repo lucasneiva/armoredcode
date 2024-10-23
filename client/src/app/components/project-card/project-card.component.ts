@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { Proposal, ProposalService } from '../../services/proposal.service';
 import { ProposalCardComponent } from '../proposal-card/proposal-card.component'; // Importe aqui
 import { ProjectDetailsComponent } from '../project-details/project-details.component';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-project-card',
@@ -36,6 +37,8 @@ export class ProjectCardComponent {
   skills: string[] = [];
   proposals: Proposal[] = [];
 
+  isLoading = true; // Add a loading flag
+
   ngOnInit() {
     this.userRole = this.authService.getUserRole();
     if (this.userRole === 'CLIENT' || this.userRole === 'FREELANCER') {
@@ -55,22 +58,27 @@ export class ProjectCardComponent {
       (response) => {
         if (response.success) {
           this.detailedProject = response.data;
-          /*debug*/ //console.log('Full Project Data:', this.detailedProject);
           const skillIds = this.detailedProject.skillIds;
           const creatorId = this.detailedProject.clientId._id;
           const projectCategoryId = this.detailedProject.projectCategoryId._id;
           this.loadProjectCategoryName(projectCategoryId);
-          this.loadCreatorName(creatorId);
-          this.loadSkills(skillIds);
-          if (this.userRole == "CLIENT") {
-            this.loadProposals();
-          }
+
+          // Load creator name and then other details and skills
+          this.loadCreatorName(creatorId).subscribe(() => {
+            this.loadSkills(skillIds);
+            if (this.userRole == "CLIENT") {
+              this.loadProposals();
+            }
+            this.isLoading = false; // Set loading to false after creator name is loaded
+          });
         } else {
           console.error('Failed to retrieve project details:', response.message);
+          this.isLoading = false; // Set loading to false on error as well
         }
       },
       (error) => {
         console.error('Error fetching project details:', error);
+        this.isLoading = false; // Set loading to false on error as well
       }
     );
   }
@@ -92,17 +100,15 @@ export class ProjectCardComponent {
   }
 
   loadCreatorName(userId: string) {
-    this.userService.getUser(userId).subscribe(
-      (response) => {
+    return this.userService.getUser(userId).pipe( // Return the observable
+      map((response) => {
         if (response.success) {
           this.creatorName = response.data.username;
         } else {
           console.error('Failed to retrieve creator details:', response.message);
         }
-      },
-      (error) => {
-        console.error('Error fetching creator details:', error);
-      });
+      })
+    );
   }
 
   loadSkills(skillIds: any[]) {
