@@ -17,7 +17,7 @@ const RatingSchema = new Schema({
         ref: 'User', 
         required: true,
     },
-    evaluatorType: { // Indicar se quem avaliou é cliente ou freelancer
+    evaluatorType: { 
         type: String,
         enum: ['CLIENT', 'FREELANCER'],
         required: true,
@@ -40,29 +40,38 @@ const RatingSchema = new Schema({
         max: 5,
         required: true,
     },
-    costBenefit: { // Apenas para avaliações de clientes
+    // Conditional Fields (based on evaluatedId's role)
+    costBenefit: { 
         type: Number,
         min: 1,
         max: 5,
-        required: function() { return this.evaluatorType === 'CLIENT'; }, 
+        required: function() {
+            return this.evaluatedId.role === 'FREELANCER'; 
+        }
     },
-    clarityDescription: { // Apenas para avaliações de freelancers
+    clarityDescription: { 
         type: Number,
         min: 1,
         max: 5,
-        required: function() { return this.evaluatorType === 'FREELANCER'; }, 
+        required: function() { 
+            return this.evaluatedId.role === 'CLIENT';
+        } 
     },
-    payments: { // Apenas para avaliações de freelancers
+    payments: { 
         type: Number,
         min: 1,
         max: 5,
-        required: function() { return this.evaluatorType === 'FREELANCER'; }, 
+        required: function() { 
+            return this.evaluatedId.role === 'FREELANCER';
+        } 
     },
-    feedback: { // Apenas para avaliações de freelancers
+    feedback: { 
         type: Number,
         min: 1,
         max: 5,
-        required: function() { return this.evaluatorType === 'FREELANCER'; }, 
+        required: function() { 
+            return this.evaluatedId.role === 'FREELANCER'; 
+        } 
     },
     comment: {
         type: String,
