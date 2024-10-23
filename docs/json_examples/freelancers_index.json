@@ -10,15 +10,6 @@
             },
             "profileSummary": {
                 "type": "string"
-            },
-            "skillIds": {
-                "type": "objectId"
-            },
-            "experienceLevel": {
-                "type": "string"
-            },
-            "specializationId": {
-                "type": "objectId"
             }
         }
     }

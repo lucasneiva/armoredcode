@@ -10,9 +10,6 @@
             },
             "projectCategoryId": {
                 "type": "objectId"
-            },
-            "skillIds": {
-                "type": "objectId"
             }
         }
     }

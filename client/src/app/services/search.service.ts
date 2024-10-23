@@ -36,7 +36,7 @@ export class SearchService {
             params = params.append('q', searchTerm);
         }
         if (skillIds && skillIds.length > 0) {
-            params = params.append('skillIds', skillIds.join(','));
+            params = params.append('skillIds[]', skillIds.join(','));
         }
         if (experienceLevel) {
             params = params.append('experienceLevel', experienceLevel);
