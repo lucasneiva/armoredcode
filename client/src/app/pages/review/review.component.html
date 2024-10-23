@@ -1,3 +1,4 @@
+<!-- review.component.html -->
 <div class="grid justify-center align-middle min-h-screen h-fit">
 
     <ng-container *ngIf="isLoading">
@@ -12,11 +13,11 @@
             <!--client part start-->
             <ng-container *ngIf="userRole === 'CLIENT'">
                 <h2>Avaliando o Freelancer <span>{{ reviewedUsername }}</span></h2>
-                <form [formGroup]="reviewClientForm">
+                <form [formGroup]="reviewTheFreelancerForm">
                     <div class="lg:flex max-lg:grid">
                         <div class="rating-group">
-                            <label for="professionalism">Profissionalismo:</label>
-                            <app-star-rating formControlName="professionalism"></app-star-rating>
+                            <label for="workQuality">Qualidade do Trabalho:</label>
+                            <app-star-rating formControlName="workQuality"></app-star-rating>
                         </div>
                         <div class="rating-group">
                             <label for="communication">Comunicação:</label>
@@ -25,21 +26,34 @@
                     </div>
                     <div class="lg:flex max-lg:grid">
                         <div class="rating-group">
+                            <label for="professionalism">Profissionalismo:</label>
+                            <app-star-rating formControlName="professionalism"></app-star-rating>
+                        </div>
+                        <div class="rating-group">
                             <label for="costBenefit">Custo Benefício:</label>
                             <app-star-rating formControlName="costBenefit"></app-star-rating>
                         </div>
+                    </div>
+                    <div class="lg:flex max-lg:grid">
                         <div class="rating-group">
-                            <label for="quality">Qualidade do Trabalho:</label>
-                            <app-star-rating formControlName="quality"></app-star-rating>
+                            <label for="payments">Pagamentos:</label>
+                            <app-star-rating formControlName="payments"></app-star-rating>
+                        </div>
+                        <div class="rating-group">
+                            <label for="feedback">Feedback:</label>
+                            <app-star-rating formControlName="feedback"></app-star-rating>
                         </div>
                     </div>
                     <div class="comment-group">
                         <label for="comment">Comentário:</label>
-                        <textarea formControlName="comment" id="comment" rows="4" placeholder="Escreva o seu comentário sobre o freelancer aqui."
+                        <textarea formControlName="comment" id="comment" rows="4" 
+                            placeholder="Escreva o seu comentário sobre o freelancer aqui."
                             class="shadow-md"></textarea>
                     </div>
                     <div class="buttons-row space-x-4">
-                        <button type="submit" (click)="submitReview()" [disabled]="!reviewFreelancerForm.valid">Enviar Avaliação</button>
+                        <button type="submit" (click)="submitReview()" [disabled]="!reviewTheFreelancerForm.valid">
+                            Enviar Avaliação
+                        </button>
                         <button type="button" (click)="cancelReview()">Cancelar Avaliação</button>
                     </div>
                 </form>
@@ -48,11 +62,11 @@
             <!--freelancer part start-->
             <ng-container *ngIf="userRole === 'FREELANCER'">
                 <h2>Avaliando o Cliente <span>{{ reviewedUsername }}</span></h2>
-                <form [formGroup]="reviewFreelancerForm">
+                <form [formGroup]="reviewTheClientForm">
                     <div class="lg:flex max-lg:grid">
                         <div class="rating-group">
-                            <label for="professionalism">Profissionalismo:</label>
-                            <app-star-rating formControlName="professionalism"></app-star-rating>
+                            <label for="workQuality">Qualidade do Trabalho:</label>
+                            <app-star-rating formControlName="workQuality"></app-star-rating>
                         </div>
                         <div class="rating-group">
                             <label for="communication">Comunicação:</label>
@@ -61,25 +75,24 @@
                     </div>  
                     <div class="lg:flex max-lg:grid">
                         <div class="rating-group">
-                            <label for="clarity">Clareza nas descrições:</label>
-                            <app-star-rating formControlName="clarity"></app-star-rating>
+                            <label for="professionalism">Profissionalismo:</label>
+                            <app-star-rating formControlName="professionalism"></app-star-rating>
                         </div>
                         <div class="rating-group">
-                            <label for="payments">Pagamentos:</label>
-                            <app-star-rating formControlName="payments"></app-star-rating>
+                            <label for="clarityDescription">Clareza nas descrições:</label>
+                            <app-star-rating formControlName="clarityDescription"></app-star-rating>
                         </div>
-                    </div>
-                    <div class="rating-group">
-                        <label for="feedback">Feedback:</label>
-                        <app-star-rating formControlName="feedback"></app-star-rating>
                     </div>
                     <div class="comment-group">
                         <label for="comment">Comentário:</label>
-                        <textarea formControlName="comment" id="comment" rows="4" placeholder="Escreva o seu comentário sobre o cliente aqui."
+                        <textarea formControlName="comment" id="comment" rows="4" 
+                            placeholder="Escreva o seu comentário sobre o cliente aqui."
                             class="shadow-md"></textarea>
                     </div>
                     <div class="buttons-row space-x-4">
-                        <button type="submit" (click)="submitReview()" [disabled]="!reviewClientForm.valid">Enviar Avaliação</button>
+                        <button type="submit" (click)="submitReview()" [disabled]="!reviewTheClientForm.valid">
+                            Enviar Avaliação
+                        </button>
                         <button type="button" (click)="cancelReview()">Cancelar Avaliação</button>
                     </div>
                 </form>

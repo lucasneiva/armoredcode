@@ -107,9 +107,9 @@ export class ProjectDetailsComponent {
   
   goToReview() {
     if (this.userRole === 'CLIENT' && this.detailedProject.freelancerId) {
-      this.router.navigate(['../review', this.detailedProject.freelancerId._id], { relativeTo: this.route });
+      this.router.navigate(['../review',this.project._id ,this.detailedProject.freelancerId._id], { relativeTo: this.route });
     } else if (this.userRole === 'FREELANCER') {
-      this.router.navigate(['../review', this.detailedProject.clientId._id], { relativeTo: this.route });
+      this.router.navigate(['../review',this.project._id ,this.detailedProject.clientId._id], { relativeTo: this.route });
     }
   }
 

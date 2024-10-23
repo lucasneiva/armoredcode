@@ -36,20 +36,20 @@ export class ProjectService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
-      withCredentials: true 
+      withCredentials: true
     };
     const updateData = { freelancerId: freelancerId };
     return this.http.patch<any>(`${apiUrls.projectServiceApi}/${projectId}`, updateData, httpOptions);
   }
 
   updateProjectStatus(projectId: string, newStatus: string): Observable<any> {
-    const httpOptions = { 
+    const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
       withCredentials: true
     };
-    const updateData = { projectStatus: newStatus }; 
+    const updateData = { projectStatus: newStatus };
     return this.http.patch<any>(`${apiUrls.projectServiceApi}/${projectId}`, updateData, httpOptions);
   }
 
@@ -58,7 +58,7 @@ export class ProjectService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
-      withCredentials: true 
+      withCredentials: true
     };
     return this.http.delete<any>(`${apiUrls.projectServiceApi}/${projectId}`, httpOptions);
   }
@@ -114,7 +114,7 @@ export class ProjectService {
       }),
       withCredentials: true
     };
-    return this.http.get<any>(`${apiUrls.projectServiceApi}`, httpOptions); 
+    return this.http.get<any>(`${apiUrls.projectServiceApi}`, httpOptions);
   }
 
   getUserPostedProjects(userId: string | null): Observable<any> {
@@ -126,7 +126,84 @@ export class ProjectService {
     };
     return this.http.get<any>(`${apiUrls.projectServiceApi}/user/posted`, httpOptions); // Changed route
   }
+
+  createRating(ratingData: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true
+    };
+    return this.http.post<any>(`${apiUrls.projectServiceApi}/ratings`, ratingData, httpOptions);
+  }
+
+  getProjectRatings(projectId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true
+    };
+    return this.http.get<any>(`${apiUrls.projectServiceApi}/projects/${projectId}/ratings`, httpOptions);
+  }
 }
+export type Rating = {
+  _id?: string;
+  projectId: string;
+  evaluatorId?: string | null;
+  evaluatedId?: string | null;
+  evaluatorType:  "CLIENT" | "FREELANCER";
+  
+  workQuality: {
+    type: Number,
+    min: 1,
+    max: 5,
+    required: true,
+  },
+  communication: {
+    type: Number,
+    min: 1,
+    max: 5,
+    required: true,
+  },
+  professionalism: {
+    type: Number,
+    min: 1,
+    max: 5,
+    required: true,
+  },
+  // Conditional Fields (based on evaluatedId's role)
+  //FREELANCER
+  costBenefit?: {
+    type: Number,
+    min: 1,
+    max: 5,
+  },
+  //CLIENT
+  clarityDescription?: {
+    type: Number,
+    min: 1,
+    max: 5,
+  },
+  //FREELANCER
+  payments?: {
+    type: Number,
+    min: 1,
+    max: 5,
+
+  },
+  //FREELANCER
+  feedback?: {
+    type: Number,
+    min: 1,
+    max: 5,
+
+  },
+  comment?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+};
+
 // Define a clear interface for your API response
 export type ProjectResponse = {
   success: boolean;
@@ -137,13 +214,13 @@ export type ProjectResponse = {
     isPosted: boolean;
     project: Project | null;
   };
-}
+};
 
 export type ProjectData = {
   isDraft: boolean;
   isPosted: boolean;
   project: Project | null;
-}
+};
 
 // Type for Location (replace with your actual locationModel structure)
 type Location = {
