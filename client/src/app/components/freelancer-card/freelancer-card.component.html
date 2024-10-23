@@ -6,7 +6,9 @@
       <h3 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
         {{ freelancer?.firstName }} {{ freelancer?.lastName }}
       </h3>
-      <div *ngIf="freelancer?.image; else defaultImage" class="w-16 h-16 rounded-full overflow-hidden"></div>
+      <img *ngIf="freelancer?.profileImage; else defaultImage" 
+        [src]="freelancer.profileImage" alt="Profile Logo" type="image/png"
+        class="flex justify-center items-center w-16 h-16 bg-gray-400 rounded-full overflow-hidden">
       <ng-template #defaultImage>
         <img src="../../../assets/images/prf_icon.png" class="w-16 h-16 p-1 bg-gray-400 rounded-full overflow-hidden">
       </ng-template>
