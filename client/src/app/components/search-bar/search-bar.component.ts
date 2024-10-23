@@ -68,36 +68,62 @@ export class SearchBarComponent {
         this.selectedSkillIds, 
         this.selectedExperienceLevel, 
         this.selectedSpecializationId 
-      ).subscribe(results => {
-        console.log("term: ",this.searchTerm);
-        console.log("XP Level: ",this.selectedExperienceLevel);
-        console.log("Specialization: ",this.selectedSpecializationId);
-        console.log("skills: ", this.selectedSkillIds);
+      ).subscribe({ // Use object for subscribe options
+        next: (results) => {
+          /*debug*//*
+          console.log("term: ", this.searchTerm);
+          console.log("XP Level: ", this.selectedExperienceLevel);
+          console.log("Specialization: ", this.selectedSpecializationId);
+          console.log("skills: ", this.selectedSkillIds);
+          */
+  
+          this.freelancers = results.data || []; // Update freelancers with results
+        },
+        error: (err) => {
+          console.error("Error searching freelancers:", err);
+        },
+        complete: () => { 
+          // Emit filtersChanged event after the request is complete
+          this.filtersChanged.emit({
+            searchTerm: this.searchTerm,
+            skillIds: this.selectedSkillIds,
+            experienceLevel: this.selectedExperienceLevel,
+            specializationId: this.selectedSpecializationId,
+            projectCategoryId: this.selectedProjectCategoryId
+          });
+        }
       });
     }
-
+  
     if (this.userRole === 'FREELANCER') {
       this.searchService.searchProjects(
         this.searchTerm, 
         this.selectedProjectCategoryId,
         this.selectedSkillIds
-      ).subscribe(results => {
-        console.log("term: ",this.searchTerm);
-        console.log("Project category: ",this.selectedProjectCategoryId);
-        console.log("skills: ", this.selectedSkillIds);
+      ).subscribe({ // Use object for subscribe options
+        next: (results) => {
+          /*debug*//*
+          console.log("term: ", this.searchTerm);
+          console.log("Project category: ", this.selectedProjectCategoryId);
+          console.log("skills: ", this.selectedSkillIds);
+          */
+          this.projects = results.data || []; // Update projects with results
+        },
+        error: (err) => {
+          console.error("Error searching projects:", err);
+        },
+        complete: () => {
+          // Emit filtersChanged event after the request is complete
+          this.filtersChanged.emit({
+            searchTerm: this.searchTerm,
+            skillIds: this.selectedSkillIds,
+            experienceLevel: this.selectedExperienceLevel,
+            specializationId: this.selectedSpecializationId,
+            projectCategoryId: this.selectedProjectCategoryId
+          });
+        }
       });
     }
-
-    // Emit the event with the selected filter values
-    this.filtersChanged.emit({
-      searchTerm: this.searchTerm,
-      skillIds: this.selectedSkillIds,
-      experienceLevel: this.selectedExperienceLevel,
-      specializationId: this.selectedSpecializationId,
-      projectCategoryId: this.selectedProjectCategoryId
-    });
-  
-    
   }
   
   searchOnEnterKey(event: Event) {
@@ -108,8 +134,7 @@ export class SearchBarComponent {
   }
 
   closeSearchBar() {
-    this.searchStateService.hideSearchBar(); 
-    this.searchTerm = ''; // Clear the search term
+    this.searchStateService.hideSearchBar();
   }
 
   fetchSpecializations() {
