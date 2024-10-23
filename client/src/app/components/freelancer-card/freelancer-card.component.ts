@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 import { NotificationService } from '../../services/notification.service';
 import { ProjectListComponent } from '../project-list/project-list.component';
 import { Project } from '../../services/project.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-freelancer-card',
@@ -34,6 +35,7 @@ export class FreelancerCardComponent {
   showDetails = false; // Flag to control showing details
   showProjectList = false;
   selectedProject: Project | null = null;
+  isLoading = true; // Add a loading flag
 
   freelancerName = '';
   specializationName: string = '';
@@ -58,25 +60,32 @@ export class FreelancerCardComponent {
   }
 
   loadFreelancerDetails() {
-    const freelancerId = this.freelancer.userId._id; // Access the _id property
-    /*debug*/ //console.log("Freelancer data:", this.freelancer);
+    const freelancerId = this.freelancer.userId._id; 
     this.profileService.getProfile(freelancerId).subscribe(
       (response) => {
         if (response.success) {
           this.detailedfreelancer = response.data.profile;
-          /*debug*/ //console.log("Detailed Freelancer:", this.detailedfreelancer);
-          const skillIds = this.detailedfreelancer.skillIds || []; // Handle null skillIds
+          const skillIds = this.detailedfreelancer.skillIds || []; 
           this.loadFreelancerName(freelancerId);
           this.loadSkills(skillIds);
+  
           if (this.detailedfreelancer.specializationId) {
-            this.loadSpecializationName(this.detailedfreelancer.specializationId);
+            // Load specialization name and then set isLoading to false
+            this.loadSpecializationName(this.detailedfreelancer.specializationId).subscribe(() => {
+              this.isLoading = false; 
+            });
+          } else {
+            // If no specialization, set isLoading to false directly
+            this.isLoading = false;
           }
         } else {
           console.error('Failed to retrieve freelancer details:', response.message);
+          this.isLoading = false; // Set loading to false on error as well
         }
       },
       (error) => {
         console.error('Error fetching freelancer details:', error);
+        this.isLoading = false; // Set loading to false on error as well
       }
     );
   }
@@ -96,18 +105,15 @@ export class FreelancerCardComponent {
   }
 
   loadSpecializationName(specializationId: string) {
-    this.specializationService.getSpecializationById(specializationId).subscribe(
-      (response) => {
+    // Make loadSpecializationName return the observable
+    return this.specializationService.getSpecializationById(specializationId).pipe(
+      map((response) => {
         if (response.success) {
-          this.specializationName = response.data.specializationName; // Assuming the name is in the 'specializationName' field
-          /*debug*/ //console.log(this.specializationName);
+          this.specializationName = response.data.specializationName;
         } else {
           console.error('Failed to retrieve specialization details:', response.message);
         }
-      },
-      (error) => {
-        console.error('Error fetching specialization details:', error);
-      }
+      })
     );
   }
 
