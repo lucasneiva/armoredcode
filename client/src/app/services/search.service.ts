@@ -36,7 +36,9 @@ export class SearchService {
             params = params.append('q', searchTerm);
         }
         if (skillIds && skillIds.length > 0) {
-            params = params.append('skillIds[]', skillIds.join(','));
+            skillIds.forEach(skillId => {
+                params = params.append('skillIds[]', skillId); // Append [] for each skillId
+            });
         }
         if (experienceLevel) {
             params = params.append('experienceLevel', experienceLevel);
@@ -45,7 +47,10 @@ export class SearchService {
             params = params.append('specializationId', specializationId);
         }
 
-        return this.http.get<Profile[]>(`${apiUrls.searchServiceApi}/freelancers`, { params });
+        const requestUrl = `${apiUrls.searchServiceApi}/freelancers?${params.toString()}`;
+        console.log("Freelancer Search Request URL:", requestUrl); // Log the URL
+
+        return this.http.get<Profile[]>(requestUrl);
     }
 
     searchProjects(searchTerm?: string, categoryId?: string, skillIds?: string[]): Observable<any> {
@@ -57,9 +62,14 @@ export class SearchService {
             params = params.append('category', categoryId);
         }
         if (skillIds && skillIds.length > 0) {
-            params = params.append('skillIds', skillIds.join(','));
+            skillIds.forEach(skillId => {
+                params = params.append('skillIds[]', skillId); // Append [] for each skillId
+            });
         }
 
-        return this.http.get<Project[]>(`${apiUrls.searchServiceApi}/projects`, { params });
+        const requestUrl = `${apiUrls.searchServiceApi}/projects?${params.toString()}`;
+        console.log("Project Search Request URL:", requestUrl); // Log the URL
+    
+        return this.http.get<Project[]>(requestUrl);
     }
 }
