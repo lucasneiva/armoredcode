@@ -37,18 +37,13 @@ export default class HomeComponent {
 
   ngOnInit(): void {
     this.userRole = this.authService.getUserRole();
-  
-    this.searchStateService.searchTerm$.subscribe(searchTerm => {
-      this.handleSearch(searchTerm); // Call handleSearch with the search term
-    });
-
-    this.searchStateService.isSearchBarVisible$.subscribe(isVisible => {
-      if (isVisible) {
-        
-      } else if (!isVisible){
-        
-      }
-    });
+    if (this.userRole === 'CLIENT') {
+      this.loadFreelancers();
+    } else if (this.userRole === 'FREELANCER') {
+      this.loadProjects();
+    } else{
+      console.log("invalid role!")
+    }
   }
 
   handleFiltersChanged(filters: any) {
