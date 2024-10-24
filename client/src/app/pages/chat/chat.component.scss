@@ -1,4 +1,4 @@
-.chat-container{
+.chat-container {
     display: flex;
     background-color: white;
     border-width: 0.25rem;
@@ -20,20 +20,40 @@
         height: 88svh;
     }
 
-    .contacts-col{
+    .contacts-col {
         display: block;
         background-color: rgb(209, 209, 209);
         height: 100%;
+
         width: 24vw;
         z-index: 20;
-        overflow-x: hidden; overflow-y: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
 
-        .contact-container{
+        .contact-nav {
+            display: flex;
+            width: 100%;
+            height: 6.5rem;
+            background-color: rgb(238, 238, 238);
+
+            span{
+                font-weight: 700;
+                font-size: 1.5rem;
+                line-height: 1.75rem;
+                margin: auto;
+            }
+        }
+
+        .contact-container {
             display: block;
             background-color: white;
             padding: 1rem;
 
-            .message-date{
+            &:hover{
+                background-color: rgb(245, 245, 245);
+            }
+
+            .message-date {
                 display: flex;
                 justify-content: end;
                 text-align: end;
@@ -44,14 +64,15 @@
                 font-size: 0.85rem;
                 line-height: 1.25rem;
             }
-            .contact-content{
+
+            .contact-content {
                 display: flex;
                 justify-content: flex-start;
                 vertical-align: middle;
                 align-items: center;
                 padding: 1.5rem 0rem;
 
-                .contact-image{
+                .contact-image {
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -61,13 +82,14 @@
                     overflow: hidden;
                 }
 
-                div{
-                    .contact-name{
+                div {
+                    .contact-name {
                         font-weight: 700;
                         font-size: 1.15rem;
                         line-height: 1.75rem;
                     }
-                    .contact-last-message{
+
+                    .contact-last-message {
                         color: rgb(75 85 99);
                         overflow: hidden;
                         display: -webkit-box;
@@ -79,11 +101,26 @@
             }
         }
     }
-    .chat-box{
+
+    .chat-box {
         display: block;
-        background-color: whitesmoke;
+        background-color: white;
         height: 100%;
         width: 100%;
         z-index: 10;
+
+        .chat-nav{
+            display: flex;
+            width: 100%;
+            height: 6.5rem;
+            background-color: rgb(238, 238, 238);
+
+            span{
+                font-weight: 700;
+                font-size: 1.5rem;
+                line-height: 1.75rem;
+                margin: auto;
+            }
+        }
     }
 }
