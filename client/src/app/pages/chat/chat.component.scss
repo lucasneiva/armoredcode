@@ -21,6 +21,8 @@
 
     .contacts-col {
         display: block;
+        position: absolute;
+        top: 0px; bottom: 0px;
         background-color: rgb(209, 209, 209);
         border-width:0rem 0.25rem;
 
@@ -29,6 +31,10 @@
         z-index: 20;
         overflow-x: hidden;
         overflow-y: auto;
+
+        @media not all and (min-width: 1024px) {
+            width: 100%;
+        }
 
         .contact-nav {
             display: flex;
@@ -104,6 +110,8 @@
 
     .chat-box {
         display: block;
+        position: absolute;
+        top: 0px; bottom: 0px;
         background-color: white;
         height: 100%;
         width: 100%;
@@ -121,6 +129,16 @@
                 font-size: 1.5rem;
                 line-height: 1.75rem;
                 margin: auto;
+            }
+
+            button {
+                border-radius: 0.5rem;
+                font-weight: 700;
+                width: fit-content;
+                height: fit-content;
+                margin: 0.5rem;
+                padding: 0.5rem 0.75rem;
+                background-color: rgba(0, 0, 0, 0.125);
             }
         }
 

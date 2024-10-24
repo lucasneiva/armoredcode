@@ -21,6 +21,9 @@ export default class ChatComponent implements OnInit, OnDestroy {
   route = inject(ActivatedRoute);
   authService = inject(AuthService);
 
+  showChatBox = false; // Add this property
+  showContacts = true; // Add this property
+
   channelId: string | null = null;
   chatChannel: any; // Replace 'any' with the actual ChatChannel type from your service
   messages: any[] = []; // Replace 'any' with the actual Message type from your service
@@ -65,6 +68,17 @@ export default class ChatComponent implements OnInit, OnDestroy {
         this.newMessageForm.reset(); 
       });
     }
+  }
+
+  openChat() { // Add this method to open the chat box | contactId: string
+    this.showChatBox = true;
+    this.showContacts =  false;
+    // ... (logic to load chat with contactId - similar to loadChatChannel) 
+  }
+
+  closeChat() { // Add this method to close the chat box (if needed)
+    this.showChatBox = false;
+    this.showContacts =  true;
   }
 
   get currentUser() {
