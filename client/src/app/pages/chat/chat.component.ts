@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { ChatService } from '../../services/chat.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-chat',
@@ -10,5 +12,9 @@ import { RouterModule } from '@angular/router';
   styleUrl: './chat.component.scss'
 })
 export default class ChatComponent {
+  fb = inject(FormBuilder);
+  router = inject(Router);
+  chatService = inject(ChatService);
 
+  
 }
