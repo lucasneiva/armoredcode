@@ -1,6 +1,123 @@
 <div class="grid justify-center align-middle min-h-screen h-fit">
-    <div class="my-auto">
-        <p>chat works!</p>
+    <!--chat structure start-->
+    <div class="chat-container">
+        <!--contacts structure start-->
+        <div class="contacts-col space-y-0.5">
+            <!--contact template-->
+            <div class="contact-container">
+                <span class="message-date"> 11 minutes ago</span>
+                <div class="contact-content">
+                    <img type="image/png"
+                        class="contact-image bg-gray-400">
+                    <div class="grid mx-4 overflow-clip">
+                        <h2 class="contact-name">Margito</h2>
+                        <p class="contact-last-message">Foul tarnished!</p>
+                    </div>
+                </div>
+            </div>
+            <!--contact template-->
+            <!--contact template-->
+            <div class="contact-container">
+                <span class="message-date"> 11 minutes ago</span>
+                <div class="contact-content">
+                    <img type="image/png"
+                        class="contact-image bg-gray-400">
+                    <div class="grid mx-4 overflow-clip">
+                        <h2 class="contact-name">Margito</h2>
+                        <p class="contact-last-message">Foul tarnished!</p>
+                    </div>
+                </div>
+            </div>
+            <!--contact template-->
+            <!--contact template-->
+            <div class="contact-container">
+                <span class="message-date"> 11 minutes ago</span>
+                <div class="contact-content">
+                    <img type="image/png"
+                        class="contact-image bg-gray-400">
+                    <div class="grid mx-4 overflow-clip">
+                        <h2 class="contact-name">Margito</h2>
+                        <p class="contact-last-message">Foul tarnished!</p>
+                    </div>
+                </div>
+            </div>
+            <!--contact template-->
+            <!--contact template-->
+            <div class="contact-container">
+                <span class="message-date"> 11 minutes ago</span>
+                <div class="contact-content">
+                    <img type="image/png"
+                        class="contact-image bg-gray-400">
+                    <div class="grid mx-4 overflow-clip">
+                        <h2 class="contact-name">Margito</h2>
+                        <p class="contact-last-message">Foul tarnished!</p>
+                    </div>
+                </div>
+            </div>
+            <!--contact template-->
+            <!--contact template-->
+            <div class="contact-container">
+                <span class="message-date"> 11 minutes ago</span>
+                <div class="contact-content">
+                    <img type="image/png"
+                        class="contact-image bg-gray-400">
+                    <div class="grid mx-4 overflow-clip">
+                        <h2 class="contact-name">Margito</h2>
+                        <p class="contact-last-message">Foul tarnished!</p>
+                    </div>
+                </div>
+            </div>
+            <!--contact template-->
+            <!--contact template-->
+            <div class="contact-container">
+                <span class="message-date"> 11 minutes ago</span>
+                <div class="contact-content">
+                    <img type="image/png"
+                        class="contact-image bg-gray-400">
+                    <div class="grid mx-4 overflow-clip">
+                        <h2 class="contact-name">Margito</h2>
+                        <p class="contact-last-message">Foul tarnished!</p>
+                    </div>
+                </div>
+            </div>
+            <!--contact template-->
+        </div>
+        <!--contacts structure end-->
+        <!--chat box structure start-->
+        <div class="chat-box">
+
+        </div>
+        <!--chat box structure end-->
     </div>
+    <!--chat structure end-->
 </div>
 
+<!--
+    <div *ngIf="chatChannel" class="flex flex-col h-screen">
+        <div class="bg-gray-200 p-4">
+          <h2>Chat for Project: {{ chatChannel.projectId }}</h2>
+        </div>
+      
+        <div class="flex-grow overflow-y-auto p-4">
+          <div class="messages-container">
+            <div *ngFor="let message of messages"
+                 [class.message-sent]="message.senderId === currentUser"
+                 [class.message-received]="message.senderId !== currentUser">
+              <div class="message-bubble">
+                <span>{{ message.content }}</span>
+                <span class="timestamp text-xs text-gray-500">{{ message.timestamp | date:'short' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="bg-gray-100 p-4">
+          <form [formGroup]="newMessageForm" (ngSubmit)="sendMessage()" class="flex items-center">
+            <input type="text" formControlName="content" placeholder="Type a message" class="flex-grow border rounded-lg p-2 mr-2">
+            <button type="submit" [disabled]="!newMessageForm.valid" class="bg-blue-500 text-white rounded-lg p-2 px-4">
+              <i class="fa fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    -->

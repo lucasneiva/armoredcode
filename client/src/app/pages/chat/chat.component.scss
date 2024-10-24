@@ -1,0 +1,89 @@
+.chat-container{
+    display: flex;
+    background-color: white;
+    border-width: 0.25rem;
+    border-color: lightgray;
+
+    width: 98vw;
+    height: 85svh;
+
+    position: relative;
+
+    top: 7rem;
+    bottom: 0rem;
+
+    overflow: hidden;
+
+    @media not all and (min-width: 1024px) {
+        top: 6.5rem;
+        width: 95vw;
+        height: 88svh;
+    }
+
+    .contacts-col{
+        display: block;
+        background-color: rgb(209, 209, 209);
+        height: 100%;
+        width: 24vw;
+        z-index: 20;
+        overflow-x: hidden; overflow-y: auto;
+
+        .contact-container{
+            display: block;
+            background-color: white;
+            padding: 1rem;
+
+            .message-date{
+                display: flex;
+                justify-content: end;
+                text-align: end;
+                padding: 0rem 1rem 0rem 0rem;
+
+                color: rgb(75 85 99);
+
+                font-size: 0.85rem;
+                line-height: 1.25rem;
+            }
+            .contact-content{
+                display: flex;
+                justify-content: flex-start;
+                vertical-align: middle;
+                align-items: center;
+                padding: 1.5rem 0rem;
+
+                .contact-image{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    min-height: 2.75rem;
+                    min-width: 2.75rem;
+                    border-radius: 100%;
+                    overflow: hidden;
+                }
+
+                div{
+                    .contact-name{
+                        font-weight: 700;
+                        font-size: 1.15rem;
+                        line-height: 1.75rem;
+                    }
+                    .contact-last-message{
+                        color: rgb(75 85 99);
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 1;
+                        line-clamp: 1;
+                    }
+                }
+            }
+        }
+    }
+    .chat-box{
+        display: block;
+        background-color: whitesmoke;
+        height: 100%;
+        width: 100%;
+        z-index: 10;
+    }
+}
