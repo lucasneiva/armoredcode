@@ -45,7 +45,8 @@
                         <span *ngIf="userRole == 'FREELANCER'" routerLink="/manage-invite"
                             class="cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Convites</span>
 
-                        <span class="cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Mensagens</span>
+                        <span routerLink="/chat"
+                            class="cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Mensagens</span>
 
                         <span routerLink="/manage-project"
                             class=" cursor-pointer max-lg:w-10 hover:underline hover:text-indigo-200">Projetos</span>
@@ -80,7 +81,7 @@
         <li *ngIf="userRole == 'FREELANCER'" class="icon-line" routerLink="/manage-invite">
             <i class="icon fa fa-envelope"></i>
         </li>
-        <li class="icon-line">
+        <li class="icon-line" routerLink="/chat">
             <i class="icon fa fa-comments-o"></i>
         </li>
         <li class="icon-line" routerLink="/manage-project">

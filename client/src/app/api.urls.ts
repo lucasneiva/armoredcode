@@ -10,4 +10,5 @@ export const apiUrls = {
     userServiceApi: 'http://localhost:8800/api/users',
     notificationServiceApi: 'http://localhost:8800/api/notifications',
     searchServiceApi: 'http://localhost:8800/api/search',
+    chatServiceApi: 'http://localhost:8800/api/chat',
 }
