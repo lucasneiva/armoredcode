@@ -2,7 +2,7 @@
     <!--chat structure start-->
     <div class="chat-container">
         <!--contacts structure start-->
-        <div class="contacts-col space-y-0.5 border-2 border-red-500">
+        <div class="contacts-col space-y-0.5">
             <nav class="contact-nav">
                 <span> Meus Contatos</span>
             </nav>
@@ -81,10 +81,80 @@
         </div>
         <!--contacts structure end-->
         <!--chat box structure start-->
-        <div class="chat-box border-2 border-red-500">
+        <div class="chat-box">
             <nav class="chat-nav">
                 <span> Conversa com o Usuário</span>
             </nav>
+            <div class="chat-content">
+                <!--placeholders-->
+                <div class="message-sent shadow-md">
+                    <div class="message-buble">
+                        <p class="message">
+                            Lorem ipsum dolor sit amet. A quidem quod ut rerum esse qui galisum similique ad corporis possimus At fuga eligendi vel molestias voluptatem ex velit animi. 
+                        </p>
+                        <span class="message-date">11:53</span>
+                    </div>
+                </div>
+                <!--placeholders-->
+                <!--placeholders-->
+                <div class="message-received shadow-md">
+                    <div class="message-buble">
+                        <p class="message">
+                            Lorem ipsum dolor sit amet. A quidem quod ut rerum esse qui galisum similique ad corporis possimus At fuga eligendi vel molestias voluptatem ex velit animi. 
+                        </p>
+                        <span class="message-date">12:49</span>
+                    </div>
+                </div>
+                <!--placeholders-->
+                <!--placeholders-->
+                <div class="message-sent shadow-md">
+                    <div class="message-buble">
+                        <p class="message">
+                            Lorem ipsum dolor sit amet. A quidem quod ut rerum esse qui galisum similique ad corporis possimus At fuga eligendi vel molestias voluptatem ex velit animi. 
+                        </p>
+                        <span class="message-date">11:53</span>
+                    </div>
+                </div>
+                <!--placeholders-->
+                <!--placeholders-->
+                <div class="message-received shadow-md">
+                    <div class="message-buble">
+                        <p class="message">
+                            Lorem ipsum dolor sit amet. A quidem quod ut rerum esse qui galisum similique ad corporis possimus At fuga eligendi vel molestias voluptatem ex velit animi. 
+                        </p>
+                        <span class="message-date">12:49</span>
+                    </div>
+                </div>
+                <!--placeholders-->
+                <!--placeholders-->
+                <div class="message-sent shadow-md">
+                    <div class="message-buble">
+                        <p class="message">
+                            Lorem ipsum dolor sit amet. A quidem quod ut rerum esse qui galisum similique ad corporis possimus At fuga eligendi vel molestias voluptatem ex velit animi. 
+                        </p>
+                        <span class="message-date">11:53</span>
+                    </div>
+                </div>
+                <!--placeholders-->
+                <!--placeholders-->
+                <div class="message-received shadow-md">
+                    <div class="message-buble">
+                        <p class="message">
+                            Lorem ipsum dolor sit amet. A quidem quod ut rerum esse qui galisum similique ad corporis possimus At fuga eligendi vel molestias voluptatem ex velit animi. 
+                        </p>
+                        <span class="message-date">12:49</span>
+                    </div>
+                </div>
+                <!--placeholders-->
+            </div>
+            <div class="chat-inputs-row">
+                <div class="message-input-container">
+                    <input class="chat-message-input" placeholder="Digite aqui sua Mensagem" type="text">
+                    <button type="submit" [disabled]="!newMessageForm.valid" class="send-message-button">
+                        <i class="fa fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
         </div>
         <!--chat box structure end-->
     </div>

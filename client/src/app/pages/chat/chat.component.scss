@@ -8,7 +8,6 @@
     height: 85svh;
 
     position: relative;
-
     top: 7rem;
     bottom: 0rem;
 
@@ -23,8 +22,9 @@
     .contacts-col {
         display: block;
         background-color: rgb(209, 209, 209);
-        height: 100%;
+        border-width:0rem 0.25rem;
 
+        height: 100%;
         width: 24vw;
         z-index: 20;
         overflow-x: hidden;
@@ -36,7 +36,7 @@
             height: 6.5rem;
             background-color: rgb(238, 238, 238);
 
-            span{
+            span {
                 font-weight: 700;
                 font-size: 1.5rem;
                 line-height: 1.75rem;
@@ -49,7 +49,7 @@
             background-color: white;
             padding: 1rem;
 
-            &:hover{
+            &:hover {
                 background-color: rgb(245, 245, 245);
             }
 
@@ -109,18 +109,122 @@
         width: 100%;
         z-index: 10;
 
-        .chat-nav{
+        .chat-nav {
             display: flex;
             width: 100%;
             height: 6.5rem;
             background-color: rgb(238, 238, 238);
+            border-bottom-width: 0.25rem;
 
-            span{
+            span {
                 font-weight: 700;
                 font-size: 1.5rem;
                 line-height: 1.75rem;
                 margin: auto;
             }
+        }
+
+        .chat-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 75%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 0.75rem;
+
+            .message-sent {
+                align-self: flex-end;
+                background-color: rgb(59 130 246);
+                color: white;
+                margin: 1rem 0.33rem;
+                width: fit-content;
+                height: fit-content;
+                border-radius: 0.5rem;
+                max-width: 66%;
+
+                .message-buble {
+                    display: block;
+                    padding: 0.85rem;
+
+                    .message {
+                        text-align: left;
+                        text-wrap: wrap;
+                    }
+
+                    .message-date {
+                        display: flex;
+                        justify-content: end;
+                        text-align: right;
+                        padding: 0rem 1rem;
+
+                        font-size: 0.85rem;
+                        line-height: 1.25rem;
+                    }
+                }
+            }
+
+            .message-received {
+                align-self: flex-start;
+                background-color: #e7eded;
+                color: black;
+                margin: 1rem 0.33rem;
+                width: fit-content;
+                height: fit-content;
+                border-radius: 0.5rem;
+                max-width: 66%;
+
+                .message-buble {
+                    display: block;
+                    padding: 0.85rem;
+
+                    .message {
+                        text-align: left;
+                        text-wrap: wrap;
+                    }
+
+                    .message-date {
+                        display: flex;
+                        justify-content: end;
+                        text-align: right;
+                        padding: 0rem 1rem;
+
+                        font-size: 0.85rem;
+                        line-height: 1.25rem;
+                    }
+                }
+            }
+        }
+
+        .chat-inputs-row {
+            display: flex;
+            justify-content: center;
+            justify-items: center;
+            width: 100%;
+            height: 6.5rem;
+            background-color: rgb(238, 238, 238);
+            border-top-width: 0.25rem;
+
+            .message-input-container {
+                display: flex;
+                padding: 0rem 1rem;
+                margin: auto;
+
+                .chat-message-input {
+                    display: flex;
+                    width: 40vw;
+                    padding: 1rem 1.5rem;
+                    border-radius: 2.5rem 0rem 0rem 2.5rem;
+                }
+
+                .send-message-button {
+                    background-color: rgb(59 130 246);
+                    color: white;
+                    border-radius: 0rem 2.5rem 2.5rem 0rem;
+                    padding: 0.5rem 1.5rem;
+                }
+            }
+
         }
     }
 }
