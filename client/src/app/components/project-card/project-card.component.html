@@ -61,10 +61,11 @@
         <!--grid start-->
         <ng-container *ngIf="proposals.length > 0; else noProposals">
           <div class="grid justify-start gap-4">
-            <!--app-project-card-->
+            <!--app-proposal-card-->
             <ng-container *ngFor="let proposal of proposals">
               <app-proposal-card [proposal]="proposal"></app-proposal-card>
             </ng-container>
+            <!--app-proposal-card-->
           </div>
         </ng-container>
         <!--grid end-->
@@ -81,14 +82,25 @@
 
   <!--freelancer part start-->
   <ng-container *ngIf="userRole == 'FREELANCER'">
-    <div *ngIf="!isLoading && creatorName; else loadingTemplate" (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{ 
+    <div *ngIf="!isLoading && creatorName && skills; else loadingTemplate" (click)="toggleDetails()"
+      style="top: calc(1rem * 1);" [ngClass]="{ 
         'bg-stone-100': project.projectStatus === 'COMPLETED',
         'bg-white': project.projectStatus !== 'COMPLETED'
-      }" class="sticky w-full lg:max-w-lg max-lg:max-w-md lg:h-56 max-lg:h-64 p-8 space-y-4 mx-auto z-10 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
+      }"
+      class="sticky w-full lg:max-w-lg max-lg:max-w-md lg:h-56 max-lg:h-64 p-8 space-y-4 mx-auto z-10 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
       <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900">
         <span class="block pb-2 text-nowrap text-ellipsis overflow-hidden line-clamp-1">{{project.projectTitle}}</span>
         <span *ngIf="creatorName" class="block text-sm text-gray-700">{{creatorName}}</span>
       </h2>
+      <ng-container *ngIf="skills.length > 0; else noSkills">
+        <span *ngFor="let skill of skills; let i = index">
+          {{ skill }}
+          <span *ngIf="i < skills.length - 1">, </span>
+        </span>
+      </ng-container>
+      <ng-template #noSkills>
+        <p>Sem Habilidades providas pelo Autor</p>
+      </ng-template>
       <p class="line-clamp-4 overflow-hidden" *ngIf="detailedProject?.projectDescription; else noDescripition">
         {{detailedProject.projectDescription}}
       </p>
