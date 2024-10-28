@@ -18,7 +18,9 @@ export default class RegisterComponent implements OnInit{
   authService = inject(AuthService);
   router = inject(Router);
   route: ActivatedRoute = inject(ActivatedRoute); 
+
   registerForm !: FormGroup;
+  showPassword = false;
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -33,6 +35,10 @@ export default class RegisterComponent implements OnInit{
   private getRoleFromQueryParams(): string {
     const role = this.route.snapshot.queryParams['role'];
     return role ? role : 'CLIENT'; // Default to 'CLIENT' if no role is provided
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
   register(){

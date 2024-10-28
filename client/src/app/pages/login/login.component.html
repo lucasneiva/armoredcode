@@ -3,21 +3,25 @@
         <h3>Login</h3>
         <form [formGroup]="loginForm">
             <div class="input-row">
-                <input formControlName="email" name="email" type="text" placeholder="Email"
-                    class="text-input">
+                <input formControlName="email" name="email" type="text" placeholder="Email" class="text-input">
                 <span *ngIf="loginForm.hasError('required', 'email') && loginForm.controls['email'].dirty"
                     class="text-red-500">*Email é requerido</span>
                 <span *ngIf="loginForm.hasError('email', 'email')" class="text-red-500">*Email é invalido</span>
             </div>
             <div class="input-row">
-                <input formControlName="password" name="password" type="password" placeholder="Senha"
-                    class="text-input">
+                <input formControlName="password" name="password" [type]="showPassword ? 'text' : 'password'"
+                    placeholder="Senha" class="text-input">
+                    <span class="input-icon-row">
+                        <button type="button" class="show-password-btn" (click)="togglePasswordVisibility()">
+                            <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                        </button>
+                    </span>
                 <span *ngIf="loginForm.hasError('required', 'password') && loginForm.controls['password'].dirty"
                     class="text-red-500">*Senha é requerida</span>
             </div>
             <div class="input-row">
                 <button [disabled]="loginForm.invalid" [class.disabled]="loginForm.invalid" (click)="login()"
-                class="form-btn">Enviar</button>
+                    class="form-btn">Enviar</button>
             </div>
         </form>
         <div class="link-row">
