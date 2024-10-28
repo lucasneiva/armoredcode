@@ -21,7 +21,7 @@
         .project-title{
             font-weight: 700;
             font-size: 1.5rem /* 24px */;
-            line-height: 1;
+            line-height: 1.5;
             margin-bottom: 0.85rem;
 
             overflow: hidden;
@@ -48,7 +48,11 @@
     }
     .skills-row{
         display: flex;
-        padding: 1rem 0rem;
+        flex-wrap: wrap;
+        justify-content: start;
+        overflow: hidden;
+        max-height: 4rem;
+        margin: auto;
 
         .skill{
             display: flex;
@@ -56,6 +60,7 @@
             color: white;
             border-radius: 2.5rem;
             padding: 0.25rem 0.75rem;
+            margin: 1rem 1rem 1rem 0rem;
             text-wrap: nowrap;
         }
     }
