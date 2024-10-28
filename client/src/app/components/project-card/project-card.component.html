@@ -80,7 +80,7 @@
 
   <!--freelancer part start-->
   <ng-container *ngIf="userRole == 'FREELANCER'">
-    <div *ngIf="!isLoading && creatorName && skills; else loadingTemplate" (click)="toggleDetails()"
+    <div *ngIf="!isLoading && creatorName && detailedProject.skillIds; else loadingTemplate" (click)="toggleDetails()"
       style="top: calc(1rem * 1);" class="project-card shadow-lg"
       [ngClass]="{ 
         'bg-stone-100': project.projectStatus === 'COMPLETED',
@@ -100,11 +100,13 @@
         </div>  
       </ng-container>
       <ng-template #noSkills>
-        <p>Sem Habilidades providas pelo Autor</p>
+        <div class="p-5">
+          <p>Sem Habilidades providas pelo Autor</p>
+        </div>
       </ng-template>
 
       <p class="project-description" *ngIf="detailedProject?.projectDescription; else noDescripition">
-        {{detailedProject.projectDescription}}
+        {{project.projectDescription}}
       </p>
       <ng-template #noDescripition>
         <p>Sem Descrição provida pelo Autor</p>
