@@ -21,8 +21,10 @@ export default class ResetComponent implements OnInit {
   authService = inject(AuthService);
 
   resetForm !: FormGroup;
-
   token!: string;
+
+  showPassword = false;
+  showConfirmPassword = false;
 
   ngOnInit(): void {
     this.resetForm = this.fb.group({
@@ -37,6 +39,14 @@ export default class ResetComponent implements OnInit {
       this.token = val['token']; //mudar sempre q mudar no routes
       console.log(this.token);
     })
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
+  toggleConfirmPasswordVisibility() {
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
 
   reset() {

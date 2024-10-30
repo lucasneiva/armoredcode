@@ -1,0 +1,166 @@
+<div class="grid justify-center align-middle min-h-screen h-fit">
+    <!--chat structure start-->
+    <div class="chat-container">
+        <!--contacts structure start-->
+        <div class="contacts-col space-y-0.5 transition-transform duration-300 ease-in-out" 
+        [class.-translate-x-full]="showChatBox" [class.translate-x-50%]="showContacts">
+            <nav class="contact-nav">
+                <span> Meus Contatos</span>
+            </nav>
+            <!--contact template-->
+            <div class="contact-container" (click)="openChat()">
+                <span class="message-date"> 11 minutes ago</span>
+                <div class="contact-content">
+                    <img type="image/png" class="contact-image bg-gray-400">
+                    <div class="grid mx-4 overflow-clip">
+                        <h2 class="contact-name">Margito</h2>
+                        <p class="contact-last-message">Foul tarnished!</p>
+                    </div>
+                </div>
+            </div>
+            <!--contact template-->
+            <!--contact template-->
+            <div class="contact-container" (click)="openChat()">
+                <span class="message-date"> 11 minutes ago</span>
+                <div class="contact-content">
+                    <img type="image/png" class="contact-image bg-gray-400">
+                    <div class="grid mx-4 overflow-clip">
+                        <h2 class="contact-name">Margito</h2>
+                        <p class="contact-last-message">Foul tarnished!</p>
+                    </div>
+                </div>
+            </div>
+            <!--contact template-->
+            <!--contact template-->
+            <div class="contact-container" (click)="openChat()">
+                <span class="message-date"> 11 minutes ago</span>
+                <div class="contact-content">
+                    <img type="image/png" class="contact-image bg-gray-400">
+                    <div class="grid mx-4 overflow-clip">
+                        <h2 class="contact-name">Margito</h2>
+                        <p class="contact-last-message">Foul tarnished!</p>
+                    </div>
+                </div>
+            </div>
+            <!--contact template-->
+            <!--contact template-->
+            <div class="contact-container" (click)="openChat()">
+                <span class="message-date"> 11 minutes ago</span>
+                <div class="contact-content">
+                    <img type="image/png" class="contact-image bg-gray-400">
+                    <div class="grid mx-4 overflow-clip">
+                        <h2 class="contact-name">Margito</h2>
+                        <p class="contact-last-message">Foul tarnished!</p>
+                    </div>
+                </div>
+            </div>
+            <!--contact template-->
+            <!--contact template-->
+            <div class="contact-container" (click)="openChat()">
+                <span class="message-date"> 11 minutes ago</span>
+                <div class="contact-content">
+                    <img type="image/png" class="contact-image bg-gray-400">
+                    <div class="grid mx-4 overflow-clip">
+                        <h2 class="contact-name">Margito</h2>
+                        <p class="contact-last-message">Foul tarnished!</p>
+                    </div>
+                </div>
+            </div>
+            <!--contact template-->
+            <!--contact template-->
+            <div class="contact-container" (click)="openChat()">
+                <span class="message-date"> 11 minutes ago</span>
+                <div class="contact-content">
+                    <img type="image/png" class="contact-image bg-gray-400">
+                    <div class="grid mx-4 overflow-clip">
+                        <h2 class="contact-name">Margito</h2>
+                        <p class="contact-last-message">Foul tarnished!</p>
+                    </div>
+                </div>
+            </div>
+            <!--contact template-->
+        </div>
+        <!--contacts structure end-->
+        <!--chat box structure start-->
+        <div class="chat-box absolute transition-opacity duration-300 ease-in-out"
+        [class.opacity-0]="!showChatBox" [class.opacity-100]="showChatBox">
+            <nav class="chat-nav">
+                <span> Conversa com o Usuário</span>
+                <button class="lg:hidden" (click)="closeChat()"> < </button>
+                <button class="max-lg:hidden" (click)="closeChat()"> Voltar </button>
+            </nav>
+            <div class="chat-content">
+                <!--placeholders-->
+                <div class="message-sent shadow-md">
+                    <div class="message-buble">
+                        <p class="message">
+                            Lorem ipsum dolor sit amet. A quidem quod ut rerum esse qui galisum similique ad corporis possimus At fuga eligendi vel molestias voluptatem ex velit animi. 
+                        </p>
+                        <span class="message-date">11:53</span>
+                    </div>
+                </div>
+                <!--placeholders-->
+                <!--placeholders-->
+                <div class="message-received shadow-md">
+                    <div class="message-buble">
+                        <p class="message">
+                            Lorem ipsum dolor sit amet. A quidem quod ut rerum esse qui galisum similique ad corporis possimus At fuga eligendi vel molestias voluptatem ex velit animi. 
+                        </p>
+                        <span class="message-date">12:49</span>
+                    </div>
+                </div>
+                <!--placeholders-->
+                <!--placeholders-->
+                <div class="message-sent shadow-md">
+                    <div class="message-buble">
+                        <p class="message">
+                            Lorem ipsum dolor sit amet. A quidem quod ut rerum esse qui galisum similique ad corporis possimus At fuga eligendi vel molestias voluptatem ex velit animi. 
+                        </p>
+                        <span class="message-date">11:53</span>
+                    </div>
+                </div>
+                <!--placeholders-->
+                <!--placeholders-->
+                <div class="message-received shadow-md">
+                    <div class="message-buble">
+                        <p class="message">
+                            Lorem ipsum dolor sit amet. A quidem quod ut rerum esse qui galisum similique ad corporis possimus At fuga eligendi vel molestias voluptatem ex velit animi. 
+                        </p>
+                        <span class="message-date">12:49</span>
+                    </div>
+                </div>
+                <!--placeholders-->
+                <!--placeholders-->
+                <div class="message-sent shadow-md">
+                    <div class="message-buble">
+                        <p class="message">
+                            Lorem ipsum dolor sit amet. A quidem quod ut rerum esse qui galisum similique ad corporis possimus At fuga eligendi vel molestias voluptatem ex velit animi. 
+                        </p>
+                        <span class="message-date">11:53</span>
+                    </div>
+                </div>
+                <!--placeholders-->
+                <!--placeholders-->
+                <div class="message-received shadow-md">
+                    <div class="message-buble">
+                        <p class="message">
+                            Lorem ipsum dolor sit amet. A quidem quod ut rerum esse qui galisum similique ad corporis possimus At fuga eligendi vel molestias voluptatem ex velit animi. 
+                        </p>
+                        <span class="message-date">12:49</span>
+                    </div>
+                </div>
+                <!--placeholders-->
+            </div>
+            <div class="chat-inputs-row">
+                <div class="message-input-container">
+                    <input class="chat-message-input" placeholder="Digite aqui sua Mensagem" type="text">
+                    <button type="submit" [disabled]="!newMessageForm.valid" class="send-message-button">
+                        <i class="fa fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!--chat box structure end-->
+    </div>
+    <!--chat structure end-->
+</div>

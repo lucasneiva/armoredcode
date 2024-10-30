@@ -5,15 +5,25 @@
             <span>Por favor use uma Senha Forte.</span>
 
             <div class="input-row">
-                <input formControlName="password" type="password" name="password" id="password" placeholder="Senha"
-                    class="text-input" required>
+                <input formControlName="password" name="password" [type]="showPassword ? 'text' : 'password'"
+                    placeholder="Nova senha" class="text-input">
+                    <span class="input-icon-row">
+                        <button type="button" class="show-password-btn" (click)="togglePasswordVisibility()">
+                            <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                        </button>
+                    </span>
                 <span *ngIf="resetForm.hasError('required', 'password') && resetForm.controls['password'].dirty"
                     class="text-red-500">*Senha é requerida</span>
             </div>
 
             <div class="input-row">
-                <input formControlName="confirmPassword" type="password" name="comfirmPassword" id="comfirmPassword"
-                    class="text-input" placeholder="Confirmar Senha" required>
+                <input formControlName="confirmPassword" name="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'"
+                    placeholder="Confirmar nova senha" class="text-input">
+                    <span class="input-icon-row">
+                        <button type="button" class="show-password-btn" (click)="toggleConfirmPasswordVisibility()">
+                            <i class="fa" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                        </button>
+                    </span>
                 <span *ngIf="resetForm.hasError('required', 'password') && resetForm.controls['password'].dirty"
                     class="text-red-500">*Confirmar Senha é requerida</span>
                 <span *ngIf="resetForm.hasError('confirmPasswordValidator', 'confirmPassword')"

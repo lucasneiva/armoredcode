@@ -12,7 +12,13 @@
                 <span *ngIf="registerForm.hasError('email', 'email')" class="text-red-500">*Email é invalido</span>
             </div>
             <div class="input-row">
-                <input formControlName="password" name="password" type="password" placeholder="Senha" class="text-input">
+                <input formControlName="password" name="password" [type]="showPassword ? 'text' : 'password'"
+                    placeholder="Senha" class="text-input">
+                    <span class="input-icon-row">
+                        <button type="button" class="show-password-btn" (click)="togglePasswordVisibility()">
+                            <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                        </button>
+                    </span>
                 <span *ngIf="registerForm.hasError('required', 'password') && registerForm.controls['password'].dirty" class="text-red-500">*Senha é requerida</span>
             </div>
             

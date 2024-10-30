@@ -41,6 +41,22 @@
                     border-color: rgba(128, 128, 128, 0.5);
                     border-radius: 0.25rem /* 4px */;
                 }
+                .input-icon-row{
+                    position: absolute;
+                    align-self: flex-end;
+                    margin: 0.2rem 0.1rem 0rem 0rem;
+
+                    .show-password-btn{
+                        display: block;
+                        background-color: white;
+                        width: fit-content;
+                        padding: 0.33rem 0.5rem;
+                        z-index: 10;
+                        overflow: hidden;
+                        
+                        i{ color: gray;}
+                    }
+                }  
             }
             .form-btn{
                 padding: 0.5rem /* 8px */;

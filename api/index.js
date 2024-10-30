@@ -4,35 +4,34 @@ import dotenv from "dotenv";
 import cors from 'cors';
 
 // Routes
-import proposalRoutes from "./routes/proposalRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
-import projectRoutes from "./routes/projectRoutes.js";
-import profileRoutes from "./routes/profileRoutes.js";
-import skillRoutes from "./routes/skillRoutes.js"
-import projectCategoryRoutes from "./routes/projectCategoryRoutes.js";
-import industryRoutes from "./routes/industryRoutes.js";
-import specializationRoutes from "./routes/specializationRoutes.js";
+import chatChannelRoutes from "./routes/chatChannelRoutes.js";
 import cookieParser from "cookie-parser";
+import industryRoutes from "./routes/industryRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
+import profileRoutes from "./routes/profileRoutes.js";
+import projectCategoryRoutes from "./routes/projectCategoryRoutes.js";
+import projectRoutes from "./routes/projectRoutes.js";
+import proposalRoutes from "./routes/proposalRoutes.js";
 import searchRoutes from "./routes/searchRoutes.js";
+import skillRoutes from "./routes/skillRoutes.js"
+import specializationRoutes from "./routes/specializationRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 // Fixtures
-import seedProjectCategories from './fixtures/projectCategoryFixture.js';
-import seedIndustries from './fixtures/industryFixture.js';
-import seedSpecializations from './fixtures/specializationFixture.js';
-import seedSkills from './fixtures/skillFixture.js';
-import seedUsers from "./fixtures/userFixture.js";
-import seedProposals from "./fixtures/proposalFixture.js";
-import seedFreelancerProfiles from "./fixtures/freelancerProfileFixture.js";
 import seedClientProfiles from "./fixtures/clientProfileFixture.js";
-import seedProjects from "./fixtures/projectFixture.js";
+import seedFreelancerProfiles from "./fixtures/freelancerProfileFixture.js";
+import seedIndustries from './fixtures/industryFixture.js';
 import seedNotifications from "./fixtures/notificationFixture.js";
+import seedProjectCategories from './fixtures/projectCategoryFixture.js';
+import seedProjects from "./fixtures/projectFixture.js";
+import seedProposals from "./fixtures/proposalFixture.js";
+import seedSkills from './fixtures/skillFixture.js';
+import seedSpecializations from './fixtures/specializationFixture.js';
+import seedUsers from "./fixtures/userFixture.js";
 
 const app = express();
 dotenv.config();
-
-
 app.use( express.json() );
 app.use( cookieParser() );
 
@@ -48,17 +47,19 @@ app.use( cors( {
 
 // Routes
 app.use( "/api/auth", authRoutes );
-app.use( "/api/users", userRoutes );
-app.use( "/api/projects", projectRoutes );
-app.use( "/api/profiles", profileRoutes );
-app.use( "/api/proposals", proposalRoutes );
-app.use( "/api/skills", skillRoutes );
-app.use( "/api/project-categories", projectCategoryRoutes );
-app.use( "/api/specializations", specializationRoutes );
+app.use( "/api/chat", chatChannelRoutes );
 app.use( "/api/industries", industryRoutes );
 app.use( "/api/notifications", notificationRoutes );
+app.use( "/api/profiles", profileRoutes );
+app.use( "/api/project-categories", projectCategoryRoutes );
+app.use( "/api/projects", projectRoutes );
+app.use( "/api/proposals", proposalRoutes );
 app.use( "/api/search", searchRoutes );
+app.use( "/api/skills", skillRoutes );
+app.use( "/api/specializations", specializationRoutes );
+app.use( "/api/users", userRoutes );
 
+//database connection
 const connectMongoDB = async () => {
     try {
         await mongoose.connect( process.env.MONGO_URL );
@@ -83,7 +84,6 @@ app.use( ( obj, req, res, next ) => {
 } );
 
 app.listen( 8800, async () => {
-
     try {
         console.log( `Server started on port 8800!` );
 
@@ -91,10 +91,10 @@ app.listen( 8800, async () => {
 
         console.log( `Connected to MongoDB database!` );
 
-        //
+        // Seed fetchable objects
         await seedProjectCategories();
         await seedIndustries();
-        seedSpecializations();
+        await seedSpecializations();
         await seedSkills();
 
         // Seed Users First!
@@ -104,9 +104,9 @@ app.listen( 8800, async () => {
         await seedFreelancerProfiles();
         await seedClientProfiles();
 
+        //seed objects with dependencies
         await seedProjects(50);
         await seedProposals();
-        //
         await seedNotifications();
 
 

@@ -1,0 +1,93 @@
+.project-card{
+    width: 100%;
+    max-width: 30rem;
+    max-height: 22rem;
+    padding: 2rem;
+    margin-left: auto; margin-right: auto;
+    border-width: 1px;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+
+    &:hover{
+        background-color: rgb(246, 246, 246);
+    }
+
+    .card-header{
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+
+        .project-title{
+            font-weight: 700;
+            font-size: 1.5rem /* 24px */;
+            line-height: 1.5;
+            margin-bottom: 0.85rem;
+
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            line-clamp: 1;
+
+            color: rgb(17 24 39);
+        }
+        .creator-name{
+            font-weight: 500;
+            font-size: 1.05rem;
+            line-height: 1;
+
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            line-clamp: 1;
+
+            color: rgb(75 85 99);
+        }
+    }
+    .skills-row{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: start;
+        overflow: hidden;
+        max-height: 4rem;
+        margin: auto;
+
+        .skill{
+            display: flex;
+            background-color: rgb(59 130 246);
+            color: white;
+            border-radius: 2.5rem;
+            padding: 0.25rem 0.75rem;
+            margin: 1rem 1rem 1rem 0rem;
+            text-wrap: nowrap;
+        }
+    }
+    .project-description{
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+    }
+}
+
+.placeholder-card{
+    width: 100%;
+    padding: 2rem;
+    margin-left: auto; margin-right: auto;
+    border-width: 1px;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+
+    @media (min-width: 1024px) {
+        min-width: 30rem;
+        min-height: 16rem;
+    }
+
+    @media not all and (min-width: 1024px) {
+        min-width: 25rem;
+        min-height: 15.5rem;
+    }
+}

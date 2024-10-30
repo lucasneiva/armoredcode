@@ -21,6 +21,7 @@ export default class LoginComponent {
   loginForm !: FormGroup;
 
   profile: Profile | null = null;
+  showPassword = false;
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -30,7 +31,10 @@ export default class LoginComponent {
     );
   }
 
-  //modified
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
   login() {
     this.authService.loginService(this.loginForm.value)
       .subscribe({

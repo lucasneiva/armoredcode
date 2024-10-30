@@ -62,10 +62,10 @@ export class ProjectCardComponent {
           const creatorId = this.detailedProject.clientId._id;
           const projectCategoryId = this.detailedProject.projectCategoryId._id;
           this.loadProjectCategoryName(projectCategoryId);
+          this.loadSkills(skillIds);
 
           // Load creator name and then other details and skills
           this.loadCreatorName(creatorId).subscribe(() => {
-            this.loadSkills(skillIds);
             if (this.userRole == "CLIENT") {
               this.loadProposals();
             }
