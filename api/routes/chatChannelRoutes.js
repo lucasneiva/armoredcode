@@ -1,9 +1,9 @@
 import express from 'express';
-import { 
-    createChatChannel, 
-    getChatChannelById, 
-    sendMessage 
-} from '../controllers/ChatChannelController.js';
+import {
+    createChatChannel,
+    getChatChannelById,
+    sendMessage
+} from '../controllers/chatChannelController.js';
 import { verifyUser } from '../utils/authMiddleware.js'; // Verifica se o usuário está autenticado
 
 const router = express.Router();
@@ -13,10 +13,13 @@ const router = express.Router();
 
 // Obter os detalhes de um canal de comunicação, incluindo o histórico de mensagens
 // (Freelancer ou Cliente) - Requer verificação se o usuário está envolvido no canal
-router.get('/:id', verifyUser, getChatChannelById); 
+router.get( '/:id', verifyUser, getChatChannelById );
 
 // Enviar uma nova mensagem para um canal de comunicação
 // (Freelancer ou Cliente) - Requer verificação se o usuário está envolvido no canal
-router.post('/:id/messages', verifyUser, sendMessage);
+router.post( '/:id/messages', verifyUser, sendMessage );
+
+// Obter todos os canais de chat de um usuário (requer autenticação)
+router.get("/my-chats", verifyUser, getUserChatChannels);
 
 export default router;

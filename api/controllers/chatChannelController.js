@@ -90,3 +90,25 @@ export const sendMessage = async ( req, res, next ) => {
         return next( createError( 500, 'Erro interno do servidor.' ) );
     }
 };
+
+// Obter todos os canais de chat de um usuário
+export const getUserChatChannels = async ( req, res, next ) => {
+    try {
+        const userId = req.user.id;
+
+        // Encontrar todos os canais onde o usuário é freelancer ou cliente
+        const chatChannels = await ChatChannel.find( {
+            $or: [ { freelancerId: userId }, { clientId: userId } ],
+        } )
+            .populate( "freelancerId", "firstName lastName" )
+            .populate( "clientId", "firstName lastName" )
+            .sort( { updatedAt: -1 } ); // Ordenar por data da última atualização (aproximado da última mensagem)
+
+        return next(
+            createSuccess( 200, "Lista de canais de chat do usuário.", chatChannels )
+        );
+    } catch ( error ) {
+        console.error( "Error getting user chat channels:", error );
+        return next( createError( 500, "Erro interno do servidor." ) );
+    }
+};
