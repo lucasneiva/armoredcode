@@ -1,162 +1,247 @@
-@startuml class diagram
-
-' User
-
-entity User {
-  + firstName : String
-  + lastName : String
-  + username : String 
-  + email : String
-  + password : String 
-  + profileImage : String
-  + role : String <"CLIENT", "FREELANCER">
-  + profile : ObjectId
+@startuml
+class User {
+    - username: String
+    - email: String
+    - password: String
+    - role: String ["CLIENT", "FREELANCER"]
+    + register(username, email, password, role)
+    + login(email, password)
+    + sendEmail(email)
+    + resetPassword(token, password)
+    + getAllUsers()
+    + getById(id)
+    + getUserRole(id)
+    + updateUser(id, username, email)
+    + deleteUser(id)
 }
 
-entity ClientProfile {
-  + companyName : String
-  + companySize : String <"SMALL", "MEDIUM", "LARGE">
-  + industry : String
-  + companyDescription : String
-  + website : String
-  + location : ObjectId 
+class UserToken {
+    - userId: ObjectId
+    - token: String
+    - createdAt: Date
 }
 
-entity FreelancerProfile {
-  + profileSummary : String
-  + skills : Skill[*]
-  + technologies : Technology[*]
-  + experienceLevel : String <"ENTRY-LEVEL", "MID-LEVEL", "SENIOR">
-  + hourlyRate : Object { min, max, currency }
-  + portfolio : PortfolioItem[*] 
-  + isAvailable : boolean
-  + specializations : String[*]
-  + languages : Language[*]
-  + education : Education[*]
-  + certifications : Certification[*]
-  + workExperience : WorkExperience[*] 
+class FreelancerProfile {
+    - userId: ObjectId
+    - profileImage: String
+    - firstName: String
+    - lastName: String
+    - specializationId: ObjectId
+    - profileSummary: String
+    - experienceLevel: String ["JUNIOR", "MID-LEVEL", "SENIOR"]
+    - hourlyRate: HourlyRate
+    - isAvailable: Boolean
+    - location: Location
+    - skillIds: ObjectId[]
+    - portfolioItems: PortfolioItem[]
+    - educations: Education[]
+    - certifications: Certification[]
+    - workExperiences: WorkExperience[]
+    + createProfile(profileData)
+    + getProfileByUserId(id)
+    + updateProfile(profileData)
+    + deleteProfile()
+    + getAllFreelancerProfiles()
+    + searchFreelancers(q, skillIds, experienceLevel, specializationId)
 }
 
-entity PortfolioItem {
-  + title : String
-  + description : String
-  + url : String
+class ClientProfile {
+    - userId: ObjectId
+    - companyName: String
+    - companyDescription: String
+    - companySize: String ["SMALL", "MEDIUM", "LARGE"]
+    - profileImage: String
+    - industryId: ObjectId
+    - website: String
+    - location: Location
+    + createProfile(profileData)
+    + getProfileByUserId(id)
+    + updateProfile(profileData)
+    + deleteProfile()
 }
 
-entity Language {
-  + language : String
-  + proficiencyLevel : String
+class HourlyRate {
+    - min: Number
+    - max: Number
+    - currency: String
 }
 
-entity Education {
-  + degreeName : String
-  + fieldOfStudy : String
-  + institution : String
-  + graduationYear : Integer
+class Budget {
+    - min: Number
+    - max: Number
+    - currency: String
 }
 
-entity Certification {
-  + name : String
-  + issuingOrganization : String
-  + issueDate : Date
-} 
-
-entity WorkExperience {
-  + companyName : String
-  + jobTitle : String
-  + startDate : Date
-  + endDate : Date 
-  + jobDescription : String
+class Location {
+    - streetAddress: String
+    - neighborhood: String
+    - city: String
+    - state: String
+    - cep: String
+    - country: String
 }
 
-entity Location {
-  + city : String
-  + state : String <"SP"> 
-  + country : String <"Brazil">
+class Skill {
+    - skillName: String
+    - skillDescription: String
+    + getSkills()
+    + getSkillById(id)
+    + createSkill(skillData)
 }
 
-' Project
-
-entity Project {
-    + clientId : ObjectId 
-    + freelancerId : ObjectId 
-    + ProjectCategory : ProjectCategory <<Emb>>
-    + skills : Skill[*] <<Emb>>
-    + technologies : Technology[*] <<Emb>>
-    + requirements : Requirement[*] <<Emb>>
-    + ProjectTitle : String
-    + ProjectDescription : String
-    + hourlyRateLowerBound : double
-    + hourlyRateUpperBound : double
-    + isFixedRate: boolean
-    + fixedBudget : double
-    + estimatedDuration : int
-    + ProjectSize : String <"SMALL", "MEDIUM", "LARGE"> 
-    + status : String <"DRAFT", "POSTED">
-    + experienceLevel : String <"ENTRY-LEVEL", "MID-LEVEL", "SENIOR">
-    + startDate : Date
-    + endDate : Date
-    + isRemote : boolean
-    + location : Location
+class Specialization {
+    - specializationName: String
+    - specializationDescription: String
+    + getSpecializations()
+    + getSpecializationById(id)
+    + createSpecialization(specializationData)
 }
 
-entity ProjectCategory {
-   + categoryName : String
-   + categoryDescription : String
+class Industry {
+    - name: String
+    - description: String
+    + getIndustries()
+    + getIndustryById(id)
+    + createIndustry(industryData)
 }
 
-entity Requirement {
-  + title : String
-  + description : String
-  + requirementType : String <"SOURCE_CODE", "DOCUMENTATION", "TEST_REPORT">
+
+class ProjectCategory {
+    - categoryName: String
+    - categoryDescription: String
+    + getProjectCategories()
+    + getProjectCategoryById(id)
+    + createProjectCategory(categoryData)
 }
 
-entity Technology {
-   + technologyName : String
-   + technologyDescription : String
-} 
-
-entity Skill {
-    + skillName : String
-    + skillDescription : String
+class Project {
+    - clientId: ObjectId
+    - freelancerId: ObjectId
+    - projectCategoryId: ObjectId
+    - skillIds: ObjectId[]
+    - projectTitle: String
+    - projectDescription: String
+    - projectHourlyRate : HourlyRate
+    - projectBudget : Budget
+    - pricingType : String ["BUDGET", "HOURLY-RATE"]
+    - estimatedDuration: Number
+    - projectSize: String ["SMALL", "MEDIUM", "LARGE"]
+    - projectStatus: String ["DRAFT", "POSTED", 'IN-PROGRESS', 'COMPLETED', 'CANCELLED']
+    - experienceLevel: String ["ENTRY-LEVEL", "MID-LEVEL", "SENIOR"]
+    - workModel: String ["REMOTE", "HYBRID", "ON-SITE"]
+    - location: Location
+    - chatChannelId: ObjectId
+    - startDate: Date
+    - endDate: Date
+    + getProjectById(id)
+    + createProject(projectData)
+    + updateProject(id, updateData)
+    + deleteProject(id)
+    + getUserProjects()
+    + getPostedProjects()
+    + getPostedUserProjects()
+    + searchProjects(q, category, skillIds)
 }
 
-entity Proposal {
-    + freelancerId: ObjectId
-    + ProjectId: ObjectId
-    + isFixedRate: boolean
-    + fixedPrice: double 
-    + proposedHourlyRate: double 
-    + estimatedHours: int
-    + estimatedDuration: date
-    + proposalStatus: String <"PENDING", "ACCEPTED", "DECLINED">
-    + coverLetter: String
+class Proposal {
+    - projectId: ObjectId
+    - freelancerId: ObjectId
+    - clientId: ObjectId
+    - coverLetter: String
+    - pricingType : String ["BUDGET", "HOURLY-RATE"]
+    - proposedBudget: Number
+    - proposedHourlyRate: Number
+    - estimatedDuration: Number
+    - status: String ["DRAFT", "PENDING", "ACCEPTED", "REJECTED"]
+    - ChatChannelId: ObjectId
+    + createProposal(proposalData)
+    + getProposalsByProjectId(projectId)
+    + getProposalById(id)
+    + updateProposal(id, updateData)
+    + deleteProposal(id)
+    + acceptProposal(id)
+    + rejectProposal(id)
+    + getFreelancerProposals(freelancerId)
 }
 
-' Relationships
+class ChatChannel {
+    - projectId: ObjectId
+    - freelancerId: ObjectId
+    - clientId: ObjectId
+    - messages: Message[]
+    - isActive: Boolean
+    + createChatChannel(projectId, freelancerId, clientId)
+    + getChatChannelById(id)
+    + sendMessage(id, content)
+    + getUserChatChannels()
+}
 
-User --o  "1" ClientProfile : has one
-User --o  "1" FreelancerProfile: has one
+class Message {
+    - senderId: ObjectId
+    - content: String
+    - timestamp: Date
+}
 
-ClientProfile --o "1" Location : located in
-FreelancerProfile --o "1" Location : located in
+class Notification {
+    - freelancerId: ObjectId
+    - clientId: ObjectId
+    - projectId: ObjectId
+    - message: String
+    - timestamp: Date
+    - status: String ["PENDING", "ACCEPTED", "REJECTED"]
+    - isRead: Boolean
+    + createNotification(projectId, freelancerId, clientId, message)
+    + getInviteById(id)
+    + getFreelancerNotifications(freelancerId)
+    + markNotificationAsRead(id)
+}
 
-Project "1" o-- "*" Skill : requires many
-Project "1" *-- "*" Requirement : has many
-Project "*" o-- "*" Technology : uses many
-Project "*" o-- "1" ProjectCategory : belongs to one
+class Rating {
+  - projectId: ObjectId
+  - evaluatorId: ObjectId
+  - evaluatedId: ObjectId
+  - evaluatorType: String ["CLIENT", "FREELANCER"]
+  - workQuality: Number
+  - communication: Number
+  - professionalism: Number
+  - costBenefit: Number
+  - clarityDescription: Number
+  - payments: Number
+  - feedback: Number
+  - comment: String
+  + createRating(ratingData)
+  + getProjectRatings(projectId)
+}
 
-Proposal "1" -- "1" FreelancerProfile : by
-Proposal "1" -- "1" Project : for
 
-ClientProfile "1" -- "*" Project : posts
+User "1" -- "1" UserToken
+FreelancerProfile "1" -- "1" User
+ClientProfile "1" -- "1" User
+FreelancerProfile "1" -- "1" Location
+ClientProfile "1" -- "1" Location
+FreelancerProfile "1" *-- "*" Skill
+FreelancerProfile "1" -- "1" Specialization
+ClientProfile "1" -- "1" Industry
+Project "1" -- "1" ClientProfile
+Project "1" -- "0..1" FreelancerProfile
+Project "1" -- "1" ProjectCategory
+Project "1" *-- "*" Skill
+Project "0..1" -- "1" ChatChannel
+Project "1" -- "1" HourlyRate : projectHourlyRate
+Project "1" -- "1" Budget : projectBudget
+Proposal "1" -- "1" Project
+Proposal "1" -- "1" FreelancerProfile
+Proposal "1" -- "1" ClientProfile
+Proposal "0..1" -- "1" ChatChannel
+Proposal "1" -- "1" HourlyRate : proposedHourlyRate
+Proposal "1" -- "1" Budget : proposedBudget
+ChatChannel *-- "*" Message
+Notification "1" -- "1" FreelancerProfile
+Notification "1" -- "1" ClientProfile
+Notification "0..1" -- "1" Project
+Rating "1" -- "1" Project
+Rating "1" -- "1" User : evaluatorId
+Rating "1" -- "1" User : evaluatedId
 
-FreelancerProfile "1" -- "*" Language : knows
-FreelancerProfile "1" -- "*" Project : works on 
-FreelancerProfile "1" -- "1" Education : has one
-FreelancerProfile "1" -- "*" Skill : has many
-FreelancerProfile "1" -- "*" Certification : has many
-FreelancerProfile "1" -- "*" WorkExperience : has many
-FreelancerProfile "1" -- "*" PortfolioItem : has many
 
 @enduml
