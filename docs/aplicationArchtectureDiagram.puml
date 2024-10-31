@@ -1,0 +1,18 @@
+@startuml aplication archtecture diagram
+!include <C4/C4_Context>
+
+SHOW_LEGEND()
+
+Person(user, "Usuário", "Usuário do sistema, pode ser um freelancer ou um cliente")
+System_Boundary(c1, "ArmoredCode") {
+  System(frontend, "Frontend", "Aplicação web Angular", "Fornece interface para interação do usuário")
+  System(backend, "Backend", "API RESTful Node.js", "Gerencia lógica de negócio, autenticação e acesso ao banco de dados")
+  System_Ext(database, "Banco de Dados", "MongoDB", "Armazena dados da aplicação: usuários, projetos, propostas etc.")
+}
+
+Rel(user, frontend, "Utiliza", "HTTP")
+Rel(frontend, backend, "Consome", "HTTP API")
+Rel(backend, database, "Utiliza", "MongoDB Driver")
+Rel(frontend, database, "Utiliza", "HTTP API", "Para buscas e visualização de dados", "Opcional (futuramente com API Gateway)")
+
+@enduml
