@@ -5,7 +5,7 @@ import {
     getUserChatChannels,
     sendMessage
 } from '../controllers/chatChannelController.js';
-import { verifyUser } from '../utils/authMiddleware.js'; // Verifica se o usuário está autenticado
+import { verifyToken, verifyUser } from '../utils/authMiddleware.js'; // Verifica se o usuário está autenticado
 
 const router = express.Router();
 
@@ -24,6 +24,6 @@ router.post( '/:id/messages', verifyUser, sendMessage );
 router.get("/my-chats", verifyUser, getUserChatChannels);
 
 // CREATE NEW CHAT CHANNEL
-router.post('/create', verifyUser, createChatChannel);
+router.post('/create', verifyToken, createChatChannel);
 
 export default router;

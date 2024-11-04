@@ -9,6 +9,16 @@ import { apiUrls } from '../api.urls';
 export class ChatService {
     http = inject(HttpClient);
 
+    createChatChannel(projectId: string, freelancerId: string, clientId: string): Observable<any> { // Use any or a specific type if you have one
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        withCredentials: true
+      };
+      return this.http.post(`${apiUrls.chatServiceApi}/create`, { projectId, freelancerId, clientId }, httpOptions);
+  }
+
     // Get all chat channels for the current user
     getUserChatChannels(): Observable<ChatChannel[]> {
         const httpOptions = {
