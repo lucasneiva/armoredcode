@@ -7,6 +7,7 @@ actor Cliente
 
 usecase "Registrar" as UC_Registrar
 usecase "Login" as UC_Login
+usecase "Esqueceu a Senha" as UC_EsqueceuSenha
 usecase "Recuperar Senha" as UC_RecuperarSenha
 usecase "Gerenciar Conta" as UC_GerenciarConta
 
@@ -27,12 +28,13 @@ usecase "Gerenciar Mensagens" as UC_GerenciarMensagens2
 
 User --> UC_GerenciarConta
 User --> UC_Login
-User --> UC_RecuperarSenha
+User --> UC_EsqueceuSenha
 User --> UC_Registrar
 
 Cliente --|> User
 Freelancer --|> User
 
+UC_EsqueceuSenha --> UC_RecuperarSenha : <<include>>
 UC_GerenciarConta --> UC_GerenciarPerfil : <<include>>
 
 UC_BuscarFreelancers <.. UC_ConvidarFreelancer : <<extend>>  
