@@ -10,45 +10,43 @@ usecase "Login" as UC_Login
 usecase "Recuperar Senha" as UC_RecuperarSenha
 usecase "Gerenciar Conta" as UC_GerenciarConta
 
-usecase "Gerenciar Perfil" as UC1
+usecase "Gerenciar Perfil" as UC_GerenciarPerfil
 
-usecase "Enviar Proposta" as UC6
-usecase "Buscar Projetos" as UC5
-usecase "Gerenciar Projetos" as UC13
-usecase "Gerenciar Propostas" as UC14
-usecase "Gerenciar Convites" as UC10
-usecase "Gerenciar Mensagens" as UC11
+usecase "Enviar Proposta" as UC_EnviarProposta
+usecase "Buscar Projetos" as UC_BuscarProjetos
+usecase "Gerenciar Projetos Ativos" as UC_GPA
+usecase "Gerenciar Minhas Propostas" as UC_GMPropostas
+usecase "Gerenciar Convites" as UC_GerenciarConvites
+usecase "Gerenciar Mensagens" as UC_GerenciarMensagens1
 
-usecase "Gerenciar Projeto" as UC7
-usecase "Gerenciar Propostas" as UC9
-usecase "Convidar Freelancer" as UC8
-usecase "Gerenciar Convites" as UC35
-usecase "Buscar Freelancers" as UC25
-usecase "Gerenciar Mensagens" as UC12
+usecase "Gerenciar Meus Projetos" as UC_GMProjetos
+usecase "Gerenciar Propostas Recebidas" as UC_GPR
+usecase "Convidar Freelancer" as UC_ConvidarFreelancer
+usecase "Buscar Freelancers" as UC_BuscarFreelancers
+usecase "Gerenciar Mensagens" as UC_GerenciarMensagens2
 
-User --> UC_Registrar
+User --> UC_GerenciarConta
 User --> UC_Login
 User --> UC_RecuperarSenha
-User --> UC_GerenciarConta
+User --> UC_Registrar
 
 Cliente --|> User
 Freelancer --|> User
 
-UC_GerenciarConta --> UC1 : <<include>>
+UC_GerenciarConta --> UC_GerenciarPerfil : <<include>>
 
-UC5 <.. UC6 : <<extend>>  
-UC25 <.. UC8 : <<extend>>
+UC_BuscarFreelancers <.. UC_ConvidarFreelancer : <<extend>>  
+UC_BuscarProjetos <.. UC_EnviarProposta : <<extend>>
 
-Freelancer --> UC5
-Freelancer --> UC10
-Freelancer --> UC11
-Freelancer --> UC13
-Freelancer --> UC14
+Freelancer --> UC_BuscarProjetos
+Freelancer --> UC_GerenciarConvites
+Freelancer --> UC_GerenciarMensagens1
+Freelancer --> UC_GPA
+Freelancer --> UC_GMPropostas
 
-Cliente --> UC7
-Cliente --> UC9
-Cliente --> UC35
-Cliente --> UC25
-Cliente --> UC12
+Cliente --> UC_BuscarFreelancers
+Cliente --> UC_GerenciarMensagens2
+Cliente --> UC_GMProjetos
+Cliente --> UC_GPR
 
 @enduml 
