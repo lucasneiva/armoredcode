@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { apiUrls } from '../api.urls';
 
@@ -9,15 +9,39 @@ import { apiUrls } from '../api.urls';
 export class ChatService {
     http = inject(HttpClient);
 
+    // Get all chat channels for the current user
+    getUserChatChannels(): Observable<ChatChannel[]> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+            }),
+            withCredentials: true
+          };
+        return this.http.get<ChatChannel[]>(`${apiUrls.chatServiceApi}/my-chats`, httpOptions);
+    }
+
     // Get chat channel details by ID
     getChatChannelById(channelId: string): Observable<ChatChannel> {
-        return this.http.get<ChatChannel>(`${apiUrls.chatServiceApi}/${channelId}`);
+        const httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+            }),
+            withCredentials: true
+          };
+        return this.http.get<ChatChannel>(`${apiUrls.chatServiceApi}/${channelId}`, httpOptions);
     }
 
     // Send a message to a chat channel
     sendMessage(channelId: string, message: { content: string }): Observable<ChatChannel> {
-        return this.http.post<ChatChannel>(`${apiUrls.chatServiceApi}/${channelId}/messages`, message);
+        const httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+            }),
+            withCredentials: true
+          };
+        return this.http.post<ChatChannel>(`${apiUrls.chatServiceApi}/${channelId}/messages`, message, httpOptions);
     }
+    
 }
 
 export type ChatChannel = {

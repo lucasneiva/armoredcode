@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { ChatService } from '../../services/chat.service';
+import { ChatChannel, ChatService, Message } from '../../services/chat.service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -21,26 +21,20 @@ export default class ChatComponent implements OnInit, OnDestroy {
   route = inject(ActivatedRoute);
   authService = inject(AuthService);
 
-  showChatBox = false; // Add this property
-  showContacts = true; // Add this property
+  showChatBox = false;
+  showContacts = true;
 
-  channelId: string | null = null;
-  chatChannel: any; // Replace 'any' with the actual ChatChannel type from your service
-  messages: any[] = []; // Replace 'any' with the actual Message type from your service
+  contacts: ChatChannel[] = [];
+  currentChatChannel: ChatChannel | null = null;
+  messages: Message[] = [];
+
   newMessageForm = this.fb.group({
     content: ['']
   });
-  private destroy$ = new Subject<void>(); 
+  private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    this.route.paramMap
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(params => {
-      this.channelId = params.get('id'); 
-      if (this.channelId) {
-        this.loadChatChannel(this.channelId);
-      }
-    });
+    this.loadContacts();
   }
 
   ngOnDestroy(): void {
@@ -48,37 +42,47 @@ export default class ChatComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  loadContacts() {
+    this.chatService.getUserChatChannels()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(chatChannels => {
+        this.contacts = chatChannels;
+      });
+  }
+
+  openChat(channelId: string) {
+    this.showChatBox = true;
+    this.showContacts = false;
+    this.loadChatChannel(channelId);
+  }
+
   loadChatChannel(channelId: string) {
     this.chatService.getChatChannelById(channelId)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(channel => {
-      this.chatChannel = channel;
-      this.messages = channel.messages; 
-    });
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(channel => {
+        this.currentChatChannel = channel;
+        this.messages = channel.messages;
+      });
   }
 
   sendMessage() {
-    if (this.channelId && this.newMessageForm.valid) {
-      const newMessage = { content: this.newMessageForm.value.content! }; // Non-null assertion
-      this.chatService.sendMessage(this.channelId, newMessage)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(updatedChannel => {
-        this.chatChannel = updatedChannel;
-        this.messages = updatedChannel.messages; 
-        this.newMessageForm.reset(); 
-      });
+    if (this.currentChatChannel && this.newMessageForm.valid) {
+      const newMessage = { content: this.newMessageForm.value.content! };
+      this.chatService.sendMessage(this.currentChatChannel._id, newMessage)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(updatedChannel => {
+          this.currentChatChannel = updatedChannel;
+          this.messages = updatedChannel.messages;
+          this.newMessageForm.reset();
+        });
     }
   }
 
-  openChat() { // Add this method to open the chat box | contactId: string
-    this.showChatBox = true;
-    this.showContacts =  false;
-    // ... (logic to load chat with contactId - similar to loadChatChannel) 
-  }
-
-  closeChat() { // Add this method to close the chat box (if needed)
+  closeChat() {
     this.showChatBox = false;
-    this.showContacts =  true;
+    this.showContacts = true;
+    this.currentChatChannel = null;
+    this.messages = [];
   }
 
   get currentUser() {
