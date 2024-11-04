@@ -2,6 +2,7 @@ import express from 'express';
 import {
     createChatChannel,
     getChatChannelById,
+    getUserChatChannels,
     sendMessage
 } from '../controllers/chatChannelController.js';
 import { verifyUser } from '../utils/authMiddleware.js'; // Verifica se o usuário está autenticado
