@@ -1,5 +1,3 @@
-// ChatChannelController.js
-
 import ChatChannel from '../models/chatChannelModel.js';
 import { createError } from '../utils/error.js';
 import { createSuccess } from '../utils/success.js';

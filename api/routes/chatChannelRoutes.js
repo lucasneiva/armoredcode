@@ -23,4 +23,7 @@ router.post( '/:id/messages', verifyUser, sendMessage );
 // Obter todos os canais de chat de um usuário (requer autenticação)
 router.get("/my-chats", verifyUser, getUserChatChannels);
 
+// CREATE NEW CHAT CHANNEL
+router.post('/create', verifyUser, createChatChannel);
+
 export default router;
