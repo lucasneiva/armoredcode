@@ -10,6 +10,8 @@ usecase "Login" as UC_Login
 usecase "Esqueceu a Senha" as UC_EsqueceuSenha
 usecase "Recuperar Senha" as UC_RecuperarSenha
 usecase "Gerenciar Conta" as UC_GerenciarConta
+usecase "Gerenciar Mensagens" as UC_GerenciarMensagens
+usecase "Avaliar Usuário" as UC_AvaliarUsuario
 
 usecase "Gerenciar Perfil" as UC_GerenciarPerfil
 
@@ -18,18 +20,19 @@ usecase "Buscar Projetos" as UC_BuscarProjetos
 usecase "Gerenciar Projetos Ativos" as UC_GPA
 usecase "Gerenciar Minhas Propostas" as UC_GMPropostas
 usecase "Gerenciar Convites" as UC_GerenciarConvites
-usecase "Gerenciar Mensagens" as UC_GerenciarMensagens1
+
 
 usecase "Gerenciar Meus Projetos" as UC_GMProjetos
 usecase "Gerenciar Propostas Recebidas" as UC_GPR
 usecase "Convidar Freelancer" as UC_ConvidarFreelancer
 usecase "Buscar Freelancers" as UC_BuscarFreelancers
-usecase "Gerenciar Mensagens" as UC_GerenciarMensagens2
 
 User --> UC_GerenciarConta
 User --> UC_Login
 User --> UC_EsqueceuSenha
 User --> UC_Registrar
+User --> UC_GerenciarMensagens
+User --> UC_AvaliarUsuario
 
 Cliente --|> User
 Freelancer --|> User
@@ -42,12 +45,10 @@ UC_BuscarProjetos <.. UC_EnviarProposta : <<extend>>
 
 Freelancer --> UC_BuscarProjetos
 Freelancer --> UC_GerenciarConvites
-Freelancer --> UC_GerenciarMensagens1
 Freelancer --> UC_GPA
 Freelancer --> UC_GMPropostas
 
 Cliente --> UC_BuscarFreelancers
-Cliente --> UC_GerenciarMensagens2
 Cliente --> UC_GMProjetos
 Cliente --> UC_GPR
 
