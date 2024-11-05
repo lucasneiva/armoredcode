@@ -30,6 +30,8 @@ import seedSkills from './fixtures/skillFixture.js';
 import seedSpecializations from './fixtures/specializationFixture.js';
 import seedUsers from "./fixtures/userFixture.js";
 
+import Proposal from "./models/proposalModel.js";
+
 const app = express();
 dotenv.config();
 app.use( express.json() );
@@ -109,7 +111,7 @@ app.listen( 8800, async () => {
         await seedProposals();
         await seedNotifications();
 
-
+        await Proposal.deleteMany( {} );
     } catch ( error ) {
         console.error( `Error connecting to MongoDB: ${error}` );
     }
