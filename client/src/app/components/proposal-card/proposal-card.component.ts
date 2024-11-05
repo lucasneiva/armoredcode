@@ -23,8 +23,8 @@ export class ProposalCardComponent {
   projectService = inject(ProjectService);
   proposalService = inject(ProposalService);
   userService = inject(UserService);
-  
-  userRole: string | null = null; 
+
+  userRole: string | null = null;
 
   @Input() proposal: any;
   project: any;
@@ -57,8 +57,8 @@ export class ProposalCardComponent {
           const creatorId = this.detailedProposal.freelancerId;
           const projectCreatorId = this.detailedProposal.clientId;
           const projectId = this.detailedProposal.projectId;
-          this.loadProject(projectId);  
-          this.loadProjectCreatorName(projectCreatorId); 
+          this.loadProject(projectId);
+          this.loadProjectCreatorName(projectCreatorId);
           this.loadCreatorName(creatorId);
         } else {
           console.error('Failed to retrieve proposal details:', response.message);
@@ -137,68 +137,49 @@ export class ProposalCardComponent {
     const proposalId = this.proposal._id;
     const projectId = this.proposal.projectId;
     const freelancerId = this.proposal.freelancerId;
-    const clientId = this.project.clientId._id; // Or this.proposal.clientId._id if available
-
+  
     if (confirm("Are you sure you want to accept this proposal?")) {
-        this.proposalService.acceptProposal(proposalId).pipe(
-            switchMap((response) => {
-                if (response.success) {
-                    console.log('Proposal accepted successfully');
-                    this.proposal.status = 'ACCEPTED'; // Update UI immediately
-
-                    // Create the chat channel
-                    return this.chatService.createChatChannel(projectId, freelancerId, clientId).pipe(
-                        map(newChatChannel => ({ updateResponse: true, newChatChannel })), // Pass both values
-                        
-                        catchError(error => {
-                            console.error('Error creating chat channel:', error);
-                            // Optionally show an error message to the user, but don't stop the process
-                            return of({ updateResponse: true, newChatChannel: null }); // Continue with update
-                        })
-                    );
-
-
-                } else {
-                    return throwError(() => new Error('Error accepting proposal'));
-                }
-            }),
-            switchMap((result) => { // Use result to access both updateResponse and newChatChannel
-                if (result.updateResponse) { // Update project even if chat creation fails
-                  return this.projectService.updateProjectFreelancer(projectId, freelancerId);
-                } else {
-                  return throwError(() => new Error('Error accepting proposal'));
-                }
-            }),
-            switchMap((updateResponse) => {
-                if (updateResponse.success) {
-                    console.log('Project freelancerId updated successfully');
-                    this.project.freelancerId = freelancerId;
-                    return this.projectService.updateProjectStatus(projectId, 'IN-PROGRESS');
-                } else {
-                    return throwError(() => new Error('Error updating project freelancerId'));
-                }
-            })
-        ).subscribe({
-            next: (updateStatusResponse) => {
-                if (updateStatusResponse.success) {
-                    console.log('Project status updated successfully');
-                    this.project.projectStatus = 'IN-PROGRESS';
-
-                    // Handle the newChatChannel if it was created successfully
-                    
-
-                    //window.location.reload();
-                } else {
-                    console.error('Error updating project status:', updateStatusResponse.message);
-                }
-            },
-            error: (error) => {
-                console.error('Error during update process:', error);
-                // Handle errors and potentially revert changes if necessary
-            }
-        });
+      this.proposalService.acceptProposal(proposalId).pipe(
+        switchMap((response) => {
+          if (response.success) {
+            console.log('Proposal accepted successfully');
+            // 1. Update proposal status in the UI
+            this.proposal.status = 'ACCEPTED';
+            // 2. Update the project with freelancer ID
+            return this.projectService.updateProjectFreelancer(projectId, freelancerId);
+          } else {
+            return throwError(() => new Error('Error accepting proposal'));
+          }
+        }),
+        switchMap((updateResponse) => {
+          if (updateResponse.success) {
+            console.log('Project freelancerId updated successfully');
+            // Update the project object in your component
+            this.project.freelancerId = freelancerId;
+            // 3. Update project status
+            return this.projectService.updateProjectStatus(projectId, 'IN-PROGRESS');
+          } else {
+            return throwError(() => new Error('Error updating project freelancerId'));
+          }
+        })
+      ).subscribe(
+        (updateStatusResponse) => {
+          if (updateStatusResponse.success) {
+            console.log('Project status updated successfully');
+            this.project.projectStatus = 'IN-PROGRESS'; // Update status in the component
+            window.location.reload();
+          } else {
+            console.error('Error updating project status:', updateStatusResponse.message);
+            // Handle error (e.g., show an error message to the user)
+          }
+        },
+        (error) => {
+          console.error('Error during update process:', error);
+          // Handle error (e.g., show an error message to the user)
+        }
+      );
     }
-}
+  }
 
   rejectProposal() {
     const proposalId = this.proposal._id;
@@ -208,7 +189,7 @@ export class ProposalCardComponent {
           if (response.success) {
             console.log('Proposal rejected successfully');
             // Update the proposal status in the UI or reload the page
-            this.proposal.status = 'REJECTED'; 
+            this.proposal.status = 'REJECTED';
             window.location.reload();
           } else {
             console.error('Error rejecting proposal:', response.message);
@@ -219,23 +200,6 @@ export class ProposalCardComponent {
         }
       );
     }
-  }
-
-  createChatChannel() {
-    const projectId = this.project._id;
-    const freelancerId = this.proposal.freelancerId;
-    const clientId = this.project.clientId._id; // Make sure you have the clientId
-
-    this.chatService.createChatChannel(projectId, freelancerId, clientId).subscribe(
-        (newChatChannel) => {
-            console.log('Chat channel created successfully:', newChatChannel);
-            // You might want to update the UI here to reflect the new chat channel
-        },
-        (error) => {
-            console.error('Error creating chat channel:', error);
-            // Handle the error appropriately (e.g., display an error message to the user)
-        }
-    );
   }
 
   makeCounterProposal() {
