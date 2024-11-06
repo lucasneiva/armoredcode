@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap } from 'rxjs';
 import { apiUrls } from '../api.urls';
 
 @Injectable({
@@ -17,7 +17,16 @@ export class ChatService {
             }),
             withCredentials: true
           };
-        return this.http.get<ChatChannel[]>(`${apiUrls.chatServiceApi}/my-chats`, httpOptions);
+        return this.http.get<ChatChannel[]>(`${apiUrls.chatServiceApi}/my-chats`, httpOptions)
+        .pipe(
+          tap((res) => {
+            console.log('User Chats fetched:', res);
+          }),
+          catchError((error) => {
+            console.error('Error fetching User Chats:', error);
+            throw error;
+          })
+        );
     }
 
     // Get chat channel details by ID
@@ -28,7 +37,16 @@ export class ChatService {
             }),
             withCredentials: true
           };
-        return this.http.get<ChatChannel>(`${apiUrls.chatServiceApi}/${channelId}`, httpOptions);
+        return this.http.get<ChatChannel>(`${apiUrls.chatServiceApi}/${channelId}`, httpOptions)
+        .pipe(
+          tap((res) => {
+            console.log('Chat fetched:', res);
+          }),
+          catchError((error) => {
+            console.error('Error fetching Chat:', error);
+            throw error;
+          })
+        );
     }
 
     // Send a message to a chat channel
