@@ -12,9 +12,6 @@ const router = express.Router();
 // Obter todos os canais de chat de um usuário (requer autenticação)
 router.get("/my-chats", verifyToken, getUserChatChannels);
 
-// Criar um novo canal de comunicação (usado internamente, geralmente após a criação de uma proposta)
-// INTERNO AGORA router.post('/', createChatChannel); // Pode ser restrito a um administrador ou a uma função específica
-
 // Obter os detalhes de um canal de comunicação, incluindo o histórico de mensagens
 // (Freelancer ou Cliente) - Requer verificação se o usuário está envolvido no canal
 router.get( '/:id', verifyUser, getChatChannelById );
@@ -23,7 +20,8 @@ router.get( '/:id', verifyUser, getChatChannelById );
 // (Freelancer ou Cliente) - Requer verificação se o usuário está envolvido no canal
 router.post( '/:id/messages', verifyUser, sendMessage );
 
-// CREATE NEW CHAT CHANNEL
+// Criar um novo canal de comunicação (usado internamente, geralmente após a criação de uma proposta)
+// INTERNO AGORA router.post('/', createChatChannel); // Pode ser restrito a um administrador ou a uma função específica
 router.post('/create', verifyToken, createChatChannel);
 
 export default router;

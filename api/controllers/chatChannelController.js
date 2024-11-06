@@ -29,6 +29,28 @@ export const createChatChannel = async (req, res, next) => {
     }
 };
 
+// Obter todos os canais de chat de um usuário
+export const getUserChatChannels = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+
+        // Corrected version
+        const chatChannels = await ChatChannel.find({
+            $or: [{ freelancerId: userId }, { clientId: userId }],
+        })
+            .populate("freelancerId", "firstName lastName")
+            .populate("clientId", "firstName lastName")
+            .sort({ updatedAt: -1 });
+
+        return next(
+            createSuccess(200, "Lista de canais de chat do usuário.", chatChannels)
+        );
+    } catch (error) {
+        console.error("Error getting user chat channels:", error);
+        return next(createError(500, "Erro interno do servidor."));
+    }
+};
+
 // Get chat channel details, including message history
 export const getChatChannelById = async (req, res, next) => {
     try {
@@ -86,27 +108,5 @@ export const sendMessage = async (req, res, next) => {
     } catch (error) {
         console.error('Error sending message:', error);
         return next(createError(500, 'Erro interno do servidor.'));
-    }
-};
-
-// Obter todos os canais de chat de um usuário
-export const getUserChatChannels = async (req, res, next) => {
-    try {
-        const userId = req.user.id;
-
-        // Corrected version
-        const chatChannels = await ChatChannel.find({
-            $or: [{ freelancerId: userId }, { clientId: userId }],
-        })
-            .populate("freelancerId", "firstName lastName")
-            .populate("clientId", "firstName lastName")
-            .sort({ updatedAt: -1 });
-
-        return next(
-            createSuccess(200, "Lista de canais de chat do usuário.", chatChannels)
-        );
-    } catch (error) {
-        console.error("Error getting user chat channels:", error);
-        return next(createError(500, "Erro interno do servidor."));
     }
 };
