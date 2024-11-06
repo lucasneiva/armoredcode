@@ -59,8 +59,7 @@ export default class ChatComponent implements OnInit, OnDestroy {
       .subscribe((response: ChatResponse) => {
         if (response.success && response.data) {
           this.contacts = response.data;
-          console.log("contacts: ",this.contacts);
-          console.log("response: ",response.data);
+          /*debug*/ //console.log("contacts: ",this.contacts);
 
           // Iterate through each contact to determine and load the other user's name
           this.contacts.forEach(contact => {
@@ -74,13 +73,43 @@ export default class ChatComponent implements OnInit, OnDestroy {
       });
   }
 
+  getOtherUserId(contact: ChatChannel): string | null {
+    const clientId = this.getId(contact.clientId);
+    const freelancerId = this.getId(contact.freelancerId);
+  
+    /*debug*/ //console.log("Current User ID:", this.currentUserId); // Log current user ID
+    /*debug*/ //console.log("Client ID:", clientId);
+    /*debug*/ //console.log("Freelancer ID:", freelancerId);
+  
+    if (!clientId || !freelancerId) {
+      console.error("Missing client or freelancer ID in contact:", contact);
+      return null;
+    }
+  
+    //  More robust comparison (important!)
+    if (this.currentUserId === clientId) {
+      return freelancerId;
+    } else if (this.currentUserId === freelancerId) {
+      return clientId;
+    } else {
+      console.error("Current user is not part of this chat:", this.currentUserId, contact);
+      return null; 
+    }
+  }
+  
+  getId(user: string | { _id: string } | null | undefined): string | null {
+      if (user == null) return null; // Handle null or undefined
+  
+      return typeof user === 'string' ? user : user._id; // Simplified
+  }
+
   getOtherUserName(contact: ChatChannel): string {
     return this.otherUserNames[contact._id] || "Loading..."; // Use stored name or "Loading..."
   }
 
   getOtherUserIdAndLoadName(contact: ChatChannel) {
     const otherUserId = this.getOtherUserId(contact);
-    console.log("other user Id: ",otherUserId);
+    /*debug*/ //console.log("other user Id: ",otherUserId);
 
     if (!otherUserId) {
       console.error("Current user is not part of this chat channel:", contact._id);
@@ -101,14 +130,6 @@ export default class ChatComponent implements OnInit, OnDestroy {
         this.otherUserNames[contact._id] = "Unknown User";
       }
     });
-  }
-
-
-  getOtherUserId(contact: ChatChannel): string | null {
-    console.log("clientID: ",contact.clientId);
-    console.log("freelancerID: ",contact.freelancerId);
-    return (this.currentUserId === contact.freelancerId) ? contact.clientId :
-           (this.currentUserId === contact.clientId) ? contact.freelancerId : null;
   }
 
   openChat(channelId: string) {
