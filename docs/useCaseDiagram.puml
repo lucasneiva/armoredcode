@@ -2,12 +2,12 @@
 left to right direction
 
 actor Usuário as User
-actor Freelancer
 actor Cliente
+actor Freelancer
+
 
 usecase "Registrar" as UC_Registrar
 usecase "Login" as UC_Login
-usecase "Esqueceu a Senha" as UC_EsqueceuSenha
 usecase "Recuperar Senha" as UC_RecuperarSenha
 usecase "Gerenciar Conta" as UC_GerenciarConta
 usecase "Gerenciar Mensagens" as UC_GerenciarMensagens
@@ -21,23 +21,21 @@ usecase "Gerenciar Projetos Ativos" as UC_GPA
 usecase "Gerenciar Minhas Propostas" as UC_GMPropostas
 usecase "Gerenciar Convites" as UC_GerenciarConvites
 
-
 usecase "Gerenciar Meus Projetos" as UC_GMProjetos
 usecase "Gerenciar Propostas Recebidas" as UC_GPR
 usecase "Convidar Freelancer" as UC_ConvidarFreelancer
 usecase "Buscar Freelancers" as UC_BuscarFreelancers
 
+User ---> UC_AvaliarUsuario
 User --> UC_GerenciarConta
-User --> UC_Login
-User --> UC_EsqueceuSenha
-User --> UC_Registrar
-User --> UC_GerenciarMensagens
-User --> UC_AvaliarUsuario
+User ---> UC_GerenciarMensagens
+User ---> UC_Login
+User ---> UC_RecuperarSenha
+User ---> UC_Registrar
 
 Cliente --|> User
 Freelancer --|> User
 
-UC_EsqueceuSenha --> UC_RecuperarSenha : <<include>>
 UC_GerenciarConta --> UC_GerenciarPerfil : <<include>>
 
 UC_BuscarFreelancers <.. UC_ConvidarFreelancer : <<extend>>  
