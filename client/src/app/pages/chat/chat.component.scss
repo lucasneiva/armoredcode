@@ -237,11 +237,12 @@
 
             .message-input-container {
                 display: flex;
+                justify-content: center;
+                align-items: center;
+                vertical-align: middle;
                 padding: 0rem 1rem;
-                margin: auto;
 
                 .chat-message-input {
-                    display: flex;
                     width: 40vw;
                     padding: 1rem 1.5rem;
                     border-radius: 2.5rem 0rem 0rem 2.5rem;
@@ -255,7 +256,11 @@
                     background-color: rgb(59 130 246);
                     color: white;
                     border-radius: 0rem 2.5rem 2.5rem 0rem;
-                    padding: 0.5rem 1.5rem;
+                    padding: 1rem 1.75rem;
+
+                    i{
+                        margin-left: -0.5rem;
+                    }
                 }
             }
 
