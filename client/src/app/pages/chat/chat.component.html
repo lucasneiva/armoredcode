@@ -16,7 +16,7 @@
                     <img type="image/png" class="contact-image bg-gray-400">
                     <div class="grid mx-4 overflow-clip">
                         <h2 class="contact-name">
-                            {{ contact.freelancerId ? contact.freelancerId : contact.clientId }}
+                            {{ otherUserName }}
                         </h2>
                         <p class="contact-last-message" *ngIf="contact.messages && contact.messages.length > 0">
                             {{ contact.messages[contact.messages.length - 1].content }}
@@ -41,8 +41,8 @@
             </nav>
             <div class="chat-content">
                 <!--placeholders-->
-                <div *ngFor="let message of messages" [class.message-sent]="message.senderId === currentUser"
-                    [class.message-received]="message.senderId !== currentUser">
+                <div *ngFor="let message of messages" [class.message-sent]="message.senderId === currentUserId"
+                    [class.message-received]="message.senderId !== currentUserId">
                     <div class="message-buble">
                         <p class="message">{{ message.content }}</p>
                         <span class="message-date">{{ message.timestamp | date: 'HH:mm' }}</span>
