@@ -50,6 +50,8 @@ export default class ChatComponent implements OnInit, OnDestroy {
       .subscribe((response: ChatResponse) => {  // Specify the response type
         if (response.success && response.data) {  // Check for success and data
           this.contacts = response.data; // Assign the data array
+          console.log("contact data: ", response.data);
+          
         } else {
           // Handle the error or display a message if data is missing.
           console.error("Failed to load contacts:", response.message || "No data received.");
