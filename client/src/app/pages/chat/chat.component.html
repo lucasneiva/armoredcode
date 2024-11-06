@@ -28,7 +28,7 @@
         </div>
         <!--contacts structure end-->
         <!--chat box structure start-->
-        <div class="chat-box absolute transition-opacity duration-300 ease-in-out" [class.opacity-0]="!showChatBox"
+        <div class="chat-box absolute transition-opacity duration-0 ease-in-out" [class.opacity-0]="!showChatBox"
             [class.opacity-100]="showChatBox">
             <nav class="chat-nav">
                 <span *ngIf="currentChatChannel">
@@ -36,8 +36,9 @@
                     {{ currentChatChannel.freelancerId || currentChatChannel.clientId }}
                 </span>
                 <button class="lg:hidden" (click)="closeChat()">
-                    < </button>
-                        <button class="max-lg:hidden" (click)="closeChat()"> Voltar </button>
+                    <i class="fa fa-reply"></i>
+                </button>
+                <button class="max-lg:hidden" (click)="closeChat()"> Voltar </button>
             </nav>
             <div class="chat-content">
                 <!--placeholders-->
