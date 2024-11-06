@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { ChatChannel, ChatService, Message } from '../../services/chat.service';
+import { ChatChannel, ChatResponse, ChatService, Message } from '../../services/chat.service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -25,8 +25,10 @@ export default class ChatComponent implements OnInit, OnDestroy {
   showContacts = true;
 
   contacts: ChatChannel[] = [];
+
   currentChatChannel: ChatChannel | null = null;
   messages: Message[] = [];
+  
 
   newMessageForm = this.fb.group({
     content: ['']
@@ -45,8 +47,14 @@ export default class ChatComponent implements OnInit, OnDestroy {
   loadContacts() {
     this.chatService.getUserChatChannels()
       .pipe(takeUntil(this.destroy$))
-      .subscribe(chatChannels => {
-        this.contacts = chatChannels;
+      .subscribe((response: ChatResponse) => {  // Specify the response type
+        if (response.success && response.data) {  // Check for success and data
+          this.contacts = response.data; // Assign the data array
+        } else {
+          // Handle the error or display a message if data is missing.
+          console.error("Failed to load contacts:", response.message || "No data received.");
+          this.contacts = []; // Or some other default behavior
+        }
       });
   }
 

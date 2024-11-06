@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { apiUrls } from '../api.urls';
 
 @Injectable({
@@ -9,25 +9,24 @@ import { apiUrls } from '../api.urls';
 export class ChatService {
     http = inject(HttpClient);
 
-    // Get all chat channels for the current user
-    getUserChatChannels(): Observable<ChatChannel[]> {
-        const httpOptions = {
-            headers: new HttpHeaders({
+    getUserChatChannels(): Observable<ChatResponse> { // Correct return type
+      const httpOptions = {
+          headers: new HttpHeaders({
               'Content-Type': 'application/json',
-            }),
-            withCredentials: true
-          };
-        return this.http.get<ChatChannel[]>(`${apiUrls.chatServiceApi}/my-chats`, httpOptions)
-        .pipe(
-          tap((res) => {
-            console.log('User Chats fetched:', res);
           }),
-          catchError((error) => {
-            console.error('Error fetching User Chats:', error);
-            throw error;
-          })
-        );
-    }
+          withCredentials: true
+      };
+      return this.http.get<ChatResponse>(`${apiUrls.chatServiceApi}/my-chats`, httpOptions)
+          .pipe(
+              tap((res) => {
+                  console.log('User Chats fetched:', res);
+              }),
+              catchError((error) => {
+                  console.error('Error fetching User Chats:', error);
+                  return of({ success: false, status: 500, message: 'Error fetching chats.', data: [] }); // Return a default ApiResponse on error
+              })
+          );
+  }
 
     // Get chat channel details by ID
     getChatChannelById(channelId: string): Observable<ChatChannel> {
@@ -60,6 +59,13 @@ export class ChatService {
         return this.http.post<ChatChannel>(`${apiUrls.chatServiceApi}/${channelId}/messages`, message, httpOptions);
     }
     
+}
+
+export type ChatResponse = { // Define ApiResponse type in service
+  success: boolean;
+  status: number;
+  message: string;
+  data: ChatChannel[];
 }
 
 export type ChatChannel = {
