@@ -14,11 +14,11 @@ router.get("/my-chats", verifyToken, getUserChatChannels);
 
 // Obter os detalhes de um canal de comunicação, incluindo o histórico de mensagens
 // (Freelancer ou Cliente) - Requer verificação se o usuário está envolvido no canal
-router.get( '/:id', verifyUser, getChatChannelById );
+router.get( '/:id', verifyToken, getChatChannelById );
 
 // Enviar uma nova mensagem para um canal de comunicação
 // (Freelancer ou Cliente) - Requer verificação se o usuário está envolvido no canal
-router.post( '/:id/messages', verifyUser, sendMessage );
+router.post( '/:id/messages', verifyToken, sendMessage );
 
 // Criar um novo canal de comunicação (usado internamente, geralmente após a criação de uma proposta)
 // INTERNO AGORA router.post('/', createChatChannel); // Pode ser restrito a um administrador ou a uma função específica
