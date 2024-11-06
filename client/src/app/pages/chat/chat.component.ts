@@ -135,7 +135,25 @@ export default class ChatComponent implements OnInit, OnDestroy {
   openChat(channelId: string) {
     this.showChatBox = true;
     this.showContacts = false;
-    this.loadChatChannel(channelId);
+
+    this.chatService.getChatChannelById(channelId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: channel => {
+          if (channel) { // Check if channel is not null
+            this.currentChatChannel = channel;
+            this.messages = this.currentChatChannel.messages;
+            console.log("Channel received:", this.currentChatChannel);
+          } else {
+            console.error("Chat channel not found or error fetching.");
+            this.closeChat(); // Close the chat or handle the error as needed
+          }
+        },
+        error: error => { // Handle network or HTTP errors
+          console.error("Error loading chat channel:", error);
+          this.closeChat();  // Close the chat or handle the error
+        }
+      });
   }
 
   loadChatChannel(channelId: string) {
@@ -143,7 +161,9 @@ export default class ChatComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(channel => {
         this.currentChatChannel = channel;
-        this.messages = channel.messages;
+        if (channel){
+          this.messages = channel.messages;
+        }
       });
   }
 
@@ -152,11 +172,24 @@ export default class ChatComponent implements OnInit, OnDestroy {
       const newMessage = { content: this.newMessageForm.value.content! };
       this.chatService.sendMessage(this.currentChatChannel._id, newMessage)
         .pipe(takeUntil(this.destroy$))
-        .subscribe(updatedChannel => {
-          this.currentChatChannel = updatedChannel;
-          this.messages = updatedChannel.messages;
-          this.newMessageForm.reset();
+        .subscribe({
+          next: updatedChannel => {
+            this.currentChatChannel = updatedChannel;
+            this.messages = updatedChannel.messages;
+            this.newMessageForm.reset(); // Clear input after sending
+          },
+          error: error => {
+            console.error("Error sending message:", error);
+            // More robust error handling:
+            // 1. Display an error message to the user (e.g., using a snackbar or alert).
+            // 2. Potentially retry the send operation or take other corrective actions.
+            // Example using an alert (replace with your preferred method):
+            alert("Failed to send message. Please try again."); 
+          }
         });
+    } else {
+      console.warn("Cannot send message: No chat selected or form invalid.");
+      // Optionally inform the user (if no chat selected, maybe prompt them to select one).
     }
   }
 
