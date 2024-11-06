@@ -27,11 +27,12 @@ export default class ChatComponent implements OnInit, OnDestroy {
   showContacts = true;
 
   contacts: ChatChannel[] = [];
+  otherUserNames: { [channelId: string]: string } = {}; // Store other user names per channel
 
   currentChatChannel: ChatChannel | null = null;
   messages: Message[] = [];
 
-  currentUserId: string | null = null;
+  currentUserId: string = "";
   otherUserId: string | undefined | null = null;
 
   currentUserName: string | null = null;
@@ -43,6 +44,7 @@ export default class ChatComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
+    this.currentUserId = this.authService.getUserId() || ""; // Get current user ID
     this.loadContacts();
   }
 
@@ -54,38 +56,59 @@ export default class ChatComponent implements OnInit, OnDestroy {
   loadContacts() {
     this.chatService.getUserChatChannels()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((response: ChatResponse) => {  // Specify the response type
-        if (response.success && response.data) {  // Check for success and data
-          this.contacts = response.data; // Assign the data array
-          console.log("contact data: ", response.data);
+      .subscribe((response: ChatResponse) => {
+        if (response.success && response.data) {
+          this.contacts = response.data;
+          console.log("contacts: ",this.contacts);
+          console.log("response: ",response.data);
 
-          const freelancerId = this.currentChatChannel?.freelancerId;
-          const clientId = this.currentChatChannel?.clientId;
-          this.currentUserId = this.authService.getUserId();
-          /*debug*/console.log("user id: ", this.currentUserId);
-          /*debug*/console.log("client id: ", clientId);
-          /*debug*/console.log("freelancer id: ", freelancerId);
-        
-          if (this.currentUserId === freelancerId) {
-            this.otherUserId = clientId;
-          } else if (this.currentUserId === clientId) {
-            this.otherUserId = freelancerId;
-          } else {
-            console.error("Current user is not part of this chat channel.");
-            // Handle this case appropriately, maybe redirect or show an error message.
-          }
-
-          if (this.otherUserId && this.currentUserId) {
-            this.loadCurrentUserName(this.currentUserId);
-            this.loadOtherUserName(this.otherUserId);
-          }
+          // Iterate through each contact to determine and load the other user's name
+          this.contacts.forEach(contact => {
+            this.getOtherUserIdAndLoadName(contact);
+          });
 
         } else {
-          // Handle the error or display a message if data is missing.
           console.error("Failed to load contacts:", response.message || "No data received.");
-          this.contacts = []; // Or some other default behavior
+          this.contacts = [];
         }
       });
+  }
+
+  getOtherUserName(contact: ChatChannel): string {
+    return this.otherUserNames[contact._id] || "Loading..."; // Use stored name or "Loading..."
+  }
+
+  getOtherUserIdAndLoadName(contact: ChatChannel) {
+    const otherUserId = this.getOtherUserId(contact);
+    console.log("other user Id: ",otherUserId);
+
+    if (!otherUserId) {
+      console.error("Current user is not part of this chat channel:", contact._id);
+      return;
+    }
+
+    this.userService.getUser(otherUserId).subscribe({
+      next: (response) => {
+        if (response.success) {
+          this.otherUserNames[contact._id] = response.data.username;
+        } else {
+          console.error(`Failed to retrieve other user details for channel ${contact._id}:`, response.message);
+          this.otherUserNames[contact._id] = "Unknown User";
+        }
+      },
+      error: (error) => {
+        console.error(`Error fetching other user details for channel ${contact._id}:`, error);
+        this.otherUserNames[contact._id] = "Unknown User";
+      }
+    });
+  }
+
+
+  getOtherUserId(contact: ChatChannel): string | null {
+    console.log("clientID: ",contact.clientId);
+    console.log("freelancerID: ",contact.freelancerId);
+    return (this.currentUserId === contact.freelancerId) ? contact.clientId :
+           (this.currentUserId === contact.clientId) ? contact.freelancerId : null;
   }
 
   openChat(channelId: string) {
@@ -121,35 +144,5 @@ export default class ChatComponent implements OnInit, OnDestroy {
     this.showContacts = true;
     this.currentChatChannel = null;
     this.messages = [];
-  }
-
-  loadCurrentUserName(userId: string) {
-    this.userService.getUser(userId).subscribe(
-      (response) => {
-        if (response.success) {
-          this.currentUserName = response.data.username;
-          /*debug*/ console.log("current user name: ",response.data.username);
-        } else {
-          console.error('Failed to retrieve current user details:', response.message);
-        }
-      },
-      (error) => {
-        console.error('Error fetching current user details:', error);
-      });
-  }
-
-  loadOtherUserName(userId: string) {
-    this.userService.getUser(userId).subscribe(
-      (response) => {
-        if (response.success) {
-          this.otherUserName = response.data.username;
-          /*debug*/ console.log("contact user name: ",response.data.username);
-        } else {
-          console.error('Failed to retrieve current user details:', response.message);
-        }
-      },
-      (error) => {
-        console.error('Error fetching current user details:', error);
-      });
   }
 }

@@ -16,7 +16,7 @@
                     <img type="image/png" class="contact-image bg-gray-400">
                     <div class="grid mx-4 overflow-clip">
                         <h2 class="contact-name">
-                            {{ otherUserName }}
+                            {{ getOtherUserName(contact) }}
                         </h2>
                         <p class="contact-last-message" *ngIf="contact.messages && contact.messages.length > 0">
                             {{ contact.messages[contact.messages.length - 1].content }}
