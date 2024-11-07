@@ -156,19 +156,9 @@ export default class ChatComponent implements OnInit, OnDestroy {
       });
   }
 
-  loadChatChannel(channelId: string) {
-    this.chatService.getChatChannelById(channelId)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(channel => {
-        this.currentChatChannel = channel;
-        if (channel){
-          this.messages = channel.messages;
-        }
-      });
-  }
-
   sendMessage() {
     if (this.currentChatChannel && this.newMessageForm.valid) {
+      console.log("Message from Channel Id:", this.currentChatChannel._id);
       const newMessage = { content: this.newMessageForm.value.content! };
       this.chatService.sendMessage(this.currentChatChannel._id, newMessage)
         .pipe(takeUntil(this.destroy$))
