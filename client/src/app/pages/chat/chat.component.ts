@@ -51,7 +51,7 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit() {
     this.currentUserId = this.authService.getUserId() || "";
-    console.log("userID: ", this.currentUserId);
+    /*debug*/ //console.log("userID: ", this.currentUserId);
     this.loadContacts(); // loadContacts is safe here, it's independent from userId.
     // now we can safely subscribe to the route changes because userId will be there.
     this.route.params.pipe(
@@ -191,7 +191,7 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
         next: (response) => {
           if (response && response.data && Array.isArray(response.data.messages)) {
             this.messages = [...response.data.messages];
-            console.log("messages: ", this.messages);
+            /*debug*/ //console.log("messages: ", this.messages);
             this.cdRef.detectChanges(); // Essential if using OnPush, consider if not
             resolve(); // Resolve the promise
           } else {
@@ -229,12 +229,12 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
               this.newMessageForm.reset();
               this.cdRef.detectChanges();
 
-              // Logging for verification:
+              /* Logging for verification:
               console.log("currentUserId (trimmed):", this.currentUserId.trim());
               this.messages.forEach(message => {
                 console.log("message.senderId (processed):", this.getSenderId(message), "Comparison Result:", this.getSenderId(message) === this.currentUserId.trim());
               });
-
+              */
             } else {
               console.error("Invalid response format or messages not an array:", response);
               // Optional: Display an error message to the user

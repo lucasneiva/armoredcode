@@ -48,9 +48,11 @@
                     <div class="message-buble">
                         <p class="message">{{ message.content }}</p>
                         <span class="message-date">{{ message.timestamp | date: 'HH:mm' }}</span>
+                        <!-- DEV MODE
                         <pre>{{ message | json }}</pre>
                         <div>{{ message.senderId }} === {{ currentUserId }}: {{(message.senderId ===
                             currentUserId).toString() }}</div>
+                        -->
                     </div>
                 </div>
                 <!--placeholders-->

@@ -19,7 +19,7 @@ export class ChatService {
     return this.http.get<ChatResponse>(`${apiUrls.chatServiceApi}/my-chats`, httpOptions)
       .pipe(
         tap((res) => {
-          console.log('User Chats fetched:', res);
+          /*debug*/ //console.log('User Chats fetched:', res);
         }),
         catchError((error) => {
           console.error('Error fetching User Chats:', error);
@@ -38,7 +38,7 @@ export class ChatService {
     return this.http.get<ChatChannel>(`${apiUrls.chatServiceApi}/${channelId}`, httpOptions)
       .pipe(
         tap((res) => {
-          console.log('Chat fetched:', res);
+          /*debug*/ //console.log('Chat fetched:', res);
         }),
         catchError((error) => {
           console.error('Error fetching Chat:', error);
