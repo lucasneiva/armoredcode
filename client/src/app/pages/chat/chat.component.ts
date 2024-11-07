@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ChatChannel, ChatResponse, ChatService, Message } from '../../services/chat.service';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
@@ -38,14 +38,16 @@ export default class ChatComponent implements OnInit, OnDestroy {
   currentUserName: string | null = null;
   otherUserName: string | null = null;
 
-  newMessageForm = this.fb.group({
-    content: ['']
-  });
   private destroy$ = new Subject<void>();
+
+  newMessageForm: FormGroup = this.fb.group({ // Define as FormGroup
+    content: ['', Validators.required] // Add required validator
+  });
 
   ngOnInit(): void {
     this.currentUserId = this.authService.getUserId() || ""; // Get current user ID
     this.loadContacts();
+    
   }
 
   ngOnDestroy(): void {
@@ -144,6 +146,7 @@ export default class ChatComponent implements OnInit, OnDestroy {
             this.currentChatChannel = channel;
             this.messages = this.currentChatChannel.messages;
             console.log("Channel received:", this.currentChatChannel);
+            console.log("Channel ID:", this.currentChatChannel.data._id);
           } else {
             console.error("Chat channel not found or error fetching.");
             this.closeChat(); // Close the chat or handle the error as needed
@@ -156,37 +159,34 @@ export default class ChatComponent implements OnInit, OnDestroy {
       });
   }
 
-  sendMessage() {
-    if (this.currentChatChannel && this.newMessageForm.valid) {
-      console.log("Message from Channel Id:", this.currentChatChannel._id);
-      const newMessage = { content: this.newMessageForm.value.content! };
-      this.chatService.sendMessage(this.currentChatChannel._id, newMessage)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: updatedChannel => {
-            this.currentChatChannel = updatedChannel;
-            this.messages = updatedChannel.messages;
-            this.newMessageForm.reset(); // Clear input after sending
-          },
-          error: error => {
-            console.error("Error sending message:", error);
-            // More robust error handling:
-            // 1. Display an error message to the user (e.g., using a snackbar or alert).
-            // 2. Potentially retry the send operation or take other corrective actions.
-            // Example using an alert (replace with your preferred method):
-            alert("Failed to send message. Please try again."); 
-          }
-        });
-    } else {
-      console.warn("Cannot send message: No chat selected or form invalid.");
-      // Optionally inform the user (if no chat selected, maybe prompt them to select one).
-    }
-  }
-
   closeChat() {
     this.showChatBox = false;
     this.showContacts = true;
     this.currentChatChannel = null;
     this.messages = [];
   }
+
+  sendMessage() {
+    if (this.newMessageForm.valid && this.currentChatChannel) {
+      const message = this.newMessageForm.value;
+      const channelId = this.currentChatChannel.data._id;
+      /*debug*/ console.log("message: ", message)
+      /*debug*/ console.log("channel Id from message: ", channelId)
+
+      this.chatService.sendMessage(channelId, message)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (updatedChannel) => {
+            console.log('Message sent successfully:', updatedChannel);
+            this.messages = updatedChannel.messages; // Update messages array
+            this.newMessageForm.reset(); // Clear the input field
+          },
+          error: (error) => {
+            console.error('Error sending message:', error);
+            // Handle error (e.g., display an error message)
+          }
+        });
+    }
+  }
+
 }

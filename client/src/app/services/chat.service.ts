@@ -72,6 +72,7 @@ export type ChatResponse = { // Define ApiResponse type in service
 }
 
 export type ChatChannel = {
+  data: any;
   _id: string;
   projectId: string;
   freelancerId: string;
