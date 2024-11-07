@@ -156,7 +156,7 @@
             }
 
             .message-sent {
-                align-self: flex-end;
+                align-self: flex-end !important;
                 background-color: rgb(59 130 246);
                 color: white;
                 margin: 1rem 0.33rem;
@@ -191,7 +191,7 @@
             }
 
             .message-received {
-                align-self: flex-start;
+                align-self: flex-start !important;
                 background-color: #e7eded;
                 color: black;
                 margin: 1rem 0.33rem;

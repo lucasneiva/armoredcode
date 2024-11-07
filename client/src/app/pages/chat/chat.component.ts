@@ -209,7 +209,7 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   sendMessage() {
-    if (this.newMessageForm.valid && this.currentChatChannel) {
+    if (this.newMessageForm.valid && this.currentChatChannel && this.currentChatChannel.data._id) {
       const messageContent = this.newMessageForm.value.content;
       const channelId = this.currentChatChannel.data._id;
 
@@ -220,34 +220,38 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
         _id: ''
       };
 
-      // Optimistic UI update:
-      this.messages = [...this.messages, newMessage];
-      this.newMessageForm.reset();
-      this.cdRef.detectChanges();
-
-
-      this.chatService.sendMessage(channelId, { content: newMessage.content }) // Pass an object with content
+      this.chatService.sendMessage(channelId, { content: newMessage.content })
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: (response) => {
             if (response.success && response.data && Array.isArray(response.data.messages)) {
-              this.messages = [...response.data.messages]; // Use server response
+              this.messages = [...response.data.messages];
+              this.newMessageForm.reset();
+              this.cdRef.detectChanges();
+
+              // Logging for verification:
+              console.log("currentUserId (trimmed):", this.currentUserId.trim());
+              this.messages.forEach(message => {
+                console.log("message.senderId (processed):", this.getSenderId(message), "Comparison Result:", this.getSenderId(message) === this.currentUserId.trim());
+              });
+
             } else {
               console.error("Invalid response format or messages not an array:", response);
-              // Handle error, potentially revert optimistic update:
-              this.messages.pop(); // Remove the last (optimistically added) message
-              // Display an error message to the user
+              // Optional: Display an error message to the user
             }
-            this.cdRef.detectChanges();
           },
           error: (error) => {
             console.error('Error sending message:', error);
-            // Handle error, revert optimistic update
-            this.messages.pop();
-            // Display an error message to the user
-            this.cdRef.detectChanges(); // Refresh the view to reflect the reverted change
+            // Optional: Display an error message to the user
           }
         });
     }
+  }
+
+  // In your component
+  getSenderId(message: Message): string {
+    return typeof message.senderId === 'string'
+      ? message.senderId.trim()  // If it's already a string, trim it
+      : (message.senderId as any)._id?.trim() || ''; // Safely access _id if it's an object
   }
 }

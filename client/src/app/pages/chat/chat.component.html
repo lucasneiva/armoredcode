@@ -42,12 +42,15 @@
             </nav>
             <div class="chat-content">
                 <!--placeholders-->
-                <div *ngFor="let message of messages; trackBy: trackByMessage"
-                    [class.message-sent]="currentUserId && message.senderId === currentUserId"
-                    [class.message-received]="currentUserId && message.senderId !== currentUserId">
+                <div *ngFor="let message of messages"
+                    [class.message-sent]="currentUserId && getSenderId(message) === currentUserId"
+                    [class.message-received]="currentUserId && getSenderId(message) !== currentUserId">
                     <div class="message-buble">
                         <p class="message">{{ message.content }}</p>
                         <span class="message-date">{{ message.timestamp | date: 'HH:mm' }}</span>
+                        <pre>{{ message | json }}</pre>
+                        <div>{{ message.senderId }} === {{ currentUserId }}: {{(message.senderId ===
+                            currentUserId).toString() }}</div>
                     </div>
                 </div>
                 <!--placeholders-->
