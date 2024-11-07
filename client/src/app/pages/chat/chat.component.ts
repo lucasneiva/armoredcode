@@ -4,7 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { ChatChannel, ChatResponse, ChatService, Message } from '../../services/chat.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { of, Subject, switchMap, takeUntil } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 
@@ -49,10 +49,25 @@ export default class ChatComponent implements OnInit, OnDestroy {
     return message._id || index.toString();
   }
 
-  ngOnInit(): void {
-    this.currentUserId = this.authService.getUserId() || ""; // Get current user ID
-    this.loadContacts();
-
+  ngOnInit() {
+    this.currentUserId = this.authService.getUserId() || "";
+    console.log("userID: ", this.currentUserId);
+    this.loadContacts(); // loadContacts is safe here, it's independent from userId.
+    // now we can safely subscribe to the route changes because userId will be there.
+    this.route.params.pipe(
+      switchMap(({ channelId }) => {
+        if (channelId) {
+          return this.chatService.getChatChannelById(channelId);
+        } else {
+          return of(null);
+        }
+      })
+    ).subscribe(channel => {
+      if (channel) {
+        this.openChat(channel._id);
+      }
+      // else: nothing to be done because there is no channel Id to open automatically.
+    });
   }
 
   ngOnDestroy(): void {
@@ -106,7 +121,6 @@ export default class ChatComponent implements OnInit, OnDestroy {
 
   getId(user: string | { _id: string } | null | undefined): string | null {
     if (user == null) return null; // Handle null or undefined
-
     return typeof user === 'string' ? user : user._id; // Simplified
   }
 
@@ -142,6 +156,7 @@ export default class ChatComponent implements OnInit, OnDestroy {
   openChat(channelId: string) {
     this.showChatBox = true;
     this.showContacts = false;
+
     this.loadMessages(channelId); // Load messages *after* starting to open the chat
     // But before setting currentChatChannel
     this.chatService.getChatChannelById(channelId).subscribe({
@@ -149,15 +164,12 @@ export default class ChatComponent implements OnInit, OnDestroy {
         if (channel) {
           this.currentChatChannel = channel;
           console.log("Channel received:", this.currentChatChannel);
-          // this.messages = this.currentChatChannel.messages; // This line caused the race condition; removed.
-          // Now messages are set in loadMessages after the API call completes.
         } else {
-          // ... (error handling)
+          console.log("Error receiving Channel:", this.currentChatChannel);
         }
       },
       error: (error) => {
-        // ... (error handling)
-
+        console.error('Error fetching Channel:', error);
       }
     });
   }
@@ -171,20 +183,21 @@ export default class ChatComponent implements OnInit, OnDestroy {
 
   loadMessages(channelId: string) {
     this.chatService.getChatChannelById(channelId).subscribe({
-        next: (response) => { // Renamed to response for clarity
-            if (response && response.data && Array.isArray(response.data.messages)) {
-                this.messages = [...response.data.messages]; // Access messages inside response.data
-                this.cdRef.detectChanges(); // <== If using OnPush, keep this.
-            } else {
-                this.messages = []; // Or handle the error as needed
-                console.error("Invalid response format or messages not an array:", response);
-            }
-        },
-        error: (error) => {
-            // ... handle the error ...
+      next: (response) => { // Renamed to response for clarity
+        if (response && response.data && Array.isArray(response.data.messages)) {
+          this.messages = [...response.data.messages]; // Access messages inside response.data
+          console.log("messages: ", this.messages)
+          this.cdRef.detectChanges(); // <== If using OnPush, keep this.
+        } else {
+          this.messages = []; // Or handle the error as needed
+          console.error("Invalid response format or messages not an array:", response);
         }
+      },
+      error: (error) => {
+        console.error('Error loading message:', error);
+      }
     });
-}
+  }
 
   sendMessage() {
     if (this.newMessageForm.valid && this.currentChatChannel) {
