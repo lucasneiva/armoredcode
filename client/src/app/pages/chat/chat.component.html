@@ -43,8 +43,8 @@
             <div class="chat-content">
                 <!--placeholders-->
                 <div *ngFor="let message of messages; trackBy: trackByMessage"
-                    [class.message-sent]="message.senderId === currentUserId"
-                    [class.message-received]="message.senderId !== currentUserId">
+                    [class.message-sent]="currentUserId && message.senderId === currentUserId"
+                    [class.message-received]="currentUserId && message.senderId !== currentUserId">
                     <div class="message-buble">
                         <p class="message">{{ message.content }}</p>
                         <span class="message-date">{{ message.timestamp | date: 'HH:mm' }}</span>

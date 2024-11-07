@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ChatChannel, ChatResponse, ChatService, Message } from '../../services/chat.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -15,7 +15,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss'
 })
-export default class ChatComponent implements OnInit, OnDestroy {
+export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
   fb = inject(FormBuilder);
   cdRef = inject(ChangeDetectorRef);
   router = inject(Router);
@@ -68,6 +68,12 @@ export default class ChatComponent implements OnInit, OnDestroy {
       }
       // else: nothing to be done because there is no channel Id to open automatically.
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['currentChatChannel'] && this.currentChatChannel) {
+      this.loadMessages(this.currentChatChannel._id);
+    }
   }
 
   ngOnDestroy(): void {
@@ -154,23 +160,21 @@ export default class ChatComponent implements OnInit, OnDestroy {
   }
 
   openChat(channelId: string) {
-    this.showChatBox = true;
-    this.showContacts = false;
-
-    this.loadMessages(channelId); // Load messages *after* starting to open the chat
-    // But before setting currentChatChannel
-    this.chatService.getChatChannelById(channelId).subscribe({
-      next: (channel) => {
-        if (channel) {
-          this.currentChatChannel = channel;
-          console.log("Channel received:", this.currentChatChannel);
-        } else {
-          console.log("Error receiving Channel:", this.currentChatChannel);
+    this.loadMessages(channelId).then(() => { // Use a promise to ensure messages are loaded
+      this.chatService.getChatChannelById(channelId).subscribe({
+        next: (channel) => {
+          if (channel) {
+            this.currentChatChannel = channel;
+            this.showChatBox = true; // Show AFTER messages are loaded
+            this.showContacts = false;
+            // If using OnPush, add this here: this.cdRef.detectChanges();
+          }
+        },
+        error: (error) => {
+          console.error('Error fetching Channel:', error);
+          // Possibly handle the UI here to indicate a failed load
         }
-      },
-      error: (error) => {
-        console.error('Error fetching Channel:', error);
-      }
+      });
     });
   }
 
@@ -181,49 +185,69 @@ export default class ChatComponent implements OnInit, OnDestroy {
     this.messages = [];
   }
 
-  loadMessages(channelId: string) {
-    this.chatService.getChatChannelById(channelId).subscribe({
-      next: (response) => { // Renamed to response for clarity
-        if (response && response.data && Array.isArray(response.data.messages)) {
-          this.messages = [...response.data.messages]; // Access messages inside response.data
-          console.log("messages: ", this.messages)
-          this.cdRef.detectChanges(); // <== If using OnPush, keep this.
-        } else {
-          this.messages = []; // Or handle the error as needed
-          console.error("Invalid response format or messages not an array:", response);
+  loadMessages(channelId: string): Promise<void> { // Return a promise
+    return new Promise<void>((resolve, reject) => {  // Wrap in a promise
+      this.chatService.getChatChannelById(channelId).subscribe({
+        next: (response) => {
+          if (response && response.data && Array.isArray(response.data.messages)) {
+            this.messages = [...response.data.messages];
+            console.log("messages: ", this.messages);
+            this.cdRef.detectChanges(); // Essential if using OnPush, consider if not
+            resolve(); // Resolve the promise
+          } else {
+            this.messages = [];
+            console.error("Invalid response format or messages not an array:", response);
+            reject(new Error("Invalid message data")); // Reject if there's an issue
+          }
+        },
+        error: (error) => {
+          console.error('Error loading message:', error);
+          reject(error); // Reject with the error
         }
-      },
-      error: (error) => {
-        console.error('Error loading message:', error);
-      }
+      });
     });
   }
 
   sendMessage() {
     if (this.newMessageForm.valid && this.currentChatChannel) {
-      const message = this.newMessageForm.value;
+      const messageContent = this.newMessageForm.value.content;
       const channelId = this.currentChatChannel.data._id;
-      /*debug*/ console.log("message: ", message)
-      /*debug*/ console.log("channel Id from message: ", channelId)
 
-      this.chatService.sendMessage(channelId, message)
+      const newMessage: Message = {
+        content: messageContent,
+        senderId: this.currentUserId,
+        timestamp: new Date(),
+        _id: ''
+      };
+
+      // Optimistic UI update:
+      this.messages = [...this.messages, newMessage];
+      this.newMessageForm.reset();
+      this.cdRef.detectChanges();
+
+
+      this.chatService.sendMessage(channelId, { content: newMessage.content }) // Pass an object with content
         .pipe(takeUntil(this.destroy$))
         .subscribe({
-          next: (response) => { // Use response instead of updatedChannel
-            if (response.success && response.data && Array.isArray(response.data.messages)) { // Check for success and data.messages array
-              this.messages = [...response.data.messages]; // Access messages inside response.data
-              this.newMessageForm.reset();
+          next: (response) => {
+            if (response.success && response.data && Array.isArray(response.data.messages)) {
+              this.messages = [...response.data.messages]; // Use server response
             } else {
               console.error("Invalid response format or messages not an array:", response);
-              // Handle the error appropriately (e.g., display a message to the user)
+              // Handle error, potentially revert optimistic update:
+              this.messages.pop(); // Remove the last (optimistically added) message
+              // Display an error message to the user
             }
+            this.cdRef.detectChanges();
           },
           error: (error) => {
             console.error('Error sending message:', error);
-            // Handle error as needed
+            // Handle error, revert optimistic update
+            this.messages.pop();
+            // Display an error message to the user
+            this.cdRef.detectChanges(); // Refresh the view to reflect the reverted change
           }
         });
     }
   }
-
 }
