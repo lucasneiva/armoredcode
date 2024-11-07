@@ -72,6 +72,7 @@ export type ChatResponse = { // Define ApiResponse type in service
 }
 
 export type ChatChannel = {
+  success: any;
   data: any;
   _id: string;
   projectId: string;
@@ -82,6 +83,7 @@ export type ChatChannel = {
 }
 
 export type Message = {
+  _id: string;
   senderId: string;
   content: string;
   timestamp: Date;

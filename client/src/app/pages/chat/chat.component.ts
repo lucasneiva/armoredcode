@@ -44,10 +44,14 @@ export default class ChatComponent implements OnInit, OnDestroy {
     content: ['', Validators.required] // Add required validator
   });
 
+  trackByMessage(index: number, message: Message): string {
+    return message._id || index.toString();
+  }
+
   ngOnInit(): void {
     this.currentUserId = this.authService.getUserId() || ""; // Get current user ID
     this.loadContacts();
-    
+
   }
 
   ngOnDestroy(): void {
@@ -78,16 +82,16 @@ export default class ChatComponent implements OnInit, OnDestroy {
   getOtherUserId(contact: ChatChannel): string | null {
     const clientId = this.getId(contact.clientId);
     const freelancerId = this.getId(contact.freelancerId);
-  
+
     /*debug*/ //console.log("Current User ID:", this.currentUserId); // Log current user ID
     /*debug*/ //console.log("Client ID:", clientId);
     /*debug*/ //console.log("Freelancer ID:", freelancerId);
-  
+
     if (!clientId || !freelancerId) {
       console.error("Missing client or freelancer ID in contact:", contact);
       return null;
     }
-  
+
     //  More robust comparison (important!)
     if (this.currentUserId === clientId) {
       return freelancerId;
@@ -95,14 +99,14 @@ export default class ChatComponent implements OnInit, OnDestroy {
       return clientId;
     } else {
       console.error("Current user is not part of this chat:", this.currentUserId, contact);
-      return null; 
+      return null;
     }
   }
-  
+
   getId(user: string | { _id: string } | null | undefined): string | null {
-      if (user == null) return null; // Handle null or undefined
-  
-      return typeof user === 'string' ? user : user._id; // Simplified
+    if (user == null) return null; // Handle null or undefined
+
+    return typeof user === 'string' ? user : user._id; // Simplified
   }
 
   getOtherUserName(contact: ChatChannel): string {
@@ -176,14 +180,18 @@ export default class ChatComponent implements OnInit, OnDestroy {
       this.chatService.sendMessage(channelId, message)
         .pipe(takeUntil(this.destroy$))
         .subscribe({
-          next: (updatedChannel) => {
-            console.log('Message sent successfully:', updatedChannel);
-            this.messages = updatedChannel.messages; // Update messages array
-            this.newMessageForm.reset(); // Clear the input field
+          next: (response) => { // Use response instead of updatedChannel
+            if (response.success && response.data && Array.isArray(response.data.messages)) { // Check for success and data.messages array
+              this.messages = [...response.data.messages]; // Access messages inside response.data
+              this.newMessageForm.reset();
+            } else {
+              console.error("Invalid response format or messages not an array:", response);
+              // Handle the error appropriately (e.g., display a message to the user)
+            }
           },
           error: (error) => {
             console.error('Error sending message:', error);
-            // Handle error (e.g., display an error message)
+            // Handle error as needed
           }
         });
     }

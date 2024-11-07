@@ -42,7 +42,8 @@
             </nav>
             <div class="chat-content">
                 <!--placeholders-->
-                <div *ngFor="let message of messages" [class.message-sent]="message.senderId === currentUserId"
+                <div *ngFor="let message of messages" [attr.data-message-id]="message._id"
+                    [class.message-sent]="message.senderId === currentUserId"
                     [class.message-received]="message.senderId !== currentUserId">
                     <div class="message-buble">
                         <p class="message">{{ message.content }}</p>
