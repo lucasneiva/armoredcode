@@ -26,6 +26,7 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
 
   showChatBox = false;
   showContacts = true;
+  showProject = false;
 
   contacts: ChatChannel[] = [];
   otherUserNames: { [channelId: string]: string } = {}; // Store other user names per channel
@@ -167,6 +168,7 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
             this.currentChatChannel = channel;
             this.showChatBox = true; // Show AFTER messages are loaded
             this.showContacts = false;
+            this.showProject = false;
 
             /*debug*///console.log(this.currentChatChannel.data);
             // loadCurrentChatChannelUser start
@@ -204,6 +206,7 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
   closeChat() {
     this.showChatBox = false;
     this.showContacts = true;
+    this.showProject = false;
     this.currentChatChannel = null;
     this.messages = [];
   }
@@ -279,6 +282,10 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   openChatProject(){
+    this.showProject = true;
+  }
 
+  closeChatProject(){
+    this.showProject = false;
   }
 }
