@@ -41,14 +41,18 @@
         <div class="chat-box absolute transition-opacity duration-0 ease-in-out" [class.opacity-0]="!showChatBox"
             [class.opacity-100]="showChatBox">
             <nav class="chat-nav">
-                <span *ngIf="currentChatChannel">
-                    Conversa com
-                    {{ otherUserName }}
-                </span>
                 <button class="lg:hidden" (click)="closeChat()">
                     <i class="fa fa-reply"></i>
                 </button>
                 <button class="max-lg:hidden" (click)="closeChat()"> Voltar </button>
+                <span *ngIf="currentChatChannel">
+                    Conversa com
+                    {{ otherUserName }}
+                </span>
+                <button class="lg:hidden" (click)="openChatProject()">
+                    <i class="fa fa-info-circle"></i>
+                </button>
+                <button class="max-lg:hidden" (click)="openChatProject()"> Detalhes </button>
             </nav>
             <div class="chat-content">
                 <div *ngIf="currentChatChannel && messages.length === 0" class="no-messages">

@@ -277,4 +277,8 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
       ? message.senderId.trim()  // If it's already a string, trim it
       : (message.senderId as any)._id?.trim() || ''; // Safely access _id if it's an object
   }
+
+  openChatProject(){
+
+  }
 }
