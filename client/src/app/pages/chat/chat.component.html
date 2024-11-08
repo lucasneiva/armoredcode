@@ -43,7 +43,7 @@
             <nav class="chat-nav">
                 <span *ngIf="currentChatChannel">
                     Conversa com
-                    {{ currentChatChannel.freelancerId || currentChatChannel.clientId }}
+                    {{ otherUserName }}
                 </span>
                 <button class="lg:hidden" (click)="closeChat()">
                     <i class="fa fa-reply"></i>

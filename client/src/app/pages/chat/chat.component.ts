@@ -167,7 +167,30 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
             this.currentChatChannel = channel;
             this.showChatBox = true; // Show AFTER messages are loaded
             this.showContacts = false;
-            // If using OnPush, add this here: this.cdRef.detectChanges();
+
+            /*debug*///console.log(this.currentChatChannel.data);
+            // loadCurrentChatChannelUser start
+            let currentContactId = "";
+            if (this.currentUserId !== this.currentChatChannel.data.clientId){
+              currentContactId = this.currentChatChannel.data.clientId;
+            } else{
+              currentContactId = this.currentChatChannel.data.freelancerId;
+            }
+            this.userService.getUser(currentContactId).subscribe({
+              next: (response) => {
+                if (response.success) {
+                  this.otherUserName = response.data.username;
+                } else {
+                  console.error(`Failed to retrieve other user details from this channel`, response.message);
+                  this.otherUserName = "Unknown User";
+                }
+              },
+              error: (error) => {
+                console.error(`Error fetching other user details from this channel`, error);
+                this.otherUserName = "Unknown User";
+              }
+            });
+            // loadCurrentChatChannelUser end
           }
         },
         error: (error) => {
