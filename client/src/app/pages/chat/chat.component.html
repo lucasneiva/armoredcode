@@ -88,14 +88,14 @@
         </div>
         <!--chat box structure end-->
         <!--project structure start-->
-        <div *ngIf="showProject" class="project-col space-y-0.5 transition-transform duration-300 ease-in-out"
-            [class.-translate-x-200%]="showProject" [class.translate-x-150%]="!showProject">
+        <div class="project-col space-y-0.5 transition-transform duration-300 ease-in-out"
+        [class.-translate-x-0]="!showProject" [class.-translate-x-full]="showProject">
             <nav class="project-nav">
-                <span> Projeto Atual </span>
                 <button class="lg:hidden" (click)="closeChatProject()">
                     <i class="fa fa-reply"></i>
                 </button>
                 <button class="max-lg:hidden" (click)="closeChatProject()"> Voltar </button>
+                <span> Projeto Atual </span>
             </nav>
 
             

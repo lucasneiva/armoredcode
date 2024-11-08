@@ -166,9 +166,9 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
         next: (channel) => {
           if (channel) {
             this.currentChatChannel = channel;
-            this.showChatBox = true; // Show AFTER messages are loaded
-            this.showContacts = false;
-            this.showProject = false;
+            this.showChatBox = true;
+    this.showContacts = false;
+    this.showProject = false;
 
             /*debug*///console.log(this.currentChatChannel.data);
             // loadCurrentChatChannelUser start
@@ -205,7 +205,7 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
 
   closeChat() {
     this.showChatBox = false;
-    this.showContacts = true;
+    this.showContacts = true; // Show contacts when closing chat
     this.showProject = false;
     this.currentChatChannel = null;
     this.messages = [];
@@ -282,10 +282,14 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   openChatProject(){
-    this.showProject = true;
+    this.showProject = true; // Show Project
+    this.showContacts = false; // Hide contacts
+    this.showChatBox = true;
   }
 
   closeChatProject(){
     this.showProject = false;
+    this.showContacts = false;
+    this.showChatBox = true;
   }
 }
