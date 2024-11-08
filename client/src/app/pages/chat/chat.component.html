@@ -7,6 +7,13 @@
             <nav class="contact-nav">
                 <span> Meus Contatos</span>
             </nav>
+
+            <div *ngIf="contacts.length === 0" class="no-contacts">
+                <p>Você não tem nenhum contato ainda.</p>
+                <!-- Optional: Add a button or link to find contacts -->
+                <button routerLink="/home" *ngIf="!showChatBox">Encontrar Contatos</button> 
+            </div>
+
             <!--contact template-->
             <div *ngFor="let contact of contacts" class="contact-container" (click)="openChat(contact._id)">
                 <span class="message-date" *ngIf="contact.messages && contact.messages.length > 0">
@@ -28,6 +35,9 @@
         </div>
         <!--contacts structure end-->
         <!--chat box structure start-->
+        <div *ngIf="!showChatBox" class="no-chat-selected">
+            <p>Selecione um contato para iniciar a conversa.</p>
+        </div>
         <div class="chat-box absolute transition-opacity duration-0 ease-in-out" [class.opacity-0]="!showChatBox"
             [class.opacity-100]="showChatBox">
             <nav class="chat-nav">
@@ -41,6 +51,9 @@
                 <button class="max-lg:hidden" (click)="closeChat()"> Voltar </button>
             </nav>
             <div class="chat-content">
+                <div *ngIf="currentChatChannel && messages.length === 0" class="no-messages">
+                    <p>Nenhuma mensagem ainda. Comece a conversar!</p>
+                </div>
                 <!--placeholders-->
                 <div *ngFor="let message of messages"
                     [class.message-sent]="currentUserId && getSenderId(message) === currentUserId"
