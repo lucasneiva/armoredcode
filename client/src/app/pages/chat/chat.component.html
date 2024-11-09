@@ -98,18 +98,18 @@
                 <span> Projeto Atual </span>
             </nav>
             <div *ngIf="currentProject" class="project-info-container">
-                <h2>{{ currentProject.projectTitle }}</h2>
-                <p>{{ currentProject.projectDescription }}</p>
+                <h2 class="project-title">{{ currentProject.projectTitle }}</h2>
+                <p class="project-description">{{ currentProject.projectDescription }}</p>
                 <div class="pricing-container">
-                    <p *ngIf="currentProject.pricingType == 'BUDGET'">Orçamento: </p>
-                    <p *ngIf="currentProject.pricingType == 'HOURLY-RATE'">Valor Por Hora: </p>
+                    <h3 *ngIf="currentProject.pricingType == 'BUDGET'">Orçamento: </h3>
+                    <h3 *ngIf="currentProject.pricingType == 'HOURLY-RATE'">Valor Por Hora: </h3>
                     <p *ngIf="currentProject.pricingType == 'BUDGET'">
-                        {{ currentProject.projectBudget?.currency +""+ currentProject.projectBudget?.min }}
-                        {{ currentProject.projectBudget?.currency +""+ currentProject.projectBudget?.max }}
+                        {{ currentProject.projectBudget?.currency +" "+ currentProject.projectBudget?.min + " à " }}
+                        {{ currentProject.projectBudget?.currency +" "+ currentProject.projectBudget?.max }}
                     </p>
                     <p *ngIf="currentProject.pricingType == 'HOURLY-RATE'">
-                        {{ currentProject.projectHourlyRate?.currency +""+ currentProject.projectHourlyRate?.min }}
-                        {{ currentProject.projectHourlyRate?.currency +""+ currentProject.projectHourlyRate?.max }}
+                        {{ currentProject.projectHourlyRate?.currency +" "+ currentProject.projectHourlyRate?.min + " à " }}
+                        {{ currentProject.projectHourlyRate?.currency +" "+ currentProject.projectHourlyRate?.max }}
                     </p>
                 </div>
                 <!-- DEV MODE
