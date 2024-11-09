@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { of, Subject, switchMap, takeUntil } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
+import { Project, ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-chat',
@@ -23,6 +24,9 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
   route = inject(ActivatedRoute);
   authService = inject(AuthService);
   userService = inject(UserService);
+  projectService = inject(ProjectService);
+
+  currentProject: Project | null = null;
 
   showChatBox = false;
   showContacts = true;
@@ -167,15 +171,15 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
           if (channel) {
             this.currentChatChannel = channel;
             this.showChatBox = true;
-    this.showContacts = false;
-    this.showProject = false;
+            this.showContacts = false;
+            this.showProject = false;
 
             /*debug*///console.log(this.currentChatChannel.data);
             // loadCurrentChatChannelUser start
             let currentContactId = "";
-            if (this.currentUserId !== this.currentChatChannel.data.clientId){
+            if (this.currentUserId !== this.currentChatChannel.data.clientId) {
               currentContactId = this.currentChatChannel.data.clientId;
-            } else{
+            } else {
               currentContactId = this.currentChatChannel.data.freelancerId;
             }
             this.userService.getUser(currentContactId).subscribe({
@@ -281,13 +285,47 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
       : (message.senderId as any)._id?.trim() || ''; // Safely access _id if it's an object
   }
 
-  openChatProject(){
-    this.showProject = true; // Show Project
-    this.showContacts = false; // Hide contacts
+  openChatProject() {
+    this.showProject = true;
+    this.showContacts = false;
     this.showChatBox = true;
+
+    if (this.currentChatChannel) {  // Ensure chat channel is selected
+      const projectId = this.getProjectIdFromChatChannel(this.currentChatChannel);
+      if (projectId) {
+        this.loadProject(projectId);
+      } else {
+        console.error("No project ID found in chat channel data.");
+      }
+    } else {
+      console.error("No chat channel selected.");
+    }
+
   }
 
-  closeChatProject(){
+  getProjectIdFromChatChannel(channel: ChatChannel): string | null {
+    return channel.data?.projectId || null; // Access projectId safely
+  }
+
+  loadProject(projectId: string) {
+    this.projectService.getProjectById(projectId).subscribe({
+      next: (response) => {
+        if (response.success && response.data) { // Check response.data directly
+          this.currentProject = response.data;  // Assign the entire data object
+          console.log("Project (within ChatChannel data) loaded:", this.currentProject);
+        } else {
+          console.error("Failed to load project or invalid response format:", response);
+          this.currentProject = null;
+        }
+      },
+      error: (error) => {
+        console.error("Error loading project:", error);
+        this.currentProject = null;
+      }
+    });
+  }
+
+  closeChatProject() {
     this.showProject = false;
     this.showContacts = false;
     this.showChatBox = true;

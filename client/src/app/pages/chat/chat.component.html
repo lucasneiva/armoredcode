@@ -11,7 +11,7 @@
             <div *ngIf="contacts.length === 0" class="no-contacts">
                 <p>Você não tem nenhum contato ainda.</p>
                 <!-- Optional: Add a button or link to find contacts -->
-                <button routerLink="/home" *ngIf="!showChatBox">Encontrar Contatos</button> 
+                <button routerLink="/home" *ngIf="!showChatBox">Encontrar Contatos</button>
             </div>
 
             <!--contact template-->
@@ -89,7 +89,7 @@
         <!--chat box structure end-->
         <!--project structure start-->
         <div class="project-col space-y-0.5 transition-transform duration-300 ease-in-out"
-        [class.-translate-x-0]="!showProject" [class.-translate-x-full]="showProject">
+            [class.-translate-x-0]="!showProject" [class.-translate-x-full]="showProject">
             <nav class="project-nav">
                 <button class="lg:hidden" (click)="closeChatProject()">
                     <i class="fa fa-reply"></i>
@@ -97,8 +97,27 @@
                 <button class="max-lg:hidden" (click)="closeChatProject()"> Voltar </button>
                 <span> Projeto Atual </span>
             </nav>
+            <div *ngIf="currentProject" class="project-info-container">
+                <h2>{{ currentProject.projectTitle }}</h2>
+                <p>{{ currentProject.projectDescription }}</p>
+                <div class="pricing-container">
+                    <p *ngIf="currentProject.pricingType == 'BUDGET'">Orçamento: </p>
+                    <p *ngIf="currentProject.pricingType == 'HOURLY-RATE'">Valor Por Hora: </p>
+                    <p *ngIf="currentProject.pricingType == 'BUDGET'">
+                        {{ currentProject.projectBudget?.currency +""+ currentProject.projectBudget?.min }}
+                        {{ currentProject.projectBudget?.currency +""+ currentProject.projectBudget?.max }}
+                    </p>
+                    <p *ngIf="currentProject.pricingType == 'HOURLY-RATE'">
+                        {{ currentProject.projectHourlyRate?.currency +""+ currentProject.projectHourlyRate?.min }}
+                        {{ currentProject.projectHourlyRate?.currency +""+ currentProject.projectHourlyRate?.max }}
+                    </p>
+                </div>
+                <!-- DEV MODE
+                <pre>{{ currentProject | json }}</pre>
+                -->
+            </div>
+            <div *ngIf="!currentProject">Project loading or error...</div>
 
-            
         </div>
         <!--project structure end-->
     </div>
