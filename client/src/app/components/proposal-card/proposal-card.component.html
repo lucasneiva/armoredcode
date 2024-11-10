@@ -6,17 +6,18 @@
         'bg-white': project?.projectStatus !== 'COMPLETED'}"
         class="sticky w-full lg:max-w-lg max-lg:max-w-md px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
         <!-- DEV MODE <p class="text-sm text-gray-500">ID da Proposta: {{proposal._id}}</p>-->
-        <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
-            <span *ngIf="project" class="block py-2 mr-2">{{project.projectTitle}}</span>
-            <span class="block w-fit p-2 border-2 border-transparent rounded-md text-white" [ngClass]="{'bg-blue-500': proposal.status === 'DRAFT',
+        <h2 class="flex flex-col space-y-1 text-2xl font-bold leading-none text-gray-900">
+            <span class="block w-full p-2 border-2 border-transparent rounded-md text-white" [ngClass]="{'bg-blue-500': proposal.status === 'DRAFT',
                       'bg-yellow-500': proposal.status === 'PENDING',
                       'bg-red-500': proposal.status === 'REJECTED',
                       'bg-green-500': proposal.status === 'ACCEPTED'}">
+                <span> Status da Proposta: </span>
                 <ng-container *ngIf="proposal.status === 'DRAFT'">Rascunho</ng-container>
                 <ng-container *ngIf="proposal.status === 'PENDING'">Pendente</ng-container>
                 <ng-container *ngIf="proposal.status === 'REJECTED'">Rejeitada</ng-container>
                 <ng-container *ngIf="proposal.status === 'ACCEPTED'">Aceita</ng-container>
             </span>
+            <span *ngIf="project" class="block py-2 mr-2">{{project.projectTitle}}</span>
         </h2>
     </div>
     <!--card end-->
