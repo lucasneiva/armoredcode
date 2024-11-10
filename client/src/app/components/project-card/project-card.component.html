@@ -7,7 +7,7 @@
       'bg-stone-100': project.projectStatus === 'COMPLETED',
       'bg-white': project.projectStatus !== 'COMPLETED'}"
       class="sticky w-full lg:max-w-lg max-lg:max-w-md px-8 pt-8 pb-2 mx-auto space-y-4 z-10 border rounded-lg shadow-lg">
-      <p class="text-sm text-gray-500">ID do Projeto: {{project._id}}</p>
+      <!-- DEV MODE <p class="text-sm text-gray-500">ID do Projeto: {{project._id}}</p>-->
       <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
         <span class="block py-2 mr-2">{{project.projectTitle}}</span>
         <span class="block w-fit p-2 border-2 border-transparent rounded-md text-white text-nowrap" [ngClass]="{'bg-blue-500': project.projectStatus === 'DRAFT', 

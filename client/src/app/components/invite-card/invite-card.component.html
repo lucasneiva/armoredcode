@@ -5,7 +5,7 @@
         'bg-stone-100': project?.projectStatus === 'COMPLETED',
         'bg-white': project?.projectStatus !== 'COMPLETED'}"
         class="sticky w-full lg:max-w-lg max-lg:max-w-md px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
-        <p class="text-sm text-gray-500">ID do convite: {{invite._id}}</p>
+        <!-- DEV MODE <p class="text-sm text-gray-500">ID do convite: {{invite._id}}</p>-->
         <h2 class="space-y-1 text-2xl font-bold leading-none text-gray-900 flex justify-between items-center">
             <span *ngIf="project" class="block py-2 mr-2">{{project.projectTitle}}</span>
             <span *ngIf="invite" class="text-sm" [ngClass]="{

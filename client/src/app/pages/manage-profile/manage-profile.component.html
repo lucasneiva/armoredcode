@@ -19,15 +19,15 @@
         </div>
 
 
-        <div class="w-full flex max-lg:grid justify-between max-lg:justify-center py-3 mt-20 h-fit">
-            <div class="px-10 max-lg:p-4 h-fit">
+        <div class="w-full flex max-lg:grid justify-between max-lg:justify-center py-3 mt-20 h-fit align-middle">
+            <div class="px-10 max-lg:p-4 h-fit my-auto">
                 <h2 class="font-bold text-3xl">
                     {{ profile.companyName ? profile.companyName : (profile.firstName ? profile.firstName + ' ' +
                     profile.lastName : 'User Profile') }}
                 </h2>
-                <h2>
-                    ID: {{authService.getUserId()}}
-                </h2>
+                <!-- DEV MODE
+                <h2> ID: {{authService.getUserId()}} </h2>
+                -->
             </div>
             <div class="flex justify-center max-lg:w-full max-lg:justify-between px-8 py-4 h-fit">
                 <button (click)="showDeleteConfirmation()"
