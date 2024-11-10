@@ -27,6 +27,8 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
   projectService = inject(ProjectService);
 
   currentProject: Project | null = null;
+  timeElapsedSinceStart: string = ''; // Renamed property
+  private startTimeInterval: any; // Renamed for clarity
 
   showChatBox = false;
   showContacts = true;
@@ -84,6 +86,9 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+    if (this.startTimeInterval) {
+      clearInterval(this.startTimeInterval);
+    }
   }
 
   loadContacts() {
@@ -310,9 +315,13 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
   loadProject(projectId: string) {
     this.projectService.getProjectById(projectId).subscribe({
       next: (response) => {
-        if (response.success && response.data) { // Check response.data directly
-          this.currentProject = response.data;  // Assign the entire data object
-          console.log("Project (within ChatChannel data) loaded:", this.currentProject);
+        if (response.success && response.data) {
+          this.currentProject = response.data;
+          /*debug*/ console.log("project loaded: ", this.currentProject);
+          if (this.currentProject?.startDate) {
+            this.calculateTimeElapsed();
+            this.startStartTimeInterval();
+          }
         } else {
           console.error("Failed to load project or invalid response format:", response);
           this.currentProject = null;
@@ -323,6 +332,36 @@ export default class ChatComponent implements OnInit, OnDestroy, OnChanges {
         this.currentProject = null;
       }
     });
+  }
+
+  startStartTimeInterval() {
+    if (this.startTimeInterval) {
+      clearInterval(this.startTimeInterval);
+    }
+
+    this.startTimeInterval = setInterval(() => {
+      this.calculateTimeElapsed();
+    }, 60000);
+  }
+
+  calculateTimeElapsed() {
+    if (this.currentProject?.startDate) {
+      const startDate = new Date(this.currentProject.startDate);
+      const now = new Date();
+      const diffMs = now.getTime() - startDate.getTime();
+      const diffDays = Math.floor(diffMs / 86400000);
+      const diffHrs = Math.floor((diffMs % 86400000) / 3600000);
+      const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
+
+      this.timeElapsedSinceStart =
+        diffDays > 0
+          ? `${diffDays}d ${diffHrs}h`
+          : diffHrs > 0
+            ? `${diffHrs}h ${diffMins}m`
+            : `${diffMins}m`;
+
+      this.cdRef.detectChanges();
+    }
   }
 
   closeChatProject() {

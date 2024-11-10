@@ -100,7 +100,7 @@
             <div *ngIf="currentProject" class="project-info-container">
                 <h2 class="project-title">{{ currentProject.projectTitle }}</h2>
                 <p class="project-description">{{ currentProject.projectDescription }}</p>
-                <div class="pricing-container">
+                <div class="project-items-container">
                     <h3 *ngIf="currentProject.pricingType == 'BUDGET'">Orçamento: </h3>
                     <h3 *ngIf="currentProject.pricingType == 'HOURLY-RATE'">Valor Por Hora: </h3>
                     <p *ngIf="currentProject.pricingType == 'BUDGET'">
@@ -111,6 +111,13 @@
                         {{ currentProject.projectHourlyRate?.currency +" "+ currentProject.projectHourlyRate?.min + " à " }}
                         {{ currentProject.projectHourlyRate?.currency +" "+ currentProject.projectHourlyRate?.max }}
                     </p>
+                </div>
+                <div class="project-items-container">
+                    <h3>Tempo decorrido:</h3>
+                    <p *ngIf="currentProject?.startDate; else noStartDate"> {{ timeElapsedSinceStart }}</p>
+                    <ng-template #noStartDate>
+                        <p> Não especificado </p>
+                    </ng-template>
                 </div>
                 <!-- DEV MODE
                 <pre>{{ currentProject | json }}</pre>
