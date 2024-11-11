@@ -4,10 +4,11 @@
     <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{
         'bg-stone-100': project?.projectStatus === 'COMPLETED',
         'bg-white': project?.projectStatus !== 'COMPLETED'}"
-        class="sticky w-full lg:max-w-lg max-lg:max-w-md px-8 py-12 mx-auto space-y-4 bg-white border rounded-lg shadow-lg hover:bg-gray-100">
+        class="proposal-card">
         <!-- DEV MODE <p class="text-sm text-gray-500">ID da Proposta: {{proposal._id}}</p>-->
-        <h2 class="flex flex-col space-y-1 text-2xl font-bold leading-none text-gray-900">
-            <span class="block w-full p-2 border-2 border-transparent rounded-md text-white" [ngClass]="{'bg-blue-500': proposal.status === 'DRAFT',
+        <div class="card-header">
+            <span class="proposal-status" 
+            [ngClass]="{'bg-blue-500': proposal.status === 'DRAFT',
                       'bg-yellow-500': proposal.status === 'PENDING',
                       'bg-red-500': proposal.status === 'REJECTED',
                       'bg-green-500': proposal.status === 'ACCEPTED'}">
@@ -17,8 +18,9 @@
                 <ng-container *ngIf="proposal.status === 'REJECTED'">Rejeitada</ng-container>
                 <ng-container *ngIf="proposal.status === 'ACCEPTED'">Aceita</ng-container>
             </span>
-            <span *ngIf="project" class="block py-2 mr-2">{{project.projectTitle}}</span>
-        </h2>
+            <span *ngIf="project" class="project-title">{{project.projectTitle}}</span>
+            <h3 *ngIf="creatorName" class="creator-name"> {{creatorName}} </h3>
+        </div>
     </div>
     <!--card end-->
     <!--card details start-->
@@ -104,12 +106,6 @@
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
                         Rejeitar Proposta
                     </button>
-                    <!--
-                    <button *ngIf="proposal.status === 'PENDING'" (click)="makeCounterProposal()"
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-                        Make a Counter Proposal
-                    </button>
-                    -->
                 </ng-container>
             </div>
             <!--Buttons end-->
