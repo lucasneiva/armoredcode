@@ -1,5 +1,5 @@
 .project-container{
-    display: grid;
+    display: block;
     justify-content: center;
     align-items: center;
     position: fixed;
@@ -7,4 +7,84 @@
     inset: 0px;
     overflow: auto;
     background-color:rgba(0, 0, 0, 0.5);
+
+    .project-frame{
+        background-color: white;
+        border-radius: 0.5rem /* 8px */;
+        padding: 2rem /* 32px */;
+
+        @media (min-width: 1024px) {
+            margin: 0.25rem auto;
+            width: 98.5vw;
+            height: 98.5vh;
+        }
+        
+        @media not all and (min-width: 1024px) {
+            border-radius: 0rem /* 8px */;
+            margin: auto auto;
+            width: 96.5vw;
+            height: 99.9vh;
+        }
+
+        .frame-header{
+            display: flex;
+            justify-content: end;
+
+            .close-btn{
+                background-color: rgb(209 213 219);
+                color: rgb(31 41 55);
+                font-weight: 700;
+                border-radius: 100%;
+                padding: 0.25rem /* 4px */;
+                align-items: center;
+                width: fit-content;
+                height: fit-content;
+
+                &:hover{
+                    background-color: rgb(156 163 175);
+                }
+            }
+        }
+        .project-details{
+            display: flex;
+            flex-direction: column;
+            font-weight: 500;
+            font-size: 1.33rem;
+            line-height: 1.5;
+
+            .project-title{
+                font-weight: 700;
+                font-size: 2rem;
+                line-height: 1.75;
+                margin-bottom: 0.85rem;
+
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+
+                color: rgb(17 24 39);
+            }
+
+            .main-project-info{
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+
+                .primary-project-info{
+                    display: block;
+                    width: 100%;
+                }
+
+                .secondary-project-info{
+                    display: block;
+                    width: 100%;
+                }
+            }
+            .other-project-info{
+                display: block;
+                width: 100%;
+            }
+            
+        }
+    }
 }
