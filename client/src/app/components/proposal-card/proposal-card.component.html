@@ -19,7 +19,7 @@
                 <ng-container *ngIf="proposal.status === 'ACCEPTED'">Aceita</ng-container>
             </span>
             <span *ngIf="project" class="project-title">{{project.projectTitle}}</span>
-            <h3 *ngIf="creatorName" class="creator-name"> {{creatorName}} </h3>
+            <h3 *ngIf="creatorName && project.clientId._id === this.authService.getUserId()" class="creator-name"> {{creatorName}} </h3>
         </div>
     </div>
     <!--card end-->

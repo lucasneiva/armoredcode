@@ -1,4 +1,5 @@
-<div class="flex flex-col min-h-screen h-fit bg-white">
+<div class="flex flex-col min-h-screen h-fit" [ngClass]="{
+    'bg-transparent': !isLoading && !profile, 'bg-white': !isLoading && profile}">
 
     <ng-container *ngIf="isLoading">
         <div class="w-full flex justify-center items-center py-10 my-auto fixed top-0 bottom-0">
@@ -205,20 +206,21 @@
     </ng-container>
 
     <ng-container *ngIf="!isLoading && !profile">
-        <div class="block text-wrap max-w-md shadow-lg mt-56 p-10 mx-auto bg-white">
+        <div class="block text-wrap max-w-md shadow-lg my-auto p-10 mx-auto bg-white">
             <h1 class="text-center text-4xl text-gray-700">Que Vazio!</h1>
             <p class="text-left text-2xl text-gray-600 mt-4">
                 Você ainda não tem um perfil.
                 Mas você pode criar um clicando no botão de "Criar Perfil".
             </p>
+            <div class="flex w-full mt-4">
+                <button routerLink="/create-profile"
+                    class="bg-blue-500 hover:bg-blue-700 text-xl text-white font-bold py-4 px-8 w-full rounded cursor-pointer">
+                    Criar Perfil
+                </button>
+            </div>
         </div>
 
-        <div class="fixed bottom-12 left-1/2 transform -translate-x-1/2">
-            <button routerLink="/create-profile"
-                class="bg-blue-500 hover:bg-blue-700 text-xl text-white font-bold py-4 px-8 rounded cursor-pointer">
-                Criar Perfil
-            </button>
-        </div>
+        
 
     </ng-container>
 
