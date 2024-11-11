@@ -58,6 +58,7 @@ export class ProjectCardComponent {
       (response) => {
         if (response.success) {
           this.detailedProject = response.data;
+          /*debug*///console.log(this.detailedProject);
           const skillIds = this.detailedProject.skillIds;
           const creatorId = this.detailedProject.clientId._id;
           const projectCategoryId = this.detailedProject.projectCategoryId._id;

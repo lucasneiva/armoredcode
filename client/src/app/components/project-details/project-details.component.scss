@@ -1,11 +1,12 @@
 .project-container{
-    display: block;
+    display: flex;
     justify-content: center;
     align-items: center;
+    vertical-align: middle;
     position: fixed;
     z-index: 70;
     inset: 0px;
-    overflow: auto;
+    overflow: hidden;
     background-color:rgba(0, 0, 0, 0.5);
 
     .project-frame{
@@ -15,9 +16,9 @@
         overflow-y: auto;
 
         @media (min-width: 1024px) {
-            margin: 0.25rem auto;
-            width: 98.5vw;
-            height: 98.5vh;
+            margin: auto auto;
+            width: 68.5vw;
+            height: fit-content;
         }
         
         @media not all and (min-width: 1024px) {
@@ -56,7 +57,7 @@
             .project-title{
                 font-weight: 700;
                 font-size: 2rem;
-                line-height: 1.75;
+                line-height: 1.5;
                 margin-bottom: 0.85rem;
 
                 overflow: hidden;
@@ -64,10 +65,16 @@
                 -webkit-box-orient: vertical;
 
                 color: rgb(17 24 39);
+
+                @media not all and (min-width: 1024px) {
+                    font-size: 1.77rem;
+                    line-height: 1.25;
+                }
             }
 
             .main-project-info{
                 display: flex;
+                padding: 1rem 0rem;
                 width: 100%;
 
                 @media (min-width: 1024px) {
@@ -104,6 +111,7 @@
             .project-btns{
                 background-color: rgb(59 130 246);
                 color: white;
+                font-size: 1.25rem;
                 font-weight: 700;
                 padding: 1rem 0.5rem;
                 border-radius: 0.25rem;

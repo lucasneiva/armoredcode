@@ -1,6 +1,6 @@
 <!--card details start-->
-<div class="project-container">
-    <div class="project-frame shadow-lg">
+<div class="project-container border-2 border-red-500">
+    <div class="project-frame shadow-lg border-2 border-red-500">
         <div class="frame-header">
             <!-- DEV MODE <p class="text-sm text-gray-500">ID do Projeto: {{project._id}}</p>-->
 
@@ -14,9 +14,9 @@
         </div>
         <div *ngIf="detailedProject" class="project-details">
             <h1 class="project-title">{{project.projectTitle}}</h1>
-            <div class="main-project-info border-2">
+            <div class="main-project-info">
 
-                <div class="primary-project-info border-2">
+                <div class="primary-project-info">
                     <p><strong>Criado por: </strong>{{creatorName}}</p>
                     <p><strong>Trabalhado por: </strong>
                         <ng-container *ngIf="detailedProject.freelancerId; else noFreelancer">
@@ -71,7 +71,7 @@
                     </p>
                 </div>
 
-                <div class="secondary-project-info border-2">
+                <div class="secondary-project-info">
                     <p><strong>Duração estimada:</strong>
                         {{detailedProject.estimatedDuration}}
                         {{detailedProject.estimatedDuration > 1 ? 'dias': 'dia'}}
@@ -103,7 +103,7 @@
                 </div>
 
             </div>
-            <div class="other-project-info border-2">
+            <div class="other-project-info">
                 <p><strong>Descrição:</strong> <br> {{detailedProject.projectDescription}}</p>
             </div>
             
@@ -148,7 +148,10 @@
 
             <ng-container *ngIf="project.projectStatus === 'COMPLETED'">
                 <button (click)="goToReview()" class="project-btns">
-                    <span class="max-lg:hidden">Avaliar</span>
+                    <span class="max-lg:hidden"> Avaliar
+                        <span *ngIf="detailedProject.clientId._id == this.authService.getUserId()">Freelancer</span>
+                        <span *ngIf="detailedProject.freelancerId._id == this.authService.getUserId()">Cliente</span>
+                    </span>
                     <i class="fa fa-star-half-o lg:hidden"></i>
                 </button>
             </ng-container>
