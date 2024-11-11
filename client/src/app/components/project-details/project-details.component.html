@@ -1,6 +1,6 @@
 <!--card details start-->
-<div class="project-container border-2 border-red-500">
-    <div class="project-frame shadow-lg border-2 border-red-500">
+<div class="project-container">
+    <div class="project-frame shadow-lg">
         <div class="frame-header">
             <!-- DEV MODE <p class="text-sm text-gray-500">ID do Projeto: {{project._id}}</p>-->
 
@@ -50,12 +50,12 @@
                     <strong>Habilidades:</strong>
                     <ng-container *ngIf="skills.length > 0; else noSkills">
                         <div class="flex flex-row flex-wrap">
-                            <span *ngFor="let skill of skills; let i = index">
-                                {{ skill }}
-                                <span *ngIf="i < skills.length - 1">,</span>
-                                <span *ngIf="i == skills.length - 1">.</span>
+                            <span *ngFor="let skill of skills; let last = last">
+                                <span class="mr-1" *ngIf="!last"> {{ skill + ","}} </span>
+                                <span *ngIf="last"> {{skill + "."}} </span>
                             </span>
-                        </div>
+                            
+                          </div>
 
                     </ng-container>
                     <ng-template #noSkills>
