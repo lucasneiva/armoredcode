@@ -12,6 +12,7 @@
         background-color: white;
         border-radius: 0.5rem /* 8px */;
         padding: 2rem /* 32px */;
+        overflow-y: auto;
 
         @media (min-width: 1024px) {
             margin: 0.25rem auto;
@@ -67,8 +68,14 @@
 
             .main-project-info{
                 display: flex;
-                flex-direction: row;
                 width: 100%;
+
+                @media (min-width: 1024px) {
+                    flex-direction: row;
+                }
+                @media not all and (min-width: 1024px) {
+                    flex-direction: column;
+                }
 
                 .primary-project-info{
                     display: block;
@@ -79,12 +86,33 @@
                     display: block;
                     width: 100%;
                 }
+                
             }
+
             .other-project-info{
                 display: block;
                 width: 100%;
             }
-            
+        }
+
+        .project-options{
+            display: flex;
+            margin-top: 1rem /* 16px */;
+            width: 100%;
+            height: fit-content;
+
+            .project-btns{
+                background-color: rgb(59 130 246);
+                color: white;
+                font-weight: 700;
+                padding: 1rem 0.5rem;
+                border-radius: 0.25rem;
+                width: 100%;
+
+                &:hover{
+                    background-color: rgb(29 78 216);
+                }
+            }
         }
     }
 }
