@@ -1,0 +1,66 @@
+.invite-card{
+    position: sticky;
+    width: 100%;
+    padding: 3rem 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0.5rem /* 8px */;
+    
+    &:hover{
+        background-color: rgb(243 244 246);
+    }
+
+    @media (min-width: 1024px) {
+        max-width: 32rem /* 512px */;
+    }
+    @media not all and (min-width: 1024px) {
+        max-width: 28rem /* 448px */;
+    }
+
+    .card-header{
+        display: flex;
+        flex-direction: column;
+
+        font-size: 1.5rem /* 24px */;
+        font-weight: 700;
+        line-height: 1;
+        color: rgb(17 24 39);
+
+        .project-title{
+            font-weight: 700;
+            font-size: 1.5rem /* 24px */;
+            line-height: 1.5;
+            margin-bottom: 0.85rem;
+
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            line-clamp: 1;
+
+            color: rgb(17 24 39);
+        }
+        .creator-name{
+            font-weight: 500;
+            font-size: 1.05rem;
+            line-height: 1;
+
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            line-clamp: 1;
+
+            color: rgb(75 85 99);
+        }
+    }
+    .invite-message{
+        font-weight: 500;
+        font-size: 1.125rem /* 24px */;
+        line-height: 1.5;
+
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+    }
+}
