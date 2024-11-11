@@ -4,7 +4,7 @@
     <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{
         'bg-stone-100': project?.projectStatus === 'COMPLETED',
         'bg-white': project?.projectStatus !== 'COMPLETED'}"
-        class="proposal-card">
+        class="proposal-card shadow-lg">
         <!-- DEV MODE <p class="text-sm text-gray-500">ID da Proposta: {{proposal._id}}</p>-->
         <div class="card-header">
             <span class="proposal-status" 
