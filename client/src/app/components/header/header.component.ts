@@ -31,6 +31,8 @@ export class HeaderComponent implements OnInit {
   showHeader: boolean = true;
   previousScrollPosition: number = 0;
 
+  currentRoute: string = '';
+
   @HostListener('window:scroll', ['$event'])
   onScroll(event: Event) {
     const currentScrollPosition = window.pageYOffset;
@@ -59,6 +61,17 @@ export class HeaderComponent implements OnInit {
         this.closeMenu();
       }
     });
+    // Subscribe to Router events to track the current route
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.currentRoute = this.router.url;
+      }
+    });
+  }
+
+  // Helper function to check if a route is active or a parent route is active
+  isRouteActive(route: string): boolean {
+    return this.currentRoute === route || this.currentRoute.startsWith(route + '/');
   }
 
   // In your HeaderComponent

@@ -22,12 +22,45 @@ nav {
     align-items: center;
     justify-content: flex-end;
     width: 100%;
-    padding-left: 1rem
-        /* 16px */
-    ;
-    padding-right: 1rem
-        /* 16px */
-    ;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    // Desktop Styles
+    @media (min-width: 1024px) {
+        span {
+            cursor: pointer;
+            padding: 0.5rem 1rem;  
+            border-radius: 0.25rem; 
+
+            &.active, &:hover { 
+                background-color: rgba(23, 17, 148, 0.22); 
+                border-width: 0.15rem;
+                border-color: rgba(129, 126, 240, 0.20);
+                color: lightcyan;
+                text-decoration: none;
+            }
+        }
+        img{
+            width: 3rem;
+            height: 3rem;
+            margin: auto 1rem;
+            border-radius: 100%;
+            border-color: white;
+            border-style: solid;
+            border-width: 2px;
+            cursor: pointer;
+
+            &.active, &:hover { 
+                background-color: rgba(23, 17, 148, 0.22); 
+                border-color: rgba(129, 126, 240, 0.20);
+                border: 1rem;
+                width: 3.28rem;
+                height: 3.28rem;
+                padding: 0.3rem;
+                color: lightcyan;
+            }
+        }
+    }
 }
 
 .logo {
@@ -38,7 +71,7 @@ nav {
         min-width: 25rem;
     }
 
-    @media not all and (min-width: 1024px) {
+    @media (max-width: 1023px) {
         min-width: 3rem;
     }
 }
@@ -128,6 +161,7 @@ nav {
         background-color: rgba(0, 0, 0, 0.25);
         backdrop-filter: blur(2px);
         -webkit-backdrop-filter: blur(2px);/* For Safari support */
+
     }
 }
 
