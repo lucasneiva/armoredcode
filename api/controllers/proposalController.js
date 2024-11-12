@@ -142,7 +142,9 @@ export const acceptProposal = async ( req, res, next ) => {
             proposal.projectId,
             {
                 chatChannelId: savedChatChannel._id,
-                freelancerId: proposal.freelancerId
+                freelancerId: proposal.freelancerId,
+                startDate: Date.now(), // Set startDate to the current date and time
+                projectStatus: 'IN-PROGRESS' // Update the project status to 'IN-PROGRESS'
             }
         );
 
