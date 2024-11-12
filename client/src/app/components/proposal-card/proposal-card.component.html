@@ -12,24 +12,29 @@
                       'bg-yellow-500': proposal.status === 'PENDING',
                       'bg-red-500': proposal.status === 'REJECTED',
                       'bg-green-500': proposal.status === 'ACCEPTED'}">
-                <span> Status da Proposta: </span>
+                <span> Status: </span>
                 <ng-container *ngIf="proposal.status === 'DRAFT'">Rascunho</ng-container>
                 <ng-container *ngIf="proposal.status === 'PENDING'">Pendente</ng-container>
                 <ng-container *ngIf="proposal.status === 'REJECTED'">Rejeitada</ng-container>
                 <ng-container *ngIf="proposal.status === 'ACCEPTED'">Aceita</ng-container>
             </span>
             <span *ngIf="project" class="project-title">{{project.projectTitle}}</span>
-            <h3 *ngIf="creatorName && project.clientId._id === this.authService.getUserId()" class="creator-name"> {{creatorName}} </h3>
+            <h3 *ngIf="creatorName && project?.clientId._id === this.authService.getUserId()" class="creator-name"> {{creatorName}} </h3>
         </div>
     </div>
     <!--card end-->
     <!--card details start-->
-    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-30" *ngIf="showDetails">
-        <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl w-full" style="max-height: 90vh; overflow-y: auto;">
-            <div class="flex justify-between align-middle">
-                <h2 *ngIf="project" class="text-2xl font-bold mb-4">{{project.projectTitle}}</h2>
-                <button (click)="toggleDetails()"
-                    class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded-full p-1 items-center w-fit h-fit">
+    <div class="proposal-container" *ngIf="showDetails">
+        <div class="proposal-frame shadow-lg">
+            <div class="frame-header">
+                <!-- DEV MODE
+                <div class="lg:flex max-lg:grid justify-start align-middle">
+                    <p class="text-sm text-gray-500">ID do Projeto: {{proposal.projectId}} <span
+                        class="lg:visible max-lg:hidden">|</span></p>
+                    <p class="text-sm text-gray-500 ml-1"> ID da Proposta: {{proposal._id}}</p>
+                </div>
+                -->
+                <button (click)="toggleDetails()" class="close-btn">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
@@ -37,20 +42,14 @@
                     </svg>
                 </button>
             </div>
-            <!-- DEV MODE
-            <div class="lg:flex max-lg:grid justify-start align-middle">
-                <p class="text-sm text-gray-500">ID do Projeto: {{proposal.projectId}} <span
-                        class="lg:visible max-lg:hidden">|</span></p>
-                <p class="text-sm text-gray-500 ml-1"> ID da Proposta: {{proposal._id}}</p>
-            </div>
-            -->
-            <div *ngIf="detailedProposal" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
+            
+            <div *ngIf="detailedProposal" class="proposal-details">
+                <h1 class="project-title">{{project.projectTitle}}</h1>
+                <div class="main-proposal-info">
+
                     <p><strong>Proposta criada por:</strong> {{creatorName}}</p>
                     <p><strong>Projeto criado por:</strong> {{projectCreatorName}}</p>
-                    <p><strong>Descrição:</strong> <br> {{detailedProposal.coverLetter}}</p>
-                </div>
-                <div>
+                
                     <ng-container *ngIf="detailedProposal.pricingType == 'BUDGET'">
                         <p>
                             <strong>Orçamento:</strong>
@@ -78,33 +77,36 @@
                         <ng-container *ngIf="proposal.status === 'ACCEPTED'">Aceita</ng-container>
                     </p>
                 </div>
+                <div class="other-proposal-info">
+                    <p><strong>Descrição:</strong> <br> {{detailedProposal.coverLetter}}</p>
+                </div>
             </div>
 
             <!--Buttons start-->
-            <div class="mt-4 flex w-full space-x-4">
+            <div class="proposal-options space-x-4">
                 <ng-container *ngIf="userRole == 'FREELANCER'">
-                    <button *ngIf="proposal.status === 'DRAFT'" (click)="sendProposal()"
-                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full">
-                        Enviar Proposta
+                    <button *ngIf="proposal.status === 'DRAFT'" (click)="sendProposal()" class="proposal-btns">
+                        <span class="max-lg:hidden">Enviar Proposta</span>
+                        <i class="fa fa-paper-plane lg:hidden"></i>
                     </button>
-                    <button (click)="cancelProposal()"
-                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
-                        Cancelar Proposta
+                    <button (click)="cancelProposal()" class="proposal-btns">
+                        <span class="max-lg:hidden">Cancelar Proposta</span>
+                        <i class="fa fa-minus-circle lg:hidden"></i>
                     </button>
-                    <button *ngIf="proposal.status !== 'ACCEPTED'" (click)="editProposal()"
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-                        Editar Proposta
+                    <button *ngIf="proposal.status !== 'ACCEPTED'" (click)="editProposal()" class="proposal-btns">
+                        <span class="max-lg:hidden">Editar Proposta</span>
+                        <i class="fa fa-pencil lg:hidden"></i>
                     </button>
                 </ng-container>
 
                 <ng-container *ngIf="userRole == 'CLIENT'">
-                    <button *ngIf="proposal.status === 'PENDING'" (click)="acceptProposal()"
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-                        Aceitar Proposta
+                    <button *ngIf="proposal.status === 'PENDING'" (click)="acceptProposal()" class="proposal-btns">
+                        <span class="max-lg:hidden">Aceitar Proposta</span>
+                        <i class="fa fa-check lg:hidden"></i>
                     </button>
-                    <button *ngIf="proposal.status === 'PENDING'" (click)="rejectProposal()"
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-                        Rejeitar Proposta
+                    <button *ngIf="proposal.status === 'PENDING'" (click)="rejectProposal()" class="proposal-btns">
+                        <span class="max-lg:hidden">Rejeitar Proposta</span>
+                        <i class="fa fa-times lg:hidden"></i>
                     </button>
                 </ng-container>
             </div>

@@ -26,7 +26,7 @@
             text-wrap: nowrap;
 
             font-weight: 700;
-            font-size: 1.5rem /* 24px */;
+            font-size: 1.33rem /* 24px */;
             line-height: 1.5;
             text-align: center;
         }
@@ -56,6 +56,117 @@
             line-clamp: 1;
 
             color: rgb(75 85 99);
+        }
+    }
+}
+
+.proposal-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    position: fixed;
+    z-index: 70;
+    inset: 0px;
+    overflow: hidden;
+    background-color:rgba(0, 0, 0, 0.5);
+
+    .proposal-frame{
+        background-color: white;
+        border-radius: 0.5rem /* 8px */;
+        padding: 2rem /* 32px */;
+        overflow-y: auto;
+
+        @media (min-width: 1024px) {
+            margin: auto auto;
+            width: 38.5vw;
+            height: fit-content;
+        }
+        
+        @media not all and (min-width: 1024px) {
+            margin: auto auto;
+            width: 86.5vw;
+            height: fit-content;
+        }
+
+        .frame-header{
+            display: flex;
+            justify-content: end;
+
+            .close-btn{
+                background-color: rgb(209 213 219);
+                color: rgb(31 41 55);
+                font-weight: 700;
+                border-radius: 100%;
+                padding: 0.25rem /* 4px */;
+                align-items: center;
+                width: fit-content;
+                height: fit-content;
+
+                &:hover{
+                    background-color: rgb(156 163 175);
+                }
+            }
+        }
+        .proposal-details{
+            display: flex;
+            flex-direction: column;
+            font-weight: 500;
+            font-size: 1.33rem;
+            line-height: 1.5;
+
+            .project-title{
+                font-weight: 700;
+                font-size: 2rem;
+                line-height: 1.5;
+                margin-bottom: 0.85rem;
+
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+
+                color: rgb(17 24 39);
+
+                @media not all and (min-width: 1024px) {
+                    font-size: 1.77rem;
+                    line-height: 1.25;
+                }
+            }
+
+            .main-proposal-info{
+                display: flex;
+                flex-direction: column;
+                padding: 1rem 0rem;
+                width: 100%;
+
+                
+            }
+
+            .other-proposal-info{
+                display: block;
+                width: 100%;
+            }
+        }
+
+        .proposal-options{
+            display: flex;
+            margin-top: 1rem /* 16px */;
+            width: 100%;
+            height: fit-content;
+
+            .proposal-btns{
+                background-color: rgb(59 130 246);
+                color: white;
+                font-size: 1.25rem;
+                font-weight: 700;
+                padding: 1rem 0.5rem;
+                border-radius: 0.25rem;
+                width: 100%;
+
+                &:hover{
+                    background-color: rgb(29 78 216);
+                }
+            }
         }
     }
 }

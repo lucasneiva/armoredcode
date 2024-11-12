@@ -12,8 +12,9 @@
             <!--nav-items start-->
             <div class="flex align-middle items-center w-full">
                 <div class="nav-items text-gray-200 text-2xl font-bold space-x-8">
-                    <span routerLink="/login" class="cursor-pointer hover:underline hover:text-indigo-200">Login</span>
-                    <span routerLink="/register"
+                    <span [routerLink]="['/login']" [class.active]="isRouteActive('/login')" 
+                        class="cursor-pointer hover:underline hover:text-indigo-200">Login</span>
+                    <span [routerLink]="['/register']" [class.active]="isRouteActive('/register')"
                         class="cursor-pointer hover:underline hover:text-indigo-200">Registro</span>
                 </div>
             </div>
