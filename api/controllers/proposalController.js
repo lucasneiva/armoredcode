@@ -90,6 +90,30 @@ export const deleteProposal = async ( req, res, next ) => {
     }
 };
 
+export const sendProposal = async (req, res, next) => {
+    try {
+        const proposalId = req.params.id;
+
+        const proposal = await Proposal.findById(proposalId);
+
+        if (!proposal) {
+            return next(createError(404, "Proposal not found!"));
+        }
+
+        // Check if the proposal is in DRAFT status
+        if (proposal.status !== 'DRAFT') {
+            return next(createError(400, "Proposal is not in DRAFT status and cannot be sent."));
+        }
+
+        proposal.status = 'PENDING';
+        await proposal.save();
+
+        return next(createSuccess(200, "Proposal sent successfully!", proposal));
+    } catch (error) {
+        return next(createError(500, "Internal Server Error!"));
+    }
+};
+
 export const acceptProposal = async ( req, res, next ) => {
     try {
         const proposalId = req.params.id;

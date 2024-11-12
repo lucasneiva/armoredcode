@@ -69,6 +69,16 @@ export class ProposalService {
     return this.http.put<any>(`${apiUrls.proposalServiceApi}/${proposalId}`, proposalObj, httpOptions);
   }
 
+  sendProposal(proposalId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true
+    };
+    return this.http.patch<any>(`${apiUrls.proposalServiceApi}/${proposalId}/send`, {}, httpOptions); // Use PATCH for updating status
+  }
+
   deleteProposal(proposalId: string): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({

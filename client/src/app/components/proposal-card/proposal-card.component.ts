@@ -106,8 +106,28 @@ export class ProposalCardComponent {
   }
 
   sendProposal() {
-    // Implement logic to post the project (e.g., make an API call)
-    console.log("Send Proposal button clicked");
+    const proposalId = this.proposal._id;
+
+    if (confirm("Are you sure you want to send this proposal?")) {
+      this.proposalService.sendProposal(proposalId).subscribe({
+        next: (response) => {
+          if (response.success) {
+            console.log('Proposal sent successfully');
+            // Update the proposal status in the component
+            this.proposal.status = 'PENDING';
+            this.detailedProposal.status = 'PENDING'; // Also update detailedProposal
+            window.location.reload();
+          } else {
+            console.error('Error sending proposal:', response.message);
+            // Handle error, e.g., display an error message to the user
+          }
+        },
+        error: (error) => {
+          console.error('Error sending proposal:', error);
+          // Handle error
+        }
+      });
+    }
   }
 
   editProposal() {
