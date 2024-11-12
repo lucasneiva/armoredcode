@@ -1,13 +1,17 @@
 <!--cover-->
-<div *ngIf="isSearchBarVisible" class="page-cover">
+<div class="page-cover transition-transform duration-700 ease-in-out" 
+    [class.-translate-y-full]="isSearchBarVisible" [class.translate-y-full]="!isSearchBarVisible">
     <!--search bar start-->
-    <div class="search-container">
+    <div 
+        class="search-container">
         <div class="search-bar-container">
             <input class="search-bar" type="text" placeholder="Pesquisar..." [(ngModel)]="searchTerm"
                 (keyup.enter)="searchOnEnterKey($event)">
             <button class="search-button" (click)="search()">Buscar</button>
         </div>
-        <button class="close-button" (click)="closeSearchBar()">X</button>
+        <button class="close-button" (click)="closeSearchBar()">
+            <i class="fa fa-times"></i>
+        </button>
     </div>
     <!--search bar end-->
     <!--filsters start-->

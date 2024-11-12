@@ -33,9 +33,10 @@
                     {{ profile.companyName ? profile.companyName : (profile.firstName ? profile.firstName + ' ' +
                     profile.lastName : 'User Profile') }}
                 </h2>
-                <h2>
-                    ID: {{profile._id}}
-                </h2>
+                <!--DEV MODE
+                    <h2> ID: {{profile._id}} </h2>
+                -->
+                
             </div>
             <!--Buttons start-->
             <div class="flex justify-center max-lg:w-full max-lg:justify-between px-8 py-4 h-fit">

@@ -56,7 +56,7 @@ export class SearchBarComponent {
       console.log("invalid role");
     }
     this.searchStateService.isSearchBarVisible$.subscribe(isVisible => {
-      this.isSearchBarVisible = isVisible;
+      this.isSearchBarVisible = !isVisible;
     });
   }
 
@@ -134,7 +134,8 @@ export class SearchBarComponent {
   }
 
   closeSearchBar() {
-    this.searchStateService.hideSearchBar();
+    //this.searchStateService.hideSearchBar();
+    this.searchStateService.toggleSearchBarVisibility();
   }
 
   fetchSpecializations() {
