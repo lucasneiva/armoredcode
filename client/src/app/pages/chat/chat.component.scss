@@ -18,7 +18,8 @@
     }
 
     .contacts-col {
-        display: block;
+        display: flex;
+        flex-direction: column;
         position: absolute;
         top: 0px; bottom: 0px;
         background-color: rgb(209, 209, 209);
@@ -360,7 +361,7 @@
         display: block;
         position: absolute;
         top: 0px; bottom: 0px; right: 0px; left: 100%;
-        background-color: rgb(209, 209, 209);
+        background-color: white;
         border-width: 0rem 0.25rem;
 
         height: 100%;
@@ -412,12 +413,12 @@
             }
         }
         .project-info-container{
-            display: block;
+            display: flex;
+            flex-direction: column;
             justify-content: baseline;
-            align-items: center;
-            background-color: rgb(250, 250, 250);
+            align-items: start;
             padding: 1rem;
-            height: 100%;
+            height: fit-content;
 
             .project-title{
                 font-size: 1.5rem;

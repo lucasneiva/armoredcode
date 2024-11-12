@@ -14,7 +14,7 @@
           'bg-yellow-500': project.projectStatus === 'IN-PROGRESS',
           'bg-red-500': project.projectStatus === 'CANCELLED',
           'bg-purple-500': project.projectStatus === 'COMPLETED',}">
-          <span> Status do Projeto: </span>
+          <span> Status: </span>
           <ng-container *ngIf="project.projectStatus === 'DRAFT'">Rascunho</ng-container>
           <ng-container *ngIf="project.projectStatus === 'POSTED'">Postado</ng-container>
           <ng-container *ngIf="project.projectStatus === 'IN-PROGRESS'">Em Progresso</ng-container>
