@@ -48,7 +48,7 @@ export const freelancerProfiles = [
                 companyName: "Tech Solutions Inc.",
                 jobTitle: "Engenheiro de Software",
                 startDate: new Date("2020-07-01"),
-                endDate: null,
+                endDate: new Date("2023-01-01"),
                 jobDescription: "Desenvolvimento e manutenção de aplicações web utilizando React, Node.js e PostgreSQL."
             }
         ]
@@ -108,14 +108,14 @@ export const freelancerProfiles = [
                 companyName: "DesignLab",
                 jobTitle: "Desenvolvedor Sênior em Front-End",
                 startDate: new Date("2018-01-01"),
-                endDate: null,
+                endDate: new Date("2020-06-05"),
                 jobDescription: "Liderei uma equipe de desenvolvedores front-end para criar interfaces responsivas e fáceis de usar para diversos clientes."
             },
             {
                 companyName: "TechCorp",
                 jobTitle: "Desenvolvedor Front-End",
                 startDate: new Date("2015-06-01"),
-                endDate: new Date("2017-12-01"),
+                endDate: new Date("2017-10-01"),
                 jobDescription: "Desenvolvi e mantive vários aplicativos web usando HTML, CSS e JavaScript."
             }
         ]
@@ -164,7 +164,7 @@ export const freelancerProfiles = [
                 companyName: "Agência Digital Y",
                 jobTitle: "Desenvolvedor Mobile React Native",
                 startDate: new Date("2021-03-01"),
-                endDate: null,
+                endDate: new Date("2022-09-10"),
                 jobDescription: "Desenvolvimento de aplicativos mobile para clientes da agência."
             }
         ]
@@ -213,7 +213,7 @@ export const freelancerProfiles = [
                 companyName: "XPTO Software",
                 jobTitle: "Desenvolvedor Back-End Java",
                 startDate: new Date("2015-02-01"),
-                endDate: null,
+                endDate: new Date("2018-06-10"),
                 jobDescription: "Desenvolvimento e manutenção de APIs RESTful para sistemas de e-commerce."
             }
         ]
@@ -262,7 +262,7 @@ export const freelancerProfiles = [
                 companyName: "Startup X",
                 jobTitle: "Desenvolvedora Full Stack Python",
                 startDate: new Date("2021-01-01"),
-                endDate: null,
+                endDate: new Date("2020-08-10"),
                 jobDescription: "Desenvolvimento de features para uma plataforma de streaming de vídeo."
             }
         ]
@@ -311,7 +311,7 @@ export const freelancerProfiles = [
                 companyName: "Tech Solutions",
                 jobTitle: "Desenvolvedora Front-End Angular",
                 startDate: new Date("2020-02-01"),
-                endDate: null,
+                endDate: new Date("2024-05-03"),
                 jobDescription: "Desenvolvimento de interfaces web para sistemas de gestão empresarial."
             }
         ]
@@ -360,7 +360,7 @@ export const freelancerProfiles = [
                 companyName: "Data Science Consulting",
                 jobTitle: "Cientista de Dados",
                 startDate: new Date("2015-01-01"),
-                endDate: null,
+                endDate: new Date("2017-06-11"),
                 jobDescription: "Consultoria em projetos de análise de dados e aprendizado de máquina."
             }
         ]
@@ -409,7 +409,7 @@ export const freelancerProfiles = [
                 companyName: "Startup Tech",
                 jobTitle: "Desenvolvedora Back-End Node.js",
                 startDate: new Date("2021-02-01"),
-                endDate: null,
+                endDate: new Date("2022-06-06"),
                 jobDescription: "Desenvolvimento de APIs para plataforma de gestão de tarefas."
             }
         ]
@@ -458,7 +458,7 @@ export const freelancerProfiles = [
                 companyName: "Agência Mobile",
                 jobTitle: "Desenvolvedor Mobile Flutter",
                 startDate: new Date("2022-02-01"),
-                endDate: null,
+                endDate: new Date("2024-06-05"),
                 jobDescription: "Desenvolvimento de aplicativos mobile para clientes da agência."
             }
         ]
@@ -513,7 +513,7 @@ export const freelancerProfiles = [
                 companyName: "Software House",
                 jobTitle: "Desenvolvedora Full Stack .NET",
                 startDate: new Date("2015-02-01"),
-                endDate: null,
+                endDate: new Date("2019-06-08"),
                 jobDescription: "Desenvolvimento de sistemas web e APIs para clientes corporativos."
             }
         ]
@@ -562,7 +562,7 @@ export const freelancerProfiles = [
                 companyName: "Agência Digital",
                 jobTitle: "Designer UX/UI",
                 startDate: new Date("2019-01-01"),
-                endDate: null,
+                endDate: new Date("2020-09-08"),
                 jobDescription: "Design de interfaces para projetos web e mobile da agência."
             }
         ]
@@ -611,7 +611,7 @@ export const freelancerProfiles = [
                 companyName: "Empresa de Tecnologia",
                 jobTitle: "Engenheira de Machine Learning",
                 startDate: new Date("2015-01-01"),
-                endDate: null,
+                endDate: new Date("2021-01-02"),
                 jobDescription: "Desenvolvimento de modelos de aprendizado de máquina para otimização de processos."
             }
         ]
@@ -660,7 +660,7 @@ export const freelancerProfiles = [
                 companyName: "Startup Financeira",
                 jobTitle: "Desenvolvedor Back-End Python",
                 startDate: new Date("2020-01-01"),
-                endDate: null,
+                endDate: new Date("2022-04-05"),
                 jobDescription: "Desenvolvimento de APIs e microsserviços para a plataforma financeira."
             }
         ]
@@ -709,7 +709,7 @@ export const freelancerProfiles = [
                 companyName: "Agência de Marketing Digital",
                 jobTitle: "Desenvolvedora Front-End React",
                 startDate: new Date("2021-02-01"),
-                endDate: null,
+                endDate: new Date("2023-07-07"),
                 jobDescription: "Desenvolvimento de websites e landing pages para clientes da agência."
             }
         ]
@@ -758,7 +758,7 @@ export const freelancerProfiles = [
                 companyName: "Empresa de Desenvolvimento Mobile",
                 jobTitle: "Desenvolvedor Android Nativo",
                 startDate: new Date("2021-01-01"),
-                endDate: null,
+                endDate: new Date("2023-06-05"),
                 jobDescription: "Desenvolvimento de aplicativos Android para clientes de diversos setores."
             }
         ]
@@ -807,7 +807,7 @@ export const freelancerProfiles = [
                 companyName: "Empresa de Tecnologia Educacional",
                 jobTitle: "Desenvolvedora Full Stack JavaScript",
                 startDate: new Date("2016-01-01"),
-                endDate: null,
+                endDate: new Date("2018-07-05"),
                 jobDescription: "Liderança técnica e desenvolvimento de novas features para a plataforma de e-learning."
             }
         ]
@@ -856,7 +856,7 @@ export const freelancerProfiles = [
                 companyName: "Empresa de Consultoria em Dados",
                 jobTitle: "Cientista de Dados",
                 startDate: new Date("2020-02-01"),
-                endDate: null,
+                endDate: new Date("2024-08-02"),
                 jobDescription: "Consultoria em projetos de análise de dados para clientes de diversos setores."
             }
         ]
@@ -905,7 +905,7 @@ export const freelancerProfiles = [
                 companyName: "Empresa de Consultoria em TI",
                 jobTitle: "Desenvolvedora Front-End Angular",
                 startDate: new Date("2021-01-01"),
-                endDate: null,
+                endDate: new Date("2024-01-01"),
                 jobDescription: "Desenvolvimento de interfaces web para sistemas corporativos de clientes da consultoria."
             }
         ]
@@ -954,7 +954,7 @@ export const freelancerProfiles = [
                 companyName: "Startup de Tecnologia",
                 jobTitle: "Desenvolvedor iOS Nativo",
                 startDate: new Date("2015-02-01"),
-                endDate: null,
+                endDate: new Date("2015-09-09"),
                 jobDescription: "Liderança técnica e desenvolvimento de novos recursos para o aplicativo da startup."
             }
         ]
@@ -1003,7 +1003,7 @@ export const freelancerProfiles = [
                 companyName: "Empresa de E-commerce",
                 jobTitle: "Desenvolvedora Full Stack Python",
                 startDate: new Date("2020-01-01"),
-                endDate: null,
+                endDate: new Date("2021-09-05"),
                 jobDescription: "Desenvolvimento de novas funcionalidades e manutenção da plataforma de e-commerce."
             }
         ]
@@ -1052,7 +1052,7 @@ export const freelancerProfiles = [
                 companyName: "Agência de Marketing Digital",
                 jobTitle: "Desenvolvedor Front-End React",
                 startDate: new Date("2022-02-01"),
-                endDate: null,
+                endDate: new Date("2023-06-07"),
                 jobDescription: "Desenvolvimento de websites e landing pages para clientes da agência."
             }
         ]
@@ -1101,7 +1101,7 @@ export const freelancerProfiles = [
                 companyName: "Startup de Foodtech",
                 jobTitle: "Desenvolvedora Android Nativo",
                 startDate: new Date("2021-01-01"),
-                endDate: null,
+                endDate: new Date("2022-07-07"),
                 jobDescription: "Desenvolvimento de novas funcionalidades e manutenção do aplicativo de delivery."
             }
         ]
@@ -1150,7 +1150,7 @@ export const freelancerProfiles = [
                 companyName: "Empresa de Data Science",
                 jobTitle: "Cientista de Dados",
                 startDate: new Date("2020-02-01"),
-                endDate: null,
+                endDate: new Date("2021-06-02"),
                 jobDescription: "Desenvolvimento de modelos de aprendizado de máquina e análise de dados para clientes da empresa."
             }
         ]
@@ -1199,7 +1199,7 @@ export const freelancerProfiles = [
                 companyName: "Empresa de Software",
                 jobTitle: "Desenvolvedor Front-End Angular",
                 startDate: new Date("2015-01-01"),
-                endDate: null,
+                endDate: new Date("2020-09-08"),
                 jobDescription: "Liderança técnica e desenvolvimento de novas funcionalidades para a plataforma de gestão de projetos."
             }
         ]
@@ -1248,7 +1248,7 @@ export const freelancerProfiles = [
                 companyName: "Empresa de Varejo",
                 jobTitle: "Desenvolvedora iOS Nativo",
                 startDate: new Date("2021-02-01"),
-                endDate: null,
+                endDate: new Date("2021-08-07"),
                 jobDescription: "Desenvolvimento de novas funcionalidades e manutenção do aplicativo de e-commerce."
             }
         ]
@@ -1297,7 +1297,7 @@ export const freelancerProfiles = [
                 companyName: "Empresa de Mídia",
                 jobTitle: "Desenvolvedor Full Stack Python",
                 startDate: new Date("2015-01-01"),
-                endDate: null,
+                endDate: new Date("2017-06-07"),
                 jobDescription: "Arquitetura e desenvolvimento de novas funcionalidades para a plataforma de streaming."
             }
         ]
@@ -1346,7 +1346,7 @@ export const freelancerProfiles = [
                 companyName: "Startup de Fintech",
                 jobTitle: "Desenvolvedora Front-End React",
                 startDate: new Date("2021-02-01"),
-                endDate: null,
+                endDate: new Date("2023-02-07"),
                 jobDescription: "Desenvolvimento de novas funcionalidades e manutenção da interface web da plataforma."
             }
         ]
@@ -1395,7 +1395,7 @@ export const freelancerProfiles = [
                 companyName: "Empresa de Desenvolvimento de Software",
                 jobTitle: "Desenvolvedor Android Nativo",
                 startDate: new Date("2022-01-01"),
-                endDate: null,
+                endDate: new Date("2023-06-06"),
                 jobDescription: "Desenvolvimento de aplicativos Android para clientes de diversos setores."
             }
         ]
@@ -1444,7 +1444,7 @@ export const freelancerProfiles = [
                 companyName: "Editora de Livros",
                 jobTitle: "Desenvolvedora Full Stack JavaScript",
                 startDate: new Date("2020-02-01"),
-                endDate: null,
+                endDate: new Date("2021-01-07"),
                 jobDescription: "Desenvolvimento de novas funcionalidades e manutenção da plataforma de e-commerce."
             }
         ]
@@ -1499,7 +1499,7 @@ export const freelancerProfiles = [
                 companyName: "Empresa de Tecnologia",
                 jobTitle: "Administrador de Banco de Dados",
                 startDate: new Date("2019-01-01"),
-                endDate: null,
+                endDate: new Date("2024-09-07"),
                 jobDescription: "Administração e otimização de bancos de dados MySQL e PostgreSQL para os sistemas da empresa."
             }
         ]
