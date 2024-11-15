@@ -7,4 +7,6 @@
     inset: 0px;
     overflow: auto;
     background-color:rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);/* For Safari support */
 }
