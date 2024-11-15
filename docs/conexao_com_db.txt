@@ -1,0 +1,3 @@
+MONGO_URL=mongodb+srv://<usuario>:<senha>@cluster0.bsubzcz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+JWT_SECRET=<sua_chave_secreta_jwt> 
+LIVE_URL=http://localhost:4200
