@@ -1,6 +1,7 @@
 import Skill from "../models/skillModel.js";
 
 const skillData = [
+    //hard skills
     { name: "JavaScript", description: "Linguagem de programação amplamente utilizada para desenvolvimento web front-end e back-end." },
     { name: "Python", description: "Linguagem de programação versátil usada em ciência de dados, machine learning, desenvolvimento web e scripting." },
     { name: "Java", description: "Linguagem de programação popular para desenvolvimento de aplicativos Android, back-end e sistemas corporativos." },
@@ -34,6 +35,21 @@ const skillData = [
     { name: "Kanban", description: "Método visual para gestão de fluxo de trabalho, usado em desenvolvimento de software e outras áreas." },
     { name: "UI/UX Design", description: "Habilidade de projetar interfaces de usuário intuitivas e atraentes, com foco na experiência do usuário." },
     { name: "Design Thinking", description: "Abordagem centrada no usuário para resolução de problemas e desenvolvimento de produtos e serviços." },
+
+    //soft skills
+    { name: "Comunicação", description: "Expressa-se clara e concisamente, adaptando-se a diferentes públicos." },
+    { name: "Trabalho em Equipe", description: "Colabora efetivamente, compartilhando ideias e responsabilidades." },
+    { name: "Resolução de Problemas", description: "Identifica, analisa e soluciona problemas com eficiência." },
+    { name: "Pensamento Crítico", description: "Avalia informações objetivamente, tomando decisões embasadas." },
+    { name: "Criatividade", description: "Gera novas ideias e soluções com abordagens inovadoras." },
+    { name: "Adaptabilidade", description: "Ajusta-se a mudanças, mantendo produtividade e foco." },
+    { name: "Gerenciamento de Tempo", description: "Organiza e prioriza tarefas, cumprindo prazos." },
+    { name: "Liderança", description: "Inspira e guia equipes, promovendo um ambiente produtivo." },
+    { name: "Inteligência Emocional", description: "Gerencia emoções próprias e dos outros, construindo relações saudáveis." },
+    { name: "Aprendizado Contínuo", description: "Busca novos conhecimentos e se mantém atualizado." },
+    { name: "Resiliência", description: "Supera desafios e aprende com os erros." },
+    { name: "Negociação", description: "Conduz negociações buscando soluções mutuamente benéficas." },
+    { name: "Empatia", description: "Compreende as perspectivas e sentimentos dos outros."},
 ];
 
 const seedSkills = async () => {
