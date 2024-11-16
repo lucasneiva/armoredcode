@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup,
-        ReactiveFormsModule, Validators} from '@angular/forms';
+import {
+  FormBuilder, FormControl, FormGroup,
+  ReactiveFormsModule, Validators
+} from '@angular/forms';
 import { ProjectService } from '../../services/project.service';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { SkillService } from '../../services/skill.service';
+import { Skill, SkillService } from '../../services/skill.service';
 import { hourlyRateValidator } from '../../validators/hourly-rate.validator';
 import { endDateValidator } from '../../validators/date.validator';
 import { budgetValidator } from '../../validators/budget.validator';
@@ -22,7 +24,7 @@ export default class CreateProjectComponent implements OnInit {
   router = inject(Router);
   authService = inject(AuthService);
   projectService = inject(ProjectService);
-  skillService = inject(SkillService); 
+  skillService = inject(SkillService);
 
   createProjectForm!: FormGroup;
 
@@ -30,11 +32,14 @@ export default class CreateProjectComponent implements OnInit {
   projectCategories: any[] = []; // Array to store categories
   skills: any[] = []; //array to store skills
   filteredSkills: any[] = []; // Array to store filtered skills
-  
+
   currentPage = 1; // Start with the first page
   totalPages = 3; // Total number of pages
-  pageNumbers: number[] = []; 
-  showSkillsList: boolean = false; 
+  pageNumbers: number[] = [];
+  showSkillsList: boolean = false;
+
+  otherSkillForm!: FormGroup; // Form group for the "Other" skill
+  showOtherSkillForm: boolean = false;
 
   ngOnInit() {
     // Correctly initialize pageNumbers array:
@@ -52,7 +57,7 @@ export default class CreateProjectComponent implements OnInit {
         min: [, Validators.required],
         max: [, Validators.required],
         currency: ['R$'],
-      }, { validators: hourlyRateValidator }), 
+      }, { validators: hourlyRateValidator }),
       projectBudget: this.fb.group({
         min: [, Validators.required],
         max: [, Validators.required],
@@ -77,23 +82,27 @@ export default class CreateProjectComponent implements OnInit {
       startDate: [''],
       endDate: ['', [endDateValidator]], // Apply endDateValidator here
     });
+    this.otherSkillForm = this.fb.group({
+      skillName: ['', Validators.required],
+      skillDescription: [''], // Optional description
+    });
     // Initialize the form with 'BUDGET' selected and disable the hourly rate group
     this.createProjectForm.get('pricingType')?.setValue('BUDGET');
     this.createProjectForm.get('projectHourlyRate')?.disable();
     // Clear validators of the disabled hourly rate group
     this.createProjectForm.get('projectHourlyRate')?.clearValidators();
 
-     // Subscribe to pricingType changes to enable/disable fields
-     this.createProjectForm.get('pricingType')?.valueChanges.subscribe(pricingType => {
+    // Subscribe to pricingType changes to enable/disable fields
+    this.createProjectForm.get('pricingType')?.valueChanges.subscribe(pricingType => {
       const budgetControl = this.createProjectForm.get('projectBudget');
       const hourlyRateControl = this.createProjectForm.get('projectHourlyRate');
       if (pricingType === 'BUDGET') {
         hourlyRateControl?.disable();
-        hourlyRateControl?.clearValidators(); 
+        hourlyRateControl?.clearValidators();
         hourlyRateControl?.reset();
         budgetControl?.enable();
       } else {
-        budgetControl?.disable(); 
+        budgetControl?.disable();
         budgetControl?.reset();
         budgetControl?.clearValidators();
         hourlyRateControl?.enable();
@@ -185,7 +194,7 @@ export default class CreateProjectComponent implements OnInit {
     const searchTerm = event.target.value.toLowerCase();
     this.showSkillsList = searchTerm.length > 0; // Show if search term is not empty
 
-    if (this.showSkillsList) { 
+    if (this.showSkillsList) {
       this.filteredSkills = this.skills.filter((skill) =>
         skill.skillName.toLowerCase().includes(searchTerm)
       );
@@ -198,14 +207,44 @@ export default class CreateProjectComponent implements OnInit {
     return skill ? skill.skillName : ''; // Return skill name or empty string if not found
   }
 
-  // Method to add a skill to the project
-  addSkill(skillId: string) {
+  addSkill(skillId: string | null) { // Accept null for "Other" skill
     const skillIdsControl = this.createProjectForm.get('skillIds') as FormControl;
     const skillIds = skillIdsControl.value;
 
-    if (!skillIds.includes(skillId)) {
-      skillIdsControl.setValue([...skillIds, skillId]);
+    if (skillId) { // If a skill from the list is selected
+      if (!skillIds.includes(skillId)) {
+        skillIdsControl.setValue([...skillIds, skillId]);
+      }
+    } else { // If "Other" skill is selected
+      this.showOtherSkillForm = !this.showOtherSkillForm; // Toggle the form visibility
     }
+  }
+
+  createOtherSkill() {
+    if (this.otherSkillForm.valid) {
+      const newSkill: Skill = this.otherSkillForm.value;
+      this.skillService.createSkillService(newSkill).subscribe({
+        next: (createdSkill) => {
+          // Update project form with new skill ID (createdSkill._id)
+          console.log("new created skill: ", newSkill.skillName)
+          this.addSkill(createdSkill._id);
+
+          this.otherSkillForm.reset();
+          this.showOtherSkillForm = false; // Hide "Other" skill form
+          this.fetchSkills();
+        },
+        error: (error) => {
+          console.error('Error creating skill:', error);
+          // Handle the error appropriately (e.g., display an error message)
+        }
+      });
+
+    }
+  }
+
+  cancellSkillCreation(){
+    this.otherSkillForm.reset();
+    this.showOtherSkillForm = false;
   }
 
   // Method to remove a skill from the project
@@ -224,7 +263,7 @@ export default class CreateProjectComponent implements OnInit {
   // Helper method to check if any skills are selected
   hasSelectedSkills(): boolean {
     const skillIdsControl = this.createProjectForm.get('skillIds') as FormControl;
-    return skillIdsControl.value.length > 0; 
+    return skillIdsControl.value.length > 0;
   }
 
 }
