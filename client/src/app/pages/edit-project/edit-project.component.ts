@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { ProjectService } from '../../services/project.service';  // Adjust the path if necessary
 import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { SkillService } from '../../services/skill.service';
+import { Skill, SkillService } from '../../services/skill.service';
 import { firstValueFrom } from 'rxjs';
 import { hourlyRateValidator } from '../../validators/hourly-rate.validator';
 import { budgetValidator } from '../../validators/budget.validator';
@@ -41,12 +41,16 @@ export default class EditProjectComponent implements OnInit {
   project: any;
   projectId!: string;
 
+  otherSkillForm!: FormGroup;
+  showOtherSkillForm: boolean = false;
+
   ngOnInit(): void {
     this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
 
     this.fetchSkills();
     this.getProjectCategories();
     this.initForms();  // Initialize the form early in ngOnInit
+    this.initOtherSkillForm(); // Initialize the other skill form
 
     this.route.params.subscribe(params => {
       this.projectId = params['id'];
@@ -120,6 +124,13 @@ export default class EditProjectComponent implements OnInit {
         BudgetControl?.patchValue({ min: null, max: null, currency: 'R$' }); 
         hourlyRateControl?.enable();
       }
+    });
+  }
+
+  initOtherSkillForm() {
+    this.otherSkillForm = this.fb.group({
+      skillName: ['', Validators.required],
+      skillDescription: [''], // Optional
     });
   }
 
@@ -260,12 +271,44 @@ export default class EditProjectComponent implements OnInit {
   }
 
   // Add selected skill
-  addSkill(skillId: string): void {
+  addSkill(skillId: string | null) { // Accept null for "Other" skill
     const skillIdsControl = this.editProjectForm.get('skillIds') as FormControl;
     const skillIds = skillIdsControl.value;
-    if (!skillIds.includes(skillId)) {
-      skillIdsControl.setValue([...skillIds, skillId]);
+
+    if (skillId) { // If a skill from the list is selected
+      if (!skillIds.includes(skillId)) {
+        skillIdsControl.setValue([...skillIds, skillId]);
+      }
+    } else { // If "Other" skill is selected
+      this.showOtherSkillForm = !this.showOtherSkillForm; // Toggle the form visibility
     }
+  }
+
+  createOtherSkill() {
+    if (this.otherSkillForm.valid) {
+      const newSkill: Skill = this.otherSkillForm.value;
+      this.skillService.createSkillService(newSkill).subscribe({
+        next: (createdSkill) => {
+          // Update project form with new skill ID (createdSkill._id)
+          console.log("new created skill: ", newSkill.skillName)
+          this.addSkill(createdSkill._id);
+
+          this.otherSkillForm.reset();
+          this.showOtherSkillForm = false; // Hide "Other" skill form
+          this.fetchSkills();
+        },
+        error: (error) => {
+          console.error('Error creating skill:', error);
+          // Handle the error appropriately (e.g., display an error message)
+        }
+      });
+
+    }
+  }
+
+  cancellSkillCreation(){
+    this.otherSkillForm.reset();
+    this.showOtherSkillForm = false;
   }
 
   // Remove skill

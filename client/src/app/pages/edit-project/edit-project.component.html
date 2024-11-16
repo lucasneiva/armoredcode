@@ -264,6 +264,8 @@
                                         {{ skill.skillName }}
                                     </button>
                                 </li>
+                                <button class="text-center w-full" (click)="addSkill(null)">Adcionar outra
+                                    Habilidade</button>
                             </ul>
                         </div>
 
@@ -281,6 +283,39 @@
                             </div>
                         </div>
                     </div>
+
+                    <!--other form-->
+                    <div *ngIf="showOtherSkillForm"
+                        class="flex justify-center items-center align-middle fixed z-50 mx-auto inset-0 bg-black bg-opacity-50">
+                        <div class="flex flex-col max-w-lg bg-white rounded-md p-4 w-full">
+                            <h2 class="text-3xl mb-2"> Adcionar nova Habilidade</h2>
+                            <form [formGroup]="otherSkillForm">
+                                <div class="mx-auto h-fit w-full my-4">
+                                    <input class="p-2 px-4 max-h-16 border border-gray-300 rounded w-full" type="text"
+                                        formControlName="skillName" placeholder="Nome da Habilidade" />
+                                </div>
+                                <div class="mx-auto h-fit w-full my-4">
+                                    <textarea class="shadow-md border-gray-300 border-2 min-h-14 max-h-96 p-3 w-full"
+                                        formControlName="skillDescription"
+                                        placeholder="Descrição (Opcional)"></textarea>
+                                </div>
+                                <div class="mx-auto h-fit w-full my-2 flex space-x-4">
+                                    <button
+                                        class="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-6 rounded w-full"
+                                        type="button" (click)="createOtherSkill()" [disabled]="otherSkillForm.invalid">
+                                        Adicionar Habilidade
+                                    </button>
+                                    <button
+                                        class="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-6 rounded w-full"
+                                        type="button" (click)="cancellSkillCreation()">
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--other form-->
+
                     <!--Search Skills Module End-->
                     <!--Project descripition Module Start-->
                     <div class="block align-top">
