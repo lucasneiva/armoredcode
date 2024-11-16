@@ -4,7 +4,7 @@ import { createError } from './error.js';
 export const verifyToken = ( req, res, next ) => {
 
     const token = req.cookies.acess_token;
-    console.log(token);
+    /*debug*/ //console.log(token);
     if ( !token ) {
         try {
             return next( createError( 401, "Not Authenticated!" ) );
