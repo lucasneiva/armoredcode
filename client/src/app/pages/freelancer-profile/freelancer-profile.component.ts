@@ -35,6 +35,7 @@ export default class FreelancerProfileComponent implements OnInit {
   industry: Industry | null = null;
   specialization: Specialization | null = null;
   skills: string[] = [];
+  skillImages: { [key: string]: string } = {};
 
   isLoading = true;
   freelancerId!: string;
@@ -116,13 +117,20 @@ export default class FreelancerProfileComponent implements OnInit {
       this.skillService.getSkillById(skillId)
         .subscribe({
           next: (skillData) => {
-            this.skills.push(skillData.data.skillName);
+            const skillName = skillData.data.skillName;
+            this.skills.push(skillName);
+            this.skillImages[skillName] = skillData.data.skillImage; // Store the image URL
           },
           error: (error) => {
             console.error("Error loading skill:", error);
           }
         });
     });
+  }
+
+  getImageUrl(relativePath: string | undefined): string | undefined {
+    if (!relativePath) return undefined; // Handle cases where there's no image
+    return `${window.location.origin}/${relativePath}`;
   }
 
   sendInvite() {
