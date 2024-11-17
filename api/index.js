@@ -2,6 +2,8 @@ import express from "express";
 import mongoose, { connect } from "mongoose";
 import dotenv from "dotenv";
 import cors from 'cors';
+import path from 'path'; // Import the path module
+import { fileURLToPath } from 'url';
 
 // Routes
 import authRoutes from "./routes/authRoutes.js";
@@ -32,6 +34,9 @@ import seedUsers from "./fixtures/userFixture.js";
 
 import Proposal from "./models/proposalModel.js";
 
+const __filename = fileURLToPath(import.meta.url);  // Use this for __filename in ES Modules
+const __dirname = path.dirname(__filename);        // Use this for __dirname in ES Modules
+
 const app = express();
 dotenv.config();
 app.use( express.json() );
@@ -46,6 +51,9 @@ app.use( cors( {
     exposedHeaders: [ 'Set-Cookie' ] // Important for letting frontend access cookies
     */
 } ) );
+
+// Serve static files (IMPORTANT!)
+app.use('/utils/images', express.static(path.join(__dirname, 'api', 'utils', 'images')));
 
 // Routes
 app.use( "/api/auth", authRoutes );

@@ -2,8 +2,8 @@ import Skill from "../models/skillModel.js";
 
 const skillData = [
     // Hard Skills (Alphabetical Order)
-    { name: "Agile", description: "Metodologia de desenvolvimento ágil.", image: "../utils/images/agile.svg"},
-    { name: "Angular", description: "Framework JavaScript para front-end.", image: "../utils/images/angular.svg"},
+    { name: "Agile", description: "Metodologia de desenvolvimento ágil.", image: "/utils/images/agile.svg"},
+    { name: "Angular", description: "Framework JavaScript para front-end.", image: "/utils/images/angular.svg"},
     { name: "AWS", description: "Plataforma de nuvem da Amazon." },
     { name: "Azure", description: "Plataforma de nuvem da Microsoft." },
     { name: "Bootstrap", description: "Framework CSS para web responsivo." },
