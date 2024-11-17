@@ -35,11 +35,10 @@ export class ProjectCardComponent implements OnInit {
   projectCategoryName = '';
   creatorName = '';
   skills: string[] = [];
+  skillImages: { [key: string]: string } = {}; // Store skill images
   proposals: Proposal[] = [];
 
   isLoading = true; // Add a loading flag
-
-  skillImages: { [key: string]: string } = {}; // Store skill images
 
   ngOnInit() {
     this.userRole = this.authService.getUserRole();
@@ -130,6 +129,9 @@ export class ProjectCardComponent implements OnInit {
           }
         });
     });
+  }
+  getImageUrl(relativePath: string): string {
+    return `${window.location.origin}/${relativePath}`;
   }
 
   loadProjectCategoryName(categoryId: string) {

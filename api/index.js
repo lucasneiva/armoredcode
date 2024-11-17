@@ -52,9 +52,6 @@ app.use( cors( {
     */
 } ) );
 
-// Serve static files (IMPORTANT!)
-app.use('/utils/images', express.static(path.join(__dirname, 'api', 'utils', 'images')));
-
 // Routes
 app.use( "/api/auth", authRoutes );
 app.use( "/api/chat", chatChannelRoutes );
