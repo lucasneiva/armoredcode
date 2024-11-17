@@ -6,7 +6,7 @@ const SkillSchema = new Schema( {
     skillName: {
         type: String,
         required: true,
-        maxLentgh: 50,
+        maxlength: 50,
         unique: true,
     },
 
@@ -14,6 +14,13 @@ const SkillSchema = new Schema( {
         type: String,
         maxlength: 150,
     },
+
+    skillImage: {
+        type: String, // Store the URL or path to the image
+        // Other options depending on your storage strategy:
+        // data: Buffer, // If storing image data directly in MongoDB (less common)
+        // contentType: String, // If storing image data directly
+    }
 
 } );
 
