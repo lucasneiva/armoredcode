@@ -20,37 +20,30 @@ const skillData = [
     { name: "HTML", description: "Linguagem de marcação web.", image: "assets/images/html.svg"},
     { name: "Java", description: "Linguagem para Android e back-end.", image: "assets/images/java.svg"},
     { name: "JavaScript", description: "Linguagem para web front-end e back-end.", image: "assets/images/javascript.svg"},
-    
-    { name: "Kotlin", description: "Linguagem moderna para Android.", "image": "assets/images/kotlin.svg" },
-    { name: "Node.js", description: "Ambiente de execução JavaScript.", "image": "assets/images/nodejs.svg" },
-    { name: "NoSQL", description: "Bancos de dados não relacionais.", "image": "assets/images/nosql.svg" },
-    { name: "PHP", description: "Linguagem para web back-end.", "image": "assets/images/php.svg" },
-    { name: "Python", description: "Linguagem versátil para ciência de dados, etc.", "image": "assets/images/python.svg" },
-    { name: "React", description: "Biblioteca JavaScript para UI.", "image": "assets/images/react.svg" },
+    /*
     { name: "React Native", description: "Framework para mobile multiplataforma.", "image": "assets/images/react-native.svg" },
     { name: "REST APIs", description: "Arquitetura para APIs web.", "image": "assets/images/rest-apis.svg" },
     { name: "Scrum", description: "Framework Agile para gestão de projetos.", "image": "assets/images/scrum.svg" },
     { name: "SQL", description: "Linguagem para bancos de dados relacionais.", "image": "assets/images/sql.svg" },
     { name: "Swift", description: "Linguagem da Apple para iOS, macOS, etc.", "image": "assets/images/swift.svg" },
     { name: "UI/UX Design", description: "Design de interfaces de usuário.", "image": "assets/images/ui-ux-design.svg" },
-    { name: "Vue.js", description: "Framework JavaScript para front-end.", "image": "assets/images/vuejs.svg" }
-    /*
-    { name: "jQuery", description: "Biblioteca JavaScript para DOM e AJAX.", image: "assets/images/jquery.svg" },
-    { name: "Kanban", description: "Método visual para fluxo de trabalho.", image: "assets/images/kanban.svg" },
-    { name: "Kotlin", description: "Linguagem moderna para Android." },
-    { name: "Node.js", description: "Ambiente de execução JavaScript." },
-    { name: "NoSQL", description: "Bancos de dados não relacionais." },
-    { name: "PHP", description: "Linguagem para web back-end." },
-    { name: "Python", description: "Linguagem versátil para ciência de dados, etc." },
-    { name: "React", description: "Biblioteca JavaScript para UI." },
+*/
+    { name: "jQuery", description: "Biblioteca JavaScript para DOM e AJAX.", image: "assets/images/jquery.svg"},
+    { name: "Kanban", description: "Método visual para fluxo de trabalho.", image: "assets/images/kanban.svg"},
+    { name: "Kotlin", description: "Linguagem moderna para Android.", image: "assets/images/kotlin.svg"},
+    { name: "Node.js", description: "Ambiente de execução JavaScript.", image: "assets/images/nodejs.svg"},
+    { name: "NoSQL", description: "Bancos de dados não relacionais.", image: "assets/images/nosql.svg"},
+    { name: "PHP", description: "Linguagem para web back-end.", image: "assets/images/php.svg"},
+    { name: "Python", description: "Linguagem versátil para ciência de dados, etc.", image: "assets/images/python.svg"},
+    { name: "React", description: "Biblioteca JavaScript para UI.", image: "assets/images/react.svg"},
     { name: "React Native", description: "Framework para mobile multiplataforma." },
     { name: "REST APIs", description: "Arquitetura para APIs web." },
     { name: "Scrum", description: "Framework Agile para gestão de projetos." },
     { name: "SQL", description: "Linguagem para bancos de dados relacionais." },
     { name: "Swift", description: "Linguagem da Apple para iOS, macOS, etc." },
     { name: "UI/UX Design", description: "Design de interfaces de usuário." },
-    { name: "Vue.js", description: "Framework JavaScript para front-end." },
-    */
+    { name: "Vue.js", description: "Framework JavaScript para front-end.", image: "assets/images/vuejs.svg"}
+
     // Soft Skills (Alphabetical Order)
     { name: "Adaptabilidade", description: "Ajusta-se a mudanças com foco." },
     { name: "Aprendizado Contínuo", description: "Busca novos conhecimentos." },
