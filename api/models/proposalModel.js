@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-const ProposalSchema = new Schema( {
+const ProposalSchema = new Schema({
     projectId: {
         type: Schema.Types.ObjectId,
         ref: 'Project',
@@ -24,7 +24,7 @@ const ProposalSchema = new Schema( {
     // Campos para representar o custo da proposta
     pricingType: {
         type: String,
-        enum: [ 'BUDGET', 'HOURLY-RATE' ],
+        enum: ['BUDGET', 'HOURLY-RATE'],
         required: true,
     },
     proposedBudget: { // Usado quando pricingType for 'BUDGET'
@@ -41,7 +41,7 @@ const ProposalSchema = new Schema( {
     },
     status: {
         type: String,
-        enum: [ 'DRAFT', 'PENDING', 'ACCEPTED', 'REJECTED' ],
+        enum: ['DRAFT', 'PENDING', 'ACCEPTED', 'REJECTED'],
         default: 'DRAFT',
     },
     ChatChannelId: { // Referencia ao Canal de Comunicação
@@ -49,6 +49,10 @@ const ProposalSchema = new Schema( {
         ref: 'ChatChannel',
         required: false,
     },
-}, { timestamps: true } );
+    rejectionReason: { // Optional field for rejection reason
+        type: String,
+        required: function () { return this.status === 'REJECTED'; }, // Only required if status is REJECTED
+    },
+}, { timestamps: true });
 
-export default mongoose.model( 'Proposal', ProposalSchema );
+export default mongoose.model('Proposal', ProposalSchema);

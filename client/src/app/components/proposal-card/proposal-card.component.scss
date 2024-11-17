@@ -167,6 +167,33 @@
                     background-color: rgb(29 78 216);
                 }
             }
+            .rejection-form{
+                display: flex;
+                flex-direction: column;
+                background-color: lightgray;
+                width: 100%;
+                padding: 1rem;
+                border-radius: 0.25rem;
+
+                label{
+                    text-align: start;
+                    font-size: 1.33rem;
+                    font-weight: 600;
+                    line-height: 1.5rem;
+                }
+
+                textarea{
+                    display: block;
+                    width: 100%;
+                    margin: 1rem 0rem;
+                    max-height: 20rem;
+                }
+
+                .rejection-options{
+                    display: flex;
+                    flex-direction: row;
+                }
+            }
         }
     }
 }

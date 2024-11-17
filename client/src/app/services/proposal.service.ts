@@ -99,14 +99,18 @@ export class ProposalService {
     return this.http.patch<any>(`${apiUrls.proposalServiceApi}/${proposalId}/accept`, {}, httpOptions);
   }
 
-  rejectProposal(proposalId: string): Observable<any> {
+  rejectProposal(proposalId: string, rejectionReason: string): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
       withCredentials: true
     };
-    return this.http.patch<any>(`${apiUrls.proposalServiceApi}/${proposalId}/reject`, {}, httpOptions);
+    return this.http.patch<any>(
+      `${apiUrls.proposalServiceApi}/${proposalId}/reject`, 
+      { rejectionReason },  // Send the rejection reason in the request body
+      httpOptions
+    );
   }
 
 }
@@ -144,6 +148,7 @@ export type Proposal = {
   estimatedDuration: number;
   status: 'DRAFT' | 'PENDING' | 'ACCEPTED' | 'REJECTED';
   communicationChannelId?: string; // Optional
+  rejectionReason?: string; // Optional rejection reason
   createdAt: string;
   updatedAt: string;
 }

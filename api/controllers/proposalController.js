@@ -5,7 +5,7 @@ import { createSuccess } from "../utils/success.js";
 import Project from "../models/projectModel.js";
 import ChatChannel from "../models/chatChannelModel.js";
 
-export const createProposal = async ( req, res, next ) => {
+export const createProposal = async (req, res, next) => {
     try {
         // Assuming you have middleware to verify the token and add the user to req
         const freelancerId = req.user.id;
@@ -15,45 +15,45 @@ export const createProposal = async ( req, res, next ) => {
 
         // Perform data validation here
 
-        const newProposal = new Proposal( newProposalData );
+        const newProposal = new Proposal(newProposalData);
         await newProposal.save();
 
-        return next( createSuccess( 201, "Proposal Created!", newProposal ) );
-    } catch ( error ) {
+        return next(createSuccess(201, "Proposal Created!", newProposal));
+    } catch (error) {
 
-        return handleValidationError( error, next );
+        return handleValidationError(error, next);
     }
 };
 
-export const getProposalsByProjectId = async ( req, res, next ) => {
+export const getProposalsByProjectId = async (req, res, next) => {
     try {
         const projectId = req.params.projectId;
 
-        const proposals = await Proposal.find( { projectId: projectId } );
+        const proposals = await Proposal.find({ projectId: projectId });
 
-        return next( createSuccess( 200, "Proposals for Project", proposals ) );
-    } catch ( error ) {
-        return next( createError( 500, "Internal Server Error!" ) );
+        return next(createSuccess(200, "Proposals for Project", proposals));
+    } catch (error) {
+        return next(createError(500, "Internal Server Error!"));
     }
 };
 
-export const getProposalById = async ( req, res, next ) => {
+export const getProposalById = async (req, res, next) => {
     try {
         const proposalId = req.params.id;
 
-        const proposal = await Proposal.findById( proposalId );
+        const proposal = await Proposal.findById(proposalId);
 
-        if ( !proposal ) {
-            return next( createError( 404, "Proposal not found!" ) );
+        if (!proposal) {
+            return next(createError(404, "Proposal not found!"));
         }
 
-        return next( createSuccess( 200, "Proposal Data", proposal ) );
-    } catch ( error ) {
-        return next( createError( 500, "Internal Server Error!" ) );
+        return next(createSuccess(200, "Proposal Data", proposal));
+    } catch (error) {
+        return next(createError(500, "Internal Server Error!"));
     }
 };
 
-export const updateProposal = async ( req, res, next ) => {
+export const updateProposal = async (req, res, next) => {
     try {
         const proposalId = req.params.id;
         const updateData = req.body;
@@ -64,29 +64,29 @@ export const updateProposal = async ( req, res, next ) => {
             { new: true }
         );
 
-        if ( !updatedProposal ) {
-            return next( createError( 404, "Proposal not found!" ) );
+        if (!updatedProposal) {
+            return next(createError(404, "Proposal not found!"));
         }
 
-        return next( createSuccess( 200, "Proposal updated successfully!", updatedProposal ) );
-    } catch ( error ) {
-        return next( createError( 500, "Internal Server Error!" ) );
+        return next(createSuccess(200, "Proposal updated successfully!", updatedProposal));
+    } catch (error) {
+        return next(createError(500, "Internal Server Error!"));
     }
 };
 
-export const deleteProposal = async ( req, res, next ) => {
+export const deleteProposal = async (req, res, next) => {
     try {
         const proposalId = req.params.id;
 
-        const deletedProposal = await Proposal.findByIdAndDelete( proposalId );
+        const deletedProposal = await Proposal.findByIdAndDelete(proposalId);
 
-        if ( !deletedProposal ) {
-            return next( createError( 404, "Proposal not found!" ) );
+        if (!deletedProposal) {
+            return next(createError(404, "Proposal not found!"));
         }
 
-        return next( createSuccess( 200, "Proposal deleted successfully!" ) );
-    } catch ( error ) {
-        return next( createError( 500, "Internal Server Error!" ) );
+        return next(createSuccess(200, "Proposal deleted successfully!"));
+    } catch (error) {
+        return next(createError(500, "Internal Server Error!"));
     }
 };
 
@@ -114,14 +114,14 @@ export const sendProposal = async (req, res, next) => {
     }
 };
 
-export const acceptProposal = async ( req, res, next ) => {
+export const acceptProposal = async (req, res, next) => {
     try {
         const proposalId = req.params.id;
 
         // 1. Find the Proposal
-        const proposal = await Proposal.findById( proposalId );
-        if ( !proposal ) {
-            return next( createError( 404, "Proposal not found!" ) );
+        const proposal = await Proposal.findById(proposalId);
+        if (!proposal) {
+            return next(createError(404, "Proposal not found!"));
         }
 
         // 2. Update Proposal Status
@@ -129,11 +129,11 @@ export const acceptProposal = async ( req, res, next ) => {
         await proposal.save();
 
         // 3. Create Chat Channel
-        const newChatChannel = new ChatChannel( {
+        const newChatChannel = new ChatChannel({
             projectId: proposal.projectId,
             freelancerId: proposal.freelancerId,
             clientId: proposal.clientId
-        } );
+        });
 
         const savedChatChannel = await newChatChannel.save();
 
@@ -148,45 +148,49 @@ export const acceptProposal = async ( req, res, next ) => {
             }
         );
 
-        return next( createSuccess( 200, "Proposal accepted successfully! Chat channel created.", {
+        return next(createSuccess(200, "Proposal accepted successfully! Chat channel created.", {
             proposal: proposal,
             chatChannel: savedChatChannel
-        } ) );
+        }));
 
-    } catch ( error ) {
-        console.error( "Error accepting proposal:", error );
-        return next( createError( 500, "Internal Server Error!" ) );
+    } catch (error) {
+        console.error("Error accepting proposal:", error);
+        return next(createError(500, "Internal Server Error!"));
     }
 };
 
-export const rejectProposal = async ( req, res, next ) => {
+export const rejectProposal = async (req, res, next) => {
     try {
         const proposalId = req.params.id;
+        const { rejectionReason } = req.body;
 
         const updatedProposal = await Proposal.findByIdAndUpdate(
             proposalId,
-            { status: 'REJECTED' }, // Update status to REJECTED
+            {
+                status: 'REJECTED',
+                rejectionReason: rejectionReason // Add rejectionReason to the update
+            },
             { new: true }
         );
 
-        if ( !updatedProposal ) {
-            return next( createError( 404, "Proposal not found!" ) );
+        if (!updatedProposal) {
+            return next(createError(404, "Proposal not found!"));
         }
 
-        return next( createSuccess( 200, "Proposal rejected successfully!", updatedProposal ) );
-    } catch ( error ) {
-        return next( createError( 500, "Internal Server Error!" ) );
+        return next(createSuccess(200, "Proposal rejected successfully!", updatedProposal));
+    } catch (error) {
+        return next(createError(500, "Internal Server Error!"));
     }
 };
 
-export const getFreelancerProposals = async ( req, res, next ) => {
+export const getFreelancerProposals = async (req, res, next) => {
     try {
         const freelancerId = req.params.freelancerId;
 
-        const proposals = await Proposal.find( { freelancerId: freelancerId } ); // Assuming you have a freelancerId field in your Proposal model
+        const proposals = await Proposal.find({ freelancerId: freelancerId }); // Assuming you have a freelancerId field in your Proposal model
 
-        return next( createSuccess( 200, "Freelancer's Proposals", proposals ) );
-    } catch ( error ) {
-        return next( createError( 500, "Internal Server Error!" ) );
+        return next(createSuccess(200, "Freelancer's Proposals", proposals));
+    } catch (error) {
+        return next(createError(500, "Internal Server Error!"));
     }
 };

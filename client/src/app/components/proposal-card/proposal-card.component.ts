@@ -7,11 +7,12 @@ import { AuthService } from '../../services/auth.service';
 import { ChatService } from '../../services/chat.service'; // Import your ChatService
 import { ProposalService } from '../../services/proposal.service';
 import { catchError, map, of, switchMap, throwError } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-proposal-card',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './proposal-card.component.html',
   styleUrl: './proposal-card.component.scss'
 })
@@ -33,6 +34,9 @@ export class ProposalCardComponent {
 
   creatorName = '';
   projectCreatorName = '';
+
+  showRejectionForm = false;
+  rejectionReason = '';
 
   ngOnInit() {
     this.userRole = this.authService.getUserRole();
@@ -157,7 +161,7 @@ export class ProposalCardComponent {
     const proposalId = this.proposal._id;
     const projectId = this.proposal.projectId;
     const freelancerId = this.proposal.freelancerId;
-  
+
     if (confirm("Are you sure you want to accept this proposal?")) {
       this.proposalService.acceptProposal(proposalId).pipe(
         switchMap((response) => {
@@ -203,14 +207,19 @@ export class ProposalCardComponent {
 
   rejectProposal() {
     const proposalId = this.proposal._id;
+    if (this.rejectionReason.trim() === '') { // Check if rejection reason is empty or contains only whitespace
+      alert('Por favor, forneça um motivo para a rejeição.');
+      return;
+    }
     if (confirm("Are you sure you want to reject this proposal?")) {
-      this.proposalService.rejectProposal(proposalId).subscribe(
+      this.proposalService.rejectProposal(proposalId, this.rejectionReason).subscribe(
         (response) => {
           if (response.success) {
             console.log('Proposal rejected successfully');
             // Update the proposal status in the UI or reload the page
             this.proposal.status = 'REJECTED';
-            window.location.reload();
+            this.showRejectionForm = false;
+            //window.location.reload();
           } else {
             console.error('Error rejecting proposal:', response.message);
           }
@@ -222,8 +231,4 @@ export class ProposalCardComponent {
     }
   }
 
-  makeCounterProposal() {
-    console.log("Counter Proposal button clicked");
-    //this.router.navigate(['../edit-proposal', this.proposal._id], { relativeTo: this.route });
-  }
 }

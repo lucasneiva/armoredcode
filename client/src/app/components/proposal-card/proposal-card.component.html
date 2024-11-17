@@ -3,12 +3,10 @@
     <!--card start-->
     <div (click)="toggleDetails()" style="top: calc(1rem * 1);" [ngClass]="{
         'bg-stone-100': project?.projectStatus === 'COMPLETED',
-        'bg-white': project?.projectStatus !== 'COMPLETED'}"
-        class="proposal-card shadow-lg">
+        'bg-white': project?.projectStatus !== 'COMPLETED'}" class="proposal-card shadow-lg">
         <!-- DEV MODE <p class="text-sm text-gray-500">ID da Proposta: {{proposal._id}}</p>-->
         <div class="card-header">
-            <span class="proposal-status" 
-            [ngClass]="{'bg-blue-500': proposal.status === 'DRAFT',
+            <span class="proposal-status" [ngClass]="{'bg-blue-500': proposal.status === 'DRAFT',
                       'bg-yellow-500': proposal.status === 'PENDING',
                       'bg-red-500': proposal.status === 'REJECTED',
                       'bg-green-500': proposal.status === 'ACCEPTED'}">
@@ -19,7 +17,8 @@
                 <ng-container *ngIf="proposal.status === 'ACCEPTED'">Aceita</ng-container>
             </span>
             <span *ngIf="project" class="project-title">{{project.projectTitle}}</span>
-            <h3 *ngIf="creatorName && project?.clientId._id === this.authService.getUserId()" class="creator-name"> {{creatorName}} </h3>
+            <h3 *ngIf="creatorName && project?.clientId._id === this.authService.getUserId()" class="creator-name">
+                {{creatorName}} </h3>
         </div>
     </div>
     <!--card end-->
@@ -42,14 +41,14 @@
                     </svg>
                 </button>
             </div>
-            
+
             <div *ngIf="detailedProposal" class="proposal-details">
                 <h1 class="project-title">{{project.projectTitle}}</h1>
                 <div class="main-proposal-info">
 
                     <p><strong>Proposta criada por:</strong> {{creatorName}}</p>
                     <p><strong>Projeto criado por:</strong> {{projectCreatorName}}</p>
-                
+
                     <ng-container *ngIf="detailedProposal.pricingType == 'BUDGET'">
                         <p>
                             <strong>Orçamento:</strong>
@@ -100,14 +99,29 @@
                 </ng-container>
 
                 <ng-container *ngIf="userRole == 'CLIENT'">
-                    <button *ngIf="proposal.status === 'PENDING'" (click)="acceptProposal()" class="proposal-btns">
+                    <button *ngIf="proposal.status === 'PENDING' && !showRejectionForm" (click)="acceptProposal()"
+                        class="proposal-btns">
                         <span class="max-lg:hidden">Aceitar Proposta</span>
                         <i class="fa fa-check lg:hidden"></i>
                     </button>
-                    <button *ngIf="proposal.status === 'PENDING'" (click)="rejectProposal()" class="proposal-btns">
+                    <button *ngIf="proposal.status === 'PENDING' && !showRejectionForm"
+                        (click)="showRejectionForm = true" class="proposal-btns">
                         <span class="max-lg:hidden">Rejeitar Proposta</span>
                         <i class="fa fa-times lg:hidden"></i>
                     </button>
+
+                    <div *ngIf="showRejectionForm" class="rejection-form">
+                        <form (ngSubmit)="rejectProposal()">
+                            <label for="rejectionReason">Motivo da Rejeição:</label><br>
+                            <textarea id="rejectionReason" name="rejectionReason" [(ngModel)]="rejectionReason" rows="4"
+                                cols="50"></textarea>
+                            <div class="rejection-options space-x-4">
+                                <button type="submit" class="proposal-btns">Confirmar Rejeição</button>
+                                <button type="button" (click)="showRejectionForm = false"
+                                    class="proposal-btns">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
                 </ng-container>
             </div>
             <!--Buttons end-->
