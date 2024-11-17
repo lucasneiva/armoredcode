@@ -123,7 +123,8 @@ export class ProjectCardComponent implements OnInit {
             const skillName = skillData.data.skillName;
             this.skills.push(skillName);
             this.skillImages[skillName] = skillData.data.skillImage; // Store the image URL
-            console.log(skillData.data.skillImage);
+            console.log("name: ",skillName);
+            console.log("img url: ",skillData.data.skillImage);
           },
           error: (error) => {
             console.error("Error loading skill:", error);
