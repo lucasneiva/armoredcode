@@ -99,7 +99,7 @@
         <div class="skills-row space-x-2">
           <span *ngFor="let skill of skills; let i = index" class="skill">
             <img *ngIf="skillImages[skill]" [src]="getImageUrl(skillImages[skill])" alt="{{ skill }} icon"
-              class="skill-icon" />
+              class="skill-icon"/>
             <span>{{ skill }}</span>
           </span>
         </div>
