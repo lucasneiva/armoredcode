@@ -207,9 +207,11 @@ export class ProposalCardComponent {
 
   rejectProposal() {
     const proposalId = this.proposal._id;
+
     if (this.rejectionReason.trim() === '') { // Check if rejection reason is empty or contains only whitespace
-      alert('Por favor, forneça um motivo para a rejeição.');
-      return;
+      /*alert('Por favor, forneça um motivo para a rejeição.');
+      return;*/
+      this.rejectionReason = "Sem motivo especificado.";
     }
     if (confirm("Are you sure you want to reject this proposal?")) {
       this.proposalService.rejectProposal(proposalId, this.rejectionReason).subscribe(
@@ -219,7 +221,7 @@ export class ProposalCardComponent {
             // Update the proposal status in the UI or reload the page
             this.proposal.status = 'REJECTED';
             this.showRejectionForm = false;
-            //window.location.reload();
+            window.location.reload();
           } else {
             console.error('Error rejecting proposal:', response.message);
           }

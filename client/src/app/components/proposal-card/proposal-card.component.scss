@@ -57,6 +57,16 @@
 
             color: rgb(75 85 99);
         }
+        .rejection-message{
+            font-size: 1.05rem;
+            line-height: 1;
+
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+            line-clamp: 4;
+        }
     }
 }
 

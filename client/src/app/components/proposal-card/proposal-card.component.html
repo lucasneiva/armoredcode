@@ -19,6 +19,9 @@
             <span *ngIf="project" class="project-title">{{project.projectTitle}}</span>
             <h3 *ngIf="creatorName && project?.clientId._id === this.authService.getUserId()" class="creator-name">
                 {{creatorName}} </h3>
+            <div *ngIf="proposal.status === 'REJECTED' && userRole == 'FREELANCER' && proposal.rejectionReason" class="rejection-message">
+                {{ proposal?.rejectionReason }}
+            </div>
         </div>
     </div>
     <!--card end-->
@@ -76,8 +79,11 @@
                         <ng-container *ngIf="proposal.status === 'ACCEPTED'">Aceita</ng-container>
                     </p>
                 </div>
-                <div class="other-proposal-info">
+                <div class="other-proposal-info space-y-4">
                     <p><strong>Descrição:</strong> <br> {{detailedProposal.coverLetter}}</p>
+                    <div *ngIf="proposal.status === 'REJECTED' && proposal.rejectionReason">
+                        <strong>Motivo da rejeição:</strong> <br> {{ proposal?.rejectionReason }}
+                    </div>
                 </div>
             </div>
 
@@ -114,7 +120,7 @@
                         <form (ngSubmit)="rejectProposal()">
                             <label for="rejectionReason">Motivo da Rejeição:</label><br>
                             <textarea id="rejectionReason" name="rejectionReason" [(ngModel)]="rejectionReason" rows="4"
-                                cols="50"></textarea>
+                                placeholder="(campo opcional)" cols="50"></textarea>
                             <div class="rejection-options space-x-4">
                                 <button type="submit" class="proposal-btns">Confirmar Rejeição</button>
                                 <button type="button" (click)="showRejectionForm = false"
