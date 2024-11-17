@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 import { ProjectService } from '../../services/project.service';
 import { SkillService } from '../../services/skill.service';
@@ -17,7 +17,7 @@ import { map } from 'rxjs';
   templateUrl: './project-card.component.html',
   styleUrl: './project-card.component.scss'
 })
-export class ProjectCardComponent {
+export class ProjectCardComponent implements OnInit {
   router = inject(Router);
   projectService = inject(ProjectService);
   proposalService = inject(ProposalService);
@@ -39,6 +39,8 @@ export class ProjectCardComponent {
 
   isLoading = true; // Add a loading flag
 
+  skillImages: { [key: string]: string } = {}; // Store skill images
+
   ngOnInit() {
     this.userRole = this.authService.getUserRole();
     if (this.userRole === 'CLIENT' || this.userRole === 'FREELANCER') {
@@ -47,6 +49,7 @@ export class ProjectCardComponent {
       console.log("invalid role");
     }
   }
+
 
   toggleDetails() {
     this.showDetails = !this.showDetails;
@@ -118,8 +121,9 @@ export class ProjectCardComponent {
       this.skillService.getSkillById(skillIdValue)
         .subscribe({
           next: (skillData) => {
-            this.skills.push(skillData.data.skillName);
-            /*debug*/ //console.log("skill: " + this.skills); console.log("id: " + skillIdValue);
+            const skillName = skillData.data.skillName;
+            this.skills.push(skillName);
+            this.skillImages[skillName] = skillData.data.skillImage; // Store the image URL
           },
           error: (error) => {
             console.error("Error loading skill:", error);

@@ -99,7 +99,8 @@
       <ng-container *ngIf="skills.length > 0; else noSkills">
         <div class="skills-row space-x-2">
           <span *ngFor="let skill of skills; let i = index" class="skill">
-            {{ skill }}
+            <img *ngIf="skillImages[skill]" [src]="skillImages[skill]" alt="{{ skill }} icon" class="skill-icon" /> 
+            <span> {{ skill }} </span>
           </span>
         </div>  
       </ng-container>

@@ -8,8 +8,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class SkillService {
   http = inject(HttpClient);
-  
-  createSkillService(skillObj: any){
+
+  createSkillService(skillObj: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -18,13 +18,13 @@ export class SkillService {
     };
     return this.http.post<any>(`${apiUrls.skillServiceApi}`, skillObj, httpOptions);
   }
-  
+
   getSkills(): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
-      withCredentials: true 
+      withCredentials: true
     };
     return this.http.get<any>(`${apiUrls.skillServiceApi}`, httpOptions);
   }
@@ -38,12 +38,13 @@ export class SkillService {
     };
     return this.http.get<any>(`${apiUrls.skillServiceApi}/${skillId}`, httpOptions);
   }
-  
+
 }
 export type Skill = {
-  
-    _id: string,
-    skillName: string,
-    skillDescription: string,
-    
+
+  _id: string,
+  skillName: string,
+  skillDescription: string,
+  skillImage: string;
+
 }
