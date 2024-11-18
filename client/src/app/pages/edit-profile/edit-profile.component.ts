@@ -60,6 +60,11 @@ export default class EditProfileComponent implements OnInit {
   industries: any[] = [];
   pageNumbers: number[] = [];
 
+  showSkillsList: boolean = false;
+  filteredSkills: any[] = [];
+  otherSkillForm!: FormGroup;
+  showOtherSkillForm: boolean = false;
+
   ngOnInit() {
     this.authService.getUserId();
     this.userRole = this.authService.getUserRole();
@@ -136,11 +141,16 @@ export default class EditProfileComponent implements OnInit {
         state: ['SP'],
         country: ['Brasil'],
       }),
-      skillIds: this.fb.array([]), // Initialize as an empty FormArray
+      skillIds: this.fb.array([]),  // Important: Initialize as FormArray
       portfolioItems: this.fb.array([]),
       educations: this.fb.array([]),
       certifications: this.fb.array([]),
       workExperiences: this.fb.array([]),
+    });
+
+    this.otherSkillForm = this.fb.group({
+      skillName: ['', Validators.required],
+      skillDescription: [''], // Optional description
     });
   }
 
@@ -262,16 +272,11 @@ export default class EditProfileComponent implements OnInit {
           });
         }
 
-        // Populate skillIds FormArray
-        if (profile.skillIds && profile.skillIds.length > 0) {
+        // Populate skillIds FormArray (in populateForms function)
+        if (profile?.skillIds && profile.skillIds.length > 0) {
           const skillIdsControl = this.freelancerProfileForm.get('skillIds') as FormArray;
           profile.skillIds.forEach(skillId => {
-            const skill = this.skills.find(s => s._id === skillId);
-            if (skill) {
-              skillIdsControl.push(new FormControl(skill._id));
-            } else {
-              console.warn(`Skill with ID ${skillId} not found in the skills list`);
-            }
+            skillIdsControl.push(new FormControl(skillId)); // Push FormControl into FormArray
           });
         }
       }
@@ -472,6 +477,61 @@ export default class EditProfileComponent implements OnInit {
     });
   }
 
+  searchSkills(event: any) {
+    const searchTerm = event.target.value.toLowerCase();
+    this.showSkillsList = searchTerm.length > 0; 
+
+    if (this.showSkillsList) {
+      this.filteredSkills = this.skills.filter(skill =>
+        skill.skillName.toLowerCase().includes(searchTerm)
+      );
+    }
+  }
+
+
+  addSkill(skillId: string | null) {
+    const skillIdsControl = this.freelancerProfileForm.get('skillIds') as FormArray;
+
+    if (skillId) {
+      if (!skillIdsControl.value.includes(skillId)) {
+        skillIdsControl.push(new FormControl(skillId));
+        this.showSkillsList = false; // Hide the list
+      }
+    } else {
+      this.showOtherSkillForm = true;
+    }
+  }
+
+  createOtherSkill() {
+    if (this.otherSkillForm.valid) {
+      const newSkill = this.otherSkillForm.value;
+      this.skillService.createSkillService(newSkill).subscribe({
+        next: (createdSkill) => {
+          this.addSkill(createdSkill._id);
+          this.otherSkillForm.reset();
+          this.showOtherSkillForm = false;
+          this.fetchSkills(); // Refresh the skills list!
+        },
+        error: (error) => {
+          // ... handle error
+        },
+      });
+    }
+  }
+
+  cancelSkillCreation() {
+    this.otherSkillForm.reset();
+    this.showOtherSkillForm = false;
+  }
+
+  removeSkill(index: number) {
+    (this.freelancerProfileForm.get('skillIds') as FormArray).removeAt(index);
+  }
+
+  hasSelectedSkills(): boolean {
+    return this.skillIds.length > 0;
+  }
+
   // skill methods
   addSelectedSkill(): void {
     const selectedSkillId = this.selectedSkillControl.value;
@@ -481,21 +541,13 @@ export default class EditProfileComponent implements OnInit {
     }
   }
 
-  removeSkill(index: number): void {
-    this.skillIds.removeAt(index);
-  }
-
-  hasSelectedSkills(): boolean {
-    const skillIdsControl = this.freelancerProfileForm.get('skillIds') as FormControl;
-    return skillIdsControl.value && skillIdsControl.value.length > 0;
+  getSkillName(skillId: string): string {
+    const skill = this.skills.find((s) => s._id === skillId);
+    return skill ? skill.skillName : '';
   }
 
   getSkillObjectById(skillId: string): any | undefined {
     return this.skills.find((s) => s._id === skillId);
-  }
-
-  getSkillNameById(skill: any): string {
-    return skill ? skill.skillName : '';
   }
 
   //image methods
