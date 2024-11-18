@@ -49,6 +49,11 @@ export default class CreateProfileComponent implements OnInit {
   industries: any[] = [];
   pageNumbers: number[] = [];
 
+  showSkillsList: boolean = false;
+  filteredSkills: any[] = [];
+  otherSkillForm!: FormGroup;
+  showOtherSkillForm: boolean = false;
+
   ngOnInit() {
     this.authService.getUserId();
     this.userRole = this.authService.getUserRole();
@@ -95,6 +100,7 @@ export default class CreateProfileComponent implements OnInit {
       specializationId: [''],
       profileSummary: [''],
       experienceLevel: ['', Validators.required],
+      skillIds: this.fb.control([]), // Use skillIds instead of selectedSkills
       hourlyRate: this.fb.group({
         min: [''],
         max: [''],
@@ -108,13 +114,16 @@ export default class CreateProfileComponent implements OnInit {
         state: ['SP'],
         country: ['Brasil'],
       }),
-      selectedSkills: this.fb.array([]), // Initialize as an empty array
-
       workExperiences: this.fb.array([this.createExperienceForm()]),
       educations: this.fb.array([this.createEducationsForm()]),
       certifications: this.fb.array([this.createCertificationForm()]),
       portfolioItems: this.fb.array([this.createPortfolioItem()]),
       
+    });
+
+    this.otherSkillForm = this.fb.group({
+      skillName: ['', Validators.required],
+      skillDescription: [''], // Optional description
     });
 
   }
@@ -153,9 +162,6 @@ export default class CreateProfileComponent implements OnInit {
 
       // Prepare the data for the freelancer profile
       const formData = this.freelancerProfileForm.value;
-
-      // Convert selectedSkills array to a simple array of skill IDs
-      formData.skillIds = formData.selectedSkills;
 
       this.profileService.createProfile(formData)
         .subscribe({
@@ -351,29 +357,65 @@ export default class CreateProfileComponent implements OnInit {
     );
   }
 
-  //skill methods
-  onSkillSelected(event: any) {
-    this.selectedSkillId = event.target.value;
-  }
+  // Method to filter skills based on search input
+  searchSkills(event: any) {
+    const searchTerm = event.target.value.toLowerCase();
+    this.showSkillsList = searchTerm.length > 0; // Show if search term is not empty
 
-  addSkill() {
-    if (this.selectedSkillId) {
-      this.selectedSkills.push(new FormControl(this.selectedSkillId));
-      this.selectedSkillId = '';
+    if (this.showSkillsList) {
+      this.filteredSkills = this.skills.filter((skill) =>
+        skill.skillName.toLowerCase().includes(searchTerm)
+      );
     }
   }
 
-  removeSkill(index: number) {
-    this.selectedSkills.removeAt(index);
+  addSkill(skillId: string | null) { // Accept null for "Other" skill
+    const skillIdsControl = this.freelancerProfileForm.get('skillIds') as FormControl;
+    const skillIds = skillIdsControl.value;
+
+    if (skillId) { // If a skill from the list is selected
+      if (!skillIds.includes(skillId)) {
+        skillIdsControl.setValue([...skillIds, skillId]);
+        this.showSkillsList = false; // Hide skills list
+      }
+    } else { // If "Other" skill is selected
+      this.showOtherSkillForm = true; // Show the "Other" skill form
+    }
+  }
+
+
+  createOtherSkill() {
+    if (this.otherSkillForm.valid) {
+      const newSkill = this.otherSkillForm.value;
+      this.skillService.createSkillService(newSkill).subscribe({
+        next: (createdSkill) => {
+          this.addSkill(createdSkill._id); // Add the newly created skill
+          this.otherSkillForm.reset();     // Reset the "Other" skill form
+          this.showOtherSkillForm = false; // Hide the form
+          this.fetchSkills(); // Refresh skills list to include the new skill. Important!
+        },
+        error: (error) => {
+          console.error('Error creating skill:', error);
+          // Handle error as needed
+        },
+      });
+    }
+  }
+
+  cancelSkillCreation() {
+    this.otherSkillForm.reset();
+    this.showOtherSkillForm = false;
+  }
+
+  removeSkill(skillId: string) {
+    const skillIdsControl = this.freelancerProfileForm.get('skillIds') as FormControl;
+    const skillIds = skillIdsControl.value;
+    skillIdsControl.setValue(skillIds.filter((id: string) => id !== skillId));
   }
 
   getSkillName(skillId: string): string {
     const skill = this.skills.find((s) => s._id === skillId);
     return skill ? skill.skillName : '';
-  }
-
-  get selectedSkills(): FormArray {
-    return this.freelancerProfileForm.get('selectedSkills') as FormArray;
   }
 
   //image methods

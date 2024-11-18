@@ -84,7 +84,8 @@
                     <!-- Profile Image start -->
                     <div class="my-auto mx-auto h-fit w-full grid align-top">
                         <h2 class="font-semibold my-3 text-2xl">Foto de Perfil</h2>
-                        <div class="grid align-middle w-full mx-auto my-2 h-fit bg-slate-200 border-2 border-slate-100 rounded">
+                        <div
+                            class="grid align-middle w-full mx-auto my-2 h-fit bg-slate-200 border-2 border-slate-100 rounded">
                             <label for="profileImage" class="custom-file-upload my-auto lg:w-full">
                                 Escolher Foto
                             </label>
@@ -208,9 +209,8 @@
                         <!-- first name start-->
                         <div class="my-2 mx-auto h-fit w-full">
                             <label class="font-semibold" for="firstName">Nome</label>
-                            <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                placeholder="Nome" id="firstName" name="firstName" formControlName="firstName"
-                                required>
+                            <input class="p-2 w-full border border-gray-300 rounded" type="text" placeholder="Nome"
+                                id="firstName" name="firstName" formControlName="firstName" required>
                             <span
                                 *ngIf="freelancerProfileForm.hasError('required', 'firstName') && freelancerProfileForm.get('firstName')?.touched"
                                 class="text-red-500">*Nome é requerido</span>
@@ -273,12 +273,13 @@
                     </div>
                     <!-- Price Section start -->
                     <div class="my-auto mx-auto h-fit w-full grid mt-4">
-                        <div formGroupName="hourlyRate" class="flex justify-between space-x-4" id="hourlyRate" name="hourlyRate">
+                        <div formGroupName="hourlyRate" class="flex justify-between space-x-4" id="hourlyRate"
+                            name="hourlyRate">
                             <!-- min price start-->
                             <div class="w-full mt-2">
                                 <label class="font-semibold" for="minHourlyRate">Preço por Hora Mínimo:</label>
-                                <input formControlName="min" type="number" placeholder="Mínimo" id="minHourlyRate" required
-                                    class="p-2 w-full border border-gray-300 rounded">
+                                <input formControlName="min" type="number" placeholder="Mínimo" id="minHourlyRate"
+                                    required class="p-2 w-full border border-gray-300 rounded">
                                 <span
                                     *ngIf="freelancerProfileForm.get('hourlyRate')?.hasError('required', 'min') && freelancerProfileForm.get('hourlyRate')?.get('min')?.touched"
                                     class="text-red-500">*Mínimo é requerido</span>
@@ -287,8 +288,8 @@
                             <!-- max price start-->
                             <div class="w-full mt-2">
                                 <label class="font-semibold" for="maxHourlyRate">Preço por Hora Máximo:</label>
-                                <input formControlName="max" type="number" placeholder="Máximo" id="maxHourlyRate" required
-                                    class="p-2 w-full border border-gray-300 rounded">
+                                <input formControlName="max" type="number" placeholder="Máximo" id="maxHourlyRate"
+                                    required class="p-2 w-full border border-gray-300 rounded">
                                 <span
                                     *ngIf="freelancerProfileForm.get('hourlyRate')?.hasError('required', 'max') && freelancerProfileForm.get('hourlyRate')?.get('max')?.touched"
                                     class="text-red-500">*Máximo é requerido</span>
@@ -303,36 +304,77 @@
                     <!-- Price Section end -->
                     <!-- Skills Section start -->
                     <div class="my-auto mx-auto h-fit w-full grid mt-4">
-                        <label class="font-semibold" for="skills">Habilidades</label>
-                        <div class="flex w-full">
-                            <select (change)="onSkillSelected($event)" name="skills" id="skills"
-                                class="p-2 px-4 w-full border border-gray-300 rounded text-gray-500">
-                                <option value="" disabled selected>Selecione sua Habilidade</option>
-                                <option *ngFor="let skill of skills" [value]="skill._id">
-                                    {{ skill.skillName }}
-                                </option>
-                            </select>
-                            <div class="pl-2">
-                                <button type="button" (click)="addSkill()"
-                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold ml-2 py-2 px-4 rounded cursor-pointer">
-                                    Adicionar
+                        <label class="font-semibold" for="searchSkills">Habilidades</label>
+                        <div class="search relative shadow-md flex w-full h-10 border border-gray-300 rounded">
+                            <span class="absolute mt-1.5 mx-3">
+                                <i class="fa fa-search font-light" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" placeholder="Pesquisar Habilidades" name="searchSkills" id="searchSkills"
+                                class="w-full p-2 pl-9 rounded rounded-r-none text-gray-600"
+                                (input)="searchSkills($event)" />
+                        </div>
+
+                        <div *ngIf="showSkillsList"
+                            class="row rounded-b-lg bg-slate-50 border-slate-100 overflow-hidden">
+                            <ul>
+                                <li *ngFor="let skill of filteredSkills">
+                                    <button class="w-full border-2 border-slate-100 hover:bg-slate-200"
+                                        (click)="addSkill(skill._id)">
+                                        {{ skill.skillName }}
+                                    </button>
+                                </li>
+                                <button class="text-center w-full" (click)="addSkill(null)">Adcionar outra
+                                    Habilidade</button>
+                            </ul>
+                        </div>
+
+                        <div *ngIf="freelancerProfileForm.get('skillIds')?.value.length > 0"
+                            class="grid justify-center grid-cols-3 gap-2 max-lg:grid-cols-2 mt-4 p-4 bg-slate-50 border-2 border-slate-200 rounded-lg">
+                            <div *ngFor="let skillId of freelancerProfileForm.get('skillIds')?.value"
+                                class="flex mb-2 h-8 rounded bg-blue-500 w-fit">
+                                <div class="text-white py-1 px-4 flex pr-4 text-nowrap overflow-clip">
+                                    {{ getSkillName(skillId) }}
+                                </div>
+                                <button type="button" (click)="removeSkill(skillId)" class="bg-red-500 hover:bg-red-700
+                                 text-white font-bold py-1 px-2 rounded cursor-pointer">
+                                    X
                                 </button>
                             </div>
                         </div>
+
                     </div>
-                    <div class="my-auto mx-auto h-fit w-full grid">
-                        <div *ngIf="selectedSkills.length > 0" formArrayName="selectedSkills"
-                            class="grid justify-center grid-cols-3 gap-2 max-lg:grid-cols-2 mt-4 p-4 bg-slate-50 border-2 border-slate-200 rounded-lg">
-                            <div *ngFor="let skillControl of selectedSkills.controls; let i = index"
-                                class="flex w-fit mb-2 rounded bg-blue-500">
-                                <div class="text-white py-1 px-4 flex w-fit pr-4">
-                                    {{ getSkillName(skillControl.value)}}
+
+                    <!--other form-->
+                    <div *ngIf="showOtherSkillForm"
+                        class="flex justify-center items-center align-middle fixed z-50 mx-auto inset-0 bg-black bg-opacity-50">
+                        <div class="flex flex-col max-w-lg bg-white rounded-md p-4 w-full">
+                            <h2 class="text-3xl mb-2"> Adcionar nova Habilidade</h2>
+                            <form [formGroup]="otherSkillForm">
+                                <div class="mx-auto h-fit w-full my-4">
+                                    <input class="p-2 px-4 max-h-16 border border-gray-300 rounded w-full" type="text"
+                                        formControlName="skillName" placeholder="Nome da Habilidade" />
                                 </div>
-                                <button type="button" (click)="removeSkill(i)" class="bg-red-500 hover:bg-red-700
-                            text-white font-bold py-1 px-2 rounded cursor-pointer"> X </button>
-                            </div>
+                                <div class="mx-auto h-fit w-full my-4">
+                                    <textarea class="shadow-md border-gray-300 border-2 min-h-14 max-h-96 p-3 w-full"
+                                        formControlName="skillDescription"
+                                        placeholder="Descrição (Opcional)"></textarea>
+                                </div>
+                                <div class="mx-auto h-fit w-full my-2 flex space-x-4">
+                                    <button
+                                        class="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-6 rounded w-full"
+                                        type="button" (click)="createOtherSkill()" [disabled]="otherSkillForm.invalid">
+                                        Adicionar Habilidade
+                                    </button>
+                                    <button
+                                        class="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-6 rounded w-full"
+                                        type="button" (click)="cancelSkillCreation()">
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
+                    <!--other form-->
                     <!-- Skills Section end -->
                     <!--professional module end-->
                 </div>
@@ -345,7 +387,8 @@
                             <div *ngFor="let portfolioItem of portfolioItems.controls; let i = index"
                                 class="border p-4 rounded my-2">
                                 <!-- portfolio item start-->
-                                <div *ngIf="portfolioItems.length > 0" [formGroupName]="i" class="w-full justify-center">
+                                <div *ngIf="portfolioItems.length > 0" [formGroupName]="i"
+                                    class="w-full justify-center">
                                     <h3 class="font-semibold text-lg">Portfolio {{ i + 1 }}</h3>
                                     <div class="lg:flex max-lg:grid lg:space-x-4 h-fit mt-4">
                                         <!-- title start-->
@@ -353,8 +396,8 @@
                                             <label class="font-semibold" for="portfolioTitle">Titulo do
                                                 Portfolio</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
-                                                id="portfolioTitle" name="portfolioTitle" placeholder="Título do Projeto"
-                                                formControlName="title" required>
+                                                id="portfolioTitle" name="portfolioTitle"
+                                                placeholder="Título do Projeto" formControlName="title" required>
                                             <span
                                                 *ngIf="portfolioItem.hasError('required', 'title') && portfolioItem.get('title')?.touched"
                                                 class="text-red-500">*Titulo do Portfolio é requerido</span>
@@ -409,8 +452,7 @@
                             <div *ngFor="let experienceForm of workExperiences.controls; let i = index"
                                 class="border p-4 rounded my-2">
                                 <!-- experience start-->
-                                <div *ngIf="workExperiences.length > 0" [formGroupName]="i"
-                                    class="grid w-full">
+                                <div *ngIf="workExperiences.length > 0" [formGroupName]="i" class="grid w-full">
                                     <h3 class="font-semibold text-lg">Experiência {{ i + 1 }}</h3>
                                     <div class="lg:flex max-lg:grid lg:space-x-4 h-fit mt-4">
                                         <!-- company name start-->
@@ -596,12 +638,14 @@
                             <div *ngFor="let certificationForm of certifications.controls; let i = index"
                                 class="border p-4 rounded my-2">
                                 <!-- certification start-->
-                                <div *ngIf="certifications.length > 0" [formGroupName]="i" class="border p-4 rounded my-2">
+                                <div *ngIf="certifications.length > 0" [formGroupName]="i"
+                                    class="border p-4 rounded my-2">
                                     <h3 class="font-semibold text-lg">Certificação {{ i + 1 }}</h3>
                                     <div class="lg:flex max-lg:grid lg:space-x-4 h-fit">
                                         <!-- title start-->
                                         <div class="w-full mt-4">
-                                            <label class="font-semibold" for="certificationTitle">Título da Certificação</label>
+                                            <label class="font-semibold" for="certificationTitle">Título da
+                                                Certificação</label>
                                             <input class="p-2 w-full border border-gray-300 rounded" type="text"
                                                 name="certificationTitle" id="certificationTitle"
                                                 placeholder="Título da Certificação" formControlName="name" required>
@@ -661,7 +705,8 @@
                     <!-- Profile Image start -->
                     <div class="my-auto mx-auto h-fit w-full grid align-top">
                         <h2 class="font-semibold my-3 text-2xl">Foto de Perfil</h2>
-                        <div class="grid align-middle w-full mx-auto my-2 h-fit bg-slate-200 border-2 border-slate-100 rounded">
+                        <div
+                            class="grid align-middle w-full mx-auto my-2 h-fit bg-slate-200 border-2 border-slate-100 rounded">
                             <label for="profileImage" class="custom-file-upload my-auto lg:w-full">
                                 Escolher Foto
                             </label>
@@ -757,8 +802,8 @@
                     <!--buttons-->
                     <div class="flex justify-center align-middle space-x-4">
                         <div class="button-container mt-4">
-                            <button [disabled]="freelancerProfileForm.invalid" [class.disabled]="freelancerProfileForm.invalid"
-                                (click)="onSubmit()"
+                            <button [disabled]="freelancerProfileForm.invalid"
+                                [class.disabled]="freelancerProfileForm.invalid" (click)="onSubmit()"
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 rounded cursor-pointer w-full">
                                 Salvar
                             </button>
