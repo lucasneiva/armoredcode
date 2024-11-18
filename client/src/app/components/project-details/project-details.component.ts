@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject, OnInit } from '@angular/core';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
-import { ProjectService } from '../../services/project.service';
+import { ProjectService, Rating } from '../../services/project.service';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 
@@ -12,7 +12,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './project-details.component.html',
   styleUrl: './project-details.component.scss'
 })
-export class ProjectDetailsComponent {
+export class ProjectDetailsComponent implements OnInit{
   router = inject(Router);
   route = inject(ActivatedRoute);
   projectService = inject(ProjectService);
@@ -20,6 +20,9 @@ export class ProjectDetailsComponent {
   userService = inject(UserService);
   
   showDetails = false;
+
+  showReviewButton = false; // Add flag for review button visibility
+  ratings: Rating[] = []; // Store retrieved ratings
   
   @Input() project: any;
   @Input() projectCategoryName!: string; // Add input for project category name
@@ -29,6 +32,12 @@ export class ProjectDetailsComponent {
   @Input() userRole!: string | null;
 
   @Output() close = new EventEmitter<void>();
+
+  ngOnInit(): void { // Implement ngOnInit lifecycle hook
+    if (this.project && this.project._id && this.project.projectStatus === 'COMPLETED') {
+      this.checkRatingCompletion(); // Check ratings on component initialization
+    }
+  }
 
   onClose() {
     this.close.emit(); // Emit the close event
@@ -111,6 +120,23 @@ export class ProjectDetailsComponent {
     } else if (this.userRole === 'FREELANCER') {
       this.router.navigate(['../review',this.project._id ,this.detailedProject.clientId._id], { relativeTo: this.route });
     }
+  }
+
+  checkRatingCompletion() {
+    this.projectService.checkRatingCompletion(this.project._id).subscribe({
+      next: (response) => {
+        if (response && response.success) {
+          this.showReviewButton = !response.data.complete; // Show button if ratings are NOT complete
+        } else {
+          console.error("Error checking rating completion:", response?.message || "Unknown error");
+          this.showReviewButton = false; // Handle errors (potentially show the button or an error message)
+        }
+      },
+      error: (error) => {
+        console.error("Error checking rating completion:", error);
+        this.showReviewButton = false; // Handle errors
+      }
+    });
   }
 
   makeProposal() {

@@ -146,7 +146,7 @@
                 </button>
             </ng-container>
 
-            <ng-container *ngIf="project.projectStatus === 'COMPLETED'">
+            <ng-container *ngIf="project.projectStatus === 'COMPLETED' && showReviewButton">
                 <button (click)="goToReview()" class="project-btns">
                     <span class="max-lg:hidden"> Avaliar
                         <span *ngIf="detailedProject.clientId._id == this.authService.getUserId()">Freelancer</span>

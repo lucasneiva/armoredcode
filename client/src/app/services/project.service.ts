@@ -146,6 +146,16 @@ export class ProjectService {
     };
     return this.http.get<any>(`${apiUrls.projectServiceApi}/projects/${projectId}/ratings`, httpOptions);
   }
+
+  checkRatingCompletion(projectId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true
+    };
+    return this.http.get<any>(`${apiUrls.projectServiceApi}/projects/${projectId}/ratings/complete`, httpOptions);
+  }
 }
 export type Rating = {
   _id?: string;
