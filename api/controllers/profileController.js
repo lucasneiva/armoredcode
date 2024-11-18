@@ -157,3 +157,56 @@ export const getAllFreelancerProfiles = async (req, res, next) => {
         return next(createError(500, "Error fetching freelancer profiles", error));
     }
 };
+
+export const getUserRatings = async (req, res, next) => {
+    try {
+        const userId = req.params.userId; // Get userId from request parameters
+
+        // 1. Find the user to check their role
+        const user = await User.findById(userId);
+        if (!user) {
+            return next(createError(404, "User not found"));
+        }
+
+        // 2. Find the user's profile (needed to get ratings efficiently)
+        let profile;
+        if (user.role === "CLIENT") {
+            profile = await ClientProfile.findOne({ userId: userId });
+        } else if (user.role === "FREELANCER") {
+            profile = await FreelancerProfile.findOne({ userId: userId });
+        }
+
+        if (!profile) {
+            return next(createError(404, "User profile not found")); // Handle missing profile
+        }
+
+        // 3. Query ratings based on profile IDs (most efficient)
+
+        let ratingsReceived;
+        let ratingsGiven;
+
+        if (user.role === "CLIENT") {
+            ratingsReceived = await Rating.find({ clientProfileId: profile._id, evaluatorType: "FREELANCER" }).populate('evaluatorId', 'username').populate( 'evaluatedId', 'username role' ); // Ratings received by Client
+            ratingsGiven = await Rating.find({ clientProfileId: profile._id, evaluatorType: "CLIENT"}).populate('evaluatorId', 'username').populate( 'evaluatedId', 'username role' ); // Ratings given by Client
+        } else { // FREELANCER
+            ratingsReceived = await Rating.find({ freelancerProfileId: profile._id, evaluatorType: "CLIENT"}).populate('evaluatorId', 'username').populate( 'evaluatedId', 'username role' ); // Ratings received by freelancer
+            ratingsGiven = await Rating.find({ freelancerProfileId: profile._id, evaluatorType: "FREELANCER"}).populate('evaluatorId', 'username').populate( 'evaluatedId', 'username role' ); // Ratings given by freelancer
+        }
+
+
+        //4. create result object
+
+        const allRatings = {
+            received: ratingsReceived,
+            given: ratingsGiven
+        }
+
+
+        // 5. Return the ratings
+        return next(createSuccess(200, "User ratings retrieved successfully", allRatings));
+
+    } catch (error) {
+        console.error("Error retrieving user ratings:", error);
+        return next(createError(500, "Error retrieving user ratings"));
+    }
+};

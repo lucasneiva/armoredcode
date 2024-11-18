@@ -110,17 +110,15 @@ export class ProfileService {
       withCredentials: true
     };
     return this.http.get<ProfileResponse>(`${apiUrls.profileServiceApi}/${userId}`, httpOptions)
-    /*
     .pipe(
       tap((res) => {
-        console.log('Profile fetched:', res);
+        /*debug*/ //console.log('Profile fetched:', res);
       }),
       catchError((error) => {
         console.error('Error fetching profile:', error);
         throw error;
       })
     );
-    */
   }
 
   getAllFreelancerProfiles(): Observable<any> {
@@ -131,17 +129,35 @@ export class ProfileService {
       withCredentials: true
     };
 
-    return this.http.get<any>(`${apiUrls.profileServiceApi}/freelancers`, httpOptions)/*
+    return this.http.get<any>(`${apiUrls.profileServiceApi}/freelancers`, httpOptions)
       .pipe(
         tap((res) => {
-          console.log('Freelancer profiles fetched:', res);
+          /*debug*/ //console.log('Freelancer profiles fetched:', res);
         }),
         catchError((error) => {
           console.error('Error fetching freelancer profiles:', error);
           throw error;
         })
       );
-      */
+  }
+  getUserRatings(userId: string): Observable<UserRatingResponse> { // Use correct type
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true
+    };
+
+    return this.http.get<UserRatingResponse>(`${apiUrls.profileServiceApi}/${userId}/ratings`, httpOptions)
+      .pipe(
+        tap((res) => {
+          console.log('User ratings fetched:', res);
+        }),
+        catchError((error) => {
+          console.error('Error fetching user ratings:', error);
+          return throwError(() => error); // Re-throw the error for consistent handling
+        })
+      );
   }
 
 }
@@ -227,4 +243,40 @@ export type Profile = {
     endDate?: Date;
     jobDescription?: string;
   }>;
+}
+
+// Define the interface for the ratings response:
+export type UserRatingResponse = {
+  success: boolean;
+  status: number;
+  message: string;
+  data: {
+    received: Rating[];
+    given: Rating[];
+  };
+}
+
+export type Rating = {
+    _id?: string;
+    projectId: string;
+    evaluatorId: { 
+        _id: string;
+        username: string; // Or other fields you populate
+    };
+    evaluatedId: {
+        _id: string;
+        username: string;
+        role: 'CLIENT' | 'FREELANCER';
+    };
+    evaluatorType: 'CLIENT' | 'FREELANCER';
+    workQuality: number;
+    communication: number;
+    professionalism: number;
+    costBenefit?: number; // Optional, based on evaluated role
+    clarityDescription?: number; // Optional
+    payments?: number; // Optional
+    feedback?: number; // Optional
+    comment?: string;
+    createdAt?: string;
+    updatedAt?: string;
 }

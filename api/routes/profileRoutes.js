@@ -1,5 +1,5 @@
 import express from "express";
-import { createProfile, getProfileByUserId, updateProfile, deleteProfile, getAllFreelancerProfiles } from "../controllers/profileController.js";
+import { createProfile, getProfileByUserId, updateProfile, deleteProfile, getAllFreelancerProfiles, getUserRatings } from "../controllers/profileController.js";
 import { verifyToken, verifyUser } from "../utils/authMiddleware.js";
 
 const router = express.Router();
@@ -15,5 +15,8 @@ router.get("/freelancers", verifyToken, getAllFreelancerProfiles);
 
 // Route for fetching a profile by user ID
 router.get("/:id", verifyToken, getProfileByUserId);
+
+// Route for fetching ratings by user ID
+router.get("/:id/ratings", verifyToken, getUserRatings);
 
 export default router;
