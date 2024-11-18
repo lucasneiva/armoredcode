@@ -9,11 +9,12 @@ import { Specialization, SpecializationService } from '../../services/specializa
 import { SkillService } from '../../services/skill.service';
 import { __values } from 'tslib';
 import { UserService } from '../../services/user.service';
+import { StarDisplayComponent } from "../../components/star-display/star-display.component";
 
 @Component({
   selector: 'app-manage-profile',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, StarDisplayComponent],
   templateUrl: './manage-profile.component.html',
   styleUrl: './manage-profile.component.scss'
 })

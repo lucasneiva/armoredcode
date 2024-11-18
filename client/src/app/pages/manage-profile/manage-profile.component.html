@@ -26,6 +26,7 @@
                     {{ profile.companyName ? profile.companyName : (profile.firstName ? profile.firstName + ' ' +
                     profile.lastName : 'User Profile') }}
                 </h2>
+                <app-star-display *ngIf="profile"></app-star-display>
                 <!-- DEV MODE
                 <h2> ID: {{authService.getUserId()}} </h2>
                 -->
