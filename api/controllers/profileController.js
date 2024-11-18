@@ -1,5 +1,7 @@
+import Rating from "../models/ratingModel.js"; // Add this line
 import ClientProfile from "../models/clientProfileModel.js";
 import FreelancerProfile from "../models/freelancerProfileModel.js";
+
 import User from "../models/userModel.js";
 import { createError } from "../utils/error.js";
 import { createSuccess } from "../utils/success.js";
@@ -17,23 +19,23 @@ export const createProfile = async (req, res, next) => {
         let profile;
 
         if (role === "CLIENT") {
-            const existingProfile = await ClientProfile.findOne( { userId: userId } );
+            const existingProfile = await ClientProfile.findOne({ userId: userId });
 
-            if ( existingProfile ){
-                return next( createError( 400, "User has a profile already!" ) );
-            }else{
+            if (existingProfile) {
+                return next(createError(400, "User has a profile already!"));
+            } else {
                 profile = new ClientProfile(profileData);
             }
-                
+
         } else if (role === "FREELANCER") {
-            const existingProfile = await FreelancerProfile.findOne( { userId: userId } );
-            
-            if ( existingProfile ){
-                return next( createError( 400, "User has a profile already!" ) );
-            }else{
+            const existingProfile = await FreelancerProfile.findOne({ userId: userId });
+
+            if (existingProfile) {
+                return next(createError(400, "User has a profile already!"));
+            } else {
                 profile = new FreelancerProfile(profileData);
             }
-           
+
         } else {
             return next(createError(400, "Invalid role!"));
         }
@@ -42,7 +44,7 @@ export const createProfile = async (req, res, next) => {
         return next(createSuccess(200, "Profile created successfully!", profile));
 
     } catch (error) {
-        handleValidationError( error, next );
+        handleValidationError(error, next);
 
     }
 };
@@ -67,13 +69,13 @@ export const getProfileByUserId = async (req, res, next) => {
         } else {
             return next(createError(400, "Invalid user role!"));
         }
-        
+
         // Check if a profile was found
         if (profile) {
-            hasProfile = true; 
+            hasProfile = true;
         }
 
-        return next(createSuccess(200, "Profile fetch status:", { hasProfile, profile } ));
+        return next(createSuccess(200, "Profile fetch status:", { hasProfile, profile }));
 
     } catch (error) {
         console.error("Error fetching profile:", error);
@@ -81,7 +83,7 @@ export const getProfileByUserId = async (req, res, next) => {
     }
 };
 
-export const updateProfile = async ( req, res, next ) => {
+export const updateProfile = async (req, res, next) => {
     const userId = req.user.id;
     const role = req.user.role;
     const profileData = req.body;
@@ -89,34 +91,34 @@ export const updateProfile = async ( req, res, next ) => {
     try {
         let updatedProfile;
 
-        if ( role === "CLIENT" ) {
-            updatedProfile = await ClientProfile.findOneAndUpdate( { userId: userId }, profileData, {
+        if (role === "CLIENT") {
+            updatedProfile = await ClientProfile.findOneAndUpdate({ userId: userId }, profileData, {
                 new: true, // Return the updated document
                 runValidators: true, // Run validation rules on the update
-            } );
-        } else if ( role === "FREELANCER" ) {
-            updatedProfile = await FreelancerProfile.findOneAndUpdate( { userId: userId }, profileData, {
+            });
+        } else if (role === "FREELANCER") {
+            updatedProfile = await FreelancerProfile.findOneAndUpdate({ userId: userId }, profileData, {
                 new: true,
                 runValidators: true,
-            } );
+            });
         } else {
-            return next( createError( 400, "Invalid role!" ) );
+            return next(createError(400, "Invalid role!"));
         }
 
-        if ( !updatedProfile ) {
-            return next( createError( 404, "Profile not found!" ) );
+        if (!updatedProfile) {
+            return next(createError(404, "Profile not found!"));
         }
 
-        if ( profileData.firstName || profileData.lastName ) {
-            await User.findByIdAndUpdate( userId, {
+        if (profileData.firstName || profileData.lastName) {
+            await User.findByIdAndUpdate(userId, {
                 firstName: profileData.firstName,
                 lastName: profileData.lastName,
-            } );
+            });
         }
 
-        return next( createSuccess( 200, "Profile updated successfully!", updatedProfile ) );
-    } catch ( error ) {
-        return next( createError( 500, "Error updating profile", error ) );
+        return next(createSuccess(200, "Profile updated successfully!", updatedProfile));
+    } catch (error) {
+        return next(createError(500, "Error updating profile", error));
     }
 };
 
@@ -160,15 +162,13 @@ export const getAllFreelancerProfiles = async (req, res, next) => {
 
 export const getUserRatings = async (req, res, next) => {
     try {
-        const userId = req.params.userId; // Get userId from request parameters
+        const userId = req.params.userId;
 
-        // 1. Find the user to check their role
         const user = await User.findById(userId);
         if (!user) {
             return next(createError(404, "User not found"));
         }
 
-        // 2. Find the user's profile (needed to get ratings efficiently)
         let profile;
         if (user.role === "CLIENT") {
             profile = await ClientProfile.findOne({ userId: userId });
@@ -177,32 +177,33 @@ export const getUserRatings = async (req, res, next) => {
         }
 
         if (!profile) {
-            return next(createError(404, "User profile not found")); // Handle missing profile
+            return next(createError(404, "User profile not found"));
         }
 
-        // 3. Query ratings based on profile IDs (most efficient)
-
-        let ratingsReceived;
-        let ratingsGiven;
-
+        let ratingsReceivedQuery;
+        let ratingsGivenQuery;
         if (user.role === "CLIENT") {
-            ratingsReceived = await Rating.find({ clientProfileId: profile._id, evaluatorType: "FREELANCER" }).populate('evaluatorId', 'username').populate( 'evaluatedId', 'username role' ); // Ratings received by Client
-            ratingsGiven = await Rating.find({ clientProfileId: profile._id, evaluatorType: "CLIENT"}).populate('evaluatorId', 'username').populate( 'evaluatedId', 'username role' ); // Ratings given by Client
+            ratingsReceivedQuery = { clientProfileId: profile._id, evaluatorType: "FREELANCER" };
+            ratingsGivenQuery = { evaluatorId: userId, evaluatorType: "CLIENT" };
         } else { // FREELANCER
-            ratingsReceived = await Rating.find({ freelancerProfileId: profile._id, evaluatorType: "CLIENT"}).populate('evaluatorId', 'username').populate( 'evaluatedId', 'username role' ); // Ratings received by freelancer
-            ratingsGiven = await Rating.find({ freelancerProfileId: profile._id, evaluatorType: "FREELANCER"}).populate('evaluatorId', 'username').populate( 'evaluatedId', 'username role' ); // Ratings given by freelancer
+            ratingsReceivedQuery = { freelancerProfileId: profile._id, evaluatorType: "CLIENT" };
+            ratingsGivenQuery = { evaluatorId: userId, evaluatorType: "FREELANCER" };
         }
+        const ratingsReceived = await Rating.find(ratingsReceivedQuery)
+            .populate('evaluatorId', 'firstName lastName')
+            .populate('evaluatedId', 'firstName lastName role');
 
 
-        //4. create result object
+        const ratingsGiven = await Rating.find(ratingsGivenQuery)
+            .populate('evaluatorId', 'firstName lastName')
+            .populate('evaluatedId', 'firstName lastName role');
+
 
         const allRatings = {
             received: ratingsReceived,
             given: ratingsGiven
         }
 
-
-        // 5. Return the ratings
         return next(createSuccess(200, "User ratings retrieved successfully", allRatings));
 
     } catch (error) {
