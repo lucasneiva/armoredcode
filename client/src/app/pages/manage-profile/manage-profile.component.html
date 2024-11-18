@@ -26,7 +26,7 @@
                     {{ profile.companyName ? profile.companyName : (profile.firstName ? profile.firstName + ' ' +
                     profile.lastName : 'User Profile') }}
                 </h2>
-                <app-star-display *ngIf="profile"></app-star-display>
+                <app-star-display *ngIf="profile" [userId]="profile.userId._id"></app-star-display>
                 <!-- DEV MODE
                 <h2> ID: {{authService.getUserId()}} </h2>
                 -->
@@ -41,7 +41,7 @@
                 <button routerLink="/edit-profile"
                     class="flex justify-center items-center rounded max-lg:text-nowrap font-semibold
                          text-gray-700 bg-transparent ml-2 py-4 px-8 border border-gray-500 hover:bg-blue-500 hover:text-white hover:border-transparent">
-                        <i class="fa fa-pencil-square-o cursor-pointer w-5 h-5 mx-2 mt-2"></i>
+                    <i class="fa fa-pencil-square-o cursor-pointer w-5 h-5 mx-2 mt-2"></i>
                     Editar Perfil
                 </button>
             </div>
@@ -118,8 +118,10 @@
                     <div *ngIf="profile.skillIds && profile.skillIds.length > 0">
                         <h4 class="font-bold text-2xl py-2">Habilidades</h4>
                         <ul class="flex flex-wrap justify-start gap-2">
-                            <li *ngFor="let skillName of skills" class="flex items-center gap-2 bg-blue-500 py-1 px-3 rounded-full text-white">
-                                <img *ngIf="skillImages[skillName]" [src]="getImageUrl(skillImages[skillName])" alt="{{ skillName }} icon" class="w-5 h-5 invert"/> 
+                            <li *ngFor="let skillName of skills"
+                                class="flex items-center gap-2 bg-blue-500 py-1 px-3 rounded-full text-white">
+                                <img *ngIf="skillImages[skillName]" [src]="getImageUrl(skillImages[skillName])"
+                                    alt="{{ skillName }} icon" class="w-5 h-5 invert" />
                                 <span>{{ skillName }}</span>
                             </li>
                         </ul>
@@ -221,7 +223,7 @@
             </div>
         </div>
 
-        
+
 
     </ng-container>
 

@@ -8,8 +8,11 @@
             margin: 0.25rem;
             font-size: 1.25rem;
         }
-        .star-yellow {
-            color: gold;
+        i {
+            color: gray;
+            &.star-yellow {
+                color: gold;
+            }
         }
     }
 }

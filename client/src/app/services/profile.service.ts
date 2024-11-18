@@ -180,7 +180,7 @@ export type ProfileData = { // Use an interface for type safety
 
 export type Profile = {
   _id?: string;
-  userId: string;
+  userId: { _id: string; email: string }; // Correct the userId type
   profileImage?: string;
   createdAt?: string;
   updatedAt?: string;
