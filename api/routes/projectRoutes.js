@@ -1,7 +1,7 @@
 import express from 'express';
 import { getProjectById, createProject, getUserProjects, updateProject, deleteProject, getPostedProjects, getPostedUserProjects } from '../controllers/projectController.js';
 import { verifyClient, verifyToken } from '../utils/authMiddleware.js';
-import { createRating, getProjectRatings } from '../controllers/ratingController.js';
+import { createRating, getProjectRatings, checkRatingCompletion  } from '../controllers/ratingController.js';
 
 const router = express.Router();
 
@@ -23,5 +23,8 @@ router.get('/user/posted', verifyToken, getPostedUserProjects); // New route
 router.post('/ratings', verifyToken, createRating);
 
 router.get('/projects/:projectId/ratings', getProjectRatings);
+
+router.get('/projects/:projectId/ratings/complete', checkRatingCompletion); // Use the controller function
+
 
 export default router;

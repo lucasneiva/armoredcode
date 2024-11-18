@@ -43,3 +43,22 @@ export const getProjectRatings = async ( req, res, next ) => {
         return next( createError( 500, "Internal server error" ) );
     }
 };
+
+export const checkRatingCompletion = async (req, res, next) => {
+    try {
+        const projectId = req.params.projectId;
+
+        const clientRating = await Rating.findOne({ projectId, evaluatorType: 'CLIENT' });
+        const freelancerRating = await Rating.findOne({ projectId, evaluatorType: 'FREELANCER' });
+
+        if (clientRating && freelancerRating) {
+            return next(createSuccess(200, "Both client and freelancer have rated the project.", { complete: true }));
+        } else {
+            return next(createSuccess(200, "Rating incomplete.", { complete: false }));
+        }
+
+    } catch (error) {
+        console.error("Error checking rating completeness:", error);
+        return next(createError(500, "Internal server error"));
+    }
+};
