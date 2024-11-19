@@ -1,55 +1,88 @@
 <div class="grid min-h-screen h-fit">
-    <!--if no feed-->
     <ng-container *ngIf="isLoading">
+        <!-- Loading spinner -->
         <div class="w-full flex justify-center items-center py-10 my-auto fixed top-0 bottom-0">
             <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
         </div>
     </ng-container>
-    <!--search start-->
-    
-    <!--search end-->
+
     <ng-container *ngIf="!isLoading">
-        <!--feed container start-->
-        <div class="my-24 mx-auto h-fit">
-            <!--grid start-->
+        <!-- Search Bar and Filters -->
+        
+        <div class="search-container">
+            <button class="filter-btn shadow-lg" (click)="toogleFiltersSidebar()">
+                Filtros
+            </button>
+            <div class="search-bar-container">
+                <input class="search-bar shadow-lg" type="text" placeholder="Pesquisar..." [(ngModel)]="searchTerm"
+                (keyup.enter)="performSearch()">
+            <button class="search-button shadow-lg" (click)="performSearch()">Buscar</button>
+            </div>
+            
+        </div>
+
+        <div class="filters-container" *ngIf="isFiltersVisible">
+            <ng-container *ngIf="userRole === 'CLIENT'">
+                <select class="dropdown-filter" [(ngModel)]="experienceLevel">
+                    <option value="">Experience Level</option>
+                    <option value="JUNIOR">Júnior</option>
+                    <option value="MID-LEVEL">Pleno</option>
+                    <option value="SENIOR">Senior</option>
+                </select>
+
+                <select class="dropdown-filter" [(ngModel)]="specializationId">
+                    <option value="">Specialization</option>
+                    <option *ngFor="let specialization of specializations" [value]="specialization._id">
+                        {{ specialization.specializationName }}
+                    </option>
+                </select>
+            </ng-container>
+
+            <ng-container *ngIf="userRole === 'FREELANCER'">
+                <select class="dropdown-filter" [(ngModel)]="projectCategoryId">
+                    <option value="">Project Category</option>
+                    <option *ngFor="let category of projectCategories" [value]="category._id">
+                        {{ category.categoryName }}
+                    </option>
+                </select>
+            </ng-container>
+
+            <ng-container *ngIf="userRole === 'CLIENT' || userRole === 'FREELANCER'">
+                <select class="dropdown-filter" [formControl]="selectedSkillControl">
+                    <option value="">Select Skill</option>
+                    <option *ngFor="let skill of skills" [value]="skill._id">{{ skill.skillName }}</option>
+                </select>
+                <button (click)="addSelectedSkill()">Add Skill</button>
+
+                <div *ngIf="skillIds.length > 0">
+                    <span *ngFor="let skillId of skillIds; let i = index">
+                        {{ getSkillNameById(skillId) }}
+                        <button (click)="removeSkill(i)">X</button>
+                    </span>
+                </div>
+            </ng-container>
+        </div>
+
+
+        <!-- Results Display -->
+        <div class="my-4 mx-auto h-fit">
             <div class="grid justify-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-10 my-auto">
-                <!--client feed start-->
-                <ng-container *ngIf="this.userRole == 'CLIENT'">
-                    <!--freelancers cards-->
+                <ng-container *ngIf="userRole === 'CLIENT'">
                     <ng-container *ngFor="let freelancer of freelancers">
                         <app-freelancer-card [freelancer]="freelancer"></app-freelancer-card>
                     </ng-container>
-                    <!--freelancers cards-->
-
-                    <!-- No freelancers results -->
-                    <ng-container *ngIf="!freelancers || freelancers.length <= 0">
-                        <div class="flex w-full justify-center items-center my-auto right-0 left-0 absolute">
-                            <p class="text-3xl font-bold text-center">Não foi possível encontrar Freelancers com estes critérios de pesquisa.</p>
-                        </div>
-                    </ng-container>
-                    <!-- No freelancers results -->
+                    <p *ngIf="!freelancers || freelancers.length === 0 && !isLoading" class="no-results">No freelancers
+                        found.</p>
                 </ng-container>
-                <!--client feed end-->
-                <!--freelancer feed start-->
-                <ng-container *ngIf="this.userRole == 'FREELANCER'">
-                    <!--projects cards-->
+
+                <ng-container *ngIf="userRole === 'FREELANCER'">
                     <ng-container *ngFor="let project of projects">
                         <app-project-card [project]="project"></app-project-card>
                     </ng-container>
-                    <!--projects cards-->
-
-                    <!-- No projects results -->
-                    <ng-container *ngIf="!projects || projects.length <= 0">
-                        <div class="flex w-full justify-center items-center my-auto right-0 left-0 absolute">
-                            <p class="text-3xl font-bold text-center">Não foi possível encontrar Projetos com estes critérios de pesquisa.</p>
-                        </div>
-                    </ng-container>
-                    <!-- No projects results -->
+                    <p *ngIf="!projects || projects.length === 0 && !isLoading" class="no-results">No projects found.
+                    </p>
                 </ng-container>
-                <!--freelancer feed end-->
             </div>
-            <!--grid end-->
         </div>
-        <!--feed container end-->
     </ng-container>
 </div>

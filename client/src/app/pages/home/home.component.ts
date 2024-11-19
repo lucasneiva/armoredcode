@@ -8,11 +8,20 @@ import { Project, ProjectService } from '../../services/project.service';
 import { Profile, ProfileService } from '../../services/profile.service';
 import { SearchService, SearchStateService } from '../../services/search.service';
 import { Subject, takeUntil } from 'rxjs';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SpecializationService } from '../../services/specialization.service';
+import { SkillService } from '../../services/skill.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, ProjectCardComponent, FreelancerCardComponent],
+  imports:
+    [CommonModule,
+      FormsModule,
+      ReactiveFormsModule,
+      RouterModule,
+      ProjectCardComponent,
+      FreelancerCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -25,6 +34,12 @@ export default class HomeComponent {
   profileService = inject(ProfileService);
   searchService = inject(SearchService);
   searchStateService = inject(SearchStateService);
+  skillService = inject(SkillService);
+  specializationService = inject(SpecializationService);
+
+  skills: any[] = [];
+  specializations: any[] = [];
+  projectCategories: any[] = [];
 
   projects: Project[] = [];
   freelancers: Profile[] = [];
@@ -34,9 +49,12 @@ export default class HomeComponent {
   // Filter properties (initialize with defaults)
   searchTerm = '';
   skillIds: string[] = [];
+  selectedSkillControl = new FormControl(''); // Add FormControl
   experienceLevel = '';
   specializationId = '';
   projectCategoryId = '';
+
+  isFiltersVisible = true;
 
   ngOnInit(): void {
     this.userRole = this.authService.getUserRole();
@@ -51,13 +69,20 @@ export default class HomeComponent {
 
     // Initial data load and search based on user role
     if (this.userRole === 'CLIENT') {
+      this.fetchSpecializations();
+      this.fetchSkills();
       this.loadFreelancers(() => this.performSearch());
     } else if (this.userRole === 'FREELANCER') {
+      this.getProjectCategories();
+      this.fetchSkills();
       this.loadProjects(() => this.performSearch());
     }
+
   }
 
-
+  toogleFiltersSidebar(){
+  this.isFiltersVisible = !this.isFiltersVisible;
+  }
 
   handleFiltersChanged(filters: any): void {
     this.searchTerm = filters.searchTerm;
@@ -149,6 +174,51 @@ export default class HomeComponent {
     if (keyboardEvent.key === 'Enter') {
       this.searchStateService.setSearchTerm(this.searchTerm);
     }
+  }
+
+  fetchSpecializations() {
+    this.specializationService.getSpecializations().subscribe(
+      (response: any) => {
+        this.specializations = response.data;
+      },
+      (error) => {
+        console.error("Error fetching specializations:", error);
+      }
+    );
+  }
+
+  fetchSkills() {
+    this.skillService.getSkills().subscribe(response => {
+      this.skills = response.data;
+    });
+  }
+
+  addSelectedSkill() {
+    const selectedSkillId = this.selectedSkillControl.value;
+    if (selectedSkillId && !this.skillIds.includes(selectedSkillId)) {
+      this.skillIds.push(selectedSkillId);
+      //this.selectedSkillControl.reset(); // Optional: Clear the selection
+    }
+  }
+
+  removeSkill(index: number): void {  // Add this method
+    this.skillIds.splice(index, 1);
+}
+
+  getSkillNameById(skillId: string): string {
+    const skill = this.skills.find(s => s._id === skillId);
+    return skill ? skill.skillName : '';
+  }
+
+  getProjectCategories() {
+    this.projectService.getProjectCategories().subscribe(
+      (response: any) => {
+        this.projectCategories = response.data;
+      },
+      (error) => {
+        console.error('Error fetching project categories:', error);
+      }
+    );
   }
 
 }
