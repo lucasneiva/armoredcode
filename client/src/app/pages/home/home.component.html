@@ -85,14 +85,15 @@
         </div>
 
         <!-- Results Display -->
-        <div class="my-4 mx-auto h-fit">
-            <div class="grid justify-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-10 my-auto">
+        <div class="results-container transition-transform duration-300 ease-in-out border-2 border-red-500" 
+        [class.translate-x-60]="isFiltersVisible" [class.translate-x-0]="!isFiltersVisible">
+            <div class="results-grid">
                 <ng-container *ngIf="userRole === 'CLIENT'">
                     <ng-container *ngFor="let freelancer of freelancers">
                         <app-freelancer-card [freelancer]="freelancer"></app-freelancer-card>
                     </ng-container>
                     <div *ngIf="!freelancers || freelancers.length === 0 && !isLoading"
-                        class="flex w-full justify-center items-center text-center absolute right-0 left-0 text-3xl">
+                        class="flex text-3xl border-2 border-red-500">
                         Nenhum Freelancer corresponde a pesquisa.
                     </div>
                 </ng-container>
@@ -102,7 +103,7 @@
                         <app-project-card [project]="project"></app-project-card>
                     </ng-container>
                     <p *ngIf="!projects || projects.length === 0 && !isLoading"
-                        class="flex w-full justify-center items-center text-center absolute right-0 left-0 text-3xl">
+                        class="flex text-3xl">
                         Nenhum Projeto corresponde a pesquisa.
                     </p>
                 </ng-container>
