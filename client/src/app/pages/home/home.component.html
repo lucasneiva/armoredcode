@@ -8,61 +8,81 @@
 
     <ng-container *ngIf="!isLoading">
         <!-- Search Bar and Filters -->
-        
+
         <div class="search-container">
             <button class="filter-btn shadow-lg" (click)="toogleFiltersSidebar()">
-                Filtros
+                <i class="fa fa-sliders px-2"></i>
+                <span class="max-lg:hidden">Filtros</span>
             </button>
             <div class="search-bar-container">
                 <input class="search-bar shadow-lg" type="text" placeholder="Pesquisar..." [(ngModel)]="searchTerm"
-                (keyup.enter)="performSearch()">
-            <button class="search-button shadow-lg" (click)="performSearch()">Buscar</button>
+                    (keyup.enter)="performSearch()">
+                <button class="search-button shadow-lg" (click)="performSearch()">Buscar</button>
             </div>
-            
+
         </div>
 
-        <div class="filters-container" *ngIf="isFiltersVisible">
-            <ng-container *ngIf="userRole === 'CLIENT'">
-                <select class="dropdown-filter" [(ngModel)]="experienceLevel">
-                    <option value="">Experience Level</option>
-                    <option value="JUNIOR">Júnior</option>
-                    <option value="MID-LEVEL">Pleno</option>
-                    <option value="SENIOR">Senior</option>
-                </select>
+        <div class="filters-container shadow-xl transition-transform duration-300 ease-in-out"
+            [class.-translate-x-full]="!isFiltersVisible" [class.translate-x-50%]="isFiltersVisible">
+            <div class="filters-header">
+                <h2 class="header-title"> Filtros </h2>
+                <button class="close-filters-btn shadow-lg" (click)="toogleFiltersSidebar()">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
 
-                <select class="dropdown-filter" [(ngModel)]="specializationId">
-                    <option value="">Specialization</option>
-                    <option *ngFor="let specialization of specializations" [value]="specialization._id">
-                        {{ specialization.specializationName }}
-                    </option>
-                </select>
-            </ng-container>
+            <div class="filters-inputs-container">
+                <ng-container *ngIf="userRole === 'CLIENT'">
+                    <select class="dropdown-filter" [(ngModel)]="experienceLevel">
+                        <option value="">Nível de Experiência</option>
+                        <option value="JUNIOR">Júnior</option>
+                        <option value="MID-LEVEL">Pleno</option>
+                        <option value="SENIOR">Senior</option>
+                    </select>
 
-            <ng-container *ngIf="userRole === 'FREELANCER'">
-                <select class="dropdown-filter" [(ngModel)]="projectCategoryId">
-                    <option value="">Project Category</option>
-                    <option *ngFor="let category of projectCategories" [value]="category._id">
-                        {{ category.categoryName }}
-                    </option>
-                </select>
-            </ng-container>
+                    <select class="dropdown-filter" [(ngModel)]="specializationId">
+                        <option value="">Expecialização</option>
+                        <option *ngFor="let specialization of specializations" [value]="specialization._id">
+                            {{ specialization.specializationName }}
+                        </option>
+                    </select>
+                </ng-container>
 
-            <ng-container *ngIf="userRole === 'CLIENT' || userRole === 'FREELANCER'">
-                <select class="dropdown-filter" [formControl]="selectedSkillControl">
-                    <option value="">Select Skill</option>
-                    <option *ngFor="let skill of skills" [value]="skill._id">{{ skill.skillName }}</option>
-                </select>
-                <button (click)="addSelectedSkill()">Add Skill</button>
+                <ng-container *ngIf="userRole === 'FREELANCER'">
+                    <select class="dropdown-filter" [(ngModel)]="projectCategoryId">
+                        <option value="">Categoria do Projeto</option>
+                        <option *ngFor="let category of projectCategories" [value]="category._id">
+                            {{ category.categoryName }}
+                        </option>
+                    </select>
+                </ng-container>
 
-                <div *ngIf="skillIds.length > 0">
-                    <span *ngFor="let skillId of skillIds; let i = index">
-                        {{ getSkillNameById(skillId) }}
-                        <button (click)="removeSkill(i)">X</button>
-                    </span>
-                </div>
-            </ng-container>
+                <ng-container *ngIf="userRole === 'CLIENT' || userRole === 'FREELANCER'">
+                    <div class="flex justify-center align-middle items-center space-x-2">
+                        <select class="dropdown-filter" [formControl]="selectedSkillControl">
+                            <option value="">Selecione uma Habilidade</option>
+                            <option *ngFor="let skill of skills" [value]="skill._id">{{ skill.skillName }}</option>
+                        </select>
+                        <button (click)="addSelectedSkill()" class="add-skills-btn">Adicionar</button>
+                    </div>
+                    
+
+                    <div *ngIf="skillIds.length > 0">
+                        <span *ngFor="let skillId of skillIds; let i = index"
+                            class="flex mb-2 h-8 rounded bg-blue-500 w-fit">
+                            <div class="text-white py-1 px-4 flex pr-4 text-nowrap overflow-clip">
+                                {{ getSkillNameById(skillId) }}
+                            </div>
+
+                            <button (click)="removeSkill(i)" class="bg-red-500 hover:bg-red-700
+                            text-white font-bold py-1 px-2 rounded cursor-pointer">
+                                X
+                            </button>
+                        </span>
+                    </div>
+                </ng-container>
+            </div>
         </div>
-
 
         <!-- Results Display -->
         <div class="my-4 mx-auto h-fit">
@@ -71,15 +91,19 @@
                     <ng-container *ngFor="let freelancer of freelancers">
                         <app-freelancer-card [freelancer]="freelancer"></app-freelancer-card>
                     </ng-container>
-                    <p *ngIf="!freelancers || freelancers.length === 0 && !isLoading" class="no-results">No freelancers
-                        found.</p>
+                    <div *ngIf="!freelancers || freelancers.length === 0 && !isLoading"
+                        class="flex w-full justify-center items-center text-center absolute right-0 left-0 text-3xl">
+                        Nenhum Freelancer corresponde a pesquisa.
+                    </div>
                 </ng-container>
 
                 <ng-container *ngIf="userRole === 'FREELANCER'">
                     <ng-container *ngFor="let project of projects">
                         <app-project-card [project]="project"></app-project-card>
                     </ng-container>
-                    <p *ngIf="!projects || projects.length === 0 && !isLoading" class="no-results">No projects found.
+                    <p *ngIf="!projects || projects.length === 0 && !isLoading"
+                        class="flex w-full justify-center items-center text-center absolute right-0 left-0 text-3xl">
+                        Nenhum Projeto corresponde a pesquisa.
                     </p>
                 </ng-container>
             </div>

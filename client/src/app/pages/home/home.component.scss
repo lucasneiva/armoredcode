@@ -6,7 +6,7 @@
     padding: 7.5rem 0rem 1.5rem 0rem;
     background-color: rgb(246, 246, 246);
 
-    .filter-btn{
+    .filter-btn {
         padding: 0rem 1rem;
         font-size: 1.25rem;
         color: white;
@@ -14,7 +14,7 @@
         border: gray;
         border-radius: 1.5rem;
         cursor: pointer;
-    
+
         &:hover {
             background-color: rgb(90, 90, 90);
         }
@@ -31,12 +31,12 @@
             color: black;
             border: 2px grey;
             border-radius: 1.5rem 0rem 0rem 1.5rem;
-    
+
             @media not all and (min-width: 1024px) {
                 width: 55vw;
             }
         }
-    
+
         .search-button {
             padding: 0rem 1rem;
             font-size: 1.25rem;
@@ -45,11 +45,99 @@
             border: gray;
             border-radius: 0rem 1.5rem 1.5rem 0rem;
             cursor: pointer;
-    
+
             &:hover {
                 background-color: rgb(90, 90, 90);
             }
         }
     }
 
+}
+
+.filters-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    position: fixed;
+    z-index: 30;
+    height: 100%;
+    width: 22.5vw;
+    padding: 7.5rem 1rem 1.5rem 1rem;
+    background-color: rgb(234, 234, 234);
+    border-width: 4px;
+    border-color: rgba(0, 0, 0, 0.11);
+
+    @media not all and (min-width: 1024px) {
+        width: 96.5vw;
+    }
+
+    .filters-header {
+        display: flex;
+        justify-content: space-between;
+        justify-items: center;
+        vertical-align: middle;
+
+        .header-title {
+            font-weight: 700;
+            font-size: 2rem;
+            line-height: 1;
+            margin: auto 0rem;
+
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+
+            color: rgb(17 24 39);
+
+            @media not all and (min-width: 1024px) {
+                font-size: 1.77rem;
+            }
+        }
+
+        .close-filters-btn {
+            width: 3rem;
+            height: 3rem;
+            font-size: 1.25rem;
+            color: white;
+            background-color: rgb(106, 106, 106);
+            border: gray;
+            border-radius: 100%;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgb(90, 90, 90);
+            }
+        }
+    }
+
+    .filters-inputs-container{
+        padding: 1.5rem 0rem;
+
+        .dropdown-filter {
+            margin: 1rem 0rem;
+            padding: 0.5rem 1rem;
+            max-height: 4rem;
+            width: 100%;
+    
+            border-width: 1px;
+            border-color: rgb(209 213 219);
+            border-radius: 0.25rem;
+            color: rgb(107 114 128);
+        }
+
+        .add-skills-btn{
+            height: fit-content;
+            padding: 0.25rem 1rem;
+            font-size: 1.25rem;
+            color: white;
+            background-color: rgb(106, 106, 106);
+            border: gray;
+            border-radius: 0.25rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgb(90, 90, 90);
+            }
+        }
+    }
 }
