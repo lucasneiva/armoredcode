@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit, inject } from '@angular/core';
 import { Router, RouterModule, NavigationStart, NavigationEnd } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { SearchService, SearchStateService } from '../../services/search.service';
 
 @Component({
   selector: 'app-header',
@@ -14,8 +13,6 @@ import { SearchService, SearchStateService } from '../../services/search.service
 export class HeaderComponent implements OnInit {
   router = inject(Router);
   authService = inject(AuthService);
-  searchService = inject(SearchService);
-  searchStateService = inject(SearchStateService);
 
   profilePath = '../../assets/images/prf_icon.png';
   logoPath = '../../assets/images/logo_branca_sfundo.png';
@@ -26,7 +23,7 @@ export class HeaderComponent implements OnInit {
   userRole: string | null = null;
 
   showMenu: boolean = false;
-  menuRotated: boolean = false; // Add a flag to track rotation
+  menuRotated: boolean = false;
 
   showHeader: boolean = true;
   previousScrollPosition: number = 0;
@@ -74,20 +71,15 @@ export class HeaderComponent implements OnInit {
     return this.currentRoute === route || this.currentRoute.startsWith(route + '/');
   }
 
-  // In your HeaderComponent
   logOut() {
     this.authService.logout()
-      .then(() => { // Wait for logout to complete
+      .then(() => {
         this.closeMenu();
         this.router.navigate(['login']);
       })
       .catch(error => {
         console.log(error);
       });
-  }
-
-  toggleSearchBar() {
-    this.searchStateService.toggleSearchBarVisibility();
   }
 
   toggleMenu() {
@@ -100,13 +92,13 @@ export class HeaderComponent implements OnInit {
         mobileMenu?.classList.add('open');
       } else {
         mobileMenu?.classList.remove('open');
-        this.menuRotated = false; // Reset rotation when closing the menu 
+        this.menuRotated = false;
       }
     }, 0);
   }
 
   closeMenu() {
     this.showMenu = false;
-    this.menuRotated = false; // Reset rotation when closing programmatically 
+    this.menuRotated = false;
   }
 }
