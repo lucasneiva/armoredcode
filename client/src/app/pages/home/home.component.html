@@ -9,7 +9,7 @@
     <ng-container *ngIf="!isLoading">
         <!-- Search Bar and Filters -->
 
-        <div class="search-container">
+        <div class="search-container shadow-xl">
             <button class="filter-btn shadow-lg" (click)="toogleFiltersSidebar()">
                 <i class="fa fa-sliders px-2"></i>
                 <span class="max-lg:hidden">Filtros</span>
@@ -67,7 +67,7 @@
                     </div>
                     
 
-                    <div *ngIf="skillIds.length > 0">
+                    <div class="skills-container" *ngIf="skillIds.length > 0">
                         <span *ngFor="let skillId of skillIds; let i = index"
                             class="flex mb-2 h-8 rounded bg-blue-500 w-fit">
                             <div class="text-white py-1 px-4 flex pr-4 text-nowrap overflow-clip">
