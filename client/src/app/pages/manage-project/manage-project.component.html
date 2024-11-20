@@ -11,12 +11,17 @@
         <!--if projects-->
         <ng-container *ngIf="projects.length <= 0">
             <div *ngIf="this.userRole == 'CLIENT'"
-                class="block text-wrap max-w-md shadow-lg p-10 mx-auto my-auto bg-white h-fit">
+                class="block text-wrap max-w-md shadow-lg p-10 mx-auto my-auto bg-white h-fit space-y-4">
                 <h1 class="text-center text-4xl text-gray-700">Que vazio!</h1>
                 <p class="text-left text-2xl text-gray-600 mt-4">
                     Voçê ainda não tem nenhum projeto na sua área de trabalho,
                     mas voçê pode criar um clicando no botão de "criar projeto".
                 </p>
+                <button routerLink="/create-project"
+                    class="bg-blue-500 hover:bg-blue-700 max-lg:text-2xl lg:text-3xl text-white font-bold max-lg:h-14 max-lg:w-14 lg:px-4 lg:py-2 max-lg:rounded-full lg:rounded cursor-pointer w-full">
+                    <p class="max-lg:hidden">Criar Projeto</p>
+                    <i class="fa fa-plus lg:hidden"></i>
+                </button>
             </div>
 
             <div *ngIf="this.userRole == 'FREELANCER'"
@@ -29,7 +34,8 @@
         </ng-container>
         <!--grid start-->
         <ng-container *ngIf="projects.length > 0">
-            <div class="flex justify-between align-middle items-center lg:max-w-lg max-lg:max-w-md w-full mt-28 -mb-14 mx-auto">
+            <div
+                class="flex justify-between align-middle items-center lg:max-w-lg max-lg:max-w-md w-full mt-28 -mb-14 mx-auto">
                 <h2 class="text-3xl font-bold text-black"> Meus Projetos</h2>
                 <!--button-->
                 <ng-container *ngIf="this.userRole == 'CLIENT'">
