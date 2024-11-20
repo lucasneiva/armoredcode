@@ -116,10 +116,10 @@ export default class CreateProfileComponent implements OnInit {
         state: ['SP'],
         country: ['Brasil'],
       }),
-      workExperiences: this.fb.array([this.createExperienceForm()]),
-      educations: this.fb.array([this.createEducationsForm()]),
-      certifications: this.fb.array([this.createCertificationForm()]),
-      portfolioItems: this.fb.array([this.createPortfolioItem()]),
+      workExperiences: this.fb.array([]),
+      educations: this.fb.array([]),
+      certifications: this.fb.array([]),
+      portfolioItems: this.fb.array([]),
 
     });
 
