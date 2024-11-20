@@ -39,7 +39,7 @@ export default class LoginComponent {
     this.authService.loginService(this.loginForm.value)
       .subscribe({
         next: (res) => {
-          alert("Login is Success!");
+          //alert("Login is Success!");
           localStorage.setItem("user_id", res.data._id);
           localStorage.setItem('user_role', res.userRole);
           localStorage.setItem('token', res.token);

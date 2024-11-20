@@ -22,6 +22,8 @@ export default class RegisterComponent implements OnInit{
   registerForm !: FormGroup;
   showPassword = false;
 
+  serverError: string | null = null; // To display server error messages
+
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       username: ['',Validators.required],
@@ -41,6 +43,7 @@ export default class RegisterComponent implements OnInit{
     this.showPassword = !this.showPassword;
   }
 
+  /*
   register(){
     this.authService.registerService(this.registerForm.value)
     .subscribe({
@@ -53,6 +56,38 @@ export default class RegisterComponent implements OnInit{
         console.log(err);
       }
     })
+  }
+  */
+  register() {
+    this.serverError = null; // Clear previous errors
+    this.authService.registerService(this.registerForm.value)
+      .subscribe({
+        next: (res) => {
+          alert("User Created!");
+          this.registerForm.reset();
+          this.router.navigate(['login']);
+        },
+        error: (err) => {
+          if (err.status === 400 && err.error && err.error.message) {  // Check for 400 Bad Request and specific error structure
+            const errorMessage = err.error.message;
+            if (typeof errorMessage === 'object') {  // Check if it's an object
+                if (errorMessage.username) {
+                    this.serverError = errorMessage.username;
+                } else if (errorMessage.email) {  // Handle the case where email already exists
+                    this.serverError = errorMessage.email; 
+                } else {
+                    this.serverError = 'Registration failed. Please try again.'; // Generic error if other fields are invalid
+                }
+            } else { // If it's not an object
+                this.serverError = 'Registration failed. Please try again.'; // Generic error
+            }
 
+
+          } else {
+            this.serverError = 'Registration failed. Please try again.'; // Generic error message
+            console.error(err); // Log the full error for debugging
+          }
+        }
+      });
   }
 }
