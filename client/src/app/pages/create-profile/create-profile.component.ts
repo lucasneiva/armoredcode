@@ -5,23 +5,21 @@ import {
   ReactiveFormsModule, Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { endDateValidator } from '../../validators/date.validator'; // Import the validator
-import { hourlyRateValidator } from '../../validators/hourly-rate.validator'; // Import the validator
+import { endDateValidator } from '../../validators/date.validator';
+import { hourlyRateValidator } from '../../validators/hourly-rate.validator';
 import { SkillService } from '../../services/skill.service';
 import { SpecializationService } from '../../services/specialization.service';
 import { IndustryService } from '../../services/industry.service';
 import { ProfileService } from '../../services/profile.service';
 import { UserService, User } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
-//
 import { cepValidator } from '../../validators/cep.validator';
 import { CepFormatterDirective } from '../../validators/cep-formatter.directive';
-//
 
 @Component({
   selector: 'app-create-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, CepFormatterDirective], //CepFormatterDirective
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, CepFormatterDirective],
   templateUrl: './create-profile.component.html',
   styleUrl: './create-profile.component.scss'
 })
@@ -42,8 +40,8 @@ export default class CreateProfileComponent implements OnInit {
 
   //constants
   userRole: string | null = null;
-  currentPage!: number; // Start with the first page
-  totalPages!: number; // Total number of pages
+  currentPage!: number;
+  totalPages!: number;
   profileImagePreview: string | ArrayBuffer | null = null;
 
   //arrays:
@@ -63,15 +61,15 @@ export default class CreateProfileComponent implements OnInit {
     this.userRole = this.authService.getUserRole();
     if (this.userRole === 'CLIENT') {
       this.fetchIndustries();
-      this.currentPage = 1; // Start with the first page
-      this.totalPages = 2; // Total number of pages
+      this.currentPage = 1;
+      this.totalPages = 2;
       this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     }
     else if (this.userRole === 'FREELANCER') {
       this.fetchSkills();
       this.fetchSpecializations();
-      this.currentPage = 1; // Start with the first page
-      this.totalPages = 6; // Total number of pages
+      this.currentPage = 1;
+      this.totalPages = 6;
       this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     }
     else {
@@ -87,7 +85,7 @@ export default class CreateProfileComponent implements OnInit {
       industryId: ['', Validators.required],
       website: [''],
       location: this.fb.group({
-        cep: ['', [Validators.required, cepValidator()]], // Add cepValidator
+        cep: ['', [Validators.required, cepValidator()]],
         streetAddress: ['', Validators.required],
         neighborhood: ['', Validators.required],
         city: ['', Validators.required],
@@ -111,7 +109,7 @@ export default class CreateProfileComponent implements OnInit {
         currency: ['R$']
       }, { validators: hourlyRateValidator }),
       location: this.fb.group({
-        cep: ['', [Validators.required, cepValidator()]], // Add cepValidator
+        cep: ['', [Validators.required, cepValidator()]],
         streetAddress: ['', Validators.required],
         neighborhood: ['', Validators.required],
         city: ['', Validators.required],
@@ -185,17 +183,16 @@ export default class CreateProfileComponent implements OnInit {
       this.markFormArrayTouched(this.freelancerProfileForm.get('certifications') as FormArray);
       this.markFormArrayTouched(this.freelancerProfileForm.get('educations') as FormArray);
       this.markFormArrayTouched(this.freelancerProfileForm.get('workExperiences') as FormArray);
-      this.markFormArrayTouched(this.freelancerProfileForm.get('portfolioItems') as FormArray); // Add this for portfolioItems as well
+      this.markFormArrayTouched(this.freelancerProfileForm.get('portfolioItems') as FormArray);
 
       this.displayFormErrors(this.userRole == "CLIENT" ? this.clientProfileForm : this.freelancerProfileForm);
     }
   }
 
-  //
   cancelSubmit() {
     if (confirm("Are you sure you want to cancel this profile?")) {
-      alert("profile creation Canceled!")
-      this.router.navigate(['login'])
+      alert("profile creation Canceled!");
+      this.router.navigate(['login']);
       if (this.userRole == "CLIENT") {
         this.clientProfileForm.reset();
       }
@@ -204,8 +201,7 @@ export default class CreateProfileComponent implements OnInit {
       }
     }
   }
-  //
-  
+
   private markFormArrayTouched(formArray: FormArray) {
     formArray.markAsTouched();
     formArray.controls.forEach(control => {
@@ -276,7 +272,7 @@ export default class CreateProfileComponent implements OnInit {
       companyName: [''],
       jobTitle: [''],
       startDate: [''],
-      endDate: ['', [Validators.required, endDateValidator]], // Use the imported validator
+      endDate: ['', [Validators.required, endDateValidator]],
       jobDescription: ['']
     });
   }
@@ -292,7 +288,7 @@ export default class CreateProfileComponent implements OnInit {
       fieldOfStudy: [''],
       institution: [''],
       startDate: [''],
-      endDate: ['', [Validators.required, endDateValidator]], // Use the imported validator
+      endDate: ['', [Validators.required, endDateValidator]],
     });
   }
 

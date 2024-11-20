@@ -5,23 +5,25 @@ import {
   ReactiveFormsModule, Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { endDateValidator } from '../../validators/date.validator'; // Import the validator
-import { hourlyRateValidator } from '../../validators/hourly-rate.validator'; // Import the validator
+import { endDateValidator } from '../../validators/date.validator';
+import { hourlyRateValidator } from '../../validators/hourly-rate.validator';
 import { SpecializationService } from '../../services/specialization.service';
 import { IndustryService } from '../../services/industry.service';
 import { ProfileService, Profile, ProfileResponse } from '../../services/profile.service';
 import { UserService, User } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
-import { firstValueFrom } from 'rxjs'; // Import firstValueFrom
+import { firstValueFrom } from 'rxjs';
 import { SkillService } from '../../services/skill.service';
+import { cepValidator } from '../../validators/cep.validator';
+import { CepFormatterDirective } from '../../validators/cep-formatter.directive';
 
 @Component({
   selector: 'app-edit-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, CepFormatterDirective],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.scss',
-  providers: [DatePipe] // Forneça o DatePipe aqui
+  providers: [DatePipe]
 })
 export default class EditProfileComponent implements OnInit {
   fb = inject(FormBuilder);
@@ -30,7 +32,7 @@ export default class EditProfileComponent implements OnInit {
   //services
   authService = inject(AuthService);
   industryService = inject(IndustryService);
-  skillService = inject(SkillService); // Inject SkillService
+  skillService = inject(SkillService);
   specializationService = inject(SpecializationService);
   profileService = inject(ProfileService);
   userService = inject(UserService);
@@ -50,8 +52,8 @@ export default class EditProfileComponent implements OnInit {
   userRole: string | null = null;
   isLoading = true;
   profile: Profile | null = null;
-  currentPage!: number; // Start with the first page
-  totalPages!: number; // Total number of pages
+  currentPage!: number;
+  totalPages!: number;
   profileImagePreview: string | ArrayBuffer | null = null;
 
   //arrays:
@@ -111,7 +113,7 @@ export default class EditProfileComponent implements OnInit {
       industryId: ['', Validators.required],
       website: [''],
       location: this.fb.group({
-        cep: ['', Validators.required],
+        cep: ['', [Validators.required, cepValidator()]],
         streetAddress: ['', Validators.required],
         neighborhood: ['', Validators.required],
         city: ['', Validators.required],
@@ -132,16 +134,16 @@ export default class EditProfileComponent implements OnInit {
         min: [''],
         max: [''],
         currency: ['R$']
-      }, { validators: hourlyRateValidator }), // Apply the validator to the FormGroup
+      }, { validators: hourlyRateValidator }),
       location: this.fb.group({
-        cep: ['', Validators.required],
+        cep: ['', [Validators.required, cepValidator()]],
         streetAddress: ['', Validators.required],
         neighborhood: ['', Validators.required],
         city: ['', Validators.required],
         state: ['SP'],
         country: ['Brasil'],
       }),
-      skillIds: this.fb.array([]),  // Important: Initialize as FormArray
+      skillIds: this.fb.array([]),
       portfolioItems: this.fb.array([]),
       educations: this.fb.array([]),
       certifications: this.fb.array([]),
@@ -150,12 +152,12 @@ export default class EditProfileComponent implements OnInit {
 
     this.otherSkillForm = this.fb.group({
       skillName: ['', Validators.required],
-      skillDescription: [''], // Optional description
+      skillDescription: [''],
     });
   }
 
   //get the profile data
-  loadProfile(): Promise<void> { // Now returns a Promise
+  loadProfile(): Promise<void> {
     this.isLoading = true;
     const userId = this.authService.getUserId();
     const profile$ = this.profileService.getProfile(userId);
@@ -233,7 +235,7 @@ export default class EditProfileComponent implements OnInit {
         // Populate educations
         if (profile.educations?.length) {
           profile.educations.forEach((edu) => {
-            const educationForm = this.createEducationsForm(); // Create the form
+            const educationForm = this.createEducationsForm();
             educationForm.setValue({
               degreeName: edu.degreeName,
               fieldOfStudy: edu.fieldOfStudy,
@@ -276,7 +278,7 @@ export default class EditProfileComponent implements OnInit {
         if (profile?.skillIds && profile.skillIds.length > 0) {
           const skillIdsControl = this.freelancerProfileForm.get('skillIds') as FormArray;
           profile.skillIds.forEach(skillId => {
-            skillIdsControl.push(new FormControl(skillId)); // Push FormControl into FormArray
+            skillIdsControl.push(new FormControl(skillId));
           });
         }
       }
@@ -337,13 +339,15 @@ export default class EditProfileComponent implements OnInit {
   }
 
   cancelSubmit() {
-    alert("profile edition Canceled!")
-    this.router.navigate(['manage-profile'])
-    if (this.userRole == "CLIENT") {
-      this.clientProfileForm.reset();
-    }
-    else {
-      this.freelancerProfileForm.reset();
+    if (confirm("Are you sure you want to cancel this profile edition?")) {
+      alert("profile edition Canceled!");
+      this.router.navigate(['manage-profile']);
+      if (this.userRole == "CLIENT") {
+        this.clientProfileForm.reset();
+      }
+      else {
+        this.freelancerProfileForm.reset();
+      }
     }
   }
 
@@ -393,7 +397,7 @@ export default class EditProfileComponent implements OnInit {
       companyName: [''],
       jobTitle: [''],
       startDate: [''],
-      endDate: ['', [Validators.required, endDateValidator]], // Use the imported validator
+      endDate: ['', [Validators.required, endDateValidator]],
       jobDescription: ['']
     });
   }
@@ -409,7 +413,7 @@ export default class EditProfileComponent implements OnInit {
       fieldOfStudy: [''],
       institution: [''],
       startDate: [''],
-      endDate: ['', [Validators.required, endDateValidator]], // Use the imported validator
+      endDate: ['', [Validators.required, endDateValidator]],
     });
   }
 

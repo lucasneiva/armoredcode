@@ -113,12 +113,15 @@
                                 <!--CEP start-->
                                 <div class="my-2 mx-auto h-fit w-full">
                                     <label class="font-semibold" for="cep">CEP</label>
-                                    <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    <input appCepFormatter class="p-2 w-full border border-gray-300 rounded" type="text"
                                         placeholder="Exemplo: 12345-678" id="cep" name="cep" formControlName="cep"
                                         required>
                                     <span
                                         *ngIf="clientProfileForm.get('location')?.hasError('required', 'cep') && clientProfileForm.get('location')?.get('cep')?.touched"
-                                        class="text-red-500">*CEP is required</span>
+                                        class="text-red-500">*CEP é requerido</span>
+                                    <span
+                                        *ngIf="clientProfileForm.get('location')?.hasError('cepInvalid', 'cep') && clientProfileForm.get('location')?.get('cep')?.touched"
+                                        class="text-red-500">*CEP é inválido</span>
                                 </div>
                                 <!--CEP end-->
                                 <!--neighborhood start-->
@@ -129,7 +132,7 @@
                                         formControlName="neighborhood" required>
                                     <span
                                         *ngIf="clientProfileForm.get('location')?.hasError('required', 'neighborhood') && clientProfileForm.get('location')?.get('neighborhood')?.touched"
-                                        class="text-red-500">*Neighborhood is required</span>
+                                        class="text-red-500">*Bairro é requerido</span>
                                 </div>
                                 <!--neighborhood end-->
                             </div>
@@ -142,7 +145,7 @@
                                         formControlName="streetAddress" required>
                                     <span
                                         *ngIf="clientProfileForm.get('location')?.hasError('required', 'streetAddress') && clientProfileForm.get('location')?.get('streetAddress')?.touched"
-                                        class="text-red-500">*Street Address is required</span>
+                                        class="text-red-500">*Rua é requerido</span>
                                 </div>
                                 <!--street end-->
                                 <!--city start-->
@@ -157,6 +160,7 @@
                                         <option value="CERQUILHO">Cerquilho</option>
                                         <option value="IPERÓ">Iperó</option>
                                         <option value="ITU">Itu</option>
+                                        <option value="MAIRINQUE">Mairinque</option>
                                         <option value="SALTO DE PIRAPORA">Salto</option>
                                         <option value="SÃO ROQUE">São Roque</option>
                                         <option value="SOROCABA">Sorocaba</option>
@@ -165,7 +169,7 @@
                                     </select>
                                     <span
                                         *ngIf="clientProfileForm.get('location')?.hasError('required', 'city') && clientProfileForm.get('location')?.get('city')?.touched"
-                                        class="text-red-500">*City is required</span>
+                                        class="text-red-500">*Cidade é requerido</span>
                                 </div>
                                 <!--city end-->
                             </div>
@@ -747,12 +751,15 @@
                                 <!--CEP start-->
                                 <div class="my-2 mx-auto h-fit w-full">
                                     <label class="font-semibold" for="cep">CEP</label>
-                                    <input class="p-2 w-full border border-gray-300 rounded" type="text"
+                                    <input appCepFormatter class="p-2 w-full border border-gray-300 rounded" type="text"
                                         placeholder="Exemplo: 12345-678" id="cep" name="cep" formControlName="cep"
                                         required>
                                     <span
-                                        *ngIf="clientProfileForm.get('location')?.hasError('required', 'cep') && clientProfileForm.get('location')?.get('cep')?.touched"
-                                        class="text-red-500">*CEP is required</span>
+                                        *ngIf="freelancerProfileForm.get('location')?.hasError('required', 'cep') && freelancerProfileForm.get('location')?.get('cep')?.touched"
+                                        class="text-red-500">*CEP é requerido</span>
+                                    <span
+                                        *ngIf="freelancerProfileForm.get('location')?.hasError('cepInvalid', 'cep') && freelancerProfileForm.get('location')?.get('cep')?.touched"
+                                        class="text-red-500">*CEP é inválido</span>
                                 </div>
                                 <!--CEP end-->
                                 <!--neighborhood start-->
@@ -762,8 +769,8 @@
                                         placeholder="Bairro" id="neighborhood" name="neighborhood"
                                         formControlName="neighborhood" required>
                                     <span
-                                        *ngIf="clientProfileForm.get('location')?.hasError('required', 'neighborhood') && clientProfileForm.get('location')?.get('neighborhood')?.touched"
-                                        class="text-red-500">*Neighborhood is required</span>
+                                        *ngIf="freelancerProfileForm.get('location')?.hasError('required', 'neighborhood') && freelancerProfileForm.get('location')?.get('neighborhood')?.touched"
+                                        class="text-red-500">*Bairro é requerido</span>
                                 </div>
                                 <!--neighborhood end-->
                             </div>
@@ -775,8 +782,8 @@
                                         placeholder="Rua e Número da residência" id="streetAddress" name="streetAddress"
                                         formControlName="streetAddress" required>
                                     <span
-                                        *ngIf="clientProfileForm.get('location')?.hasError('required', 'streetAddress') && clientProfileForm.get('location')?.get('streetAddress')?.touched"
-                                        class="text-red-500">*Street Address is required</span>
+                                        *ngIf="freelancerProfileForm.get('location')?.hasError('required', 'streetAddress') && freelancerProfileForm.get('location')?.get('streetAddress')?.touched"
+                                        class="text-red-500">*Rua é requerido</span>
                                 </div>
                                 <!--street end-->
                                 <!--city start-->
@@ -791,6 +798,7 @@
                                         <option value="CERQUILHO">Cerquilho</option>
                                         <option value="IPERÓ">Iperó</option>
                                         <option value="ITU">Itu</option>
+                                        <option value="MAIRINQUE">Mairinque</option>
                                         <option value="SALTO DE PIRAPORA">Salto</option>
                                         <option value="SÃO ROQUE">São Roque</option>
                                         <option value="SOROCABA">Sorocaba</option>
@@ -798,8 +806,8 @@
                                         <option value="VOTORANTIM">Votorantim</option>
                                     </select>
                                     <span
-                                        *ngIf="clientProfileForm.get('location')?.hasError('required', 'city') && clientProfileForm.get('location')?.get('city')?.touched"
-                                        class="text-red-500">*City is required</span>
+                                        *ngIf="freelancerProfileForm.get('location')?.hasError('required', 'city') && freelancerProfileForm.get('location')?.get('city')?.touched"
+                                        class="text-red-500">*Cidade é requerido</span>
                                 </div>
                                 <!--city end-->
                             </div>
