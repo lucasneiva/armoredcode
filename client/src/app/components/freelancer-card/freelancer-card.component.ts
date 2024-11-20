@@ -40,6 +40,7 @@ export class FreelancerCardComponent {
   freelancerName = '';
   specializationName: string = '';
   skills: string[] = [];
+  skillImages: { [key: string]: string } = {}; // Store skill images
 
   ngOnInit() {
     this.userRole = this.authService.getUserRole();
@@ -117,22 +118,26 @@ export class FreelancerCardComponent {
     );
   }
 
-  loadSkills(skillIds: string[]) {
+  loadSkills(skillIds: any[]) {
     skillIds.forEach((skillId) => {
-      this.skillService.getSkillById(skillId).subscribe({
-        next: (skillData) => {
-          const skillName = skillData.data.skillName;
-
-          // Check if the skill is already in the array
-          if (!this.skills.includes(skillName)) {
+      const skillIdValue = skillId;
+      this.skillService.getSkillById(skillIdValue)
+        .subscribe({
+          next: (skillData) => {
+            const skillName = skillData.data.skillName;
             this.skills.push(skillName);
+            this.skillImages[skillName] = skillData.data.skillImage; // Store the image URL
+            /*debug*///console.log("name: ",skillName);
+            /*debug*///console.log("img url: ",skillData.data.skillImage);
+          },
+          error: (error) => {
+            console.error("Error loading skill:", error);
           }
-        },
-        error: (error) => {
-          console.error("Error loading skill:", error);
-        }
-      });
+        });
     });
+  }
+  getImageUrl(relativePath: string): string {
+    return `${window.location.origin}/${relativePath}`;
   }
 
   viewFreelancerProfile() {

@@ -49,7 +49,6 @@ export class ProjectCardComponent implements OnInit {
     }
   }
 
-
   toggleDetails() {
     this.showDetails = !this.showDetails;
   }

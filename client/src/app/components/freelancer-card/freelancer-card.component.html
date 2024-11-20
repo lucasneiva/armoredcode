@@ -12,6 +12,22 @@
       </ng-template>
     </div>
 
+    <ng-container *ngIf="skills.length > 0; else noSkills">
+      <div class="skills-row space-x-2">
+        <span *ngFor="let skill of skills; let i = index" class="skill">
+          <img *ngIf="skillImages[skill]" [src]="getImageUrl(skillImages[skill])" alt="{{ skill }} icon"
+            class="skill-icon"/>
+          <span>{{ skill }}</span>
+        </span>
+      </div>
+    </ng-container>
+
+    <ng-template #noSkills>
+      <div class="p-5">
+        <p>Sem Habilidades providas pelo Freelancer</p>
+      </div>
+    </ng-template>
+
     <p class="specialization">
       {{ specializationName || 'No Specialization' }}
     </p>
