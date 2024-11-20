@@ -28,7 +28,8 @@ const LocationSchema = new Schema( {
             "ARAÇOIABA DA SERRA",
             "BOITUVA",
             "CERQUILHO",
-            "TATUÍ"
+            "TATUÍ",
+            "MAIRINQUE",
         ]
     },
 

@@ -13,11 +13,15 @@ import { IndustryService } from '../../services/industry.service';
 import { ProfileService } from '../../services/profile.service';
 import { UserService, User } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
+//
+import { cepValidator } from '../../validators/cep.validator';
+import { CepFormatterDirective } from '../../validators/cep-formatter.directive';
+//
 
 @Component({
   selector: 'app-create-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, CepFormatterDirective], //CepFormatterDirective
   templateUrl: './create-profile.component.html',
   styleUrl: './create-profile.component.scss'
 })
@@ -62,8 +66,8 @@ export default class CreateProfileComponent implements OnInit {
       this.currentPage = 1; // Start with the first page
       this.totalPages = 2; // Total number of pages
       this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-    } 
-    else if (this.userRole === 'FREELANCER'){
+    }
+    else if (this.userRole === 'FREELANCER') {
       this.fetchSkills();
       this.fetchSpecializations();
       this.currentPage = 1; // Start with the first page
@@ -83,7 +87,7 @@ export default class CreateProfileComponent implements OnInit {
       industryId: ['', Validators.required],
       website: [''],
       location: this.fb.group({
-        cep: ['', Validators.required],
+        cep: ['', [Validators.required, cepValidator()]], // Add cepValidator
         streetAddress: ['', Validators.required],
         neighborhood: ['', Validators.required],
         city: ['', Validators.required],
@@ -100,14 +104,14 @@ export default class CreateProfileComponent implements OnInit {
       specializationId: [''],
       profileSummary: [''],
       experienceLevel: ['', Validators.required],
-      skillIds: this.fb.control([]), // Use skillIds instead of selectedSkills
+      skillIds: this.fb.control([]),
       hourlyRate: this.fb.group({
         min: [''],
         max: [''],
         currency: ['R$']
-      }, { validators: hourlyRateValidator }), // Apply the validator to the FormGroup
+      }, { validators: hourlyRateValidator }),
       location: this.fb.group({
-        cep: ['', Validators.required],
+        cep: ['', [Validators.required, cepValidator()]], // Add cepValidator
         streetAddress: ['', Validators.required],
         neighborhood: ['', Validators.required],
         city: ['', Validators.required],
@@ -118,16 +122,16 @@ export default class CreateProfileComponent implements OnInit {
       educations: this.fb.array([this.createEducationsForm()]),
       certifications: this.fb.array([this.createCertificationForm()]),
       portfolioItems: this.fb.array([this.createPortfolioItem()]),
-      
+
     });
 
     this.otherSkillForm = this.fb.group({
       skillName: ['', Validators.required],
-      skillDescription: [''], // Optional description
+      skillDescription: [''],
     });
 
   }
-  
+
   nextPage() {
     this.currentPage++;
     /*debug*///alert(this.currentPage);
@@ -187,17 +191,21 @@ export default class CreateProfileComponent implements OnInit {
     }
   }
 
+  //
   cancelSubmit() {
-    alert("profile creation Canceled!")
-    this.router.navigate(['login'])
-    if (this.userRole == "CLIENT") {
-      this.clientProfileForm.reset();
-    }
-    else {
-      this.freelancerProfileForm.reset();
+    if (confirm("Are you sure you want to cancel this profile?")) {
+      alert("profile creation Canceled!")
+      this.router.navigate(['login'])
+      if (this.userRole == "CLIENT") {
+        this.clientProfileForm.reset();
+      }
+      else {
+        this.freelancerProfileForm.reset();
+      }
     }
   }
-
+  //
+  
   private markFormArrayTouched(formArray: FormArray) {
     formArray.markAsTouched();
     formArray.controls.forEach(control => {
