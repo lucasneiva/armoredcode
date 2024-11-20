@@ -1,10 +1,21 @@
 .search-container {
     display: flex;
-    justify-content: center;
     height: fit-content;
     width: 100%;
     padding: 7.5rem 0rem 1.5rem 0rem;
     background-color: rgb(246, 246, 246);
+
+    @media not all and (min-width: 1024px) {
+        justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+        justify-content: end;
+    }
+
+    @media (min-width: 1024px) {
+        justify-content: center;
+    }
 
     .filter-btn {
         padding: 0rem 1rem;
@@ -25,7 +36,6 @@
         padding: 0rem 1rem;
 
         .search-bar {
-            width: 40vw;
             padding: 0.75rem 1rem 0.75rem 1rem;
             background-color: white;
             color: black;
@@ -35,6 +45,15 @@
             @media not all and (min-width: 1024px) {
                 width: 55vw;
             }
+
+            @media (min-width: 768px) {
+                width: 35vw;
+            }
+
+            @media (min-width: 1024px) {
+                width: 40vw;
+            }
+
         }
 
         .search-button {
@@ -61,12 +80,19 @@
     position: fixed;
     z-index: 30;
     height: 100%;
-    width: 22.5vw;
     padding: 7.5rem 1rem 1.5rem 1rem;
     background-color: rgb(234, 234, 234);
 
     @media not all and (min-width: 1024px) {
-        width: 96.5vw;
+        width: 98vw;
+    }
+
+    @media (min-width: 768px) {
+        width: 33.3vw; 
+    }
+
+    @media (min-width: 1024px) {
+        width: 22.5vw;
     }
 
     .filters-header {
@@ -152,39 +178,50 @@
     }
 }
 
-.results-container {
-    display: flex;
+
+
+.results-grid {
+    grid-template-columns: repeat(var(--column-count), minmax(0, 1fr));
+    display: grid;
     justify-content: center;
-    height: fit-content;
+    gap: 1rem;
     width: 100%;
-    margin: auto;
 
-    .results-grid {
-        grid-template-columns: repeat(var(--column-count), minmax(0, 1fr));
-        display: grid;
-        justify-content: center;
-        gap: 1rem;
-        padding: 2.5rem;
-        margin: auto;
-
-        @media (min-width: 768px) {
-            --column-count: 2;
-        }
-
-        @media (min-width: 1024px) {
-            --column-count: 3;
-        }
+    @media not all and (min-width: 1024px) {
+        --column-count: 1;
+        padding: 2rem;
     }
 
-    .results-grid.filters-visible {
- 
-        @media (min-width: 768px) {
-            --column-count: 1;
-        }
-
-        @media (min-width: 1024px) {
-            --column-count: 2;
-        }
+    @media (min-width: 768px) {
+        --column-count: 2;
+        padding: 2.5rem 3rem;
     }
 
+    @media (min-width: 1024px) {
+        --column-count: 3;
+        padding: 2.5rem 14rem;
+    }
+}
+
+.results-grid.filters-visible {
+    justify-self: center;
+
+    @media not all and (min-width: 1024px) {
+        --column-count: 1;
+        padding: 2rem;
+        width: fit-content;
+    }
+
+    @media (min-width: 768px) {
+        --column-count: 1;
+        padding: 2.5rem 0.5rem;
+        width: fit-content;
+        margin-right: 10rem;
+    }
+
+    @media (min-width: 1024px) {
+        --column-count: 2;
+        padding: 2.5rem 0rem;
+        width: fit-content;
+    }
 }

@@ -65,7 +65,7 @@
                         </select>
                         <button (click)="addSelectedSkill()" class="add-skills-btn">Adicionar</button>
                     </div>
-                    
+
 
                     <div class="skills-container" *ngIf="skillIds.length > 0">
                         <span *ngFor="let skillId of skillIds; let i = index"
@@ -85,29 +85,28 @@
         </div>
 
         <!-- Results Display -->
-        <div class="results-container transition-transform duration-300 ease-in-out" 
-        [class.translate-x-60]="isFiltersVisible" [class.translate-x-0]="!isFiltersVisible">
-            <div class="results-grid" [class.filters-visible]="isFiltersVisible">
-                <ng-container *ngIf="userRole === 'CLIENT'">
-                    <ng-container *ngFor="let freelancer of freelancers">
-                        <app-freelancer-card [freelancer]="freelancer"></app-freelancer-card>
-                    </ng-container>
-                    <div *ngIf="!freelancers || freelancers.length === 0 && !isLoading"
-                        class="flex text-3xl border-2 border-red-500">
-                        Nenhum Freelancer corresponde a pesquisa.
-                    </div>
+        <div class="results-grid transition-transform duration-300 ease-in-out"
+            [class.translate-x-60]="isFiltersVisible" [class.translate-x-0]="!isFiltersVisible"
+            [class.filters-visible]="isFiltersVisible">
+            <ng-container *ngIf="userRole === 'CLIENT'">
+                <ng-container *ngFor="let freelancer of freelancers">
+                    <app-freelancer-card [freelancer]="freelancer"></app-freelancer-card>
                 </ng-container>
+                <div *ngIf="!freelancers || freelancers.length === 0 && !isLoading"
+                    class="flex text-3xl border-2 border-red-500">
+                    Nenhum Freelancer corresponde a pesquisa.
+                </div>
+            </ng-container>
 
-                <ng-container *ngIf="userRole === 'FREELANCER'">
-                    <ng-container *ngFor="let project of projects">
-                        <app-project-card [project]="project"></app-project-card>
-                    </ng-container>
-                    <p *ngIf="!projects || projects.length === 0 && !isLoading"
-                        class="flex text-3xl">
-                        Nenhum Projeto corresponde a pesquisa.
-                    </p>
+            <ng-container *ngIf="userRole === 'FREELANCER'">
+                <ng-container *ngFor="let project of projects">
+                    <app-project-card [project]="project"></app-project-card>
                 </ng-container>
-            </div>
+                <p *ngIf="!projects || projects.length === 0 && !isLoading" class="flex text-3xl">
+                    Nenhum Projeto corresponde a pesquisa.
+                </p>
+            </ng-container>
         </div>
+
     </ng-container>
 </div>
