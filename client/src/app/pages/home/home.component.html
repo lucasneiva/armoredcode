@@ -85,9 +85,9 @@
         </div>
 
         <!-- Results Display -->
-        <div class="results-container transition-transform duration-300 ease-in-out border-2 border-red-500" 
+        <div class="results-container transition-transform duration-300 ease-in-out" 
         [class.translate-x-60]="isFiltersVisible" [class.translate-x-0]="!isFiltersVisible">
-            <div class="results-grid">
+            <div class="results-grid" [class.filters-visible]="isFiltersVisible">
                 <ng-container *ngIf="userRole === 'CLIENT'">
                     <ng-container *ngFor="let freelancer of freelancers">
                         <app-freelancer-card [freelancer]="freelancer"></app-freelancer-card>
