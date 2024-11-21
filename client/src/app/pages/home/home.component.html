@@ -21,8 +21,8 @@
         </div>
         <!-- Search Bar End -->
         <!-- Filters Start-->
-        <div class="filters-container shadow-xl transition-transform duration-300 ease-in-out"
-            [class.-translate-x-full]="!isFiltersVisible" [class.translate-x-50%]="isFiltersVisible">
+        <div class="filters-container shadow-xl fixed transition-transform duration-300 ease-in-out"
+        [class.-translate-x-full]="!isFiltersVisible" [class.translate-x-0]="isFiltersVisible">
             <div class="filters-header">
                 <h2 class="header-title"> Filtros </h2>
                 <button class="close-filters-btn shadow-lg" (click)="toogleFiltersSidebar()">

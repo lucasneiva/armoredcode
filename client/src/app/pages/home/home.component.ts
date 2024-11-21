@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { FreelancerCardComponent } from '../../components/freelancer-card/freelancer-card.component';
@@ -36,6 +36,7 @@ export default class HomeComponent {
   searchStateService = inject(SearchStateService);
   skillService = inject(SkillService);
   specializationService = inject(SpecializationService);
+  platformId = inject(PLATFORM_ID);
 
   skills: any[] = [];
   specializations: any[] = [];
@@ -78,6 +79,30 @@ export default class HomeComponent {
       this.loadProjects(() => this.performSearch());
     }
 
+    if (isPlatformBrowser(this.platformId)) { // Check if running in browser
+      this.checkScreenWidth();
+      window.addEventListener('resize', () => this.checkScreenWidth());
+    }
+
+  }
+
+  checkScreenWidth() {
+    if (isPlatformBrowser(this.platformId)) {
+       if (window.innerWidth < 1024) {
+            this.isFiltersVisible = false;
+        } else {
+            this.isFiltersVisible = true;
+        }
+    }
+
+  }
+
+  ngOnDestroy(): void {
+    if (isPlatformBrowser(this.platformId)) { // Check before removing listener
+      window.removeEventListener('resize', () => this.checkScreenWidth());
+    }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   toogleFiltersSidebar(){
@@ -162,11 +187,6 @@ export default class HomeComponent {
           this.isLoading = false;
         }
       });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
   searchOnEnterKey(event: Event) {
