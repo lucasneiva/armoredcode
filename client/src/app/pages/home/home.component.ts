@@ -88,11 +88,11 @@ export default class HomeComponent {
 
   checkScreenWidth() {
     if (isPlatformBrowser(this.platformId)) {
-       if (window.innerWidth < 1024) {
-            this.isFiltersVisible = false;
-        } else {
-            this.isFiltersVisible = true;
-        }
+      if (window.innerWidth < 1024) {
+        this.isFiltersVisible = false;
+      } else {
+        this.isFiltersVisible = true;
+      }
     }
 
   }
@@ -105,8 +105,8 @@ export default class HomeComponent {
     this.destroy$.complete();
   }
 
-  toogleFiltersSidebar(){
-  this.isFiltersVisible = !this.isFiltersVisible;
+  toogleFiltersSidebar() {
+    this.isFiltersVisible = !this.isFiltersVisible;
   }
 
   handleFiltersChanged(filters: any): void {
@@ -117,6 +117,17 @@ export default class HomeComponent {
     this.projectCategoryId = filters.projectCategoryId || '';
 
     this.performSearch(); // Perform search when filters change
+  }
+
+  clearFilters(): void {
+    this.searchTerm = '';
+    this.skillIds = [];
+    this.selectedSkillControl.reset();
+    this.experienceLevel = '';
+    this.specializationId = '';
+    this.projectCategoryId = '';
+
+    this.performSearch(); // Refresh results with cleared filters
   }
 
   performSearch(): void {
@@ -223,7 +234,7 @@ export default class HomeComponent {
 
   removeSkill(index: number): void {  // Add this method
     this.skillIds.splice(index, 1);
-}
+  }
 
   getSkillNameById(skillId: string): string {
     const skill = this.skills.find(s => s._id === skillId);

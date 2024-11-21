@@ -24,13 +24,18 @@
         <div class="filters-container shadow-xl fixed transition-transform duration-300 ease-in-out"
         [class.-translate-x-full]="!isFiltersVisible" [class.translate-x-0]="isFiltersVisible">
             <div class="filters-header">
-                <h2 class="header-title"> Filtros </h2>
+                <h2 class="header-title"> Filtrar por: </h2>
                 <button class="close-filters-btn shadow-lg" (click)="toogleFiltersSidebar()">
                     <i class="fa fa-times"></i>
                 </button>
             </div>
 
             <div class="filters-inputs-container">
+                <div class="filters-buttons-row space-x-4">
+                    <button class="apply-filters-btn shadow-lg"(click)="performSearch()">Aplicar Filtros</button>
+                    <button class="clear-filters-btn shadow-lg" (click)="clearFilters()">Limpar Filtros</button>
+                </div>
+
                 <ng-container *ngIf="userRole === 'CLIENT'">
                     <select class="dropdown-filter" [(ngModel)]="experienceLevel">
                         <option value="">Nível de Experiência</option>

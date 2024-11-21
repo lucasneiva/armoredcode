@@ -137,6 +137,34 @@
     .filters-inputs-container {
         padding: 1.5rem 0rem;
 
+        .filters-buttons-row{
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+
+            .apply-filters-btn{
+                background-color: rgb(59 130 246);
+                border-radius: 0.25rem;
+                color: white;
+                padding: 0.5rem 1rem;
+                width: 100%;
+                &:hover{
+                    background-color: rgb(29 78 216);
+                }
+            }
+            .clear-filters-btn{
+                background-color: rgb(209 213 219);
+                border-radius: 0.25rem;
+                color: black;
+                padding: 0.5rem 1rem;
+                width: 100%;
+
+                &:hover{
+                    background-color: rgb(156 163 175);
+                }
+            }
+        }
+
         .dropdown-filter {
             margin: 1rem 0rem;
             padding: 0.5rem 1rem;
