@@ -95,7 +95,7 @@
                     <app-freelancer-card [freelancer]="freelancer"></app-freelancer-card>
                 </ng-container>
                 <div *ngIf="!freelancers || freelancers.length === 0 && !isLoading"
-                    class="flex text-3xl border-2 border-red-500">
+                    class="absolute right-0 left-0 text-center text-3xl">
                     Nenhum Freelancer corresponde a pesquisa.
                 </div>
             </div>
@@ -107,9 +107,10 @@
                 <ng-container *ngFor="let project of projects">
                     <app-project-card [project]="project"></app-project-card>
                 </ng-container>
-                <p *ngIf="!projects || projects.length === 0 && !isLoading" class="flex text-3xl">
+                <div *ngIf="!projects || projects.length === 0 && !isLoading" 
+                    class="absolute right-0 left-0 text-center text-3xl">
                     Nenhum Projeto corresponde a pesquisa.
-                </p>
+                </div>
             </div>
         </ng-container>
         <!-- Projects Results Display -->
