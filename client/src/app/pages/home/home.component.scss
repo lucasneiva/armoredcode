@@ -219,7 +219,8 @@
     }
 
     @media (min-width: 1024px) {
-        --column-count: 2;
-        padding: 2.5rem 14rem;
+        --column-count: 3;
+        padding: 2.5rem 2rem;
+        width: 75%;
     }
 }
