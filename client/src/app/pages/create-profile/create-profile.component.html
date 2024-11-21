@@ -441,7 +441,8 @@
                         <div class="flex justify-center align-middle">
                             <button type="button" (click)="addPortfolioItem()" *ngIf="portfolioItems.length < 3"
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-2 py-2 px-4 rounded cursor-pointer">
-                                Adicionar Item ao Portfólio
+                                Adicionar novo Portfólio
+                                <i class="fa fa-plus pl-2"></i>
                             </button>
                         </div>
                     </div>
@@ -467,7 +468,7 @@
                                                 formControlName="companyName" required>
                                             <span
                                                 *ngIf="experienceForm.hasError('required', 'companyName') && experienceForm.get('companyName')?.touched"
-                                                class="text-red-500">*Company name is required</span>
+                                                class="text-red-500">*Nome da compania é requerido</span>
                                         </div>
                                         <!-- company name end-->
                                         <!-- job title start-->
@@ -478,7 +479,7 @@
                                                 formControlName="jobTitle" required>
                                             <span
                                                 *ngIf="experienceForm.hasError('required', 'jobTitle') && experienceForm.get('jobTitle')?.touched"
-                                                class="text-red-500">*job title is required</span>
+                                                class="text-red-500">*Cargo é requerido</span>
                                         </div>
                                         <!-- job title end-->
                                     </div>
@@ -491,7 +492,7 @@
                                                 formControlName="startDate" required>
                                             <span
                                                 *ngIf="experienceForm.hasError('required', 'startDate') && experienceForm.get('startDate')?.touched"
-                                                class="text-red-500">*Start Date is required</span>
+                                                class="text-red-500">*Data de Início é requerida</span>
                                         </div>
                                         <!-- start date end-->
                                         <!-- end date start-->
@@ -502,10 +503,10 @@
                                                 formControlName="endDate" required>
                                             <span
                                                 *ngIf="experienceForm.hasError('required', 'endDate') && experienceForm.get('endDate')?.touched"
-                                                class="text-red-500">*End Date is required</span>
+                                                class="text-red-500">*Data de término é requerida</span>
                                             <span *ngIf="experienceForm.hasError('endDateInvalid', 'endDate')"
                                                 class="text-red-500">
-                                                End date cannot be before start date.
+                                                *A data de início deve ser menor do que a de término
                                             </span>
                                         </div>
                                         <!-- end date end-->
@@ -533,7 +534,8 @@
                         <div class="flex justify-center align-middle">
                             <button type="button" (click)="addExperience()" *ngIf="workExperiences.length < 2"
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
-                                Adicionar Experiência
+                                Adicionar nova Experiência
+                                <i class="fa fa-plus pl-2"></i>
                             </button>
                         </div>
                     </div>
@@ -558,7 +560,7 @@
                                                 formControlName="degreeName" required>
                                             <span
                                                 *ngIf="educationsForm.hasError('required', 'degreeName') && educationsForm.get('degreeName')?.touched"
-                                                class="text-red-500">*Degree name is required</span>
+                                                class="text-red-500">*Curso é requerido</span>
                                         </div>
                                         <!-- degree name end-->
                                         <!-- field of study start-->
@@ -569,7 +571,7 @@
                                                 formControlName="fieldOfStudy" required>
                                             <span
                                                 *ngIf="educationsForm.hasError('required', 'fieldOfStudy') && educationsForm.get('fieldOfStudy')?.touched"
-                                                class="text-red-500">*Field of Study is required</span>
+                                                class="text-red-500">*Área de formação é requerida</span>
                                         </div>
                                         <!-- field of study end-->
                                     </div>
@@ -582,7 +584,7 @@
                                                 formControlName="institution" required>
                                             <span
                                                 *ngIf="educationsForm.hasError('required', 'institution') && educationsForm.get('institution')?.touched"
-                                                class="text-red-500">*Institution is required</span>
+                                                class="text-red-500">*Institição é requerida</span>
                                         </div>
                                         <!-- institution end-->
                                     </div>
@@ -595,7 +597,7 @@
                                                 formControlName="startDate" required>
                                             <span
                                                 *ngIf="educationsForm.hasError('required', 'startDate') && educationsForm.get('startDate')?.touched"
-                                                class="text-red-500">*Start Date is required</span>
+                                                class="text-red-500">*Data de Início é requerida</span>
                                         </div>
                                         <!-- start date end -->
                                         <!-- end date start -->
@@ -606,10 +608,10 @@
                                                 formControlName="endDate" required>
                                             <span
                                                 *ngIf="educationsForm.hasError('required', 'endDate') && educationsForm.get('endDate')?.touched"
-                                                class="text-red-500">*End Date is required</span>
+                                                class="text-red-500">*Data de término é requerida</span>
                                             <span *ngIf="educationsForm.hasError('endDateInvalid', 'endDate')"
                                                 class="text-red-500">
-                                                End date cannot be before start date.
+                                                *A data de início deve ser menor do que a de término
                                             </span>
                                         </div>
                                         <!-- end date end -->
@@ -626,7 +628,8 @@
                             <div class="flex justify-center align-middle">
                                 <button type="button" (click)="addEducations()" *ngIf="educations.length < 2"
                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
-                                    Adicionar Formação
+                                    Adicionar nova Formação
+                                    <i class="fa fa-plus pl-2"></i>
                                 </button>
                             </div>
                         </div>
@@ -655,7 +658,7 @@
                                                 placeholder="Título da Certificação" formControlName="name" required>
                                             <span
                                                 *ngIf="certificationForm.hasError('required', 'name') && certificationForm.get('name')?.touched"
-                                                class="text-red-500">*Certification Name is required</span>
+                                                class="text-red-500">*Nome da certificações é requerido</span>
                                         </div>
                                         <!-- title end-->
                                         <!-- issuing organization start-->
@@ -668,7 +671,7 @@
                                                 required>
                                             <span
                                                 *ngIf="certificationForm.hasError('required', 'issuingOrganization') && certificationForm.get('issuingOrganization')?.touched"
-                                                class="text-red-500">*Issuing Organization is required</span>
+                                                class="text-red-500">*Nome da organização emissora é requerido</span>
                                         </div>
                                         <!-- issuing organization end-->
                                     </div>
@@ -681,7 +684,7 @@
                                                 formControlName="issueDate" required>
                                             <span
                                                 *ngIf="certificationForm.hasError('required', 'issueDate') && certificationForm.get('issueDate')?.touched"
-                                                class="text-red-500">*Issue Date is required</span>
+                                                class="text-red-500">*Data de certificação é requerido</span>
                                         </div>
                                         <!-- issue date end-->
                                     </div>
@@ -697,7 +700,8 @@
                             <div class="flex justify-center align-middle">
                                 <button type="button" (click)="addCertification()" *ngIf="certifications.length < 5"
                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-4 py-2 px-4 rounded cursor-pointer">
-                                    Adicionar Certificação
+                                    Adicionar nova Certificação
+                                    <i class="fa fa-plus pl-2"></i>
                                 </button>
                             </div>
                         </div>
