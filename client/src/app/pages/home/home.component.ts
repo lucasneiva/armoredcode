@@ -165,6 +165,7 @@ export default class HomeComponent {
           }
         });
     }
+    this.isFiltersVisible = false;
   }
 
   loadProjects(callback?: () => void): void {

@@ -112,6 +112,10 @@
         </div>
       </ng-template>
 
+      <p class="project-category" *ngIf="project">
+        {{projectCategoryName}}
+      </p>
+
       <p class="project-description" *ngIf="detailedProject?.projectDescription; else noDescripition">
         {{project.projectDescription}}
       </p>

@@ -12,6 +12,7 @@
         flex-direction: column;
         justify-content: start;
         align-items: start;
+        padding-bottom: 1rem;
 
         .project-status{
             display: block;
@@ -94,7 +95,6 @@
         flex-wrap: wrap;
         justify-content: start;
         overflow: hidden;
-        max-height: 4rem;
         margin: auto;
 
         .skill{
@@ -103,7 +103,7 @@
             color: white;
             border-radius: 2.5rem;
             padding: 0.25rem 0.75rem;
-            margin: 1rem 1rem 1rem 0rem;
+            margin: auto 0.75rem auto 0rem;
             text-wrap: nowrap;
 
             .skill-icon{
@@ -114,12 +114,19 @@
             }
         }
     }
+    .project-category{
+        margin: 1rem 0rem;
+        font-weight: 500;
+        font-size: 1.05rem;
+        line-height: 1;
+        color: rgb(75 85 99);
+    }
     .project-description{
         overflow: hidden;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 4;
-        line-clamp: 4;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
     }
 }
 
