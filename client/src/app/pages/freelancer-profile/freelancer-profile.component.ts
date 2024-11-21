@@ -10,11 +10,12 @@ import { SkillService } from '../../services/skill.service';
 import { Project } from '../../services/project.service';
 import { NotificationService } from '../../services/notification.service';
 import { ProjectListComponent } from '../../components/project-list/project-list.component';
+import { StarDisplayComponent } from "../../components/star-display/star-display.component";
 
 @Component({
   selector: 'app-freelancer-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, ProjectListComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, ProjectListComponent, StarDisplayComponent],
   templateUrl: './freelancer-profile.component.html',
   styleUrls: ['./freelancer-profile.component.scss']
 })

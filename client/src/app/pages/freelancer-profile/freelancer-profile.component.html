@@ -33,6 +33,7 @@
                     {{ profile.companyName ? profile.companyName : (profile.firstName ? profile.firstName + ' ' +
                     profile.lastName : 'User Profile') }}
                 </h2>
+                <app-star-display *ngIf="profile" [userId]="profile.userId._id"></app-star-display>
                 <!--DEV MODE
                     <h2> ID: {{profile._id}} </h2>
                 -->
