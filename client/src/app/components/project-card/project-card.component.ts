@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 import { ProjectService } from '../../services/project.service';
@@ -34,6 +34,7 @@ export class ProjectCardComponent implements OnInit {
 
   projectCategoryName = '';
   creatorName = '';
+  creationDate: string | null = null;
   skills: string[] = [];
   skillImages: { [key: string]: string } = {}; // Store skill images
   proposals: Proposal[] = [];
@@ -63,6 +64,12 @@ export class ProjectCardComponent implements OnInit {
           const skillIds = this.detailedProject.skillIds;
           const creatorId = this.detailedProject.clientId._id;
           const projectCategoryId = this.detailedProject.projectCategoryId._id;
+
+          // Format the creation date
+          if (this.detailedProject.createdAt) {
+            this.creationDate = formatDate(this.detailedProject.createdAt, 'dd/MM/yyyy', 'en-US');
+          }
+          
           this.loadProjectCategoryName(projectCategoryId);
           this.loadSkills(skillIds);
 

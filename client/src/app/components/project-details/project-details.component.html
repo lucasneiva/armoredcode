@@ -13,10 +13,11 @@
             </button>
         </div>
         <div *ngIf="detailedProject" class="project-details">
-            <h1 class="project-title">{{project.projectTitle}}</h1>
+            <h1 class="project-title">{{project.projectTitle}}</h1> 
             <div class="main-project-info">
 
                 <div class="primary-project-info">
+                    <p *ngIf="creationDate"><strong>Criado em:</strong> {{ creationDate }}</p>
                     <p><strong>Criado por: </strong>{{creatorName}}</p>
                     <p><strong>Trabalhado por: </strong>
                         <ng-container *ngIf="detailedProject.freelancerId; else noFreelancer">
@@ -26,8 +27,6 @@
                             Não especificado
                         </ng-template>
                     </p>
-
-                    <p><strong>Categoria do Projeto: </strong>{{ projectCategoryName }}</p>
 
                     <ng-container *ngIf="detailedProject.pricingType == 'BUDGET'">
                         <p>
@@ -47,6 +46,16 @@
                         </p>
                     </ng-container>
 
+                    <p><strong>Categoria do Projeto: </strong>{{ projectCategoryName }}</p>
+
+                    <p><strong>Status: </strong>
+                        <ng-container *ngIf="project.projectStatus === 'DRAFT'">Rascunho</ng-container>
+                        <ng-container *ngIf="project.projectStatus === 'POSTED'">Postado</ng-container>
+                        <ng-container *ngIf="project.projectStatus === 'IN-PROGRESS'">Em Progresso</ng-container>
+                        <ng-container *ngIf="project.projectStatus === 'CANCELLED'">Cancelado</ng-container>
+                        <ng-container *ngIf="project.projectStatus === 'COMPLETED'">Finalizado</ng-container>
+                    </p>
+
                     <strong>Habilidades:</strong>
                     <ng-container *ngIf="skills.length > 0; else noSkills">
                         <div class="flex flex-row flex-wrap">
@@ -62,13 +71,6 @@
                         Não especificado
                     </ng-template>
 
-                    <p><strong>Status: </strong>
-                        <ng-container *ngIf="project.projectStatus === 'DRAFT'">Rascunho</ng-container>
-                        <ng-container *ngIf="project.projectStatus === 'POSTED'">Postado</ng-container>
-                        <ng-container *ngIf="project.projectStatus === 'IN-PROGRESS'">Em Progresso</ng-container>
-                        <ng-container *ngIf="project.projectStatus === 'CANCELLED'">Cancelado</ng-container>
-                        <ng-container *ngIf="project.projectStatus === 'COMPLETED'">Finalizado</ng-container>
-                    </p>
                 </div>
 
                 <div class="secondary-project-info">

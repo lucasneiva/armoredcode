@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { Component, Input, Output, EventEmitter, inject, OnInit } from '@angular/core';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { ProjectService, Rating } from '../../services/project.service';
@@ -23,6 +23,8 @@ export class ProjectDetailsComponent implements OnInit{
 
   showReviewButton = false; // Add flag for review button visibility
   ratings: Rating[] = []; // Store retrieved ratings
+
+  creationDate: string | null = null; // Add creationDate property
   
   @Input() project: any;
   @Input() projectCategoryName!: string; // Add input for project category name
@@ -34,6 +36,9 @@ export class ProjectDetailsComponent implements OnInit{
   @Output() close = new EventEmitter<void>();
 
   ngOnInit(): void { // Implement ngOnInit lifecycle hook
+    if (this.detailedProject && this.detailedProject.createdAt) {
+      this.creationDate = formatDate(this.detailedProject.createdAt, 'dd/MM/yyyy', 'en-US');
+    }
     if (this.project && this.project._id && this.project.projectStatus === 'COMPLETED') {
       this.checkRatingCompletion(); // Check ratings on component initialization
     }

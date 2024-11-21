@@ -6,8 +6,6 @@ import { connectToDatabase } from "../db.js";
 import mongoose, { Mongoose, Schema } from "mongoose";
 import { handleValidationError } from "../utils/handleValidationError.js";
 
-
-
 export const getProjectById = async ( req, res, next ) => {
     try {
         const projectId = req.params.id;
@@ -35,8 +33,7 @@ export const getProjectById = async ( req, res, next ) => {
             return next( createError( 403, "You don't have permission to view this project" ) );
         }
 
-        return next( createSuccess( 200, "Project details retrieved successfully", projectDetails ) );
-
+        return next(createSuccess(200, "Project details retrieved successfully", { ...projectDetails.toObject(), createdAt: projectDetails.createdAt })); // Include createdAt in the response
     } catch ( error ) {
         console.error( "Error in getProjectById:", error );
         return next( createError( 500, "Internal server error" ) );

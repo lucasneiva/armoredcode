@@ -133,6 +133,6 @@ const ProjectSchema = new Schema( {
         required: false,
     },
 
-} );
+}, { timestamps: true }); // Add this line
 
 export default mongoose.model( "Project", ProjectSchema );

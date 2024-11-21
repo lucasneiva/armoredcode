@@ -21,6 +21,7 @@
           <ng-container *ngIf="project.projectStatus === 'COMPLETED'">Finalizado</ng-container>
         </span>
         <h2 class="project-title-c">{{project.projectTitle}}</h2>
+        <p *ngIf="creationDate">Criado em: {{ creationDate }}</p>
       </div>
       <div class="buttons-row space-x-2">
         <button (click)="toggleDetails()" class="proj-card-btn">
