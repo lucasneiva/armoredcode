@@ -7,8 +7,7 @@
     </ng-container>
 
     <ng-container *ngIf="!isLoading">
-        <!-- Search Bar and Filters -->
-
+        <!-- Search Bar Start -->
         <div class="search-container shadow-xl">
             <button class="filter-btn shadow-lg" (click)="toogleFiltersSidebar()">
                 <i class="fa fa-sliders px-2"></i>
@@ -19,9 +18,9 @@
                     (keyup.enter)="performSearch()">
                 <button class="search-button shadow-lg" (click)="performSearch()">Buscar</button>
             </div>
-
         </div>
-
+        <!-- Search Bar End -->
+        <!-- Filters Start-->
         <div class="filters-container shadow-xl transition-transform duration-300 ease-in-out"
             [class.-translate-x-full]="!isFiltersVisible" [class.translate-x-50%]="isFiltersVisible">
             <div class="filters-header">
@@ -83,12 +82,10 @@
                 </ng-container>
             </div>
         </div>
-
-        <!-- Results Display -->
-        <div class="results-grid transition-transform duration-300 ease-in-out"
-            [class.translate-x-60]="isFiltersVisible" [class.translate-x-0]="!isFiltersVisible"
-            [class.filters-visible]="isFiltersVisible">
-            <ng-container *ngIf="userRole === 'CLIENT'">
+        <!-- Filters End-->
+        <!-- Freelancers Results Display -->
+        <ng-container *ngIf="userRole === 'CLIENT'">
+            <div class="results-grid" [class.filters-visible]="isFiltersVisible">
                 <ng-container *ngFor="let freelancer of freelancers">
                     <app-freelancer-card [freelancer]="freelancer"></app-freelancer-card>
                 </ng-container>
@@ -96,17 +93,20 @@
                     class="flex text-3xl border-2 border-red-500">
                     Nenhum Freelancer corresponde a pesquisa.
                 </div>
-            </ng-container>
-
-            <ng-container *ngIf="userRole === 'FREELANCER'">
+            </div>
+        </ng-container>
+        <!-- Freelancers Results Display -->
+        <!-- Projects Results Display -->
+        <ng-container *ngIf="userRole === 'FREELANCER'">
+            <div class="results-grid" [class.filters-visible]="isFiltersVisible">
                 <ng-container *ngFor="let project of projects">
                     <app-project-card [project]="project"></app-project-card>
                 </ng-container>
                 <p *ngIf="!projects || projects.length === 0 && !isLoading" class="flex text-3xl">
                     Nenhum Projeto corresponde a pesquisa.
                 </p>
-            </ng-container>
-        </div>
-
+            </div>
+        </ng-container>
+        <!-- Projects Results Display -->
     </ng-container>
 </div>
