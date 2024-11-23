@@ -16,10 +16,7 @@ const SkillSchema = new Schema( {
     },
 
     skillImage: {
-        type: String, // Store the URL or path to the image
-        // Other options depending on your storage strategy:
-        // data: Buffer, // If storing image data directly in MongoDB (less common)
-        // contentType: String, // If storing image data directly
+        type: String, // URL da imagem
     }
 
 } );

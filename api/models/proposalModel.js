@@ -21,7 +21,6 @@ const ProposalSchema = new Schema({
         type: String,
         required: true,
     },
-    // Campos para representar o custo da proposta
     pricingType: {
         type: String,
         enum: ['BUDGET', 'HOURLY-RATE'],
@@ -49,9 +48,9 @@ const ProposalSchema = new Schema({
         ref: 'ChatChannel',
         required: false,
     },
-    rejectionReason: { // Optional field for rejection reason
+    rejectionReason: {
         type: String,
-        required: function () { return this.status === 'REJECTED'; }, // Only required if status is REJECTED
+        required: function () { return this.status === 'REJECTED'; },
     },
 }, { timestamps: true });
 

@@ -40,7 +40,7 @@ const RatingSchema = new Schema({
         max: 5,
         required: true,
     },
-    // Conditional Fields (based on evaluatedId's role)
+    // Campos opcionais (baseado no id do avaliador)
     costBenefit: { 
         type: Number,
         min: 1,
