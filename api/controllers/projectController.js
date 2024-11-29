@@ -2,6 +2,7 @@ import project from "../models/projectModel.js"
 import { createError } from "../utils/error.js"
 import { createSuccess } from "../utils/success.js";
 import jwt from 'jsonwebtoken';
+import nodemailer from "nodemailer";
 import { connectToDatabase } from "../db.js";
 import mongoose, { Mongoose, Schema } from "mongoose";
 import { handleValidationError } from "../utils/handleValidationError.js";
@@ -76,6 +77,13 @@ export const updateProject = async ( req, res, next ) => {
         if ( !existingProject ) {
             return next( createError( 404, "Project not found" ) );
         }
+
+
+        // Check if status is changing to 'IN-PROGRESS'
+        if (updateData.projectStatus && updateData.projectStatus === 'IN-PROGRESS') {
+            await sendProjectStartedEmails(existingProject); // Send emails
+        }
+
 
         Object.assign( existingProject, updateData );
         await existingProject.save();
@@ -173,3 +181,82 @@ export const getPostedUserProjects = async (req, res, next) => {
         return next(createError(500, 'Internal Server Error'));
     }
 };
+
+
+
+async function sendProjectStartedEmails(project) {
+    try {
+        // 1. Fetch client and freelancer emails
+        const projectWithEmails = await Project.findById(project._id)
+            .populate('clientId', 'username email')
+            .populate('freelancerId', 'username email');
+
+
+        if (!projectWithEmails || !projectWithEmails.clientId || !projectWithEmails.freelancerId) {
+            console.error("Error fetching client or freelancer emails");
+            return; // Or handle the error as needed
+        }
+
+        const clientEmail = projectWithEmails.clientId.email;
+        const freelancerEmail = projectWithEmails.freelancerId.email;
+
+        // 2. Configure email transporter
+        const transporter = nodemailer.createTransport({
+            service: 'gmail', // or your email service
+            auth: {
+                user: 'your_email@gmail.com', // your email address
+                pass: 'your_email_password' // or use environment variables for better security!
+            },
+        });
+
+        const emailSubject = `Project Started: ${project.projectTitle}`;
+
+        const emailHtmlClient = `
+            <html>
+            <head><title>${emailSubject}</title></head>
+            <body style="color: #000000;">
+                <h1>${emailSubject}</h1>
+                <p>Dear ${projectWithEmails.clientId.username},</p>
+                <p>Your project "${project.projectTitle}" has officially started!</p>
+                <p>You can view the project details and communicate with the freelancer on our platform.</p> <p>Best regards,</p>
+                <p>The ArmoredCode Team</p>
+            </body>
+            </html>
+        `; // Client email HTML content (as provided before)
+
+        const emailHtmlFreelancer = `
+        <html>
+            <head><title>${emailSubject}</title></head>
+            <body style="color: #000000;">
+                <h1>${emailSubject}</h1>
+                <p>Dear ${projectWithEmails.freelancerId.username},</p>
+                <p>The project "${project.projectTitle}" has officially started!</p>
+                <p>You can now begin working on the project.  Please communicate with the client through our platform.</p>
+                <p>Best regards,</p>
+                <p>The ArmoredCode Team</p>
+            </body>
+        </html>
+        `; // Freelancer email HTML content
+
+
+        // 3. Send email to client
+        await transporter.sendMail({
+          from: 'armoredcode2@gmail.com',
+          to: clientEmail,
+          subject: emailSubject,
+          html: emailHtmlClient,
+        });
+
+        // 4. Send email to freelancer
+        await transporter.sendMail({
+          from: 'armoredcode2@gmail.com',
+          to: freelancerEmail,
+          subject: emailSubject,
+          html: emailHtmlFreelancer,
+        });
+
+    } catch (error) {
+        console.error("Error sending project started emails:", error);
+        // Handle the error as you see fit (log, retry, etc.)
+    }
+}
