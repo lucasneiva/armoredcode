@@ -62,3 +62,68 @@ export const checkRatingCompletion = async (req, res, next) => {
         return next(createError(500, "Internal server error"));
     }
 };
+/*
+
+export const getAverageRating = async (req, res, next) => {
+    try {
+        const evaluatedId = req.params.userId;
+
+        const result = await Rating.aggregate([
+            { $match: { evaluatedId: new mongoose.Types.ObjectId(evaluatedId) } },
+            {
+                $facet: { // Use $facet to calculate separate aggregates
+                    client: [
+                        { $match: { evaluatorType: 'CLIENT' } },
+                        {
+                            $group: {
+                                _id: null,
+                                avgWorkQuality: { $avg: '$workQuality' },
+                                avgCommunication: { $avg: '$communication' },
+                                avgProfessionalism: { $avg: '$professionalism' },
+                                avgClarityDescription: { $avg: '$clarityDescription' },
+                                totalClientRatings: { $sum: 1 }
+                            }
+                        }
+                    ],
+                    freelancer: [
+                        { $match: { evaluatorType: 'FREELANCER' } },
+                        {
+                            $group: {
+                                _id: null,
+                                avgWorkQuality: { $avg: '$workQuality' },
+                                avgCommunication: { $avg: '$communication' },
+                                avgProfessionalism: { $avg: '$professionalism' },
+                                avgCostBenefit: { $avg: '$costBenefit' },
+                                avgPayments: { $avg: '$payments' },
+                                avgFeedback: { $avg: '$feedback' },
+                                totalFreelancerRatings: { $sum: 1 }
+                            }
+                        }
+                    ]
+                }
+            }
+        ]);
+
+        let clientAverages = {};
+        let freelancerAverages = {};
+
+        if (result[0].client.length > 0) {
+            clientAverages = result[0].client[0];
+            delete clientAverages._id; // Remove unnecessary _id
+        }
+
+
+        if (result[0].freelancer.length > 0) {
+            freelancerAverages = result[0].freelancer[0];
+            delete freelancerAverages._id;
+        }
+
+
+        res.json({ clientAverages, freelancerAverages });
+
+    } catch (error) {
+        console.error("Error in getAverageRating:", error);
+        return next(createError(500, "Internal server error"));
+    }
+};
+*/
