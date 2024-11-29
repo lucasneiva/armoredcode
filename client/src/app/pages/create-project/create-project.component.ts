@@ -214,6 +214,7 @@ export default class CreateProjectComponent implements OnInit {
     if (skillId) { // If a skill from the list is selected
       if (!skillIds.includes(skillId)) {
         skillIdsControl.setValue([...skillIds, skillId]);
+        this.showSkillsList = false; // Hide the list
       }
     } else { // If "Other" skill is selected
       this.showOtherSkillForm = !this.showOtherSkillForm; // Toggle the form visibility
