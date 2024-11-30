@@ -187,7 +187,7 @@ export const getPostedUserProjects = async (req, res, next) => {
 async function sendProjectStartedEmails(project) {
     try {
         // 1. Fetch client and freelancer emails
-        const projectWithEmails = await Project.findById(project._id)
+        const projectWithEmails = await project.findById(project._id)
             .populate('clientId', 'username email')
             .populate('freelancerId', 'username email');
 
@@ -204,8 +204,8 @@ async function sendProjectStartedEmails(project) {
         const transporter = nodemailer.createTransport({
             service: 'gmail', // or your email service
             auth: {
-                user: 'your_email@gmail.com', // your email address
-                pass: 'your_email_password' // or use environment variables for better security!
+                user: "armoredcode2@gmail.com", // your email address
+                pass: "fxzzygovyurfdynn" // or use environment variables for better security!
             },
         });
 
