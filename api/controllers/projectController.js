@@ -81,7 +81,7 @@ export const updateProject = async ( req, res, next ) => {
 
         // Check if status is changing to 'IN-PROGRESS'
         if (updateData.projectStatus && updateData.projectStatus === 'IN-PROGRESS') {
-            await sendProjectStartedEmails(existingProject); // Send emails
+            await sendProjectStartedEmails(project, projectId);  // <-- Correct way
         }
 
 
@@ -156,7 +156,6 @@ export const getPostedProjects = async ( req, res, next ) => {
     }
 }
 
-//new route
 export const getPostedUserProjects = async (req, res, next) => {
     try {
         const userId = req.user.id;
@@ -182,81 +181,75 @@ export const getPostedUserProjects = async (req, res, next) => {
     }
 };
 
-
-
-async function sendProjectStartedEmails(project) {
+async function sendProjectStartedEmails(ProjectModel, projectId) {
     try {
-        // 1. Fetch client and freelancer emails
-        const projectWithEmails = await project.findById(project._id)
+        const projectWithEmails = await ProjectModel.findById(projectId)
             .populate('clientId', 'username email')
-            .populate('freelancerId', 'username email');
-
+            .populate('freelancerId', 'username email')
+            .select('projectTitle');
 
         if (!projectWithEmails || !projectWithEmails.clientId || !projectWithEmails.freelancerId) {
-            console.error("Error fetching client or freelancer emails");
-            return; // Or handle the error as needed
+            console.error("Erro ao buscar informações do cliente, freelancer ou título do projeto");
+            return;
         }
 
         const clientEmail = projectWithEmails.clientId.email;
         const freelancerEmail = projectWithEmails.freelancerId.email;
+        const projectTitle = projectWithEmails.projectTitle;
 
-        // 2. Configure email transporter
+        const emailSubject = `Projeto Iniciado: ${projectTitle}`;
+
         const transporter = nodemailer.createTransport({
-            service: 'gmail', // or your email service
+            service: 'gmail', // Ou seu serviço de email
             auth: {
-                user: "armoredcode2@gmail.com", // your email address
-                pass: "fxzzygovyurfdynn" // or use environment variables for better security!
+                user: "armoredcode2@gmail.com", // Seu endereço de email
+                pass: "fxzzygovyurfdynn" // Sua senha ou variáveis de ambiente!
             },
         });
-
-        const emailSubject = `Project Started: ${project.projectTitle}`;
 
         const emailHtmlClient = `
             <html>
             <head><title>${emailSubject}</title></head>
             <body style="color: #000000;">
                 <h1>${emailSubject}</h1>
-                <p>Dear ${projectWithEmails.clientId.username},</p>
-                <p>Your project "${project.projectTitle}" has officially started!</p>
-                <p>You can view the project details and communicate with the freelancer on our platform.</p> <p>Best regards,</p>
-                <p>The ArmoredCode Team</p>
+                <p>Prezado(a) ${projectWithEmails.clientId.username},</p>
+                <p>Seu projeto "${projectTitle}" foi oficialmente iniciado!</p>
+                <p>Você pode visualizar os detalhes do projeto e se comunicar com o freelancer em nossa plataforma.</p>
+                <p>Atenciosamente,</p>
+                <p>A Equipe ArmoredCode</p>
             </body>
             </html>
-        `; // Client email HTML content (as provided before)
+        `;
 
         const emailHtmlFreelancer = `
-        <html>
+            <html>
             <head><title>${emailSubject}</title></head>
             <body style="color: #000000;">
                 <h1>${emailSubject}</h1>
-                <p>Dear ${projectWithEmails.freelancerId.username},</p>
-                <p>The project "${project.projectTitle}" has officially started!</p>
-                <p>You can now begin working on the project.  Please communicate with the client through our platform.</p>
-                <p>Best regards,</p>
-                <p>The ArmoredCode Team</p>
+                <p>Prezado(a) ${projectWithEmails.freelancerId.username},</p>
+                <p>O projeto "${projectTitle}" foi oficialmente iniciado!</p>
+                <p>Agora você pode começar a trabalhar no projeto. Por favor, comunique-se com o cliente através de nossa plataforma.</p>
+                <p>Atenciosamente,</p>
+                <p>A Equipe ArmoredCode</p>
             </body>
-        </html>
-        `; // Freelancer email HTML content
+            </html>
+        `;
 
-
-        // 3. Send email to client
         await transporter.sendMail({
-          from: 'armoredcode2@gmail.com',
-          to: clientEmail,
-          subject: emailSubject,
-          html: emailHtmlClient,
+            from: 'armoredcode2@gmail.com',
+            to: clientEmail,
+            subject: emailSubject,
+            html: emailHtmlClient,
         });
 
-        // 4. Send email to freelancer
         await transporter.sendMail({
-          from: 'armoredcode2@gmail.com',
-          to: freelancerEmail,
-          subject: emailSubject,
-          html: emailHtmlFreelancer,
+            from: 'armoredcode2@gmail.com',
+            to: freelancerEmail,
+            subject: emailSubject,
+            html: emailHtmlFreelancer,
         });
 
     } catch (error) {
-        console.error("Error sending project started emails:", error);
-        // Handle the error as you see fit (log, retry, etc.)
+        console.error("Erro ao enviar emails de início do projeto:", error);
     }
 }
