@@ -71,7 +71,7 @@ export class ProjectService {
       withCredentials: true // VERY IMPORTANT: Include cookies in requests
     };
     return this.http.get<any>(`${apiUrls.projectServiceApi}/${projectId}`, httpOptions).pipe(
-      tap(response => console.log('API response:', response))  // Log API response
+      //tap(response => console.log('API response:', response))  // Log API response
     );
   }
 
@@ -114,7 +114,9 @@ export class ProjectService {
       }),
       withCredentials: true
     };
-    return this.http.get<any>(`${apiUrls.projectServiceApi}`, httpOptions);
+    return this.http.get<any>(`${apiUrls.projectServiceApi}`, httpOptions).pipe(
+      tap(response => console.log('API response:', response))  // Log API response
+    );
   }
 
   getUserPostedProjects(userId: string | null): Observable<any> {
