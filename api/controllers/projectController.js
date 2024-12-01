@@ -141,20 +141,25 @@ export const getUserProjects = async ( req, res, next ) => {
     }
 };
 
-export const getPostedProjects = async ( req, res, next ) => {
+export const getPostedProjects = async (req, res, next) => {
     try {
-        const allProjects = await project.find( { projectStatus: "POSTED" } )
-            .populate( 'clientId', 'username email' )
-            .populate( 'freelancerId', 'username email' )
-            .populate( 'projectCategoryId', 'name' )
-            .populate( 'skillIds', 'name' );
+        const allProjects = await project.find({
+            $or: [
+              { projectStatus: "POSTED", clientId: { $ne: null } },
+              { projectStatus: "POSTED", freelancerId: { $ne: null } }
+            ]
+        })
+            .populate('clientId', 'username email')
+            .populate('freelancerId', 'username email')
+            .populate('projectCategoryId', 'name')
+            .populate('skillIds', 'name');
 
-        return next( createSuccess( 200, "All projects retrieved successfully", allProjects ) );
-    } catch ( error ) {
-        console.error( "Error in updateProject:", error );
-        return next( createError( 500, "Internal server error" ) );
+        return next(createSuccess(200, "All projects retrieved successfully", allProjects));
+    } catch (error) {
+        console.error("Error in getPostedProjects:", error);
+        return next(createError(500, "Internal server error"));
     }
-}
+};
 
 export const getPostedUserProjects = async (req, res, next) => {
     try {

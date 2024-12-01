@@ -114,7 +114,7 @@ export class ProjectService {
       }),
       withCredentials: true
     };
-    return this.http.get<any>(`${apiUrls.projectServiceApi}`, httpOptions);
+    return this.http.get<any>(`${apiUrls.projectServiceApi}/posted`, httpOptions);
   }
 
   getUserPostedProjects(userId: string | null): Observable<any> {
