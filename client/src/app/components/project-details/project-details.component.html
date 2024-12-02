@@ -133,12 +133,12 @@
                 </button>
             </ng-container>
 
-            <ng-container *ngIf="userRole == 'FREELANCER'">
+            <ng-container *ngIf="userRole == 'FREELANCER' && project.projectStatus !== 'DRAFT'">
                 <button *ngIf="project.projectStatus === 'POSTED'" (click)="makeProposal()" class="project-btns">
                     <span class="max-lg:hidden">Fazer Proposta</span>
                     <i class="fa fa-handshake-o lg:hidden"></i>
                 </button>
-                <button *ngIf="project.projectStatus !== 'COMPLETED' && project.projectStatus !== 'POSTED'" (click)="cancelProject()" class="project-btns">
+                <button *ngIf="project.projectStatus === 'IN-PROGRESS'" (click)="cancelProject()" class="project-btns">
                     <span class="max-lg:hidden">Cancelar Projeto</span>
                     <i class="fa fa-minus-circle lg:hidden"></i>
                 </button>
