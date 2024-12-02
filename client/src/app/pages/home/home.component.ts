@@ -134,6 +134,7 @@ export default class HomeComponent {
     this.isLoading = true;
 
     if (this.userRole === 'CLIENT') {
+      this.freelancers = [];
       this.searchService.searchFreelancers(this.searchTerm, this.skillIds, this.experienceLevel, this.specializationId)
         .pipe(takeUntil(this.destroy$))
         .subscribe({
@@ -152,6 +153,7 @@ export default class HomeComponent {
 
 
     } else if (this.userRole === 'FREELANCER') {
+      this.projects = [];
       this.searchService.searchProjects(this.searchTerm, this.projectCategoryId, this.skillIds)
         .pipe(takeUntil(this.destroy$))
         .subscribe({
@@ -169,6 +171,7 @@ export default class HomeComponent {
   }
 
   loadProjects(callback?: () => void): void {
+    this.projects = [];
     this.projectService.getPostedProjects()
       .pipe(
         filter(res => res.success && res.data && res.data.every((project: any) => project.projectStatus !== "DRAFT")), // Filter here
