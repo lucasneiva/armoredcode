@@ -37,7 +37,7 @@ export default class ManageProfileComponent implements OnInit {
   skillImages: { [key: string]: string } = {};
 
   isLoading = true;
-  showConfirmationModal = false; // Flag for the confirmation modal
+  showConfirmationModal = false;
 
   ngOnInit(): void {
     this.loadProfile();
@@ -46,7 +46,7 @@ export default class ManageProfileComponent implements OnInit {
   loadProfile() {
     this.isLoading = true;
     const userId = this.authService.getUserId();
-    this.profileService.getProfile(userId) // Replace with how you get the user ID
+    this.profileService.getProfile(userId) 
       .subscribe({
         next: (response: ProfileResponse) => {
           console.log("Full API response:", response);
@@ -131,10 +131,10 @@ export default class ManageProfileComponent implements OnInit {
 
   // Function to handle the confirmation modal response
   handleConfirmation(confirmed: boolean) {
-    this.showConfirmationModal = false; // Close the modal
+    this.showConfirmationModal = false; 
 
     if (confirmed) {
-      this.deleteProfile(); // Proceed with deletion
+      this.deleteProfile();
     }
   }
 
@@ -146,7 +146,7 @@ export default class ManageProfileComponent implements OnInit {
           this.userService.deleteUser()
             .subscribe({
               next: () => {
-                alert("Profile and user deleted successfully!");
+                alert("Perfil Deletado com Sucesso!");
                 localStorage.removeItem("user_id");
                 localStorage.removeItem('user_role');
                 localStorage.removeItem('token');

@@ -22,7 +22,7 @@ export default class RegisterComponent implements OnInit{
   registerForm !: FormGroup;
   showPassword = false;
 
-  serverError: string | null = null; // To display server error messages
+  serverError: string | null = null; 
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -36,56 +36,41 @@ export default class RegisterComponent implements OnInit{
 
   private getRoleFromQueryParams(): string {
     const role = this.route.snapshot.queryParams['role'];
-    return role ? role : 'CLIENT'; // Default to 'CLIENT' if no role is provided
+    return role ? role : 'CLIENT'; 
   }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
-  /*
-  register(){
-    this.authService.registerService(this.registerForm.value)
-    .subscribe({
-      next:(res)=>{
-        alert("User Created!")
-        this.registerForm.reset();
-        this.router.navigate(['login'])
-      },
-      error:(err)=>{
-        console.log(err);
-      }
-    })
-  }
-  */
   register() {
-    this.serverError = null; // Clear previous errors
+    this.serverError = null; 
     this.authService.registerService(this.registerForm.value)
       .subscribe({
         next: (res) => {
-          alert("User Created!");
+          alert("Usuário Criado Com Sucesso!");
           this.registerForm.reset();
           this.router.navigate(['login']);
         },
         error: (err) => {
-          if (err.status === 400 && err.error && err.error.message) {  // Check for 400 Bad Request and specific error structure
+          if (err.status === 400 && err.error && err.error.message) {  
             const errorMessage = err.error.message;
-            if (typeof errorMessage === 'object') {  // Check if it's an object
+            if (typeof errorMessage === 'object') {  
                 if (errorMessage.username) {
                     this.serverError = errorMessage.username;
-                } else if (errorMessage.email) {  // Handle the case where email already exists
+                } else if (errorMessage.email) {  
                     this.serverError = errorMessage.email; 
                 } else {
-                    this.serverError = 'Registration failed. Please try again.'; // Generic error if other fields are invalid
+                    this.serverError = 'Registration failed. Please try again.'; 
                 }
-            } else { // If it's not an object
+            } else { 
                 this.serverError = 'Registration failed. Please try again.'; // Generic error
             }
 
 
           } else {
             this.serverError = 'Registration failed. Please try again.'; // Generic error message
-            console.error(err); // Log the full error for debugging
+            console.error(err);
           }
         }
       });

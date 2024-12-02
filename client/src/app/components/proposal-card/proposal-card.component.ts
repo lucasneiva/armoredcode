@@ -208,9 +208,11 @@ export class ProposalCardComponent {
   rejectProposal() {
     const proposalId = this.proposal._id;
 
-    if (this.rejectionReason.trim() === '') { // Check if rejection reason is empty or contains only whitespace
-      /*alert('Por favor, forneça um motivo para a rejeição.');
-      return;*/
+    if (this.rejectionReason.trim() === '') {
+      /* deprecated
+      alert('Por favor, forneça um motivo para a rejeição.');
+      return;
+      */
       this.rejectionReason = "Sem motivo especificado.";
     }
     if (confirm("Are you sure you want to reject this proposal?")) {

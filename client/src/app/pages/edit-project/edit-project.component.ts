@@ -199,7 +199,7 @@ export default class EditProjectComponent implements OnInit {
       .updateProject(this.projectId, this.editProjectForm.value)
       .subscribe({
         next: (res) => {
-          alert('project Edited!');
+          alert('Projeto Editado com sucesso!');
           this.projectService.isDraft$.next(true);
           this.editProjectForm.reset();
           this.router.navigate(['manage-project']);
@@ -217,7 +217,7 @@ export default class EditProjectComponent implements OnInit {
       .updateProject(this.projectId, this.editProjectForm.value)
       .subscribe({
         next: (res) => {
-          alert('project Edited and Posted!');
+          alert('Projeto Editado e Postado!');
           this.projectService.isPosted$.next(true);
           this.router.navigate(['manage-project']);
           this.editProjectForm.reset();
@@ -229,7 +229,7 @@ export default class EditProjectComponent implements OnInit {
   }
 
   CancelProject() {
-    alert('project edition Canceled!');
+    alert('A Edição do Projeto foi Cancelada!');
     this.router.navigate(['manage-project']);
     this.editProjectForm.reset();
   }

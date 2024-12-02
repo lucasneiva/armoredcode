@@ -131,7 +131,7 @@ export default class CreateProjectComponent implements OnInit {
       .createProjectService(this.createProjectForm.value)
       .subscribe({
         next: (res) => {
-          alert('project Created!');
+          alert('Projeto Criado!');
           this.projectService.isDraft$.next(true);
           this.createProjectForm.reset();
           this.router.navigate(['manage-project']);
@@ -149,7 +149,7 @@ export default class CreateProjectComponent implements OnInit {
       .createProjectService(this.createProjectForm.value)
       .subscribe({
         next: (res) => {
-          alert('project Created and Posted!');
+          alert('Projeto Criado e Postado!');
           this.projectService.isPosted$.next(true);
           this.router.navigate(['manage-project']);
           this.createProjectForm.reset();
@@ -161,7 +161,7 @@ export default class CreateProjectComponent implements OnInit {
   }
 
   CancelProject() {
-    alert('project Canceled!');
+    alert('A Criação do Projeto foi Cancelada!');
     this.router.navigate(['manage-project']);
     this.createProjectForm.reset();
   }

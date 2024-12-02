@@ -151,7 +151,7 @@ export default class CreateProfileComponent implements OnInit {
       this.profileService.createProfile(this.clientProfileForm.value)
         .subscribe({
           next: (res) => {
-            alert("Client Profile Created!");
+            alert("Perfil de Cliente criado!");
             this.profileService.hasProfile$.next(true);
             this.clientProfileForm.reset();
             this.router.navigate(['home']);
@@ -168,7 +168,7 @@ export default class CreateProfileComponent implements OnInit {
       this.profileService.createProfile(formData)
         .subscribe({
           next: (res) => {
-            alert("Freelancer Profile Created!");
+            alert("Perfil de Freelancer criado!");
             this.profileService.hasProfile$.next(true);
             this.freelancerProfileForm.reset();
             this.router.navigate(['home']);
@@ -191,7 +191,7 @@ export default class CreateProfileComponent implements OnInit {
 
   cancelSubmit() {
     if (confirm("Are you sure you want to cancel this profile?")) {
-      alert("profile creation Canceled!");
+      alert("Criação de Perfil Cancelada!");
       this.router.navigate(['login']);
       if (this.userRole == "CLIENT") {
         this.clientProfileForm.reset();

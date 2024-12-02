@@ -4,7 +4,7 @@ import {
   FormBuilder, FormControl, FormGroup,
   ReactiveFormsModule, Validators
 } from '@angular/forms';
-import { Router, RouterModule, ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../../services/project.service';
 import { AuthService } from '../../services/auth.service';
 import { ProposalService } from '../../services/proposal.service';
@@ -34,12 +34,12 @@ export default class EditProposalComponent implements OnInit {
   proposalId!: string;
 
   ngOnInit() {
-    this.initForms();  // Initialize the form early in ngOnInit
+    this.initForms();  
 
     this.route.params.subscribe(params => {
       this.proposalId = params['id'];
       if (this.proposalId) {
-        this.loadProposal();  // Load the project only if proposalId is valid
+        this.loadProposal();  
       } else {
         console.error('proposal ID is missing');
       }
@@ -68,8 +68,8 @@ export default class EditProposalComponent implements OnInit {
       /*Debug*/ //console.log('Proposal loaded:', this.proposal);
       this.isLoading = false;
       if (this.proposal) {
-        this.loadProject(this.proposal.projectId);  // Pass the project object here
-        this.populateForms(this.proposal);  // Pass the project object here
+        this.loadProject(this.proposal.projectId);  
+        this.populateForms(this.proposal);  
       }
     });
   }
@@ -111,7 +111,7 @@ export default class EditProposalComponent implements OnInit {
       .updateProposal(this.proposalId, this.editProposalForm.value)
       .subscribe({
         next: (res) => {
-          alert('proposal Edited!');
+          alert('Proposta Editada com sucesso!');
           this.editProposalForm.reset();
           this.router.navigate(['manage-proposal']);
         },
@@ -128,7 +128,7 @@ export default class EditProposalComponent implements OnInit {
       .updateProposal(this.proposalId, this.editProposalForm.value)
       .subscribe({
         next: (res) => {
-          alert('Proposal Edited and Sent!');
+          alert('Proposta Editada e Enviada!');
           this.editProposalForm.reset();
           this.router.navigate(['manage-proposal']);
         },
@@ -139,7 +139,7 @@ export default class EditProposalComponent implements OnInit {
   }
 
   CancelProposal() {
-    alert('Proposal Canceled!');
+    alert('A Edição da Proposta foi Cancelada!');
     this.editProposalForm.reset();
     this.router.navigate(['manage-proposal']);
   }

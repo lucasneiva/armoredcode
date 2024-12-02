@@ -305,7 +305,7 @@ export default class EditProfileComponent implements OnInit {
       this.profileService.editProfile(this.clientProfileForm.value)
         .subscribe({
           next: (res) => {
-            alert("Client Profile edited sucessfully!");
+            alert("Perfil de Cliente editado com sucesso!");
             this.profileService.hasProfile$.next(true);
             this.clientProfileForm.reset();
             this.router.navigate(['manage-profile']);
@@ -323,7 +323,7 @@ export default class EditProfileComponent implements OnInit {
       this.profileService.editProfile(formData)
         .subscribe({
           next: (res) => {
-            alert("Freelancer Profile edited sucessfully!");
+            alert("Perfil de Freelancer Editado com sucesso!");
             this.profileService.hasProfile$.next(true);
             this.freelancerProfileForm.reset();
             this.router.navigate(['manage-profile']);
@@ -340,7 +340,7 @@ export default class EditProfileComponent implements OnInit {
 
   cancelSubmit() {
     if (confirm("Are you sure you want to cancel this profile edition?")) {
-      alert("profile edition Canceled!");
+      alert("Edição de Perfil Cancelada!");
       this.router.navigate(['manage-profile']);
       if (this.userRole == "CLIENT") {
         this.clientProfileForm.reset();

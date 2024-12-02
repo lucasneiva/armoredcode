@@ -39,7 +39,7 @@ export default class LoginComponent {
     this.authService.loginService(this.loginForm.value)
       .subscribe({
         next: (res) => {
-          //alert("Login is Success!");
+          //deprecated   alert("Login Feito com Sucesso!");
           localStorage.setItem("user_id", res.data._id);
           localStorage.setItem('user_role', res.userRole);
           localStorage.setItem('token', res.token);
@@ -65,12 +65,12 @@ export default class LoginComponent {
         },
         error: (err) => {
           if (err.status === 404) {
-            alert(err.error.message || 'User not found.');
+            alert(err.error.message || 'Usuário não Encontrado.');
           } else if (err.status === 400) {
-            alert(err.error.message || 'Incorrect password.');
+            alert(err.error.message || 'Senha Incorreta.');
           } else {
             console.error(err);
-            alert(err.error || 'An error occurred. Please try again.');
+            alert(err.error || 'Um erro inesperado ocorreu. Por Favor, tente de novo.');
           }
           console.log(err);
         }

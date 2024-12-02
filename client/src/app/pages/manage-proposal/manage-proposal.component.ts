@@ -10,7 +10,7 @@ import { Proposal, ProposalService } from '../../services/proposal.service';
 @Component({
   selector: 'app-manage-proposal',
   standalone: true,
-  imports: [CommonModule, RouterModule, ProjectCardComponent, ProposalCardComponent],
+  imports: [CommonModule, RouterModule, ProposalCardComponent],
   templateUrl: './manage-proposal.component.html',
   styleUrl: './manage-proposal.component.scss'
 })

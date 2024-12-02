@@ -22,12 +22,12 @@ export default class ReviewComponent {
   authService = inject(AuthService);
   userService = inject(UserService);
   projectService = inject(ProjectService);
-  projectId!: string; // Add projectId property
+  projectId!: string; 
 
   reviewTheFreelancerForm !: FormGroup;
   reviewTheClientForm !: FormGroup;
 
-  isLoading = true; // Flag to track loading state
+  isLoading = true; 
   userRole: string | null = null;
 
   clientId!: string;
@@ -37,7 +37,7 @@ export default class ReviewComponent {
 
   ngOnInit() {
     this.userRole = this.authService.getUserRole();
-    this.createForm(); // Initialize both forms here
+    this.createForm(); 
 
     this.route.params.subscribe(params => {
       if (this.userRole === "CLIENT"){
@@ -52,10 +52,10 @@ export default class ReviewComponent {
 
       if (this.clientId) {
         this.loadUser(this.clientId);
-        this.isLoading = false; // Set isLoading to false after data is loaded 
+        this.isLoading = false; 
       }else if (this.freelancerId){
         this.loadUser(this.freelancerId);
-        this.isLoading = false; // Set isLoading to false after data is loaded 
+        this.isLoading = false; 
       } else {
         console.error('ID is missing');
       }
@@ -118,7 +118,7 @@ export default class ReviewComponent {
       this.projectService.createRating(reviewData).subscribe({
         next: (response) => {
           if (response.success) {
-            alert("Review submitted successfully!");
+            alert("Avaliação enviada com Sucesso!");
             this.router.navigate(['/manage-project']);
           } else {
             // Handle error
@@ -136,7 +136,7 @@ export default class ReviewComponent {
         projectId: this.projectId,
         evaluatorId: this.authService.getUserId(),
         evaluatedId: this.evaluatedUserId,
-        evaluatorType: "FREELANCER", // Add evaluatorType
+        evaluatorType: "FREELANCER", 
         workQuality: this.reviewTheClientForm.get('workQuality')?.value,
         communication: this.reviewTheClientForm.get('communication')?.value,
         professionalism: this.reviewTheClientForm.get('professionalism')?.value,
@@ -147,7 +147,7 @@ export default class ReviewComponent {
       this.projectService.createRating(reviewData).subscribe({
         next: (response) => {
           if (response.success) {
-            alert("Review submitted successfully!");
+            alert("Avaliação enviada com Sucesso!");
             this.router.navigate(['/manage-project']);
           } else {
             // Handle error
@@ -163,7 +163,7 @@ export default class ReviewComponent {
   }
 
   cancelReview() {
-    alert("review cancelled!"); 
+    alert("Avaliação Cancelada!"); 
     this.router.navigate(['/manage-project']);
   }
 }

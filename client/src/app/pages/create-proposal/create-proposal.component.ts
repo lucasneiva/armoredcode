@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup,
         ReactiveFormsModule, Validators} from '@angular/forms';
-import { Router, RouterModule, ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
+import { Router, RouterModule, ActivatedRoute } from '@angular/router'; 
 import { ProjectService } from '../../services/project.service';
 import { AuthService } from '../../services/auth.service';
 import { ProposalService } from '../../services/proposal.service';
@@ -32,9 +32,9 @@ export default class CreateProposalComponent implements OnInit {
 
   ngOnInit() {
     this.createProposalForm = this.fb.group({
-      projectId: ['', Validators.required], //this.projectId
-      freelancerId: ['', Validators.required], //this.freelancerId
-      clientId: ['', Validators.required], //this.clientId
+      projectId: ['', Validators.required], 
+      freelancerId: ['', Validators.required], 
+      clientId: ['', Validators.required], 
       coverLetter: ['', Validators.required],
       pricingType: ['BUDGET', Validators.required],
       proposedBudget: [''],
@@ -46,7 +46,7 @@ export default class CreateProposalComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.projectId = params['id'];
       if (this.projectId) {
-        this.loadProject();  // Load the project only if projectId is valid
+        this.loadProject();
       } else {
         console.error('Project ID is missing');
       }
@@ -63,7 +63,7 @@ export default class CreateProposalComponent implements OnInit {
         projectId: this.project._id,
         freelancerId: this.authService.getUserId(),
         clientId: this.project.clientId._id,
-        pricingType: this.project.pricingType // Set default pricing type
+        pricingType: this.project.pricingType
       });
       this.isLoading = false;
       if (this.project) {
@@ -79,7 +79,7 @@ export default class CreateProposalComponent implements OnInit {
       .createProposal(this.createProposalForm.value)
       .subscribe({
         next: (res) => {
-          alert('proposal Created!');
+          alert('Proposta Criada!');
           this.createProposalForm.reset();
           this.router.navigate(['home']);
           //this.router.navigate(['manage-proposal']);
@@ -97,7 +97,7 @@ export default class CreateProposalComponent implements OnInit {
       .createProposal(this.createProposalForm.value)
       .subscribe({
         next: (res) => {
-          alert('Proposal Created and Sent!');
+          alert('Proposta Criada e Enviada!');
           this.createProposalForm.reset();
           this.router.navigate(['home']);
         },
@@ -108,7 +108,7 @@ export default class CreateProposalComponent implements OnInit {
   }
 
   CancelProposal() {
-    alert('Proposal Canceled!');
+    alert('Proposta Cancelada!');
     this.createProposalForm.reset();
     this.router.navigate(['home']);
   }

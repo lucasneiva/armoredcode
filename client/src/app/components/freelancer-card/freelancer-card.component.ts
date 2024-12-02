@@ -169,7 +169,7 @@ export class FreelancerCardComponent {
       this.notificationService.createNotification(notificationObj).subscribe({
         next: (response) => {
           if (response.success) {
-            alert("Invite sent successfully!");
+            alert("Convite enviado com sucesso!");
             // You can add a success message or other actions here, like disabling the button
           } else {
             console.error("Failed to send invite:", response.message);

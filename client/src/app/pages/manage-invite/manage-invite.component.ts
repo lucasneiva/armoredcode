@@ -1,7 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { InviteCardComponent } from '../../components/invite-card/invite-card.component';
-//import { Project, ProjectService } from '../../services/project.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { NotificationService } from '../../services/notification.service';
@@ -18,9 +17,9 @@ export default class ManageInviteComponent implements OnInit{
   authService = inject(AuthService);
   notificationService = inject(NotificationService);
 
-  isLoading = true; // Flag to track loading state
+  isLoading = true; 
   userRole: string | null = null; 
-  invites: Notification[] = []; // Array to store invites
+  invites: Notification[] = []; 
 
   ngOnInit(): void {
     this.userRole = this.authService.getUserRole();
@@ -30,7 +29,7 @@ export default class ManageInviteComponent implements OnInit{
         next: (res) => {
           /*debug*/ //console.log("API response: ",res);
           if (res.success) { 
-            this.invites = res.data; // Assign res.data to invites
+            this.invites = res.data; 
             /*debug*/ //console.log("invites fetched:", this.invites); 
             this.isLoading = false;
           } else {
