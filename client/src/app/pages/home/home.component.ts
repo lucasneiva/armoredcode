@@ -7,7 +7,7 @@ import { ProjectCardComponent } from '../../components/project-card/project-card
 import { Project, ProjectService } from '../../services/project.service';
 import { Profile, ProfileService } from '../../services/profile.service';
 import { SearchService, SearchStateService } from '../../services/search.service';
-import { Subject, takeUntil } from 'rxjs';
+import { filter, Subject, takeUntil } from 'rxjs';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpecializationService } from '../../services/specialization.service';
 import { SkillService } from '../../services/skill.service';
@@ -170,10 +170,13 @@ export default class HomeComponent {
 
   loadProjects(callback?: () => void): void {
     this.projectService.getPostedProjects()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        filter(res => res.success && res.data && res.data.every((project: any) => project.projectStatus !== "DRAFT")), // Filter here
+        takeUntil(this.destroy$)
+      )
       .subscribe({
         next: (res) => {
-          this.projects = res.data || [];
+          this.projects = res.data || []; // Now projects array will only contain non-DRAFT projects
           this.isLoading = false;
           if (callback) callback();
         },
