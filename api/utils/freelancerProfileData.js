@@ -1,6 +1,6 @@
 export const freelancerProfiles = [
     {
-        //1
+        //0
         firstName: "Miguel",
         lastName: "Santos",
         specializationId: [],
@@ -55,7 +55,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //2
+        //1
         firstName: "Joana",
         lastName: "Silva",
         specializationId: [],
@@ -122,7 +122,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //3
+        //2
         firstName: "Lucas",
         lastName: "Pereira",
         specializationId: [],
@@ -171,7 +171,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //4
+        //3
         firstName: "Pedro",
         lastName: "Souza",
         specializationId: [],
@@ -220,7 +220,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //5
+        //4
         firstName: "Ana",
         lastName: "Oliveira",
         specializationId: [],
@@ -269,7 +269,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //6
+        //5
         firstName: "Juliana",
         lastName: "Costa",
         specializationId: [],
@@ -318,7 +318,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //7
+        //6
         firstName: "Ricardo",
         lastName: "Almeida",
         specializationId: [],
@@ -367,7 +367,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //8
+        //7
         firstName: "Fernanda",
         lastName: "Rodrigues",
         specializationId: [],
@@ -416,7 +416,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //9
+        //8
         firstName: "Marcelo",
         lastName: "Santos",
         specializationId: [],
@@ -465,7 +465,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //10
+        //9
         firstName: "Patricia",
         lastName: "Gomes",
         specializationId: [],
@@ -520,7 +520,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //11
+        //10
         firstName: "Carlos",
         lastName: "Ferreira",
         specializationId: [],
@@ -569,7 +569,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //12
+        //11
         firstName: "Laura",
         lastName: "Lima",
         specializationId: [],
@@ -618,7 +618,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //13
+        //12
         firstName: "Rafael",
         lastName: "Cardoso",
         specializationId: [],
@@ -667,7 +667,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //14
+        //13
         firstName: "Isabela",
         lastName: "Cavalcanti",
         specializationId: [],
@@ -716,7 +716,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //15
+        //14
         firstName: "Gustavo",
         lastName: "Barbato",
         specializationId: [],
@@ -765,7 +765,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //16
+        //15
         firstName: "Mariana",
         lastName: "Barbosa",
         specializationId: [],
@@ -814,7 +814,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //17
+        //16
         firstName: "Leonardo",
         lastName: "Azevedo",
         specializationId: [],
@@ -863,7 +863,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //18
+        //17
         firstName: "Camila",
         lastName: "Ramos",
         specializationId: [],
@@ -912,7 +912,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //19
+        //18
         firstName: "Bruno",
         lastName: "Silva",
         specializationId: [],
@@ -961,7 +961,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //20
+        //19
         firstName: "Juliana",
         lastName: "Castro",
         specializationId: [],
@@ -1010,7 +1010,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //21
+        //20
         firstName: "Victor",
         lastName: "Pereira",
         specializationId: [],
@@ -1059,7 +1059,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //22
+        //21
         firstName: "Amanda",
         lastName: "Souza",
         specializationId: [],
@@ -1108,7 +1108,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //23
+        //22
         firstName: "Gabriela",
         lastName: "Melo",
         specializationId: [],
@@ -1157,7 +1157,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //24
+        //23
         firstName: "Bruno",
         lastName: "Ferreira",
         specializationId: [],
@@ -1206,7 +1206,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //25
+        //24
         firstName: "Juliana",
         lastName: "Lima",
         specializationId: [],
@@ -1255,7 +1255,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //26
+        //25
         firstName: "Victor",
         lastName: "Carvalho",
         specializationId: [],
@@ -1304,7 +1304,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //27
+        //26
         firstName: "Amanda",
         lastName: "Costa",
         specializationId: [],
@@ -1353,7 +1353,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //28
+        //27
         firstName: "Lucas",
         lastName: "Santos",
         specializationId: [],
@@ -1402,7 +1402,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //29
+        //28
         firstName: "Gabriela",
         lastName: "Oliveira",
         specializationId: [],
@@ -1451,7 +1451,7 @@ export const freelancerProfiles = [
     },
 
     {
-        //30
+        //29
         firstName: "Thiago",
         lastName: "Almeida",
         specializationId: [],
