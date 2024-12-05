@@ -283,72 +283,82 @@ export const users = [
         role: "FREELANCER",
         profileId: null,
     },
+    //F20
     {
-        username: `freelancer`,
-        email: `freelancer@example.com`,
+        username: `Victor Pereira`,
+        email: `victorpereira@example.com`,
         password: await bcrypt.hash("password123", 20),
         role: "FREELANCER",
         profileId: null,
     },
+    //F21
     {
-        username: `freelancer`,
-        email: `freelancer@example.com`,
+        username: `Amanda Souza`,
+        email: `amandasouza@example.com`,
         password: await bcrypt.hash("password123", 21),
         role: "FREELANCER",
         profileId: null,
     },
+    //F22
     {
-        username: `freelancer`,
-        email: `freelancer@example.com`,
+        username: `Gabriela Melo`,
+        email: `gabrielamelo@example.com`,
         password: await bcrypt.hash("password123", 22),
         role: "FREELANCER",
         profileId: null,
     },
+    //F23
     {
-        username: `freelancer`,
-        email: `freelancer@example.com`,
+        username: `Bruno Ferreira`,
+        email: `brunoferreira@example.com`,
         password: await bcrypt.hash("password123", 23),
         role: "FREELANCER",
         profileId: null,
     },
+    //F24
     {
-        username: `freelancer`,
-        email: `freelancer@example.com`,
+        username: `Juliana Lima`,
+        email: `julianalima@example.com`,
         password: await bcrypt.hash("password123", 24),
         role: "FREELANCER",
         profileId: null,
     },
+    //F25
     {
-        username: `freelancer`,
-        email: `freelancer@example.com`,
+        username: `Victor Carvalho`,
+        email: `victorcarvalho@example.com`,
         password: await bcrypt.hash("password123", 25),
         role: "FREELANCER",
         profileId: null,
     },
+    //F26
     {
-        username: `freelancer`,
-        email: `freelancer@example.com`,
+        username: `Amanda Costa`,
+        email: `amandacosta@example.com`,
         password: await bcrypt.hash("password123", 26),
         role: "FREELANCER",
         profileId: null,
     },
+    //F27
     {
-        username: `freelancer`,
-        email: `freelancer@example.com`,
+        username: `Lucas Santos`,
+        email: `lucassantos@example.com`,
         password: await bcrypt.hash("password123", 27),
         role: "FREELANCER",
         profileId: null,
     },
+    //F28
     {
-        username: `freelancer`,
-        email: `freelancer@example.com`,
+        username: `Gabriela Oliveira`,
+        email: `gabrielaoliveira@example.com`,
         password: await bcrypt.hash("password123", 28),
         role: "FREELANCER",
         profileId: null,
     },
+    //F29
     {
-        username: `freelancer`,
-        email: `freelancer@example.com`,
+        username: `Thiago Almeida`,
+        email: `thiagoalmeida@example.com`,
         password: await bcrypt.hash("password123", 29),
         role: "FREELANCER",
         profileId: null,
