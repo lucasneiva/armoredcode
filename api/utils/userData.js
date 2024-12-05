@@ -187,7 +187,7 @@ export const users = [
         role: "FREELANCER",
         profileId: null,
     },
-    //09
+    //F08
     {
         username: `Marcelo Santos`,
         email: `marcelosantos@example.com`,
@@ -195,7 +195,7 @@ export const users = [
         role: "FREELANCER",
         profileId: null,
     },
-    //10
+    //F09
     {
         username: `Patricia Gomes`,
         email: `patriciagomes@example.com`,
@@ -203,7 +203,7 @@ export const users = [
         role: "FREELANCER",
         profileId: null,
     },
-    //11
+    //F10
     {
         username: `Carlos Ferreira`,
         email: `carlosferreira@example.com`,
@@ -211,7 +211,7 @@ export const users = [
         role: "FREELANCER",
         profileId: null,
     },
-    //12
+    //F11
     {
         username: `Laura Lima`,
         email: `lauralima@example.com`,
@@ -219,7 +219,7 @@ export const users = [
         role: "FREELANCER",
         profileId: null,
     },
-    //13
+    //F12
     {
         username: `Rafael Cardoso`,
         email: `rafaelcardoso@example.com`,
@@ -227,15 +227,15 @@ export const users = [
         role: "FREELANCER",
         profileId: null,
     },
-    //14
+    //F13
     {
-        username: `Isabele Cavalcanti`,
-        email: `isabelecavalcanti@example.com`,
+        username: `Isabela Cavalcanti`,
+        email: `isabelacavalcanti@example.com`,
         password: await bcrypt.hash("password123", 12),
         role: "FREELANCER",
         profileId: null,
     },
-    //15
+    //F14
     {
         username: `Gustavo Barbato`,
         email: `gustavobarbato@example.com`,
@@ -243,7 +243,7 @@ export const users = [
         role: "FREELANCER",
         profileId: null,
     },
-    //16
+    //F15
     {
         username: `Mariana Barbosa`,
         email: `marianabarbosa@example.com`,
@@ -251,7 +251,7 @@ export const users = [
         role: "FREELANCER",
         profileId: null,
     },
-    //17
+    //F16
     {
         username: `Leornado Azevedo`,
         email: `leornadoazevedo@example.com`,
@@ -259,7 +259,7 @@ export const users = [
         role: "FREELANCER",
         profileId: null,
     },
-    //18
+    //F17
     {
         username: `Camila Ramos`,
         email: `camilaramos@example.com`,
@@ -267,7 +267,7 @@ export const users = [
         role: "FREELANCER",
         profileId: null,
     },
-    //19
+    //F18
     {
         username: `Bruno Silva`,
         email: `brunosilva@example.com`,
@@ -275,7 +275,7 @@ export const users = [
         role: "FREELANCER",
         profileId: null,
     },
-    //20
+    //F19
     {
         username: `Juliana Castro`,
         email: `julianacastro@example.com`,
