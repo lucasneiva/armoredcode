@@ -124,8 +124,8 @@ export const users = [
 
     //FREELANCER
     {
-        username: `freelancer`,
-        email: `freelancer@example.com`,
+        username: `Miguel Santos`,
+        email: `miguelsantos@example.com`,
         password: await bcrypt.hash("password123", 0),
         role: "FREELANCER",
         profileId: null,
