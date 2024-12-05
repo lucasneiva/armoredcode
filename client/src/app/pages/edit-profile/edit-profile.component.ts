@@ -339,7 +339,7 @@ export default class EditProfileComponent implements OnInit {
   }
 
   cancelSubmit() {
-    if (confirm("Are you sure you want to cancel this profile edition?")) {
+    if (confirm("Cancelar Edição do Perfil?")) {
       alert("Edição de Perfil Cancelada!");
       this.router.navigate(['manage-profile']);
       if (this.userRole == "CLIENT") {

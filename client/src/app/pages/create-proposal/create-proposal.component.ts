@@ -108,8 +108,10 @@ export default class CreateProposalComponent implements OnInit {
   }
 
   CancelProposal() {
-    alert('Proposta Cancelada!');
-    this.createProposalForm.reset();
-    this.router.navigate(['home']);
+    if (confirm("Cancelar Criação da Proposta?")) {
+      alert('A Criação da Proposta foi Cancelada!');
+      this.router.navigate(['home']);
+      this.createProposalForm.reset();
+    }
   }
 }

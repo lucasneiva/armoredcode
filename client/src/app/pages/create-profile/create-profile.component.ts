@@ -190,7 +190,7 @@ export default class CreateProfileComponent implements OnInit {
   }
 
   cancelSubmit() {
-    if (confirm("Are you sure you want to cancel this profile?")) {
+    if (confirm("Cancelar Criação do Perfil?")) {
       alert("Criação de Perfil Cancelada!");
       this.router.navigate(['login']);
       if (this.userRole == "CLIENT") {

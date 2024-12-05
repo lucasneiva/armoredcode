@@ -139,8 +139,10 @@ export default class EditProposalComponent implements OnInit {
   }
 
   CancelProposal() {
-    alert('A Edição da Proposta foi Cancelada!');
-    this.editProposalForm.reset();
-    this.router.navigate(['manage-proposal']);
+    if (confirm("Cancelar Edição da Proposta?")) {
+      alert('A Edição da Proposta foi Cancelada!');
+      this.router.navigate(['manage-proposal']);
+      this.editProposalForm.reset();
+    }
   }
 }

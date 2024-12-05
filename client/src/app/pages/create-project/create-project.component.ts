@@ -161,9 +161,11 @@ export default class CreateProjectComponent implements OnInit {
   }
 
   CancelProject() {
-    alert('A Criação do Projeto foi Cancelada!');
-    this.router.navigate(['manage-project']);
-    this.createProjectForm.reset();
+    if (confirm("Cancelar Criação do Projeto?")) {
+      alert('A Criação do Projeto foi Cancelada!');
+      this.router.navigate(['manage-project']);
+      this.createProjectForm.reset();
+    }
   }
 
   getProjectCategories() {

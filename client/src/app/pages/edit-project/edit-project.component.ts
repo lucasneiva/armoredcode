@@ -229,9 +229,11 @@ export default class EditProjectComponent implements OnInit {
   }
 
   CancelProject() {
-    alert('A Edição do Projeto foi Cancelada!');
-    this.router.navigate(['manage-project']);
-    this.editProjectForm.reset();
+    if (confirm("Cancelar Edição do Projeto?")) {
+      alert('A Edição do Projeto foi Cancelada!');
+      this.router.navigate(['manage-project']);
+      this.editProjectForm.reset();
+    }
   }
 
   // Fetch project categories
