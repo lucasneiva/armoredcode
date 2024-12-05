@@ -140,7 +140,7 @@ export class ProposalCardComponent {
 
   cancelProposal() {
     const proposalId = this.proposal._id;
-    if (confirm("Are you sure you want to cancel this proposal?")) {
+    if (confirm("Você tem certeza que quer Cancelar esta Proposta?")) {
       this.proposalService.deleteProposal(proposalId).subscribe(
         (response) => {
           if (response.success) {

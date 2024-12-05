@@ -77,7 +77,7 @@ export class ProjectDetailsComponent implements OnInit{
 
   cancelProject() {
     const projectId = this.project._id;
-    if (confirm("Are you sure you want to cancel this project?")) {
+    if (confirm("Você tem certeza que quer cancelar este projeto?")) {
       this.projectService.deleteProject(projectId).subscribe(
         (response) => {
           if (response.success) {
