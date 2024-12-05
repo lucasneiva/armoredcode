@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 
 export const users = [
+    //CLIENTS
     //C00
     {
         username: "TechSol",
@@ -121,14 +122,69 @@ export const users = [
         role: "CLIENT",
         profileId: null,
     },
-
+    //FREELANCERS
     //F00
     {
-        username: `freelancer`,
-        email: `freelancer@example.com`,
+        username: `Miguel Santos`,
+        email: `miguelsantos@example.com`,
         password: await bcrypt.hash("password123", 0),
         role: "FREELANCER",
         profileId: null,
     },
-    
+    //F01
+    {
+        username: `Joana Silva`,
+        email: `joanasilva@example.com`,
+        password: await bcrypt.hash("password123", 1),
+        role: "FREELANCER",
+        profileId: null,
+    },
+    //F02
+    {
+        username: `Lucas Pereira`,
+        email: `lucaspereira@example.com`,
+        password: await bcrypt.hash("password123", 2),
+        role: "FREELANCER",
+        profileId: null,
+    },
+    //F03
+    {
+        username: `Pedro Souza`,
+        email: `pedrosouza@example.com`,
+        password: await bcrypt.hash("password123", 3),
+        role: "FREELANCER",
+        profileId: null,
+    },
+    //F04
+    {
+        username: `Ana Oliveira`,
+        email: `anaoliveira@example.com`,
+        password: await bcrypt.hash("password123", 4),
+        role: "FREELANCER",
+        profileId: null,
+    },
+    //F05
+    {
+        username: `Juliana Costa`,
+        email: `julianacosta@example.com`,
+        password: await bcrypt.hash("password123", 5),
+        role: "FREELANCER",
+        profileId: null,
+    },
+    //F06
+    {
+        username: `Ricardo Almeida`,
+        email: `Ricardo Almeida@example.com`,
+        password: await bcrypt.hash("password123", 6),
+        role: "FREELANCER",
+        profileId: null,
+    },
+    //F07
+    {
+        username: `freelancer`,
+        email: `freelancer@example.com`,
+        password: await bcrypt.hash("password123", 7),
+        role: "FREELANCER",
+        profileId: null,
+    },
 ];
