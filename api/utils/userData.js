@@ -179,23 +179,26 @@ export const users = [
         role: "FREELANCER",
         profileId: null,
     },
+    //08
     {
-        username: `freelancer`,
-        email: `freelancer@example.com`,
+        username: `Fernanda Rodrigues`,
+        email: `fernandarodrigues@example.com`,
         password: await bcrypt.hash("password123", 7),
         role: "FREELANCER",
         profileId: null,
     },
+    //09
     {
-        username: `freelancer`,
-        email: `freelancer@example.com`,
+        username: `Marcelo Santos`,
+        email: `marcelosantos@example.com`,
         password: await bcrypt.hash("password123", 8),
         role: "FREELANCER",
         profileId: null,
     },
+    //10
     {
-        username: `freelancer`,
-        email: `freelancer@example.com`,
+        username: `Patricia Gomes`,
+        email: `patriciagomes@example.com`,
         password: await bcrypt.hash("password123", 9),
         role: "FREELANCER",
         profileId: null,
