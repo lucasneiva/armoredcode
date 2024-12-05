@@ -35,4 +35,12 @@ export default class ForgetPasswordComponent {
       }
     })
   }
+
+  cancelSubmission(){
+    if (confirm("Cancelar Envio de recuperação de senha?")) {
+      alert('Envio de recuperação de senha Cancelado!');
+      this.router.navigate(['login']);
+      this.forgetForm.reset();
+    }
+  }
 }
