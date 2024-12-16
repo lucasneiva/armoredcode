@@ -85,7 +85,6 @@ export default class ReviewComponent {
       communication: [0, Validators.required],
       professionalism: [0, Validators.required],
       costBenefit: [0, Validators.required],
-      payments: [0, Validators.required],
       feedback: [0, Validators.required], 
       comment: ['']
     });
@@ -95,6 +94,7 @@ export default class ReviewComponent {
       communication: [0, Validators.required],
       professionalism: [0, Validators.required],
       clarityDescription: [0, Validators.required], 
+      payments: [0, Validators.required],
       comment: ['']
     });
   }
@@ -110,7 +110,6 @@ export default class ReviewComponent {
         communication: this.reviewTheFreelancerForm.get('communication')?.value,
         professionalism: this.reviewTheFreelancerForm.get('professionalism')?.value,
         costBenefit: this.reviewTheFreelancerForm.get('costBenefit')?.value,
-        payments: this.reviewTheFreelancerForm.get('payments')?.value,
         feedback: this.reviewTheFreelancerForm.get('feedback')?.value, 
         comment: this.reviewTheFreelancerForm.get('comment')?.value 
       };
@@ -140,7 +139,8 @@ export default class ReviewComponent {
         workQuality: this.reviewTheClientForm.get('workQuality')?.value,
         communication: this.reviewTheClientForm.get('communication')?.value,
         professionalism: this.reviewTheClientForm.get('professionalism')?.value,
-        clarityDescription: this.reviewTheClientForm.get('clarityDescription')?.value, 
+        clarityDescription: this.reviewTheClientForm.get('clarityDescription')?.value,
+        payments: this.reviewTheFreelancerForm.get('payments')?.value,
         comment: this.reviewTheClientForm.get('comment')?.value 
       };
       /*debug*/ console.log(reviewData);
