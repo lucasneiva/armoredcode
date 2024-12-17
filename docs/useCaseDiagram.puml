@@ -4,10 +4,12 @@ left to right direction
 actor Usuário as User
 actor Cliente
 actor Freelancer
+actor Admin
 
 
 usecase "Registrar" as UC_Registrar
 usecase "Login" as UC_Login
+usecase "Logout" as UC_Logout
 usecase "Recuperar Senha" as UC_RecuperarSenha
 usecase "Gerenciar Conta" as UC_GerenciarConta
 usecase "Gerenciar Mensagens" as UC_GerenciarMensagens
@@ -26,19 +28,33 @@ usecase "Gerenciar Propostas Recebidas" as UC_GPR
 usecase "Convidar Freelancer" as UC_ConvidarFreelancer
 usecase "Buscar Freelancers" as UC_BuscarFreelancers
 
+usecase "Gerenciar Usuários" as UC_GerenciarUsuarios
+usecase "Gerenciar Clientes" as UC_GerenciarClientes
+usecase "Gerenciar Freelancers" as UC_GerenciarFreelancers
+
+usecase "Gerenciar Indústrias" as UC_GerenciarIndustrias
+usecase "Gerenciar Perfis" as UC_GerenciarPerfis
+usecase "Gerenciar Categorias de Projeto" as UC_GerenciarCDP
+usecase "Gerenciar Projetos" as UC_GerenciarProjetos
+usecase "Gerenciar Propostas" as UC_GerenciarPropostas
+usecase "Gerenciar Habilidades" as UC_GerenciarHabilidades
+usecase "Gerenciar Especializações" as UC_GerenciarEspecializacoes
+
+Admin --|> User
+Cliente --|> User
+Freelancer --|> User
+
 User ---> UC_AvaliarUsuario
 User --> UC_GerenciarConta
 User ---> UC_GerenciarMensagens
 User ---> UC_Login
+User ---> UC_Logout
 User ---> UC_RecuperarSenha
 User ---> UC_Registrar
 
-Cliente --|> User
-Freelancer --|> User
-
 UC_GerenciarConta --> UC_GerenciarPerfil : <<include>>
 
-UC_BuscarFreelancers <.. UC_ConvidarFreelancer : <<extend>>  
+UC_BuscarFreelancers <.. UC_ConvidarFreelancer : <<extend>>
 UC_BuscarProjetos <.. UC_EnviarProposta : <<extend>>
 
 Freelancer --> UC_BuscarProjetos
@@ -49,5 +65,18 @@ Freelancer --> UC_GMPropostas
 Cliente --> UC_BuscarFreelancers
 Cliente --> UC_GMProjetos
 Cliente --> UC_GPR
+
+Admin -> UC_GerenciarUsuarios
+
+UC_GerenciarUsuarios --> UC_GerenciarClientes : <<include>>
+UC_GerenciarUsuarios -> UC_GerenciarFreelancers : <<include>>
+
+Admin --> UC_GerenciarIndustrias
+Admin --> UC_GerenciarPerfis
+Admin --> UC_GerenciarCDP
+Admin --> UC_GerenciarProjetos
+Admin --> UC_GerenciarPropostas
+Admin --> UC_GerenciarHabilidades
+Admin --> UC_GerenciarEspecializacoes
 
 @enduml 
